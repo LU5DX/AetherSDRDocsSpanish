@@ -5,28 +5,37 @@
      ---
      template: home.html
      ---
-   La sección hero es un escenario de paralaje con tres capas:
-   estrellas (lento), silueta del alienígena (medio), maqueta de la UI
-   de AetherSDR (rápido). #}
+
+   Paralaje fijo de dos capas que persiste en toda la página:
+
+     .aether-bg        — captura de la UI de AetherSDR (la "película")
+     .aether-audience  — siluetas de alienígenas viendo la película
+
+   Las dos capas tienen position:fixed y z-index < 0, por lo que viven
+   debajo de todo el contenido. El JS en javascripts/parallax.js aplica
+   transform a cada capa a velocidades distintas para dar profundidad.
+#}
 
 {% block tabs %}
   {{ super() }}
 
+  <div class="aether-bg"        data-parallax-speed="0.30" aria-hidden="true"></div>
+  <div class="aether-audience"  data-parallax-speed="0.65" aria-hidden="true"></div>
+  <div class="aether-veil"      aria-hidden="true"></div>
+
   <section class="aether-hero" aria-label="Manual de usuario de AetherSDR">
-    <div class="aether-hero__stars" data-parallax-speed="0.85" aria-hidden="true"></div>
-    <div class="aether-hero__ui"    data-parallax-speed="0.60" aria-hidden="true"></div>
-    <div class="aether-hero__alien" data-parallax-speed="0.10" aria-hidden="true"></div>
-
-    <div class="aether-hero__veil" aria-hidden="true"></div>
-
     <div class="aether-hero__content">
       <h1 class="aether-hero__title">AetherSDR</h1>
       <p class="aether-hero__subtitle">Manual de usuario</p>
       <p class="aether-hero__lede">
-        Opere su FlexRadio FLEX-8400, 8600, 6400 o 6600 desde Linux,
-        macOS o Windows. Cientos de guías prácticas y orientadas a
-        tareas que cubren cada applet, diálogo y menú — basadas
-        directamente en el código fuente.
+        AetherSDR lleva la operación de FlexRadio a Linux, macOS y
+        Windows — sin Wine ni máquinas virtuales. Construido con Qt6
+        y C++20, habla el protocolo SmartSDR de forma nativa. Funciona
+        con cualquier transceptor FlexRadio que ejecute firmware
+        SmartSDR v3.x o v4.x.
+      </p>
+      <p class="aether-hero__radios">
+        FLEX-6400 / 6400M · 6600 / 6600M · 6700 · 8400 / 8400M · 8600 / 8600M · Aurora AU-510 / AU-520
       </p>
       <div class="aether-hero__cta">
         <a class="md-button md-button--primary" href="getting-started/install/installation-linux/">
