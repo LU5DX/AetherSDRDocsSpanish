@@ -6,22 +6,20 @@
      template: home.html
      ---
 
-   Paralaje fijo de dos capas que persiste en toda la página:
-
-     .aether-bg        — captura de la UI de AetherSDR (la "película")
-     .aether-audience  — siluetas de alienígenas viendo la película
-
-   Las dos capas tienen position:fixed y z-index < 0, por lo que viven
-   debajo de todo el contenido. El JS en javascripts/parallax.js aplica
-   transform a cada capa a velocidades distintas para dar profundidad.
+   Hero estático en capas, al estilo de la propia portada de Material
+   for MkDocs:
+     - .aether-bg          — captura de la UI de AetherSDR a pantalla
+                              completa, fija
+     - .aether-audience    — siluetas de alienígenas ancladas abajo
+     - .aether-hero__content — título + texto + CTAs en la esquina
+                              inferior izquierda
 #}
 
 {% block tabs %}
   {{ super() }}
 
-  <div class="aether-bg"        data-parallax-speed="0.50" aria-hidden="true"></div>
-  <div class="aether-audience"  data-parallax-speed="0.85" aria-hidden="true"></div>
-  <div class="aether-veil"      aria-hidden="true"></div>
+  <div class="aether-bg"        aria-hidden="true"></div>
+  <div class="aether-audience"  aria-hidden="true"></div>
 
   <section class="aether-hero" aria-label="Manual de usuario de AetherSDR">
     <div class="aether-hero__content">
