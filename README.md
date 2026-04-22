@@ -1,7 +1,7 @@
 # Documentación de usuario de AetherSDR (Español)
 
 Fuente del manual de usuario en
-**https://lu5dx.github.io/AetherSDRDocsSpanish/** (cuando se habilite Pages).
+**https://lu5dx.github.io/AetherSDRDocsSpanish/**
 
 Construido con [MkDocs Material](https://squidfunk.github.io/mkdocs-material/).
 Espejo en inglés: [AetherSDRDocsEnglish](https://github.com/LU5DX/AetherSDRDocsEnglish).
@@ -34,25 +34,3 @@ TCI" — "Enable" queda en inglés porque así aparece en la pantalla.
 └── .github/workflows/      Workflow de despliegue a GitHub Pages
 ```
 
-## Vista previa local
-
-```bash
-pip install mkdocs-material
-mkdocs serve     # http://127.0.0.1:8000
-```
-
-## Generación
-
-Estos archivos se traducen automáticamente desde el repositorio en inglés
-mediante el pipeline en
-[AetherSDRDocsEnglish/_generator/translate_docs.py](https://github.com/LU5DX/AetherSDRDocsEnglish/blob/main/_generator/translate_docs.py).
-No edite estos archivos a mano — los cambios se sobreescribirán en la
-siguiente regeneración. Para cambios permanentes, modifique la versión en
-inglés y vuelva a ejecutar el traductor.
-
-## Hospedaje
-
-El workflow incluido publica en GitHub Pages en cada push a `main`.
-**Nota:** GitHub Pages en repositorios privados requiere GitHub Pro o
-superior. En el plan gratuito, haga el repo público o cambie el job de
-despliegue por Cloudflare Pages / Netlify / Vercel.
