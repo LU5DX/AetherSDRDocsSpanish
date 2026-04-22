@@ -6,22 +6,27 @@
      template: home.html
      ---
 
-   Hero estático en capas, al estilo de la propia portada de Material
-   for MkDocs:
+   Hero con paralaje acoplado al scroll, al estilo de la propia portada
+   de Material for MkDocs:
+
+     - el hero ocupa 100vh y forma parte del flujo del documento
      - .aether-bg          — captura de la UI de AetherSDR a pantalla
-                              completa, fija
+                              completa
      - .aether-audience    — siluetas de alienígenas ancladas abajo
      - .aether-hero__content — título + texto + CTAs en la esquina
                               inferior izquierda
+
+   javascripts/parallax.js traduce cada capa según window.scrollY:
+   el fondo se mueve lento (lejano), los alienígenas rápido (frente).
 #}
 
 {% block tabs %}
   {{ super() }}
 
-  <div class="aether-bg"        data-parallax-speed="0.10" aria-hidden="true"></div>
-  <div class="aether-audience"  data-parallax-speed="0.25" aria-hidden="true"></div>
-
   <section class="aether-hero" aria-label="Manual de usuario de AetherSDR">
+    <div class="aether-bg"        data-parallax-speed="0.30" aria-hidden="true"></div>
+    <div class="aether-audience"  data-parallax-speed="0.75" aria-hidden="true"></div>
+
     <div class="aether-hero__content">
       <h1 class="aether-hero__title">AetherSDR</h1>
       <p class="aether-hero__subtitle">Manual de usuario</p>
