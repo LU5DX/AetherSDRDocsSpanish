@@ -1,0 +1,75 @@
+{% extends "main.html" %}
+
+{# Página de inicio personalizada (versión española). Activada por
+   docs/index.md con frontmatter:
+     ---
+     template: home.html
+     ---
+   La sección hero es un escenario de paralaje con tres capas:
+   estrellas (lento), silueta del alienígena (medio), maqueta de la UI
+   de AetherSDR (rápido). #}
+
+{% block tabs %}
+  {{ super() }}
+
+  <section class="aether-hero" aria-label="Manual de usuario de AetherSDR">
+    <div class="aether-hero__stars" data-parallax-speed="0.15" aria-hidden="true"></div>
+    <div class="aether-hero__alien" data-parallax-speed="0.45" aria-hidden="true"></div>
+    <div class="aether-hero__ui"    data-parallax-speed="0.75" aria-hidden="true"></div>
+
+    <div class="aether-hero__veil" aria-hidden="true"></div>
+
+    <div class="aether-hero__content">
+      <h1 class="aether-hero__title">AetherSDR</h1>
+      <p class="aether-hero__subtitle">Manual de usuario</p>
+      <p class="aether-hero__lede">
+        Opere su FlexRadio FLEX-8600 desde Linux. Cientos de guías
+        prácticas y orientadas a tareas que cubren cada applet, diálogo
+        y menú — basadas directamente en el código fuente.
+      </p>
+      <div class="aether-hero__cta">
+        <a class="md-button md-button--primary" href="getting-started/install/installation-linux/">
+          Comenzar
+        </a>
+        <a class="md-button" href="features/tci/overview/">
+          Explorar funciones
+        </a>
+      </div>
+    </div>
+
+    <div class="aether-hero__scroll-hint" aria-hidden="true">
+      <span></span>
+    </div>
+  </section>
+{% endblock %}
+
+{% block content %}
+  <div class="aether-home-below">
+    <section class="aether-tiles">
+      <a class="aether-tile" href="getting-started/concepts/understanding-applets/">
+        <h3>Entienda el panel</h3>
+        <p>Applets, slices y cómo está organizada la interfaz de AetherSDR.</p>
+      </a>
+      <a class="aether-tile" href="operating/dsp/noise-reduction-overview/">
+        <h3>Saque señales débiles</h3>
+        <p>NR2, NR4, DFNR, MNR — cuál reductor de ruido usar y cuándo.</p>
+      </a>
+      <a class="aether-tile" href="operating/digital-modes/digital-modes-setup/">
+        <h3>Comience con modos digitales</h3>
+        <p>FT8, WSJT-X, fldigi — enrutamiento de audio DAX y control CAT.</p>
+      </a>
+      <a class="aether-tile" href="features/tci/overview/">
+        <h3>Conecte sus herramientas</h3>
+        <p>TCI para Log4OM y SunSDR. MQTT para automatización. MIDI para superficies de control.</p>
+      </a>
+      <a class="aether-tile" href="operating/remote/remote-operation-smartlink/">
+        <h3>Opere de forma remota</h3>
+        <p>SmartLink, redirección de puertos y la ruta de audio remoto.</p>
+      </a>
+      <a class="aether-tile" href="reference/settings/settings-reference/">
+        <h3>Referencia</h3>
+        <p>Cada ajuste persistido y cada acción de menú, en un solo lugar.</p>
+      </a>
+    </section>
+  </div>
+{% endblock %}

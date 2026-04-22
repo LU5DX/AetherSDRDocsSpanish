@@ -1,2 +1,6 @@
+# MkDocs build output
+/site/
+/.cache/
+
 .DS_Store
 Thumbs.db

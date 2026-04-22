@@ -1,20 +1,10 @@
 # Documentación de usuario de AetherSDR (Español)
 
-Documentación para usuarios de [AetherSDR](https://github.com/ten9876/AetherSDR),
-un cliente nativo Linux escrito en Qt6 compatible con SmartSDR para radios
-FlexRadio FLEX-8600.
+Fuente del manual de usuario en
+**https://lu5dx.github.io/AetherSDRDocsSpanish/** (cuando se habilite Pages).
 
-## Estructura
-
-```
-/
-├── getting-started/   Instalación, primera conexión, primer QSO, conceptos
-├── features/          Una carpeta por función (applet, diálogo, panel) con
-│                      página de descripción general y páginas de tareas
-├── operating/         Guías de operación (modos digitales, operación remota)
-├── reference/         Referencia de menús, claves de configuración
-└── troubleshooting/   Problemas comunes y soluciones
-```
+Construido con [MkDocs Material](https://squidfunk.github.io/mkdocs-material/).
+Espejo en inglés: [AetherSDRDocsEnglish](https://github.com/LU5DX/AetherSDRDocsEnglish).
 
 ## Nota sobre la interfaz
 
@@ -25,17 +15,44 @@ aplicación, y traducen únicamente el texto explicativo al español.
 Por ejemplo: "Para activar TCI, haga clic en el botón **Enable** del applet
 TCI" — "Enable" queda en inglés porque así aparece en la pantalla.
 
-## Generación
+## Estructura
 
-Estos archivos se generan automáticamente a partir de la versión en inglés
-mediante el pipeline en el repositorio
-[AetherSDRDocsEnglish](../AetherSDRDocsEnglish). Para regenerarlos:
-
-```bash
-cd ../AetherSDRDocsEnglish/_generator
-python translate_docs.py
+```
+/
+├── mkdocs.yml              Configuración de MkDocs Material
+├── overrides/              Plantilla personalizada de inicio
+├── docs/                   Árbol de documentación (servido por MkDocs)
+│   ├── index.md            Página de inicio (usa overrides/home.html)
+│   ├── stylesheets/        CSS personalizado (hero con paralaje)
+│   ├── javascripts/        Paralaje en scroll
+│   ├── assets/             Arte del hero (SVG provisionales)
+│   ├── getting-started/    Instalación, primera conexión, primer QSO
+│   ├── features/           Una carpeta por applet/diálogo/panel
+│   ├── operating/          Guías de operación transversales
+│   ├── reference/          Referencia de menús y ajustes
+│   └── troubleshooting/    Problemas comunes y soluciones
+└── .github/workflows/      Workflow de despliegue a GitHub Pages
 ```
 
+## Vista previa local
+
+```bash
+pip install mkdocs-material
+mkdocs serve     # http://127.0.0.1:8000
+```
+
+## Generación
+
+Estos archivos se traducen automáticamente desde el repositorio en inglés
+mediante el pipeline en
+[AetherSDRDocsEnglish/_generator/translate_docs.py](https://github.com/LU5DX/AetherSDRDocsEnglish/blob/main/_generator/translate_docs.py).
 No edite estos archivos a mano — los cambios se sobreescribirán en la
 siguiente regeneración. Para cambios permanentes, modifique la versión en
 inglés y vuelva a ejecutar el traductor.
+
+## Hospedaje
+
+El workflow incluido publica en GitHub Pages en cada push a `main`.
+**Nota:** GitHub Pages en repositorios privados requiere GitHub Pro o
+superior. En el plan gratuito, haga el repo público o cambie el job de
+despliegue por Cloudflare Pages / Netlify / Vercel.

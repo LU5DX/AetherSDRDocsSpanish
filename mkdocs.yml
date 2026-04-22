@@ -1,0 +1,128 @@
+site_name: Manual de usuario de AetherSDR
+site_description: Documentación para usuarios de AetherSDR — cliente nativo Linux compatible con SmartSDR para FlexRadio FLEX-8600.
+site_author: AetherSDR community
+site_url: https://lu5dx.github.io/AetherSDRDocsSpanish/
+
+repo_name: LU5DX/AetherSDRDocsSpanish
+repo_url: https://github.com/LU5DX/AetherSDRDocsSpanish
+edit_uri: edit/main/docs/
+
+copyright: >
+  Hecho con
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+       style="height:1em;width:1em;vertical-align:-0.15em;fill:#ef4444;
+              filter:drop-shadow(0 0 4px rgba(239,68,68,0.6));"
+       aria-label="amor">
+    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+  </svg>
+  por <a href="https://github.com/LU5DX" style="color:inherit;font-weight:600;">LU5DX</a>
+  &middot; &copy; 2026 AetherSDR contributors
+
+theme:
+  name: material
+  custom_dir: overrides
+  language: es
+  palette:
+    - scheme: slate
+      primary: deep purple
+      accent: cyan
+      toggle:
+        icon: material/weather-night
+        name: Cambiar a modo claro
+    - scheme: default
+      primary: deep purple
+      accent: cyan
+      toggle:
+        icon: material/weather-sunny
+        name: Cambiar a modo oscuro
+  font:
+    text: Inter
+    code: JetBrains Mono
+  features:
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.action.edit
+    - content.action.view
+    - content.tooltips
+    - announce.dismiss
+    - toc.follow
+  icon:
+    repo: fontawesome/brands/github
+    edit: material/pencil
+    view: material/eye
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/parallax.js
+
+plugins:
+  - search:
+      lang: es
+  - tags
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.betterem
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.tilde
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.tasklist:
+      custom_checkbox: true
+      clickable_checkbox: false
+  - pymdownx.keys
+
+extra:
+  alternate:
+    - name: English
+      link: https://lu5dx.github.io/AetherSDRDocsEnglish/
+      lang: en
+    - name: Español
+      link: https://lu5dx.github.io/AetherSDRDocsSpanish/
+      lang: es
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/ten9876/AetherSDR
+      name: AetherSDR en GitHub
+    - icon: fontawesome/brands/github
+      link: https://github.com/LU5DX/AetherSDRDocsSpanish
+      name: Fuente de la documentación
+  generator: false
