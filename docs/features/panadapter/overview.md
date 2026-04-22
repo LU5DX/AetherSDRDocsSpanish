@@ -1,23 +1,14 @@
-# Vista general del panadapter
+# Descripción general del panadapter
 
-El panadapter (visualizador panorámico de espectro) es la pantalla principal de AetherSDR para visualizar la actividad del espectro de RF. Combina un gráfico de espectro FFT y una cascada (*waterfall*) desplazable, y opcionalmente muestra un panel de decodificación CW debajo de la pantalla para leer código Morse fuera del aire.
-
-## Antes de comenzar
-
-- Conéctese a una radio FLEX-8600. El panadapter requiere una conexión de radio activa.
-- Si desea utilizar el decodificador CW, primero debe configurar el enrutamiento de audio del PC hacia AetherSDR. El panel muestra un recordatorio "(requires PC Audio)" hasta que el audio esté disponible.
+El panadapter es la pantalla principal de AetherSDR. Muestra un espectro FFT en vivo y un waterfall para un único slice (ranura de frecuencia), y opcionalmente un panel decodificador de CW fuera del aire debajo de él. Esta página describe cada control del panadapter y enlaza a páginas de tareas específicas.
 
 ## Cómo funciona
 
-Cada panadapter está vinculado a un slice (Slice A hasta Slice H). El título del slice se muestra en la barra de título del panadapter. En el modo de panadapter único, los botones de la barra de título para desprender, maximizar y cerrar están ocultos. Aparecen cuando hay más de un panadapter abierto.
+Cada panadapter está vinculado a un slice (mostrado en la barra de título como "Slice A" hasta "Slice H"). La parte superior es la pantalla de espectro y waterfall; hacer clic o arrastrar sobre ella sintoniza el slice vinculado. Desplazar la rueda del ratón amplía o reduce el rango de frecuencias.
 
-**Interacción con el espectro y la cascada**
+En el modo de panadapter único, la barra de título muestra solo la etiqueta del slice y el control de arrastre. En el modo multi-slice, aparecen los botones de ventana flotante (⬈), maximizar (□) y cerrar (×) en la barra de título para reorganizar el diseño.
 
-Hacer clic en cualquier lugar del área de espectro/cascada activa ese panadapter. Puede arrastrar para sintonizar y desplazar la rueda del ratón para hacer zoom. De forma predeterminada, se requiere un doble clic para resintonizar; active `View > Single-Click to Tune` para cambiar este comportamiento. Cuando `View > Pan Follows VFO` está activado (valor predeterminado), la pantalla se desplaza automáticamente para mantener visible el marcador VFO activo.
-
-**Panel de decodificación CW**
-
-El panel de decodificación CW aparece debajo del espectro cuando el decodificador CW está activado. Ejecuta un decodificador de código Morse fuera del aire sobre el audio del PC y muestra el texto decodificado en forma continua. Cada carácter se colorea según el nivel de confianza de la decodificación: verde (mayor confianza), amarillo, naranja y rojo (menor confianza). El panel puede ocultarse en cualquier momento con ✕.
+El panel decodificador de CW está oculto de forma predeterminada. Cuando está activo, se sitúa debajo del waterfall y ejecuta un decodificador Morse fuera del aire sobre el audio del PC enrutado a AetherSDR. El panel muestra el texto decodificado, el tono y la velocidad, y proporciona controles para sintonizar y bloquear el decodificador.
 
 ## Qué hace cada control
 
@@ -25,47 +16,47 @@ El panel de decodificación CW aparece debajo del espectro cuando el decodificad
 
 | Control | Tipo | Comportamiento | Notas |
 |---|---|---|---|
-| Título del slice | Indicador | Muestra el slice vinculado a este panadapter (p. ej., "Slice A"). | — |
-| ⬈ / ↩ (desprender/acoplar) | Botón | Desprende el panadapter en una ventana flotante o lo acopla de nuevo. | Oculto en modo de panadapter único. |
-| □ (maximizar) | Botón | Maximiza este panadapter para llenar el área del diseño principal. | Oculto en modo de panadapter único. |
-| × (cerrar) | Botón | Cierra este panadapter. | Oculto en modo de panadapter único. |
+| Título del slice | Indicador | Muestra qué slice está vinculado (p. ej., "Slice A"). Rango: Slice A–Slice H. | — |
+| ⬈ / ↩ (ventana flotante/acoplar) | Botón | Saca el panadapter a una ventana flotante; haga clic de nuevo para acoplarlo. | Oculto en el modo de panadapter único. |
+| □ (maximizar) | Botón | Maximiza este panadapter para llenar el área principal. | Oculto en el modo de panadapter único. |
+| × (cerrar) | Botón | Cierra este panadapter. | Oculto en el modo de panadapter único. |
 
-### Espectro / cascada
+### Espectro / waterfall
 
 | Control | Tipo | Comportamiento |
 |---|---|---|
-| Espectro / cascada | Pantalla y controlador de arrastre | Haga clic para activar; arrastre para sintonizar; desplace para hacer zoom. |
+| Espectro / waterfall | Control de arrastre | Haga clic para activar el panadapter (modo multi-slice); arrastre para desplazar la frecuencia; desplace la rueda para ampliar o reducir. |
 
-### Panel de decodificación CW
+### Panel decodificador de CW
 
-| Control | Tipo | Valor predeterminado | Rango válido | Clave persistida | Comportamiento |
+| Control | Tipo | Valor predeterminado | Rango | Clave persistida | Comportamiento |
 |---|---|---|---|---|---|
-| Etiqueta de estadísticas CW | Indicador | — | `<hz> Hz  <wpm> WPM` | — | Muestra el tono y la velocidad detectados actualmente por el decodificador. |
-| Sens | Control deslizante | 30 | 0–100 | `CwDecoderSensitivity` | Filtra las decodificaciones de baja confianza. Los valores más altos son más estrictos. Mapea 0–100 a un umbral de costo de 1.0–0.1. |
-| 🔒P (Lock Pitch) | Botón de alternancia | Off | — | — | Fija el tono del decodificador a la frecuencia sintonizada actual. |
-| 🔒S (Lock Speed) | Botón de alternancia | Off | — | — | Fija la velocidad del decodificador a los WPM actuales. |
-| Lo (tono mínimo) | Control deslizante | 500 Hz | 300–1200 Hz | — | Establece el tono mínimo en el que busca el decodificador. Limitado a ≤ Hi. |
-| Hi (tono máximo) | Control deslizante | 700 Hz | 300–1200 Hz | — | Establece el tono máximo en el que busca el decodificador. Limitado a ≥ Lo. |
-| CPY ALL | Botón | — | — | — | Copia el buffer completo de texto decodificado al portapapeles. |
+| Etiqueta de estadísticas CW | Indicador | — | `<hz> Hz  <wpm> WPM` | — | Muestra el tono y la velocidad detectados por el decodificador. |
+| Sens | Control deslizante | 30 | 0–100 | `CwDecoderSensitivity` | Filtra decodificaciones de baja confianza. Valores más altos son más estrictos. Mapea 0–100 a un umbral de costo interno de 1.0–0.1. |
+| 🔒P (Lock Pitch) | Botón de alternancia | Off | On/Off | — | Bloquea el tono del decodificador en la frecuencia sintonizada actual. |
+| 🔒S (Lock Speed) | Botón de alternancia | Off | On/Off | — | Bloquea la velocidad del decodificador en el WPM actual. |
+| Lo (tono mínimo) | Control deslizante | 500 Hz | 300–1200 Hz | — | Tono mínimo en el que busca el decodificador. Limitado a ≤ Hi. |
+| Hi (tono máximo) | Control deslizante | 700 Hz | 300–1200 Hz | — | Tono máximo en el que busca el decodificador. Limitado a ≥ Lo. |
+| CPY ALL | Botón | — | — | — | Copia el búfer completo de texto decodificado al portapapeles. |
 | CPY VIS | Botón | — | — | — | Copia solo el texto visible actualmente en el área de desplazamiento al portapapeles. |
-| CLR | Botón | — | — | — | Borra el buffer de decodificación CW. |
-| ✕ (cerrar CW) | Botón | — | — | — | Oculta el panel de decodificación CW. |
-| Texto decodificado CW | Área de texto de solo lectura | — | — | — | Visualización continua del código Morse decodificado. Los caracteres se colorean según la confianza: verde (<0.15), amarillo (<0.35), naranja (<0.60), rojo (≥0.60). |
+| CLR | Botón | — | — | — | Borra el búfer de decodificación CW. |
+| ✕ (cerrar CW) | Botón | — | — | — | Oculta el panel decodificador de CW. |
+| Texto decodificado CW | Campo de texto (solo lectura) | — | — | — | Pantalla continua de CW decodificado. El texto se colorea según la confianza de decodificación: verde (mayor confianza), pasando por amarillo y naranja, hasta rojo (menor confianza). |
 
 ## Consejos
 
-- Lo y Hi definen la ventana de búsqueda de tono. Reducir el rango alrededor del tono conocido de una señal disminuye las decodificaciones falsas causadas por interferencias adyacentes.
-- Establecer Sens en 0 muestra todos los intentos de decodificación, incluidos los de baja confianza. Auméntelo gradualmente hasta que desaparezca el ruido generado por señales no deseadas.
-- Use 🔒P y 🔒S una vez que el decodificador haya capturado la señal con claridad. Esto evita que el decodificador se desplace si la señal se debilita temporalmente.
+- El decodificador CW requiere que el audio del PC esté enrutado a AetherSDR. Si el panel muestra "(requires PC Audio)", el enrutamiento de audio aún no está configurado.
+- Lo y Hi están limitados entre sí: arrastrar Lo por encima de Hi ajusta Lo al valor de Hi, y viceversa. Establezca Lo primero y luego Hi.
+- El color del texto decodificado refleja la confianza. El texto verde es el más fiable; el texto rojo debe tratarse con precaución.
 
 ## Relacionados
 
-- [Activar el decodificador CW para leer código Morse fuera del aire](turn-on-the-cw-decoder-to-read-morse-off-air.md)
+- [Activar el decodificador CW para leer Morse fuera del aire](turn-on-the-cw-decoder-to-read-morse-off-air.md)
 - [Ajustar la sensibilidad del decodificador CW para rechazar ruido](tune-cw-decoder-sensitivity-to-reject-noise.md)
-- [Fijar el tono o la velocidad del decodificador CW una vez que el seguimiento es estable](lock-cw-decoder-pitch-or-speed-once-tracking-is-good.md)
+- [Bloquear el tono o la velocidad del decodificador CW una vez que el seguimiento es correcto](lock-cw-decoder-pitch-or-speed-once-tracking-is-good.md)
 - [Copiar el texto CW decodificado al portapapeles](copy-decoded-cw-text-to-the-clipboard.md)
-- [Desprender un panadapter a su propia ventana](pop-a-panadapter-out-into-its-own-window.md)
+- [Sacar un panadapter a su propia ventana](pop-a-panadapter-out-into-its-own-window.md)
 - [Maximizar un panadapter para llenar el área principal](maximize-one-panadapter-to-fill-the-main-area.md)
 - [Cerrar un panadapter adicional](close-an-extra-panadapter.md)
 - [Hacer clic en el espectro para activar un panadapter (modo multi-slice)](click-the-spectrum-to-activate-a-panadapter-multi-slice-mode.md)
-- [Comprender los slices y los VFOs](../../getting-started/concepts/understanding-slices.md)
+- [Comprensión de los slices y los VFO](../../getting-started/concepts/understanding-slices.md)

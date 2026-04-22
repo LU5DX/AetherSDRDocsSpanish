@@ -1,53 +1,55 @@
 # Conectarse a un clúster DX
 
-El diálogo SpotHub de AetherSDR se conecta a un clúster DX mediante telnet y superpone los spots entrantes sobre el panadapter. Use esta página para ingresar los datos de su servidor de clúster, iniciar sesión y comenzar a ver spots.
+El diálogo SpotHub de AetherSDR permite conectarse a un clúster DX mediante telnet y mostrar los spots entrantes en el panadapter. Use esta página para realizar esa primera conexión y, opcionalmente, reconectarse de forma automática en cada inicio.
 
 ## Antes de comenzar
 
-- Conozca el nombre de host y el puerto de su clúster DX preferido (por ejemplo, `dxc.nc7j.com` en el puerto `23`).
-- Tenga a mano su indicativo — se envía al clúster como credencial de acceso.
+- Tenga a mano el nombre de host y el puerto del clúster DX que desea usar (por ejemplo, `dxc.k0xm.net`, puerto `23`).
+- Tenga su indicativo listo para usarlo como credencial de inicio de sesión.
 
 ## Pasos
 
-1. Haga clic en `Settings > SpotHub...` para abrir el diálogo SpotHub.
+1. Abra `Settings > SpotHub...`.
 2. Haga clic en la pestaña **Cluster**.
-3. En el campo **Server:**, escriba el nombre de host de su clúster DX.
-4. En el campo **Port:**, establezca el puerto telnet (rango válido: 1–65535).
-5. En el campo **Callsign:**, escriba su indicativo.
-6. Haga clic en **Connect**. La etiqueta del botón cambia a **Disconnect** cuando se establece la sesión. El tráfico sin procesar del clúster aparece en el área de solo lectura **Cluster Console**.
-7. Opcional: para enviar un comando al clúster, escríbalo en el campo de línea de comandos junto a **Send** y haga clic en **Send**.
-8. Opcional: para reconectarse automáticamente la próxima vez que AetherSDR inicie, active **Auto-connect on startup**.
+3. En el campo **Server:**, ingrese el nombre de host del clúster.
+4. En el campo **Port:**, ingrese el puerto telnet (rango válido: 1–65535).
+5. En el campo **Callsign:**, ingrese el indicativo con el que desea iniciar sesión.
+6. Haga clic en **Connect**.
+7. Observe el área **Cluster Console** para verificar el banner de inicio de sesión del clúster y el tráfico de spots, y confirme que la conexión está activa.
+8. Para enviar un comando al clúster, escríbalo en el campo de línea de comandos ubicado debajo de la consola y haga clic en **Send**.
 
-## Qué hace cada control
+## Función de cada control
 
-| Control | Comportamiento | Clave de configuración | Valor predeterminado | Rango |
-|---|---|---|---|---|
-| **Server:** | Nombre de host del servidor telnet del clúster DX. | `ClusterHost` | — | — |
-| **Port:** | Puerto telnet en el servidor del clúster. | `ClusterPort` | — | 1–65535 |
-| **Callsign:** | Indicativo de acceso enviado al clúster al conectarse. | `ClusterCallsign` | — | — |
-| **Connect / Disconnect** | Alterna la conexión telnet. La etiqueta refleja el estado actual. | — | Connect | — |
-| **Auto-connect on startup** | Reconecta al clúster automáticamente al iniciar. | `ClusterAutoConnect` | — | — |
-| **Cluster Console** | Visualización de solo lectura del tráfico telnet sin procesar del clúster. | — | — | — |
-| **Send** | Envía el comando escrito al clúster. Activo solo mientras está conectado. | — | — | — |
-| **Spot Color:** | Abre un selector de color para definir el color de los spots del clúster en el panadapter. | `ClusterSpotColor` | — | — |
+| Control | Comportamiento | Clave de configuración |
+|---|---|---|
+| **Server:** | Nombre de host del clúster DX al que conectarse. | `ClusterHost` |
+| **Port:** | Puerto telnet del clúster DX. Rango válido: 1–65535. | `ClusterPort` |
+| **Callsign:** | Indicativo de inicio de sesión enviado al clúster en el momento de la conexión. | `ClusterCallsign` |
+| **Connect / Disconnect** | Activa o desactiva la conexión telnet. La etiqueta cambia a "Disconnect" mientras está conectado. | — |
+| **Auto-connect on startup** | Cuando está habilitado, AetherSDR se conecta al clúster automáticamente al iniciar. | `ClusterAutoConnect` |
+| **Cluster Console** | Visualización de solo lectura del tráfico telnet sin procesar proveniente del clúster. | — |
+| **Send** | Envía el comando escrito al clúster. Solo está activo mientras hay conexión. | — |
+| **Spot Color:** | Abre un selector de color para definir el color usado para los spots del clúster en el panadapter. | `ClusterSpotColor` |
 
 ## Consejos
 
-- Los spots aparecen en el panadapter solo cuando la superposición maestra de spots está activada. Si no ve spots después de conectarse, abra la pestaña **Display** y confirme que **Spots:** esté configurado en Enabled (el valor predeterminado).
-- Haga doble clic en cualquier fila de la pestaña **Spot List** para sintonizar el VFO activo en la frecuencia de ese spot. Consulte [Sintonizar un spot haciendo doble clic en la lista de spots](../../features/dx-cluster/tune-to-a-spot-by-double-clicking-the-spot-list.md).
+- Los spots del clúster aparecen en la pestaña unificada **Spot List** junto con spots de otras fuentes. La columna **Source** los identifica como "Cluster".
+- Haga doble clic en cualquier fila de la tabla de spots para sintonizar la radio a esa frecuencia. Consulte [Sintonizar un spot haciendo doble clic en la lista de spots](../../features/dx-cluster/tune-to-a-spot-by-double-clicking-the-spot-list.md).
+- La superposición maestra de spots en el panadapter debe estar habilitada. Vaya a la pestaña **Display** y confirme que **Spots:** esté configurado como Enabled (valor predeterminado). Si los spots no son visibles, revise ese control primero.
+- Los colores de spots por fuente pueden modificarse en cualquier momento sin necesidad de desconectarse.
 
 ## Solución de problemas
 
-- **El botón permanece en "Connect" y la consola muestra "Error: ..."** — El nombre de host o el puerto es incorrecto, o el servidor del clúster no es accesible. Verifique la dirección del servidor y el puerto, compruebe su conexión de red e inténtelo de nuevo.
-- **No aparecen spots en el panadapter después de conectarse** — Confirme que el interruptor **Spots:** en la pestaña **Display** esté en Enabled. Compruebe también que la banda de los spots entrantes coincida con el rango de frecuencias actual del panadapter.
-- **La Cluster Console está vacía después de conectarse** — Algunos clústeres requieren que envíe un comando (como su indicativo nuevamente o `SET/DX`) antes de transmitir spots. Escriba el comando en el campo de línea de comandos y haga clic en **Send**.
+- **El botón "Disconnect" aparece pero no llegan spots** — Es posible que el clúster requiera un comando de inicio de sesión específico tras el banner. Escriba el comando correspondiente (por ejemplo, `SET/SKIMMER` o `SET/DX`) en la línea de comandos y haga clic en **Send**.
+- **El estado muestra un error en rojo** — El nombre de host o el puerto no son accesibles. Verifique los valores de **Server:** y **Port:** y confirme que su ruta de red hacia el host del clúster esté disponible.
+- **Los spots aparecen en la Spot List pero no en el panadapter** — Abra la pestaña **Display** y confirme que **Spots:** esté como Enabled. Verifique también que la radio esté sintonizada en una banda con spots activos.
 
 ## Relacionados
 
 - [Descripción general de SpotHub](../../features/dx-cluster/overview.md)
 - [Conectarse a la Reverse Beacon Network](connect-to-the-reverse-beacon-network.md)
 - [Sintonizar un spot haciendo doble clic en la lista de spots](../../features/dx-cluster/tune-to-a-spot-by-double-clicking-the-spot-list.md)
-- [Elegir colores para cada fuente de spots](../../features/dx-cluster/pick-colors-for-each-spot-source.md)
-- [Ajustar densidad, posición, tamaño de fuente y duración de los spots](../../features/dx-cluster/tune-spot-density-position-font-size-and-lifetime.md)
-- [Activar el coloreado DXCC desde un registro ADIF](../../features/dx-cluster/enable-dxcc-coloring-from-an-adif-log.md)
-- [Borrar todos los spots del panadapter](../../features/dx-cluster/clear-all-spots-from-the-panadapter.md)
+- [Seleccionar colores para cada fuente de spots](../../features/dx-cluster/pick-colors-for-each-spot-source.md)
+- [Ajustar densidad, posición, tamaño de fuente y vida útil de los spots](../../features/dx-cluster/tune-spot-density-position-font-size-and-lifetime.md)
+- [Habilitar coloración DXCC a partir de un registro ADIF](../../features/dx-cluster/enable-dxcc-coloring-from-an-adif-log.md)
+- [Iniciar el receptor UDP de WSJT-X y filtrar por CQ, POTA o llamadas dirigidas a mí](../../features/dx-cluster/start-wsjt-x-udp-listener-and-filter-for-cq-pota-or-calls-to-me.md)

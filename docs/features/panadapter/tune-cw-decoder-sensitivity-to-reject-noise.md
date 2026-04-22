@@ -1,40 +1,40 @@
-# Ajustar la sensibilidad del decodificador CW para rechazar el ruido
+# Ajustar la sensibilidad del decodificador CW para rechazar ruido
 
-El control deslizante Sens establece qué tan estrictamente el decodificador CW filtra los caracteres de baja confianza. Subirlo reduce los caracteres basura causados por el ruido; bajarlo recupera señales débiles a costa de más errores.
+El control deslizante Sens determina con qué rigor el decodificador CW filtra las decodificaciones de baja confianza. Aumentarlo reduce el ruido y la salida confusa, a costa de perder ocasionalmente caracteres débiles pero válidos.
 
 ## Antes de comenzar
 
-- El panel de decodificación CW debe estar abierto en el applet Panadapter. Si no está visible, consulte [Activar el decodificador CW para leer Morse en el aire](turn-on-the-cw-decoder-to-read-morse-off-air.md).
-- El audio de la PC debe estar enrutado hacia AetherSDR. El panel de decodificación CW muestra "(requires PC Audio)" como recordatorio.
+- El panel de decodificación CW debe estar abierto y visible debajo del panadapter. Si no está visible, consulte [Activar el decodificador CW para leer Morse en el aire](turn-on-the-cw-decoder-to-read-morse-off-air.md).
+- El audio de la PC debe estar enrutado hacia AetherSDR. El panel muestra "(requires PC Audio)" como recordatorio.
 
 ## Pasos
 
-1. Localice el panel de decodificación CW en la parte inferior del applet Panadapter.
-2. Encuentre la etiqueta **Sens:** y su control deslizante inmediatamente a la derecha.
-3. Arrastre el control deslizante **Sens** hacia la derecha para aumentar la sensibilidad (filtrado más estricto, menos caracteres de ruido) o hacia la izquierda para disminuirla (más permisivo, pasan más caracteres).
-4. Observe el área de **texto decodificado CW**. Reduzca el valor si se están descartando caracteres genuinos; auméntelo si los caracteres de ruido saturan la salida.
+1. Localice el panel de decodificación CW en la parte inferior del panadapter.
+2. Encuentre la etiqueta "Sens:" y el control deslizante horizontal corto inmediatamente a su derecha.
+3. Arrastre el control hacia la derecha para aumentar la sensibilidad (filtrado más estricto, menos decodificaciones de ruido) o hacia la izquierda para reducirla (más permisivo, muestra caracteres de menor confianza).
+4. Observe el texto decodificado en el área de texto del decodificador CW para confirmar que el nivel de ruido cambia según lo esperado.
 
-El nuevo valor se guarda automáticamente en `CwDecoderSensitivity` y se restaura la próxima vez que AetherSDR se inicia.
+El nuevo valor se guarda inmediatamente en `CwDecoderSensitivity` y persiste entre reinicios.
 
 ## Qué hace cada control
 
-| Control | Predeterminado | Rango | Clave persistida | Comportamiento |
+| Control | Predeterminado | Rango válido | Clave persistida | Comportamiento |
 |---|---|---|---|---|
-| Sens | 30 | 0–100 | `CwDecoderSensitivity` | Filtra decodificaciones de baja confianza. Valores más altos aplican un umbral de costo más estricto, rechazando más caracteres. Asigna 0–100 a un umbral de costo interno de 1.0–0.1. |
+| Sens | 30 | 0–100 | `CwDecoderSensitivity` | Se asigna a un umbral de costo interno: 0 = umbral 1.0 (mostrar todo); 100 = umbral 0.1 (solo alta confianza). Los valores más altos rechazan más ruido. |
 
 ## Consejos
 
-- El área de **texto decodificado CW** colorea cada carácter decodificado según su confianza: verde (máxima confianza), amarillo, naranja y rojo (mínima confianza). Si durante un período de silencio observa mayormente caracteres rojos o anaranjados, suba Sens para suprimirlos.
-- Después de encontrar un valor que funcione para las condiciones actuales de la banda, considere fijar el tono y la velocidad para evitar que el decodificador vuelva a sincronizarse con el ruido. Consulte [Fijar el tono o la velocidad del decodificador CW una vez que el seguimiento es correcto](lock-cw-decoder-pitch-or-speed-once-tracking-is-good.md).
-- Los controles deslizantes **Lo** y **Hi** reducen el rango de búsqueda de tono (predeterminado 500–700 Hz), lo que también ayuda a rechazar el ruido fuera de frecuencia de forma independiente de Sens.
+- Los caracteres decodificados se colorean según la confianza. El verde indica un costo inferior a 0.15; el amarillo, inferior a 0.35; el naranja, inferior a 0.60; el rojo, en 0.60 o superior. Si ve principalmente rojo o naranja, aumente Sens hasta que la salida sea predominantemente verde o amarilla.
+- Con una señal limpia y una nota CW fuerte, un valor de Sens de 30–50 suele ser suficiente. En una banda ruidosa o con una señal débil, experimente primero con valores más bajos para evitar perder caracteres antes de aumentar Sens para suprimir el ruido.
+- Si el decodificador sigue con seguimiento deficiente después de ajustar Sens, considere reducir la ventana de búsqueda de tono con Lo y Hi, o bloquee el tono una vez que el decodificador lo haya encontrado. Consulte [Bloquear el tono o la velocidad del decodificador CW una vez que el seguimiento sea correcto](lock-cw-decoder-pitch-or-speed-once-tracking-is-good.md).
 
-## Resolución de problemas
+## Solución de problemas
 
-- **Subir Sens elimina toda la salida decodificada** — La señal puede ser demasiado débil o el tono puede estar fuera del rango Lo–Hi. Baje Sens gradualmente y verifique que la **etiqueta de estadísticas CW** muestre un tono detectado y una cifra de WPM. Si la etiqueta de estadísticas está en blanco, el decodificador no está sincronizando con ninguna señal.
-- **Sens vuelve a 30 después de reiniciar** — La configuración no se guardó. Verifique que AetherSDR tenga permiso de escritura en su directorio de configuración.
+- **Aumentar Sens elimina toda la salida, incluida la que parece ser una señal correcta** — El costo interno del decodificador para esa señal supera el umbral. Reduzca Sens ligeramente hasta que reaparezcan los caracteres válidos y luego auméntelo de nuevo en pequeños pasos.
+- **La salida no cambia después de mover el control deslizante** — Confirme que el panel de decodificación CW está activo y que se está recibiendo audio de la PC. El indicador "(requires PC Audio)" en el encabezado del panel indica que el audio aún no está llegando al decodificador.
 
-## Relacionado
+## Relacionados
 
 - [Activar el decodificador CW para leer Morse en el aire](turn-on-the-cw-decoder-to-read-morse-off-air.md)
-- [Fijar el tono o la velocidad del decodificador CW una vez que el seguimiento es correcto](lock-cw-decoder-pitch-or-speed-once-tracking-is-good.md)
+- [Bloquear el tono o la velocidad del decodificador CW una vez que el seguimiento sea correcto](lock-cw-decoder-pitch-or-speed-once-tracking-is-good.md)
 - [Copiar el texto CW decodificado al portapapeles](copy-decoded-cw-text-to-the-clipboard.md)

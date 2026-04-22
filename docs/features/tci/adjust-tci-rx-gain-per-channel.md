@@ -1,44 +1,47 @@
-# Ajustar la ganancia TCI de RX por canal
+# Ajustar la ganancia de RX por canal en TCI
 
-El applet TCI Server proporciona cuatro controles deslizantes de ganancia de RX independientes —uno por canal— que escalan el nivel de audio enviado a los clientes TCI conectados. Ajústelos cuando un cliente reciba audio demasiado alto o demasiado bajo en relación con su configuración operativa.
+El applet TCI Server proporciona cuatro controles deslizantes de ganancia de RX independientes, uno por canal. Ajustarlos permite igualar el nivel de audio que los clientes TCI (como Log4OM o las herramientas SunSDR) reciben de cada slice activo.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600. El applet TCI requiere una conexión de radio.
-- El servidor TCI debe estar habilitado. Si no lo está, los valores de ganancia se guardan de todas formas, pero no se envía audio a los clientes. Consulte [Habilitar el servidor TCI para clientes Log4OM / SunSDR](enable-the-tci-server-for-log4om-sunsdr-clients.md).
+- AetherSDR debe estar conectado a una radio FLEX-8600.
+- El applet TCI debe estar visible. Si no lo está, haga clic en el botón TCI del área de notificación en la barra lateral derecha para mostrarlo.
+- El servidor TCI debe estar en ejecución (Enable activado) para poder ver la medición en tiempo real mientras realiza los ajustes.
 
 ## Pasos
 
-1. Haga clic en el botón de bandeja **TCI** en la barra lateral derecha para abrir el applet TCI Server.
-2. Localice la fila **RX1**, **RX2**, **RX3** o **RX4** correspondiente al canal que desea ajustar. El slice asignado actualmente a cada canal se muestra en el indicador junto a la etiqueta de la fila (por ejemplo, `Slice A`); las filas sin slice asignado muestran `—`.
-3. Arrastre el medidor/control deslizante de esa fila hacia la izquierda para reducir la ganancia o hacia la derecha para aumentarla. El valor se guarda de inmediato.
-4. Repita el proceso para cualquier otro canal que necesite ajuste.
+1. Haga clic en el botón TCI del área de notificación en la barra lateral derecha para abrir el applet TCI Server.
+2. Localice la fila RX1, RX2, RX3 o RX4 correspondiente al canal que desea ajustar. La etiqueta de slice a la derecha del nombre del canal (por ejemplo, `Slice A`) indica qué slice está controlando ese canal. Un `—` significa que no hay ningún slice asignado.
+3. Arrastre el control deslizante/medidor combinado de esa fila hacia la izquierda para disminuir la ganancia, o hacia la derecha para aumentarla. El rango válido es de 0.0 a 1.0; el valor predeterminado es 0.5.
+4. Repita el procedimiento para cualquier otro canal RX que desee ajustar.
+
+El nuevo valor se guarda de inmediato. Persiste entre reinicios como `TciRxGain1`, `TciRxGain2`, `TciRxGain3` o `TciRxGain4`, según el canal.
 
 ## Qué hace cada control
 
-| Etiqueta | Tipo | Valor predeterminado | Rango válido | Ajuste persistido |
-|---|---|---|---|---|
-| Ganancia+medidor RX1 | Medidor/control deslizante | 0.5 | 0.0–1.0 | `TciRxGain1` |
-| Ganancia+medidor RX2 | Medidor/control deslizante | 0.5 | 0.0–1.0 | `TciRxGain2` |
-| Ganancia+medidor RX3 | Medidor/control deslizante | 0.5 | 0.0–1.0 | `TciRxGain3` |
-| Ganancia+medidor RX4 | Medidor/control deslizante | 0.5 | 0.0–1.0 | `TciRxGain4` |
+| Control | Predeterminado | Rango válido | Clave persistida |
+|---|---|---|---|
+| Ganancia+medidor RX1 | 0.5 | 0.0 – 1.0 | `TciRxGain1` |
+| Ganancia+medidor RX2 | 0.5 | 0.0 – 1.0 | `TciRxGain2` |
+| Ganancia+medidor RX3 | 0.5 | 0.0 – 1.0 | `TciRxGain3` |
+| Ganancia+medidor RX4 | 0.5 | 0.0 – 1.0 | `TciRxGain4` |
+| Etiqueta de asignación de slice | — | — o `Slice <letter>` | (ninguna) |
 
-Cada control deslizante también funciona como medidor en tiempo real, mostrando el nivel de audio de RX suavizado para el canal.
+La parte del medidor de cada control deslizante refleja el nivel de señal RX en tiempo real mediante suavizado exponencial: ataque rápido, decaimiento lento. Esto permite estimar un ajuste de ganancia adecuado mientras el audio está fluyendo.
 
 ## Consejos
 
-- La visualización del medidor utiliza suavizado de ataque rápido y decaimiento lento, por lo que los picos son visibles brevemente incluso durante los silencios en el audio.
-- Los valores de ganancia se guardan en cuanto suelta el control deslizante. Se restauran automáticamente la próxima vez que AetherSDR inicia.
-- Las asignaciones de canales de RX siguen el mapeo de canales DAX. Si un canal muestra `—`, no hay ningún slice asignado actualmente a ese canal DAX; asigne un canal DAX a un slice para activar esa fila de TCI RX.
+- Si un canal muestra `—` en la etiqueta de slice, no hay ningún slice asignado a ese canal DAX. Los cambios de ganancia se guardan, pero no tendrán ningún efecto audible hasta que se asigne un slice a ese canal.
+- Los cuatro valores de ganancia son independientes. Configurar RX1 no afecta a RX2–RX4.
 
 ## Solución de problemas
 
-- **Todos los medidores de RX están apagados y no llega audio al cliente** — Es posible que el servidor TCI no esté en ejecución. Verifique que el estado del servidor muestre `:<puerto> (N clients)` y no `(stopped)`. Haga clic en **Enable** para iniciar el servidor si es necesario.
-- **Los cambios de ganancia no tienen efecto en el cliente** — Confirme que el cliente está conectado al puerto correcto (`TciPort`, predeterminado `50001`). El estado del servidor muestra el puerto activo y el número de clientes.
+- **El medidor no muestra movimiento** — Es posible que el servidor TCI no esté en ejecución. Verifique que Enable esté activado y que el estado del servidor no indique `(stopped)` ni `(port in use)`. Consulte [Habilitar el servidor TCI para clientes Log4OM / SunSDR](enable-the-tci-server-for-log4om-sunsdr-clients.md).
+- **La etiqueta de slice muestra `—` en todos los canales** — Ningún slice tiene asignado un canal DAX. Asigne un canal DAX a cada slice a través de la configuración de slice de la radio y, luego, vuelva aquí para ajustar la ganancia.
 
 ## Relacionados
 
-- [Ajustar la ganancia TCI de TX](adjust-tci-tx-gain.md)
 - [Habilitar el servidor TCI para clientes Log4OM / SunSDR](enable-the-tci-server-for-log4om-sunsdr-clients.md)
+- [Ajustar la ganancia de TX en TCI](adjust-tci-tx-gain.md)
+- [Descripción general del TCI Server](overview.md)
 - [Cambiar el puerto TCI](change-the-tci-port.md)
-- [Iniciar TCI automáticamente al arrancar](autostart-tci-on-launch.md)

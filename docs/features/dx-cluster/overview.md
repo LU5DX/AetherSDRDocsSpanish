@@ -1,147 +1,131 @@
 # Descripción general de SpotHub
 
-SpotHub es el concentrador central de AetherSDR para recibir spots de DX de múltiples fuentes y mostrarlos como superposiciones en el panadapter. Úselo para conectarse a un cluster de DX, la Reverse Beacon Network (RBN), WSJT-X, SpotCollector, POTA y FreeDV, y para controlar cómo se ven los spots en pantalla.
+SpotHub es el concentrador central de AetherSDR para recibir spots de DX desde múltiples fuentes y mostrarlos como superposiciones en el panadapter. Úselo para conectarse a un cluster de DX, la Reverse Beacon Network, WSJT-X, SpotCollector, POTA o FreeDV, y para controlar el aspecto y el comportamiento de los spots en pantalla.
 
 ## Antes de comenzar
 
-- No se requiere conexión de radio para configurar SpotHub.
-- Abra SpotHub desde `Settings > SpotHub...`.
+- AetherSDR no necesita estar conectado a un radio para configurar SpotHub, pero las superposiciones de spots en el panadapter solo aparecen cuando hay un radio conectado.
+- La pestaña FreeDV solo está presente en versiones que incluyen soporte para WebSocket.
 
 ## Cómo funciona
 
-SpotHub agrega spots de hasta seis fuentes independientes. Cada fuente tiene su propia pestaña para los ajustes de conexión, una consola de solo lectura que muestra el tráfico en vivo y un selector de color para los spots. Todos los spots entrantes se integran en una lista unificada y se dibujan como marcadores etiquetados en el panadapter.
+Abra SpotHub desde `Settings > SpotHub...`. El cuadro de diálogo contiene ocho pestañas: **Cluster**, **RBN**, **WSJT-X**, **SpotCollector**, **POTA**, **FreeDV**, **Spot List** y **Display**.
 
-### Fuentes
-
-| Pestaña | Cómo se conecta | Qué recibe |
-|---|---|---|
-| Cluster | Telnet a un host y puerto especificados por el usuario | Spots de DX de un cluster de paquetes tradicional |
-| RBN | Telnet a la Reverse Beacon Network | Spots de skimmer de CW, RTTY y FT8 con limitación de tasa opcional |
-| WSJT-X | Listener UDP en una dirección y puerto locales | Transmisiones decodificadas de una instancia de WSJT-X en ejecución |
-| SpotCollector | Listener UDP en un puerto local | Spots difundidos por Ham Radio Deluxe SpotCollector |
-| POTA | Sondeo HTTP de `api.pota.app` | Activaciones actuales de Parks on the Air |
-| FreeDV | Conexión WebSocket a `qso.freedv.org` | Spots del reportero de QSO de FreeDV (requiere soporte WebSocket) |
-
-Cada fuente puede iniciarse manualmente o configurarse para iniciarse automáticamente cuando AetherSDR se lanza, usando su respectivo interruptor "Auto-connect on startup" o "Auto-start on startup".
-
-### Pestaña Spot List
-
-La pestaña Spot List muestra una tabla unificada y ordenable de todos los spots activos de cada fuente activa. Las columnas son Time, Freq (kHz), DX Call, Mode, Comment, Spotter, Band y Source. Las casillas de verificación por banda filtran qué bandas aparecen en la tabla. Haga doble clic en cualquier fila para sintonizar el VFO activo a la frecuencia de ese spot. Haga clic en Clear para vaciar la lista actual.
-
-### Pestaña Display
-
-La pestaña Display controla cómo aparecen los spots en el panadapter y no afecta la conectividad.
-
-## Qué hace cada control
+Cada pestaña de fuente gestiona de forma independiente una entrada de spots. Los spots de todas las fuentes activas fluyen hacia un único conjunto unificado, visible en la pestaña **Spot List** y representados como superposiciones en el panadapter según la configuración de la pestaña **Display**.
 
 ### Pestaña Cluster
 
-| Control | Comportamiento | Clave de ajuste |
+Se conecta a un cluster de DX mediante telnet. La **Cluster Console** muestra el tráfico telnet sin procesar. Puede escribir comandos en la línea de comandos y hacer clic en **Send** para enviarlos.
+
+| Control | Ajuste persistente | Notas |
 |---|---|---|
-| Server: | Nombre de host del cluster de DX | `ClusterHost` |
-| Port: | Puerto Telnet (1–65535) | `ClusterPort` |
-| Callsign: | Indicativo de inicio de sesión enviado al cluster | `ClusterCallsign` |
-| Connect / Disconnect | Activa o desactiva la conexión Telnet | — |
-| Auto-connect on startup | Se conecta automáticamente al iniciar | `ClusterAutoConnect` |
-| Cluster Console | Visualización de solo lectura del tráfico sin procesar del cluster | — |
-| Send | Envía un comando escrito al cluster | — |
-| Spot Color: | Abre un selector de color para los spots del cluster | `ClusterSpotColor` |
+| `Server:` | `ClusterHost` | Nombre de host del cluster de DX. |
+| `Port:` | `ClusterPort` | Puerto telnet; rango válido 1–65535. |
+| `Callsign:` | `ClusterCallsign` | Indicativo de inicio de sesión enviado al conectar. |
+| `Connect` / `Disconnect` | — | Activa o desactiva la conexión telnet. |
+| `Auto-connect on startup` | `ClusterAutoConnect` | Se reconecta automáticamente al iniciar. |
+| `Spot Color:` | `ClusterSpotColor` | Selector de color para las etiquetas de spots del cluster. |
 
 ### Pestaña RBN
 
-| Control | Comportamiento | Clave de ajuste |
+Se conecta a la Reverse Beacon Network mediante telnet. Incluye un limitador de velocidad para reducir la acumulación de spots de balizas en el panadapter.
+
+| Control | Ajuste persistente | Notas |
 |---|---|---|
-| Server: | Nombre de host Telnet de RBN | `RbnHost` |
-| Port: | Puerto Telnet de RBN (1–65535) | `RbnPort` |
-| Callsign: | Indicativo de inicio de sesión enviado a RBN | `RbnCallsign` |
-| Rate Limit: | Máximo de spots de RBN por segundo | `RbnRateLimit` |
-| Connect / Disconnect | Activa o desactiva la conexión RBN | — |
-| Auto-connect on startup | Conecta RBN automáticamente al iniciar | `RbnAutoConnect` |
-| RBN Console | Visualización de solo lectura del tráfico sin procesar de RBN | — |
-| Send | Envía un comando a RBN | — |
-| Spot Color: | Abre un selector de color para los spots de RBN | `RbnSpotColor` |
+| `Server:` | `RbnHost` | Nombre de host telnet de RBN. |
+| `Port:` | `RbnPort` | Puerto telnet; rango válido 1–65535. |
+| `Callsign:` | `RbnCallsign` | Indicativo de inicio de sesión enviado a RBN. |
+| `Rate Limit:` | `RbnRateLimit` | Limita el número de spots de RBN por segundo. |
+| `Connect` / `Disconnect` | — | Activa o desactiva la conexión a RBN. |
+| `Auto-connect on startup` | `RbnAutoConnect` | Se reconecta automáticamente al iniciar. |
+| `Spot Color:` | `RbnSpotColor` | Selector de color para las etiquetas de spots de RBN. |
 
 ### Pestaña WSJT-X
 
-| Control | Comportamiento | Clave de ajuste |
+Escucha en un puerto UDP las transmisiones decodificadas de una instancia de WSJT-X en ejecución. Los filtros permiten reducir la visualización a solo los decodificados que sean relevantes.
+
+| Control | Ajuste persistente | Notas |
 |---|---|---|
-| Address: | Dirección de enlace UDP para mensajes de WSJT-X | `WsjtxAddress` |
-| Port: | Puerto UDP (1–65535) | `WsjtxPort` |
-| Start / Stop | Inicia o detiene el listener UDP | — |
-| Auto-start on startup | Inicia el listener automáticamente al iniciar | `WsjtxAutoStart` |
-| CQ | Muestra spots solo para llamadas CQ | `WsjtxFilterCQ` |
-| CQ POTA | Muestra llamadas CQ POTA | `WsjtxFilterPOTA` |
-| Calling Me | Muestra decodificaciones dirigidas a su indicativo | `WsjtxFilterCallingMe` |
-| CQ color | Color para spots CQ | `WsjtxColorCQ` |
-| POTA color | Color para spots CQ POTA | `WsjtxColorPOTA` |
-| Calling Me color | Color para spots que lo llaman a usted | `WsjtxColorCallingMe` |
-| Default color | Color para todos los demás spots de WSJT-X | `WsjtxColorDefault` |
-| WSJT-X Decodes | Consola de solo lectura de transmisiones decodificadas | — |
-| Spot Life: | Segundos que los spots de WSJT-X permanecen en el panadapter | `WsjtxSpotLife` |
+| `Address:` | `WsjtxAddress` | Dirección de enlace UDP. |
+| `Port:` | `WsjtxPort` | Puerto UDP; rango válido 1–65535. |
+| `Start` / `Stop` | — | Inicia o detiene el receptor UDP. |
+| `Auto-start on startup` | `WsjtxAutoStart` | Inicia el receptor automáticamente al arrancar. |
+| `CQ` | `WsjtxFilterCQ` | Muestra solo llamadas CQ. |
+| `CQ POTA` | `WsjtxFilterPOTA` | Muestra llamadas CQ POTA. |
+| `Calling Me` | `WsjtxFilterCallingMe` | Muestra solo decodificados dirigidos a su indicativo. |
+| Selectores de color CQ / POTA / Calling Me / Default | `WsjtxColorCQ` / `WsjtxColorPOTA` / `WsjtxColorCallingMe` / `WsjtxColorDefault` | Colores de spots por categoría. |
+| `Spot Life:` | `WsjtxSpotLife` | Segundos que los spots de WSJT-X permanecen en el panadapter. |
 
 ### Pestaña SpotCollector
 
-| Control | Comportamiento | Clave de ajuste |
+Escucha en un puerto UDP las difusiones de spots de Ham Radio Deluxe SpotCollector.
+
+| Control | Ajuste persistente | Notas |
 |---|---|---|
-| UDP Port: | Puerto en el que SpotCollector difunde (1–65535) | `SpotCollectorPort` |
-| Start / Stop | Inicia o detiene el listener UDP | — |
-| Auto-start on startup | Inicia el listener automáticamente al iniciar | `SpotCollectorAutoStart` |
-| SpotCollector Spots | Consola de solo lectura de spots recibidos | — |
+| `UDP Port:` | `SpotCollectorPort` | Rango válido 1–65535. |
+| `Start` / `Stop` | — | Inicia o detiene el receptor UDP. |
+| `Auto-start on startup` | `SpotCollectorAutoStart` | Inicia el receptor automáticamente al arrancar. |
 
 ### Pestaña POTA
 
-| Control | Comportamiento | Clave de ajuste |
+Consulta `api.pota.app` mediante HTTP a un intervalo configurable para obtener las activaciones actuales de Parks on the Air.
+
+| Control | Ajuste persistente | Notas |
 |---|---|---|
-| Server: | Punto de acceso fijo: `api.pota.app` (sondeo HTTP) | — |
-| Poll Interval: | Segundos entre sondeos de POTA | `PotaPollInterval` |
-| Start / Stop | Inicia o detiene el sondeo de POTA | — |
-| Auto-start on startup | Inicia el sondeo de POTA automáticamente al iniciar | `PotaAutoStart` |
-| POTA Activations | Consola de solo lectura del feed de activaciones | — |
-| Spot Color: | Abre un selector de color para los spots de POTA | `PotaSpotColor` |
+| `Poll Interval:` | `PotaPollInterval` | Segundos entre consultas a la API de POTA. |
+| `Start` / `Stop` | — | Inicia o detiene las consultas. |
+| `Auto-start on startup` | `PotaAutoStart` | Inicia las consultas automáticamente al arrancar. |
+| `Spot Color:` | `PotaSpotColor` | Selector de color para las etiquetas de spots de POTA. |
 
 ### Pestaña FreeDV
 
-FreeDV está disponible solo en versiones que incluyen soporte WebSocket.
+Se conecta al reportador de QSO de FreeDV en `qso.freedv.org` mediante WebSocket. Esta pestaña solo está presente en versiones con soporte para WebSocket.
 
-| Control | Comportamiento | Clave de ajuste |
+| Control | Ajuste persistente | Notas |
 |---|---|---|
-| Server: | Punto de acceso fijo: `qso.freedv.org` (WebSocket) | — |
-| Start / Stop | Conecta o desconecta el WebSocket de FreeDV | — |
-| Auto-start on startup | Se conecta automáticamente al iniciar | `FreeDvAutoStart` |
-| FreeDV Spots | Consola de solo lectura de la actividad de FreeDV | — |
-| Spot Color: | Abre un selector de color para los spots de FreeDV | `FreeDvSpotColor` |
+| `Start` / `Stop` | — | Conecta o desconecta la fuente WebSocket. |
+| `Auto-start on startup` | `FreeDvAutoStart` | Se conecta automáticamente al arrancar. |
+| `Spot Color:` | `FreeDvSpotColor` | Selector de color para las etiquetas de spots de FreeDV. |
+
+### Pestaña Spot List
+
+Muestra una tabla unificada y ordenable de todos los spots activos de cada fuente activa. Las columnas son Time, Freq (kHz), DX Call, Mode, Comment, Spotter, Band y Source. Al hacer doble clic en una fila, el VFO activo se sintoniza a la frecuencia de ese spot.
+
+Las casillas de verificación por banda en la parte superior de la pestaña alternan la visibilidad de los spots según la banda (de 160m a 2m). Haga clic en **Clear** para vaciar la lista de spots actual sin desconectar ninguna fuente.
 
 ### Pestaña Display
 
-| Control | Valor predeterminado | Comportamiento | Clave de ajuste |
+Controla cómo se representan los spots en el panadapter y si el estado de premio DXCC afecta a su color.
+
+| Control | Ajuste persistente | Valor predeterminado | Notas |
 |---|---|---|---|
-| Spots: | Habilitado | Interruptor principal para la superposición de spots en el panadapter | `IsSpotsEnabled` |
-| Memories: | Deshabilitado | Activa o desactiva los marcadores de canales de memoria en el panadapter | `IsMemoriesShownOnPanadapter` |
-| Auto Mode: | — | Selecciona automáticamente la densidad de spots según el nivel de zoom | `SpotsAutoMode` |
-| Levels: | — | Número de filas de apilamiento vertical para las etiquetas de spots | `SpotsStackLevels` |
-| Position: | — | Posición vertical de las etiquetas de spots en el panadapter | `SpotsPosition` |
-| Font Size: | — | Tamaño del texto de las etiquetas de spots | `SpotsFontSize` |
-| Spot Lifetime: | — | Segundos antes de que un spot desaparezca del panadapter | `SpotsLifetime` |
-| Override Colors: | — | Fuerza un único color de texto para todos los spots | `IsSpotsOverrideColorsEnabled` |
-| Override Background: Enabled | — | Habilita un color de fondo personalizado para las etiquetas de spots | `IsSpotsOverrideBackgroundColorsEnabled` |
-| Override Background: Auto | — | Aplica contraste automático a los fondos de las etiquetas de spots | `IsSpotsOverrideToAutoBackgroundColorEnabled` |
-| Background Opacity: | 48 | Opacidad del fondo de las etiquetas de spots | `SpotsOverrideBgOpacity` |
-| DXCC Coloring | — | Colorea los spots según el estado trabajado/confirmado/necesario a partir de un registro ADIF | `DxccColoringEnabled` |
-| Log File (ADIF): | — | Carga un archivo de registro ADIF para gestionar el coloreado DXCC | `DxccAdifPath` |
-| Auto-Reload Log: | — | Vuelve a leer el archivo ADIF automáticamente cuando cambia | `DxccAutoReload` |
-| Clear All Spots | — | Elimina todos los spots actualmente rastreados en todas las fuentes | — |
+| `Spots:` | `IsSpotsEnabled` | Habilitado | Interruptor principal de la superposición de spots. Desactívelo para ocultar todos los spots sin desconectar las fuentes. |
+| `Memories:` | `IsMemoriesShownOnPanadapter` | Deshabilitado | Activa o desactiva los marcadores de canales de memoria en el panadapter. |
+| `Auto Mode:` | `SpotsAutoMode` | — | Ajusta automáticamente la densidad de spots según el nivel de zoom del panadapter. |
+| `Levels:` | `SpotsStackLevels` | — | Número de filas de apilamiento vertical usadas cuando los spots se superponen. |
+| `Position:` | `SpotsPosition` | — | Posición vertical de las etiquetas de spots en el panadapter. |
+| `Font Size:` | `SpotsFontSize` | — | Tamaño del texto de las etiquetas de spots. |
+| `Spot Lifetime:` | `SpotsLifetime` | — | Segundos antes de que una etiqueta de spot desaparezca. |
+| `Override Colors:` | `IsSpotsOverrideColorsEnabled` | — | Fuerza un único color de texto para todos los spots, ignorando los colores por fuente. |
+| `Override Background:` Enabled / Auto | `IsSpotsOverrideBackgroundColorsEnabled` / `IsSpotsOverrideToAutoBackgroundColorEnabled` | — | Habilita un color de fondo personalizado para los spots; Auto selecciona automáticamente un fondo con contraste adecuado. |
+| `Background Opacity:` | `SpotsOverrideBgOpacity` | 48 | Opacidad del relleno de fondo de los spots. |
+| `DXCC Coloring` | `DxccColoringEnabled` | — | Colorea los spots según el estado DXCC: trabajado, confirmado o necesario. |
+| `Log File (ADIF):` | `DxccAdifPath` | — | Ruta a un archivo de registro ADIF utilizado para determinar el estado DXCC. |
+| `Auto-Reload Log:` | `DxccAutoReload` | — | Vuelve a leer el archivo ADIF automáticamente cuando una aplicación de registro lo actualiza. |
+| `Clear All Spots` | — | — | Elimina todos los spots rastreados actualmente en todas las fuentes. |
 
 ## Consejos
 
-- El color de los spots de cada fuente puede configurarse de forma independiente. Si habilita Override Colors: en la pestaña Display, ese único color tiene prioridad sobre todos los colores por fuente.
-- Auto Mode: reduce el desorden automáticamente en niveles de zoom amplios. Si los spots se superponen, habilítelo antes de ajustar Levels: manualmente.
-- DXCC Coloring requiere un archivo de registro ADIF. Habilite Auto-Reload Log: si su software de registro actualiza el archivo durante una sesión, para que el coloreado se mantenga actualizado sin necesidad de reabrir SpotHub.
+- Cada pestaña de fuente muestra un indicador de estado: **Connected**, **Disconnected**, **Listening**, **Polling** o **Stopped**. Verifíquelo antes de asumir que una fuente está activa.
+- El número total de spots rastreados en ese momento se muestra en el cuadro de diálogo y se actualiza a medida que llegan nuevos spots.
+- Cada consola de fuente (Cluster Console, RBN Console, WSJT-X Decodes, POTA Activations, FreeDV Spots, SpotCollector Spots) desplaza automáticamente el contenido cuando usted está al final, pero deja de seguir si sube para revisar el tráfico anterior.
+- El coloreado DXCC no tiene efecto a menos que haya cargado un archivo ADIF con `Log File (ADIF):`.
 
-## Relacionados
+## Relacionado
 
 - [Conectarse a un cluster de DX](../../getting-started/setup/connect-to-a-dx-cluster.md)
 - [Conectarse a la Reverse Beacon Network](../../getting-started/setup/connect-to-the-reverse-beacon-network.md)
-- [Iniciar el listener UDP de WSJT-X y filtrar por CQ, POTA o llamadas dirigidas a mí](start-wsjt-x-udp-listener-and-filter-for-cq-pota-or-calls-to-me.md)
-- [Habilitar el feed UDP de SpotCollector](enable-spotcollector-udp-feed.md)
-- [Sondear activaciones de POTA](poll-pota-activations.md)
-- [Habilitar el WebSocket del reportero de QSO de FreeDV](enable-freedv-qso-reporter-websocket.
+- [Iniciar el receptor UDP de WSJT-X y filtrar por CQ, POTA o llamadas dirigidas a mí](start-wsjt-x-udp-listener-and-filter-for-cq-pota-or-calls-to-me.md)
+- [Habilitar la fuente UDP de SpotCollector](enable-spotcollector-udp-feed.md)
+- [Consultar activaciones de POTA](poll-pota-activations.md)
+- [Habilitar el WebSocket del reportador de QSO de FreeDV](enable-freedv-qso-reporter-websocket)

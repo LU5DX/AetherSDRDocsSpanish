@@ -1,49 +1,50 @@
 # Consultar activaciones POTA
 
-AetherSDR puede obtener periódicamente las activaciones actuales de Parks on the Air (POTA) desde `api.pota.app` y mostrarlas como spots en el panadapter. Esto permite ver los operadores POTA activos en todas las bandas sin necesidad de un navegador o aplicación independiente.
+AetherSDR puede obtener periódicamente las activaciones activas de Parks on the Air (POTA) desde `api.pota.app` y mostrarlas como spots en su panadapter. Use esta función para encontrar operadores de parques activos sin necesidad de ejecutar una aplicación separada.
 
 ## Antes de comenzar
 
-- AetherSDR debe tener una conexión a internet activa para alcanzar `api.pota.app`.
-- La visualización de spots en el panadapter requiere que `IsSpotsEnabled` esté activado. Verifique que en `Settings > SpotHub...` > pestaña Display > **Spots:** esté configurado como **Enabled**.
+- AetherSDR debe estar en ejecución. No se requiere conexión a una radio para configurar el sondeo POTA.
+- Su equipo debe tener acceso HTTP saliente a `api.pota.app`.
+- Confirme que la superposición de spots esté habilitada (`IsSpotsEnabled` configurado en Enabled) para que los spots aparezcan en el panadapter.
 
 ## Pasos
 
 1. Abra `Settings > SpotHub...`.
 2. Haga clic en la pestaña **POTA**.
-3. Revise el indicador **Server:** — muestra `api.pota.app (HTTP polling)` y no puede modificarse.
-4. Configure **Poll Interval:** con el número de segundos entre consultas (almacenado como `PotaPollInterval`).
+3. Revise el indicador **Server:** — muestra `api.pota.app (HTTP polling)` y no es editable.
+4. Configure **Poll Interval:** con el número de segundos entre consultas. Este valor se guarda como `PotaPollInterval`.
 5. Haga clic en **Start**. El indicador de estado cambia a **Polling**.
-6. Observe la consola **POTA Activations** para ver los datos de activación entrantes. Los spots aparecen en el panadapter una vez recibidos.
-7. Para elegir un color de spot, haga clic en **Spot Color:** y seleccione un color en el cuadro de diálogo (almacenado como `PotaSpotColor`).
-8. Para iniciar la consulta automáticamente cada vez que AetherSDR se inicie, haga clic en **Auto-start on startup** para activarlo (almacenado como `PotaAutoStart`).
+6. Observe la consola **POTA Activations** para ver los datos de activación entrantes.
+7. Para cambiar el color de los spots POTA en el panadapter, haga clic en **Spot Color:** y elija un color. La selección se guarda como `PotaSpotColor`.
+8. Para que el sondeo inicie automáticamente cada vez que AetherSDR se ejecute, haga clic en **Auto-start on startup** para activarlo. Esto se guarda como `PotaAutoStart`.
+9. Para detener el sondeo, haga clic en **Stop**.
 
 ## Qué hace cada control
 
-| Control | Descripción | Clave de configuración |
-|---|---|---|
-| **Server:** | Indicador de solo lectura que muestra el punto de acceso fijo `api.pota.app (HTTP polling)`. | — |
-| **Poll Interval:** | Segundos entre consultas HTTP a `api.pota.app`. | `PotaPollInterval` |
-| **Start / Stop** | Inicia o detiene la consulta POTA. El estado muestra **Polling** cuando está activo y **Stopped** cuando está inactivo. | — |
-| **Auto-start on startup** | Cuando está activo, la consulta comienza automáticamente al iniciar. | `PotaAutoStart` |
-| **POTA Activations** | Consola de solo lectura que muestra el flujo de activaciones sin procesar recibido en cada consulta. | — |
-| **Spot Color:** | Abre un selector de color para los spots POTA en el panadapter. | `PotaSpotColor` |
+| Control | Descripción | Valor predeterminado | Clave de configuración |
+|---|---|---|---|
+| **Server:** | Indicador de solo lectura que muestra el endpoint fijo de POTA. | `api.pota.app (HTTP polling)` | — |
+| **Poll Interval:** | Segundos entre consultas sucesivas a la API de POTA. | — | `PotaPollInterval` |
+| **Start / Stop** | Inicia o detiene el sondeo POTA. El estado cambia entre **Polling** y **Stopped**. | — | — |
+| **Auto-start on startup** | Inicia el sondeo automáticamente cuando AetherSDR se ejecuta. | — | `PotaAutoStart` |
+| **POTA Activations** | Consola de solo lectura que muestra el feed de activaciones sin procesar recibido desde la API. | — | — |
+| **Spot Color:** | Abre un selector de color para definir el color de los spots POTA en el panadapter. | — | `PotaSpotColor` |
 
 ## Consejos
 
-- Si desea sintonizar directamente una activación POTA, cambie a la pestaña **Spot List** y haga doble clic en la fila. Consulte [Sintonizar un spot haciendo doble clic en la lista de spots](tune-to-a-spot-by-double-clicking-the-spot-list.md).
-- Los spots POTA respetan la configuración global de visualización de spots (duración, posición, tamaño de fuente, apilamiento). Ajuste esos parámetros en la pestaña **Display** o consulte [Ajustar la densidad, posición, tamaño de fuente y duración de los spots](tune-spot-density-position-font-size-and-lifetime.md).
+- La consola **POTA Activations** carga las últimas 500 líneas del registro de sesión cuando se abre el diálogo SpotHub, por lo que las activaciones recientes son visibles de inmediato sin esperar la siguiente consulta.
+- Haga doble clic en cualquier spot POTA en la pestaña **Spot List** para sintonizar directamente la frecuencia de esa activación.
 
 ## Solución de problemas
 
-- **El estado permanece en Stopped después de hacer clic en Start** — Verifique que su sistema tenga una conexión a internet funcional y pueda alcanzar `api.pota.app` en el puerto 443.
-- **No aparecen spots en el panadapter a pesar del estado Polling** — Compruebe que **Spots:** en la pestaña **Display** esté configurado como **Enabled** (`IsSpotsEnabled`). Confirme también que ninguna estación POTA activa quede fuera del rango visible actualmente en el panadapter.
-- **Los spots desaparecen rápidamente** — El control deslizante global **Spot Lifetime:** en la pestaña **Display** determina cuánto tiempo permanece visible cada spot. Auméntelo para mantener los spots POTA en pantalla por más tiempo (`SpotsLifetime`).
+- **El estado permanece en Stopped después de hacer clic en Start** — Verifique que su equipo tenga conexión a internet activa y que el HTTP saliente hacia `api.pota.app` no esté bloqueado por un cortafuegos.
+- **No aparecen spots en el panadapter** — Confirme que la superposición maestra de spots esté habilitada: abra la pestaña **Display** en SpotHub y verifique que **Spots:** esté configurado en Enabled (`IsSpotsEnabled`).
 
 ## Relacionados
 
 - [Descripción general de SpotHub](overview.md)
 - [Sintonizar un spot haciendo doble clic en la lista de spots](tune-to-a-spot-by-double-clicking-the-spot-list.md)
-- [Ajustar la densidad, posición, tamaño de fuente y duración de los spots](tune-spot-density-position-font-size-and-lifetime.md)
-- [Seleccionar colores para cada fuente de spots](pick-colors-for-each-spot-source.md)
-- [Borrar todos los spots del panadapter](clear-all-spots-from-the-panadapter.md)
+- [Ajustar densidad, posición, tamaño de fuente y duración de los spots](tune-spot-density-position-font-size-and-lifetime.md)
+- [Elegir colores para cada fuente de spots](pick-colors-for-each-spot-source.md)
+- [Iniciar el receptor UDP de WSJT-X y filtrar por CQ, POTA o llamadas dirigidas a mí](start-wsjt-x-udp-listener-and-filter-for-cq-pota-or-calls-to-me.md)

@@ -1,38 +1,37 @@
-# Cambio a una referencia externa de 10 MHz
+# Cambiar a una referencia externa de 10 MHz
 
-Esta página explica cómo seleccionar un reloj de referencia externo de 10 MHz en su FLEX-8600. Utilice una referencia externa cuando necesite sincronizar el equipo con un oscilador disciplinado por GPS, un patrón de rubidio u otra fuente de frecuencia de precisión.
+Use esta página para seleccionar una señal de referencia externa de 10 MHz como estándar de frecuencia del FLEX-8600. Esto es útil cuando tiene un oscilador disciplinado por GPS, un patrón de rubidio u otra referencia de precisión conectada al puerto REF IN del panel trasero del radio.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al equipo. El diálogo Radio Setup no está disponible sin una conexión activa al equipo.
-- Una señal estable de 10 MHz debe estar físicamente conectada a la entrada de referencia de 10 MHz del panel trasero del FLEX-8600 antes de cambiar la fuente.
+- AetherSDR debe estar conectado al radio. El diálogo Radio Setup requiere una conexión activa con el radio.
+- La fuente de referencia externa de 10 MHz debe estar conectada al conector REF IN del panel trasero del radio y debe estar activa antes de cambiar la configuración.
 
 ## Pasos
 
-1. Abra `Settings > Radio Setup...`.
+1. Haga clic en `Settings > Radio Setup...` para abrir el diálogo Radio Setup.
 2. Haga clic en la pestaña **RX**.
 3. Localice el cuadro combinado **10 MHz Reference Source:**.
-4. Seleccione **External**.
+4. Seleccione **External** en la lista desplegable.
+5. Haga clic en **Close** para cerrar el diálogo.
 
-El equipo cambia inmediatamente su entrada de oscilador de referencia. No se requiere ningún paso adicional de confirmación.
-
-Para volver al oscilador interno, regrese a la pestaña **RX** y seleccione **Internal** en **10 MHz Reference Source:**.
+Para volver al oscilador interno, repita los pasos y seleccione **Internal**.
 
 ## Qué hace cada control
 
 | Control | Tipo | Valores válidos | Comportamiento |
 |---|---|---|---|
-| **10 MHz Reference Source:** | Cuadro combinado | Internal \| External | Selecciona si el equipo se sincroniza con su oscilador interno o con una señal presente en la entrada de 10 MHz del panel trasero. |
+| **10 MHz Reference Source:** | Cuadro combinado | `Internal`, `External` | Selecciona si el radio sincroniza su reloj de muestreo con el oscilador interno o con una señal de 10 MHz presente en el conector REF IN. |
 
 ## Consejos
 
-- Si también necesita corregir un error de frecuencia residual después de sincronizar con una referencia externa, utilice el control giratorio **Freq Offset (ppb):** en la misma pestaña **RX**.
+- La pestaña **RX** también contiene los controles de calibración del GPSDO (**Cal Frequency (MHz):**, **Start** y **Freq Offset (ppb):**). Si utiliza un oscilador disciplinado por GPS como referencia externa, no es necesario aplicar también un desplazamiento de frecuencia manual — el GPSDO mantiene la frecuencia.
 
 ## Solución de problemas
 
-- **La frecuencia del equipo es inestable o se desvía tras seleccionar External** — Es posible que la señal externa de 10 MHz esté ausente, sea demasiado débil o esté fuera de especificación. Verifique que la señal esté presente y dentro de los requisitos de nivel de entrada del FLEX-8600; luego vuelva a **Internal** y reintente.
-- **El cuadro combinado 10 MHz Reference Source: aparece atenuado o no está visible** — AetherSDR requiere una conexión activa al equipo para mostrar los controles de la pestaña **RX**. Confirme que el equipo esté conectado antes de abrir Radio Setup.
+- **La indicación de frecuencia se vuelve inestable o el radio deja de recibir tras cambiar a External** — La referencia externa está ausente, su nivel es demasiado bajo o no es exactamente 10 MHz. Verifique que la fuente esté en funcionamiento y correctamente cableada; luego vuelva a **Internal** para restablecer la operación normal.
 
-## Relacionado
+## Temas relacionados
 
 - [Calibrar el desplazamiento de frecuencia del GPSDO](calibrate-the-gpsdo-frequency-offset.md)
+- [Descripción general de Radio Setup](overview.md)

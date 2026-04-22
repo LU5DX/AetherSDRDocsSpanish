@@ -1,53 +1,56 @@
-# Activar el decodificador CW para leer Morse en el aire
+# Activar el decodificador de CW para leer Morse en el aire
 
-El panel de decodificación CW aparece debajo del panadapter y muestra el código Morse entrante como texto en tiempo real. Úselo para copiar CW en el aire sin necesidad de escuchar ni transcribir manualmente.
+El panel de decodificación de CW se encuentra debajo del espectro y la cascada (waterfall) del panadapter y muestra en tiempo real el texto Morse decodificado. Úselo para leer estaciones en CW sin necesidad de una aplicación de decodificación independiente.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. El panel del decodificador CW requiere una conexión activa con el radio.
-- El audio del PC debe estar enrutado hacia AetherSDR. El panel muestra "(requires PC Audio)" como recordatorio — la decodificación no funcionará sin entrada de audio.
-- El slice vinculado a este panadapter debe estar configurado en modo CW en el radio.
+- AetherSDR debe estar conectado al radio. El decodificador de CW requiere una conexión de radio activa.
+- El audio del PC debe estar enrutado hacia AetherSDR. El panel muestra "(requires PC Audio)" como recordatorio — la decodificación no funcionará sin él.
+- Sintonice una señal CW y establezca el modo del slice en CW.
 
 ## Pasos
 
-1. Localice el panadapter correspondiente al slice que desea decodificar.
-2. Haga clic derecho en el espectro o en el waterfall del panadapter para abrir el menú contextual del panadapter, luego seleccione la opción para mostrar el panel del decodificador CW. El panel de decodificación CW aparece debajo del espectro y muestra "CW" en la barra de encabezado junto con "(requires PC Audio)".
-3. Sintonice el radio en la señal CW. La etiqueta de estadísticas CW se actualiza para mostrar el tono y la velocidad detectados en el formato `<hz> Hz  <wpm> WPM`.
-4. Observe el área "CW decode text" para ver los caracteres decodificados. El texto aparece codificado por colores según la confianza: verde indica la mayor confianza, luego amarillo, luego naranja y finalmente rojo.
-5. Ajuste el control deslizante Sens si es necesario. El valor predeterminado es 30 (rango 0–100). Muévalo hacia la derecha para rechazar decodificaciones de baja confianza; muévalo hacia la izquierda para mostrar más resultados. Su configuración se guarda como `CwDecoderSensitivity`.
+1. Localice el panadapter que contiene el slice que desea decodificar.
+2. Haga clic derecho sobre el área del espectro o la cascada del panadapter para abrir el menú contextual y seleccione **Show CW Decoder**. El panel de decodificación de CW aparece debajo de la cascada.
+3. Confirme que el panel es visible: muestra la etiqueta **CW**, el aviso **(requires PC Audio)**, un control deslizante **Sens** y un área de texto con desplazamiento.
+4. Ajuste el control deslizante **Lo** para establecer el tono mínimo que buscará el decodificador (valor predeterminado 500 Hz, rango 300–1200 Hz).
+5. Ajuste el control deslizante **Hi** para establecer el tono máximo (valor predeterminado 700 Hz, rango 300–1200 Hz). **Lo** se limita automáticamente a un valor ≤ **Hi**.
+6. Observe el área de texto **CW decode text**. Los caracteres decodificados aparecen con colores según el nivel de confianza: verde (más alto), amarillo, naranja o rojo (más bajo).
+7. La etiqueta **CW stats label** que aparece sobre el área de texto muestra el tono y la velocidad detectados en el formato `<hz> Hz  <wpm> WPM` una vez que el decodificador está siguiendo una señal.
+8. Para cerrar el panel al terminar, haga clic en **✕** (close CW) en el extremo derecho de la barra de controles.
 
 ## Qué hace cada control
 
-| Control | Función | Valor predeterminado | Rango |
-|---|---|---|---|
-| Etiqueta de estadísticas CW | Muestra el tono y la velocidad detectados como `<hz> Hz  <wpm> WPM`. | — | — |
-| Sens | Filtra las decodificaciones de baja confianza. Los valores más altos son más estrictos. Se guarda como `CwDecoderSensitivity`. | 30 | 0–100 |
-| 🔒P (Lock Pitch) | Fija el tono del decodificador en la frecuencia sintonizada actualmente. | Off | Toggle |
-| 🔒S (Lock Speed) | Fija la velocidad del decodificador en los WPM detectados actualmente. | Off | Toggle |
-| Lo (pitch min) | Tono mínimo que busca el decodificador, en Hz. Limitado a ≤ Hi. | 500 Hz | 300–1200 Hz |
-| Hi (pitch max) | Tono máximo que busca el decodificador, en Hz. Limitado a ≥ Lo. | 700 Hz | 300–1200 Hz |
-| CW decode text | Pantalla continua de solo lectura con el texto decodificado, coloreado según la confianza. | — | — |
-| CPY ALL | Copia el texto decodificado completo al portapapeles. | — | — |
-| CPY VIS | Copia únicamente el texto visible actualmente en el área de desplazamiento al portapapeles. | — | — |
-| CLR | Borra el búfer de decodificación CW. | — | — |
-| ✕ (close CW) | Oculta el panel de decodificación CW. | — | — |
+| Control | Función | Valor predeterminado | Rango / valores | Clave de configuración |
+|---|---|---|---|---|
+| Control deslizante **Sens** | Filtra las decodificaciones de baja confianza. Valores más altos rechazan más ruido. | 30 | 0–100 | `CwDecoderSensitivity` |
+| **🔒P (Lock Pitch)** | Fija el tono del decodificador en la frecuencia sintonizada actualmente. | Off | On / Off | — |
+| **🔒S (Lock Speed)** | Fija la velocidad del decodificador en el valor WPM actual. | Off | On / Off | — |
+| Control deslizante **Lo** | Tono mínimo que busca el decodificador (Hz). Limitado a ≤ Hi. | 500 Hz | 300–1200 Hz | — |
+| Control deslizante **Hi** | Tono máximo que busca el decodificador (Hz). Limitado a ≥ Lo. | 700 Hz | 300–1200 Hz | — |
+| **CW stats label** | Muestra el tono y la velocidad detectados. | — | `<hz> Hz  <wpm> WPM` | — |
+| **CW decode text** | Pantalla deslizante de solo lectura de los caracteres decodificados, con colores según el nivel de confianza. | — | — | — |
+| **CPY ALL** | Copia el buffer completo de texto decodificado al portapapeles. | — | — | — |
+| **CPY VIS** | Copia al portapapeles únicamente el texto visible actualmente en el área de desplazamiento. | — | — | — |
+| **CLR** | Borra el buffer de decodificación de CW. | — | — | — |
+| **✕ (close CW)** | Oculta el panel de decodificación de CW. | — | — | — |
 
 ## Consejos
 
-- El color del texto decodificado indica la confianza de la decodificación: verde significa costo < 0.15 (mayor confianza), amarillo < 0.35, naranja < 0.60, rojo ≥ 0.60.
-- Si el tono de la señal se desplaza, deje 🔒P desactivado para que el decodificador pueda rastrearlo. Una vez que el tono sea estable, active 🔒P para reducir las activaciones falsas producidas por señales cercanas.
-- Reduzca el rango de tono entre Lo y Hi para delimitar la señal que está copiando. Esto reduce la interferencia de otras señales dentro del pasabanda.
-- Use CLR para borrar el texto acumulado antes de que comience una nueva transmisión o un contacto.
+- Colores de confianza del texto: verde = costo < 0.15 (mejor), amarillo = < 0.35, naranja = < 0.60, rojo = ≥ 0.60. Aumente **Sens** para suprimir los caracteres naranja y rojo cuando la banda esté ruidosa.
+- Si conoce el tono de la estación, reduzca el rango entre **Lo** y **Hi** alrededor de ese tono y active **🔒P (Lock Pitch)** para evitar que el decodificador se desvíe hacia interferencias.
+- Una vez que el decodificador siga la velocidad de forma confiable, haga clic en **🔒S (Lock Speed)** para estabilizarla frente al QSB.
+- El valor de `CwDecoderSensitivity` (0–100) se guarda automáticamente cada vez que mueve el control deslizante **Sens** y persiste entre sesiones.
 
 ## Solución de problemas
 
-- **No aparece texto en el panel de decodificación** — El decodificador CW requiere audio del PC. Verifique que el audio esté enrutado hacia AetherSDR. La etiqueta "(requires PC Audio)" en el encabezado del panel es un recordatorio permanente de este requisito.
-- **El texto decodificado es mayormente rojo o ilegible** — Mueva el control deslizante Sens hacia 0 para aceptar más resultados, luego verifique que los límites de tono Lo y Hi encuadren el tono real de la señal. Compruebe que el modo del slice sea CW en el radio.
-- **El decodificador sigue la señal incorrecta** — Active 🔒P para fijar el tono en la frecuencia de la señal objetivo. Reduzca el rango Lo–Hi para excluir los tonos de otras señales.
+- **No aparece texto a pesar de una señal CW fuerte** — Verifique que el audio del PC esté enrutado hacia AetherSDR. El aviso "(requires PC Audio)" en el panel indica que se requiere audio para la decodificación.
+- **Solo aparece texto rojo o naranja** — El nivel de confianza de la señal es bajo. Reduzca el control deslizante **Sens** hacia 0 para mostrar más salida, o verifique que **Lo** y **Hi** encuadren el tono CW real indicado en la **CW stats label**.
+- **La etiqueta de estadísticas permanece en blanco** — El decodificador no ha enganchado ninguna señal. Amplíe el rango **Lo**/**Hi** y asegúrese de que el slice esté sintonizado en una señal CW con un nivel de audio suficiente.
 
 ## Temas relacionados
 
-- [Ajustar la sensibilidad del decodificador CW para rechazar ruido](tune-cw-decoder-sensitivity-to-reject-noise.md)
-- [Fijar el tono o la velocidad del decodificador CW una vez que el seguimiento es correcto](lock-cw-decoder-pitch-or-speed-once-tracking-is-good.md)
+- [Ajustar la sensibilidad del decodificador de CW para rechazar el ruido](tune-cw-decoder-sensitivity-to-reject-noise.md)
+- [Fijar el tono o la velocidad del decodificador de CW una vez que el seguimiento es correcto](lock-cw-decoder-pitch-or-speed-once-tracking-is-good.md)
 - [Copiar el texto CW decodificado al portapapeles](copy-decoded-cw-text-to-the-clipboard.md)
 - [Descripción general del panadapter](overview.md)

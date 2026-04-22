@@ -1,41 +1,35 @@
 # Cargar un nuevo firmware .ssdr en la radio
 
-Use esta página para cargar una nueva imagen de firmware en su FLEX-8600 desde un archivo `.ssdr` local. Realice este procedimiento para actualizar el firmware de la radio manualmente, sin depender de una verificación de actualizaciones por internet.
+Esta página explica cómo cargar un archivo de imagen de firmware en su FLEX-8600 usando el cargador integrado de AetherSDR. Realice este proceso para actualizar la radio a una versión de firmware específica sin usar SmartSDR for Windows.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a la radio. La pestaña `Radio` no es accesible sin una conexión activa.
-- Descargue el archivo de firmware `.ssdr` en su computadora antes de abrir el diálogo.
-- No desconecte la radio ni cierre el diálogo mientras la carga esté en progreso.
+- AetherSDR debe estar conectado a la radio. La pestaña `Radio (tab)` en Radio Setup requiere una conexión activa con la radio.
+- Obtenga el archivo de firmware `.ssdr` correcto para su FLEX-8600 y anote su ubicación en el equipo.
+- No interrumpa la alimentación de la radio ni cierre AetherSDR durante la carga.
 
 ## Pasos
 
 1. Abra `Settings > Radio Setup...`.
-2. Haga clic en la pestaña `Radio`.
-3. Haga clic en `Browse .ssdr...` para abrir un selector de archivos.
-4. Navegue hasta su archivo de firmware `.ssdr`, selecciónelo y confirme la selección.
+2. Haga clic en la pestaña `Radio (tab)` si no está seleccionada.
+3. Haga clic en `Browse .ssdr...` para abrir el selector de archivos.
+4. Navegue hasta su archivo `.ssdr`, selecciónelo y confirme.
 5. Haga clic en `Upload Firmware`.
 6. Observe la barra de progreso y el texto de estado debajo del botón. Espere hasta que el estado indique que la carga se completó antes de realizar cualquier otra acción.
-
-## Función de cada control
-
-| Control | Tipo | Comportamiento |
-|---|---|---|
-| `Check for Update` | Botón | Consulta a la radio si hay actualizaciones de firmware disponibles. |
-| `Browse .ssdr...` | Botón | Abre un diálogo de archivo para seleccionar una imagen de firmware `.ssdr` local. |
-| `Upload Firmware` | Botón | Inicia la carga del firmware. Durante la transferencia aparecen y se actualizan una barra de progreso y un texto de estado. |
+7. Reinicie la radio cuando se le indique o cuando el estado de la carga confirme la finalización.
 
 ## Consejos
 
-- Use `Check for Update` primero si no está seguro de si el firmware actual ya está al día.
-- El área de estado del firmware debajo de `Upload Firmware` aparece vacía hasta que comienza una carga. Si el texto deja de actualizarse de forma inesperada, no desconecte la radio; espere para confirmar si la transferencia se completó.
+- Si desea que AetherSDR verifique si hay una actualización disponible en lugar de proporcionar su propio archivo, haga clic en `Check for Update` en vez de `Browse .ssdr...`.
+- El área de estado del firmware aparece en blanco hasta que comienza una carga. La barra de progreso y el texto de resultado aparecen una vez que se hace clic en `Upload Firmware`.
 
 ## Solución de problemas
 
-- **`Upload Firmware` no tiene efecto** — Confirme que se ha seleccionado un archivo con `Browse .ssdr...` primero. El botón requiere que se haya establecido una ruta de archivo antes de continuar.
-- **La carga comienza pero no se completa** — No cierre el diálogo ni desconecte la radio. Verifique que la conexión de red entre su computadora y la radio sea estable. Si la carga falla, puede intentarlo nuevamente haciendo clic en `Upload Firmware` sin volver a explorar los archivos, siempre que la ruta del archivo aún se muestre.
+- **"Browse .ssdr..." no responde o el diálogo se cierra de inmediato** — Verifique que esté conectado a la radio. Los controles de la pestaña Radio solo están activos con una conexión de radio establecida.
+- **La carga se detiene o falla a mitad del proceso** — No cierre el diálogo. Compruebe que la conexión de red entre su equipo y la radio sea estable. Si usa una VPN o un enlace remoto, una conexión local por cable es más confiable para transferencias de firmware.
+- **La radio no reinicia después de la carga** — Realice un ciclo de encendido manual del FLEX-8600 desde el panel frontal y vuelva a conectar AetherSDR.
 
 ## Relacionado
 
-- [Verificar número de serie, versión de hardware, región y opciones de la radio](check-radio-serial-hardware-version-region-and-options.md)
+- [Verificar el número de serie, versión de hardware, región y opciones de la radio](check-radio-serial-hardware-version-region-and-options.md)
 - [Descripción general de Radio Setup](overview.md)

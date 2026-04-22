@@ -1,51 +1,47 @@
-# Configurar las funciones de los pines del puerto serie para FlexControl
+# Configurar las funciones de los pines del puerto serie de FlexControl
 
-Esta página explica cómo seleccionar un puerto serie para la interfaz de hardware FlexControl y asignar funciones y polaridad a los pines de salida DTR y RTS. Use estos ajustes al conectar un mando FlexControl o un paddle mediante un adaptador serie.
+Esta página explica cómo asignar funciones a los pines de salida DTR y RTS — y configurar los pines de entrada CTS y DSR — en el puerto serie utilizado por la interfaz de hardware FlexControl. Úsela cuando necesite que AetherSDR controle PTT, manipulación u otras señales a través de las líneas de control de un puerto serie.
 
 ## Antes de comenzar
 
-- AetherSDR debe compilarse con soporte para puerto serie. La pestaña Serial solo aparece cuando `HAVE_SERIALPORT` está habilitado. Si no ve una pestaña Serial en Radio Setup, su compilación no incluye esta función.
-- Debe haber una conexión de radio activa. Radio Setup requiere una radio conectada.
-- Identifique qué ruta de dispositivo serie corresponde a su FlexControl o adaptador serie (por ejemplo, `/dev/ttyUSB0` en Linux).
+- AetherSDR debe compilarse con soporte para puerto serie (`HAVE_SERIALPORT`). Si la pestaña Serial no aparece en Radio Setup, su versión no incluye esta función.
+- La radio debe estar conectada. Radio Setup requiere una conexión activa con la radio.
+- Conozca la ruta del dispositivo de su puerto serie (por ejemplo, `/dev/ttyUSB0` en Linux o `COM3` en Windows).
 
 ## Pasos
 
-1. Abra `Settings > FlexControl...`. Esto abre el diálogo Radio Setup directamente en la pestaña Serial. Alternativamente, abra `Settings > Radio Setup...` y haga clic en la pestaña Serial.
-2. En la sección Port, haga clic en el combo box Port y seleccione su dispositivo serie de la lista. Si el dispositivo no aparece, haga clic en Refresh para volver a explorar. Para escribir una ruta directamente, edite el campo Path.
-3. Configure los parámetros de la línea serie usando los combo boxes Baud, Data, Parity y Stop para que coincidan con su dispositivo.
-4. En la fila DTR, abra el combo box Function y seleccione la función que desea asignar al pin DTR. Abra el combo box Polarity y seleccione la polaridad.
-5. En la fila RTS, abra el combo box Function y seleccione la función para el pin RTS. Abra el combo box Polarity y seleccione la polaridad.
-6. Si está conectando un paddle CW y necesita intercambiar dit y dah, active Paddle Swap (swap dit/dah).
-7. Para que AetherSDR abra este puerto automáticamente cada vez que se inicie, active Auto-open serial port on startup.
-8. En la sección FlexControl Tuning Knob, haga clic en Detect para confirmar que el mando es reconocido. Haga clic en Close para liberarlo.
-9. Para que AetherSDR detecte el mando de sintonía automáticamente al arrancar, active Auto-detect on startup. Para invertir la dirección de sintonía, active Invert tuning direction.
+1. Abra `Settings > FlexControl...`. Esto abre el cuadro de diálogo Radio Setup directamente en la pestaña **Serial**. Alternativamente, abra `Settings > Radio Setup...` y haga clic en la pestaña **Serial**.
+2. En el combo **Port**, seleccione su dispositivo serie de la lista. Haga clic en **Refresh** para volver a escanear si el puerto no aparece. También puede escribir la ruta directamente en el campo **Path**.
+3. Configure los parámetros de la línea serie usando los combos **Baud**, **Data**, **Parity** y **Stop** para que coincidan con su hardware.
+4. En la fila DTR, establezca el combo **Function** con la función de señal deseada para el pin DTR y, a continuación, configure el combo **Polarity** con la polaridad correcta.
+5. En la fila RTS, establezca el combo **Function** con la función de señal deseada para el pin RTS y, a continuación, configure el combo **Polarity** con la polaridad correcta.
+6. Si el cableado de su paddle invierte el dit y el dah, marque **Paddle Swap (swap dit/dah)**.
+7. Si desea que el puerto se abra automáticamente cada vez que AetherSDR inicie, marque **Auto-open serial port on startup**.
+8. En la sección **FlexControl Tuning Knob**, haga clic en **Detect** para detectar el control giratorio FlexControl en el puerto seleccionado, o en **Close** para liberarlo.
+9. Si desea que el control giratorio FlexControl se detecte automáticamente al iniciar, marque **Auto-detect on startup**. Para invertir la dirección de sintonía del control giratorio, marque **Invert tuning direction**.
 
-## Qué hace cada control
+## Función de cada control
 
 | Control | Tipo | Comportamiento |
 |---|---|---|
-| Port / Refresh / Path | Combo box | Selecciona o especifica manualmente el dispositivo serie. Refresh vuelve a explorar los puertos disponibles. |
-| Baud / Data / Parity / Stop | Combo boxes | Establece los parámetros de la línea serie para que coincidan con el dispositivo conectado. |
-| DTR: Function / Polarity | Combo boxes | Asigna una función de señal y una polaridad activa al pin de salida DTR. |
-| RTS: Function / Polarity | Combo boxes | Asigna una función de señal y una polaridad activa al pin de salida RTS. |
-| Paddle Swap (swap dit/dah) | Casilla de verificación | Invierte las entradas de dit y dah del paddle conectado. |
-| Auto-open serial port on startup | Casilla de verificación | Reabre el puerto configurado cada vez que AetherSDR se inicia. |
-| FlexControl Tuning Knob: Detect / Close | Botones | Detect inicia el reconocimiento del mando FlexControl. Close libera la conexión con él. |
-| Auto-detect on startup | Casilla de verificación | Detecta automáticamente el mando FlexControl cuando AetherSDR arranca. |
-| Invert tuning direction | Casilla de verificación | Invierte la dirección del mando de sintonía. |
-
-## Consejos
-
-- Si abrió Radio Setup mediante `Settings > Radio Setup...` y la pestaña Serial no es visible, su compilación de AetherSDR no incluye soporte para `HAVE_SERIALPORT`.
-- En Linux, las rutas de dispositivos serie suelen ser `/dev/ttyUSB0` o `/dev/ttyS0`. Es posible que su cuenta de usuario deba ser miembro del grupo `dialout` para acceder a estos dispositivos.
+| **Port** / **Refresh** / **Path** | Combo | Selecciona el dispositivo serie. Refresh vuelve a escanear los puertos disponibles. Path permite introducir la ruta directamente como texto. |
+| **Baud** / **Data** / **Parity** / **Stop** | Combos | Establecen los parámetros de la línea serie para que coincidan con el hardware conectado. |
+| **DTR: Function** / **Polarity** | Combos | Asignan la función de señal y la polaridad activa para el pin de salida DTR. |
+| **RTS: Function** / **Polarity** | Combos | Asignan la función de señal y la polaridad activa para el pin de salida RTS. |
+| **Paddle Swap (swap dit/dah)** | Casilla | Intercambia el dit y el dah en la entrada del paddle. |
+| **Auto-open serial port on startup** | Casilla | Reabre el puerto serie configurado automáticamente al iniciar AetherSDR. |
+| **FlexControl Tuning Knob: Detect** | Botón | Intenta detectar un control giratorio FlexControl en el puerto actualmente seleccionado. |
+| **FlexControl Tuning Knob: Close** | Botón | Libera la conexión con el control giratorio FlexControl. |
+| **Auto-detect on startup** | Casilla | Detecta automáticamente el control giratorio FlexControl al iniciar AetherSDR. |
+| **Invert tuning direction** | Casilla | Invierte la dirección de sintonía de frecuencia del control giratorio FlexControl. |
 
 ## Solución de problemas
 
-- **La pestaña Serial no aparece en Radio Setup** — La pestaña solo se compila cuando `HAVE_SERIALPORT` está habilitado. Use una compilación que incluya soporte para puerto serie.
-- **La lista de puertos está vacía** — No se encontraron dispositivos serie. Conecte el dispositivo y haga clic en Refresh para volver a explorar.
-- **El mando FlexControl no se detecta después de hacer clic en Detect** — Verifique que el puerto y la velocidad en baudios correctos estén seleccionados y que el dispositivo esté físicamente conectado. Haga clic en Refresh en la lista de puertos e inténtelo de nuevo.
+- **La pestaña Serial no aparece en Radio Setup** — AetherSDR no se compiló con `HAVE_SERIALPORT`. Utilice una versión que incluya soporte para puerto serie.
+- **El puerto no aparece en la lista Port** — Haga clic en **Refresh** para volver a escanear. Confirme que el dispositivo esté físicamente conectado y que su cuenta de usuario tenga permiso para acceder al puerto (en Linux, esto normalmente requiere pertenecer al grupo `dialout` o `tty`).
+- **El control giratorio FlexControl no se detecta** — Confirme que el puerto correcto está seleccionado y haga clic en **Detect** nuevamente. Verifique que ninguna otra aplicación tenga el puerto abierto.
 
-## Relacionado
+## Temas relacionados
 
 - [Asignar un cable USB como CAT, BCD, bit o PTT](assign-a-usb-cable-as-cat-bcd-bit-or-ptt.md)
 - [Descripción general de Radio Setup](overview.md)

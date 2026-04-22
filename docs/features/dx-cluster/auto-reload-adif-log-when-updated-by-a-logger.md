@@ -1,41 +1,41 @@
-# Recarga automática del registro ADIF cuando lo actualiza un programa de registro
+# Recarga automática del registro ADIF cuando el programa de registro lo actualiza
 
-Cuando el coloreado DXCC está activo, AetherSDR puede vigilar su archivo de registro ADIF y recargarlo automáticamente cada vez que su programa de registro guarda un nuevo QSO. Esto mantiene al día los colores de spots trabajados/confirmados/necesarios en el panadapter sin ninguna intervención manual.
+Cuando el coloreado DXCC está habilitado, AetherSDR puede vigilar su archivo de registro ADIF y volver a leerlo automáticamente cada vez que su software de registro escribe un nuevo QSO. Esto mantiene los colores de los spots actualizados sin necesidad de recargar manualmente.
 
 ## Antes de comenzar
 
-- El coloreado DXCC debe estar habilitado y un archivo de registro ADIF debe estar ya cargado. Consulte [Habilitar el coloreado DXCC desde un registro ADIF](enable-dxcc-coloring-from-an-adif-log.md).
-- Su programa de registro debe escribir los QSO en el mismo archivo ADIF que AetherSDR tiene cargado.
+- El coloreado DXCC debe estar habilitado y un archivo ADIF debe estar ya cargado. Consulte [Habilitar el coloreado DXCC desde un registro ADIF](enable-dxcc-coloring-from-an-adif-log.md).
+- Su software de registro debe escribir las actualizaciones en la misma ruta de archivo ADIF que AetherSDR tiene cargada.
 
 ## Pasos
 
 1. Abra `Settings > SpotHub...`.
 2. Haga clic en la pestaña **Display**.
-3. Confirme que **DXCC Coloring** está activo (el interruptor aparece habilitado) y que **Log File (ADIF):** muestra la ruta de archivo correcta.
-4. Haga clic en **Auto-Reload Log:** para habilitarlo.
+3. Confirme que **DXCC Coloring** está habilitado (el interruptor aparece como activo).
+4. Confirme que **Log File (ADIF):** muestra la ruta de archivo correcta.
+5. Haga clic en **Auto-Reload Log:** para habilitarlo.
 
-AetherSDR comenzará a monitorear el archivo. Cada vez que el archivo cambie en disco, el registro ADIF se vuelve a leer y el coloreado DXCC en el panadapter se actualiza automáticamente.
+AetherSDR vigilará ahora el archivo y lo volverá a leer cada vez que cambie. Los colores de los spots en el panadapter se actualizan para reflejar el nuevo contenido del registro.
 
 ## Qué hace cada control
 
-| Control | Comportamiento | Clave de configuración |
+| Control | Comportamiento | Configuración persistente |
 |---|---|---|
-| **DXCC Coloring** | Interruptor principal. Colorea los spots según el estado de trabajado/confirmado/necesario basándose en el registro ADIF cargado. | `DxccColoringEnabled` |
-| **Log File (ADIF):** | Abre un selector de archivos para elegir el archivo de registro ADIF. La ruta seleccionada se guarda de forma persistente. | `DxccAdifPath` |
-| **Auto-Reload Log:** | Vuelve a leer el archivo ADIF cada vez que cambia en disco. | `DxccAutoReload` |
+| **DXCC Coloring** | Interruptor principal para colorear los spots según el estado trabajado/confirmado/necesario de DXCC. | `DxccColoringEnabled` |
+| **Log File (ADIF):** | Abre un selector de archivos para elegir el archivo de registro ADIF que controla el coloreado DXCC. La ruta seleccionada se guarda. | `DxccAdifPath` |
+| **Auto-Reload Log:** | Cuando está habilitado, vuelve a leer el archivo ADIF cada vez que se modifica en el disco. | `DxccAutoReload` |
 
 ## Consejos
 
-- Si su programa de registro sobreescribe el archivo ADIF en su lugar en cada guardado (comportamiento habitual en Log4OM, DXKeeper y similares), la recarga automática incorporará cada nuevo QSO en cuestión de segundos desde que se escriba.
-- Deshabilitar **Auto-Reload Log:** no borra los datos del registro ya cargado. El coloreado DXCC continúa usando el último archivo leído correctamente hasta que realice una recarga manual o cambie el archivo.
+- Apunte la exportación ADIF de su software de registro a la misma ruta de archivo almacenada en `DxccAdifPath`. Muchos programas de registro admiten una opción de exportación continua o por QSO guardado que escribe en un archivo fijo.
+- Si su programa de registro crea un archivo nuevo en cada exportación en lugar de actualizar el existente, el vigilante de archivos no detectará el cambio. Configure su programa de registro para que sobreescriba siempre el mismo archivo.
 
 ## Solución de problemas
 
-- **Los colores de los spots no se actualizan tras registrar un QSO** — Confirme que **Auto-Reload Log:** está habilitado en la pestaña **Display**. Verifique también que su programa de registro está escribiendo en el archivo exacto que se muestra en **Log File (ADIF):**. Algunos programas de registro escriben en un archivo temporal y luego lo renombran; esto puede no activar una recarga en todas las plataformas. En ese caso, deshabilite **Auto-Reload Log:**, vuelva a abrir `Settings > SpotHub...` y haga clic en **Log File (ADIF):** para recargar manualmente.
-- **El interruptor DXCC Coloring está disponible pero no produce cambios de color** — El recuento de QSO importados que muestra el indicador de estadísticas DXCC será cero si la ruta del archivo ADIF no es válida o el archivo no es legible. Vuelva a seleccionar el archivo mediante **Log File (ADIF):**.
+- **Los colores de los spots no se actualizan después de registrar un QSO** — Verifique que **Auto-Reload Log:** esté habilitado en la pestaña **Display**. Confirme también que su programa de registro está escribiendo en la ruta de archivo exacta que aparece junto a **Log File (ADIF):**. Si el programa escribe en un archivo diferente o renombra el archivo en cada exportación, el vigilante no se activará.
+- **El interruptor DXCC Coloring está desactivado** — **Auto-Reload Log:** no tiene efecto a menos que **DXCC Coloring** también esté habilitado. Habilite primero **DXCC Coloring**.
 
-## Relacionados
+## Relacionado
 
 - [Habilitar el coloreado DXCC desde un registro ADIF](enable-dxcc-coloring-from-an-adif-log.md)
-- [Ajustar densidad, posición, tamaño de fuente y tiempo de vida de los spots](tune-spot-density-position-font-size-and-lifetime.md)
-- [Descripción general de SpotHub](overview.md)
+- [Ajustar la densidad, posición, tamaño de fuente y duración de los spots](tune-spot-density-position-font-size-and-lifetime.md)

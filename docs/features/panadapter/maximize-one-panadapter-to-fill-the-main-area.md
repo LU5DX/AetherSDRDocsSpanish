@@ -1,29 +1,29 @@
-# Maximizar un panadapter para que ocupe el área principal
+# Maximizar un panadapter para ocupar el área principal
 
-Cuando tiene varios panadapters abiertos, puede expandir uno para que ocupe todo el área principal, desplazando temporalmente los demás fuera de la vista.
+Cuando tiene varios panadapters abiertos, puede expandir uno para que ocupe toda el área principal, ocultando temporalmente los demás.
 
 ## Antes de comenzar
 
 - Debe estar conectado a una radio FLEX-8600.
-- Deben estar abiertos al menos dos panadapters. El botón □ (maximizar) está oculto en el modo de panadapter único.
+- Deben estar abiertos al menos dos panadapters. En el modo de un solo panadapter, el botón de maximizar está oculto.
 
 ## Pasos
 
-1. Localice la barra de título en la parte superior del panadapter que desea expandir.
-2. Haga clic en □ (maximize) en esa barra de título.
+1. Localice la barra de título del panadapter que desea expandir. Esta barra corre a lo largo del borde superior del panadapter y muestra el nombre del slice (por ejemplo, "Slice A").
+2. Haga clic en el botón □ que se encuentra en el lado derecho de esa barra de título.
 
-El panadapter seleccionado se expande para ocupar el área principal. Los demás panadapters dejan de ser visibles.
+El panadapter seleccionado se expande para ocupar toda el área principal. Los demás panadapters dejan de ser visibles.
 
-3. Para restaurar el diseño anterior de múltiples panadapters, haga clic en □ nuevamente en la misma barra de título.
+Para volver al diseño de múltiples panadapters, haga clic en □ nuevamente en la misma barra de título.
 
 ## Consejos
 
-- Si no puede ver el botón □, está en el modo de panadapter único. Abra primero un panadapter adicional.
-- Los botones ⬈ / ↩ (pop-out/dock) y × (cerrar) también se encuentran en la barra de título. Tenga cuidado de hacer clic en □ y no en × si no desea cerrar el panadapter.
+- El botón □ está oculto cuando solo hay un panadapter abierto. Si no puede verlo, primero debe agregar un segundo panadapter.
+- Si desea mover un panadapter a una ventana independiente en lugar de maximizarlo, use el botón ⬈ en la misma barra de título. Consulte [Abrir un panadapter en su propia ventana](pop-a-panadapter-out-into-its-own-window.md).
 
-## Relacionados
+## Temas relacionados
 
 - [Descripción general del panadapter](overview.md)
-- [Haga clic en el espectro para activar un panadapter (modo multi-slice)](click-the-spectrum-to-activate-a-panadapter-multi-slice-mode.md)
-- [Extraer un panadapter en su propia ventana](pop-a-panadapter-out-into-its-own-window.md)
+- [Abrir un panadapter en su propia ventana](pop-a-panadapter-out-into-its-own-window.md)
 - [Cerrar un panadapter adicional](close-an-extra-panadapter.md)
+- [Hacer clic en el espectro para activar un panadapter (modo multi-slice)](click-the-spectrum-to-activate-a-panadapter-multi-slice-mode.md)
