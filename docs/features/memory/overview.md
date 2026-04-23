@@ -1,10 +1,10 @@
 # Descripción general de los canales de memoria
 
-El diálogo Memory Channels le permite almacenar, organizar y recuperar frecuencias en su FLEX-8600. Úselo para guardar frecuencias de uso frecuente junto con sus ajustes de modo, filtro y repetidor, y luego sintonice cualquier slice a una memoria almacenada con un solo clic.
+El diálogo Memory Channels le permite almacenar, organizar y recuperar frecuencias en su radio Flex. Úselo para guardar frecuencias de uso frecuente junto con sus ajustes de modo, filtro y repetidor, y luego sintonice cualquier slice a una memoria almacenada con un solo clic.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600. Memory Channels requiere una conexión de radio activa.
+- AetherSDR debe estar conectado a una radio Flex. Memory Channels requiere una conexión de radio activa.
 
 ## Cómo funciona
 

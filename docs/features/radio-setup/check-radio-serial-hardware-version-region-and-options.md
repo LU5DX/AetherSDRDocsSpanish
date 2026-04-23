@@ -1,6 +1,6 @@
 # Consultar el número de serie, versión de hardware, región y opciones del radio
 
-Consulte los detalles de hardware de solo lectura reportados por su FLEX-8600 conectado: número de serie del chasis, cadena de versión de hardware, región regulatoria y opciones con licencia.
+Consulte los detalles de hardware de solo lectura reportados por su radio Flex conectado: número de serie del chasis, cadena de versión de hardware, región regulatoria y opciones con licencia.
 
 ## Antes de comenzar
 

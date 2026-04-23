@@ -4,7 +4,7 @@ La función de diseño del panadapter (Panadapter Layout) controla cuántos pana
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600. Los botones de diseño para configuraciones que requieren más panadapters de los que la radio admite están desactivados.
+- AetherSDR debe estar conectado a una radio Flex. Los botones de diseño para configuraciones que requieren más panadapters de los que la radio admite están desactivados.
 
 ## Cómo funciona
 

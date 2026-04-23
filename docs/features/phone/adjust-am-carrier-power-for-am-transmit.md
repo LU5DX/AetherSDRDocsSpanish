@@ -4,7 +4,7 @@ Use esta página para establecer el nivel de potencia de portadora AM al transmi
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600.
+- AetherSDR debe estar conectado a una radio Flex.
 - La radio debe estar configurada en modo AM antes de que el nivel de portadora AM tenga algún efecto en la transmisión.
 - El applet Phone debe estar visible en el Panel de Applets.
 

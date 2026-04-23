@@ -1,6 +1,6 @@
 # Configurar la potencia TX máxima por banda y el modo de ajuste
 
-Use esta página para limitar la potencia de transmisión y seleccionar el modo de ajuste para cada banda de radioaficionado en su FLEX-8600. Estas configuraciones permiten proteger amplificadores, antenas o hardware específico de banda contra condiciones de exceso de potencia.
+Use esta página para limitar la potencia de transmisión y seleccionar el modo de ajuste para cada banda de radioaficionado en su radio Flex. Estas configuraciones permiten proteger amplificadores, antenas o hardware específico de banda contra condiciones de exceso de potencia.
 
 ## Antes de comenzar
 

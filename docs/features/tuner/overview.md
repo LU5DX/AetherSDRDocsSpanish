@@ -4,7 +4,7 @@ El applet Tuner le permite controlar un sintonizador de antena externo 4O3A Tune
 
 ## Antes de comenzar
 
-- Conéctese a una radio FLEX-8600. El applet permanece oculto hasta que se detecta un Tuner Genius XL.
+- Conéctese a una radio Flex. El applet permanece oculto hasta que se detecta un Tuner Genius XL.
 - Confirme que el TGXL está encendido y comunicándose con la radio o directamente con AetherSDR.
 
 ## Cómo funciona

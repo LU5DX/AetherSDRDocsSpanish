@@ -1,6 +1,6 @@
 # Conceder o revocar el PTT local
 
-Cuando varias estaciones comparten un FLEX-8600 mediante multiFLEX, solo una estación tiene autoridad de PTT local a la vez. Esta página explica cómo reclamar el PTT local para su estación y cómo identificar qué estación lo tiene en ese momento.
+Cuando varias estaciones comparten un radio Flex mediante multiFLEX, solo una estación tiene autoridad de PTT local a la vez. Esta página explica cómo reclamar el PTT local para su estación y cómo identificar qué estación lo tiene en ese momento.
 
 ## Antes de comenzar
 

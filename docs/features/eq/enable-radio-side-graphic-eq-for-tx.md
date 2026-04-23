@@ -1,10 +1,10 @@
 # Activar el ecualizador gráfico en el radio para TX
 
-Esta página explica cómo activar el ecualizador gráfico en la ruta de transmisión. El ecualizador opera dentro del propio FLEX-8600, dando forma al audio transmitido en ocho bandas fijas antes de que la señal salga del radio.
+Esta página explica cómo activar el ecualizador gráfico en la ruta de transmisión. El ecualizador opera dentro del propio radio Flex, dando forma al audio transmitido en ocho bandas fijas antes de que la señal salga del radio.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a un radio FLEX-8600. El applet del ecualizador requiere una conexión activa con el radio.
+- AetherSDR debe estar conectado a un radio Flex. El applet del ecualizador requiere una conexión activa con el radio.
 - El panel de applets debe estar visible. Si no lo está, haga clic en `View > Applet Panel` para mostrarlo.
 
 ## Pasos

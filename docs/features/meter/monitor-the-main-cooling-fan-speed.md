@@ -1,6 +1,6 @@
 # Monitorear la velocidad del ventilador de refrigeración principal
 
-El applet Meters muestra un indicador en tiempo real de la velocidad del ventilador de refrigeración principal del FLEX-8600. Úselo para confirmar que el ventilador está girando y para detectar velocidades anormalmente altas que puedan indicar estrés térmico.
+El applet Meters muestra un indicador en tiempo real de la velocidad del ventilador de refrigeración principal del radio Flex. Úselo para confirmar que el ventilador está girando y para detectar velocidades anormalmente altas que puedan indicar estrés térmico.
 
 ## Antes de comenzar
 

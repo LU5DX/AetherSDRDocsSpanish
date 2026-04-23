@@ -8,7 +8,7 @@ El Administrador de perfiles le permite crear, cargar, renombrar y eliminar perf
 
 ## Cómo funciona
 
-Abra el Administrador de perfiles desde `Profiles > Profile Manager...`. El diálogo contiene cuatro pestañas — **Global**, **Transmit**, **Microphone** y **Auto-Save** — cada una correspondiente a una categoría separada de perfiles almacenados en el FLEX-8600.
+Abra el Administrador de perfiles desde `Profiles > Profile Manager...`. El diálogo contiene cuatro pestañas — **Global**, **Transmit**, **Microphone** y **Auto-Save** — cada una correspondiente a una categoría separada de perfiles almacenados en el radio Flex.
 
 **Las pestañas Global, Transmit y Microphone** comparten el mismo diseño: un campo de texto en la parte superior para ingresar el nombre del perfil, tres botones de acción (Load, Save, Delete) y una lista con todos los perfiles de esa categoría debajo. El perfil activo en ese momento aparece resaltado en la lista. Al seleccionar un perfil en la lista, el campo **Profile name** se rellena con el nombre de ese perfil y se habilitan los botones Load y Delete. Hacer doble clic sobre un perfil en la lista lo carga de inmediato, lo que equivale a hacer clic en Load.
 

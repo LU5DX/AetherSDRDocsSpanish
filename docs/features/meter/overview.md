@@ -1,6 +1,6 @@
 # Descripción general de los medidores
 
-El applet de medidores muestra telemetría de hardware en tiempo real de su FLEX-8600: temperatura del amplificador de potencia (PA), tensión de alimentación de CC y velocidad del ventilador principal. Úselo para supervisar el estado del equipo durante la operación sin salir de la ventana principal de AetherSDR.
+El applet de medidores muestra telemetría de hardware en tiempo real de su radio Flex: temperatura del amplificador de potencia (PA), tensión de alimentación de CC y velocidad del ventilador principal. Úselo para supervisar el estado del equipo durante la operación sin salir de la ventana principal de AetherSDR.
 
 ## Antes de comenzar
 

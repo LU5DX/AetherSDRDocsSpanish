@@ -4,7 +4,7 @@ El applet Amplifier muestra en tiempo real la temperatura del disipador, la corr
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600.
+- AetherSDR debe estar conectado a una radio Flex.
 - El radio debe haber detectado un amplificador Power Genius XL. El botón AMP en la bandeja no aparece hasta que el radio reporte un PGXL.
 
 ## Pasos
@@ -28,7 +28,7 @@ El applet Amplifier muestra en tiempo real la temperatura del disipador, la corr
 
 ## Solución de problemas
 
-- **El botón AMP no es visible** — El radio no ha detectado un Power Genius XL. Confirme que el PGXL esté encendido y conectado al FLEX-8600.
+- **El botón AMP no es visible** — El radio no ha detectado un Power Genius XL. Confirme que el PGXL esté encendido y conectado al radio Flex.
 - **La línea Volts / Amps no aparece** — El applet oculta este indicador hasta que llega la primera telemetría. Espere a que el PGXL envíe una actualización de telemetría, o verifique la conexión del amplificador.
 
 ## Relacionados

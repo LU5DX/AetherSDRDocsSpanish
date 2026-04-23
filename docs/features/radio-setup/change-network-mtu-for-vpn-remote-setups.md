@@ -1,6 +1,6 @@
 # Cambiar el MTU de red para configuraciones VPN/remotas
 
-Ajuste el MTU de red saliente que el FLEX-8600 utiliza al enviar datos a los clientes. Reducir el MTU evita la fragmentación en VPNs y otros enlaces con un tamaño máximo de paquete menor que una conexión Ethernet estándar.
+Ajuste el MTU de red saliente que el radio Flex utiliza al enviar datos a los clientes. Reducir el MTU evita la fragmentación en VPNs y otros enlaces con un tamaño máximo de paquete menor que una conexión Ethernet estándar.
 
 ## Antes de comenzar
 

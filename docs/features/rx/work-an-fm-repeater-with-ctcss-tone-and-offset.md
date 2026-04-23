@@ -4,7 +4,7 @@ Configure un slice para operación en repetidor FM estableciendo el modo, la fre
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio FLEX-8600.
+- AetherSDR debe estar conectado al radio Flex.
 - El applet RX Controls debe estar visible. Si no lo está, haga clic en el botón RX del panel lateral derecho para mostrarlo.
 - Conozca la frecuencia de salida del repetidor, la dirección del desplazamiento, la magnitud del desplazamiento y el tono CTCSS (si es requerido).
 

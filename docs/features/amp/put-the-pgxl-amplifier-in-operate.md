@@ -5,7 +5,7 @@ Esta página explica cómo cambiar un amplificador Power Genius XL conectado de 
 ## Antes de comenzar
 
 - AetherSDR debe estar conectado al radio. El applet de amplificador permanece oculto hasta que el radio detecta un Power Genius XL.
-- El PGXL debe estar encendido y comunicándose con el FLEX-8600 para que haya llegado la telemetría de estado. El botón OPERATE permanece oculto hasta que se recibe la primera actualización de estado.
+- El PGXL debe estar encendido y comunicándose con el radio Flex para que haya llegado la telemetría de estado. El botón OPERATE permanece oculto hasta que se recibe la primera actualización de estado.
 
 ## Pasos
 
@@ -31,7 +31,7 @@ Esta página explica cómo cambiar un amplificador Power Genius XL conectado de 
 
 ## Solución de problemas
 
-- **El botón de bandeja AMP no aparece** — El radio no ha detectado ningún Power Genius XL. Confirme que el PGXL está encendido y correctamente conectado al FLEX-8600.
+- **El botón de bandeja AMP no aparece** — El radio no ha detectado ningún Power Genius XL. Confirme que el PGXL está encendido y correctamente conectado al radio Flex.
 - **El botón OPERATE no es visible dentro del applet** — El applet se ha abierto pero todavía no ha llegado ninguna telemetría de estado del PGXL. Espere un momento; el botón aparece tras la primera actualización de estado.
 - **El botón muestra "STANDBY" inmediatamente después de hacer clic** — Es posible que el PGXL esté en FAULT o POWERUP y no pueda entrar en OPERATE. Revise el panel frontal del amplificador para verificar si hay indicadores de falla.
 

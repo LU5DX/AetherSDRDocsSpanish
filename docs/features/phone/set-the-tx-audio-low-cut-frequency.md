@@ -4,7 +4,7 @@ Use esta página para subir o bajar el límite de corte inferior del filtro de a
 
 ## Antes de comenzar
 
-- Conéctese a una radio FLEX-8600. El applet Phone requiere una conexión de radio activa.
+- Conéctese a una radio Flex. El applet Phone requiere una conexión de radio activa.
 - Confirme que el applet Phone sea visible en el Panel de Applets. Si no lo está, haga clic en el botón PHNE de la barra lateral derecha.
 
 ## Pasos

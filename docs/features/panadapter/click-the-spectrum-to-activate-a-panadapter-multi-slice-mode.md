@@ -4,7 +4,7 @@ Cuando tiene más de un panadapter abierto, solo uno está activo a la vez. Haga
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600.
+- AetherSDR debe estar conectado a una radio Flex.
 - Deben estar abiertos al menos dos panadapters (modo multi-slice). En el modo single-pan, el panadapter siempre está activo y no se requiere ningún clic.
 
 ## Pasos

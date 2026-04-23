@@ -1,6 +1,6 @@
 # Configuración de Modos de Datos
 
-Esta página abre la guía integrada para configurar la operación en modos digitales en su FLEX-8600 con AetherSDR.
+Esta página abre la guía integrada para configurar la operación en modos digitales en su radio Flex con AetherSDR.
 
 ## Antes de comenzar
 

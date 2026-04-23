@@ -5,7 +5,7 @@ El panel de applets es una región acoplable de la ventana de AetherSDR que agru
 ## Antes de comenzar
 
 - AetherSDR debe estar instalado y en ejecución.
-- No se requiere conexión a un radio para explorar el diseño del panel, pero la mayoría de los controles se activan únicamente cuando hay conexión a un FLEX-8600.
+- No se requiere conexión a un radio para explorar el diseño del panel, pero la mayoría de los controles se activan únicamente cuando hay conexión a un radio Flex.
 
 ## Qué es el panel de applets
 

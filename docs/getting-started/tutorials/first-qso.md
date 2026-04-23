@@ -1,11 +1,11 @@
 # Realice su primer QSO con AetherSDR
 
-Este tutorial le guía a través de la conexión a su FLEX-8600, la sintonización a una frecuencia y el establecimiento de un contacto de voz con AetherSDR por primera vez.
+Este tutorial le guía a través de la conexión a su radio Flex, la sintonización a una frecuencia y el establecimiento de un contacto de voz con AetherSDR por primera vez.
 
 ## Antes de comenzar
 
 - AetherSDR está instalado y en ejecución.
-- Su FLEX-8600 está encendido y accesible en la red local, o dispone de credenciales SmartLink para acceso remoto.
+- Su radio Flex está encendido y accesible en la red local, o dispone de credenciales SmartLink para acceso remoto.
 - Un micrófono y auriculares están conectados y configurados en su sistema operativo.
 
 ## Pasos
@@ -13,7 +13,7 @@ Este tutorial le guía a través de la conexión a su FLEX-8600, la sintonizaci�
 ### 1. Conectarse al radio
 
 1. El panel **Connect to a Radio** aparece automáticamente en la ventana principal cuando no hay ningún radio conectado. Si no está visible, haga clic en `Settings > Connect to Radio...`.
-2. Haga clic en **Local** si su radio está en la misma LAN. AetherSDR ejecuta descubrimiento mDNS; su FLEX-8600 aparece en la lista **Available radios** en pocos segundos.
+2. Haga clic en **Local** si su radio está en la misma LAN. AetherSDR ejecuta descubrimiento mDNS; su radio Flex aparece en la lista **Available radios** en pocos segundos.
 3. Si la lista está vacía, haga clic en **Retry Discovery** y espere un momento.
 4. Seleccione su radio en la lista **Available radios**.
 5. Haga clic en **Connect Selected Radio**.

@@ -4,7 +4,7 @@
 
 ## Antes de comenzar
 
-- AetherSDR debe estar en ejecución y conectado a un FLEX-8600.
+- AetherSDR debe estar en ejecución y conectado a un radio Flex.
 
 ## Pasos
 

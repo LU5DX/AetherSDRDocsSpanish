@@ -4,7 +4,7 @@ Use esta página para dividir el área del panadapter en dos paneles mostrados a
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600. El diálogo de disposición requiere una conexión de radio activa.
+- AetherSDR debe estar conectado a una radio Flex. El diálogo de disposición requiere una conexión de radio activa.
 - Su licencia de radio debe admitir al menos 2 panadapters. Los botones de disposición para cantidades de panadapters que superan el máximo de su radio se desactivan automáticamente.
 
 ## Pasos

@@ -34,7 +34,7 @@ Esta página explica cómo iniciar el ciclo de ajuste automático del 4O3A Tuner
 
 ## Solución de problemas
 
-- **El botón TUN de la bandeja no aparece** — El radio no ha detectado el TGXL. Verifique que el sintonizador esté encendido y correctamente conectado al FLEX-8600.
+- **El botón TUN de la bandeja no aparece** — El radio no ha detectado el TGXL. Verifique que el sintonizador esté encendido y correctamente conectado al radio Flex.
 - **El botón TUNE regresa a "TUNE" inmediatamente sin mostrar un resultado de ROS** — Es posible que el ciclo de ajuste se haya cancelado o que el TGXL no haya reportado una ROS estabilizada. Verifique el estado físico del sintonizador e intente de nuevo.
 - **El botón TUNE muestra "SWR 3.00" o un valor muy alto** — El sintonizador no pudo encontrar una coincidencia aceptable en la frecuencia y antena actuales. Verifique que la antena esté conectada y que la banda esté dentro del rango de ajuste del sintonizador.
 

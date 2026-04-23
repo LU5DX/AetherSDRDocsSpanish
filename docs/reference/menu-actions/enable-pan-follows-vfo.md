@@ -4,7 +4,7 @@
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600 para que se muestre un panadapter.
+- AetherSDR debe estar conectado a una radio Flex para que se muestre un panadapter.
 
 ## Pasos
 

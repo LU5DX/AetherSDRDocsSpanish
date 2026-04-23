@@ -4,7 +4,7 @@ El panel CWX almacena hasta 12 cadenas de macro, una por cada tecla de función 
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600. El panel CWX requiere una conexión de radio.
+- AetherSDR debe estar conectado a una radio Flex. El panel CWX requiere una conexión de radio.
 - El slice activo debe estar en modo CW, CWL o CWU para que aparezca el panel CWX.
 
 ## Pasos

@@ -24,7 +24,7 @@ Al conectarse por IP a través de una VPN o una red enrutada, AetherSDR necesita
 | Control | Función | Ajuste persistente |
 |---|---|---|
 | **Advanced: Source path** | Selecciona la NIC local usada como dirección de origen para la conexión manual. Cuando se establece en una interfaz explícita, AetherSDR vincula el tráfico saliente a esa interfaz. | `ManualBindSource` |
-| **Radio IP address** | La dirección IP o nombre de host del radio FLEX-8600 al que conectarse. | `ManualRadioIp` |
+| **Radio IP address** | La dirección IP o nombre de host del radio Flex al que conectarse. | `ManualRadioIp` |
 | **Use low bandwidth mode** | Habilita flujos de audio y datos a tasa reducida; útil para enlaces VPN lentos o con alta latencia. | `LowBandwidthMode` |
 | **Network Diagnostics** | Abre el panel de diagnósticos de red para verificar la accesibilidad de las interfaces sin salir de la pantalla de conexión. | — |
 

@@ -4,7 +4,7 @@ El panel CWX le permite escribir un mensaje y transmitirlo de inmediato en códi
 
 ## Antes de comenzar
 
-- Conéctese a una radio FLEX-8600. El panel CWX requiere una conexión de radio activa.
+- Conéctese a una radio Flex. El panel CWX requiere una conexión de radio activa.
 - Configure el slice activo en modo CW, CWL o CWU. El panel CWX aparece en la ventana principal cuando hay un modo CW activo.
 
 ## Pasos

@@ -1,6 +1,6 @@
 # Calibrar el desplazamiento de frecuencia del GPSDO
 
-Use esta página para ajustar la frecuencia del oscilador interno del FLEX-8600 ingresando una frecuencia de calibración conocida y aplicando un desplazamiento en partes por mil millones (ppb). Una calibración de frecuencia precisa mejora la exactitud en recepción y la precisión de frecuencia en el aire.
+Use esta página para ajustar la frecuencia del oscilador interno del radio Flex ingresando una frecuencia de calibración conocida y aplicando un desplazamiento en partes por mil millones (ppb). Una calibración de frecuencia precisa mejora la exactitud en recepción y la precisión de frecuencia en el aire.
 
 ## Antes de comenzar
 

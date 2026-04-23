@@ -1,6 +1,6 @@
 # Crear una nueva entrada de transverter
 
-Use esta página para agregar una definición de transverter a su FLEX-8600 para que AetherSDR pueda mostrar y sintonizar la banda de frecuencia de salida del transverter.
+Use esta página para agregar una definición de transverter a su radio Flex para que AetherSDR pueda mostrar y sintonizar la banda de frecuencia de salida del transverter.
 
 ## Antes de comenzar
 

@@ -1,6 +1,6 @@
 # Conectarse por IP a través de una VPN o red enrutada
 
-Use el modo Manual para conectarse a un FLEX-8600 cuando el descubrimiento por mDNS no puede alcanzarlo — por ejemplo, cuando la radio está en un túnel VPN o en una subred enrutada diferente y ya conoce su dirección IP.
+Use el modo Manual para conectarse a un radio Flex cuando el descubrimiento por mDNS no puede alcanzarlo — por ejemplo, cuando la radio está en un túnel VPN o en una subred enrutada diferente y ya conoce su dirección IP.
 
 ## Antes de comenzar
 

@@ -4,7 +4,7 @@ Exporte uno o más canales de memoria a un archivo CSV para hacer una copia de s
 
 ## Antes de comenzar
 
-- Es necesario tener conectada una radio FLEX-8600. El diálogo Memory Channels requiere una conexión de radio activa.
+- Es necesario tener conectada una radio Flex. El diálogo Memory Channels requiere una conexión de radio activa.
 - Las memorias que desea exportar deben existir previamente. Consulte [Agregar una memoria en la frecuencia actual](add-a-memory-at-current-frequency.md) si necesita crearlas primero.
 
 ## Pasos

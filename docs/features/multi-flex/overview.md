@@ -1,11 +1,11 @@
 # Descripción general del panel multiFLEX
 
-El panel multiFLEX muestra todos los clientes SmartSDR que comparten actualmente su FLEX-8600 y le permite gestionar la autoridad PTT entre ellos. Úselo cuando más de un operador o aplicación esté conectado a la misma radio y necesite ver quién tiene el control de transmisión.
+El panel multiFLEX muestra todos los clientes SmartSDR que comparten actualmente su radio Flex y le permite gestionar la autoridad PTT entre ellos. Úselo cuando más de un operador o aplicación esté conectado a la misma radio y necesite ver quién tiene el control de transmisión.
 
 ## Antes de comenzar
 
 - AetherSDR debe estar conectado a la radio. El panel requiere una conexión de radio activa.
-- multiFLEX debe ser compatible con el firmware de su radio (FLEX-8600, firmware 4.1.5).
+- multiFLEX debe ser compatible con el firmware de su radio (radio Flex, firmware 4.1.5).
 
 ## Cómo funciona
 

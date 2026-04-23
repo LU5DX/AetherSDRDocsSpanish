@@ -1,6 +1,6 @@
 # Descripción general de Diagnósticos de red
 
-El diálogo Network Diagnostics ofrece una vista en tiempo real del enlace entre AetherSDR y su FLEX-8600: puntos finales de conexión, latencia de ida y vuelta, tasas de datos por flujo, conteos de pérdida de paquetes y estado del búfer de audio. Úselo para confirmar que la ruta de red es estable o para aislar la causa de interrupciones de audio y parpadeos en el waterfall.
+El diálogo Network Diagnostics ofrece una vista en tiempo real del enlace entre AetherSDR y su radio Flex: puntos finales de conexión, latencia de ida y vuelta, tasas de datos por flujo, conteos de pérdida de paquetes y estado del búfer de audio. Úselo para confirmar que la ruta de red es estable o para aislar la causa de interrupciones de audio y parpadeos en el waterfall.
 
 ## Cómo funciona
 

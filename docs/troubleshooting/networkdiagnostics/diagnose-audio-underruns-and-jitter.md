@@ -53,7 +53,7 @@ Ninguno de estos indicadores tiene claves de configuración persistentes. Son me
 
 ## Solución de problemas
 
-- **Underruns (last sec) es distinto de cero pero el conteo de pérdidas de Audio es cero** — los paquetes están llegando pero no a tiempo. La ruta de red está introduciendo ráfagas o jitter. Investigue el switch, el cable o el segmento Wi-Fi entre el host y el FLEX-8600.
+- **Underruns (last sec) es distinto de cero pero el conteo de pérdidas de Audio es cero** — los paquetes están llegando pero no a tiempo. La ruta de red está introduciendo ráfagas o jitter. Investigue el switch, el cable o el segmento Wi-Fi entre el host y el radio Flex.
 - **RX Buffer Now muestra un valor cercano a cero constantemente** — el búfer no se está llenando. Verifique que el flujo de audio esté activo y que la tasa de **Audio** en el grupo Incoming Stream Rates sea distinta de cero.
 - **Max Arrival Gap es grande pero el Audio Arrival Gap actual es normal** — ocurrió un único evento de ráfaga en algún momento desde la conexión. Vuelva a abrir el cuadro de diálogo y monitoree durante un período más largo para determinar si se repite.
 

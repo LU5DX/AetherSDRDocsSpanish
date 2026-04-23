@@ -4,7 +4,7 @@ Esta página explica cómo conectar AetherSDR con programas de modos digitales c
 
 ## Antes de comenzar
 
-- AetherSDR está conectado a su FLEX-8600 (el ícono de radio en la barra de título muestra una conexión activa).
+- AetherSDR está conectado a su radio Flex (el ícono de radio en la barra de título muestra una conexión activa).
 - WSJT-X, fldigi u otro programa de modos digitales está instalado y cerrado por ahora. Configure AetherSDR primero y luego inicie el programa externo.
 - Decida qué slice (canal de recepción) usará para los modos digitales y anote su letra (A, B, C o D).
 

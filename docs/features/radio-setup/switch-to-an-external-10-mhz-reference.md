@@ -1,6 +1,6 @@
 # Cambiar a una referencia externa de 10 MHz
 
-Use esta página para cambiar la referencia de frecuencia del FLEX-8600 desde su oscilador interno a una señal externa de 10 MHz conectada al conector REF IN del panel trasero. Una referencia externa mejora la exactitud y la estabilidad de frecuencia, lo cual es importante para trabajo en señales débiles, modos digitales y operación con estándares disciplinados por GPS o de rubidio.
+Use esta página para cambiar la referencia de frecuencia del radio Flex desde su oscilador interno a una señal externa de 10 MHz conectada al conector REF IN del panel trasero. Una referencia externa mejora la exactitud y la estabilidad de frecuencia, lo cual es importante para trabajo en señales débiles, modos digitales y operación con estándares disciplinados por GPS o de rubidio.
 
 ## Antes de comenzar
 

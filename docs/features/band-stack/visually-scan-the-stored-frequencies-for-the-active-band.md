@@ -4,7 +4,7 @@ El panel Band Stack muestra todos sus marcadores de frecuencia guardados como un
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a su radio FLEX-8600. El panel Band Stack solo es visible cuando hay una conexión de radio activa.
+- AetherSDR debe estar conectado a su radio Flex. El panel Band Stack solo es visible cuando hay una conexión de radio activa.
 - Necesita tener al menos un marcador guardado. Si el panel está vacío, consulte [Marcar la frecuencia actual](bookmark-the-current-frequency.md).
 
 ## Pasos

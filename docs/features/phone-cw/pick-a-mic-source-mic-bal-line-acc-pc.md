@@ -4,7 +4,7 @@ Esta página explica cómo seleccionar la fuente de entrada de micrófono para e
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600.
+- AetherSDR debe estar conectado a una radio Flex.
 - El slice activo debe estar en un modo de voz (el panel Phone debe ser visible en el applet P/CW). Los controles de fuente de micrófono no se muestran cuando el slice está en modo CW.
 
 ## Pasos

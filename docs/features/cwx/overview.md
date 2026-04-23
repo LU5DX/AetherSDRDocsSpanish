@@ -1,10 +1,10 @@
 # Descripción general de CWX
 
-CWX es el panel de manipulación CW de AetherSDR. Permite escribir y enviar texto CW en tiempo real, activar cadenas de macros predefinidas con las teclas de función, y configurar QSK y el retardo entre macros — todo enrutado a través del FLEX-8600 conectado.
+CWX es el panel de manipulación CW de AetherSDR. Permite escribir y enviar texto CW en tiempo real, activar cadenas de macros predefinidas con las teclas de función, y configurar QSK y el retardo entre macros — todo enrutado a través del radio Flex conectado.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600. CWX requiere una conexión de radio activa.
+- AetherSDR debe estar conectado a una radio Flex. CWX requiere una conexión de radio activa.
 - El slice activo debe estar en modo CW, CWL o CWU para que CWX aparezca automáticamente en el área de la ventana principal.
 
 ## Cómo funciona

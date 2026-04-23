@@ -1,10 +1,10 @@
 # Descripción general de DAX IQ
 
-El applet DAX IQ le permite habilitar hasta cuatro flujos de datos IQ independientes desde el FLEX-8600, establecer la tasa de muestreo de cada flujo y monitorear su nivel de señal en tiempo real. Use estos flujos para alimentar software SDR externo con muestras IQ en bruto provenientes del radio.
+El applet DAX IQ le permite habilitar hasta cuatro flujos de datos IQ independientes desde el radio Flex, establecer la tasa de muestreo de cada flujo y monitorear su nivel de señal en tiempo real. Use estos flujos para alimentar software SDR externo con muestras IQ en bruto provenientes del radio.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a un radio FLEX-8600. El applet DAX IQ requiere una conexión activa con el radio.
+- AetherSDR debe estar conectado a un radio Flex. El applet DAX IQ requiere una conexión activa con el radio.
 - El panel del applet debe estar visible. Si no lo está, haga clic en `View > Applet Panel` para mostrarlo.
 
 ## Cómo funciona

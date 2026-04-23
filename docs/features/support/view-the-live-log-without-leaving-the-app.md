@@ -4,7 +4,7 @@ El diálogo Support & Diagnostics incluye un visor de registro integrado que per
 
 ## Antes de comenzar
 
-- No se requiere conexión de radio. El visor de registro funciona independientemente de si AetherSDR está conectado a un FLEX-8600.
+- No se requiere conexión de radio. El visor de registro funciona independientemente de si AetherSDR está conectado a un radio Flex.
 - Si desea capturar un rastreo limpio de un problema específico, considere borrar el registro antes de reproducir el problema.
 
 ## Pasos

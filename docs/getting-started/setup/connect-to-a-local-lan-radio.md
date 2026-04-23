@@ -1,10 +1,10 @@
 # Conectarse a una radio en la red LAN local
 
-Abra la pantalla de conexión de AetherSDR y conéctese a un FLEX-8600 que esté en la misma LAN que su computadora. Este es el método recomendado para usuarios nuevos en una estación doméstica o de club.
+Abra la pantalla de conexión de AetherSDR y conéctese a un radio Flex que esté en la misma LAN que su computadora. Este es el método recomendado para usuarios nuevos en una estación doméstica o de club.
 
 ## Antes de comenzar
 
-- El FLEX-8600 está encendido y conectado a la misma red local que su computadora.
+- El radio Flex está encendido y conectado a la misma red local que su computadora.
 - No hay VPN ni aislamiento de Wi-Fi para invitados activo entre la radio y la computadora. Cualquiera de los dos puede bloquear el descubrimiento mDNS.
 - AetherSDR está instalado y en ejecución.
 
@@ -23,7 +23,7 @@ Abra la pantalla de conexión de AetherSDR y conéctese a un FLEX-8600 que esté
 | **On This Network** | Botón de modo | Cambia a la página de descubrimiento en LAN local. Modo predeterminado. | `ConnectionMode` |
 | **Remote with SmartLink** | Botón de modo | Cambia a la página de SmartLink. | `ConnectionMode` |
 | **Connect by IP** | Botón de modo | Cambia a la página manual/por IP. | `ConnectionMode` |
-| **Available radios** | Lista | Muestra las radios FLEX-8600 encontradas en la LAN mediante mDNS. Se actualiza automáticamente. | — |
+| **Available radios** | Lista | Muestra las radios radio Flex encontradas en la LAN mediante mDNS. Se actualiza automáticamente. | — |
 | **Connect Selected Radio** | Botón | Se conecta a la radio seleccionada. Deshabilitado hasta que se seleccione una radio. | — |
 | **No local radios found yet** | Indicador | Se muestra en lugar de la lista cuando el descubrimiento no ha encontrado ninguna radio. | — |
 | **Retry Discovery** | Botón | Vuelve a ejecutar el descubrimiento en LAN de inmediato. Visible solo cuando la lista está vacía. | — |

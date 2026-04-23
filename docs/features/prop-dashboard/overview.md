@@ -53,7 +53,7 @@ Dos notas de aprendizaje fijas explican la diferencia entre la propagación auro
 
 - El texto **Rationale** debajo de la cuadrícula de pronóstico ofrece una explicación en lenguaje sencillo de por qué el pronóstico de hoy tiene el aspecto que tiene; léalo para obtener un resumen rápido antes de revisar las métricas individuales.
 - Al pasar el cursor sobre una tarjeta de **Current Conditions** se muestra una descripción emergente detallada que explica la importancia de la métrica para la propagación HF, incluyendo qué bandas se ven más afectadas.
-- El panel no requiere una radio FLEX-8600 conectada. Puede consultarlo antes de encender su estación.
+- El panel no requiere una radio Flex conectada. Puede consultarlo antes de encender su estación.
 
 ## Relacionados
 

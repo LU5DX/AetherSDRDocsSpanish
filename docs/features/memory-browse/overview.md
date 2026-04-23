@@ -1,6 +1,6 @@
 # Descripción general del Explorador de memorias
 
-El Explorador de memorias es un panel lateral de solo lectura que lista las memorias almacenadas en su radio FLEX-8600 conectada, junto al panadapter. Resalta automáticamente la memoria más cercana a la frecuencia sintonizada en ese momento y permite saltar a cualquier memoria con un doble clic o la tecla Enter.
+El Explorador de memorias es un panel lateral de solo lectura que lista las memorias almacenadas en su radio Flex conectada, junto al panadapter. Resalta automáticamente la memoria más cercana a la frecuencia sintonizada en ese momento y permite saltar a cualquier memoria con un doble clic o la tecla Enter.
 
 ## Antes de comenzar
 

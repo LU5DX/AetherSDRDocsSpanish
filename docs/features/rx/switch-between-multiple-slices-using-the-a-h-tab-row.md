@@ -4,7 +4,7 @@ El applet RX Controls puede vincularse a cualquier slice activo en el radio. Use
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a un radio FLEX-8600. La fila de pestañas de slices no se muestra cuando el radio reporta un único slice.
+- AetherSDR debe estar conectado a un radio Flex. La fila de pestañas de slices no se muestra cuando el radio reporta un único slice.
 - Deben existir al menos dos slices en el radio. Cree slices adicionales desde el panadapter antes de usar este procedimiento. Consulte [Entendiendo los slices y VFOs](../../getting-started/concepts/understanding-slices.md).
 
 ## Pasos

@@ -1,10 +1,10 @@
 # Habilitar el ecualizador gráfico en el radio para RX
 
-Abra el applet Equalizer y active la ruta del ecualizador RX para que el FLEX-8600 aplique un ecualizador gráfico de 8 bandas al audio recibido dentro del propio radio.
+Abra el applet Equalizer y active la ruta del ecualizador RX para que el radio Flex aplique un ecualizador gráfico de 8 bandas al audio recibido dentro del propio radio.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a un radio FLEX-8600. El applet de EQ requiere una conexión activa con el radio.
+- AetherSDR debe estar conectado a un radio Flex. El applet de EQ requiere una conexión activa con el radio.
 - Si el panel de applets no está visible, habilítelo mediante `View > Applet Panel`.
 
 ## Pasos

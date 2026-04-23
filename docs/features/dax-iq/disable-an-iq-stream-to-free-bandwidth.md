@@ -4,7 +4,7 @@ Deshabilitar un flujo DAX IQ activo impide que consuma ancho de banda DSP del ra
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a un radio FLEX-8600. El applet DAX IQ requiere una conexión de radio activa.
+- AetherSDR debe estar conectado a un radio Flex. El applet DAX IQ requiere una conexión de radio activa.
 - Abra el applet DAX IQ haciendo clic en el botón IQ de la bandeja en la barra lateral derecha. El applet está oculto de forma predeterminada.
 - Identifique qué canal (IQ 1–4) desea deshabilitar. El botón de alternancia de ese canal debe mostrar actualmente "On".
 

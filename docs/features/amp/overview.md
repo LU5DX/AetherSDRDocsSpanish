@@ -4,7 +4,7 @@ El applet Amplifier proporciona telemetría en tiempo real y control OPERATE/STA
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600.
+- AetherSDR debe estar conectado a una radio Flex.
 - El radio debe detectar un amplificador Power Genius XL. El applet y su botón en la bandeja permanecen ocultos hasta que el radio reporte un PGXL.
 
 ## Cómo funciona

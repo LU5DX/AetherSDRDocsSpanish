@@ -4,7 +4,7 @@ El diálogo Panadapter Layout muestra miniaturas de todas las disposiciones de p
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600. El diálogo requiere una conexión de radio activa.
+- AetherSDR debe estar conectado a una radio Flex. El diálogo requiere una conexión de radio activa.
 - La cantidad de diseños seleccionables depende de cuántos panadapters admite la licencia de su radio. Los diseños que requieren más panadapters que su máximo permitido se muestran, pero no pueden seleccionarse.
 
 ## Pasos

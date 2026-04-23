@@ -4,7 +4,7 @@ Después de un autotune, puede ajustar manualmente las posiciones de los relés 
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600.
+- AetherSDR debe estar conectado a una radio Flex.
 - Debe detectarse un 4O3A Tuner Genius XL; el botón TUN del área de notificación aparece en la barra lateral derecha únicamente cuando hay uno presente.
 - El TGXL debe estar conectado mediante una conexión directa TGXL. El desplazamiento con la rueda del ratón sobre las barras de relés queda desactivado cuando solo hay una conexión mediada por radio activa.
 - El applet Tuner debe estar abierto. Haga clic en el botón TUN del área de notificación para mostrarlo.

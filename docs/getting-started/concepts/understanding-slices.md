@@ -1,15 +1,15 @@
 # Entender los slices y los VFO
 
-Un slice (canal de recepción independiente) es un canal de recepción —y opcionalmente de transmisión— que opera dentro de un único panadapter en el FLEX-8600. Comprender cómo los slices se corresponden con los VFO le ayudará a navegar por los controles de AetherSDR y a trabajar varias señales simultáneamente.
+Un slice (canal de recepción independiente) es un canal de recepción —y opcionalmente de transmisión— que opera dentro de un único panadapter en el radio Flex. Comprender cómo los slices se corresponden con los VFO le ayudará a navegar por los controles de AetherSDR y a trabajar varias señales simultáneamente.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600. Los controles de slice no están disponibles sin conexión.
+- AetherSDR debe estar conectado a una radio Flex. Los controles de slice no están disponibles sin conexión.
 - Familiarícese con el Panel de Applets en la barra lateral derecha. El applet RX Controls (que se activa con el botón RX del panel lateral) es donde se encuentran los ajustes por slice.
 
 ## Cómo funcionan los slices y los VFO
 
-El FLEX-8600 admite hasta ocho slices simultáneos, etiquetados de A a H. Cada slice es un receptor independiente con su propio:
+El radio Flex admite hasta ocho slices simultáneos, etiquetados de A a H. Cada slice es un receptor independiente con su propio:
 
 - **Frecuencia de VFO** — mostrada en la etiqueta Frequency del applet RX Controls, con formato de grupos MHz separados por puntos (por ejemplo, `14.225.000`).
 - **Modo** — USB, LSB, CW, AM, FM y otros, seleccionables desde el combo Mode.

@@ -1,6 +1,6 @@
 # Cargar un nuevo firmware .ssdr en la radio
 
-Use esta página para cargar una nueva imagen de firmware en su FLEX-8600. Necesitará un archivo de firmware `.ssdr` en su equipo local antes de comenzar.
+Use esta página para cargar una nueva imagen de firmware en su radio Flex. Necesitará un archivo de firmware `.ssdr` en su equipo local antes de comenzar.
 
 ## Antes de empezar
 

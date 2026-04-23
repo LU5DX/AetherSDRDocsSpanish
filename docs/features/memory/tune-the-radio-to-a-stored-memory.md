@@ -4,7 +4,7 @@ Abra un canal de memoria guardado y vuelva a sintonizar el slice (segmento de re
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600. El diálogo Memory Channels requiere una conexión de radio activa.
+- AetherSDR debe estar conectado a una radio Flex. El diálogo Memory Channels requiere una conexión de radio activa.
 - Debe haber al menos una memoria almacenada. Consulte [Agregar una memoria en la frecuencia actual](add-a-memory-at-current-frequency.md) si la lista está vacía.
 
 ## Pasos

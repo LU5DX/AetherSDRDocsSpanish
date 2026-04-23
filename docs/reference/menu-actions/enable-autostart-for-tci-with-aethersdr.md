@@ -5,7 +5,7 @@ Esta página explica cómo configurar AetherSDR para que inicie su servidor TCI 
 ## Antes de comenzar
 
 - AetherSDR debe estar compilado con soporte para WebSockets. Si `Settings > Autostart TCI with AetherSDR` no aparece en el menú, su versión no incluye esta función.
-- Conéctese a su FLEX-8600 antes de habilitar el inicio automático si desea verificar que TCI funciona correctamente tras el cambio.
+- Conéctese a su radio Flex antes de habilitar el inicio automático si desea verificar que TCI funciona correctamente tras el cambio.
 
 ## Pasos
 

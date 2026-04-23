@@ -4,7 +4,7 @@ El panadapter muestra un espectro FFT en tiempo real y un waterfall para un slic
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600. El panadapter requiere una conexión de radio activa.
+- AetherSDR debe estar conectado a una radio Flex. El panadapter requiere una conexión de radio activa.
 - El audio de la PC debe estar enrutado hacia AetherSDR para que el decodificador CW produzca salida.
 
 ## Cómo funciona

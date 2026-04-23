@@ -1,6 +1,6 @@
 # Habilitar el manipulador de paleta iámbica
 
-El manipulador iámbico le permite usar una paleta squeeze para generar CW con el manipulador integrado del FLEX-8600. Esta página explica cómo activarlo y ajustar los controles CW relacionados.
+El manipulador iámbico le permite usar una paleta squeeze para generar CW con el manipulador integrado del radio Flex. Esta página explica cómo activarlo y ajustar los controles CW relacionados.
 
 ## Antes de comenzar
 

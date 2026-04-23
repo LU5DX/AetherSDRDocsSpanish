@@ -4,7 +4,7 @@ Cuando esta configuración está habilitada, AetherSDR inicia automáticamente u
 
 ## Antes de comenzar
 
-- AetherSDR debe estar instalado y poder conectarse a su radio FLEX-8600.
+- AetherSDR debe estar instalado y poder conectarse a su radio Flex.
 - rigctld debe estar instalado y ser accesible en el PATH de su sistema.
 
 ## Pasos

@@ -1,6 +1,6 @@
 # Restablecer la configuración de AetherSDR a los valores predeterminados de fábrica
 
-Utilice este procedimiento para borrar la configuración almacenada localmente por AetherSDR y la caché de sabiduría NR2, y restaurarlas a sus valores predeterminados. La configuración almacenada en el propio FLEX-8600 no se ve afectada.
+Utilice este procedimiento para borrar la configuración almacenada localmente por AetherSDR y la caché de sabiduría NR2, y restaurarlas a sus valores predeterminados. La configuración almacenada en el propio radio Flex no se ve afectada.
 
 ## Antes de comenzar
 

@@ -4,7 +4,7 @@ Use `View > Band Plan` para superponer etiquetas de segmentos de bandas de radio
 
 ## Antes de comenzar
 
-- AetherSDR debe estar en ejecución y conectado a una radio FLEX-8600 para que el panadapter sea visible.
+- AetherSDR debe estar en ejecución y conectado a una radio Flex para que el panadapter sea visible.
 
 ## Pasos
 

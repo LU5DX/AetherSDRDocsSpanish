@@ -4,7 +4,7 @@ Esta página describe cómo abrir la guía integrada para personalizar applets, 
 
 ## Antes de comenzar
 
-- AetherSDR debe estar en ejecución y conectado a una radio FLEX-8600.
+- AetherSDR debe estar en ejecución y conectado a una radio Flex.
 
 ## Pasos
 

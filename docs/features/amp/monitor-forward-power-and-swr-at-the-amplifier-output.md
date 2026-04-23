@@ -4,7 +4,7 @@ El applet Amplifier muestra lecturas en tiempo real de potencia directa y ROS (r
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600.
+- AetherSDR debe estar conectado a una radio Flex.
 - El radio debe detectar un amplificador Power Genius XL. El botón AMP en la bandeja no aparece hasta que el PGXL esté presente.
 
 ## Pasos
@@ -34,7 +34,7 @@ Ninguno de los medidores tiene una clave de configuración persistente. Los valo
 
 ## Solución de problemas
 
-- **El botón AMP en la bandeja no es visible** — El PGXL no ha sido detectado por el radio. Verifique que el amplificador esté encendido y conectado al FLEX-8600. AetherSDR muestra el botón AMP solo después de que el radio reporta que hay un amplificador presente.
+- **El botón AMP en la bandeja no es visible** — El PGXL no ha sido detectado por el radio. Verifique que el amplificador esté encendido y conectado al radio Flex. AetherSDR muestra el botón AMP solo después de que el radio reporta que hay un amplificador presente.
 - **Los medidores Fwd Pwr y SWR no muestran movimiento durante la transmisión** — Confirme que el amplificador esté en estado OPERATE y no en STANDBY. Consulte [Poner el amplificador PGXL en OPERATE](put-the-pgxl-amplifier-in-operate.md).
 
 ## Relacionado

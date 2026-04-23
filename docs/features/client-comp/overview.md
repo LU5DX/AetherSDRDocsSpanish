@@ -9,7 +9,7 @@ El compresor de TX del lado del cliente en AetherSDR reduce el rango dinámico d
 
 ## Cómo funciona
 
-El compresor se ejecuta completamente en el lado del cliente: procesa el audio en AetherSDR antes de que la señal se envíe al FLEX-8600. Aplica un modelo estándar de reducción de ganancia: cuando el nivel de entrada supera el umbral, el compresor atenúa la señal según la relación configurada. Los tiempos de ataque y de recuperación controlan la rapidez con que el compresor actúa y se recupera. La ganancia de compensación (makeup gain) permite restaurar el nivel promedio perdido por la compresión.
+El compresor se ejecuta completamente en el lado del cliente: procesa el audio en AetherSDR antes de que la señal se envíe al radio Flex. Aplica un modelo estándar de reducción de ganancia: cuando el nivel de entrada supera el umbral, el compresor atenúa la señal según la relación configurada. Los tiempos de ataque y de recuperación controlan la rapidez con que el compresor actúa y se recupera. La ganancia de compensación (makeup gain) permite restaurar el nivel promedio perdido por la compresión.
 
 El tile del applet **COMPRESSOR** se encuentra dentro del contenedor principal PooDoo Audio (TXDSP). Muestra una curva de transferencia con un indicador de envolvente en tiempo real y un medidor horizontal de reducción de ganancia para observar la compresión mientras se transmite.
 

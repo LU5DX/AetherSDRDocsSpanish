@@ -4,7 +4,7 @@ Ajuste el nivel de audio de recepción para cada uno de los cuatro canales DAX (
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600.
+- AetherSDR debe estar conectado a una radio Flex.
 - El applet de DAX debe estar abierto. Si no está visible, haga clic en el botón DAX del panel lateral derecho para mostrarlo.
 - DAX debe estar habilitado. Si el botón Enable no está encendido, haga clic en Enable para iniciar el puente de audio DAX.
 

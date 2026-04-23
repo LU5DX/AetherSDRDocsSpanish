@@ -24,7 +24,7 @@ La etiqueta del botón cambia a "STANDBY" y el fondo verde es reemplazado por el
 
 ## Solución de problemas
 
-- **El botón AMP del área de notificación no está visible** — El applet permanece oculto hasta que la radio detecta un Power Genius XL. Confirme que el PGXL esté encendido y conectado al FLEX-8600.
+- **El botón AMP del área de notificación no está visible** — El applet permanece oculto hasta que la radio detecta un Power Genius XL. Confirme que el PGXL esté encendido y conectado al radio Flex.
 - **El botón OPERATE no está visible** — El botón permanece oculto hasta que llega el primer mensaje de estado del amplificador. Espere un momento después de que el applet se abra; si no aparece, verifique la conexión del amplificador.
 - **Hacer clic en OPERATE no tiene efecto** — Confirme que AetherSDR siga conectado a la radio. Desconecte y vuelva a conectar si es necesario.
 

@@ -1,10 +1,10 @@
 # Activar un flujo IQ para software SDR externo
 
-El applet DAX IQ permite activar uno o más de los cuatro flujos de datos IQ de su FLEX-8600. El software SDR externo puede entonces recibir muestras IQ en bruto del radio a través de la red local.
+El applet DAX IQ permite activar uno o más de los cuatro flujos de datos IQ de su radio Flex. El software SDR externo puede entonces recibir muestras IQ en bruto del radio a través de la red local.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a un radio FLEX-8600. Si no está conectado, abra primero `Settings > Connect to Radio...`.
+- AetherSDR debe estar conectado a un radio Flex. Si no está conectado, abra primero `Settings > Connect to Radio...`.
 - El panel de applets debe estar visible. Si no lo está, abra `View > Applet Panel`.
 
 ## Pasos

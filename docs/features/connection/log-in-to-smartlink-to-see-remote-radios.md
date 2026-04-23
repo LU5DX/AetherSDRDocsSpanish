@@ -1,6 +1,6 @@
 # Iniciar sesión en SmartLink para ver radios remotos
 
-SmartLink le permite ver y conectarse a una radio FLEX-8600 que se encuentra en una ubicación diferente a la de su computadora. Esta página explica cómo iniciar sesión en su cuenta de SmartLink para que los radios remotos aparezcan en la lista.
+SmartLink le permite ver y conectarse a una radio Flex que se encuentra en una ubicación diferente a la de su computadora. Esta página explica cómo iniciar sesión en su cuenta de SmartLink para que los radios remotos aparezcan en la lista.
 
 ## Antes de comenzar
 

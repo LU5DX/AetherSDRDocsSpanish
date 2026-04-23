@@ -4,7 +4,7 @@ El applet Phone/CW permite configurar cuánto tiempo espera el equipo después d
 
 ## Antes de comenzar
 
-- Conéctese a un equipo FLEX-8600. El applet Phone/CW requiere una conexión activa con el equipo.
+- Conéctese a un equipo radio Flex. El applet Phone/CW requiere una conexión activa con el equipo.
 - Configure el slice activo en un modo CW. El applet cambia automáticamente al subpanel de CW cuando el slice está en CW; el control Delay no es visible en modos de voz.
 
 ## Pasos

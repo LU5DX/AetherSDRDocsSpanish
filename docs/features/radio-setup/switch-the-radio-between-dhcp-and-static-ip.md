@@ -1,6 +1,6 @@
 # Cambiar el radio entre DHCP e IP estática
 
-Use esta página para configurar el modo de direccionamiento de red del FLEX-8600. Cambie a IP estática cuando necesite que el radio tenga una dirección fija en su LAN, o vuelva a DHCP para que el router asigne una dirección automáticamente.
+Use esta página para configurar el modo de direccionamiento de red del radio Flex. Cambie a IP estática cuando necesite que el radio tenga una dirección fija en su LAN, o vuelva a DHCP para que el router asigne una dirección automáticamente.
 
 ## Antes de comenzar
 
@@ -35,7 +35,7 @@ Use esta página para configurar el modo de direccionamiento de red del FLEX-860
 
 ## Solución de problemas
 
-- **El radio no aparece tras cambiar a IP estática** — La dirección ingresada puede entrar en conflicto con otro dispositivo o puede estar fuera de la subred de su LAN. Verifique que la dirección IP, la máscara y el gateway sean correctos para su red. Si el radio queda inaccesible, puede ser necesario un restablecimiento de hardware para restaurar DHCP; consulte la documentación de hardware del FLEX-8600.
+- **El radio no aparece tras cambiar a IP estática** — La dirección ingresada puede entrar en conflicto con otro dispositivo o puede estar fuera de la subred de su LAN. Verifique que la dirección IP, la máscara y el gateway sean correctos para su red. Si el radio queda inaccesible, puede ser necesario un restablecimiento de hardware para restaurar DHCP; consulte la documentación de hardware del radio Flex.
 - **Apply no parece surtir efecto** — Asegúrese de que sigue conectado al radio en el momento en que hace clic en **Apply**. Si la conexión se interrumpió antes de hacer clic, vuelva a abrir `Settings > Radio Setup...`, reingrese los valores estáticos y haga clic en **Apply** sin demora.
 
 ## Relacionado

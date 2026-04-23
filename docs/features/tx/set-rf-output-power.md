@@ -4,7 +4,7 @@ Use el control deslizante RF Power en el applet TX Controls para establecer cuá
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a un radio FLEX-8600. Si no lo está, vaya a `Settings > Connect to Radio...`.
+- AetherSDR debe estar conectado a un radio Flex. Si no lo está, vaya a `Settings > Connect to Radio...`.
 - El applet TX Controls debe estar visible. Si no lo está, haga clic en el botón TX tray en la barra lateral derecha para mostrarlo.
 
 ## Pasos

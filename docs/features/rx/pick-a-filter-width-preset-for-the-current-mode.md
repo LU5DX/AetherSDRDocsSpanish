@@ -4,7 +4,7 @@ Los preajustes de ancho de filtro permiten aplicar un ancho de banda estándar a
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600.
+- AetherSDR debe estar conectado a una radio Flex.
 - El applet RX debe estar abierto. Si no es visible, haga clic en el botón RX del panel lateral derecho para mostrarlo.
 - Seleccione el slice que desea ajustar usando las pestañas de slice (A..H) en la parte superior del applet RX.
 

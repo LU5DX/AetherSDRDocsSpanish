@@ -1,6 +1,6 @@
 # Descripción general del Tube Saturator
 
-El Tube Saturator es un procesador del lado de transmisión (TX) que moldea la señal transmitida mediante un modelo de válvula con barrido de polarización, añadiendo riqueza armónica antes de que la señal llegue al radio. Úselo para agregar calidez o carácter a SSB y otros modos de voz sin modificar nada en el FLEX-8600.
+El Tube Saturator es un procesador del lado de transmisión (TX) que moldea la señal transmitida mediante un modelo de válvula con barrido de polarización, añadiendo riqueza armónica antes de que la señal llegue al radio. Úselo para agregar calidez o carácter a SSB y otros modos de voz sin modificar nada en el radio Flex.
 
 ## Antes de comenzar
 

@@ -4,7 +4,7 @@ Configure AetherSDR para que inicie el puente de audio DAX automáticamente cada
 
 ## Antes de comenzar
 
-- AetherSDR debe estar instalado y poder comunicarse con su FLEX-8600 en la red.
+- AetherSDR debe estar instalado y poder comunicarse con su radio Flex en la red.
 - DAX está disponible en sistemas macOS y Linux con PipeWire.
 
 ## Pasos
@@ -34,7 +34,7 @@ Configure AetherSDR para que inicie el puente de audio DAX automáticamente cada
 ## Solución de problemas
 
 - **DAX no inicia automáticamente a pesar de que la marca de verificación está establecida** — Confirme que su sistema cumple el requisito de plataforma (macOS o PipeWire en Linux). En otras configuraciones, la opción no tiene efecto.
-- **El botón Enable no responde** — El applet DAX requiere una conexión activa con la radio. Conéctese primero al FLEX-8600 mediante `Settings > Connect to Radio...` y vuelva a intentarlo.
+- **El botón Enable no responde** — El applet DAX requiere una conexión activa con la radio. Conéctese primero al radio Flex mediante `Settings > Connect to Radio...` y vuelva a intentarlo.
 
 ## Temas relacionados
 

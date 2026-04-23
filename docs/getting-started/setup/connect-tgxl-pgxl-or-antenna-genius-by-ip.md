@@ -4,7 +4,7 @@ Esta página explica cómo conectar manualmente un periférico TGXL, PGXL o Ante
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a su radio FLEX-8600.
+- AetherSDR debe estar conectado a su radio Flex.
 - Debe conocer la dirección IP del dispositivo TGXL, PGXL o Antenna Genius.
 
 ## Pasos

@@ -5,7 +5,7 @@ El indicador **First UDP Packet** en Network Diagnostics confirma si la radio ha
 ## Antes de comenzar
 
 - AetherSDR debe estar en ejecución.
-- Debe haber intentado conectarse a una radio FLEX-8600. El indicador solo tiene significado después de un intento de conexión; no requiere que la conexión esté completamente establecida.
+- Debe haber intentado conectarse a una radio Flex. El indicador solo tiene significado después de un intento de conexión; no requiere que la conexión esté completamente establecida.
 
 ## Pasos
 

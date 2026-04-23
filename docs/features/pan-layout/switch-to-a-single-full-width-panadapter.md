@@ -4,7 +4,7 @@ Esta página explica cómo configurar el área del panadapter para mostrar un ú
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600. El diálogo de disposición requiere una conexión de radio activa.
+- AetherSDR debe estar conectado a una radio Flex. El diálogo de disposición requiere una conexión de radio activa.
 
 ## Pasos
 

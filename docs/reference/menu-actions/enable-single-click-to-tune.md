@@ -4,7 +4,7 @@ Esta página explica cómo habilitar la sintonización con un solo clic en el pa
 
 ## Antes de comenzar
 
-- AetherSDR debe estar en ejecución y conectado a una radio FLEX-8600.
+- AetherSDR debe estar en ejecución y conectado a una radio Flex.
 - Un panadapter debe estar visible en la ventana principal.
 
 ## Pasos

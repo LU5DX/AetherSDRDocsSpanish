@@ -1,10 +1,10 @@
 # Activar Inhibit durante TUNE
 
-Use `Settings > Inhibit during TUNE` para seleccionar qué líneas de salida TX suprime el FLEX-8600 mientras el sintonizador está en funcionamiento. Esto evita que la RF llegue a amplificadores o conmutadores de antena que no deben recibir potencia de sintonización.
+Use `Settings > Inhibit during TUNE` para seleccionar qué líneas de salida TX suprime el radio Flex mientras el sintonizador está en funcionamiento. Esto evita que la RF llegue a amplificadores o conmutadores de antena que no deben recibir potencia de sintonización.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600.
+- AetherSDR debe estar conectado a una radio Flex.
 - Identifique qué conectores de salida TX de su radio están conectados al equipo que desea proteger durante la sintonización.
 
 ## Pasos

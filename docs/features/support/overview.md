@@ -40,7 +40,7 @@ La fila de botones en la parte inferior del diálogo gestiona todas las acciones
 - Habilite solo las categorías relevantes para el problema que está reproduciendo. Un registro más pequeño es más fácil de leer y compartir.
 - Haga clic en Clear Log antes de reproducir un error para que el registro contenga únicamente la secuencia de eventos relevante.
 - El paquete de soporte creado por File an Issue incluye sus registros y configuración. Adjúntelo al issue de GitHub arrastrándolo desde la carpeta que se abre automáticamente.
-- Reset Settings elimina las preferencias locales de AetherSDR y la caché de wisdom de NR2. No modifica ninguna configuración almacenada en el FLEX-8600.
+- Reset Settings elimina las preferencias locales de AetherSDR y la caché de wisdom de NR2. No modifica ninguna configuración almacenada en el radio Flex.
 
 ## Relacionado
 

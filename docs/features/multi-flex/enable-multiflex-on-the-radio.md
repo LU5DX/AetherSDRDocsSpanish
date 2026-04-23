@@ -1,11 +1,11 @@
 # Activar multiFLEX en el equipo
 
-multiFLEX permite que varias estaciones compartan un único FLEX-8600 de forma simultánea. Use esta página para activar o desactivar multiFLEX desde AetherSDR.
+multiFLEX permite que varias estaciones compartan un único radio Flex de forma simultánea. Use esta página para activar o desactivar multiFLEX desde AetherSDR.
 
 ## Antes de comenzar
 
 - AetherSDR debe estar conectado al equipo. El multiFLEX Dashboard no está disponible sin una conexión activa al equipo.
-- Su FLEX-8600 de FlexRadio debe ser compatible con multiFLEX. Confirme que la licencia de su equipo incluye la función multiFLEX antes de continuar.
+- Su radio Flex de FlexRadio debe ser compatible con multiFLEX. Confirme que la licencia de su equipo incluye la función multiFLEX antes de continuar.
 
 ## Pasos
 

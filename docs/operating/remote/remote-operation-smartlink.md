@@ -1,10 +1,10 @@
 # Operación remota mediante SmartLink
 
-SmartLink es el servicio de retransmisión en la nube de FlexRadio que permite conectarse a un FLEX-8600 en una ubicación remota a través de internet. Utilice esta página cuando su radio y su computadora se encuentren en redes distintas y disponga de una cuenta de FlexRadio.
+SmartLink es el servicio de retransmisión en la nube de FlexRadio que permite conectarse a un radio Flex en una ubicación remota a través de internet. Utilice esta página cuando su radio y su computadora se encuentren en redes distintas y disponga de una cuenta de FlexRadio.
 
 ## Antes de comenzar
 
-- El FLEX-8600 debe estar encendido y conectado a internet en el sitio remoto.
+- El radio Flex debe estar encendido y conectado a internet en el sitio remoto.
 - Debe tener una cuenta de FlexRadio (correo electrónico y contraseña) con acceso a SmartLink habilitado en esa cuenta.
 - AetherSDR debe estar instalado y en ejecución en su equipo local.
 

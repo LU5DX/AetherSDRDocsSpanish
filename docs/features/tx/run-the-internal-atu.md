@@ -1,10 +1,10 @@
 # Ejecutar el ATU interno
 
-Use los controles del applet TX Controls para ejecutar el sintonizador automático de antena interno del FLEX-8600 y verificar el resultado. Esto reduce la ROE y optimiza la adaptación entre la radio y la antena en la frecuencia actual.
+Use los controles del applet TX Controls para ejecutar el sintonizador automático de antena interno del radio Flex y verificar el resultado. Esto reduce la ROE y optimiza la adaptación entre la radio y la antena en la frecuencia actual.
 
 ## Antes de comenzar
 
-- Conéctese a una radio FLEX-8600. El applet TX Controls requiere una conexión de radio activa.
+- Conéctese a una radio Flex. El applet TX Controls requiere una conexión de radio activa.
 - Asegúrese de que el applet TX Controls sea visible. Si no lo es, haga clic en el botón TX tray en la barra lateral derecha.
 - Verifique que no esté operando con un TGXL en modo OPERATE — ATU y MEM están deshabilitados en ese estado.
 

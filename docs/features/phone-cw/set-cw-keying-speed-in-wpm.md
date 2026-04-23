@@ -1,6 +1,6 @@
 # Establecer la velocidad de manipulación CW en PPM
 
-Use el control deslizante Speed en el applet Phone/CW para establecer la velocidad a la que el radio manipula CW, medida en palabras por minuto. Esta configuración se envía directamente al FLEX-8600 y tiene efecto de inmediato.
+Use el control deslizante Speed en el applet Phone/CW para establecer la velocidad a la que el radio manipula CW, medida en palabras por minuto. Esta configuración se envía directamente al radio Flex y tiene efecto de inmediato.
 
 ## Antes de comenzar
 

@@ -4,7 +4,7 @@
 
 ## Antes de comenzar
 
-- AetherSDR debe estar en ejecución y conectado a un radio FLEX-8600 para observar el parpadeo del latido.
+- AetherSDR debe estar en ejecución y conectado a un radio Flex para observar el parpadeo del latido.
 
 ## Pasos
 

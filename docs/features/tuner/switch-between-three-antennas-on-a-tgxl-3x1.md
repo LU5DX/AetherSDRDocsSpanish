@@ -4,7 +4,7 @@ Seleccione cuál de los tres puertos de antena del conmutador 4O3A Tuner Genius 
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600.
+- AetherSDR debe estar conectado a una radio Flex.
 - Se debe detectar un Tuner Genius XL; el botón TUN en la bandeja del panel lateral derecho aparece únicamente cuando hay uno presente.
 - Debe haber una conexión directa con el TGXL activa. La fila del conmutador de antenas se oculta si el TGXL no está conectado directamente o no reporta un conmutador de antenas.
 

@@ -4,7 +4,7 @@ La función CAT PTY crea cuatro enlaces simbólicos de puerto serie virtual en `
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600. El applet CAT Control requiere una conexión de radio activa.
+- AetherSDR debe estar conectado a una radio Flex. El applet CAT Control requiere una conexión de radio activa.
 - Los enlaces simbólicos PTY están disponibles únicamente en Linux y macOS. Esta función no está disponible en Windows.
 - El applet CAT Control está oculto de forma predeterminada. Debe hacerlo visible antes de poder usarlo.
 
