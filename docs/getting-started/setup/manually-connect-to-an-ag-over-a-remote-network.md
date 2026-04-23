@@ -1,49 +1,46 @@
 # Conectar manualmente un AG a través de una red remota
 
-Use este procedimiento cuando su Antenna Genius no se encuentre en el mismo segmento de red LAN que AetherSDR y el descubrimiento por UDP no pueda alcanzarlo. Ingresar la dirección IP del dispositivo directamente omite el descubrimiento y se conecta al puerto 9007.
+Use esta página para conectar AetherSDR a un Antenna Genius que no se encuentra en la LAN local — por ejemplo, a través de una VPN o una red enrutada — ingresando su dirección IP directamente. El descubrimiento por UDP solo funciona en la subred local, por lo que se requiere una entrada de IP manual para dispositivos remotos.
 
 ## Antes de comenzar
 
-- Conoce la dirección IPv4 o IPv6 del Antenna Genius en la red remota.
-- La red remota permite tráfico TCP al puerto 9007 del Antenna Genius (VPN, reenvío de puertos o ruta enrutada).
-- El applet de Antenna Genius es visible. Si el botón AG en la bandeja lateral derecha no aparece, AetherSDR aún no ha detectado ningún dispositivo. Continúe de todos modos — ingresar una IP manual hará que el applet aparezca tras una conexión exitosa.
+- El Antenna Genius debe ser accesible desde su máquina en el puerto TCP 9007. Confirme esto con su configuración de red o VPN antes de continuar.
+- El applet de Antenna Genius permanece oculto hasta que se descubre un dispositivo o se conecta manualmente. Si no ve el botón de bandeja del AG en la barra lateral derecha, eso es esperado — aparecerá después de una conexión exitosa.
 
 ## Pasos
 
-1. Haga clic en el botón **AG** de la bandeja lateral derecha para abrir el applet de Antenna Genius.
-2. Localice el campo **Manual IP** debajo de la etiqueta de estado.
-3. Escriba la dirección IPv4 o IPv6 del Antenna Genius en el campo **Manual IP**.
-4. Presione **Enter**.
-   - AetherSDR valida la dirección. Si está mal formada, la etiqueta de estado se torna roja y muestra `Invalid IP address`. Corrija la dirección y presione **Enter** nuevamente.
-   - Si la dirección es válida, AetherSDR la guarda en `AG_ManualIp` e intenta conectarse al puerto 9007.
-5. Observe la etiqueta de estado:
-   - `Connected — <name> v<version>` confirma una conexión exitosa. El botón **Connect / Disconnect** cambia a **Disconnect**.
-   - `Error: <msg>` significa que el dispositivo no fue alcanzable o rechazó la conexión. Verifique la dirección, las reglas del cortafuegos y que el puerto 9007 esté abierto.
+1. Abra el panel de applets. Si no está visible, haga clic en `View > Applet Panel`.
+2. Busque el botón de bandeja del AG en la barra lateral derecha. Si el applet ya está abierto, pase al paso 4.
+3. Si todavía no hay ningún botón de bandeja del AG visible, continúe con los pasos restantes — el botón aparece una vez que se establece una conexión.
+4. En el applet de Antenna Genius, localice el campo **Manual IP** (etiquetado como "Manual IP:").
+5. Escriba la dirección IPv4 o IPv6 del Antenna Genius remoto en el campo **Manual IP**.
+6. Presione **Enter**. AetherSDR valida la dirección y se conecta al puerto 9007.
+7. Observe la etiqueta de estado debajo del combo de dispositivos. Una conexión exitosa muestra `Connected — <name> v<version>`. Una conexión inalcanzable o rechazada muestra `Error: <msg>`.
 
 ## Qué hace cada control
 
-| Control | Comportamiento | Valor predeterminado | Clave persistente |
-|---|---|---|---|
-| **Manual IP** | Acepta una dirección IPv4 o IPv6. Presione **Enter** para iniciar una conexión al puerto 9007. Una dirección inválida muestra `Invalid IP address` en rojo. | *(en blanco, o la última dirección usada)* | `AG_ManualIp` |
-| **Connect / Disconnect** | Cuando está desconectado y no hay ningún dispositivo descubierto seleccionado en el combo de dispositivos, hacer clic en **Connect** también inicia un intento de conexión por IP manual. Cambia a **Disconnect** cuando está conectado. | Connect | — |
-| Etiqueta de estado | Muestra el estado de descubrimiento y conexión: `No device found`, `Device found`, `Connected — <name> v<version>`, `Disconnected`, `Error: <msg>` o `Invalid IP address`. | No device found | — |
+| Control | Qué hace | Valor predeterminado | Valores válidos | Clave de configuración |
+|---|---|---|---|---|
+| **Manual IP** | Almacena y usa una dirección IP para conectarse directamente, omitiendo el descubrimiento por UDP. Al presionar Enter se inicia el intento de conexión. | _(en blanco)_ | Dirección IPv4 o IPv6 | `AG_ManualIp` |
+| **Connect / Disconnect** | Se conecta al dispositivo seleccionado en el combo de dispositivos, o a la dirección **Manual IP** si no hay ningún dispositivo descubierto seleccionado. Cambia a Disconnect cuando está conectado. | Connect | — | — |
+| Etiqueta de estado | Muestra el estado actual de descubrimiento o conexión. | No device found | No device found, Device found, Connected — \<name\> v\<version\>, Disconnected, Error: \<msg\>, Invalid IP address | — |
 
 ## Consejos
 
-- AetherSDR restaura la última IP manual utilizada desde `AG_ManualIp` al iniciarse, por lo que el campo aparece prellenado en lanzamientos posteriores.
-- Si ya hay un dispositivo seleccionado en el combo de dispositivos, hacer clic en **Connect** se conecta a ese dispositivo descubierto en lugar de usar la IP manual. Borre o ignore la selección del combo si desea usar la ruta de IP manual.
-- El Puerto B se oculta si el Antenna Genius conectado reporta solo un puerto de radio. Esto es normal en dispositivos de un solo puerto.
+- AetherSDR guarda la última dirección utilizada en `AG_ManualIp` cuando se presiona Enter. El campo se pre-rellena con esa dirección la próxima vez que abra el applet.
+- Si el combo de dispositivos contiene un dispositivo descubierto, al hacer clic en Connect se conecta a ese dispositivo, no a la **Manual IP**. Borre o ignore la selección del combo si desea que la **Manual IP** tenga efecto mediante el botón Connect. Presionar Enter en el campo **Manual IP** siempre usa la dirección escrita independientemente del estado del combo.
+- El puerto B se oculta automáticamente si el Antenna Genius conectado reporta solo un puerto de radio.
 
 ## Solución de problemas
 
-- **La etiqueta de estado muestra `Invalid IP address`** — El texto en el campo **Manual IP** no es una dirección IPv4 o IPv6 válida. Verifique si hay errores tipográficos, espacios no deseados o un nombre de host (los nombres de host no se aceptan; use una dirección IP numérica).
-- **La etiqueta de estado muestra `Error: <msg>` tras una dirección válida** — El Antenna Genius no es alcanzable en el puerto 9007. Verifique que la dirección IP sea correcta, que una VPN o ruta hacia la red remota esté activa, y que ningún cortafuegos esté bloqueando el puerto 9007.
-- **El botón AG de la bandeja no es visible** — El applet permanece oculto hasta que se detecta o conecta un dispositivo. Si no puede ver el botón de la bandeja, consulte [Descripción general de Antenna Genius](../../features/antenna-genius/overview.md) para saber cómo mostrar el panel del applet.
+- **La etiqueta de estado muestra "Invalid IP address"** — El texto ingresado en **Manual IP** no es una dirección IPv4 o IPv6 válida. Corrija la dirección y presione Enter nuevamente.
+- **La etiqueta de estado muestra "Error: \<msg\>"** — AetherSDR alcanzó la capa de red pero no pudo completar la conexión. Verifique que el puerto 9007 esté abierto y que el Antenna Genius esté encendido y sea accesible en la dirección ingresada.
+- **El botón de bandeja del AG nunca aparece** — El applet permanece oculto hasta que se establece una conexión. Revise la etiqueta de estado dentro del panel de applets para obtener detalles del error. Si el panel en sí no está visible, habilítelo mediante `View > Applet Panel`.
 
-## Relacionado
+## Relacionados
 
-- [Descripción general de Antenna Genius](../../features/antenna-genius/overview.md)
+- [Descripción general del Antenna Genius](../../features/antenna-genius/overview.md)
 - [Descubrir automáticamente un Antenna Genius en la LAN](../../features/antenna-genius/auto-discover-an-antenna-genius-on-the-lan.md)
-- [Seleccionar una antena para el Puerto A o el Puerto B](../../features/antenna-genius/select-an-antenna-for-port-a-or-port-b.md)
-- [Activar el modo AUTO para que el AG siga los cambios de banda del radio](../../features/antenna-genius/enable-auto-mode-so-the-ag-follows-radio-band-changes.md)
 - [Conectar por IP a través de una VPN o red enrutada](connect-by-ip-across-a-vpn-or-routed-network.md)
+- [Seleccionar una antena para el Puerto A o Puerto B](../../features/antenna-genius/select-an-antenna-for-port-a-or-port-b.md)
+- [Habilitar el modo AUTO para que el AG siga los cambios de banda del radio](../../features/antenna-genius/enable-auto-mode-so-the-ag-follows-radio-band-changes.md)

@@ -1,35 +1,43 @@
 # Explorar visualmente las frecuencias almacenadas para la banda activa
 
-El panel Band Stack muestra todas las frecuencias marcadas como botones de colores dispuestos en una franja vertical junto al panadapter. Al observar el panel, puede ver de un vistazo qué frecuencias tiene almacenadas y en qué segmento del plan de banda se encuentra cada una, sin necesidad de sintonizar ninguna de ellas.
+El panel Band Stack muestra todos sus marcadores de frecuencia guardados como una tira vertical junto al panadapter. Esta página explica cómo leer el panel de un vistazo — entender la codificación por colores, el orden de disposición y las opciones de agrupación — para que pueda encontrar una frecuencia almacenada rápidamente sin desplazarse por una lista larga.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600. El panel Band Stack solo es visible cuando hay una radio conectada.
-- Debe existir al menos un marcador almacenado para la radio activa. Si el panel está vacío, consulte [Marcar la frecuencia actual](bookmark-the-current-frequency.md).
+- AetherSDR debe estar conectado a su radio FLEX-8600. El panel Band Stack solo es visible cuando hay una conexión de radio activa.
+- Necesita tener al menos un marcador guardado. Si el panel está vacío, consulte [Marcar la frecuencia actual](bookmark-the-current-frequency.md).
 
 ## Pasos
 
-1. Observe la franja vertical estrecha (80 px de ancho) que se encuentra junto al panadapter en la ventana principal. Este es el panel Band Stack.
-2. Lea las etiquetas de frecuencia en los botones de marcador. Cada botón muestra la frecuencia almacenada en MHz con tres decimales (por ejemplo, `14.225`).
-3. Pase el cursor sobre cualquier botón de marcador para ver un tooltip con la frecuencia completa a seis decimales, el modo almacenado y la antena de recepción (RX).
-4. Observe el color de fondo de cada botón. El color refleja el segmento del plan de banda que contiene esa frecuencia. Los botones de frecuencias que no pertenecen a ningún segmento definido en el plan de banda aparecen en gris oscuro.
-5. Si hay más marcadores de los que caben en el área visible, desplace el panel verticalmente para ver los botones adicionales. El panel permite desplazamiento vertical; no hay desplazamiento horizontal disponible.
+1. Observe el panel Band Stack — la estrecha tira vertical situada inmediatamente junto al panadapter en la ventana principal.
+2. Lea cada botón de marcador. La etiqueta del botón muestra la frecuencia en MHz con tres decimales (por ejemplo, `14.225`). Pase el cursor sobre cualquier botón para ver un tooltip con la frecuencia completa a seis decimales, el modo y la antena de recepción.
+3. Observe el color del botón. El color de fondo de cada marcador refleja el segmento del plan de banda que contiene esa frecuencia, con el mismo esquema de colores utilizado en la superposición del plan de banda del panadapter.
+4. Para cambiar el panel del orden de inserción al orden agrupado por banda, haga clic en el botón ⚙ en la parte inferior del panel. En el menú que aparece, haga clic en **Group by band**. El panel se reconstruye con encabezados de banda etiquetados que separan cada grupo. Los marcadores que no pertenecen a ninguna banda conocida aparecen bajo un encabezado **Other** al final.
+5. Para volver al orden de inserción plano, haga clic en ⚙ nuevamente y haga clic en **Group by band** para desactivarlo.
+6. Desplace la lista de marcadores hacia arriba o hacia abajo si hay más marcadores de los que caben en el área visible. La barra de desplazamiento horizontal está oculta; solo está disponible el desplazamiento vertical.
 
 ## Qué hace cada control
 
-| Control | Comportamiento | Configuración persistente |
+| Control | Comportamiento | Notas |
 |---|---|---|
-| Botones de marcador | Cada botón muestra una frecuencia almacenada. El color refleja el segmento del plan de banda para esa frecuencia. Haga clic para recuperarla; haga clic derecho para eliminarla. | `BandStack_<serial>` |
-| + | Agrega un nuevo marcador en la frecuencia actual del slice activo. | `BandStack_<serial>` |
+| Botones de marcador | Muestran la frecuencia almacenada en MHz (3 decimales). Haga clic para recuperarla; haga clic derecho para ver la opción **Remove**. | El color coincide con el segmento del plan de banda para esa frecuencia. |
+| ⚙ (botón de engranaje) | Abre un menú con opciones de disposición y vencimiento. | Se encuentra en la fila inferior del panel. |
+| **Group by band** (elemento de menú) | Alterna entre el orden de inserción plano y la disposición agrupada por banda con encabezados de nombre de banda. | Cuando está agrupado, hacer clic derecho en un encabezado de banda muestra la opción **Clear \<band\>**. |
+| **Auto-expiry** (elementos de menú) | Establece cuánto tiempo se conservan los marcadores antes de su eliminación automática. Opciones: **Off**, **5 min**, **15 min**, **30 min**, **60 min**. Valor predeterminado: **Off**. | Se aplica a todos los marcadores del radio conectado. |
+| × (botón borrar todo) | Elimina todos los marcadores a la vez. | Se encuentra en la fila inferior junto a + y ⚙. |
+| + | Guarda la frecuencia actual del slice activo como un nuevo marcador. | Se encuentra en la fila inferior. |
+
+Los marcadores se almacenan de forma persistente bajo la clave `BandStack_<serial>`, donde `<serial>` es el número de serie de su radio.
 
 ## Consejos
 
-- El texto del tooltip incluye el modo y la antena RX almacenados con cada marcador, por lo que puede distinguir dos marcadores en la misma frecuencia guardados con diferentes modos o antenas sin necesidad de recuperar ninguno de ellos.
-- Los datos de los marcadores se almacenan por número de serie de la radio. Si conecta una radio diferente, aparecerá su propia lista de marcadores independiente.
+- Cuando **Group by band** está activado, los marcadores dentro de cada banda aparecen en el orden en que fueron guardados. Explorar una sola banda es más fácil porque sus marcadores son contiguos y están etiquetados con el nombre de la banda.
+- Si opera en muchas bandas, activar **Group by band** evita tener que recordar a qué banda pertenece cada frecuencia — los encabezados lo hacen inmediatamente visible.
+- El tooltip de cada marcador incluye el modo y la antena de recepción que estaban activos cuando se guardó el marcador, lo que le proporciona más contexto sin necesidad de recordar la frecuencia.
 
 ## Relacionado
 
 - [Descripción general del Band Stack](overview.md)
 - [Marcar la frecuencia actual](bookmark-the-current-frequency.md)
-- [Recuperar un marcador almacenado con un clic](recall-a-stored-bookmark-with-one-click.md)
+- [Recuperar un marcador almacenado con un solo clic](recall-a-stored-bookmark-with-one-click.md)
 - [Eliminar un marcador que ya no necesita](delete-a-bookmark-you-no-longer-need.md)

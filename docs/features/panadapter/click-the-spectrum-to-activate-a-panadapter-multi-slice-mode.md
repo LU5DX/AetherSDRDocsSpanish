@@ -1,38 +1,38 @@
 # Haga clic en el espectro para activar un panadapter (modo multi-slice)
 
-Cuando hay varios panadapters abiertos, solo uno está activo a la vez. Al hacer clic en el área de espectro de cualquier panadapter, este se convierte en el activo y recibe las acciones de sintonía, desplazamiento y entrada de teclado.
+Cuando tiene más de un panadapter abierto, solo uno está activo a la vez. Haga clic en su espectro para convertirlo en el panadapter activo antes de sintonizar, ajustar configuraciones o usar atajos de teclado.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600. La visualización del panadapter requiere una conexión de radio activa.
-- Debe haber al menos un panadapter adicional presente. En el modo de un solo panadapter, los botones de la barra de título están ocultos y solo existe un panadapter.
+- AetherSDR debe estar conectado a una radio FLEX-8600.
+- Deben estar abiertos al menos dos panadapters (modo multi-slice). En el modo single-pan, el panadapter siempre está activo y no se requiere ningún clic.
 
 ## Pasos
 
-1. Ubique el panadapter que desea activar. Cada panadapter muestra un indicador de "Slice title" (por ejemplo, "Slice A" o "Slice B") en su barra de título.
+1. Localice el panadapter con el que desea trabajar. Cada panadapter tiene una barra de título que muestra una etiqueta de slice (por ejemplo, "Slice A" o "Slice B").
 2. Haga clic en cualquier parte del área de espectro o waterfall de ese panadapter.
 
-El clic activa el panadapter. La sintonía, el zoom con desplazamiento y la entrada de teclado se aplican ahora al slice vinculado a ese panadapter.
+El panadapter está ahora activo. La sintonización, el zoom y los atajos de teclado se aplican a este panadapter hasta que haga clic en otro.
 
 ## Qué hace cada control
 
-| Control | Tipo | Predeterminado | Rango válido | Clave de ajuste | Comportamiento |
-|---|---|---|---|---|---|
-| Slice title | Indicador | Slice A | Slice A – Slice H | — | Muestra qué slice está vinculado a este panadapter. |
-| Espectro / waterfall | Controlador de arrastre | — | — | — | El clic activa el panadapter. Arrastre para sintonizar. Desplácese para hacer zoom. |
-| ⬈ / ↩ (separar/acoplar) | Botón | — | — | — | Separa el panadapter en una ventana flotante o lo acopla de nuevo. Oculto en modo de un solo panadapter. |
-| □ (maximizar) | Botón | — | — | — | Maximiza este panadapter en un diseño multi-panadapter. Oculto en modo de un solo panadapter. |
-| × (cerrar) | Botón | — | — | — | Cierra este panadapter. Oculto en modo de un solo panadapter. |
+| Control | Descripción | Valor predeterminado | Rango | Clave de configuración |
+|---|---|---|---|---|
+| Espectro / waterfall | Haga clic para activar este panadapter; arrastre para sintonizar; desplace para hacer zoom. | — | — | — |
+| Título del slice | Indicador que muestra qué slice está vinculado a este panadapter. | Slice A | Slice A–Slice H | — |
+| ⬈ / ↩ (flotante/acoplado) | Extrae el panadapter a una ventana flotante o lo vuelve a acoplar. Oculto en modo single-pan. | — | — | — |
+| □ (maximizar) | Maximiza este panadapter en un diseño multi-pan. Oculto en modo single-pan. | — | — | — |
+| × (cerrar) | Cierra este panadapter. Oculto en modo single-pan. | — | — | — |
 
 ## Consejos
 
-- En el modo de un solo panadapter, los botones ⬈, □ y × de la barra de título están ocultos. Aparecen únicamente cuando hay más de un panadapter presente.
-- Si desea que un solo clic también resintonice el VFO en ese punto, active `View > Single-Click to Tune` antes de hacer clic.
+- En el modo single-pan, ⬈ / ↩, □ y × están todos ocultos. Estos controles aparecen únicamente cuando hay más de un panadapter abierto.
+- Si desea que un solo clic en el espectro vuelva a sintonizar en lugar de simplemente activar, habilite `View > Single-Click to Tune`.
 
 ## Relacionado
 
 - [Descripción general del panadapter](overview.md)
-- [Separar un panadapter en su propia ventana](pop-a-panadapter-out-into-its-own-window.md)
-- [Maximizar un panadapter para ocupar el área principal](maximize-one-panadapter-to-fill-the-main-area.md)
+- [Maximizar un panadapter para que ocupe el área principal](maximize-one-panadapter-to-fill-the-main-area.md)
+- [Extraer un panadapter a su propia ventana](pop-a-panadapter-out-into-its-own-window.md)
 - [Cerrar un panadapter adicional](close-an-extra-panadapter.md)
 - [Comprensión de slices y VFOs](../../getting-started/concepts/understanding-slices.md)

@@ -1,40 +1,41 @@
-# Guardar la frecuencia actual como marcador
+# Marcar la frecuencia actual como favorita
 
-Guarde la frecuencia, el modo y los ajustes de filtro del slice activo como un marcador en el panel Band Stack para poder volver a esa configuración con un solo clic.
+Guarde la frecuencia del slice activo en el Band Stack para poder volver a ella más tarde con un solo clic.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a un radio. El panel Band Stack solo es visible cuando hay un radio conectado.
-- Sintonice el slice activo en la frecuencia que desea guardar como marcador.
+- AetherSDR debe estar conectado a un radio. El panel Band Stack solo es visible cuando hay una conexión de radio activa.
+- Sintonice el slice activo en la frecuencia que desea marcar como favorita.
 
 ## Pasos
 
-1. Localice el panel Band Stack — la franja vertical estrecha de botones de colores ubicada al costado del panadapter.
+1. Ubique el panel Band Stack — la franja vertical estrecha junto al panadapter.
 2. Haga clic en `+` en la parte inferior del panel Band Stack.
 
-Aparece un nuevo botón de marcador en el panel que muestra la frecuencia en MHz. Su color refleja el segmento del plan de banda correspondiente a esa frecuencia.
+Aparece un nuevo botón de favorito en la lista, etiquetado con la frecuencia en MHz y con un color que corresponde al segmento del plan de banda para esa frecuencia. El favorito se guarda inmediatamente en `BandStack_<serial>`, donde `<serial>` es el número de serie de su radio.
 
-## Función de cada control
+## Qué hace cada control
 
-| Control | Comportamiento | Ajuste persistido |
+| Control | Comportamiento | Notas |
 |---|---|---|
-| `+` | Agrega un marcador en la frecuencia actual del slice activo. | `BandStack_<serial>` |
-| Botones de marcador | Haga clic para recuperar la frecuencia almacenada. Haga clic derecho para eliminar. El color refleja el segmento del plan de banda para esa frecuencia. | `BandStack_<serial>` |
+| `+` | Agrega un favorito en la frecuencia actual del slice activo. | Se guarda en `BandStack_<serial>`. |
+| Botones de favorito | Haga clic para recuperar la frecuencia almacenada; haga clic derecho para eliminar. | El color refleja el segmento del plan de banda para esa frecuencia. El tooltip muestra la frecuencia completa en MHz, el modo y la antena RX. |
+| ⚙ | Abre las opciones del band stack. | Las opciones incluyen "Group by band" y los intervalos de expiración automática: Off, 5 min, 15 min, 30 min, 60 min. |
+| × | Elimina todos los favoritos. | El tooltip muestra "Clear all bookmarks". |
 
 ## Consejos
 
-- Los marcadores se guardan por número de serie del radio. Si conecta un radio diferente, su lista de marcadores es independiente.
-- Al pasar el cursor sobre un botón de marcador, se muestra la frecuencia completa en MHz, el modo y la antena RX almacenados con él.
-- Si tiene muchos marcadores, el panel se desplaza verticalmente. El botón `+` permanece fijo en la parte inferior.
+- Si "Group by band" está habilitado (mediante el menú ⚙), el nuevo favorito aparece bajo el encabezado de su banda en lugar de al final de una lista plana.
+- El tooltip del botón de favorito muestra la frecuencia completa con seis decimales, el modo y la antena RX — coloque el cursor sobre un botón para confirmar lo que fue capturado.
 
 ## Solución de problemas
 
-- **El botón `+` no es visible** — El panel Band Stack solo aparece cuando hay un radio conectado. Verifique su conexión a través de `Settings > Connect to Radio...`.
-- **El nuevo marcador aparece en color gris** — El gris indica que la frecuencia no coincide con ningún segmento del plan de banda activo. Verifique la región de su plan de banda en `View > Band Plan`.
+- **El botón `+` no es visible** — El panel Band Stack solo aparece cuando hay un radio conectado. Verifique la conexión mediante `Settings > Connect to Radio...`.
+- **El favorito aparece en una posición inesperada** — "Group by band" está activado. El menú ⚙ indica si el agrupamiento está activo; desactívelo para restaurar el orden de inserción.
 
-## Temas relacionados
+## Relacionados
 
 - [Descripción general del Band Stack](overview.md)
-- [Recuperar un marcador almacenado con un solo clic](recall-a-stored-bookmark-with-one-click.md)
-- [Eliminar un marcador que ya no necesita](delete-a-bookmark-you-no-longer-need.md)
+- [Recuperar un favorito almacenado con un solo clic](recall-a-stored-bookmark-with-one-click.md)
+- [Eliminar un favorito que ya no necesita](delete-a-bookmark-you-no-longer-need.md)
 - [Explorar visualmente las frecuencias almacenadas para la banda activa](visually-scan-the-stored-frequencies-for-the-active-band.md)

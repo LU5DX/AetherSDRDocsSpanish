@@ -1,57 +1,56 @@
-# Conectar a la Red de Balizas Inversas (RBN)
+# Conectarse a la Red de Balizas Inversas (RBN)
 
-Esta página explica cómo configurar AetherSDR para recibir spots de la Red de Balizas Inversas (Reverse Beacon Network, RBN) y mostrarlos en el panadapter. La RBN proporciona spots automatizados de skimmer en CW, RTTY y modos digitales, útiles para operación en concursos y DX.
+La Red de Balizas Inversas (Reverse Beacon Network, RBN) detecta automáticamente señales CW, RTTY y digitales escuchadas por una red mundial de estaciones skimmer. Esta página explica cómo conectar AetherSDR al flujo telnet de la RBN para que los avisos de la RBN aparezcan en su panadapter.
 
 ## Antes de comenzar
 
-- Tenga a mano el nombre de host y el puerto telnet de la RBN que desea usar (el servidor público es `rbn.ad3w.com`, normalmente en el puerto `7000`).
-- Tenga listo su indicativo — se usa como credencial de inicio de sesión en el servidor RBN.
+- Conozca su indicativo de llamada — se utiliza como credencial de acceso al servidor telnet de la RBN.
+- Conozca el nombre de host y el puerto del servidor telnet de la RBN. El servidor público estándar es `rbn.telegraphy.de` en el puerto `7000`, pero verifique en [reversebeacon.net](https://www.reversebeacon.net) si la dirección ha cambiado.
+- Para que los avisos se muestren en el panadapter, es necesario que la capa de avisos principal esté habilitada (consulte la pestaña Display, `IsSpotsEnabled`).
 
 ## Pasos
 
-1. Abra `Settings > SpotHub...`.
+1. Haga clic en `Settings > SpotHub...` para abrir el cuadro de diálogo SpotHub.
 2. Haga clic en la pestaña **RBN**.
-3. En el campo **Server:**, introduzca el nombre de host telnet de la RBN (por ejemplo, `rbn.ad3w.com`). Este valor se guarda como `RbnHost`.
-4. En el campo **Port:**, introduzca el puerto telnet (rango válido: 1–65535). Este valor se guarda como `RbnPort`.
-5. En el campo **Callsign:**, introduzca su indicativo. Este valor se guarda como `RbnCallsign`.
-6. Si la fuente RBN genera más spots de los necesarios, establezca **Rate Limit:** con el número máximo de spots por segundo que desea aceptar. Este valor se guarda como `RbnRateLimit`.
-7. Haga clic en **Connect**. La etiqueta del botón cambia a **Disconnect** cuando la sesión se establece. El tráfico telnet sin procesar de la RBN aparece en el área **RBN Console**.
-8. Para que AetherSDR se conecte a la RBN automáticamente cada vez que arranque, habilite **Auto-connect on startup**. Esto se guarda en `RbnAutoConnect`.
-9. Para cambiar el color de los spots de la RBN en el panadapter, haga clic en **Spot Color:** y elija un color en el selector. Esto se guarda en `RbnSpotColor`.
+3. En el campo **Server:**, ingrese el nombre de host telnet de la RBN (guardado como `RbnHost`).
+4. En el cuadro numérico **Port:**, ingrese el puerto telnet en el rango 1–65535 (guardado como `RbnPort`).
+5. En el campo **Callsign:**, ingrese su indicativo (guardado como `RbnCallsign`).
+6. Si desea limitar la cantidad de avisos por segundo que se procesan, establezca el valor preferido en **Rate Limit:** (guardado como `RbnRateLimit`).
+7. Haga clic en **Connect**. La etiqueta del botón cambia a **Disconnect** y el área de consola inferior muestra `--- Connected ---` seguido del tráfico entrante de la RBN en la **RBN Console**.
+8. Para conectarse automáticamente cada vez que AetherSDR se inicia, haga clic en **Auto-connect on startup** para activarlo (guardado como `RbnAutoConnect`).
+9. Para elegir un color de visualización para los avisos de la RBN en el panadapter, haga clic en **Spot Color:** y seleccione un color en el selector (guardado como `RbnSpotColor`).
 
 ## Qué hace cada control
 
-| Control | Comportamiento | Clave de configuración | Valor predeterminado | Rango válido |
-|---|---|---|---|---|
-| **Server:** | Nombre de host telnet de la RBN | `RbnHost` | — | Cualquier nombre de host o IP |
-| **Port:** | Puerto telnet de la RBN | `RbnPort` | — | 1–65535 |
-| **Callsign:** | Indicativo de inicio de sesión enviado a la RBN | `RbnCallsign` | — | — |
-| **Rate Limit:** | Máximo de spots aceptados por segundo | `RbnRateLimit` | — | — |
-| **Connect / Disconnect** | Activa o desactiva la conexión telnet | — | Connect | — |
-| **Auto-connect on startup** | Conecta a la RBN automáticamente al iniciar | `RbnAutoConnect` | — | — |
-| **RBN Console** | Visualización de solo lectura del tráfico telnet sin procesar de la RBN | — | — | — |
-| **Send** | Envía un comando escrito al servidor RBN | — | — | — |
-| **Spot Color:** | Abre el selector de color para los spots de la RBN en el panadapter | `RbnSpotColor` | — | — |
+| Control | Comportamiento | Clave de configuración | Rango / valor predeterminado |
+|---|---|---|---|
+| **Server:** | Nombre de host del servidor telnet de la RBN. | `RbnHost` | Cualquier nombre de host |
+| **Port:** | Puerto telnet en el servidor de la RBN. | `RbnPort` | 1–65535 |
+| **Callsign:** | Indicativo de acceso enviado a la RBN al conectar. | `RbnCallsign` | Su indicativo |
+| **Rate Limit:** | Máximo de avisos de la RBN procesados por segundo. | `RbnRateLimit` | Consulte el rango del cuadro numérico |
+| **Connect / Disconnect** | Activa o desactiva la conexión telnet a la RBN. | — | Etiqueta predeterminada: Connect |
+| **Auto-connect on startup** | Conecta a la RBN automáticamente al iniciar AetherSDR. | `RbnAutoConnect` | — |
+| **RBN Console** | Visualización de solo lectura del tráfico telnet entrante de la RBN. | — | — |
+| **Send** | Envía un comando escrito a la sesión de la RBN. | — | — |
+| **Spot Color:** | Abre un selector de color para los avisos de la RBN en el panadapter. | `RbnSpotColor` | — |
 
 ## Consejos
 
-- El volumen de spots de la RBN es alto, especialmente durante los concursos. Use **Rate Limit:** para evitar que el panadapter se sature.
-- La **RBN Console** muestra la salida telnet sin procesar. Si el inicio de sesión falla, el mensaje de error aparece allí.
-- Los spots de todas las fuentes activas (Cluster, RBN, WSJT-X, etc.) se combinan en la pestaña **Spot List** y se pueden ordenar por banda, frecuencia, modo o fuente.
-- Haga doble clic en cualquier fila de la tabla de spots para sintonizar el equipo en esa frecuencia. Consulte [Sintonizar un spot haciendo doble clic en la lista de spots](../../features/dx-cluster/tune-to-a-spot-by-double-clicking-the-spot-list.md).
+- El control **Rate Limit:** es útil durante un fin de semana de concurso activo, cuando la RBN puede generar cientos de avisos por segundo. Reducirlo evita que la lista de avisos y el panadapter se saturen.
+- Puede escribir comandos telnet de la RBN (por ejemplo, `set/skimmer` o `set/dx`) en la línea de comandos situada debajo de la consola y hacer clic en **Send** para enviarlos al servidor.
+- Los avisos de la RBN aparecen junto a los avisos del cluster DX en la pestaña **Spot List**. Use las casillas de verificación de banda para filtrar por banda. Haga doble clic en cualquier fila para sintonizar directamente esa frecuencia.
 
 ## Solución de problemas
 
-- **La RBN Console muestra "--- Disconnected ---" inmediatamente después de conectar** — Es posible que el servidor haya rechazado el inicio de sesión. Verifique que el indicativo en **Callsign:** sea correcto y que el nombre de host y el puerto sean accesibles desde su red.
-- **Aparecen spots pero el panadapter no muestra nada** — Compruebe que **Spots:** esté habilitado en la pestaña **Display** (interruptor principal, guardado como `IsSpotsEnabled`). Confirme también que la banda de los spots entrantes coincida con la vista actual del panadapter.
-- **Demasiados spots ralentizan la visualización** — Reduzca **Rate Limit:** para disminuir el caudal de datos, o use las casillas de banda en la pestaña **Spot List** para ocultar las bandas en las que no está operando.
+- **El botón permanece en "Connect" y la consola muestra un error** — El nombre de host o el puerto es incorrecto, o un cortafuegos está bloqueando el tráfico telnet saliente. Verifique la dirección y el puerto del servidor, y compruebe que su red permita conexiones TCP salientes en el puerto configurado.
+- **Los avisos aparecen en la consola pero no en el panadapter** — Es posible que la capa de avisos principal esté deshabilitada. Abra la pestaña **Display** en SpotHub y confirme que **Spots:** esté habilitado (`IsSpotsEnabled`). Confirme también que haya una slice de radio abierta y visible.
+- **"Auto-connect on startup" no se reconecta tras una interrupción de red** — La conexión automática solo se activa al iniciar la aplicación. Si la sesión se interrumpe durante el uso, haga clic en **Connect** manualmente para reconectarse.
 
-## Relacionado
+## Temas relacionados
 
-- [Conectar a un cluster DX](connect-to-a-dx-cluster.md)
 - [Descripción general de SpotHub](../../features/dx-cluster/overview.md)
-- [Ajustar densidad, posición, tamaño de fuente y tiempo de vida de los spots](../../features/dx-cluster/tune-spot-density-position-font-size-and-lifetime.md)
-- [Sintonizar un spot haciendo doble clic en la lista de spots](../../features/dx-cluster/tune-to-a-spot-by-double-clicking-the-spot-list.md)
-- [Elegir colores para cada fuente de spots](../../features/dx-cluster/pick-colors-for-each-spot-source.md)
-- [Habilitar coloración DXCC desde un registro ADIF](../../features/dx-cluster/enable-dxcc-coloring-from-an-adif-log.md)
-- [Borrar todos los spots del panadapter](../../features/dx-cluster/clear-all-spots-from-the-panadapter.md)
+- [Conectarse a un cluster DX](connect-to-a-dx-cluster.md)
+- [Ajustar densidad, posición, tamaño de fuente y duración de los avisos](../../features/dx-cluster/tune-spot-density-position-font-size-and-lifetime.md)
+- [Elegir colores para cada fuente de avisos](../../features/dx-cluster/pick-colors-for-each-spot-source.md)
+- [Sintonizar un aviso haciendo doble clic en la lista de avisos](../../features/dx-cluster/tune-to-a-spot-by-double-clicking-the-spot-list.md)
+- [Habilitar coloreado DXCC desde un registro ADIF](../../features/dx-cluster/enable-dxcc-coloring-from-an-adif-log.md)

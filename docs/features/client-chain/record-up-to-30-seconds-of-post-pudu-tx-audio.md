@@ -1,45 +1,42 @@
-# Grabar hasta 30 segundos de audio TX posterior a PUDU
+# Grabar hasta 30 segundos de audio TX posterior al PUDU
 
-Use el grabador del monitor en la cadena PooDoo Audio para capturar hasta 30 segundos de su audio TX procesado después de que haya pasado por todas las etapas, incluida PUDU. Esto le permite escuchar exactamente cómo suena su señal antes de transmitir al aire.
+Use el grabador del monitor post-PUDU para capturar hasta 30 segundos de su audio TX procesado después de que pase por toda la cadena PooDoo. Esto le permite escuchar exactamente lo que produce la cadena sin necesitar un segundo receptor.
 
 ## Antes de comenzar
 
-- El contenedor PooDoo Audio (TXDSP) debe estar visible. Si no lo está, haga clic en el botón de bandeja "PUDU" en la barra lateral derecha para mostrarlo.
-- La fuente de entrada del micrófono debe estar configurada en PC y DAX debe estar desactivado. El botón de grabación permanece deshabilitado hasta que se cumplan ambas condiciones.
-- Debe estar en la vista de cadena TX. Haga clic en "TX" si actualmente está seleccionado "RX".
+- El contenedor PooDoo Audio (TXDSP) debe estar visible. Si no lo está, haga clic en el botón "PUDU" de la bandeja en la barra lateral derecha para mostrarlo.
+- La entrada de micrófono debe estar configurada en PC y DAX debe estar desactivado. El botón de grabación está deshabilitado si alguna de estas condiciones no se cumple.
+- No debe haber reproducción en curso. El botón de grabación está deshabilitado mientras el botón Play esté activo.
 
 ## Pasos
 
-1. Confirme que el botón "TX" está seleccionado en el encabezado de la cadena PooDoo Audio. El botón es de color ámbar cuando está activo.
-2. Localice el botón de grabación (⏺) en la fila del encabezado, a la derecha de los botones "TX" y "RX". Solo está habilitado cuando la entrada del micrófono está lista.
-3. Haga clic en ⏺ para iniciar la grabación. El botón pulsa en rojo y su fondo se ilumina para confirmar que la captura está activa. La grabación se detiene automáticamente después de 30 segundos.
-4. Para detener antes de los 30 segundos, haga clic en ⏺ nuevamente.
-5. La reproducción comienza automáticamente cuando se detiene la grabación. El botón de reproducción (▶) pulsa en verde durante la reproducción.
-6. Para reproducir el audio capturado manualmente, haga clic en ▶. Para cancelar una reproducción en curso, haga clic en ▶ nuevamente.
+1. En el contenedor PooDoo Audio, confirme que el botón TX está seleccionado (ámbar). El grabador del monitor opera únicamente sobre la cadena TX.
+2. Haga clic en el botón Record (⏺) en la fila de encabezado, a la derecha de los botones TX y RX.
+3. Transmita normalmente. El botón Record parpadea en rojo mientras captura.
+4. Haga clic en el botón Record (⏺) nuevamente para detener, o permita que la grabación se detenga automáticamente a los 30 segundos. La reproducción comienza automáticamente una vez que la grabación se detiene.
 
 ## Qué hace cada control
 
 | Control | Comportamiento | Valor predeterminado | Notas |
 |---|---|---|---|
-| ⏺ (grabar) | Captura hasta 30 s de audio TX posterior a PUDU. Haga clic nuevamente para detener antes; la reproducción comienza automáticamente. | Sin marcar | Habilitado solo cuando la fuente del micrófono es PC, DAX está desactivado y la reproducción no está en curso. Deshabilitado cuando no existe ninguna grabación y las condiciones no se cumplen. Pulsa en rojo durante la grabación. |
-| ▶ (reproducir) | Reproduce el audio capturado. Haga clic nuevamente para cancelar. | Sin marcar | Habilitado solo cuando existe una grabación y la grabación no está activa. Pulsa en verde durante la reproducción. |
-
-Configuraciones persistentes involucradas: `ClientCompTxChainStages`, `Applet_TXDSP`.
+| Record (⏺) | Inicia o detiene la captura de hasta 30 s de audio TX posterior al PUDU. La reproducción comienza automáticamente al detener. | Desactivado | Habilitado solo cuando la entrada de micrófono está lista y la reproducción no está en curso. Parpadea en rojo durante la grabación. |
+| Play (▶) | Reproduce el audio capturado. Haga clic de nuevo para cancelar. | Desactivado | Habilitado solo cuando existe una grabación y no hay grabación activa. Parpadea en verde durante la reproducción. |
 
 ## Consejos
 
-- Si desea escuchar el efecto de una etapa específica, omita las demás etapas haciendo clic simple en cada etapa de la cadena antes de grabar y, luego, compare los resultados.
-- El botón de grabación permanece habilitado durante la grabación, por lo que puede hacer clic en él para detenerla en cualquier momento.
-- El botón de reproducción permanece habilitado durante la reproducción, por lo que puede cancelarla en cualquier momento.
+- El tooltip del botón Record dice: "Record up to 30 s of post-PooDoo™ TX audio (MIC must be set to PC and DAX off). Click again to stop; playback starts automatically." Si el botón aparece atenuado, verifique primero la configuración de la fuente del micrófono y el estado de DAX.
+- El botón Record permanece habilitado mientras la grabación está activa, de modo que puede hacer clic en él para detener la captura en cualquier momento antes del límite de 30 segundos.
+- La cadena procesa el audio independientemente de qué etapas estén omitidas. Para evaluar etapas específicas, omita las demás antes de grabar. Consulte [Omitir todas las etapas TX a la vez](bypass-every-tx-stage-at-once.md).
 
 ## Solución de problemas
 
-- **⏺ aparece en gris y no se puede hacer clic** — La fuente de entrada del micrófono no está configurada en PC, DAX está activado o la reproducción está en curso. Verifique la configuración de su fuente de audio y asegúrese de que DAX esté desactivado.
-- **La reproducción no comienza después de que se detiene la grabación** — No se capturó audio o la grabación fue demasiado corta. Verifique que el audio esté llegando a la cadena y que MOX haya estado activo durante la grabación.
+- **El botón Record (⏺) está atenuado y no se puede hacer clic** — La entrada de micrófono no está configurada en PC, DAX está activado, o la reproducción está en curso. Corrija la configuración del micrófono y DAX, o espere a que finalice la reproducción.
+- **La grabación se detiene antes de que termine** — El grabador captura un máximo de 30 segundos. Inicie la captura más cerca de la parte de su transmisión que desea evaluar.
+- **La reproducción no comienza después de que se detiene la grabación** — La reproducción requiere una grabación completada. Si detuvo la grabación inmediatamente después de iniciarla, inténtelo de nuevo y permita al menos una captura breve antes de detener.
 
 ## Relacionados
 
-- [Descripción general de la cadena PooDoo Audio](overview.md)
 - [Reproducir el audio PUDU capturado](play-back-the-captured-pudu-audio.md)
 - [Omitir todas las etapas TX a la vez](bypass-every-tx-stage-at-once.md)
 - [Abrir el editor flotante de una etapa desde la cadena](open-a-stage-s-floating-editor-from-the-chain.md)
+- [Descripción general de la cadena PooDoo Audio](overview.md)

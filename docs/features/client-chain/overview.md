@@ -1,68 +1,52 @@
-# Descripción general del applet PooDoo Audio Chain
+# Descripción general de la cadena de audio PooDoo
 
-El applet PooDoo Audio Chain muestra el flujo de señal DSP de TX como una tira horizontal de etapas de procesamiento. Úselo para omitir, reordenar o abrir editores de etapas individuales, y para capturar una breve muestra de audio posterior al procesamiento y auditar su sonido de TX.
+El applet PooDoo Audio Chain muestra el flujo de señal DSP de TX como una tira interactiva de etapas de procesamiento. Úselo para omitir, reordenar y editar etapas individuales, o para capturar y revisar una muestra corta de su audio TX procesado.
 
 ## Antes de comenzar
 
-- El contenedor PooDoo Audio (TXDSP) debe estar visible. Si no lo está, haga clic en el botón de bandeja etiquetado **PUDU** en la barra lateral derecha para activarlo.
-- No se requiere conexión a radio para ver o configurar la cadena. Algunas funciones (grabar, reproducir) requieren que la fuente de entrada del micrófono esté configurada en PC con DAX desactivado.
+- Abra el contenedor PooDoo Audio haciendo clic en el botón PUDU de la bandeja en la barra lateral derecha. El applet de cadena siempre es visible en la parte superior de ese contenedor cuando el tile está habilitado.
+- No se requiere una conexión de radio para ver o reorganizar la cadena, pero el procesamiento de audio requiere un motor de audio activo.
 
 ## Cómo funciona
 
-El applet aparece como la sección superior del contenedor TXDSP. Tiene dos capas: una fila de encabezado con controles y, debajo de ella, la tira de cadena.
+El encabezado del applet contiene tres controles — TX, RX y BYPASS — seguidos de los botones de grabación y reproducción de monitor. Debajo del encabezado se encuentra la tira de cadena, que muestra cada etapa de procesamiento como un tile arrastrable. Una línea de ayuda estática debajo de la tira indica "Click to bypass · Double click to edit · Drag to reorder".
 
-**Fila de encabezado**
+El botón TX está seleccionado de forma predeterminada. En el modo TX, la tira de cadena completa es interactiva. Al hacer clic en RX se cambia a un marcador de posición que indica "Client RX chain — coming in a future phase"; en ese modo no hay edición de etapas ni bypass disponible.
 
-La fila de encabezado contiene los botones de modo, los botones de monitor y el botón BYPASS, de izquierda a derecha.
+La cadena procesa el audio a través de hasta siete etapas en el orden mostrado en la tira: Eq, Comp, Gate, DeEss, Tube, Enh (PUDU) y Reverb. Cada etapa puede omitirse individualmente, abrirse para edición o arrastrarse a una nueva posición. El orden de las etapas y los estados habilitados se guardan en `ClientCompTxChainStages`. El estado de visibilidad del contenedor en sí se guarda en `Applet_TXDSP`.
 
-- **TX** y **RX** son botones de alternancia exclusivos que seleccionan qué vista de cadena se muestra. TX está seleccionado de forma predeterminada (resaltado en ámbar). Al seleccionar RX se muestra el texto de marcador de posición "Client RX chain — coming in a future phase"; no hay procesamiento de etapas disponible en esa vista.
-- El botón **Record** (⏺) y el botón **Play** (▶) son los controles de grabación del monitor post-PUDU, descritos a continuación.
-- **BYPASS** se encuentra en el extremo derecho de la fila de encabezado.
-
-**Tira de cadena**
-
-Debajo del encabezado, cada etapa DSP aparece como un mosaico arrastrable en el orden del flujo de señal. El orden predeterminado de las etapas es: Eq, Comp, Gate, DeEss, Tube, Enh (PUDU), Reverb. Una línea de ayuda estática debajo de la tira indica "Click to bypass · Double click to edit · Drag to reorder".
-
-Cada mosaico de etapa responde a tres interacciones:
-
-| Interacción | Resultado |
-|---|---|
-| Clic simple | Activa o desactiva el bypass solo para esa etapa |
-| Doble clic | Abre el editor flotante de esa etapa |
-| Arrastrar | Mueve la etapa a una nueva posición en la cadena |
-
-El orden de la cadena y los estados de habilitación de las etapas se guardan en `ClientCompTxChainStages`. Si el contenedor TXDSP se muestra o no, se guarda en `Applet_TXDSP`.
+Cuando está transmitiendo, el indicador de punto final TX pulsa en rojo en la tira de cadena, impulsado por el estado MOX de su slice.
 
 ## Qué hace cada control
 
-| Control | Predeterminado | Comportamiento |
-|---|---|---|
-| **TX** | Seleccionado | Muestra la cadena DSP de TX interactiva. Resaltado en ámbar cuando está activo. |
-| **RX** | No seleccionado | Muestra el marcador de posición de RX. BYPASS no tiene efecto en este modo. |
-| **BYPASS** | Sin marcar | Cuando se marca: toma una instantánea de las etapas habilitadas en ese momento y las deshabilita todas. Cuando se desmarca: vuelve a habilitar solo las etapas que estaban activas antes de la instantánea. Las etapas alternadas individualmente mientras BYPASS estaba activo no se ven afectadas por la restauración. |
-| **Record** (⏺) | Deshabilitado | Captura hasta 30 segundos de audio TX post-PUDU. Haga clic de nuevo para detener antes; la reproducción comienza automáticamente al detenerse la grabación. Se habilita solo cuando la entrada de micrófono está configurada en PC y la reproducción no está activa. Parpadea en rojo mientras graba. |
-| **Play** (▶) | Deshabilitado | Reproduce el audio capturado más recientemente. Haga clic de nuevo para cancelar. Se habilita solo cuando existe una grabación y la grabación no está activa. Parpadea en verde durante la reproducción. |
-| **Etapa de cadena (Eq)** | — | Clic simple activa o desactiva el bypass del ecualizador; doble clic abre el editor de EQ; arrastre para reordenar. |
-| **Etapa de cadena (Comp)** | — | Clic simple activa o desactiva el bypass del compresor; doble clic abre el editor del compresor; arrastre para reordenar. |
-| **Etapa de cadena (Gate)** | — | Clic simple activa o desactiva el bypass del gate; doble clic abre el editor del gate; arrastre para reordenar. |
-| **Etapa de cadena (DeEss)** | — | Clic simple activa o desactiva el bypass del de-esser; doble clic abre el editor del de-ess; arrastre para reordenar. |
-| **Etapa de cadena (Tube)** | — | Clic simple activa o desactiva el bypass del saturador de tubo; doble clic abre el editor del tubo; arrastre para reordenar. |
-| **Etapa de cadena (Enh / PUDU)** | — | Clic simple activa o desactiva el bypass del excitador PUDU; doble clic abre el editor PUDU; arrastre para reordenar. |
-| **Etapa de cadena (Reverb)** | — | Clic simple activa o desactiva el bypass del reverb; doble clic abre el editor del reverb; arrastre para reordenar. |
+| Control | Tipo | Valor predeterminado | Comportamiento |
+|---|---|---|---|
+| TX | Botón de alternancia | Activado | Cambia a la vista de cadena DSP de TX. Color ámbar cuando está seleccionado. |
+| RX | Botón de alternancia | Desactivado | Cambia al marcador de posición de la cadena RX. BYPASS no tiene efecto en este modo. |
+| BYPASS | Botón de alternancia | Desactivado | Activado: toma una instantánea de todas las etapas habilitadas actualmente y las deshabilita todas. Desactivado: vuelve a habilitar exactamente las etapas que estaban activas antes de la instantánea. Las etapas alternadas manualmente mientras BYPASS estaba activo se conservan fuera de la instantánea. |
+| Grabar (⏺) | Botón de alternancia | Desactivado | Captura hasta 30 s de audio TX posterior a PUDU. Haga clic de nuevo para detener; la reproducción comienza automáticamente. Pulsa en rojo durante la grabación. Solo se habilita cuando la fuente MIC está configurada como PC, DAX está desactivado y la reproducción no está en curso. |
+| Reproducir (▶) | Botón de alternancia | Desactivado | Reproduce el audio capturado. Haga clic de nuevo para cancelar. Pulsa en verde durante la reproducción. Solo se habilita una vez que existe una grabación y la grabación no está activa. |
+| Etapa de cadena (Eq) | Controlador de arrastre | — | Un solo clic alterna el bypass de la etapa de EQ. Doble clic abre el editor de EQ. Arrastre para reordenar. |
+| Etapa de cadena (Comp) | Controlador de arrastre | — | Un solo clic alterna el bypass del compresor. Doble clic abre el editor de compresor. Arrastre para reordenar. |
+| Etapa de cadena (Gate) | Controlador de arrastre | — | Un solo clic alterna el bypass de la puerta de ruido. Doble clic abre el editor de puerta. Arrastre para reordenar. |
+| Etapa de cadena (DeEss) | Controlador de arrastre | — | Un solo clic alterna el bypass del de-esser. Doble clic abre el editor de de-ess. Arrastre para reordenar. |
+| Etapa de cadena (Tube) | Controlador de arrastre | — | Un solo clic alterna el bypass del saturador de tubo. Doble clic abre el editor de tubo. Arrastre para reordenar. |
+| Etapa de cadena (Enh / PUDU) | Controlador de arrastre | — | Un solo clic alterna el bypass del excitador PUDU. Doble clic abre el editor PUDU. Arrastre para reordenar. |
+| Etapa de cadena (Reverb) | Controlador de arrastre | — | Un solo clic alterna el bypass de la reverberación. Doble clic abre el editor de reverberación. Arrastre para reordenar. |
 
 ## Consejos
 
-- El indicador de punto final TX parpadea en rojo en la tira de cadena mientras su slice está transmitiendo (MOX activo), lo que le proporciona una confirmación en tiempo real de que TX está activo.
-- BYPASS está diseñado para comparaciones A/B rápidas. Dado que toma una instantánea de las etapas habilitadas en el momento en que lo activa, puede alternar etapas individuales de forma segura durante un bypass sin perder su configuración original al restaurar.
-- El botón Record requiere que la fuente del micrófono esté configurada en PC y que DAX esté desactivado. Si el botón aparece atenuado, verifique primero esas dos condiciones.
+- Mientras BYPASS está activo, aún puede alternar etapas individuales. Esos cambios por etapa no se incluyen en la instantánea de bypass y persistirán después de desactivar BYPASS.
+- El botón Grabar permanece habilitado durante la grabación para que pueda hacer clic por segunda vez y detenerla antes de tiempo.
+- La línea de ayuda "Click to bypass · Double click to edit · Drag to reorder" solo se muestra en el modo TX.
 
-## Relacionados
+## Relacionado
 
 - [Omitir todas las etapas de TX a la vez](bypass-every-tx-stage-at-once.md)
 - [Volver a habilitar una etapa específica después de un bypass global](re-enable-a-specific-stage-after-a-global-bypass.md)
 - [Reordenar la cadena DSP de TX](reorder-the-tx-dsp-chain.md)
 - [Abrir el editor flotante de una etapa desde la cadena](open-a-stage-s-floating-editor-from-the-chain.md)
-- [Grabar hasta 30 segundos de audio TX post-PUDU](record-up-to-30-seconds-of-post-pudu-tx-audio.md)
+- [Grabar hasta 30 segundos de audio TX posterior a PUDU](record-up-to-30-seconds-of-post-pudu-tx-audio.md)
 - [Reproducir el audio PUDU capturado](play-back-the-captured-pudu-audio.md)
 - [Cambiar entre la vista de cadena TX y el marcador de posición RX](switch-between-tx-chain-view-and-rx-placeholder.md)
-- [Confirmar visualmente cuando TX (MOX) está activo](visually-confirm-when-tx-mox-is-live.md)
+- [Confirmar visualmente cuándo TX (MOX) está activo](visually-confirm-when-tx-mox-is-live.md)

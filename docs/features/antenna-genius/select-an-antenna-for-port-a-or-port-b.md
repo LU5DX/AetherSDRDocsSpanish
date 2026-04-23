@@ -1,47 +1,51 @@
-# Seleccionar una antena para Port A o Port B
+# Seleccionar una antena para el Puerto A o el Puerto B
 
-Use el applet Antenna Genius para elegir qué antena el conmutador 4O3A Antenna Genius enruta hacia Port A o Port B en su radio. Al seleccionar una antena aquí, el comando se envía inmediatamente al conmutador.
+Use el applet Antenna Genius para asignar una antena específica al Puerto A o al Puerto B de su conmutador 4O3A Antenna Genius. Esto le permite controlar qué antena física usa cada puerto de radio sin salir de AetherSDR.
 
 ## Antes de comenzar
 
-- El applet Antenna Genius debe estar visible en el panel de applets. Aparece automáticamente cuando se descubre o conecta un dispositivo. Si no está visible, haga clic en el botón AG tray en la barra lateral derecha.
-- El Antenna Genius debe estar conectado. La etiqueta de estado debe mostrar "Connected — &lt;name&gt; v&lt;version&gt;". Si muestra "No device found" o "Disconnected", consulte [Descubrir automáticamente un Antenna Genius en la LAN](auto-discover-an-antenna-genius-on-the-lan.md) o [Conectarse manualmente a un AG a través de una red remota](../../getting-started/setup/manually-connect-to-an-ag-over-a-remote-network.md).
-- La lista de antenas debe estar poblada. Los botones de antena aparecen automáticamente después de una conexión exitosa.
+- El applet Antenna Genius debe estar visible. Permanece oculto hasta que se conecta o detecta un dispositivo. Consulte [Detección automática de un Antenna Genius en la LAN](auto-discover-an-antenna-genius-on-the-lan.md) o [Conectarse manualmente a un AG a través de una red remota](../../getting-started/setup/manually-connect-to-an-ag-over-a-remote-network.md).
+- La etiqueta de estado debe mostrar **Connected — \<name\> v\<version\>** antes de que aparezcan los botones de antena.
+- Abra el applet haciendo clic en el botón de bandeja **AG** en la barra lateral derecha.
 
 ## Pasos
 
-1. Haga clic en el botón AG tray en la barra lateral derecha para abrir el applet Antenna Genius.
-2. Localice la sección Port A o Port B. Port B se oculta si el dispositivo conectado reporta solo un puerto de radio.
-3. Haga clic en el botón de antena que desea seleccionar. El botón se resalta para indicar que está activo.
-4. Para deseleccionar la antena actual en un puerto, haga clic nuevamente en su botón activo. El puerto regresa al estado sin antena seleccionada (antena 0).
+1. Haga clic en el botón de bandeja **AG** para abrir el applet Antenna Genius.
+2. Confirme que la etiqueta de estado muestre **Connected —** seguido del nombre y la versión del dispositivo.
+3. Bajo el encabezado **Port A**, localice los botones de antena que se han cargado desde la lista de antenas del dispositivo.
+4. Haga clic en el botón de la antena que desea asignar al Puerto A. El botón se resalta para indicar que está seleccionado.
+5. Para deseleccionar la antena actual del Puerto A, haga clic en el mismo botón de nuevo. El puerto vuelve al estado sin antena seleccionada (antena 0).
+6. Si su dispositivo tiene dos puertos de radio, la sección **Port B** es visible debajo del separador. Repita los pasos 3–5 bajo el encabezado **Port B** para asignar una antena al Puerto B.
 
 ## Qué hace cada control
 
 | Control | Comportamiento | Notas |
 |---|---|---|
-| Botones de antena de Port A | Haga clic para seleccionar una antena en Port A. Haga clic en el botón activo nuevamente para deseleccionar. | Azul = TX y RX permitidos en la banda actual. Ámbar = solo RX en la banda actual. Tenue = sin permiso en la banda actual. Deshabilitado si la antena ya está seleccionada en Port B. |
-| Port A AUTO | Active o desactive para habilitar el seguimiento de banda en Port A. El conmutador selecciona antenas automáticamente cuando el radio cambia de banda. | Consulte [Habilitar el modo AUTO para que el AG siga los cambios de banda del radio](enable-auto-mode-so-the-ag-follows-radio-band-changes.md). |
-| Botones de antena de Port B | Haga clic para seleccionar una antena en Port B. Haga clic en el botón activo nuevamente para deseleccionar. | Mismo código de colores que Port A. Deshabilitado si la antena ya está seleccionada en Port A. Oculto si el dispositivo tiene solo un puerto de radio. |
-| Port B AUTO | Active o desactive para habilitar el seguimiento de banda en Port B. | Consulte [Habilitar el modo AUTO para que el AG siga los cambios de banda del radio](enable-auto-mode-so-the-ag-follows-radio-band-changes.md). |
-| Indicador de antena de Port A | Muestra el nombre de la antena actualmente seleccionada para Port A. Muestra `<ant>  TX:<alt>` cuando el TX se enruta a una antena alternativa, o `<ant> [INHIBIT]` cuando la transmisión está inhibida. | Se vuelve rojo durante la transmisión, naranja cuando el TX se redirige o el inhibidor está activo. |
-| Indicador de antena de Port B | Igual que el indicador de antena de Port A, para Port B. | Mismo comportamiento de colores. |
+| Botones de antena del Puerto A | Haga clic para seleccionar una antena en el Puerto A; haga clic de nuevo para deseleccionar. | Azul = TX y RX permitidos en la banda actual. Ámbar = solo RX. Atenuado = sin permiso en la banda actual. Deshabilitado si la antena ya está seleccionada en el Puerto B. |
+| Banda del Puerto A | Muestra la banda activa en el Puerto A, derivada de la frecuencia del radio. | Muestra **—** cuando no se identifica ninguna banda. |
+| Antena del Puerto A | Muestra el nombre de la antena actualmente seleccionada para el Puerto A. | Muestra **\<ant\>  TX:\<alt\>** cuando el TX está enrutado hacia una antena alternativa, y **\<ant\> [INHIBIT]** cuando la transmisión está inhibida. Se vuelve rojo durante TX; naranja en TX alternativo o en inhibición. |
+| **Port A AUTO** | Conmutador. Activa el seguimiento de banda en el Puerto A para que el conmutador siga automáticamente los cambios de banda del radio. | Consulte [Activar el modo AUTO para que el AG siga los cambios de banda del radio](enable-auto-mode-so-the-ag-follows-radio-band-changes.md). |
+| Botones de antena del Puerto B | Haga clic para seleccionar una antena en el Puerto B; haga clic de nuevo para deseleccionar. | La misma lista de antenas que el Puerto A. Oculto si el dispositivo reporta solo un puerto de radio. |
+| Banda del Puerto B | Muestra la banda activa en el Puerto B. | Muestra **—** cuando no se identifica ninguna banda. |
+| Antena del Puerto B | Muestra el nombre de la antena actualmente seleccionada para el Puerto B. | El mismo indicador de estado que la antena del Puerto A. |
+| **Port B AUTO** | Conmutador. Activa el seguimiento de banda en el Puerto B. | Oculto cuando la sección del Puerto B está oculta. |
 
 ## Consejos
 
-- Un botón de antena que aparece tenue en la banda actual sigue siendo clicable, pero esa antena no tiene permiso de TX ni de RX configurado para esta banda en el Antenna Genius. Verifique la configuración de permisos de banda/antena en su AG si esto no es lo esperado.
-- Si una antena que desea asignar a Port A aparece en gris y no es clicable, ya está seleccionada en Port B. Deselecciónela primero desde Port B.
+- Una antena que ya está seleccionada en un puerto aparece deshabilitada y atenuada en la cuadrícula de botones del otro puerto. No es posible asignar la misma antena a ambos puertos de forma simultánea.
+- Los botones de antena resaltados en ámbar están disponibles para recepción, pero no permitirán TX en la banda actual. Cambie a un botón azul antes de transmitir.
 
 ## Solución de problemas
 
-- **Los botones de antena no aparecen** — El applet está conectado pero no ha recibido una lista de antenas del dispositivo. Intente hacer clic en Disconnect y luego en Connect para restablecer la sesión.
-- **Hacer clic en un botón no tiene efecto** — Es posible que el dispositivo haya perdido la conexión. Verifique la etiqueta de estado. Si no muestra "Connected — &lt;name&gt; v&lt;version&gt;", reconéctese usando el botón Connect.
-- **La sección Port B no está visible** — El dispositivo Antenna Genius conectado reporta solo un puerto de radio. Los controles de Port B se ocultan automáticamente en este caso.
+- **La sección del Puerto B no es visible** — El dispositivo conectado reporta solo un puerto de radio. El Puerto B se oculta automáticamente en este caso y no está disponible.
+- **Los botones de antena no se muestran** — El dispositivo aún no está conectado o la lista de antenas no se ha cargado. Confirme que la etiqueta de estado muestre **Connected —** y espere un momento para que se complete la lista.
+- **Al hacer clic en un botón de antena no ocurre nada** — Es posible que el botón esté deshabilitado porque esa antena ya está seleccionada en el otro puerto. Elija una antena diferente o deselecciónela en el otro puerto primero.
 
-## Relacionado
+## Relacionados
 
-- [Descripción general del Antenna Genius](overview.md)
-- [Descubrir automáticamente un Antenna Genius en la LAN](auto-discover-an-antenna-genius-on-the-lan.md)
+- [Descripción general de Antenna Genius](overview.md)
+- [Detección automática de un Antenna Genius en la LAN](auto-discover-an-antenna-genius-on-the-lan.md)
 - [Conectarse manualmente a un AG a través de una red remota](../../getting-started/setup/manually-connect-to-an-ag-over-a-remote-network.md)
-- [Habilitar el modo AUTO para que el AG siga los cambios de banda del radio](enable-auto-mode-so-the-ag-follows-radio-band-changes.md)
-- [Identificar qué antenas no pueden hacer TX en la banda actual (ámbar o tenue)](spot-which-antennas-cannot-tx-on-the-current-band-amber-or-dim.md)
-- [Intercambiar radios que comparten el AG (las antenas en uso por el otro puerto quedan bloqueadas)](swap-radios-that-share-the-ag-antennas-in-use-by-the-other-port-are-locked-out.md)
+- [Activar el modo AUTO para que el AG siga los cambios de banda del radio](enable-auto-mode-so-the-ag-follows-radio-band-changes.md)
+- [Identificar qué antenas no pueden transmitir en la banda actual (ámbar o atenuado)](spot-which-antennas-cannot-tx-on-the-current-band-amber-or-dim.md)
+- [Intercambiar radios que comparten el AG (las antenas en uso por el otro puerto están bloqueadas)](swap-radios-that-share-the-ag-antennas-in-use-by-the-other-port-are-locked-out.md)

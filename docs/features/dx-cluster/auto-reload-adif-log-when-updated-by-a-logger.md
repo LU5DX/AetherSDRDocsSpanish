@@ -1,39 +1,39 @@
-# Recarga automática del registro ADIF cuando el programa de registro lo actualiza
+# Recarga automática del registro ADIF al actualizarlo con un programa de log
 
-Cuando el coloreado DXCC está habilitado, AetherSDR puede vigilar su archivo de registro ADIF y volver a leerlo automáticamente cada vez que su software de registro escribe un nuevo QSO. Esto mantiene los colores de los spots actualizados sin necesidad de recargar manualmente.
+Cuando el coloreado DXCC está activo, AetherSDR puede vigilar su archivo de registro ADIF y recargarlo automáticamente cada vez que su programa de log escribe un nuevo QSO. Esto mantiene el estado trabajado/confirmado/necesario actualizado en el panadapter sin intervención manual.
 
 ## Antes de comenzar
 
-- El coloreado DXCC debe estar habilitado y un archivo ADIF debe estar ya cargado. Consulte [Habilitar el coloreado DXCC desde un registro ADIF](enable-dxcc-coloring-from-an-adif-log.md).
-- Su software de registro debe escribir las actualizaciones en la misma ruta de archivo ADIF que AetherSDR tiene cargada.
+- El coloreado DXCC debe estar habilitado y ya debe haber un archivo ADIF seleccionado. Consulte [Habilitar el coloreado DXCC desde un registro ADIF](enable-dxcc-coloring-from-an-adif-log.md).
+- Su programa de log debe escribir las actualizaciones en la misma ruta de archivo ADIF almacenada en `DxccAdifPath`.
 
 ## Pasos
 
 1. Abra `Settings > SpotHub...`.
-2. Haga clic en la pestaña **Display**.
-3. Confirme que **DXCC Coloring** está habilitado (el interruptor aparece como activo).
-4. Confirme que **Log File (ADIF):** muestra la ruta de archivo correcta.
-5. Haga clic en **Auto-Reload Log:** para habilitarlo.
+2. Haga clic en la pestaña `Display`.
+3. Confirme que `DXCC Coloring` está habilitado (el botón de alternancia aparece activo).
+4. Confirme que `Log File (ADIF):` muestra la ruta de archivo correcta.
+5. Haga clic en `Auto-Reload Log:` para habilitarlo.
 
-AetherSDR vigilará ahora el archivo y lo volverá a leer cada vez que cambie. Los colores de los spots en el panadapter se actualizan para reflejar el nuevo contenido del registro.
+El botón de alternancia activa la supervisión de cambios de archivo en la ruta almacenada en `DxccAdifPath`. Cada vez que su programa de log guarda el archivo, AetherSDR lo vuelve a leer y actualiza el coloreado DXCC en el panadapter.
 
 ## Qué hace cada control
 
-| Control | Comportamiento | Configuración persistente |
+| Control | Comportamiento | Clave de configuración |
 |---|---|---|
-| **DXCC Coloring** | Interruptor principal para colorear los spots según el estado trabajado/confirmado/necesario de DXCC. | `DxccColoringEnabled` |
-| **Log File (ADIF):** | Abre un selector de archivos para elegir el archivo de registro ADIF que controla el coloreado DXCC. La ruta seleccionada se guarda. | `DxccAdifPath` |
-| **Auto-Reload Log:** | Cuando está habilitado, vuelve a leer el archivo ADIF cada vez que se modifica en el disco. | `DxccAutoReload` |
+| `DXCC Coloring` | Alternancia principal; colorea los spots según el estado trabajado/confirmado/necesario. Debe estar activo para que la recarga automática tenga algún efecto. | `DxccColoringEnabled` |
+| `Log File (ADIF):` | Abre un selector de archivos y almacena la ruta ADIF seleccionada. | `DxccAdifPath` |
+| `Auto-Reload Log:` | Supervisa el archivo ADIF en busca de cambios y lo recarga automáticamente cuando el archivo se actualiza. | `DxccAutoReload` |
 
 ## Consejos
 
-- Apunte la exportación ADIF de su software de registro a la misma ruta de archivo almacenada en `DxccAdifPath`. Muchos programas de registro admiten una opción de exportación continua o por QSO guardado que escribe en un archivo fijo.
-- Si su programa de registro crea un archivo nuevo en cada exportación en lugar de actualizar el existente, el vigilante de archivos no detectará el cambio. Configure su programa de registro para que sobreescriba siempre el mismo archivo.
+- Si su programa de log escribe en un archivo temporal y luego lo renombra sobre la ruta de destino, la recarga se activará al momento del renombrado, siempre que la ruta final coincida con `DxccAdifPath`.
+- Deshabilitar `DXCC Coloring` mientras `Auto-Reload Log:` está activo no afecta el estado del botón de alternancia; el monitor de archivos reanuda las actualizaciones de coloreado si vuelve a habilitar `DXCC Coloring` sin cambiar ninguna otra configuración.
 
-## Solución de problemas
+## Resolución de problemas
 
-- **Los colores de los spots no se actualizan después de registrar un QSO** — Verifique que **Auto-Reload Log:** esté habilitado en la pestaña **Display**. Confirme también que su programa de registro está escribiendo en la ruta de archivo exacta que aparece junto a **Log File (ADIF):**. Si el programa escribe en un archivo diferente o renombra el archivo en cada exportación, el vigilante no se activará.
-- **El interruptor DXCC Coloring está desactivado** — **Auto-Reload Log:** no tiene efecto a menos que **DXCC Coloring** también esté habilitado. Habilite primero **DXCC Coloring**.
+- **Los spots no se actualizan después de registrar un nuevo QSO** — Confirme que `Auto-Reload Log:` está habilitado y que `Log File (ADIF):` muestra exactamente el archivo en el que su programa de log está escribiendo. Si su programa de log escribe en una ruta diferente o en un archivo temporal que nunca se renombra a la ruta configurada, AetherSDR no detectará el cambio. Vuelva a seleccionar el archivo mediante `Log File (ADIF):` después de confirmar la ruta correcta.
+- **El coloreado DXCC no refleja el registro recargado** — Verifique que `DXCC Coloring` está habilitado. La recarga automática no tiene ningún efecto visible mientras la alternancia principal está desactivada.
 
 ## Relacionado
 

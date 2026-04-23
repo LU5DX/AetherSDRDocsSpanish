@@ -1,62 +1,63 @@
-# Iniciar el receptor UDP de WSJT-X y filtrar por CQ, POTA o llamadas dirigidas a usted
+# Iniciar el oyente UDP de WSJT-X y filtrar por CQ, POTA o llamadas a su indicativo
 
-AetherSDR puede escuchar paquetes de decodificación de WSJT-X a través de UDP y mostrar las transmisiones coincidentes como spots en el panadapter. Use los filtros para limitar lo que aparece a llamadas CQ, activaciones POTA o estaciones que lo llaman a usted.
+AetherSDR puede escuchar en un puerto UDP los mensajes de decodificación de WSJT-X y representar los spots resultantes en el panadapter. Use los filtros para limitar lo que aparece a llamadas CQ, activaciones POTA o estaciones que llaman a su indicativo.
 
 ## Antes de comenzar
 
-- WSJT-X debe estar ejecutándose en la misma computadora o en una computadora accesible a través de la red.
-- En WSJT-X, confirme que los mensajes UDP están habilitados y que la dirección de destino y el puerto coinciden con los que configurará en AetherSDR. El puerto UDP predeterminado de WSJT-X es 2237.
-- Conozca su propio indicativo si tiene intención de usar el filtro "Calling Me".
+- WSJT-X debe estar configurado para enviar mensajes UDP a la dirección y el puerto que usted defina aquí. En WSJT-X, abra **File > Settings > Reporting** y confirme que la dirección y el puerto del servidor UDP coincidan con los valores que ingrese a continuación.
+- AetherSDR no necesita estar conectado a un radio para que el oyente funcione, pero los spots solo aparecen en el panadapter cuando hay un radio conectado.
 
 ## Pasos
 
-1. Vaya a `Settings > SpotHub...`.
+1. Abra `Settings > SpotHub...`.
 2. Haga clic en la pestaña **WSJT-X**.
-3. En **Address:**, ingrese la dirección de enlace UDP en la que AetherSDR debe escuchar. Para aceptar paquetes desde cualquier interfaz, use `0.0.0.0`. Este valor se almacena como `WsjtxAddress`.
-4. En **Port:**, establezca el puerto UDP para que coincida con el puerto de destino configurado en WSJT-X. Rango válido: 1–65535. Este valor se almacena como `WsjtxPort`.
+3. En **Address:**, ingrese la dirección UDP de enlace donde AetherSDR debe escuchar (almacenada como `WsjtxAddress`). Use `127.0.0.1` si WSJT-X se ejecuta en el mismo equipo.
+4. En **Port:**, establezca el puerto UDP para que coincida con la configuración de reporte de WSJT-X (almacenado como `WsjtxPort`; rango válido: 1–65535).
 5. Haga clic en **Start**. El indicador de estado cambia a **Listening**.
-6. Para mostrar solo llamadas CQ, marque **CQ**. Este valor se almacena como `WsjtxFilterCQ`.
-7. Para mostrar solo activaciones POTA, marque **CQ POTA**. Este valor se almacena como `WsjtxFilterPOTA`.
-8. Para mostrar solo decodificaciones dirigidas a su indicativo, marque **Calling Me**. Este valor se almacena como `WsjtxFilterCallingMe`.
-9. Para que AetherSDR inicie el receptor automáticamente cada vez que se lanza, habilite **Auto-start on startup (WSJT-X)**. Este valor se almacena como `WsjtxAutoStart`.
+6. Para iniciar el oyente automáticamente al arrancar, haga clic en **Auto-start on startup** (almacenado como `WsjtxAutoStart`).
+7. Active uno o más filtros:
+   - Marque **CQ** para mostrar solo llamadas CQ (almacenado como `WsjtxFilterCQ`).
+   - Marque **CQ POTA** para mostrar llamadas CQ POTA (almacenado como `WsjtxFilterPOTA`).
+   - Marque **Calling Me** para mostrar solo decodificaciones dirigidas a su indicativo (almacenado como `WsjtxFilterCallingMe`).
+8. Opcionalmente, ajuste **Spot Life:** para controlar cuántos segundos permanecen los spots de WSJT-X en el panadapter (almacenado como `WsjtxSpotLife`).
+9. Confirme que las transmisiones decodificadas aparecen en la consola **WSJT-X Decodes**.
 
 ## Qué hace cada control
 
-| Control | Función | Clave de configuración |
-|---|---|---|
-| **Address:** | Dirección de enlace UDP para los mensajes entrantes de WSJT-X. | `WsjtxAddress` |
-| **Port:** | Número de puerto UDP. Rango válido: 1–65535. | `WsjtxPort` |
-| **Start / Stop** | Inicia o detiene el receptor UDP. El estado muestra **Listening** cuando está activo. | — |
-| **Auto-start on startup (WSJT-X)** | Inicia el receptor automáticamente cuando AetherSDR se lanza. | `WsjtxAutoStart` |
-| **CQ** | Pasa al overlay de spots solo las llamadas CQ de las decodificaciones de WSJT-X. | `WsjtxFilterCQ` |
-| **CQ POTA** | Pasa solo las llamadas CQ POTA. | `WsjtxFilterPOTA` |
-| **Calling Me** | Pasa solo las decodificaciones dirigidas a su indicativo. | `WsjtxFilterCallingMe` |
-| **CQ color** | Selector de color para los spots CQ en el panadapter. | `WsjtxColorCQ` |
-| **POTA color** | Selector de color para los spots POTA. | `WsjtxColorPOTA` |
-| **Calling Me color** | Selector de color para los spots que lo llaman a usted. | `WsjtxColorCallingMe` |
-| **Default color** | Selector de color para todos los demás spots de WSJT-X. | `WsjtxColorDefault` |
-| **Spot Life:** | Segundos que un spot de WSJT-X permanece visible en el panadapter. | `WsjtxSpotLife` |
-| **WSJT-X Decodes** | Consola de solo lectura que muestra las transmisiones decodificadas a medida que llegan. | — |
+| Control | Comportamiento | Clave de configuración | Valor predeterminado | Rango válido |
+|---|---|---|---|---|
+| **Address:** | Dirección UDP de enlace para los mensajes de WSJT-X | `WsjtxAddress` | — | — |
+| **Port:** | Puerto UDP para WSJT-X | `WsjtxPort` | — | 1–65535 |
+| **Start / Stop** | Inicia o detiene el oyente UDP | — | — | — |
+| **Auto-start on startup** | Inicia el oyente automáticamente al arrancar | `WsjtxAutoStart` | — | — |
+| **CQ** | Mostrar solo llamadas CQ | `WsjtxFilterCQ` | — | — |
+| **CQ POTA** | Mostrar llamadas CQ POTA | `WsjtxFilterPOTA` | — | — |
+| **Calling Me** | Mostrar solo decodificaciones dirigidas a su indicativo | `WsjtxFilterCallingMe` | — | — |
+| **CQ color** | Selector de color para spots CQ | `WsjtxColorCQ` | — | — |
+| **POTA color** | Selector de color para spots POTA | `WsjtxColorPOTA` | — | — |
+| **Calling Me color** | Selector de color para estaciones que le llaman | `WsjtxColorCallingMe` | — | — |
+| **Default color** | Selector de color para todos los demás spots de WSJT-X | `WsjtxColorDefault` | — | — |
+| **Spot Life:** | Segundos que los spots de WSJT-X permanecen en el panadapter | `WsjtxSpotLife` | — | — |
+| **WSJT-X Decodes** | Consola de solo lectura de transmisiones decodificadas | — | — | — |
 
 ## Consejos
 
-- Puede habilitar más de un filtro al mismo tiempo. Por ejemplo, marcar tanto **CQ** como **Calling Me** muestra las llamadas CQ y cualquier estación que lo llame a usted.
-- Si no hay ningún filtro marcado, todas las decodificaciones de WSJT-X aparecen como spots.
-- La consola **WSJT-X Decodes** muestra las líneas de decodificación sin procesar independientemente de los filtros activos, lo cual es útil para verificar que los paquetes están llegando.
-- El tiempo de vida del spot configurado con **Spot Life:** se aplica únicamente a los spots de WSJT-X. El tiempo de vida global de los spots en el panadapter se controla por separado en la pestaña **Display**, en **Spot Lifetime:**.
+- Si ninguno de los tres filtros (**CQ**, **CQ POTA**, **Calling Me**) está marcado, todos los spots decodificados pasan al panadapter.
+- El filtro **Calling Me** compara contra el indicativo que AetherSDR recibe de WSJT-X en cada mensaje de decodificación, por lo que asegúrese de que su indicativo esté correctamente configurado en WSJT-X.
+- Puede asignar colores distintos a cada categoría de filtro para que las llamadas CQ, las activaciones POTA y las estaciones que le llaman sean visualmente distinguibles en el panadapter. Use los selectores **CQ color**, **POTA color**, **Calling Me color** y **Default color** en la misma pestaña.
+- Los spots decodificados se integran en la pestaña unificada **Spot List** junto con los spots de otras fuentes. Use las casillas de banda disponibles allí para acotar la vista.
 
 ## Solución de problemas
 
-- **El estado permanece en Stopped después de hacer clic en Start** — Compruebe que ninguna otra aplicación esté enlazada al mismo puerto. Cambie **Port:** si hay un conflicto.
-- **Las decodificaciones aparecen en la consola pero no en el panadapter** — Confirme que los spots estén habilitados globalmente. Vaya a `Settings > SpotHub...`, abra la pestaña **Display** y verifique que **Spots:** esté configurado como **Enabled**.
-- **El filtro "Calling Me" no muestra nada** — WSJT-X debe estar configurado con su indicativo para que lo incluya en los mensajes de decodificación UDP. Verifique que el indicativo en WSJT-X coincida con el que espera que AetherSDR detecte.
-- **Los paquetes no llegan desde una computadora remota** — Asegúrese de que ningún firewall esté bloqueando el UDP en el puerto configurado, y que la dirección de destino UDP de WSJT-X esté configurada con la dirección IP de la computadora con AetherSDR, no con `127.0.0.1`.
+- **No aparecen spots en WSJT-X Decodes** — Verifique que la dirección y el puerto en AetherSDR coincidan con la dirección y el puerto del servidor UDP configurados en WSJT-X en **File > Settings > Reporting**. Confirme que el estado del oyente muestre **Listening** y no **Stopped**. Compruebe que su cortafuegos no esté bloqueando el puerto UDP.
+- **Los spots aparecen en la consola pero no en el panadapter** — Confirme que la superposición principal de spots esté habilitada. Abra la pestaña **Display** en SpotHub y verifique que **Spots:** esté establecido en **Enabled** (`IsSpotsEnabled`). Confirme también que hay un radio conectado, ya que la superposición en el panadapter requiere una conexión de radio activa.
+- **Solo aparecen algunos spots** — Uno o más filtros están activos. Si desea ver todas las decodificaciones, desmarque **CQ**, **CQ POTA** y **Calling Me**.
 
-## Relacionados
+## Relacionado
 
 - [Descripción general de SpotHub](overview.md)
-- [Seleccionar colores para cada fuente de spots](pick-colors-for-each-spot-source.md)
-- [Ajustar densidad, posición, tamaño de fuente y tiempo de vida de los spots](tune-spot-density-position-font-size-and-lifetime.md)
-- [Consultar activaciones POTA](poll-pota-activations.md)
+- [Configuración de modos digitales (FT8, WSJT-X, fldigi)](../../operating/digital-modes/digital-modes-setup.md)
+- [Elegir colores para cada fuente de spots](pick-colors-for-each-spot-source.md)
+- [Ajustar densidad, posición, tamaño de fuente y duración de los spots](tune-spot-density-position-font-size-and-lifetime.md)
 - [Sintonizar un spot haciendo doble clic en la lista de spots](tune-to-a-spot-by-double-clicking-the-spot-list.md)
-- [Configurar modos digitales (FT8, WSJT-X, fldigi)](../../operating/digital-modes/digital-modes-setup.md)
+- [Consultar activaciones POTA](poll-pota-activations.md)

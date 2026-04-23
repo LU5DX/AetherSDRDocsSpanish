@@ -1,39 +1,39 @@
-# Exportar memorias para respaldo o compartir
+# Exportar memorias para copia de seguridad o compartir
 
-Exporte uno o más canales de memoria almacenados a un archivo CSV para guardarlos de forma segura o para compartirlos con otro operador.
+Exporte uno o más canales de memoria a un archivo CSV para hacer una copia de seguridad o compartirlos con otro operador.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a su radio FLEX-8600. El diálogo Memory Channels requiere una conexión de radio activa.
-- Las memorias que desea exportar deben existir previamente en la tabla de memorias.
+- Es necesario tener conectada una radio FLEX-8600. El diálogo Memory Channels requiere una conexión de radio activa.
+- Las memorias que desea exportar deben existir previamente. Consulte [Agregar una memoria en la frecuencia actual](add-a-memory-at-current-frequency.md) si necesita crearlas primero.
 
 ## Pasos
 
-1. Abra `Settings > Memory...` para abrir el diálogo Memory Channels.
-2. Seleccione las memorias que desea exportar. Haga clic en una fila para seleccionarla. Haga Shift-clic para seleccionar un rango. Haga Ctrl-clic (o Command-clic en macOS) para agregar o quitar filas individuales. Para exportar todas las memorias, haga clic en `Select All`.
-3. Opcionalmente, use el campo `Search:` o el cuadro combinado `Profile:` para filtrar la tabla antes de seleccionar, de modo que solo sean visibles las memorias relevantes.
-4. Haga clic en `Export...`.
-5. En el diálogo de archivo que se abre, confirme o cambie la ubicación de guardado y el nombre del archivo, luego guarde el archivo. El nombre de archivo predeterminado incluye la fecha y hora actuales y la versión de AetherSDR (por ejemplo, `AetherSDR_Memories_01-15-25_14_30_v4.1.5.csv`), y se guarda en su carpeta `Documents` de inicio.
+1. Abra `Settings > Memory...`.
+2. Seleccione las memorias que desea exportar. Haga clic en una fila para seleccionarla. Shift-click selecciona un rango. Ctrl-click (o Command-click en macOS) agrega o quita filas individuales. Para exportar todas las memorias, haga clic en `Select All`.
+3. Haga clic en `Export...`.
+4. En el diálogo de archivo, elija una carpeta de destino y confirme o cambie el nombre del archivo. El nombre predeterminado tiene la forma `AetherSDR_Memories_<date-time>_v<version>.csv` dentro de su carpeta Documentos.
+5. Confirme el guardado. Las memorias seleccionadas se escriben en el archivo CSV.
 
 ## Qué hace cada control
 
 | Control | Comportamiento |
 |---|---|
-| `Search:` | Filtra la tabla de memorias por nombre. Borre el texto con el botón de borrado integrado o eliminando el texto manualmente. |
-| `Profile:` | Filtra la tabla de memorias según el perfil global activo. |
-| Tabla de memorias | Muestra todas las memorias que coinciden con el filtro actual. El recuento de selección se muestra en el indicador `<N> selected` en la parte inferior derecha. |
-| `Select All` | Selecciona todas las filas visibles actualmente en la tabla. |
-| `Export...` | Escribe las memorias seleccionadas en un archivo CSV de su elección. |
+| `Select All` | Selecciona todas las filas de la tabla de memorias. |
+| `Export...` | Exporta las filas de memoria actualmente seleccionadas a un archivo CSV. |
+| `Profile:` | Filtra la tabla según el perfil global activo, lo que limita las memorias visibles y seleccionables antes de exportar. |
+| `Search:` | Filtra la tabla por nombre de memoria, permitiéndole localizar memorias específicas antes de seleccionarlas. |
+| Contador de selección | Muestra el número de filas actualmente seleccionadas (por ejemplo, `3 selected`) en el área inferior derecha del diálogo. |
 
 ## Consejos
 
-- El indicador de recuento de selección en la parte inferior del diálogo muestra cuántas filas están seleccionadas actualmente, lo que ayuda a confirmar que tiene las memorias correctas antes de hacer clic en `Export...`.
-- Si desea exportar únicamente un grupo, use el filtro `Profile:` para reducir la tabla a ese grupo primero y, a continuación, haga clic en `Select All` antes de exportar.
-- La ruta de exportación predeterminada es su carpeta `Documents` de inicio. Cámbiela en el diálogo de archivo si prefiere una ubicación diferente.
+- Si solo desea exportar las memorias pertenecientes a un grupo, use el cuadro combinado `Profile:` para filtrar la tabla antes de hacer clic en `Select All`. Solo se mostrarán las filas visibles que coincidan con ese perfil, lo que facilita la selección masiva.
+- La ruta de exportación predeterminada coloca el archivo en su carpeta `Documents` de inicio con una marca de tiempo y un número de versión en el nombre, lo que le ayuda a distinguir múltiples copias de seguridad.
 
-## Temas relacionados
+## Relacionado
 
 - [Importar memorias desde un archivo CSV/JSON](import-memories-from-a-csv-json-file.md)
-- [Descripción general de Memory Channels](overview.md)
+- [Agregar una memoria en la frecuencia actual](add-a-memory-at-current-frequency.md)
+- [Eliminar una o más memorias](delete-one-or-more-memories.md)
 - [Filtrar memorias por perfil](filter-memories-by-profile.md)
-- [Buscar memorias por nombre](search-memories-by-name.md)
+- [Descripción general de Memory Channels](overview.md)

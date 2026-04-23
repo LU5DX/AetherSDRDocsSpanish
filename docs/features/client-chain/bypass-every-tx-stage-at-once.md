@@ -1,39 +1,41 @@
 # Omitir todas las etapas de TX a la vez
 
-El botón BYPASS desactiva todas las etapas activas de la cadena DSP de TX en un solo clic y las restaura con otro clic. Úselo para comparar el audio de TX procesado y sin procesar sin necesidad de alternar cada etapa manualmente.
+Use el botón BYPASS para silenciar instantáneamente toda la cadena DSP de TX — EQ, Compressor, Gate, De-Ess, Tube, PUDU y Reverb — y restaurarlas todas con un solo clic cuando haya terminado.
 
 ## Antes de comenzar
 
-- El contenedor PooDoo Audio (TXDSP) debe estar visible. Si no lo está, haga clic en el botón PUDU de la bandeja en la barra lateral derecha para mostrarlo.
-- TX debe estar seleccionado en el applet de cadena. El selector TX está marcado de forma predeterminada; si en cambio está seleccionado RX, BYPASS no tiene ningún efecto.
+- El contenedor PooDoo Audio (TXDSP) debe estar visible. Si no lo está, haga clic en el botón de bandeja etiquetado **PUDU** en la barra lateral derecha para mostrarlo.
+- El modo TX debe estar activo. BYPASS no tiene efecto en modo RX.
 
 ## Pasos
 
-1. Confirme que el selector TX está marcado en la fila de encabezado del applet PooDoo Audio Chain. El botón se ilumina en ámbar cuando está activo.
-2. Haga clic en BYPASS.
-3. AetherSDR toma una instantánea de las etapas actualmente habilitadas y las desactiva todas. El botón BYPASS se ilumina en ámbar para indicar que el bypass está activo.
-4. Haga clic en BYPASS nuevamente para restaurar las etapas que estaban habilitadas antes de activar el bypass.
+1. Confirme que el botón **TX** en la parte superior izquierda de la tira de cadena PooDoo Audio está marcado. Si en cambio está marcado **RX**, haga clic en **TX**.
+2. Haga clic en **BYPASS**. El botón cambia a su estado marcado (borde y relleno ámbar saturado). Cada etapa actualmente habilitada queda registrada en una instantánea y se deshabilita.
+3. Para restaurar, haga clic en **BYPASS** nuevamente. Las etapas que estaban habilitadas antes del bypass se vuelven a habilitar.
 
 ## Qué hace cada control
 
-| Control | Valor predeterminado | Comportamiento | Clave de configuración |
-|---|---|---|---|
-| TX | Marcado | Muestra y edita la cadena DSP de TX. BYPASS opera únicamente sobre esta cadena. | — |
-| RX | Desmarcado | Cambia a la vista de marcador de posición de RX. BYPASS no tiene efecto en este modo. | — |
-| BYPASS | Desmarcado | Marcado: toma una instantánea de las etapas habilitadas y las desactiva todas. Desmarcado: reactiva únicamente las etapas que estaban activas antes. | `ClientCompTxChainStages` |
+| Control | Tipo | Valor predeterminado | Comportamiento | Clave de configuración |
+|---|---|---|---|---|
+| TX | Botón de alternancia | Marcado | Muestra la cadena DSP de TX interactiva. Necesario para que BYPASS tenga efecto. | — |
+| RX | Botón de alternancia | No marcado | Cambia al marcador de posición de la cadena RX. BYPASS no realiza ninguna acción en este modo. | — |
+| BYPASS | Botón de alternancia | No marcado | Marcado: registra en una instantánea las etapas actualmente habilitadas y las deshabilita todas. No marcado: vuelve a habilitar solo las etapas que estaban activas antes. | `ClientCompTxChainStages` |
+
+La tira de cadena y la visibilidad de su contenedor se guardan de forma persistente bajo `Applet_TXDSP`.
 
 ## Consejos
 
-- Las etapas que se alternan individualmente mientras BYPASS está activo no forman parte de la instantánea. Al desmarcar BYPASS, solo se restauran las etapas que estaban activas en el momento en que se activó el bypass.
-- El botón PUDU de la bandeja controla la visibilidad del contenedor PooDoo Audio completo, que se guarda en `Applet_TXDSP`.
+- Si activa o desactiva manualmente etapas individuales mientras BYPASS está marcado, esos cambios se rastrean de forma separada de la instantánea. Al desmarcar BYPASS, solo se restauran las etapas que estaban habilitadas en el momento en que marcó BYPASS; los cambios manuales realizados durante el bypass se conservan.
+- BYPASS se aplica únicamente a la cadena TX. Hacer clic en él mientras **RX** está seleccionado no tiene ningún efecto.
 
 ## Solución de problemas
 
-- **Hacer clic en BYPASS no tiene efecto** — Verifique que TX esté seleccionado y no RX. En modo RX, BYPASS no hace nada, ya que la cadena RX aún no está implementada.
-- **BYPASS restaura menos etapas de las esperadas** — Cualquier etapa que se haya desactivado manualmente mientras BYPASS estaba activo fue eliminada de la instantánea y no se restaurará automáticamente. Vuelva a habilitarla haciendo clic directamente en esa etapa.
+- **BYPASS está marcado pero el audio sigue pasando por una etapa** — Es posible que una etapa haya sido activada manualmente después de que se activó BYPASS. Esa etapa queda fuera de la instantánea. Haga clic en la etapa una vez para omitirla individualmente, o desmarque y vuelva a marcar BYPASS para tomar una nueva instantánea.
+- **El botón BYPASS está presente pero hacer clic en él no tiene efecto** — El botón **RX** está seleccionado. Haga clic primero en **TX**; BYPASS solo opera sobre la cadena TX.
 
-## Relacionados
+## Relacionado
 
-- [Reactivar una etapa específica después de un bypass global](re-enable-a-specific-stage-after-a-global-bypass.md)
-- [Descripción general de PooDoo Audio Chain](overview.md)
-- [Cambiar entre la vista de cadena TX y el marcador de posición RX](switch-between-tx-chain-view-and-rx-placeholder.md)
+- [Descripción general de la cadena PooDoo Audio](overview.md)
+- [Volver a habilitar una etapa específica después de un bypass global](re-enable-a-specific-stage-after-a-global-bypass.md)
+- [Abrir el editor flotante de una etapa desde la cadena](open-a-stage-s-floating-editor-from-the-chain.md)
+- [Alternar entre la vista de la cadena TX y el marcador de posición RX](switch-between-tx-chain-view-and-rx-placeholder.md)

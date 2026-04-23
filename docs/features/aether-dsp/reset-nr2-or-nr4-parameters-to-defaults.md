@@ -1,15 +1,15 @@
 # Restablecer los parámetros de NR2 o NR4 a los valores predeterminados
 
-Use esta página para restaurar todos los controles de NR2 o NR4 a sus valores de fábrica con un solo clic, deshaciendo cualquier cambio experimental sin necesidad de ajustar cada control individualmente.
+Use esta página para restaurar todos los controles de NR2 o NR4 a sus valores de fábrica con un solo clic, deshaciendo cualquier ajuste experimental.
 
 ## Antes de comenzar
 
 - Abra `Settings > AetherDSP Settings...` para acceder al diálogo AetherDSP Settings.
-- Identifique el motor que desea restablecer: NR2 o NR4 (o ambos).
+- Identifique qué motor desea restablecer: NR2 o NR4.
 
 ## Pasos
 
-### Restablecer NR2
+### Restablecer NR2 a los valores predeterminados
 
 1. Haga clic en `Settings > AetherDSP Settings...`.
 2. Haga clic en la pestaña **NR2**.
@@ -17,7 +17,7 @@ Use esta página para restaurar todos los controles de NR2 o NR4 a sus valores d
 
 Todos los controles de NR2 vuelven a sus valores predeterminados de inmediato.
 
-### Restablecer NR4
+### Restablecer NR4 a los valores predeterminados
 
 1. Haga clic en `Settings > AetherDSP Settings...`.
 2. Haga clic en la pestaña **NR4**.
@@ -50,17 +50,19 @@ Todos los controles de NR4 vuelven a sus valores predeterminados de inmediato.
 | Masking Depth: | 0.50 | 0.00–1.00 | `NR4MaskingDepth` |
 | Suppression: | 0.50 | 0.00–1.00 | `NR4SuppressionStrength` |
 
-## Sugerencias
+## Consejos
 
-- **Reset Defaults** afecta únicamente la pestaña que se muestra en ese momento. Al hacer clic en ella desde la pestaña NR2 no se modifican los ajustes de NR4, y viceversa.
-- Los cambios surten efecto de inmediato; no hay confirmación ni posibilidad de deshacer. Si desea conservar una configuración que funciona correctamente, anote los valores actuales antes de hacer clic en **Reset Defaults**.
+- **Reset Defaults** aplica los cambios de inmediato. No hay un aviso de confirmación, pero puede reajustar los controles individuales posteriormente sin necesidad de reabrir el diálogo.
+- Cada pestaña tiene su propio botón **Reset Defaults**. Al hacer clic en él desde la pestaña NR2 no se afectan los ajustes de NR4, y viceversa.
+- Todos los valores se guardan en cuanto cambia un control, incluso al restablecer. Si cierra el diálogo sin realizar más cambios, los valores predeterminados quedan guardados.
 
 ## Relacionado
 
-- [Ajustar la profundidad de reducción y el umbral de voz de NR2](tune-nr2-reduction-depth-and-voice-threshold.md)
+- [Descripción general de AetherDSP Settings](overview.md)
+- [Ajustar la profundidad de reducción y el umbral de voz en NR2](tune-nr2-reduction-depth-and-voice-threshold.md)
 - [Cambiar el método de ganancia de NR2 entre Linear, Log, Gamma y Trained](switch-nr2-gain-method-between-linear-log-gamma-and-trained.md)
 - [Cambiar el estimador de potencia de ruido de NR2 (OSMS/MMSE/NSTAT)](change-nr2-noise-power-estimator-osms-mmse-nstat.md)
 - [Ajustar la cantidad de reducción de NR4 en dB](adjust-nr4-reduction-amount-in-db.md)
 - [Habilitar o deshabilitar la estimación de ruido adaptativa de NR4](enable-or-disable-nr4-adaptive-noise-estimation.md)
-- [Ajustar la profundidad de enmascaramiento y la intensidad de supresión de NR4](tune-nr4-masking-depth-and-suppression-strength.md)
+- [Ajustar la profundidad de enmascaramiento y la fuerza de supresión de NR4](tune-nr4-masking-depth-and-suppression-strength.md)
 - [Elegir la reducción de ruido adecuada: NR2, NR4, DFNR, MNR](../../operating/dsp/noise-reduction-overview.md)

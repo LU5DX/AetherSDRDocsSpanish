@@ -1,6 +1,6 @@
 # Ordenar la tabla de memorias por encabezado de columna
 
-Haga clic en un encabezado de columna en el diálogo Memory Channels para ordenar todas las filas de memoria visibles según esa columna. Use el ordenamiento para localizar rápidamente entradas por frecuencia, nombre, grupo u otros campos.
+Haga clic en un encabezado de columna en el diálogo Memory Channels para ordenar todas las filas visibles por esa columna. Use esta función para localizar rápidamente entradas por frecuencia, nombre, grupo u otros campos.
 
 ## Antes de comenzar
 
@@ -9,45 +9,20 @@ Haga clic en un encabezado de columna en el diálogo Memory Channels para ordena
 
 ## Pasos
 
-1. Abra `Settings > Memory...` para mostrar el diálogo Memory Channels.
-2. Haga clic en cualquier encabezado de columna ordenable en la tabla de memorias — por ejemplo, **Frequency** o **Name**.
-3. La tabla se ordena de forma ascendente en el primer clic. Aparece una flecha indicadora de ordenamiento en el encabezado.
-4. Haga clic en el mismo encabezado de columna nuevamente para invertir el orden a descendente.
-5. Haga clic en un encabezado de columna diferente para ordenar por esa columna, restableciendo el orden ascendente.
-
-## Qué hace cada control
-
-| Encabezado de columna | Ordena por |
-|---|---|
-| Group | Nombre del grupo de memorias |
-| Owner | Campo de propietario |
-| Frequency | Frecuencia almacenada (numérica) |
-| Name | Nombre de la memoria |
-| Mode | Modo de operación (p. ej., USB, CW) |
-| Step | Valor del paso de sintonía |
-| FM TX Offset Dir | Dirección de desplazamiento del repetidor FM |
-| Repeater Offset | Frecuencia de desplazamiento del repetidor |
-| Tone Mode | Modo de tono CTCSS/DCS |
-| Tone Value | Frecuencia o código del tono |
-| Squelch | Estado de habilitación del squelch |
-| Squelch Level | Nivel de umbral del squelch |
-| RX Filter Low | Borde inferior del filtro de recepción |
-| RX Filter High | Borde superior del filtro de recepción |
-| RTTY Mark | Frecuencia mark de RTTY |
-| RTTY Shift | Valor de desplazamiento de RTTY |
-| DIGL Offset | Desplazamiento de banda lateral inferior digital |
-| DIGU Offset | Desplazamiento de banda lateral superior digital |
-
-La flecha indicadora de ordenamiento en el encabezado de columna muestra la columna activa y la dirección de ordenamiento. Los valores de frecuencia se ordenan de forma numérica y no alfabética.
+1. Abra `Settings > Memory...`.
+2. En la tabla de memorias, haga clic en cualquier encabezado de columna que permita ordenación (por ejemplo, "Frequency" o "Name").
+3. La tabla se ordena en sentido ascendente. Aparece una flecha indicadora de ordenación en el encabezado.
+4. Haga clic en el mismo encabezado nuevamente para invertir el orden a descendente.
+5. Haga clic en un encabezado diferente para ordenar por esa columna, volviendo al orden ascendente.
 
 ## Consejos
 
-- El ordenamiento se aplica sobre cualquier búsqueda activa o filtro de perfil. Primero reduzca la lista con **Search:** o **Profile:**, luego ordene para organizar los resultados filtrados.
-- El ordenamiento no cambia el orden almacenado de las memorias en el radio. Es una operación solo de visualización.
+- La ordenación se aplica sobre cualquier búsqueda activa o filtro de perfil. Primero reduzca la lista con el campo Search: o el cuadro combinado Profile:, y luego ordene para organizar las filas restantes.
+- La columna Frequency almacena valores numéricos internamente, por lo que se ordena de forma numérica en lugar de alfabética.
+- El orden de clasificación no se conserva. Cada vez que abra Memory Channels, la tabla vuelve a su orden predeterminado.
 
 ## Relacionados
 
-- [Descripción general de Memory Channels](overview.md)
 - [Buscar memorias por nombre](search-memories-by-name.md)
 - [Filtrar memorias por perfil](filter-memories-by-profile.md)
-- [Sintonizar el radio a una memoria almacenada](tune-the-radio-to-a-stored-memory.md)
+- [Descripción general de Memory Channels](overview.md)

@@ -1,48 +1,46 @@
 # Cambiar el método de ganancia de NR2 entre Linear, Log, Gamma y Trained
 
-El método de ganancia de NR2 controla cómo AetherSDR asigna las estimaciones de ruido a las curvas de reducción de ganancia. Elegir el método adecuado permite equilibrar la supresión de ruido y la fidelidad de la voz según las condiciones de la banda.
+El método de ganancia del motor NR2 controla cómo mapea el ruido estimado a una curva de supresión. Cambiarlo permite equilibrar entre una eliminación de ruido agresiva y una voz que suene natural.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar en ejecución. No se requiere conexión a una radio para cambiar esta configuración.
-- NR2 debe estar activo en su slice de recepción para que el cambio tenga un efecto audible.
+- No se requiere conexión a radio. AetherDSP Settings puede abrirse en cualquier momento.
+- NR2 debe estar activo en un slice receptor para que los cambios surtan efecto en el audio en vivo.
 
 ## Pasos
 
-1. Haga clic en `Settings > AetherDSP Settings...`.
+1. Abra `Settings > AetherDSP Settings...`.
 2. Haga clic en la pestaña **NR2**.
-3. En **Gain Method**, haga clic en uno de los cuatro botones de opción: **Linear**, **Log**, **Gamma** o **Trained**.
-4. Cierre el cuadro de diálogo. La configuración surte efecto de inmediato y se guarda automáticamente.
+3. En el grupo **Gain Method**, haga clic en uno de los cuatro botones de opción: **Linear**, **Log**, **Gamma** o **Trained**.
+
+El ajuste surte efecto de inmediato. AetherSDR guarda la selección en `NR2GainMethod`.
 
 ## Qué hace cada control
 
-| Control | Tipo | Valor predeterminado | Valores válidos | Clave de configuración | Comportamiento |
-|---|---|---|---|---|---|
-| **Gain Method** | Botones de opción | Gamma | Linear, Log, Gamma, Trained | `NR2GainMethod` | Selecciona el mapeo de curva de ganancia utilizado por NR2. Se almacena como entero 0–3 en el orden indicado. |
+| Control | Tipo | Predeterminado | Valores válidos | Clave persistida |
+|---|---|---|---|---|
+| **Gain Method** | Botones de opción | Gamma | Linear, Log, Gamma, Trained | `NR2GainMethod` |
 
-**Descripción de los métodos de ganancia:**
+**Opciones de Gain Method:**
 
-- **Linear** — Utiliza una escala de amplitud de audio lineal para el cálculo de la ganancia.
-- **Log** — Utiliza una escala de amplitud logarítmica que comprime el rango dinámico.
-- **Gamma** — Modela la ganancia mediante una distribución Gamma que se ajusta a los patrones típicos de amplitud de voz. Es el valor predeterminado.
-- **Trained** — Aplica un modelo de reducción de ruido entrenado con muestras reales de voz y ruido.
+- **Linear** — Mapea la ganancia usando una escala de amplitud de audio lineal. Sin compresión del rango dinámico.
+- **Log** — Usa una escala de amplitud logarítmica. Comprime el rango dinámico; tiende a reducir los artefactos de ruido musical a costa de cierta naturalidad en la voz.
+- **Gamma** — Modela la amplitud de la voz usando una distribución Gamma. Predeterminado. Generalmente ofrece el mejor equilibrio entre supresión y fidelidad de la voz para trabajo en SSB y CW.
+- **Trained** — Aplica un modelo de reducción de ruido entrenado con muestras reales de voz y ruido. Puede rendir mejor en tipos de ruido específicos, pero puede sonar procesado en otros.
+
+La selección se almacena como un entero: Linear = 0, Log = 1, Gamma = 2, Trained = 3.
 
 ## Consejos
 
-- **Gamma** es adecuado para la mayoría de los contactos SSB. Comience aquí si no está seguro.
-- **Trained** puede rendir mejor en bandas con mucho ruido y patrones de voz reconocibles, pero puede sonar excesivamente procesado en señales débiles.
-- **Log** puede ayudar a reducir artefactos de ruido musical cuando **Linear** produce un residual irregular en el piso de ruido.
-- Después de cambiar el método de ganancia, ajuste **Reduction Depth:** y **Voice Threshold:** en la misma pestaña para adaptarlos. Consulte [Ajustar la profundidad de reducción y el umbral de voz de NR2](tune-nr2-reduction-depth-and-voice-threshold.md).
-- Haga clic en **Reset Defaults** en la pestaña NR2 para volver a Gamma y a todos los demás valores predeterminados de NR2 a la vez.
-
-## Solución de problemas
-
-- **Cambiar el método no produce ningún efecto audible** — Confirme que NR2 esté habilitado en su slice de recepción. El cuadro de diálogo AetherDSP Settings solo configura parámetros; la habilitación de NR2 se realiza desde los controles del slice.
-- **La voz suena distorsionada después de cambiar a Trained** — Reduzca **Reduction Depth:** desde su valor predeterminado de 1.50 hacia 1.00, o vuelva a **Gamma**.
+- Comience con **Gamma** si no está seguro. Es el valor predeterminado y se adapta a la mayoría de las condiciones en HF.
+- Si escucha ruido musical residual con Gamma, pruebe **Log**.
+- Si el tipo de ruido es constante (por ejemplo, un ventilador estacionario o el zumbido de un sistema HVAC), **Trained** puede ofrecer resultados más limpios.
+- Después de cambiar el método, use los controles deslizantes **Reduction Depth:** y **Voice Threshold:** para reoptimizar la supresión con la nueva curva. Consulte [Ajustar la profundidad de reducción y el umbral de voz de NR2](tune-nr2-reduction-depth-and-voice-threshold.md).
+- Para restaurar todos los parámetros de NR2 a sus valores predeterminados, haga clic en **Reset Defaults** en la pestaña NR2. Esto restablece el Gain Method a **Gamma**. Consulte [Restablecer los parámetros de NR2 o NR4 a sus valores predeterminados](reset-nr2-or-nr4-parameters-to-defaults.md).
 
 ## Relacionados
 
-- [Cambiar el estimador de potencia de ruido de NR2 (OSMS/MMSE/NSTAT)](change-nr2-noise-power-estimator-osms-mmse-nstat.md)
 - [Ajustar la profundidad de reducción y el umbral de voz de NR2](tune-nr2-reduction-depth-and-voice-threshold.md)
-- [Restablecer los parámetros de NR2 o NR4 a los valores predeterminados](reset-nr2-or-nr4-parameters-to-defaults.md)
-- [Cómo elegir la reducción de ruido adecuada: NR2, NR4, DFNR, MNR](../../operating/dsp/noise-reduction-overview.md)
+- [Cambiar el estimador de potencia de ruido de NR2 (OSMS/MMSE/NSTAT)](change-nr2-noise-power-estimator-osms-mmse-nstat.md)
+- [Restablecer los parámetros de NR2 o NR4 a sus valores predeterminados](reset-nr2-or-nr4-parameters-to-defaults.md)
+- [Elegir la reducción de ruido adecuada: NR2, NR4, DFNR, MNR](../../operating/dsp/noise-reduction-overview.md)

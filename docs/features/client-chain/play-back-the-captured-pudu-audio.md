@@ -1,36 +1,36 @@
 # Reproducir el audio PUDU capturado
 
-Use el botón Play del applet PooDoo Audio Chain para escuchar el audio que ya ha grabado a través del monitor post-PUDU. Esto le permite evaluar cómo suena su cadena TX DSP sin necesidad de transmitir.
+Use el botón de reproducción en el applet PooDoo Audio Chain para escuchar el audio que ya grabó a través de la cadena TX DSP. Esto le permite auditar cómo suena su señal después del procesamiento sin necesidad de transmitir.
 
 ## Antes de comenzar
 
-- El contenedor PooDoo Audio (TXDSP) debe estar visible. Si no lo está, haga clic en el botón PUDU del panel lateral derecho para habilitarlo.
+- El contenedor PooDoo Audio (TXDSP) debe estar visible. Si no lo está, haga clic en el botón de la bandeja etiquetado **PUDU** en la barra lateral derecha.
 - Debe haber capturado previamente una grabación usando el botón Record. El botón Play permanece deshabilitado hasta que exista una grabación.
 - La grabación no debe estar activa cuando inicie la reproducción.
 
 ## Pasos
 
-1. Abra el applet PooDoo Audio Chain haciendo clic en el botón PUDU del panel lateral derecho.
-2. Confirme que TX está seleccionado (el botón de alternancia TX aparece marcado en ámbar). Los botones del monitor solo están activos en modo TX.
-3. Haga clic en el botón Play (▶) en la fila de encabezado del applet.
-4. El botón Play pulsa en verde mientras se ejecuta la reproducción. Para detenerla antes de que finalice la grabación, haga clic en el botón Play (▶) nuevamente.
+1. Confirme que el botón **TX** está seleccionado en el encabezado de la cadena (está seleccionado por defecto).
+2. Localice el botón Play (▶) en la fila del encabezado, a la derecha del botón Record.
+3. Haga clic en ▶ para iniciar la reproducción. El botón parpadea en verde mientras se reproduce el audio.
+4. Para detener la reproducción antes de que termine, haga clic en ▶ nuevamente.
 
 ## Qué hace cada control
 
 | Control | Comportamiento | Valor predeterminado | Notas |
 |---|---|---|---|
-| Play (▶) | Inicia la reproducción del audio PUDU capturado; haga clic de nuevo para cancelar. | Sin marcar | Habilitado solo cuando existe una grabación y la grabación no está activa. Pulsa en verde durante la reproducción. |
-| Record (⏺) | Deshabilitado durante la reproducción. | Sin marcar | Vuelve a estar disponible una vez que la reproducción se detiene. |
+| ▶ (Play) | Inicia la reproducción del audio PUDU capturado; haga clic de nuevo para cancelar. | Sin marcar | Habilitado solo cuando existe una grabación y la grabación no está activa. Parpadea en verde durante la reproducción. |
+| ⏺ (Record) | Captura hasta 30 s de audio TX post-PUDU; haga clic de nuevo para detener. La reproducción inicia automáticamente al detener la grabación. | Sin marcar | Requiere MIC configurado en PC y DAX desactivado. Deshabilitado mientras la reproducción está en curso. |
 
 ## Consejos
 
-- Si la reproducción comienza inmediatamente después de que se detiene la grabación, es porque el botón Record activa automáticamente la reproducción al detener la grabación. En ese caso, no es necesario hacer clic en Play (▶) por separado.
-- El botón Play (▶) permanece habilitado mientras la reproducción está en curso, de modo que puede cancelarla en cualquier momento haciendo clic en él nuevamente.
+- La reproducción inicia automáticamente cuando detiene una grabación haciendo clic en ⏺ por segunda vez. No es necesario hacer clic en ▶ manualmente después de cada grabación.
+- Mientras la reproducción está en curso, el botón Record está deshabilitado. Espere a que termine la reproducción, o haga clic en ▶ para cancelarla, antes de iniciar una nueva grabación.
 
 ## Solución de problemas
 
-- **Play (▶) aparece en gris** — Aún no se ha capturado ninguna grabación, o la grabación está actualmente activa. Complete una grabación primero y luego haga clic en Play (▶).
-- **Play (▶) aparece en gris incluso después de grabar** — Confirme que la grabación se ha detenido por completo (el botón Record (⏺) ya no pulsa en rojo) antes de intentar la reproducción.
+- **▶ aparece en gris** — Aún no existe ninguna grabación, o hay una grabación en curso. Complete o detenga la grabación primero.
+- **La reproducción no produce audio** — Verifique que la salida de audio de su sistema esté configurada correctamente. AetherSDR reproduce a través del dispositivo de salida de audio predeterminado.
 
 ## Temas relacionados
 

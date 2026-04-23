@@ -1,38 +1,42 @@
 # Recuperar un marcador guardado con un solo clic
 
-El panel Band Stack muestra sus marcadores de frecuencia guardados junto a cada panadapter. Al hacer clic en un marcador, el panadapter sintoniza inmediatamente esa frecuencia y restaura el modo, filtro, antena y demás configuraciones del slice almacenadas.
+El panel Band Stack le permite saltar el panadapter a cualquier frecuencia guardada con un solo clic. Úselo cuando desee regresar rápidamente a una frecuencia que ya ha marcado sin tener que escribirla de nuevo.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600. El panel Band Stack solo es visible cuando hay una radio conectada.
-- Debe existir al menos un marcador. Si el panel está vacío, guarde primero un marcador usando el botón `+`.
+- AetherSDR debe estar conectado a un radio. El panel Band Stack solo es visible cuando hay un radio conectado.
+- Al menos un marcador debe estar guardado previamente. Si el panel está vacío, consulte [Marcar la frecuencia actual](bookmark-the-current-frequency.md) primero.
 
 ## Pasos
 
-1. Ubique el panel Band Stack: la franja vertical estrecha de botones de colores que aparece inmediatamente junto al panadapter.
-2. Encuentre el botón de marcador que muestra la frecuencia deseada. Cada botón muestra la frecuencia en MHz (por ejemplo, `14.225`). Pase el cursor sobre un botón para ver un tooltip con la frecuencia completa, el modo y la antena.
-3. Haga clic en el botón de marcador. El panadapter sintoniza la frecuencia almacenada y se restauran las configuraciones del slice asociadas.
+1. Localice el panel Band Stack — la estrecha franja vertical de botones de colores ubicada junto al panadapter en la ventana principal.
+2. Encuentre el botón de marcador que muestra la frecuencia deseada. Cada botón muestra la frecuencia en MHz (tres decimales). Pase el cursor sobre un botón para ver un tooltip con la frecuencia completa, el modo y la antena.
+3. Haga clic en el botón de marcador. El panadapter sintoniza inmediatamente la frecuencia almacenada.
 
 ## Qué hace cada control
 
-| Control | Comportamiento | Clave de configuración |
+| Control | Comportamiento | Notas |
 |---|---|---|
-| Botones de marcador | Haga clic para recuperar la frecuencia, el modo, el filtro, la antena, el AGC, el audio y la configuración de reducción de ruido almacenados. El color refleja el segmento del plan de bandas para esa frecuencia. Haga clic derecho para eliminar. | `BandStack_<serial>` |
-| `+` | Agrega un nuevo marcador en la frecuencia actual del slice activo. | `BandStack_<serial>` |
+| Botones de marcador | Haga clic para sintonizar el panadapter en la frecuencia almacenada. Haga clic derecho para abrir un menú contextual con la opción **Remove**. | El color del botón refleja el segmento del plan de banda para esa frecuencia. |
+| `+` | Agrega un nuevo marcador en la frecuencia actual del slice activo. | — |
+| ⚙ (engranaje) | Abre el menú de opciones del Band Stack. Contiene el interruptor **Group by band** y la configuración **Auto-expiry** (Off, 5 min, 15 min, 30 min, 60 min). | — |
+| × | Elimina todos los marcadores de una vez. El tooltip muestra "Clear all bookmarks". | — |
+
+Los marcadores se guardan en `BandStack_<serial>`, donde `<serial>` es el número de serie de su radio.
 
 ## Consejos
 
-- El color del botón indica el segmento del plan de bandas para la frecuencia almacenada. Use el color para agrupar visualmente los marcadores antes de hacer clic.
-- Si tiene más marcadores de los que caben en el panel visible, desplace el panel verticalmente para mostrar los botones adicionales.
+- Si tiene muchos marcadores, desplace el panel verticalmente para encontrar el que desea. El panel cuenta con un área desplazable; el desplazamiento horizontal está desactivado.
+- Active **Group by band** desde el menú ⚙ para ordenar los marcadores por banda en lugar de por orden de inserción. Esto facilita encontrar una frecuencia cuando tiene marcadores en múltiples bandas.
 
 ## Solución de problemas
 
-- **El panel Band Stack no es visible** — El panel solo aparece cuando hay una radio conectada. Verifique su conexión mediante `Settings > Connect to Radio...`.
-- **No aparecen botones de marcador** — Aún no se han guardado marcadores para esta radio. Use `+` para agregar el primero.
+- **El panel Band Stack no es visible** — El panel solo aparece cuando hay un radio conectado. Verifique su conexión mediante `Settings > Connect to Radio...`.
+- **Hacer clic en un botón de marcador no hace nada** — Asegúrese de que el radio siga conectado. Si la conexión se interrumpió, reconéctese e intente nuevamente.
 
 ## Relacionados
 
-- [Descripción general del Band Stack](overview.md)
-- [Guardar un marcador en la frecuencia actual](bookmark-the-current-frequency.md)
+- [Marcar la frecuencia actual](bookmark-the-current-frequency.md)
 - [Eliminar un marcador que ya no necesita](delete-a-bookmark-you-no-longer-need.md)
-- [Explorar visualmente las frecuencias almacenadas para la banda activa](visually-scan-the-stored-frequencies-for-the-active-band.md)
+- [Explorar visualmente las frecuencias guardadas para la banda activa](visually-scan-the-stored-frequencies-for-the-active-band.md)
+- [Descripción general del Band Stack](overview.md)

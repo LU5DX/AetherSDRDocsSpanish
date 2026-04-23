@@ -1,41 +1,40 @@
-# Actualizar el snapshot después de cambiar el estado de un slice
+# Actualizar la instantánea después de cambiar el estado de un slice
 
-El diálogo Slice Troubleshooting captura el estado del radio en el momento en que se abre. Si cambia algún parámetro de un slice — como quitarle el silencio, cambiar la antena o ajustar la asignación de canal DAX — haga clic en **Refresh Snapshot** para cargar el estado actualizado en el diálogo antes de revisar el resumen o compartir datos con soporte.
+El diálogo Slice Troubleshooting captura una instantánea del estado del radio al abrirse. Si cambia algún ajuste de un slice después de abrir el diálogo —por ejemplo, desactivar el silencio de un slice o cambiar su antena— los datos mostrados quedarán desactualizados. Haga clic en **Refresh Snapshot** para releer el estado actual y que las pestañas **Issue Summary** y **JSON** reflejen sus cambios.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. El diálogo no está disponible sin una conexión de radio activa.
-- Abra el diálogo mediante `Help > Slice Troubleshooting...` si aún no está abierto.
+- AetherSDR debe estar conectado al radio. El diálogo Slice Troubleshooting requiere una conexión activa con el radio.
+- El diálogo Slice Troubleshooting debe estar ya abierto. Si no lo está, vaya a `Help > Slice Troubleshooting...`.
 
 ## Pasos
 
-1. Realice los cambios al estado del slice en la ventana principal de AetherSDR (por ejemplo, quite el silencio a un slice, cambie la antena o ajuste un canal DAX).
-2. Regrese al diálogo Slice Troubleshooting.
-3. Haga clic en **Refresh Snapshot**.
-4. Revise la etiqueta de estado en la parte inferior del diálogo. Mostrará algo como `Snapshot refreshed: 2 slice(s), 4 global meter(s), 48 total meter(s).`, lo que confirma que la actualización se completó.
-5. Revise los resultados actualizados en la pestaña **Issue Summary** o en la pestaña **JSON**.
+1. Realice el cambio de estado del slice que desea capturar (por ejemplo, desactivar el silencio de un slice, cambiar su modo o reasignar su antena).
+2. En el diálogo Slice Troubleshooting, haga clic en **Refresh Snapshot**.
+3. Revise la etiqueta de estado en la parte inferior del diálogo. Mostrará un mensaje con el formato `Snapshot refreshed: N slice(s), N global meter(s), N total meter(s).`
+4. Revise el contenido actualizado en la pestaña **Issue Summary** o en la pestaña **JSON** según sea necesario.
 
 ## Qué hace cada control
 
 | Control | Tipo | Comportamiento |
 |---|---|---|
-| **Issue Summary** | Pestaña | Lista con viñetas en lenguaje sencillo de los problemas detectados, como audio ausente, silencio bloqueado o antena faltante. |
-| **JSON** | Pestaña | Snapshot completo en JSON de los slices y canales DAX. |
-| **Refresh Snapshot** | Botón | Vuelve a leer el estado del slice en el snapshot. Actualiza ambas pestañas y la etiqueta de estado. |
-| **Copy Summary** | Botón | Copia el texto del resumen de problemas al portapapeles. |
-| **Copy JSON** | Botón | Copia el JSON completo al portapapeles. |
-| **Export JSON...** | Botón | Abre un diálogo de guardado y escribe el JSON en un archivo. |
+| **Issue Summary** | Pestaña | Muestra una lista con viñetas en lenguaje sencillo de los problemas detectados en la instantánea actualizada. |
+| **JSON** | Pestaña | Muestra la instantánea JSON completa de los slices y canales DAX generada por la última actualización. |
+| **Refresh Snapshot** | Botón | Relee el estado actual del slice en la instantánea y actualiza ambas pestañas. |
+| **Copy Summary** | Botón | Copia el texto del resumen de problemas al portapapeles. La etiqueta de estado confirma la acción con `Issue summary copied to clipboard.` |
+| **Copy JSON** | Botón | Copia el JSON completo al portapapeles. La etiqueta de estado confirma la acción con `JSON copied to clipboard.` |
+| **Export JSON...** | Botón | Abre un diálogo para guardar el archivo y escribe el JSON en un fichero. |
 | **Close** | Botón | Cierra el diálogo. |
 
-## Sugerencias
+## Consejos
 
-- El diálogo lee desde el modelo en memoria de AetherSDR, no consultando el radio directamente. Si el radio aún no ha propagado un cambio de vuelta al cliente, espere un momento antes de hacer clic en **Refresh Snapshot**.
-- Después de actualizar, use **Copy Summary** o **Copy JSON** para capturar el nuevo estado y adjuntarlo a un informe de error o solicitud de soporte.
+- El diálogo no consulta el radio de forma continua. Cada vez que cambie el estado de un slice y desee datos actualizados, haga clic en **Refresh Snapshot** nuevamente.
+- Después de actualizar, use **Copy Summary** para copiar la lista de problemas actualizada, o **Copy JSON** para copiar la instantánea sin procesar, antes de compartirlos con soporte técnico.
 
 ## Relacionado
 
 - [Descripción general de Slice Troubleshooting](overview.md)
-- [Capturar un snapshot de slice para soporte](capture-a-slice-snapshot-for-support.md)
-- [Leer una lista en lenguaje sencillo de problemas detectados en slices](read-a-plain-language-list-of-suspected-slice-problems.md)
-- [Copiar el snapshot JSON completo al portapapeles](copy-the-full-json-snapshot-to-the-clipboard.md)
-- [Exportar el snapshot a un archivo para adjuntar a un informe de error](export-the-snapshot-to-a-file-to-attach-to-a-bug-report.md)
+- [Capturar una instantánea de slice para soporte técnico](capture-a-slice-snapshot-for-support.md)
+- [Leer una lista en lenguaje sencillo de los problemas sospechados en un slice](read-a-plain-language-list-of-suspected-slice-problems.md)
+- [Copiar la instantánea JSON completa al portapapeles](copy-the-full-json-snapshot-to-the-clipboard.md)
+- [Exportar la instantánea a un archivo para adjuntar a un informe de error](export-the-snapshot-to-a-file-to-attach-to-a-bug-report.md)

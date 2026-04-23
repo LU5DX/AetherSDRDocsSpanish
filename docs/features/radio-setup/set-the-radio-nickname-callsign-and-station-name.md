@@ -1,34 +1,33 @@
-# Configurar el apodo, el indicativo y el nombre de estación del equipo
+# Configurar el apodo, indicativo y nombre de estación del equipo
 
-Configure un nombre legible, su indicativo y un identificador de estación en su FLEX-8600. Estos valores se almacenan en el equipo e identifican su cliente ante otras estaciones multiFLEX.
+Cambie la forma en que el equipo y este cliente se identifican: el apodo aparece en las listas de conexión, el indicativo se almacena en el equipo y el nombre de estación identifica a este cliente de AetherSDR ante otras estaciones multiFLEX.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al equipo. La pestaña Radio en Radio Setup no está disponible sin una conexión activa.
+- AetherSDR debe estar conectado al equipo. Los controles de la pestaña Radio no están disponibles sin una conexión activa.
 
 ## Pasos
 
-1. Abra `Settings > Radio Setup...`.
-2. Haga clic en la pestaña **Radio**.
-3. En el grupo **Radio Identification**, localice el campo **Nickname**. Escriba el nombre que desea asignar al equipo y luego presione Tab o Enter para confirmar. AetherSDR envía el nuevo nombre al equipo de inmediato.
-4. Localice el campo **Callsign**. Escriba su indicativo y luego presione Tab o Enter para confirmar.
-5. Localice el campo **Station Name**. Escriba el nombre que identifica este cliente ante otras estaciones multiFLEX y luego presione Tab o Enter para confirmar. Si se deja vacío, AetherSDR utiliza el nombre de host del sistema operativo como valor predeterminado.
-6. Haga clic en **Close** cuando haya terminado.
+1. Vaya a `Settings > Radio Setup...`.
+2. Haga clic en la pestaña **Radio** si no está seleccionada.
+3. En el grupo **Radio Identification**, localice el campo **Nickname**. Escriba el nombre que desea usar para este equipo y presione Tab o Enter para confirmar.
+4. En el mismo grupo, localice el campo **Callsign**. Escriba su indicativo y presione Tab o Enter para confirmar.
+5. Localice el campo **Station Name**. Escriba el nombre que identifica a este cliente ante otras estaciones multiFLEX y presione Tab o Enter para confirmar.
+6. Haga clic en **Close**.
 
 ## Qué hace cada control
 
-| Control | Tipo | Comportamiento | Valor predeterminado |
+| Control | Comportamiento | Valor predeterminado | Persistencia |
 |---|---|---|---|
-| **Nickname** | Campo de texto | Nombre descriptivo para el equipo. Se envía al equipo al confirmar. | Se obtiene del nombre actual del equipo si no se ha definido ningún apodo. |
-| **Callsign** | Campo de texto | Indicativo de estación almacenado en el equipo. Se envía al equipo al confirmar. | Valor actual almacenado en el equipo. |
-| **Station Name** | Campo de texto | Identifica este cliente de AetherSDR ante otras estaciones multiFLEX. Se guarda localmente. Se envía al equipo al confirmar. | Nombre de host del sistema operativo si el campo nunca ha sido configurado. |
+| **Nickname** | Nombre descriptivo almacenado en el equipo. Se envía al equipo al terminar la edición. | Se obtiene del nombre actual del equipo si no se ha definido un apodo. | En el equipo (no en la configuración de la aplicación AetherSDR) |
+| **Callsign** | Indicativo de estación almacenado en el equipo. Se envía al equipo al terminar la edición. | Indicativo actual del equipo. | En el equipo |
+| **Station Name** | Identifica a este cliente de AetherSDR ante otras estaciones multiFLEX. Se envía al equipo como nombre de estación del cliente. | Nombre de host del sistema operativo si el campo no se ha definido anteriormente. | `StationName` |
 
-## Consejos
+## Sugerencias
 
-- Los tres campos envían su valor al equipo en cuanto se termina de editar (al perder el foco o al presionar Enter). No existe un botón Save independiente.
-- **Station Name** se almacena en la configuración local de AetherSDR bajo la clave `StationName`. **Nickname** y **Callsign** se almacenan en el propio equipo, no en la configuración local de AetherSDR.
+- Cada campo se aplica de inmediato al presionar Tab o Enter; no existe un botón de guardar independiente para estos campos.
+- **Station Name** usa por defecto el nombre de host del sistema operativo si nunca se ha introducido un valor. Para restaurar ese valor predeterminado, borre el campo, presione Enter y vuelva a abrir el cuadro de diálogo; mostrará el nombre de host nuevamente.
 
-## Temas relacionados
+## Relacionado
 
-- [Consultar el número de serie, la versión de hardware, la región y las opciones del equipo](check-radio-serial-hardware-version-region-and-options.md)
-- [Descripción general de Radio Setup](overview.md)
+- [Consultar número de serie, versión de hardware, región y opciones del equipo](check-radio-serial-hardware-version-region-and-options.md)

@@ -1,37 +1,43 @@
 # Descripción general del Band Stack
 
-El Band Stack es una franja vertical de marcadores de frecuencia que se muestra junto a cada panadapter. Úselo para guardar frecuencias a las que regresa con frecuencia y recupérelas con un solo clic.
-
-## Antes de comenzar
-
-- Es necesario tener conectada una radio FLEX-8600. El panel Band Stack no es visible cuando no hay ninguna radio conectada.
+El Band Stack es una franja vertical de marcadores de frecuencia que aparece junto a cada panadapter (visualizador panorámico). Úselo para guardar, recuperar y gestionar posiciones de sintonía sin salir de la vista del panadapter.
 
 ## Cómo funciona
 
-El panel Band Stack aparece como una franja estrecha a un lado de cada panadapter en la ventana principal. Siempre es visible cuando hay una radio conectada y no requiere ninguna configuración manual para mostrarse.
+El panel Band Stack aparece automáticamente junto a cada panadapter cuando se conecta un radio. No requiere ningún paso adicional para abrirlo.
 
-Cada botón de marcador muestra una frecuencia en MHz, redondeada a tres decimales. El color del botón refleja el segmento del plan de banda que contiene esa frecuencia — por ejemplo, las porciones de fonía, CW o datos de una banda se muestran cada una con el color definido por el plan de banda activo. Las frecuencias que quedan fuera de cualquier segmento definido en el plan de banda aparecen en un gris oscuro neutro.
+Cada marcador se muestra como un botón etiquetado con la frecuencia almacenada en MHz. Los colores de los botones reflejan el segmento del plan de banda correspondiente a esa frecuencia, lo que permite identificar de un vistazo a qué banda pertenece cada marcador. Los marcadores se guardan por número de serie del radio bajo la configuración `BandStack_<serial>`, de modo que cada radio conectado mantiene su propia lista independiente.
 
-Los marcadores se almacenan por radio, identificados por número de serie, mediante el ajuste `BandStack_<serial>`. El archivo se guarda automáticamente cada vez que se agrega o elimina un marcador. Si conecta una radio diferente, su propio conjunto de marcadores se carga de forma independiente.
+El panel es desplazable cuando la lista de marcadores supera el área visible. Una fila de tres botones en la parte inferior del panel controla la lista:
 
-El panel se desplaza verticalmente si tiene más marcadores de los que caben en el área visible. Cuando es necesario, aparece una barra de desplazamiento delgada en el borde derecho del panel.
+| Control | Función |
+|---|---|
+| Botones de marcador | Haga clic para recuperar la frecuencia almacenada en el panadapter activo. Haga clic derecho para abrir un menú contextual con la opción "Remove". El tooltip muestra la frecuencia completa en MHz, el modo y la antena de recepción. |
+| `+` | Agrega un nuevo marcador en la frecuencia actual del slice activo. |
+| `×` | Elimina todos los marcadores de la lista. |
+| ⚙ (engranaje) | Abre el menú de opciones del band stack (véase más adelante). |
 
-## Qué hace cada control
+### Menú de opciones del band stack
 
-| Control | Comportamiento | Notas |
-|---|---|---|
-| Botones de marcador | Haga clic para sintonizar el panadapter en la frecuencia almacenada. Haga clic derecho para abrir un menú contextual con la opción **Remove**. | El color del botón refleja el segmento del plan de banda para esa frecuencia. El tooltip muestra la frecuencia completa en MHz, el modo y la antena de RX. |
-| **+** | Agrega un nuevo marcador en la frecuencia actual del slice activo. | Está ubicado en la parte inferior del panel. Almacena la frecuencia, el modo, los bordes del filtro, las antenas, los ajustes de AGC, la ganancia de audio y el estado de reducción de ruido. |
+Al hacer clic en el botón de engranaje se abre un menú con dos categorías de ajustes:
 
-## Consejos
+**Group by band** — Opción activable mediante casilla. Cuando está habilitada, los marcadores se ordenan en secciones de banda con un encabezado etiquetado para cada banda (por ejemplo, "40m", "20m"). Al hacer clic derecho sobre un encabezado de banda se ofrece la opción de eliminar todos los marcadores dentro del rango de frecuencias de esa banda. Cuando está deshabilitada, los marcadores aparecen en orden de inserción.
 
-- Los marcadores de cada radio se almacenan por separado. Al conectar una segunda FLEX-8600 se carga la lista de marcadores propia de esa radio sin afectar la primera.
-- Los tooltips de los botones de marcador muestran la frecuencia con seis decimales completos, el modo y la antena de RX. Pase el cursor sobre un botón para confirmar lo que recuperará antes de hacer clic.
-- Si reorganiza las regiones de su plan de banda, los colores de los marcadores existentes se actualizan para coincidir con el nuevo plan en la siguiente carga.
+**Auto-expiry** — Define cuánto tiempo se conservan los marcadores antes de eliminarse automáticamente. Las opciones son:
 
-## Relacionados
+| Opción | Retención |
+|---|---|
+| Off | Los marcadores nunca caducan automáticamente |
+| 5 min | Se eliminan después de 5 minutos |
+| 15 min | Se eliminan después de 15 minutos |
+| 30 min | Se eliminan después de 30 minutos |
+| 60 min | Se eliminan después de 60 minutos |
+
+Solo una opción de caducidad automática puede estar activa a la vez.
+
+## Temas relacionados
 
 - [Marcar la frecuencia actual](bookmark-the-current-frequency.md)
-- [Recuperar un marcador almacenado con un clic](recall-a-stored-bookmark-with-one-click.md)
+- [Recuperar un marcador guardado con un solo clic](recall-a-stored-bookmark-with-one-click.md)
 - [Eliminar un marcador que ya no necesita](delete-a-bookmark-you-no-longer-need.md)
-- [Explorar visualmente las frecuencias almacenadas para la banda activa](visually-scan-the-stored-frequencies-for-the-active-band.md)
+- [Explorar visualmente las frecuencias guardadas para la banda activa](visually-scan-the-stored-frequencies-for-the-active-band.md)

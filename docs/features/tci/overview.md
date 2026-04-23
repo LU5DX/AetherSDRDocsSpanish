@@ -1,48 +1,38 @@
 # Descripción general del servidor TCI
 
-El applet TCI Server ejecuta un servidor WebSocket que habla el protocolo TCI de Expert Electronics, lo que permite que aplicaciones de terceros —como Log4OM, herramientas SunSDR y otras aplicaciones de registro o modos digitales compatibles con TCI— lean y controlen la radio sin una conexión directa a SmartSDR. Abra este applet para iniciar el servidor, configurar el puerto y ajustar los niveles de ganancia de audio por canal.
+El applet del servidor TCI ejecuta un servidor WebSocket dentro de AetherSDR que implementa el protocolo TCI de Expert Electronics. Aplicaciones de registro, modos digitales y SDR de terceros — como Log4OM y las herramientas de SunSDR — pueden conectarse a este servidor para leer y controlar la radio sin necesidad de software de puente adicional.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600. El applet TCI no está disponible sin una conexión de radio activa.
-- La función TCI Server requiere una versión de AetherSDR que incluya soporte WebSocket (`HAVE_WEBSOCKETS`). Si el botón TCI en la bandeja no aparece, su versión no incluye esta función.
+- AetherSDR debe estar conectado a la radio. El applet TCI requiere una conexión de radio activa.
+- El applet TCI está oculto por defecto. Haga clic en el botón TCI de la bandeja en la barra lateral derecha para mostrarlo.
 
 ## Cómo funciona
 
-El applet TCI está oculto de forma predeterminada. Ábralo o ciérrelo con el botón **TCI** de la bandeja en la barra lateral derecha. Una vez abierto, haga clic en **Enable** para enlazar el servidor al puerto configurado. Los clientes conectados se cuentan y se muestran en el indicador de estado del servidor.
+Al hacer clic en Enable, AetherSDR enlaza un servidor WebSocket al puerto configurado (por defecto `50001`). Cualquier cliente compatible con TCI en la misma red puede entonces conectarse a `<host>:<port>`. El servidor admite hasta cuatro flujos de audio RX simultáneos, un flujo de audio TX y control bidireccional de frecuencia y modo.
 
-El audio RX de cada canal TCI sigue las mismas asignaciones de canal DAX ya configuradas en sus slices (receptores virtuales). El slice que controla cada canal se muestra en las etiquetas de asignación RX/TX junto a cada medidor. Cuando ningún slice está asignado a un canal, la etiqueta muestra —.
+Cada canal RX se corresponde con una asignación de canal DAX. Los indicadores de asignación de slice (slice — canal de recepción independiente) junto a cada fila RX y TX muestran qué slice controla actualmente ese canal; por ejemplo, `Slice A`. Si no hay ningún slice asignado, el indicador muestra `—`.
 
-El canal TX transporta el audio del slice que actualmente es el slice de transmisión.
+El indicador de estado del servidor se actualiza en tiempo real conforme los clientes se conectan y desconectan. Cuando el servidor está en ejecución, muestra `:<port> (N clients)`. Cuando está detenido, muestra `(stopped)`. Si el puerto ya está en uso al hacer clic en Enable, el estado muestra `(port in use)` en rojo y Enable vuelve automáticamente a la posición desactivada.
+
+Puede configurar el servidor para que se inicie automáticamente cada vez que AetherSDR arranque mediante `Settings > Autostart TCI with AetherSDR`.
 
 ## Qué hace cada control
 
-| Control | Función | Valor predeterminado | Rango | Clave de configuración |
+| Control | Descripción | Valor por defecto | Rango válido | Clave de configuración |
 |---|---|---|---|---|
-| Ganancia+medidor RX1–RX4 | Establece la ganancia de audio TCI RX para los canales 1–4. Arrastre para ajustar; el medidor muestra el nivel de señal en tiempo real. | 0.5 | 0.0–1.0 | `TciRxGain1`, `TciRxGain2`, `TciRxGain3`, `TciRxGain4` |
-| Ganancia+medidor TX | Establece la ganancia de audio TCI TX. Arrastre para ajustar; el medidor muestra el nivel de señal en tiempo real. | 0.5 | 0.0–1.0 | `TciTxGain` |
-| Puerto | El puerto TCP en el que escucha el servidor WebSocket de TCI. Cambiar el puerto reinicia el servidor si ya está en ejecución. Los valores fuera del rango 1024–65535 vuelven automáticamente a 50001. | 50001 | 1024–65535 | `TciPort` |
-| Enable | Inicia o detiene el servidor TCI. Si el puerto no puede enlazarse, el botón vuelve automáticamente a desactivado y el indicador de estado muestra `(port in use)` en rojo. | Off | — | — |
-| Etiquetas de asignación RX/TX de slice | Indicadores de solo lectura que muestran qué slice controla cada fila RX o TX. Muestra `Slice <letra>` cuando hay un slice asignado, o — cuando no hay ninguno. | — | — o Slice A–H | — |
-| Estado del servidor | Muestra el estado actual del servidor: `(stopped)`, `:<puerto> (<N> clients)` o `(port in use)`. Se vuelve rojo si falla el enlace. | (stopped) | — | — |
+| Ganancia+medidor RX1–RX4 | Medidor de nivel y control deslizante de ganancia combinados para cada canal TCI RX. Arrastre para ajustar la ganancia. | 0.5 | 0.0–1.0 | `TciRxGain1`, `TciRxGain2`, `TciRxGain3`, `TciRxGain4` |
+| Ganancia+medidor TX | Medidor de nivel y control deslizante de ganancia combinados para el canal TCI TX. Arrastre para ajustar la ganancia. | 0.5 | 0.0–1.0 | `TciTxGain` |
+| Port | Puerto WebSocket en el que escucha el servidor. Si se cambia mientras el servidor está en ejecución, el servidor se reinicia de inmediato. Los valores fuera del rango 1024–65535 se ajustan automáticamente a `50001`. | `50001` | 1024–65535 | `TciPort` |
+| Enable | Inicia o detiene el servidor TCI. Si el puerto no puede enlazarse, el botón vuelve automáticamente a la posición desactivada. | Off | On / Off | — |
+| Etiquetas de asignación de slice RX/TX | Indicadores de solo lectura que muestran qué slice está asignado a cada fila RX o TX. Muestra `Slice <letter>` o `—`. | `—` | `—` o `Slice <letter>` | — |
+| Estado del servidor | Muestra el estado actual del servidor y el número de clientes conectados. Se muestra en rojo si falla el enlace del puerto. | `(stopped)` | `(stopped)`, `:<port> (N clients)`, `(port in use)` | — |
 
-## Consejos
-
-- Para iniciar el servidor TCI automáticamente cada vez que se inicia AetherSDR, use `Settings > Autostart TCI with AetherSDR`.
-- Si el estado muestra `(port in use)`, otra aplicación ya está enlazada a ese puerto. Cambie el número de puerto y haga clic en **Enable** nuevamente.
-- Los medidores de nivel RX utilizan suavizado exponencial: el nivel sube rápidamente con una señal y decae lentamente, de modo que los picos breves permanecen visibles.
-
-## Solución de problemas
-
-- **Enable vuelve automáticamente a desactivado de inmediato** — El servidor no pudo enlazarse al puerto especificado. Verifique que ninguna otra aplicación esté usando ese puerto, ingrese un valor diferente en Port y haga clic en **Enable**.
-- **Las etiquetas de asignación de slice muestran — para todos los canales** — Ningún slice tiene canales DAX asignados. Configure las asignaciones de canal DAX en sus slices; los canales TCI RX siguen el mismo mapeo.
-- **El botón TCI de la bandeja no es visible** — Su versión de AetherSDR no incluye soporte WebSocket. La función TCI Server no está disponible en esta versión.
-
-## Relacionados
+## Temas relacionados
 
 - [Habilitar el servidor TCI para clientes Log4OM / SunSDR](enable-the-tci-server-for-log4om-sunsdr-clients.md)
 - [Cambiar el puerto TCI](change-the-tci-port.md)
 - [Ajustar la ganancia TCI RX por canal](adjust-tci-rx-gain-per-channel.md)
 - [Ajustar la ganancia TCI TX](adjust-tci-tx-gain.md)
-- [Inicio automático de TCI al lanzar la aplicación](autostart-tci-on-launch.md)
+- [Inicio automático de TCI al arrancar](autostart-tci-on-launch.md)
 - [Ver cuántos clientes TCI están conectados](../../getting-started/setup/see-how-many-tci-clients-are-connected.md)

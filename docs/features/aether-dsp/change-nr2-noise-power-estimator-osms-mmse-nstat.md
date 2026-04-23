@@ -1,37 +1,36 @@
 # Cambiar el estimador de potencia de ruido NR2 (OSMS/MMSE/NSTAT)
 
-El estimador de potencia de ruido (NPE) de NR2 determina cómo AetherSDR modela el piso de ruido de fondo antes de aplicar la reducción de ganancia. Cambiar entre OSMS, MMSE y NSTAT puede mejorar la supresión de ruido en señales cuyo carácter de ruido es estacionario, varía lentamente o cambia de forma rápida.
+El estimador de potencia de ruido (NPE) de NR2 controla cómo el motor NR2 de AetherSDR mide el piso de ruido antes de aplicar ganancia. Cambiar entre OSMS, MMSE y NSTAT permite adaptar el estimador al tipo de ruido con el que se trabaja: estable, promediado o de variación rápida.
 
 ## Antes de comenzar
 
 - AetherSDR debe estar en ejecución. No se requiere conexión a una radio para cambiar esta configuración.
-- La reducción de ruido NR2 debe estar activa en un receptor slice para que el cambio tenga efecto audible.
+- NR2 debe estar activo en su slice para que el cambio tenga efecto audible.
 
 ## Pasos
 
-1. Abra `Settings > AetherDSP Settings...`.
+1. Haga clic en `Settings > AetherDSP Settings...`.
 2. Haga clic en la pestaña **NR2**.
-3. En **NPE Method**, haga clic en uno de los tres botones de opción: **OSMS**, **MMSE** o **NSTAT**.
-4. La configuración surte efecto de inmediato y se guarda automáticamente en `NR2NpeMethod`.
+3. En el grupo **NPE Method**, haga clic en uno de los tres botones de opción: **OSMS**, **MMSE** o **NSTAT**.
+
+La selección surte efecto de inmediato y se guarda en `NR2NpeMethod`.
 
 ## Qué hace cada control
 
-| Control | Tipo | Valor predeterminado | Valores válidos | Clave persistida | Comportamiento |
+| Control | Tipo | Valor predeterminado | Valores válidos | Clave de configuración | Comportamiento |
 |---|---|---|---|---|---|
-| **NPE Method** | Botón de opción | OSMS | OSMS \| MMSE \| NSTAT | `NR2NpeMethod` | Selecciona el estimador de potencia de ruido utilizado por NR2. Se almacena como entero 0 (OSMS), 1 (MMSE) o 2 (NSTAT). |
+| **NPE Method** | Botones de opción | OSMS | OSMS \| MMSE \| NSTAT | `NR2NpeMethod` | Selecciona el estimador de potencia de ruido utilizado por NR2. Se almacena como entero 0–2. |
 
-**OSMS** — Estadísticas mínimas con suavizado óptimo. Rastrea el piso de ruido mediante una estimación de mínimo continuo. Funciona bien con ruido estacionario o que cambia lentamente, típico del ruido de banda e interferencias.
+**OSMS** — Optimal Smoothing Minimum Statistics. Rastrea el piso de ruido mediante una estimación de mínimo continuo. Ideal para ruido estable y de variación lenta.
 
-**MMSE** — Error cuadrático medio mínimo. Minimiza el error de estimación de ruido esperado. Generalmente produce curvas de ganancia más suaves y puede reducir los artefactos de ruido musical en señales de voz.
+**MMSE** — Minimum Mean Squared Error. Minimiza el error esperado en la estimación del ruido. Una opción equilibrada de propósito general.
 
-**NSTAT** — Estimación no estacionaria. Se adapta al ruido que cambia con el tiempo. Utilícelo cuando haya ráfagas de ruido, QRM u otras interferencias que varíen rápidamente.
+**NSTAT** — Non-Stationary estimation. Se adapta al ruido que cambia con el tiempo. Úselo cuando el ruido de fondo sea variable o intermitente.
 
 ## Consejos
 
-- Si escucha ruido musical o borboteo residual después de que NR2 procesa una señal, intente cambiar de OSMS a MMSE y, a continuación, active **AE Filter (artifact elimination)** si no está marcado todavía.
-- En condiciones de pile-up o concurso donde las interferencias cambian rápidamente, NSTAT puede rastrear el piso de ruido con mayor precisión que OSMS.
-- Cambiar el método NPE interactúa con el control deslizante **Smoothing:** (`NR2GainSmooth`, valor predeterminado 0.85). Un valor de suavizado más bajo permite que cualquier estimador se adapte más rápido; un valor más alto lo estabiliza.
-- Para restaurar OSMS junto con todos los demás valores predeterminados de NR2, haga clic en **Reset Defaults** en la pestaña NR2.
+- Si escucha artefactos de ruido musical tras cambiar de estimador, habilite **AE Filter (artifact elimination)** en la misma pestaña. Su clave de configuración es `NR2AeFilter` y está activado de forma predeterminada.
+- Si cambia el método NPE y no queda satisfecho, haga clic en **Reset Defaults** en la pestaña NR2 para restaurar OSMS junto con todos los demás parámetros de NR2 a sus valores predeterminados (Gamma / OSMS / AE activado / 1.50 / 0.85 / 0.20).
 
 ## Relacionados
 

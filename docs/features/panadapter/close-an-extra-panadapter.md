@@ -1,30 +1,27 @@
 # Cerrar un panadapter adicional
 
-Elimine un panadapter que ya no necesite cuando trabaje con múltiples slices. El botón × (cerrar) solo está disponible cuando hay más de un panadapter abierto.
+Al trabajar con múltiples slices, cada panadapter tiene su propia barra de título. Use el botón × en esa barra de título para eliminar un panadapter que ya no necesite.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. El botón × (cerrar) no está disponible sin una conexión activa al radio.
-- Deben estar abiertos al menos dos panadapters. En el modo de panadapter único, el botón × (cerrar) está oculto.
+- El radio debe estar conectado. El botón × está oculto en el modo de un solo panadapter y solo aparece cuando hay dos o más panadapters abiertos.
+- Identifique cuál panadapter desea cerrar verificando la etiqueta del slice (por ejemplo, "Slice B") en su barra de título.
 
 ## Pasos
 
-1. Ubique la barra de título del panadapter que desea eliminar. Se encuentra encima del espectro y del waterfall, y muestra el nombre del slice (por ejemplo, "Slice A").
-2. Haga clic en × (cerrar) en el lado derecho de esa barra de título.
-3. El panadapter se cierra y los panadapters restantes se reorganizan para ocupar el espacio.
+1. Localice la barra de título en la parte superior del panadapter que desea cerrar.
+2. Haga clic en × en el lado derecho de esa barra de título.
+
+El panadapter se cierra de inmediato. Los panadapters restantes se redistribuyen para ocupar el espacio disponible.
 
 ## Consejos
 
-- Si no puede ver el botón × (cerrar), se encuentra en el modo de panadapter único. Agregue un segundo slice primero, o verifique que el radio tenga más de un panadapter activo.
-- Para ocultar temporalmente un panadapter sin cerrarlo, use □ (maximizar) en otro panadapter para ocupar el área principal. Consulte [Maximizar un panadapter para llenar el área principal](maximize-one-panadapter-to-fill-the-main-area.md).
+- Si no ve × en un panadapter, está en el modo de un solo panadapter. El botón está oculto cuando solo hay un panadapter abierto.
+- Para reducir un panadapter sin eliminarlo por completo, use □ para maximizar otro diferente. Consulte [Maximizar un panadapter para que ocupe el área principal](maximize-one-panadapter-to-fill-the-main-area.md).
 
-## Solución de problemas
+## Relacionados
 
-- **El botón × (cerrar) no es visible** — El radio tiene solo un panadapter activo. Los botones × (cerrar), □ (maximizar) y ⬈ / ↩ (separar/anclar) están todos ocultos en el modo de panadapter único. Abra un slice adicional para que aparezcan.
-
-## Relacionado
-
-- [Maximizar un panadapter para llenar el área principal](maximize-one-panadapter-to-fill-the-main-area.md)
-- [Separar un panadapter en su propia ventana](pop-a-panadapter-out-into-its-own-window.md)
+- [Maximizar un panadapter para que ocupe el área principal](maximize-one-panadapter-to-fill-the-main-area.md)
+- [Extraer un panadapter en su propia ventana](pop-a-panadapter-out-into-its-own-window.md)
 - [Hacer clic en el espectro para activar un panadapter (modo multi-slice)](click-the-spectrum-to-activate-a-panadapter-multi-slice-mode.md)
-- [Comprensión de slices y VFOs](../../getting-started/concepts/understanding-slices.md)
+- [Entender los slices y los VFOs](../../getting-started/concepts/understanding-slices.md)

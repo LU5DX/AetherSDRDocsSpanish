@@ -1,44 +1,42 @@
 # Cambiar el radio entre DHCP e IP estática
 
-Use esta página para cambiar cómo su FLEX-8600 recibe su dirección IP — ya sea automáticamente desde un servidor DHCP o desde una dirección estática fija que usted ingresa manualmente. Una IP estática es útil cuando necesita una dirección predecible para acceso remoto o integraciones de red.
+Use esta página para configurar el modo de direccionamiento de red del FLEX-8600. Cambie a IP estática cuando necesite que el radio tenga una dirección fija en su LAN, o vuelva a DHCP para que el router asigne una dirección automáticamente.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. La pestaña Network solo está disponible mientras haya conexión activa.
-- Tenga a mano la dirección IP estática deseada, la máscara de subred y la dirección de puerta de enlace antes de comenzar.
-- Si va a cambiar a IP estática, confirme que la dirección que planea usar no esté ya en uso en su red y que esté fuera del rango de asignación DHCP de su router.
+- AetherSDR debe estar conectado al radio. La pestaña Network solo está disponible mientras haya conexión.
+- Si va a asignar una IP estática, tenga listos la dirección IP deseada, la máscara de subred y la dirección de gateway antes de empezar.
+- Cambiar la dirección IP desconectará AetherSDR del radio. Esté preparado para volver a conectarse con la nueva dirección.
 
 ## Pasos
 
-1. Haga clic en `Settings > Radio Setup...` para abrir el diálogo Radio Setup.
+1. Abra `Settings > Radio Setup...`.
 2. Haga clic en la pestaña **Network**.
-3. Localice el botón de alternancia **DHCP / Static**.
-4. Haga clic en **DHCP / Static** para cambiar entre modos. El botón refleja el modo activo actualmente.
-5. Si cambió a Static, ingrese valores en los campos **IP Address:**, **Mask:** y **Gateway:**.
-6. Haga clic en **Apply** para enviar la configuración de red al radio.
+3. Localice el botón de alternancia **DHCP / Static**. Haga clic en él para cambiar entre modos.
+   - Cuando está en DHCP, los campos de dirección estática no son necesarios.
+   - Cuando está en Static, los campos **IP Address:**, **Mask:** y **Gateway:** se activan.
+4. Si seleccionó Static, ingrese los valores deseados en los campos **IP Address:**, **Mask:** y **Gateway:**.
+5. Haga clic en **Apply** para enviar la configuración de red al radio.
 
 ## Qué hace cada control
 
 | Control | Tipo | Comportamiento |
 |---|---|---|
-| **IP Address / Mask / MAC Address** | Indicador (solo lectura) | Muestra las direcciones de red actuales del radio. Se actualizan después de que Apply surte efecto. |
-| **DHCP / Static** | Botón de alternancia | Cambia el radio entre asignación DHCP e IP estática. |
-| **IP Address:** | Campo de texto | Dirección IP estática que se asignará al radio. Activo solo en modo Static. |
-| **Mask:** | Campo de texto | Máscara de subred para la configuración estática. Activo solo en modo Static. |
-| **Gateway:** | Campo de texto | Puerta de enlace predeterminada para la configuración estática. Activo solo en modo Static. |
-| **Apply** | Botón | Envía la configuración de red al radio. |
-| **Enforce Private IP Connections:** | Botón de alternancia | Cuando está habilitado, rechaza conexiones provenientes de direcciones IP que no sean RFC1918 (no privadas). |
-| **Network MTU:** | Spinbox | Establece el MTU de salida en bytes. |
+| **DHCP / Static** | Botón de alternancia | Cambia el radio entre los modos DHCP e IP estática. |
+| **IP Address:** | Campo de texto | La dirección IPv4 estática que se asignará al radio. Activo solo en modo Static. |
+| **Mask:** | Campo de texto | La máscara de subred para la configuración estática. Activa solo en modo Static. |
+| **Gateway:** | Campo de texto | El gateway predeterminado para la configuración estática. Activo solo en modo Static. |
+| **Apply** | Botón | Envía la configuración de red actual al radio. |
 
 ## Consejos
 
-- Después de hacer clic en **Apply** con una nueva IP estática, el radio dejará de ser accesible en su dirección anterior. Reconéctese usando la nueva IP mediante `Settings > Connect to Radio...`.
-- Si va a volver a DHCP, no es necesario completar los campos de dirección — haga clic en **Apply** inmediatamente después de alternar a DHCP.
+- Los indicadores **IP Address / Mask / MAC Address** que aparecen sobre el botón de alternancia muestran las direcciones de red actuales del radio y son de solo lectura. Úselos para confirmar que la nueva configuración surtió efecto después de reconectarse.
+- Tras hacer clic en **Apply** en modo Static, AetherSDR perderá la conexión. Vuelva a conectarse mediante `Settings > Connect to Radio...` usando la nueva dirección estática.
 
 ## Solución de problemas
 
-- **El radio no es accesible después de aplicar una IP estática** — La dirección, la máscara o la puerta de enlace pueden ser incorrectas para su red. Conéctese al radio mediante la pantalla del panel frontal o la consola para verificar la configuración, luego corrija los valores en AetherSDR.
-- **Apply no tiene efecto** — Confirme que el radio sigue conectado (la pestaña Network requiere una conexión activa). Si la conexión se interrumpió, reconéctese y vuelva a ingresar la configuración antes de hacer clic en **Apply**.
+- **El radio no aparece tras cambiar a IP estática** — La dirección ingresada puede entrar en conflicto con otro dispositivo o puede estar fuera de la subred de su LAN. Verifique que la dirección IP, la máscara y el gateway sean correctos para su red. Si el radio queda inaccesible, puede ser necesario un restablecimiento de hardware para restaurar DHCP; consulte la documentación de hardware del FLEX-8600.
+- **Apply no parece surtir efecto** — Asegúrese de que sigue conectado al radio en el momento en que hace clic en **Apply**. Si la conexión se interrumpió antes de hacer clic, vuelva a abrir `Settings > Radio Setup...`, reingrese los valores estáticos y haga clic en **Apply** sin demora.
 
 ## Relacionado
 
