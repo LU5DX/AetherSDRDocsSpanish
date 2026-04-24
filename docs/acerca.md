@@ -77,7 +77,7 @@ Si encontrás útil esta documentación — si te ahorró una hora de buscar en 
 ## Apoyá el proyecto
 
 !!! tip "Cada contribución ayuda"
-    Incluso una pequeña contribución compensa los costos de la API y motiva seguir mejorando tanto los docs como el asistente.
+    Incluso una pequeña contribución compensa los costos de API e infraestructura, y motiva seguir mejorando tanto los docs como el asistente.
 
 <div style="text-align:center; margin: 2rem 0;">
   <a href="https://ko-fi.com/lu5dx" class="md-button md-button--primary" target="_blank" rel="noopener" style="margin: 0.5rem;">
