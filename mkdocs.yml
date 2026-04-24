@@ -111,6 +111,9 @@ markdown_extensions:
   - pymdownx.keys
 
 extra:
+  analytics:
+    provider: google
+    property: G-Z8CG1BYC2F
   alternate:
     - name: English
       link: https://lu5dx.github.io/AetherSDRDocsEnglish/
