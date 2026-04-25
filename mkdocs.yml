@@ -47,7 +47,6 @@ theme:
     - navigation.instant.progress
     - navigation.tabs
     - navigation.tabs.sticky
-    - navigation.sections
     - navigation.indexes
     - navigation.top
     - navigation.footer
@@ -133,3 +132,65 @@ extra:
       link: https://github.com/LU5DX/AetherSDRDocsSpanish
       name: Fuente de la documentación
   generator: false
+  # Iconos de las secciones de la barra lateral. Las claves son los títulos
+  # de cada sección (autogenerados desde el nombre de la carpeta). Usado por
+  # overrides/partials/nav-item.html mediante render_section_icon().
+  section_icons:
+    Features: material/star-four-points
+    "Getting started": material/rocket-launch
+    Operating: material/broadcast
+    Reference: material/book-open-variant
+    Troubleshooting: material/wrench-cog
+    About: material/information-outline
+    "Aether dsp": material/waveform
+    Amp: material/amplifier
+    "Antenna genius": material/antenna
+    "Band stack": material/bookmark-multiple
+    "Cat control": material/console-network
+    "Client chain": material/transit-connection-variant
+    "Client comp": material/volume-vibrate
+    "Client de ess": material/account-voice
+    "Client eq": material/equalizer
+    "Client gate": material/gate
+    "Client pudu": material/microphone-settings
+    "Client reverb": material/surround-sound
+    "Client tube": material/lightning-bolt-circle
+    Connection: material/lan-connect
+    Cwx: material/dots-horizontal
+    Dax: material/audio-input-rca
+    "Dax iq": material/sine-wave
+    Dvk: material/microphone-message
+    "Dx cluster": material/radio-tower
+    Eq: material/equalizer-outline
+    Help: material/help-circle-outline
+    Memory: material/memory
+    "Memory browse": material/folder-search
+    Meter: material/gauge
+    "Midi mapping": material/midi
+    Mqtt: material/transit-connection
+    "Multi flex": material/account-multiple
+    "Network diagnostics": material/lan
+    "Pan layout": material/view-grid
+    Panadapter: material/chart-bell-curve
+    Phone: material/microphone
+    "Phone cw": material/microphone-variant
+    "Profile manager": material/account-cog
+    "Prop dashboard": material/satellite-variant
+    "Radio setup": material/radio
+    Rx: material/arrow-down-bold-circle
+    Shortcut: material/keyboard-outline
+    "Slice troubleshooting": material/wrench
+    "Spot settings": material/map-marker-radius
+    Support: material/lifebuoy
+    Tci: material/protocol
+    Tuner: material/tune
+    Tx: material/arrow-up-bold-circle
+    "Whats new": material/star-shooting
+    Concepts: material/lightbulb-on
+    Install: material/download
+    Setup: material/cog-outline
+    Tutorials: material/school
+    "Digital modes": material/keyboard
+    Dsp: material/sine-wave
+    Remote: material/cloud
+    Networkdiagnostics: material/lan
