@@ -1,41 +1,42 @@
 # Abrir la guía de inicio incluida
 
-Abra la guía de inicio incluida para leer una introducción sin conexión a AetherSDR sin necesidad de conexión a Internet ni de una radio conectada.
+AetherSDR incluye un conjunto de temas de ayuda sin conexión que se abren sin necesidad de acceso a internet. Esta página explica cómo abrir la guía de inicio.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar instalado. No se requiere conexión a una radio.
+- AetherSDR debe estar en ejecución. No se requiere conexión a un radio.
 
 ## Pasos
 
-1. Haga clic en **Help** en la barra de menú.
-2. Haga clic en **Getting Started...**
-3. Lea el contenido en el visor de Markdown. Desplácese según sea necesario.
-4. Haga clic en **Close** cuando termine.
+1. Haga clic en `Help` en la barra de menú.
+2. Haga clic en `Getting Started...`.
+3. Se abre el diálogo de ayuda y muestra el tema de inicio en el visor de Markdown.
+4. Para buscar dentro del tema, escriba un término en el campo `Find:` y haga clic en `Next` para avanzar entre los resultados o en `Previous` para retroceder. Presione Return para ir al siguiente resultado. Presione Shift+Return para ir al resultado anterior.
+5. Para cerrar el diálogo, haga clic en `Close`.
 
 ## Qué hace cada control
 
-| Control | Descripción |
+| Control | Comportamiento |
 |---|---|
-| AETHERSDR OFFLINE HELP | Encabezado de marca que se muestra sobre el título del tema. |
-| Title | Muestra el nombre del tema de ayuda abierto. |
-| Subtitle | Descripción de una línea: "Bundled help is available even when your station computer is offline." |
-| Markdown viewer | Renderiza el contenido de Markdown de inicio incluido. Solo lectura; los enlaces externos se abren en su navegador. |
-| Hint / footer | Muestra el consejo: "The Help menu keeps each guide separate so you can reopen just the topic you need." |
-| Close | Cierra el diálogo. |
+| `AETHERSDR OFFLINE HELP` (encabezado superior) | Encabezado de marca que se muestra sobre el título del tema. Solo lectura. |
+| Title | Muestra el nombre del tema que se pasó al diálogo al abrirse. Solo lectura. |
+| Subtitle | Descripción breve del tema en una sola línea. Solo lectura. |
+| Markdown viewer | Renderiza el contenido Markdown incluido para el tema seleccionado. Solo lectura; los enlaces externos se abren en su navegador. |
+| Campo `Find:` | Escriba un asunto o término para buscar dentro del tema mostrado. Los botones `Next` y `Previous` están desactivados hasta que ingrese texto. |
+| `Next` | Encuentra la siguiente ocurrencia del término de búsqueda. Vuelve al inicio cuando se alcanza el final del documento. |
+| `Previous` | Encuentra la ocurrencia anterior del término de búsqueda. Vuelve al final cuando se alcanza el inicio del documento. |
+| Hint / footer | Muestra un breve consejo de uso. Solo lectura. |
+| `Close` | Cierra el diálogo de ayuda. |
 
 ## Consejos
 
-- Cada tema de ayuda en el menú **Help** abre su propio diálogo independiente. Puede abrir **Getting Started...** de nuevo en cualquier momento sin interrumpir otros diálogos abiertos.
-- El diálogo puede redimensionarse. El tamaño mínimo es 520 × 420 píxeles.
-
-## Solución de problemas
-
-- **El visor de Markdown muestra "Help file not available"** — El archivo de ayuda incluido no se encuentra en su instalación. Reinstale AetherSDR. Si el problema persiste, informe sobre el archivo faltante al proyecto.
+- Cada entrada del menú `Help` abre un diálogo independiente para ese tema, por lo que puede mantener varios temas abiertos al mismo tiempo.
+- El contenido de ayuda está incluido con la aplicación y no requiere conexión de red.
+- Si un archivo de ayuda no puede cargarse, el visor muestra un aviso que le solicita reinstalar AetherSDR o reportar el recurso faltante.
 
 ## Relacionados
 
 - [Leer el documento de ayuda completo de AetherSDR](read-the-full-aethersdr-help-document.md)
 - [Conocer las diferencias entre NR2, NR4, DFNR y MNR](learn-the-differences-between-nr2-nr4-dfnr-and-mnr.md)
 - [Configurar modos digitales paso a paso](configure-digital-modes-step-by-step.md)
-- [Entender cómo contribuir con informes de errores y PRs](understand-how-to-contribute-bug-reports-and-prs.md)
+- [Entender cómo contribuir con reportes de errores y PRs](understand-how-to-contribute-bug-reports-and-prs.md)

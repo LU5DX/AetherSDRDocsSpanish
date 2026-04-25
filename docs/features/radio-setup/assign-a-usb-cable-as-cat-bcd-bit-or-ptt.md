@@ -1,52 +1,58 @@
 # Asignar un cable USB como CAT, BCD, bit o PTT
 
-La pestaña USB Cables permite asignar adaptadores serie USB físicos conectados al radio Flex a un tipo de cable específico — CAT, BCD, bit o PTT — y configurar los parámetros serie por cable. Utilice esta función cuando necesite que el radio controle equipos externos, como amplificadores, decodificadores de banda o software de registro, a través de un puerto serie USB.
+La pestaña USB Cables en Radio Setup permite asignar adaptadores seriales USB físicos conectados al FLEX-8600 a roles de control específicos: CAT, BCD, bit o PTT. Use esta página cuando desee que un dispositivo externo o un controlador de amplificador se comunique con la radio mediante un cable serial USB.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. La pestaña USB Cables solo está disponible mientras hay una conexión de radio activa.
-- El cable USB debe estar físicamente conectado al puerto USB del radio Flex. Los cables que no se detectan aparecen con el estado "Unplugged" en la lista.
+- Conecte el adaptador serial USB al FLEX-8600 antes de abrir el diálogo. La radio debe detectar el cable para que aparezca en la lista.
+- AetherSDR debe estar conectado a la radio.
 
 ## Pasos
 
-1. Abra `Settings > USB Cables...`. Esto abre el diálogo Radio Setup directamente en la pestaña USB Cables. Alternativamente, abra `Settings > Radio Setup...` y haga clic en la pestaña **USB Cables**.
-2. Revise el indicador **Cables list / Status**. Cada cable USB detectado aparece en la lista con su tipo y un estado Plugged o Unplugged.
-3. Seleccione el cable que desea configurar de la lista.
-4. En **Name:**, introduzca una etiqueta descriptiva para el cable.
-5. Active **Enabled** para habilitar el cable.
-6. Configure **Speed**, **Data Bits**, **Parity**, **Stop Bits** y **Flow** para que coincidan con los parámetros serie requeridos por su equipo externo.
-7. En **Source**, seleccione la fuente de señal que seguirá este cable.
-8. Para cables BCD, configure **BCD Type** y ajuste **Polarity** según sea necesario.
-9. Para cables bit, configure **Bit Configuration (0-7)** y **Polarity**.
-10. Para cables CAT, configure **Auto Report** para controlar si el radio envía actualizaciones de frecuencia de forma automática.
-11. Para cables PTT, configure **Polarity** para que coincida con el sentido de activación de su equipo.
-12. Cierre el diálogo. Los ajustes se aplican al radio de inmediato.
+1. Abra `Settings > USB Cables...`.
+   El diálogo Radio Setup se abre con la pestaña **USB Cables** ya seleccionada.
+   Alternativamente, abra `Settings > Radio Setup...` y haga clic en la pestaña **USB Cables**.
+2. Localice su cable en el indicador **Cables list / Status**. Cada cable detectado aparece en la lista con su tipo y un estado **Plugged** o **Unplugged**.
+3. Seleccione el cable que desea configurar haciendo clic en él en la lista.
+4. Establezca el rol del cable y los parámetros seriales mediante los controles que aparecen para el cable seleccionado:
+   - **Name:** — identifica el cable.
+   - **Enabled** — habilita o deshabilita esta asignación de cable.
+   - **Speed** — velocidad en baudios del puerto serial.
+   - **Data Bits** — número de bits de datos.
+   - **Parity** — configuración de paridad.
+   - **Stop Bits** — número de bits de parada.
+   - **Flow** — método de control de flujo.
+   - **Source** — la fuente de la radio que este cable monitorea.
+   - **Auto Report** — controla el reporte automático de estado.
+   - **BCD Type** — se aplica cuando el tipo de cable es BCD; establece la variante de codificación BCD.
+   - **Polarity** — polaridad de la señal (normal o invertida).
+   - **Bit Configuration (0-7)** — se aplica cuando el tipo de cable es bit; asigna funciones individuales a cada bit.
+5. Cierre el diálogo al terminar. Los ajustes se aplican a la radio de inmediato a medida que realiza cambios.
 
 ## Qué hace cada control
 
 | Control | Descripción |
 |---|---|
-| **Cables list / Status** | Muestra todos los cables USB detectados por tipo. Indica Plugged o Unplugged para cada uno. |
-| **Name:** | Etiqueta asignada por el usuario para el cable. |
-| **Enabled** | Activa el cable. |
-| **Speed** | Velocidad de baudios serie para este cable. |
-| **Data Bits** | Número de bits de datos por trama. |
-| **Parity** | Configuración de paridad para el enlace serie. |
-| **Stop Bits** | Número de bits de parada por trama. |
+| **Cables list / Status** | Lista de solo lectura de los cables USB detectados y su estado actual **Plugged** o **Unplugged**. |
+| **Name:** | Etiqueta que identifica el cable. |
+| **Enabled** | Activa o desactiva la asignación de este cable en la radio. |
+| **Speed** | Velocidad en baudios del puerto serial para el cable. |
+| **Data Bits** | Longitud de palabra para el enlace serial. |
+| **Parity** | Modo de verificación de paridad para el enlace serial. |
+| **Stop Bits** | Número de bits de parada para el enlace serial. |
 | **Flow** | Selección de control de flujo por hardware o software. |
-| **Source** | Selecciona qué señal de radio o slice controla la salida de este cable. |
-| **Auto Report** | Cuando está activo, el radio envía actualizaciones de frecuencia y modo de forma automática (cables CAT). |
-| **BCD Type** | Selecciona el formato de codificación BCD (solo cables BCD). |
-| **Polarity** | Invierte el nivel lógico activo en la salida del cable. |
-| **Bit Configuration (0-7)** | Asigna bits de salida individuales a estados del radio (solo cables bit). |
+| **Source** | Qué slice de la radio o fuente de señal reporta este cable. |
+| **Auto Report** | Si la radio envía automáticamente actualizaciones de estado por este cable. |
+| **BCD Type** | Variante de codificación BCD; activo solo para cables de tipo BCD. |
+| **Polarity** | Establece la polaridad lógica de la señal de salida. |
+| **Bit Configuration (0-7)** | Asigna una función a cada una de las ocho salidas de bit; activo solo para cables de tipo bit. |
 
-## Consejos
+## Solución de problemas
 
-- Puede acceder a la misma pestaña desde `Settings > Radio Setup...` y luego haciendo clic en **USB Cables**, si necesita cambiar a otra pestaña (como TX o Peripherals) durante la misma sesión sin volver a abrir el diálogo.
-- El estado Plugged o Unplugged en **Cables list / Status** se actualiza de forma dinámica. Si un cable no aparece en la lista, compruebe la conexión USB física al radio y vuelva a abrir la pestaña.
+- **El cable no aparece en la lista** — La radio enumera los cables en el momento de la conexión. Desconecte y vuelva a conectar el adaptador USB, luego cierre y vuelva a abrir `Settings > USB Cables...` para actualizar la lista. Confirme que el adaptador esté conectado al puerto USB de la radio y no a la PC anfitriona.
+- **El estado muestra Unplugged** — El cable está configurado pero actualmente no está físicamente presente. Vuelva a conectar el adaptador a la radio.
 
-## Temas relacionados
+## Relacionado
 
 - [Descripción general de Radio Setup](overview.md)
-- [Configurar las funciones de los pines del puerto serie de FlexControl](configure-flexcontrol-serial-port-pin-functions.md)
-- [Conectar TGXL, PGXL o Antenna Genius por IP](../../getting-started/setup/connect-tgxl-pgxl-or-antenna-genius-by-ip.md)
+- [Configurar las funciones de los pines del puerto serial de FlexControl](configure-flexcontrol-serial-port-pin-functions.md)

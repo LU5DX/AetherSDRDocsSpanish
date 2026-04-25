@@ -1,94 +1,89 @@
 # Descripción general del panel Connect to a Radio
 
-El panel Connect to a Radio es el punto de partida para que AetherSDR se comunique con su radio Flex. Aparece automáticamente antes de que se conecte cualquier radio y cada vez que se desconecta. Úselo para elegir cómo AetherSDR accede al radio: en la red local, a través de SmartLink o mediante una dirección IP directa.
+El panel Connect to a Radio es el punto de partida de cada sesión de AetherSDR. Permite elegir cómo conectarse al FLEX-8600 — en la red local, a través de FlexRadio SmartLink o introduciendo una dirección IP directamente — y luego iniciar la conexión.
 
 ## Antes de comenzar
 
-- AetherSDR está instalado y en ejecución.
-- Su radio Flex está encendido y es accesible por al menos una de las tres rutas de conexión descritas a continuación.
+- El FLEX-8600 debe estar encendido y ejecutando el firmware 4.1.5.
+- Para conexiones SmartLink, se necesita una cuenta de FlexRadio y acceso a internet en ambos extremos.
+- Para conexiones manuales o por VPN, se necesita la dirección IP del radio.
 
 ## Cómo funciona
 
-El panel presenta tres modos de conexión como tarjetas seleccionables en la parte superior. Al hacer clic en una tarjeta, el área inferior cambia para mostrar los controles de ese modo. AetherSDR guarda el último modo utilizado en `ConnectionMode` y lo restaura en el siguiente inicio.
+El panel aparece en la ventana principal cuando no hay ningún radio conectado. También puede abrirse en cualquier momento mediante `Settings > Connect to Radio...`.
 
-**On This Network** es el modo predeterminado. AetherSDR usa descubrimiento mDNS/Flex para encontrar radios en la misma LAN de forma automática. Los radios encontrados aparecen en la lista "Available radios". Si no se encuentra ninguno, el panel cambia a un aviso de estado vacío titulado "No local radios found yet" y ofrece accesos directos para reintentar o cambiar de modo.
+Tres botones de modo en la parte superior determinan el método de conexión activo. Al seleccionar un modo, el panel inferior cambia para mostrar los controles correspondientes. AetherSDR guarda el último modo utilizado en `ConnectionMode`.
 
-**Remote with SmartLink** conecta a un radio en una ubicación remota a través de internet mediante el servicio SmartLink de FlexRadio. Inicie sesión con su cuenta de FlexRadio y los radios remotos disponibles aparecerán en la lista "Remote radios".
+### On This Network (modo local)
 
-**Connect by IP** es para túneles VPN, redes enrutadas o cualquier situación en la que ya conozca la dirección IP del radio. Escriba la dirección directamente y, opcionalmente, elija qué interfaz de red local usar para la conexión.
+Use este modo cuando el radio y la computadora están en la misma LAN. AetherSDR ejecuta automáticamente el descubrimiento mDNS/Flex y muestra los radios encontrados en **Available radios**. Seleccione un radio de la lista y haga clic en **Connect Selected Radio** para conectarse.
 
-Puede volver a abrir este panel en cualquier momento seleccionando `Settings > Connect to Radio...` desde la barra de menú.
+Si el descubrimiento no encuentra nada, el panel cambia a una vista de estado vacío que muestra **No local radios found yet**. Desde allí puede:
 
-## Qué hace cada control
+- Hacer clic en **Retry Discovery** para ejecutar el descubrimiento nuevamente.
+- Hacer clic en **Connect by IP** para cambiar a la página Manual.
+- Hacer clic en **Remote with SmartLink** para cambiar a la página de SmartLink.
+- Hacer clic en **Open Network Diagnostics** para investigar problemas de red.
 
-### Selección de modo
+Los motivos más comunes por los que el descubrimiento no encuentra nada incluyen el aislamiento de AP en redes Wi-Fi de invitados, software VPN en ejecución en el equipo y reglas de firewall que bloquean los paquetes de descubrimiento.
 
-| Control | Función | Configuración guardada |
-|---|---|---|
-| On This Network | Cambia al modo de descubrimiento en LAN. Modo predeterminado. | `ConnectionMode` |
-| Remote with SmartLink | Cambia al inicio de sesión en SmartLink y la lista de radios remotos. | `ConnectionMode` |
-| Connect by IP | Cambia a la entrada manual de IP. | `ConnectionMode` |
+### Remote with SmartLink
 
-### Modo On This Network
+Use este modo cuando el radio se encuentra en una ubicación diferente. Ingrese el correo electrónico de su cuenta de FlexRadio en **SmartLink account: Email** (guardado como `SmartLinkEmail`) y su contraseña en **SmartLink account: Password** (no se guarda), luego haga clic en **Sign In**. Tras la autenticación, AetherSDR completa la lista **Remote radios** con los radios WAN disponibles para su cuenta. Seleccione un radio y haga clic en **Connect Remote Radio**. Para finalizar la sesión, haga clic en **Sign Out**.
 
-| Control | Función |
-|---|---|
-| Available radios | Lista los radios radio Flex descubiertos en la red local. |
-| Connect Selected Radio | Conecta al radio resaltado en la lista. Deshabilitado hasta que se seleccione un radio. |
-| No local radios found yet | Aviso que se muestra cuando el descubrimiento no ha devuelto resultados. |
-| Retry Discovery | Vuelve a ejecutar el descubrimiento en LAN. |
-| Remote with SmartLink | Acceso directo que cambia directamente al modo SmartLink. |
-| Connect by IP | Acceso directo que cambia directamente al modo de IP manual. |
-| Open Network Diagnostics | Abre el diálogo de diagnóstico de red. |
+### Connect by IP (modo manual)
 
-### Modo Remote with SmartLink
+Use este modo para conexiones VPN o en redes enrutadas donde ya se conoce la dirección IP del radio. Ingrese la dirección en **Radio IP address** (guardada como `ManualRadioIp`) y luego haga clic en **Connect by IP**.
 
-| Control | Función | Configuración guardada |
-|---|---|---|
-| SmartLink account: Email | La dirección de correo electrónico de su cuenta de FlexRadio. | `SmartLinkEmail` |
-| SmartLink account: Password | La contraseña de su cuenta de FlexRadio. No se guarda entre sesiones. | — |
-| Sign In | Autentica con SmartLink usando las credenciales ingresadas. | — |
-| Sign Out | Cierra la sesión de SmartLink actual. | — |
-| Remote radios | Lista los radios disponibles para su cuenta de SmartLink después de iniciar sesión. | — |
-| Connect Remote Radio | Inicia una conexión WAN al radio remoto seleccionado. | — |
+Hay dos controles adicionales disponibles en esta página:
 
-### Modo Connect by IP
+- **Advanced: Source path** — selecciona la interfaz de red local (NIC) utilizada para la conexión. La interfaz seleccionada se guarda como `ManualBindSource`. Aparece un **Source warning label** si la interfaz guardada no está disponible o está desactualizada.
+- **Use low bandwidth mode** — reduce las tasas de transferencia de flujos de datos para enlaces lentos o congestionados. Se guarda como `LowBandwidthMode`.
 
-| Control | Función | Configuración guardada |
-|---|---|---|
-| Radio IP address | La dirección IP del radio al que conectarse. | `ManualRadioIp` |
-| Advanced: Source path | Selecciona qué interfaz de red local usar para la conexión. | `ManualBindSource` |
-| Use low bandwidth mode | Habilita flujos de audio y datos a tasa reducida para enlaces lentos o congestionados. | `LowBandwidthMode` |
-| Connect by IP (manual) | Inicia el intento de conexión a la dirección ingresada. | — |
-| Network Diagnostics | Abre el diálogo de diagnóstico de red desde la página de IP manual. | — |
+Haga clic en **Network Diagnostics** en esta página para abrir la herramienta de diagnóstico de red si la conexión falla.
 
 ### Indicadores de estado
 
-| Indicador | Significado |
-|---|---|
-| Status label | Muestra el estado actual de la conexión: buscando, conectando, conectado o un mensaje de error. |
-| Manual result label | Muestra el resultado después de que AetherSDR sondea una dirección IP ingresada manualmente. |
-| Source warning label | Advierte cuando la interfaz de red seleccionada en "Advanced: Source path" está desactualizada o no es accesible. |
+Independientemente del modo, un **Status label** muestra el estado actual de la conexión (buscando, conectando, conectado o un mensaje de error). Tras verificar una IP manual, un **Manual result label** indica si la verificación fue exitosa o falló.
 
 ### Desconexión
 
-| Control | Función |
-|---|---|
-| Disconnect | Termina la conexión actual con el radio y regresa a este panel. |
+Una vez conectado, haga clic en **Disconnect** para volver al panel de conexión. También puede acceder al panel nuevamente mediante `Settings > Connect to Radio...`.
 
-## Sugerencias
+## Qué hace cada control
 
-- Si aparece "No local radios found yet", las causas más comunes son el aislamiento de red en Wi-Fi de invitados, software VPN o un cortafuegos que bloquea los paquetes mDNS. Haga clic en "Open Network Diagnostics" para investigar, o cambie a "Connect by IP" si el radio está en una red enrutada o VPN.
-- La contraseña de SmartLink nunca se guarda en disco. Deberá ingresarla nuevamente después de reiniciar AetherSDR.
-- El "Source warning label" aparece cuando la interfaz almacenada en `ManualBindSource` ya no está presente o no es accesible — por ejemplo, tras una reconfiguración de red. Seleccione una interfaz actual en "Advanced: Source path" antes de conectarse.
+| Control | Modo | Comportamiento | Clave guardada | Valor predeterminado |
+|---|---|---|---|---|
+| **On This Network** | — | Cambia al modo de descubrimiento en LAN local. | `ConnectionMode` | Local |
+| **Remote with SmartLink** | — | Cambia al modo remoto SmartLink. | `ConnectionMode` | — |
+| **Connect by IP** | — | Cambia al modo de entrada manual de IP. | `ConnectionMode` | — |
+| **Available radios** | Local | Lista los radios encontrados por el descubrimiento en LAN. | — | — |
+| **Connect Selected Radio** | Local | Se conecta al radio seleccionado. | — | — |
+| **No local radios found yet** | Local | Indicador que aparece cuando el descubrimiento no encuentra nada. | — | — |
+| **Retry Discovery** | Local | Vuelve a ejecutar el descubrimiento en LAN. | — | — |
+| **Remote with SmartLink** (acceso directo) | Local | Cambia a la página de SmartLink. | — | — |
+| **Connect by IP** (acceso directo) | Local | Cambia a la página Manual. | — | — |
+| **Open Network Diagnostics** | Local | Abre la herramienta de diagnóstico de red. | — | — |
+| **SmartLink account: Email** | SmartLink | Dirección de correo electrónico de la cuenta de FlexRadio. | `SmartLinkEmail` | — |
+| **SmartLink account: Password** | SmartLink | Contraseña de la cuenta (no se guarda entre sesiones). | — | — |
+| **Sign In** | SmartLink | Autentica con SmartLink. | — | — |
+| **Sign Out** | SmartLink | Cierra sesión en SmartLink. | — | — |
+| **Remote radios** | SmartLink | Lista los radios WAN disponibles para la cuenta. | — | — |
+| **Connect Remote Radio** | SmartLink | Inicia una conexión WAN al radio seleccionado. | — | — |
+| **Radio IP address** | Manual | Dirección IP del radio al que se desea conectar. | `ManualRadioIp` | — |
+| **Advanced: Source path** | Manual | Selecciona la NIC local para la conexión. | `ManualBindSource` | — |
+| **Use low bandwidth mode** | Manual | Activa flujos de datos a tasa reducida para enlaces lentos. | `LowBandwidthMode` | — |
+| **Network Diagnostics** | Manual | Abre la herramienta de diagnóstico de red. | — | — |
+| **Connect by IP** (manual) | Manual | Inicia la conexión manual o por VPN. | — | — |
+| **Disconnect** | Todos | Desconecta del radio actual. | — | — |
 
 ## Temas relacionados
 
-- [Conectarse a un radio en LAN local](../../getting-started/setup/connect-to-a-local-lan-radio.md)
+- [Conectarse a un radio en la LAN local](../../getting-started/setup/connect-to-a-local-lan-radio.md)
 - [Reintentar el descubrimiento cuando no aparecen radios](retry-discovery-when-no-radios-appear.md)
 - [Iniciar sesión en SmartLink para ver radios remotos](log-in-to-smartlink-to-see-remote-radios.md)
 - [Conectarse a un radio remoto a través de SmartLink](../../getting-started/setup/connect-to-a-remote-radio-through-smartlink.md)
 - [Conectarse por IP a través de una VPN o red enrutada](../../getting-started/setup/connect-by-ip-across-a-vpn-or-routed-network.md)
-- [Elegir la interfaz de red local para una conexión manual](../../getting-started/setup/pick-the-local-network-interface-used-for-a-manual-connection.md)
-- [Habilitar el modo de bajo ancho de banda para enlaces lentos](enable-low-bandwidth-mode-for-slow-links.md)
+- [Seleccionar la interfaz de red local para una conexión manual](../../getting-started/setup/pick-the-local-network-interface-used-for-a-manual-connection.md)
+- [Activar el modo de bajo ancho de banda para enlaces lentos](enable-low-bandwidth-mode-for-slow-links.md)
 - [Desconectarse del radio actual](../../getting-started/setup/disconnect-from-the-current-radio.md)

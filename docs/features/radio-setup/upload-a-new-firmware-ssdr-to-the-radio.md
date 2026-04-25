@@ -1,34 +1,35 @@
-# Cargar un nuevo firmware .ssdr en la radio
+# Cargar un nuevo archivo de firmware .ssdr en la radio
 
-Use esta página para cargar una nueva imagen de firmware en su radio Flex. Necesitará un archivo de firmware `.ssdr` en su equipo local antes de comenzar.
+Esta página explica cómo cargar un archivo de imagen de firmware en su FLEX-8600 usando el cargador integrado de AetherSDR. Utilice este procedimiento cuando FlexRadio publique un nuevo paquete de firmware `.ssdr` y desee actualizar la radio sin salir de AetherSDR.
 
-## Antes de empezar
+## Antes de comenzar
 
-- AetherSDR debe estar conectado a la radio. La pestaña Radio en Radio Setup no está disponible sin una conexión activa.
-- Descargue el archivo de firmware `.ssdr` de destino y anote su ubicación en el disco.
+- La radio debe estar conectada. La pestaña `Radio` de Radio Setup solo funciona cuando AetherSDR tiene una conexión de radio activa.
+- Descargue el archivo de firmware `.ssdr` desde FlexRadio a su computadora antes de abrir el diálogo.
 - No transmita durante la carga.
 
 ## Pasos
 
 1. Abra `Settings > Radio Setup...`.
-2. Haga clic en la pestaña **Radio**.
-3. Haga clic en **Browse .ssdr...** para abrir un selector de archivos, luego seleccione su archivo de firmware `.ssdr` y confirme.
-4. Haga clic en **Upload Firmware**.
-5. Observe el indicador de estado del firmware debajo del botón. Permanece vacío hasta que comienza la carga, luego muestra el progreso y un mensaje de resultado al finalizar.
-6. Cierre el cuadro de diálogo cuando el indicador de estado confirme que la carga finalizó.
+2. Haga clic en la pestaña `Radio`.
+3. Haga clic en `Browse .ssdr...` para abrir un diálogo de selección de archivos.
+4. Navegue hasta el archivo `.ssdr` que descargó y selecciónelo. El nombre del archivo se mostrará junto al botón.
+5. Haga clic en `Upload Firmware`.
+6. Observe la barra de progreso y el texto de estado debajo del botón. La carga se completa cuando el texto de estado indica que fue exitosa.
+7. Reinicie la radio según las instrucciones de las notas de la versión del firmware para aplicar el nuevo firmware.
 
 ## Consejos
 
-- Si desea que AetherSDR confirme qué versión de firmware tiene actualmente la radio antes de seleccionar un archivo, consulte **HW Version** en el grupo Radio Information de la misma pestaña.
-- El botón **Check for Update** consulta las actualizaciones de firmware disponibles si su radio tiene acceso a internet configurado.
+- Si desea verificar si hay una versión de firmware más reciente disponible antes de obtener el archivo manualmente, haga clic en `Check for Update`. AetherSDR consultará las actualizaciones de firmware disponibles e informará el resultado en el área de estado.
+- Los campos `Radio SN`, `HW Version` y `Model` en la misma pestaña confirman que está viendo la radio correcta antes de cargar.
 
 ## Solución de problemas
 
-- **Browse .ssdr... se abre pero no aparece ningún archivo en el selector** — Confirme que el archivo tenga la extensión `.ssdr`. El selector de archivos filtra por ese tipo.
-- **Upload Firmware no responde después de hacer clic en Browse .ssdr...** — Aún no se ha seleccionado ningún archivo. Haga clic en **Browse .ssdr...** nuevamente y confirme un archivo antes de hacer clic en **Upload Firmware**.
-- **El indicador de estado muestra un mensaje de error** — Verifique que la radio siga conectada (`Settings > Connect to Radio...`) y que ningún otro cliente tenga una sesión exclusiva activa. Luego reintente desde el paso 3.
+- **Upload Firmware no responde** — Aún no se ha seleccionado ningún archivo `.ssdr`. Haga clic primero en `Browse .ssdr...`, confirme que el archivo aparece y luego haga clic en `Upload Firmware`.
+- **La barra de progreso se detiene o el estado muestra un error** — Verifique que la radio siga conectada y sea accesible en la red. Revise `Settings > Network...` para detectar problemas de conectividad y luego reintente la carga desde el paso 3.
+- **Se actualizó la radio incorrecta** — Confirme que los indicadores `Radio SN` y `Model` en la pestaña Radio coincidan con la radio deseada antes de hacer clic en `Upload Firmware`.
 
 ## Relacionados
 
-- [Consultar el número de serie, versión de hardware, región y opciones de la radio](check-radio-serial-hardware-version-region-and-options.md)
-- [Descripción general de Radio Setup](overview.md)
+- [Consultar el número de serie, la versión de hardware, la región y las opciones de la radio](check-radio-serial-hardware-version-region-and-options.md)
+- [Cambiar la radio entre DHCP e IP estática](switch-the-radio-between-dhcp-and-static-ip.md)

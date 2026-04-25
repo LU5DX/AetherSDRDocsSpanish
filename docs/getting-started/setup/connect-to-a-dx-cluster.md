@@ -1,53 +1,55 @@
 # Conectarse a un clúster DX
 
-Abra el diálogo SpotHub e introduzca el nombre de host, el puerto y el indicativo de su clúster para que los spots DX aparezcan como superposiciones en el panadapter.
+El diálogo SpotHub de AetherSDR permite conectarse a un clúster DX por telnet y mostrar los spots entrantes como superposiciones en el panadapter. Use esta página para realizar su primera conexión y, opcionalmente, reconectarse de forma automática en cada inicio.
 
 ## Antes de comenzar
 
-- Conozca el nombre de host (o dirección IP) y el puerto telnet del clúster DX que desea utilizar (por ejemplo, `dxc.k0xm.net`, puerto `23`).
-- Tenga a mano su indicativo — el clúster lo utiliza para el inicio de sesión.
+- Conozca el nombre de host (o dirección IP) y el puerto telnet del clúster DX que desea usar (por ejemplo, `dxc.k0xm.net` en el puerto `7373`).
+- Conozca el indicativo con el que iniciará sesión en el clúster.
 
 ## Pasos
 
-1. Haga clic en `Settings > SpotHub...` para abrir el diálogo SpotHub.
+1. Abra `Settings > SpotHub...`.
 2. Haga clic en la pestaña **Cluster**.
-3. En el campo **Server:**, escriba el nombre de host o la dirección IP del clúster. Este valor se guarda como `ClusterHost`.
-4. En el campo **Port:**, establezca el puerto telnet (rango válido: 1–65535). Este valor se guarda como `ClusterPort`.
-5. En el campo **Callsign:**, escriba su indicativo. Este valor se guarda como `ClusterCallsign`.
-6. Haga clic en **Connect**. La etiqueta del botón cambia a **Disconnect** cuando la sesión se establece, y la **Cluster Console** muestra `--- Connected ---`.
-7. Para conectarse automáticamente cada vez que AetherSDR se inicia, haga clic en **Auto-connect on startup** para habilitarlo. Este valor se guarda como `ClusterAutoConnect`.
+3. En el campo **Server:**, escriba el nombre de host o la dirección IP del clúster. Esto se guarda en `ClusterHost`.
+4. En el campo **Port:**, establezca el puerto telnet (1–65535). Esto se guarda en `ClusterPort`.
+5. En el campo **Callsign:**, escriba su indicativo. Esto se guarda en `ClusterCallsign`.
+6. Haga clic en **Connect**.
+   - El indicador de estado cambia a **Connected** y la etiqueta del botón cambia a **Disconnect**.
+   - El tráfico entrante del clúster aparece en la pantalla de solo lectura **Cluster Console**.
+7. Para reconectarse automáticamente cada vez que inicie AetherSDR, habilite **Auto-connect on startup**. Esto se guarda en `ClusterAutoConnect`.
 
 ## Qué hace cada control
 
-| Control | Comportamiento | Clave de configuración | Valor predeterminado | Rango válido |
-|---|---|---|---|---|
-| **Server:** | Nombre de host del clúster DX. | `ClusterHost` | — | Cualquier nombre de host o IP |
-| **Port:** | Puerto telnet del clúster. | `ClusterPort` | — | 1–65535 |
-| **Callsign:** | Indicativo de inicio de sesión enviado al clúster al conectarse. | `ClusterCallsign` | — | — |
-| **Connect / Disconnect** | Activa o desactiva la conexión telnet. | — | Connect | — |
-| **Auto-connect on startup** | Reconecta a este clúster cada vez que AetherSDR se inicia. | `ClusterAutoConnect` | — | — |
-| **Cluster Console** | Visualización de solo lectura del tráfico sin procesar del clúster. | — | — | — |
-| **Send** (línea de comandos) | Envía un comando escrito al clúster conectado. | — | — | — |
-| **Spot Color:** | Abre un selector de color para los spots provenientes del clúster en el panadapter. | `ClusterSpotColor` | — | — |
+| Control | Descripción | Clave de configuración |
+|---|---|---|
+| **Server:** | Nombre de host o dirección IP del servidor telnet del clúster DX. | `ClusterHost` |
+| **Port:** | Puerto telnet. Rango válido: 1–65535. | `ClusterPort` |
+| **Callsign:** | Indicativo de inicio de sesión enviado al clúster al conectarse. | `ClusterCallsign` |
+| **Connect / Disconnect** | Activa o desactiva la conexión telnet. La etiqueta muestra la acción actual. | — |
+| **Auto-connect on startup** | Conecta al clúster automáticamente cuando AetherSDR se inicia. | `ClusterAutoConnect` |
+| **Cluster Console** | Pantalla de solo lectura del tráfico telnet sin procesar proveniente del clúster. | — |
+| **Send** (línea de comandos) | Envía un comando escrito al clúster mientras está conectado. | — |
+| **Spot Color:** | Abre un selector de color para las superposiciones de spots del clúster en el panadapter. | `ClusterSpotColor` |
 
 ## Consejos
 
-- La **Cluster Console** muestra la salida telnet sin procesar, incluidos los mensajes de inicio de sesión. Si el clúster requiere una contraseña, escríbala en el campo de comandos y haga clic en **Send**.
-- Para sintonizar directamente una frecuencia detectada en un spot, cambie a la pestaña **Spot List** y haga doble clic en la fila correspondiente.
-- Las superposiciones de spots en el panadapter se controlan globalmente mediante el selector **Spots:** en la pestaña **Display** (`IsSpotsEnabled`, valor predeterminado: habilitado). Si los spots no son visibles después de conectarse, verifique ese selector.
+- Mientras esté conectado, escriba un comando del clúster en el campo junto a **Send** y haga clic en **Send** para interactuar directamente con el clúster (por ejemplo, `set/dx` o `sh/dx 20`).
+- Las superposiciones de spots aparecen en el panadapter solo cuando el selector principal **Spots:** de la pestaña **Display** está habilitado (valor predeterminado: habilitado, guardado en `IsSpotsEnabled`).
+- Para revisar el tráfico reciente del clúster anterior a la apertura de SpotHub, desplácese hacia arriba en la **Cluster Console** — AetherSDR carga hasta las últimas 500 líneas del archivo de registro del clúster cuando se abre el diálogo.
 
 ## Solución de problemas
 
-- **El botón permanece como "Connect" después de hacer clic** — El nombre de host o el puerto del clúster es incorrecto, o el servidor no es accesible desde su red. Revise la **Cluster Console** en busca de una línea de error y verifique el nombre de host y el puerto.
-- **No aparecen spots en el panadapter a pesar de estar conectado** — Confirme que **Spots:** en la pestaña **Display** esté habilitado. Verifique también que la banda de los spots entrantes no esté oculta mediante las casillas **Bands:** en la pestaña **Spot List**.
-- **"Error: …" mostrado en la consola** — El clúster rechazó la conexión o la interrumpió. Esto suele ser un problema de inicio de sesión; observe la **Cluster Console** para ver el mensaje de inicio de sesión del clúster y envíe su indicativo manualmente con **Send** para confirmar las credenciales.
+- **El estado muestra "Error: ..."** — El nombre de host o el puerto es incorrecto, o el servidor del clúster no es accesible. Verifique la dirección y el puerto, luego haga clic en **Connect** nuevamente.
+- **La Cluster Console está vacía después de conectarse** — Algunos clústeres requieren que envíe su indicativo como primer comando. Escriba su indicativo en el campo de comandos y haga clic en **Send**.
+- **Los spots no aparecen en el panadapter** — Abra la pestaña **Display** y confirme que **Spots:** esté habilitado.
 
-## Relacionado
+## Relacionados
 
 - [Descripción general de SpotHub](../../features/dx-cluster/overview.md)
 - [Conectarse a la Reverse Beacon Network](connect-to-the-reverse-beacon-network.md)
 - [Sintonizar un spot haciendo doble clic en la lista de spots](../../features/dx-cluster/tune-to-a-spot-by-double-clicking-the-spot-list.md)
-- [Ajustar densidad, posición, tamaño de fuente y duración de los spots](../../features/dx-cluster/tune-spot-density-position-font-size-and-lifetime.md)
-- [Habilitar el coloreado DXCC desde un registro ADIF](../../features/dx-cluster/enable-dxcc-coloring-from-an-adif-log.md)
 - [Elegir colores para cada fuente de spots](../../features/dx-cluster/pick-colors-for-each-spot-source.md)
+- [Ajustar la densidad, posición, tamaño de fuente y tiempo de vida de los spots](../../features/dx-cluster/tune-spot-density-position-font-size-and-lifetime.md)
+- [Habilitar el coloreado DXCC desde un registro ADIF](../../features/dx-cluster/enable-dxcc-coloring-from-an-adif-log.md)
 - [Borrar todos los spots del panadapter](../../features/dx-cluster/clear-all-spots-from-the-panadapter.md)

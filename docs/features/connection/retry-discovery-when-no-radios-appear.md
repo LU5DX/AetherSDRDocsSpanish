@@ -1,51 +1,46 @@
 # Reintentar el descubrimiento cuando no aparecen radios
 
-Cuando AetherSDR se abre en modo local y no aparece ninguna radio en la lista, use el aviso "No local radios found yet" para volver a ejecutar el descubrimiento o cambiar a una ruta de conexión alternativa.
+Cuando el descubrimiento local de AetherSDR no encuentra radios, el aviso "No local radios found yet" aparece en lugar de la lista de radios. Esta página explica cómo activar un nuevo escaneo de descubrimiento y qué intentar si la lista permanece vacía.
 
 ## Antes de comenzar
 
-- El radio Flex está encendido y conectado a la misma LAN que su computadora.
-- AetherSDR está en ejecución y muestra el panel "Connect to a Radio". Si no es visible, haga clic en `Settings > Connect to Radio...`.
+- AetherSDR está abierto y muestra el panel "Connect to a Radio". Si no está visible, vaya a `Settings > Connect to Radio...`.
+- Su FLEX-8600 está encendido y conectado a la misma LAN que su computadora.
 
 ## Pasos
 
-1. Abra el panel "Connect to a Radio". Si ya hay una radio conectada, aparecerá después de desconectarla.
-2. Haga clic en `Local` (etiquetado como **On This Network**) si aún no está seleccionado. Este es el modo predeterminado (`ConnectionMode` = `LocalMode`).
-3. Espere unos segundos. AetherSDR escucha paquetes de descubrimiento automáticamente. Si no se encuentran radios, el aviso **No local radios found yet** aparece en lugar de la lista de radios.
-4. Haga clic en **Retry Discovery** para volver a ejecutar el descubrimiento en la LAN de inmediato.
-5. Si ahora aparece una radio en la lista **Available radios**, selecciónela y haga clic en **Connect Selected Radio**.
-6. Si no aparece ninguna radio después de reintentar, use uno de los botones alternativos del aviso:
-   - Haga clic en **Connect by IP** para ir a la página Manual e ingresar la dirección IP de la radio directamente.
-   - Haga clic en **Remote with SmartLink** para ir a la página de SmartLink y conectarse a través de internet.
-   - Haga clic en **Open Network Diagnostics** para inspeccionar el estado de la red e identificar qué está bloqueando el descubrimiento.
+1. En el panel "Connect to a Radio", confirme que **On This Network** sea el modo seleccionado. Si no lo es, haga clic en **On This Network**.
+2. Si el aviso "No local radios found yet" está visible, haga clic en **Retry Discovery**.
+3. Espere unos segundos para que AetherSDR escuche los paquetes de descubrimiento. Si su radio es encontrada, aparece en la lista **Available radios**.
+4. Seleccione su radio en la lista **Available radios** y luego haga clic en **Connect Selected Radio**.
 
 ## Qué hace cada control
 
 | Control | Tipo | Comportamiento | Clave de configuración |
 |---|---|---|---|
-| **On This Network** | Botón de modo | Selecciona el modo de descubrimiento en la LAN local. | `ConnectionMode` |
-| **No local radios found yet** | Indicador | Se muestra cuando el descubrimiento no devuelve resultados. | — |
-| **Retry Discovery** | Botón | Vuelve a ejecutar el descubrimiento en la LAN sin reiniciar la aplicación. | — |
-| **Available radios** | Lista | Muestra las radios encontradas mediante descubrimiento mDNS/Flex. | — |
-| **Connect Selected Radio** | Botón | Se conecta a la radio resaltada en la lista. | — |
-| **Connect by IP** | Botón | Cambia a la página Manual para ingresar la IP directamente. | `ManualRadioIp` |
-| **Remote with SmartLink** | Botón | Cambia a la página de SmartLink. | `SmartLinkEmail` |
-| **Open Network Diagnostics** | Botón | Abre el diálogo de diagnóstico de red. | — |
+| **On This Network** | Botón de modo | Cambia al modo de descubrimiento en la LAN local. | `ConnectionMode` |
+| **No local radios found yet** | Indicador | Se muestra cuando el descubrimiento no devuelve resultados. Reemplaza la lista de radios. | — |
+| **Retry Discovery** | Botón | Vuelve a ejecutar el escaneo de descubrimiento en la LAN de inmediato. | — |
+| **Connect Selected Radio** | Botón | Conecta a la radio resaltada en la lista **Available radios**. | — |
+| **Connect by IP** | Botón | Acceso directo al modo de conexión manual por dirección IP. | `ConnectionMode` |
+| **Remote with SmartLink** | Botón | Acceso directo al modo de conexión mediante SmartLink. | `ConnectionMode` |
+| **Open Network Diagnostics** | Botón | Abre la pantalla de diagnóstico de red para inspeccionar la conectividad. | — |
 
 ## Consejos
 
-- El descubrimiento depende de paquetes mDNS y de descubrimiento Flex. Las redes Wi-Fi de invitados, el software VPN y las reglas del firewall suelen bloquear estos paquetes, lo que provoca que el aviso **No local radios found yet** aparezca incluso cuando la radio es accesible. Si reintentar no ayuda, verifique que su computadora y la radio estén en la misma subred y que ninguna VPN esté redirigiendo el tráfico fuera de la interfaz local.
-- Si la radio está en una subred diferente o detrás de una VPN, **Retry Discovery** no tendrá éxito. Use **Connect by IP** en su lugar.
+- El aviso "No local radios found yet" también se muestra mientras el descubrimiento aún está en curso inmediatamente después del inicio. Espere unos segundos antes de concluir que la radio no es alcanzable.
+- Si la radio y la computadora están en subredes diferentes o está usando una VPN, los paquetes de descubrimiento mDNS no cruzarán el límite de la red. Haga clic en **Connect by IP** en su lugar e ingrese la dirección IP de la radio directamente.
+- Las redes Wi-Fi de invitados comúnmente bloquean el tráfico entre dispositivos. Si está en Wi-Fi, verifique si su punto de acceso aplica aislamiento de clientes.
 
 ## Solución de problemas
 
-- **Retry Discovery no tiene efecto y la lista permanece vacía** — Es probable que la radio y la computadora estén en segmentos de red diferentes, o que un firewall esté bloqueando el tráfico de descubrimiento. Cambie a **Connect by IP** e ingrese la dirección IP de la radio, o conéctese a través de SmartLink si la radio se encuentra en una ubicación remota.
-- **La radio apareció una vez pero desapareció de la lista** — Una interrupción de red descartó el paquete de descubrimiento. Haga clic en **Retry Discovery**. Si esto se repite, verifique si hay cambios de dirección IP en la radio o una conexión Wi-Fi inestable.
+- **Retry Discovery no hace nada y la lista permanece vacía** — Es posible que la radio esté en una subred diferente, detrás de una VPN o bloqueada por un firewall del host. Haga clic en **Connect by IP** e ingrese la dirección IP de la radio manualmente, o haga clic en **Open Network Diagnostics** para obtener más detalles.
+- **La radio aparece brevemente y luego desaparece** — Inestabilidad de red o un firewall que interrumpe el tráfico mDNS de forma intermitente. Revise las reglas de su firewall y reintente. Si el problema persiste, use **Connect by IP** para una conexión estable.
+- **Open Network Diagnostics no muestra información útil** — Vaya a `Settings > Network...` para abrir la pantalla completa de diagnóstico de red.
 
 ## Relacionados
 
-- [Conectarse a una radio en la LAN local](../../getting-started/setup/connect-to-a-local-lan-radio.md)
-- [Conectarse por IP a través de una VPN o red enrutada](../../getting-started/setup/connect-by-ip-across-a-vpn-or-routed-network.md)
-- [Conectarse a una radio remota a través de SmartLink](../../getting-started/setup/connect-to-a-remote-radio-through-smartlink.md)
+- [Conectar a una radio en la LAN local](../../getting-started/setup/connect-to-a-local-lan-radio.md)
+- [Conectar por IP a través de una VPN o red enrutada](../../getting-started/setup/connect-by-ip-across-a-vpn-or-routed-network.md)
 - [Iniciar sesión en SmartLink para ver radios remotas](log-in-to-smartlink-to-see-remote-radios.md)
-- [Seleccionar la interfaz de red local para una conexión manual](../../getting-started/setup/pick-the-local-network-interface-used-for-a-manual-connection.md)
+- [Conectar a una radio remota mediante SmartLink](../../getting-started/setup/connect-to-a-remote-radio-through-smartlink.md)

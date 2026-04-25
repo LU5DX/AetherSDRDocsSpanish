@@ -1,37 +1,42 @@
 # Ver todas las estaciones conectadas a este FLEX
 
-El multiFLEX Dashboard muestra todos los clientes que comparten actualmente su radio Flex y lo que cada uno está haciendo. Úselo para confirmar quién está conectado, qué antena utiliza cada uno y en qué frecuencia está transmitiendo.
+El panel multiFLEX Dashboard muestra todos los clientes que comparten el radio en ese momento, indicando el nombre de cada estación, la antena de transmisión y la frecuencia de transmisión. Úselo para verificar quién más está en el radio antes de transmitir.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. El multiFLEX Dashboard requiere una conexión activa con el radio.
-- multiFLEX debe estar habilitado en el radio. Si el panel no muestra estaciones, verifique que multiFLEX esté activo (consulte [Habilitar multiFLEX en el radio](../../features/multi-flex/enable-multiflex-on-the-radio.md)).
+- AetherSDR debe estar conectado a un radio FLEX-8600. La opción de menú no está disponible sin una conexión de radio activa.
+- multiFLEX debe estar habilitado en el radio. Si no lo está, la tabla Stations aparecerá vacía o mostrará únicamente su propia estación.
 
 ## Pasos
 
 1. Haga clic en `Settings > multiFLEX...`.
-2. El **multiFLEX Dashboard** se abre y llena inmediatamente la **Stations table** con todos los clientes conectados.
-3. Lea la tabla. Cada fila corresponde a un cliente. Las columnas son **LOCAL PTT**, **STATION**, **TX ANT** y **TX FREQ (MHz)**. Su propia estación aparece resaltada en azul.
-4. Haga clic en `Close` cuando termine.
+2. Se abre el **multiFLEX Dashboard**. La **tabla Stations** lista cada cliente conectado en cuatro columnas: **LOCAL PTT**, **STATION**, **TX ANT** y **TX FREQ (MHz)**.
+3. Revise la tabla. Su propia estación aparece resaltada en azul. Una marca de verificación en la columna **LOCAL PTT** indica qué estación tiene actualmente la autoridad de PTT.
+4. Haga clic en **Close** cuando termine.
 
 ## Qué hace cada control
 
-| Control | Descripción |
+| Control | Qué hace |
 |---|---|
-| Botón `Enabled` / `Disabled` | Activa o desactiva multiFLEX en el radio. La etiqueta del botón refleja el estado actual. |
-| **Stations table** | Lista todos los clientes multiFLEX conectados. Columnas: **LOCAL PTT** (marca de verificación si esa estación tiene PTT activo), **STATION** (programa y nombre de la estación), **TX ANT** (antena de transmisión), **TX FREQ (MHz)** (frecuencia de transmisión). Muestra `----` cuando un valor no está disponible. |
-| `Enable` (PTT) | Solicita autoridad PTT local para su estación. Aparece solo cuando hay otro cliente conectado y su estación no tiene PTT en ese momento. |
-| `Close` | Cierra el cuadro de diálogo. |
+| Botón **Enabled** / **Disabled** | Activa o desactiva multiFLEX en el radio. Muestra **Enabled** (verde) o **Disabled** (rojo) para reflejar el estado actual. |
+| **Tabla Stations** | Lista cada cliente multiFLEX conectado. Columnas: **LOCAL PTT** (marca si esta estación tiene PTT), **STATION** (programa y nombre de estación), **TX ANT** (antena de transmisión), **TX FREQ (MHz)** (frecuencia de transmisión en MHz). |
+| **Enable** (PTT) | Reclama la autoridad de PTT local para su estación. Solo es visible cuando otra estación tiene el PTT y usted no. |
+| **Close** | Cierra el cuadro de diálogo. |
 
 ## Consejos
 
-- La tabla se actualiza automáticamente cuando los clientes se conectan, se desconectan o cambian de estado. No es necesario volver a abrir el cuadro de diálogo para ver los cambios.
-- La fila de su propia estación se muestra en un color diferenciado para que pueda localizarla rápidamente en una lista con muchas entradas.
-- El botón `Enable` (PTT) está oculto cuando su estación ya tiene PTT activo o cuando usted es el único cliente conectado.
+- La fila de su propia estación se muestra en azul. Las demás estaciones se muestran con el color predeterminado.
+- Si solo hay una estación conectada, la etiqueta de PTT y el botón **Enable** están ocultos: el PTT no está en disputa.
+- La antena TX y la frecuencia muestran `----` si el radio aún no ha reportado datos de slice para esa estación.
 
-## Relacionados
+## Solución de problemas
+
+- **La tabla Stations muestra solo una fila o está vacía** — Es posible que multiFLEX no esté habilitado en el radio. Haga clic en el botón **Disabled** para habilitarlo y verifique si aparecen otros clientes.
+- **TX ANT y TX FREQ muestran `----` para una estación** — Los datos de estado de slice de ese cliente aún no han llegado desde el radio. Espere un momento; la tabla se actualizará automáticamente cuando se reciban los datos.
+
+## Temas relacionados
 
 - [Descripción general del multiFLEX Dashboard](../../features/multi-flex/overview.md)
 - [Habilitar multiFLEX en el radio](../../features/multi-flex/enable-multiflex-on-the-radio.md)
-- [Conceder o revocar PTT local](../../features/multi-flex/grant-or-revoke-local-ptt.md)
+- [Otorgar o revocar el PTT local](../../features/multi-flex/grant-or-revoke-local-ptt.md)
 - [Verificar qué antena y frecuencia usa cada estación TX](../../features/multi-flex/check-which-antenna-and-frequency-each-tx-station-is-using.md)

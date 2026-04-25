@@ -1,99 +1,103 @@
 # Configuración de modos digitales (FT8, WSJT-X, fldigi)
 
-Esta página explica cómo conectar AetherSDR con programas de modos digitales como WSJT-X o fldigi. Se necesitan dos cosas funcionando en conjunto: DAX para transportar audio entre la radio y el programa externo, y control CAT para que el programa externo pueda leer y establecer la frecuencia y el modo.
+Esta página explica cómo conectar WSJT-X, fldigi u otro software de modos digitales a AetherSDR para que el audio y el control del equipo funcionen correctamente. Es necesario enrutar el audio de recepción desde el equipo (mediante DAX) y proporcionar al software digital una forma de controlar la frecuencia y el modo (mediante CAT).
 
 ## Antes de comenzar
 
-- AetherSDR está conectado a su radio Flex (el ícono de radio en la barra de título muestra una conexión activa).
-- WSJT-X, fldigi u otro programa de modos digitales está instalado y cerrado por ahora. Configure AetherSDR primero y luego inicie el programa externo.
-- Decida qué slice (canal de recepción) usará para los modos digitales y anote su letra (A, B, C o D).
+- AetherSDR está conectado a un equipo FLEX-8600.
+- Al menos un slice (canal de recepción independiente) está activo en la banda que desea operar.
+- Su software digital (WSJT-X, fldigi, etc.) está instalado y aún no se encuentra en ejecución.
 
 ## Pasos
 
-### 1. Habilitar audio DAX
+### 1. Habilitar el puente de audio DAX
 
-1. Haga clic en el botón **DAX** del panel lateral derecho. Aparece el applet de audio DAX.
-2. Haga clic en **Enable**. El botón se vuelve verde. AetherSDR inicia el puente de audio DAX y guarda `AutoStartDAX` = `True`.
-3. Verifique el indicador de asignación de slice junto a **DAX 1** (o el canal que planea usar). Debe mostrar **Slice A** (o la letra que corresponde a su slice digital). Si muestra **—**, asigne el slice a ese canal DAX en la configuración de slices de su radio.
-4. Si el nivel de audio de recepción en su programa externo es demasiado bajo o alto, arrastre el control deslizante **DAX 1 gain+meter** hacia la izquierda o la derecha. El valor predeterminado es 0.5 (rango 0.0–1.0); el valor se guarda como `DaxRxGain1`.
-5. Si necesita transmitir audio (FT8, fldigi), ajuste el control deslizante **TX gain+meter** al nivel deseado. El valor predeterminado es 0.5 (rango 0.0–1.0); se guarda como `DaxTxGain`.
+1. Haga clic en el botón **DAX** de la barra lateral derecha para abrir el applet DAX Audio.
+2. Haga clic en **Enable**. El botón se pone verde. Esto inicia el puente de audio para todos los canales DAX.
+3. Tome nota del canal que muestra su slice en el indicador de asignación de slice (p. ej., "Slice A"). Ese es el número de canal que debe usar en la configuración del dispositivo de audio de su software digital.
+4. Si el nivel de audio es demasiado bajo o demasiado alto, arrastre el medidor/deslizador de ese canal hacia la izquierda o la derecha. La ganancia predeterminada es 0.5 (rango 0.0–1.0); el valor se guarda como `DaxRxGain1` hasta `DaxRxGain4`.
+5. Para el audio de transmisión, arrastre el medidor/deslizador **TX** para ajustar la ganancia DAX de transmisión. El valor predeterminado es 0.5; se guarda como `DaxTxGain`.
 
 ### 2. Habilitar el control CAT
 
-1. Haga clic en el botón **CAT** del panel lateral derecho. Aparece el applet de control CAT.
-2. Verifique el campo **Base**. El puerto predeterminado es `4532`. Los canales se asignan al puerto, puerto+1, puerto+2 y puerto+3 (es decir, canal A = 4532, B = 4533, y así sucesivamente). Cámbielo solo si otro programa ya está usando el puerto 4532; el valor se guarda como `CatTcpPort`.
-3. Haga clic en **Enable TCP**. El botón se vuelve verde. AetherSDR inicia cuatro servidores TCP compatibles con rigctld.
-4. En Linux o macOS, si su programa espera un puerto serie en lugar de una conexión TCP, haga clic también en **Enable TTY**. Aparecen enlaces simbólicos PTY en `/tmp/AetherSDR-CAT-A`, `/tmp/AetherSDR-CAT-B`, `/tmp/AetherSDR-CAT-C` y `/tmp/AetherSDR-CAT-D`.
+1. Haga clic en el botón **CAT** de la barra lateral derecha para abrir el applet CAT Control.
+2. Elija cómo se conectará su software digital:
 
-### 3. Configurar el programa externo
+   - **TCP (todas las plataformas):** Haga clic en **Enable TCP**. AetherSDR inicia cuatro servidores TCP compatibles con rigctld. El canal A escucha en el puerto base, B en base+1, C en base+2 y D en base+3. El puerto base predeterminado es `4532`, guardado como `CatTcpPort`.
+   - **Puerto serie virtual PTY (solo Linux/macOS):** Haga clic en **Enable TTY**. AetherSDR crea enlaces simbólicos en `/tmp/AetherSDR-CAT-A`, `/tmp/AetherSDR-CAT-B`, `/tmp/AetherSDR-CAT-C` y `/tmp/AetherSDR-CAT-D`.
 
-**WSJT-X**
+3. Confirme que la fila del canal correspondiente a su slice muestre un puerto o una ruta PTY y un recuento de clientes.
 
-- En WSJT-X, abra **File > Settings > Radio**.
-- Establezca **Rig** en `rigctld (rigctld)` o `Hamlib NET rigctl`.
-- Establezca **Network Server** en `localhost` y **Port** en `4532` (o el puerto base que configuró en el paso 2, con el desplazamiento correspondiente a la letra del canal que está usando).
-- En **Audio** de WSJT-X, establezca **Input** en el dispositivo de audio virtual DAX RX para el canal 1 y **Output** en el dispositivo de audio virtual DAX TX.
+### 3. Configurar el software digital
 
-**fldigi**
+#### WSJT-X
 
-- En fldigi, abra **Configure > Rig Control > hamlib**.
-- Establezca **Rig** en `Hamlib NET rigctl` y **Device** en `localhost:4532`.
-- En **Configure > Sound Card**, seleccione el dispositivo de audio virtual del canal DAX 1 para captura y reproducción.
+- **Rig:** Seleccione "Hamlib NET rigctl".
+- **Network server:** `localhost:4532` (o el puerto correspondiente al canal de su slice).
+- **Audio input:** Seleccione el dispositivo de audio virtual DAX RX para el canal indicado en el paso 1.
+- **Audio output:** Seleccione el dispositivo de audio virtual DAX TX.
+- **PTT method:** Ajuste a "CAT" o "RTS" según su preferencia; el PTT por CAT funciona sobre la misma conexión rigctld.
 
-> Los nombres exactos de los dispositivos de audio virtual DAX dependen del sistema operativo y del subsistema de audio. En Linux con PipeWire aparecen como entradas AetherSDR DAX en el mezclador de audio del sistema.
+#### fldigi
 
-### 4. Recibir decodificaciones de WSJT-X como marcadores en el panadapter (opcional)
+- **Rig control:** Seleccione "hamlib" y configure el equipo como "Hamlib NET rigctl" en `localhost:4532`.
+- **Audio capture/playback:** Seleccione el dispositivo del canal DAX correspondiente a su slice.
 
-1. Abra **Settings > SpotHub...**.
+### 4. (Opcional) Configurar la visualización de spots de WSJT-X en el panadapter
+
+1. Abra `Settings > SpotHub...`.
 2. Haga clic en la pestaña **WSJT-X**.
-3. Confirme o establezca los campos **Address:** y **Port:** para que coincidan con la configuración multidifusión de WSJT-X (`WsjtxAddress`, `WsjtxPort`).
-4. Haga clic en **Start**. AetherSDR comienza a recibir transmisiones decodificadas y las muestra en el panadapter.
-5. Active **Auto-start on startup (WSJT-X)** para iniciar el receptor automáticamente; se guarda como `WsjtxAutoStart`.
+3. Configure **Address:** y **Port:** para que coincidan con la dirección multicast UDP y el puerto configurados en WSJT-X (los valores predeterminados de WSJT-X son `224.0.0.1` y puerto `2237`; los valores se guardan como `WsjtxAddress` y `WsjtxPort`).
+4. Haga clic en **Start**. El botón cambia a **Stop** cuando el receptor está activo.
+5. Use las casillas **CQ**, **CQ POTA** y **Calling Me** para filtrar qué decodificaciones aparecen como spots en el panadapter.
+6. Para mantener el receptor en ejecución automáticamente, habilite **Auto-start on startup (WSJT-X)**; se guarda como `WsjtxAutoStart`.
 
-### 5. Inicio automático en lanzamientos futuros
+### 5. (Opcional) Inicio automático de DAX y CAT en cada arranque
 
-- Para iniciar el puente DAX automáticamente: **Settings > Autostart DAX with AetherSDR** (guarda `AutoStartDAX`).
-- Para iniciar los servidores CAT automáticamente: **Settings > Autostart CAT with AetherSDR** (guarda `AutoStartCAT`).
+- Para iniciar DAX automáticamente: `Settings > Autostart DAX with AetherSDR`. Se guarda como `AutoStartDAX`.
+- Para iniciar CAT TCP automáticamente: `Settings > Autostart rigctld with AetherSDR`. Se guarda como `AutoStartRigctld` (solo Linux/macOS para TTY: `Settings > Autostart CAT with AetherSDR`, se guarda como `AutoStartCAT`).
 
 ## Qué hace cada control
 
-| Control | Ubicación | Valor predeterminado | Rango | Clave de configuración |
+| Control | Dónde | Valor predeterminado | Rango | Clave de configuración |
 |---|---|---|---|---|
-| **Enable** (DAX) | Applet DAX | Off | On/Off | `AutoStartDAX` |
-| **DAX 1 gain+meter** | Applet DAX | 0.5 | 0.0–1.0 | `DaxRxGain1` |
-| **DAX 2 gain+meter** | Applet DAX | 0.5 | 0.0–1.0 | `DaxRxGain2` |
-| **DAX 3 gain+meter** | Applet DAX | 0.5 | 0.0–1.0 | `DaxRxGain3` |
-| **DAX 4 gain+meter** | Applet DAX | 0.5 | 0.0–1.0 | `DaxRxGain4` |
-| **TX gain+meter** | Applet DAX | 0.5 | 0.0–1.0 | `DaxTxGain` |
-| **Enable TCP** | Applet CAT | Off | On/Off | — |
-| **Enable TTY** | Applet CAT | Off | On/Off | — |
-| **Base** (puerto) | Applet CAT | 4532 | 1024–65535 | `CatTcpPort` |
-| **Start / Stop** (WSJT-X) | SpotHub > pestaña WSJT-X | — | — | — |
+| **Enable** (DAX principal) | Applet DAX | Off | On/Off | `AutoStartDAX` |
+| Ganancia+medidor DAX 1–4 | Applet DAX | 0.5 | 0.0–1.0 | `DaxRxGain1`–`DaxRxGain4` |
+| Ganancia+medidor TX | Applet DAX | 0.5 | 0.0–1.0 | `DaxTxGain` |
+| Indicador de asignación de slice | Applet DAX | — | — o Slice A–H | (ninguna) |
+| **Enable TCP** | Applet CAT | Off | On/Off | (ninguna; puerto base: `CatTcpPort`) |
+| **Enable TTY** | Applet CAT | Off | On/Off | (ninguna) |
+| **Base** (puerto TCP) | Applet CAT | 4532 | 1024–65535 | `CatTcpPort` |
+| **Start / Stop** (UDP WSJT-X) | SpotHub > pestaña WSJT-X | — | — | (ninguna) |
+| **Address:** (WSJT-X) | SpotHub > pestaña WSJT-X | — | — | `WsjtxAddress` |
+| **Port:** (WSJT-X) | SpotHub > pestaña WSJT-X | — | 1–65535 | `WsjtxPort` |
 | **Auto-start on startup (WSJT-X)** | SpotHub > pestaña WSJT-X | — | On/Off | `WsjtxAutoStart` |
+| Filtro **CQ** | SpotHub > pestaña WSJT-X | — | On/Off | `WsjtxFilterCQ` |
+| Filtro **CQ POTA** | SpotHub > pestaña WSJT-X | — | On/Off | `WsjtxFilterPOTA` |
+| Filtro **Calling Me** | SpotHub > pestaña WSJT-X | — | On/Off | `WsjtxFilterCallingMe` |
+| **Spot Life:** | SpotHub > pestaña WSJT-X | — | — | `WsjtxSpotLife` |
 
 ## Consejos
 
-- El indicador de asignación de slice junto a cada canal DAX muestra **—** cuando no hay ningún slice enrutado y **Slice A**–**Slice H** cuando hay uno asignado. Confirme que el slice correcto está asignado antes de iniciar el programa externo.
-- Los valores fuera de rango en el campo de puerto **Base** vuelven automáticamente a `4532`.
-- Si ejecuta varios programas digitales simultáneamente, asigne cada uno a un canal DAX diferente y a un canal CAT diferente (A, B, C o D) usando el desplazamiento de puerto correspondiente.
-- Las casillas de verificación de filtro de spots de WSJT-X — **CQ**, **CQ POTA** y **Calling Me** — permiten restringir qué decodificaciones aparecen en el panadapter. Se guardan como `WsjtxFilterCQ`, `WsjtxFilterPOTA` y `WsjtxFilterCallingMe`.
+- Cada canal CAT (A–D) es independiente. Si ejecuta dos programas digitales simultáneamente, apunte el segundo al puerto `4533` (o `/tmp/AetherSDR-CAT-B`) y enrute su audio al canal DAX 2.
+- El indicador de estado TCP por canal muestra "(stopped)", ":\<port\> (1 client)" o ":\<port\> (N clients)". Confirme que su software se haya conectado antes de llamar CQ.
+- Los valores fuera de rango introducidos en el campo **Base** se corrigen automáticamente a `4532`.
 
 ## Solución de problemas
 
-- **WSJT-X reporta "Rig control error"** — Confirme que **Enable TCP** está activo (el botón está verde) en el applet CAT y que el puerto en WSJT-X coincide con el valor de **Base** (predeterminado `4532`). Verifique que ningún cortafuegos esté bloqueando las conexiones TCP en localhost.
-- **Sin audio en WSJT-X** — Confirme que **Enable** en el applet DAX está verde y que el indicador de asignación de slice junto a DAX 1 muestra su slice digital y no **—**. Verifique también que WSJT-X apunta al dispositivo de audio virtual DAX correcto.
-- **El audio de TX no llega a la radio** — Verifique que el control deslizante **TX gain+meter** no esté en 0.0 y que su slice digital tenga privilegios de TX (el indicador de asignación TX en el applet DAX muestra la letra de su slice y no **—**).
-- **Los puertos TTY de CAT no aparecen** — **Enable TTY** solo está disponible en Linux y macOS. En Windows, use TCP (`localhost:4532`) en su lugar.
+- **WSJT-X muestra "Rig not responding"** — Confirme que **Enable TCP** esté activo (botón iluminado en verde) en el applet CAT y que el puerto configurado en WSJT-X coincida con el valor de **Base** (predeterminado `4532`). Verifique que ningún firewall bloquee las conexiones TCP en localhost.
+- **No se decodifica audio en WSJT-X o fldigi** — Confirme que **Enable** esté activo en el applet DAX. Compruebe que el indicador de asignación de slice en el canal DAX correcto muestre su slice activo y no "—". Ajuste el deslizador de ganancia DAX RX si el medidor de nivel no se mueve.
+- **No aparece la ruta PTY** — **Enable TTY** está disponible solo en Linux y macOS. Confirme que AetherSDR tenga permiso para crear archivos en `/tmp`.
+- **Los decodificados de WSJT-X no aparecen en el panadapter** — Verifique que el botón **Start / Stop** en SpotHub muestre el receptor como iniciado, y que **Address:** y **Port:** coincidan con los ajustes de reporte UDP dentro de WSJT-X.
 
 ## Relacionados
 
-- [Habilitar DAX para enrutar audio del slice a WSJT-X / FLDigi / otro programa digital](../../features/dax/enable-dax-to-route-slice-audio-to-wsjt-x-fldigi-other-digital-software.md)
-- [Habilitar CAT TCP para que N1MM, Log4OM, WSJT-X controlen la radio](../../features/cat-control/enable-cat-tcp-so-n1mm-log4om-wsjt-x-can-control-the-radio.md)
-- [Habilitar CAT PTY para que aplicaciones de Linux/macOS abran un puerto CAT de tipo serie](../../features/cat-control/enable-cat-pty-so-linux-macos-apps-can-open-a-serial-style-cat-port.md)
-- [Iniciar el receptor UDP de WSJT-X y filtrar por CQ, POTA o llamadas dirigidas a mí](../../features/dx-cluster/start-wsjt-x-udp-listener-and-filter-for-cq-pota-or-calls-to-me.md)
+- [Habilitar DAX para enrutar el audio del slice a WSJT-X / FLDigi / otro software digital](../../features/dax/enable-dax-to-route-slice-audio-to-wsjt-x-fldigi-other-digital-software.md)
+- [Habilitar CAT TCP para que N1MM, Log4OM y WSJT-X puedan controlar el equipo](../../features/cat-control/enable-cat-tcp-so-n1mm-log4om-wsjt-x-can-control-the-radio.md)
+- [Habilitar CAT PTY para que las aplicaciones de Linux/macOS puedan abrir un puerto CAT de tipo serie](../../features/cat-control/enable-cat-pty-so-linux-macos-apps-can-open-a-serial-style-cat-port.md)
+- [Iniciar el receptor UDP de WSJT-X y filtrar por CQ, POTA o llamadas propias](../../features/dx-cluster/start-wsjt-x-udp-listener-and-filter-for-cq-pota-or-calls-to-me.md)
 - [Ajustar la ganancia DAX RX por canal](../../features/dax/set-dax-rx-gain-per-channel.md)
 - [Ajustar la ganancia DAX TX](../../features/dax/set-dax-tx-gain.md)
-- [Inicio automático de DAX al lanzar AetherSDR](../../features/dax/autostart-dax-on-launch.md)
+- [Inicio automático de DAX al arrancar](../../features/dax/autostart-dax-on-launch.md)
 - [Inicio automático de los servidores CAT con AetherSDR](../../features/cat-control/autostart-cat-servers-with-aethersdr.md)
-- [Cambiar el puerto TCP base](../../features/cat-control/change-the-base-tcp-port.md)
-- [Audio DAX](../../features/dax/set-dax-rx-gain-per-channel.md)
+- [Cambiar el puerto base](../../features/cat-control/change-the-base

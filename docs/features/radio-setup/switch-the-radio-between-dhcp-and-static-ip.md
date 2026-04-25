@@ -1,44 +1,45 @@
 # Cambiar el radio entre DHCP e IP estática
 
-Use esta página para configurar el modo de direccionamiento de red del radio Flex. Cambie a IP estática cuando necesite que el radio tenga una dirección fija en su LAN, o vuelva a DHCP para que el router asigne una dirección automáticamente.
+Use esta página para cambiar la forma en que su FLEX-8600 obtiene su dirección IP: ya sea automáticamente mediante DHCP o con una dirección estática fija que usted especifique. Utilice una IP estática para garantizar que el radio siempre sea accesible en una dirección conocida, por ejemplo en una configuración remota o con VPN.
 
 ## Antes de comenzar
 
 - AetherSDR debe estar conectado al radio. La pestaña Network solo está disponible mientras haya conexión.
-- Si va a asignar una IP estática, tenga listos la dirección IP deseada, la máscara de subred y la dirección de gateway antes de empezar.
-- Cambiar la dirección IP desconectará AetherSDR del radio. Esté preparado para volver a conectarse con la nueva dirección.
+- Si va a cambiar a IP estática, tenga lista su dirección IP, máscara de subred y dirección de puerta de enlace antes de comenzar.
+- Cambiar la dirección IP del radio interrumpirá la conexión actual. Vuelva a conectarse usando la nueva dirección después de aplicar los cambios.
 
 ## Pasos
 
-1. Abra `Settings > Radio Setup...`.
+1. Haga clic en `Settings > Radio Setup...` para abrir el diálogo Radio Setup.
 2. Haga clic en la pestaña **Network**.
-3. Localice el botón de alternancia **DHCP / Static**. Haga clic en él para cambiar entre modos.
-   - Cuando está en DHCP, los campos de dirección estática no son necesarios.
-   - Cuando está en Static, los campos **IP Address:**, **Mask:** y **Gateway:** se activan.
-4. Si seleccionó Static, ingrese los valores deseados en los campos **IP Address:**, **Mask:** y **Gateway:**.
+3. Localice el botón de alternancia **DHCP / Static**. Haga clic en él para cambiar entre los modos DHCP e IP estática.
+4. Si seleccionó Static: escriba los valores deseados en los campos **IP Address:**, **Mask:** y **Gateway:**.
 5. Haga clic en **Apply** para enviar la configuración de red al radio.
+6. Vuelva a conectarse al radio en su nueva dirección usando `Settings > Connect to Radio...`.
 
 ## Qué hace cada control
 
 | Control | Tipo | Comportamiento |
 |---|---|---|
-| **DHCP / Static** | Botón de alternancia | Cambia el radio entre los modos DHCP e IP estática. |
+| **DHCP / Static** | Botón de alternancia | Cambia el radio entre el modo DHCP (dirección asignada por su enrutador) y el modo IP estática (dirección que usted ingresa manualmente). |
 | **IP Address:** | Campo de texto | La dirección IPv4 estática que se asignará al radio. Activo solo en modo Static. |
-| **Mask:** | Campo de texto | La máscara de subred para la configuración estática. Activa solo en modo Static. |
-| **Gateway:** | Campo de texto | El gateway predeterminado para la configuración estática. Activo solo en modo Static. |
+| **Mask:** | Campo de texto | La máscara de subred para la dirección estática. Activo solo en modo Static. |
+| **Gateway:** | Campo de texto | La puerta de enlace predeterminada para la dirección estática. Activo solo en modo Static. |
 | **Apply** | Botón | Envía la configuración de red actual al radio. |
+| **IP Address / Mask / MAC Address** (solo lectura) | Indicador | Muestra las direcciones de red actuales del radio. Son de solo lectura. |
 
 ## Consejos
 
-- Los indicadores **IP Address / Mask / MAC Address** que aparecen sobre el botón de alternancia muestran las direcciones de red actuales del radio y son de solo lectura. Úselos para confirmar que la nueva configuración surtió efecto después de reconectarse.
-- Tras hacer clic en **Apply** en modo Static, AetherSDR perderá la conexión. Vuelva a conectarse mediante `Settings > Connect to Radio...` usando la nueva dirección estática.
+- Los indicadores de solo lectura **IP Address / Mask / MAC Address** en la parte superior de la pestaña Network muestran las direcciones activas actuales del radio. Anótelas antes de realizar cambios para poder recuperarse si es necesario.
+- Si se conecta a través de una VPN o enlace remoto, revise también la configuración **Network MTU:** en la misma pestaña. Consulte [Cambiar el MTU de red para configuraciones VPN/remotas](change-network-mtu-for-vpn-remote-setups.md).
 
 ## Solución de problemas
 
-- **El radio no aparece tras cambiar a IP estática** — La dirección ingresada puede entrar en conflicto con otro dispositivo o puede estar fuera de la subred de su LAN. Verifique que la dirección IP, la máscara y el gateway sean correctos para su red. Si el radio queda inaccesible, puede ser necesario un restablecimiento de hardware para restaurar DHCP; consulte la documentación de hardware del radio Flex.
-- **Apply no parece surtir efecto** — Asegúrese de que sigue conectado al radio en el momento en que hace clic en **Apply**. Si la conexión se interrumpió antes de hacer clic, vuelva a abrir `Settings > Radio Setup...`, reingrese los valores estáticos y haga clic en **Apply** sin demora.
+- **No se puede ver la pestaña Network** — La pestaña solo está disponible cuando AetherSDR está conectado al radio. Conéctese primero mediante `Settings > Connect to Radio...` y luego vuelva a abrir Radio Setup.
+- **El radio no es accesible después de hacer clic en Apply** — El radio ha adoptado su nueva dirección. Si cambió a IP estática, vuelva a conectarse usando la dirección que ingresó. Si cambió a DHCP, consulte la tabla de concesiones DHCP de su enrutador para encontrar la dirección asignada al radio.
+- **Apply no tiene efecto** — Verifique que los campos IP Address:, Mask: y Gateway: contengan valores válidos antes de hacer clic en Apply. Una configuración estática incompleta puede ser rechazada sin notificación.
 
-## Relacionado
+## Relacionados
 
 - [Cambiar el MTU de red para configuraciones VPN/remotas](change-network-mtu-for-vpn-remote-setups.md)
-- [Descripción general de Radio Setup](overview.md)
+- [Verificar número de serie, versión de hardware, región y opciones del radio](check-radio-serial-hardware-version-region-and-options.md)

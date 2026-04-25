@@ -1,41 +1,39 @@
 # Elegir un color de fondo personalizado para los spots
 
-Esta página explica cómo establecer un color de fondo específico para las etiquetas de spots en el panadapter. Utilice esta opción cuando desee colores de fondo consistentes y seleccionados manualmente, en lugar de la selección automática basada en contraste.
+Esta página explica cómo establecer un color de fondo específico que aparece detrás de las etiquetas de spots en el panadapter, en lugar de dejar que AetherSDR elija el color automáticamente.
 
 ## Antes de comenzar
 
-- Abra el diálogo Spot Settings haciendo clic derecho sobre la capa de spots en el panadapter.
-- Confirme que `IsSpotsOverrideBackgroundColorsEnabled` esté activo: el botón "Override Background: Enabled" debe estar marcado. Si no lo está, el selector de color de fondo no tendrá efecto.
-- Desactive la selección automática de color de fondo: el botón "Override Background: Auto" debe estar desmarcado. Mientras Auto esté activo, AetherSDR ignorará el color elegido manualmente.
+- Abra el diálogo Spot Settings haciendo clic derecho en el panadapter y seleccionándolo desde el menú contextual de la superposición de spots.
+- Confirme que el interruptor `IsSpotsOverrideBackgroundColorsEnabled` está activo — el selector de color de fondo no tiene efecto si la anulación de fondo está desactivada.
 
 ## Pasos
 
-1. Haga clic derecho sobre la capa de spots en el panadapter y abra Spot Settings.
-2. Localice la fila **Override Background:**.
-3. Si el botón "Enabled" aparece desmarcado, haga clic en él para que muestre "Enabled".
-4. Si el botón "Auto" aparece marcado, haga clic en él para desmarcarlo. Esto desactiva la selección automática de color y habilita el selector de color manual.
-5. Haga clic en el pequeño botón de muestra de color (el cuadrado a la derecha de "Auto") para abrir el selector de color.
-6. Seleccione el color de fondo deseado en el diálogo de color y confirme. La muestra se actualiza de inmediato y el color se guarda en `SpotsOverrideBgColor`.
+1. En el diálogo Spot Settings, localice la fila **Override Background:**.
+2. Confirme que el botón de interruptor **Enabled** muestra **Enabled**. Si muestra **Disabled**, haga clic en él para habilitar las anulaciones de fondo. Esto controla `IsSpotsOverrideBackgroundColorsEnabled`.
+3. Haga clic en el botón de interruptor **Auto** para que muestre **Disabled**. Mientras **Auto** está habilitado, AetherSDR elige el color de fondo automáticamente e ignora su color personalizado. Deshabilitarlo establece `IsSpotsOverrideToAutoBackgroundColorEnabled` = False.
+4. Haga clic en el pequeño botón de muestra de color a la derecha de **Auto**. Este es el selector de color de fondo de spots y abre un diálogo de selección de color.
+5. Seleccione el color deseado en el diálogo de color y confirme la selección.
+6. La muestra se actualiza para mostrar el color elegido. El valor se guarda inmediatamente en `SpotsOverrideBgColor`.
 
 ## Qué hace cada control
 
-| Control | Valor predeterminado | Configuración persistida | Comportamiento |
+| Control | Qué hace | Valor predeterminado | Clave de configuración |
 |---|---|---|---|
-| Override Background: Enabled | Habilitado | `IsSpotsOverrideBackgroundColorsEnabled` | Dibuja un fondo detrás del texto de las etiquetas de spots. Debe estar habilitado para que se aplique cualquier configuración de color de fondo. |
-| Override Background: Auto | Habilitado | `IsSpotsOverrideToAutoBackgroundColorEnabled` | Cuando está habilitado, AetherSDR elige un color de fondo automáticamente para garantizar contraste. Desactívelo para usar un color elegido manualmente. |
-| Selector de color de fondo de spots | `#000000` | `SpotsOverrideBgColor` | Abre el diálogo del selector de color. El color seleccionado se usa como fondo del spot cuando Auto está desactivado. |
-| Background Opacity: | 48 | `SpotsOverrideBgOpacity` | Controla la transparencia del fondo del spot, de 0 (completamente transparente) a 100 (completamente opaco). |
+| Interruptor **Override Background: Enabled** | Dibuja un fondo detrás del texto de los spots. Cuando está en **Disabled**, no se dibuja ningún fondo y todos los controles de fondo quedan inactivos. | Enabled | `IsSpotsOverrideBackgroundColorsEnabled` |
+| Interruptor **Override Background: Auto** | Cuando está en **Enabled**, AetherSDR selecciona automáticamente un color de fondo contrastante e ignora el selector de color personalizado. Establézcalo en **Disabled** para usar el color elegido. | Enabled | `IsSpotsOverrideToAutoBackgroundColorEnabled` |
+| Selector de color de fondo de spots | Abre un diálogo de color para elegir el color de fondo personalizado. Activo solo cuando **Auto** está en **Disabled**. | `#000000` | `SpotsOverrideBgColor` |
+| Control deslizante **Background Opacity:** | Controla la transparencia del fondo de los spots. Rango 0–100; predeterminado 48. | 48 | `SpotsOverrideBgOpacity` |
 
 ## Consejos
 
-- Si cambia el color de fondo pero los spots siguen mostrando el color automático, verifique que "Override Background: Auto" esté desmarcado. Auto tiene prioridad sobre el color manual.
-- El color de fondo y la opacidad son independientes. Después de elegir un color, ajuste el control deslizante **Background Opacity:** para controlar con qué intensidad se renderiza sobre el panadapter.
+- El color personalizado establecido aquí solo tiene efecto cuando **Enabled** está activo y **Auto** está en **Disabled**. Si los spots siguen mostrando colores de fondo automáticos después de elegir un color, verifique que **Auto** indique **Disabled**.
+- Para ajustar la visibilidad del fondo sin cambiar el color, ajuste el control deslizante **Background Opacity:** después de establecer su color. Consulte [Ajustar la opacidad del fondo de los spots](adjust-spot-background-opacity.md).
 
 ## Solución de problemas
 
-- **El selector de color se abre pero los cambios no tienen efecto visible** — "Override Background: Auto" todavía está marcado. Desmárquelo para que se use el color manual en `SpotsOverrideBgColor`.
-- **No aparece ningún fondo detrás del texto del spot** — "Override Background: Enabled" está desmarcado. Haga clic en él para que muestre "Enabled".
-- **El fondo es invisible a pesar de tener el color correcto y el estado Enabled activo** — El control deslizante **Background Opacity:** puede estar en 0. Auméntelo por encima de 0.
+- **El color de fondo no cambia después de seleccionar un nuevo color** — Verifique que **Override Background:** muestre **Enabled** y que el interruptor **Auto** muestre **Disabled**. Si **Auto** está en **Enabled**, el color personalizado se ignora.
+- **No aparece ningún fondo** — El interruptor **Enabled** bajo **Override Background:** está en **Disabled**. Haga clic en él para que indique **Enabled**.
 
 ## Relacionados
 

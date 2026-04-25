@@ -1,41 +1,41 @@
 # Ajustar la ganancia TX de DAX
 
-Ajuste el control deslizante de ganancia TX en el applet DAX Audio para controlar el nivel del flujo de audio de transmisión enviado desde su computadora a la radio. Configurarlo correctamente evita que la ruta DAX TX reciba una señal excesiva o insuficiente al usar software de modos digitales.
+Mueva el control deslizante de ganancia TX en el applet DAX Audio para controlar el nivel de salida del flujo de transmisión DAX enviado desde el audio de su computadora hacia la radio. Esto es útil cuando el nivel de salida de audio de su software de modos digitales es demasiado alto o demasiado bajo en relación con el nivel de entrada esperado por la radio.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a la radio. El applet DAX Audio requiere una conexión activa con la radio.
-- DAX debe estar habilitado. Haga clic en Enable en el applet DAX Audio si aún no está activo.
+- Conéctese a una radio FLEX-8600. El applet DAX requiere una conexión de radio activa.
+- Abra el applet DAX haciendo clic en el botón DAX de la bandeja en la barra lateral derecha. El applet está oculto de manera predeterminada.
+- DAX debe estar habilitado. Si el botón Enable no está iluminado, haga clic en Enable para iniciar el puente de audio DAX.
 
 ## Pasos
 
-1. Haga clic en el botón DAX de la barra lateral derecha para abrir el applet DAX Audio.
-2. Localice la fila **TX:** en la parte inferior del applet. El medidor combinado con el control deslizante muestra la posición actual de la ganancia TX y el nivel de audio TX en tiempo real.
-3. Arrastre el control deslizante hacia la izquierda para disminuir la ganancia TX o hacia la derecha para aumentarla. El rango válido es de 0.0 a 1.0. El valor predeterminado es 0.5.
-4. Suelte el control deslizante. El valor se guarda inmediatamente en `DaxTxGain` y surte efecto sin necesidad de reiniciar.
+1. Haga clic en el botón DAX de la bandeja en la barra lateral derecha para abrir el applet DAX Audio.
+2. Ubique la fila TX en la parte inferior del applet. Muestra la etiqueta "TX:", un indicador de asignación de slice y un medidor/deslizador combinado.
+3. Arrastre el control del deslizador TX de ganancia+medidor hacia la izquierda para reducir la ganancia o hacia la derecha para aumentarla. El rango válido es de 0.0 a 1.0.
+4. Suelte el botón del mouse. El nuevo valor se guarda inmediatamente en `DaxTxGain`.
 
 ## Qué hace cada control
 
-| Control | Predeterminado | Rango | Clave de configuración | Comportamiento |
+| Control | Valor predeterminado | Rango válido | Clave de configuración | Comportamiento |
 |---|---|---|---|---|
-| Ganancia TX + medidor | 0.5 | 0.0–1.0 | `DaxTxGain` | Arrastre para ajustar la ganancia del flujo TX. El medidor detrás del cursor muestra el nivel de transmisión en tiempo real, posterior al fader. |
-| Indicador de asignación TX | — | — o Slice A–H | — | Muestra qué slice tiene actualmente los privilegios de TX y controla el flujo DAX TX. Solo lectura. |
-| Enable | off | on/off | `AutoStartDAX` | Interruptor principal para todos los flujos DAX, incluido TX. La ganancia TX no tiene efecto mientras DAX está deshabilitado. |
+| Deslizador TX de ganancia+medidor | 0.5 | 0.0–1.0 | `DaxTxGain` | Establece la ganancia para el flujo TX de DAX. La barra del medidor detrás del deslizador muestra el nivel de salida actual después del fader. |
+| Indicador de asignación TX | — | — o Slice A–H | *(none)* | Muestra qué slice tiene actualmente los privilegios de TX y maneja el flujo TX de DAX. |
 
 ## Consejos
 
-- El relleno del medidor detrás del control deslizante refleja el nivel posterior al fader — el nivel de entrada sin procesar multiplicado por la ganancia actual — por lo que puede ver el nivel de salida TX efectivo mientras arrastra.
-- Si el indicador de asignación TX muestra —, ningún slice tiene actualmente los privilegios de TX. Asegúrese de que su slice de transmisión esté seleccionado en la radio antes de ajustar la ganancia TX.
+- La barra del medidor detrás del deslizador muestra el nivel posterior al fader, es decir, el nivel de audio entrante multiplicado por la configuración de ganancia actual. Una barra que permanece cerca del borde derecho con la ganancia actual sugiere que la ganancia es demasiado alta; redúzcala para evitar recorte de señal (clipping).
+- El valor de ganancia persiste entre sesiones. No es necesario volver a ingresarlo después de reiniciar AetherSDR.
 
-## Resolución de problemas
+## Solución de problemas
 
-- **El medidor TX no muestra actividad** — El audio DAX TX solo fluye mientras la radio está transmitiendo o una aplicación de modo digital está enviando audio al dispositivo DAX TX. Verifique que su software (WSJT-X, fldigi, etc.) esté enrutado al dispositivo de audio DAX TX correcto.
-- **La ganancia TX se restablece después de reiniciar** — Verifique que `AutoStartDAX` esté habilitado para que el puente DAX se inicie al arrancar y restaure el valor guardado de `DaxTxGain`. Consulte [Inicio automático de DAX al arrancar](autostart-dax-on-launch.md).
+- **El medidor TX no muestra actividad** — Es posible que el slice TX aún no esté asignado. Verifique el indicador de asignación TX. Si muestra "—", ningún slice tiene actualmente los privilegios de TX. Consulte [Identificar cuál slice es el slice TX](identify-which-slice-is-the-tx-slice.md).
+- **La posición del deslizador se restablece al volver a abrir** — Si DAX no estaba habilitado cuando configuró la ganancia, el ajuste igualmente se guarda; sin embargo, confirme que Enable esté activo para que el puente esté en funcionamiento y el valor surta efecto.
 
 ## Relacionados
 
 - [Descripción general de DAX Audio](overview.md)
 - [Habilitar DAX para enrutar el audio del slice a WSJT-X / FLDigi / otro software digital](enable-dax-to-route-slice-audio-to-wsjt-x-fldigi-other-digital-software.md)
-- [Ajustar la ganancia DAX RX por canal](set-dax-rx-gain-per-channel.md)
+- [Ajustar la ganancia RX de DAX por canal](set-dax-rx-gain-per-channel.md)
 - [Identificar cuál slice es el slice TX](identify-which-slice-is-the-tx-slice.md)
-- [Inicio automático de DAX al arrancar](autostart-dax-on-launch.md)
+- [Inicio automático de DAX al lanzar la aplicación](autostart-dax-on-launch.md)

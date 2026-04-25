@@ -1,39 +1,39 @@
-# Configurar la potencia TX máxima por banda y el modo de ajuste
+# Configurar la potencia TX máxima por banda y el modo de sintonía
 
-Use esta página para limitar la potencia de transmisión y seleccionar el modo de ajuste para cada banda de radioaficionado en su radio Flex. Estas configuraciones permiten proteger amplificadores, antenas o hardware específico de banda contra condiciones de exceso de potencia.
+Esta página explica cómo establecer la potencia de transmisión máxima y el modo de sintonía para cada banda de radioaficionado en su FLEX-8600. Use estos ajustes para proteger amplificadores, cumplir los límites de potencia específicos de cada banda o configurar el comportamiento de la función Tune.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. La pestaña TX (tab) y el diálogo TX Band Settings solo están disponibles con una conexión de radio activa.
+- AetherSDR debe estar conectado al radio. Estos controles no están disponibles sin una conexión activa al radio.
+- Identifique las bandas que desea configurar antes de abrir el cuadro de diálogo.
 
 ## Pasos
 
 1. Abra `Settings > Radio Setup...`.
 2. Haga clic en la pestaña **TX**.
-3. Para establecer un límite de potencia a nivel de radio que se aplique a todas las bandas, ajuste **Max Power:** (0–100 %).
-4. Para seleccionar el comportamiento del botón de ajuste, elija una opción en el menú desplegable **Tune Mode:**.
-5. Para configurar la potencia y el modo de ajuste por banda, haga clic en **TX Band Settings**. Esto abre el diálogo dedicado de potencia y ajuste por banda.
-6. En el diálogo TX Band Settings, localice la fila de la banda que desea modificar y establezca los valores de potencia y ajuste para esa banda.
-7. Cierre el diálogo TX Band Settings al terminar y, a continuación, cierre Radio Setup.
-
-Alternativamente, abra el diálogo por banda directamente mediante `Settings > TX Band Settings...`.
+3. Para establecer un límite de potencia a nivel de radio que se aplique a todas las bandas, ajuste **Max Power:** a un valor entre 0 y 100 %.
+4. Para seleccionar el comportamiento del botón Tune, elija una opción en el menú desplegable **Tune Mode:**.
+5. Para abrir los ajustes de potencia y sintonía por banda, haga clic en **TX Band Settings**. Esto abre el cuadro de diálogo dedicado por banda, donde puede ajustar la potencia TX, la potencia de sintonía, los ajustes de inhibición y el control de amplificador externo para cada banda de forma individual.
+6. Alternativamente, abra el cuadro de diálogo por banda directamente desde `Settings > TX Band Settings...` sin pasar por Radio Setup.
+7. Cierre el cuadro de diálogo cuando termine. Los ajustes se aplican inmediatamente al radio.
 
 ## Qué hace cada control
 
 | Control | Tipo | Rango válido | Comportamiento |
 |---|---|---|---|
-| **Max Power:** | Spinbox | 0–100 % | Establece un límite de potencia TX a nivel de radio aplicado a todas las bandas. |
-| **Tune Mode:** | Combo box | Opciones definidas por el firmware del radio | Selecciona el comportamiento del botón de ajuste al activarse. |
-| **TX Band Settings** | Botón | — | Abre el diálogo de potencia y ajuste por banda. |
-| **Show TX in Waterfall:** | Interruptor | — | Dibuja la señal TX en la pantalla de cascada (waterfall). |
-| **TX Follows Active Slice / Active Slice Follows TX** | Botón | Mutuamente excluyentes | Controla si la TX sigue al slice activo o el slice activo sigue a la TX. |
+| **Max Power:** | Spinbox | 0–100 % | Establece un límite de potencia TX a nivel de radio que restringe la salida en todas las bandas. |
+| **Tune Mode:** | Menú desplegable | Las opciones dependen del firmware del radio | Selecciona el comportamiento del botón Tune al activarse. |
+| **TX Band Settings** | Botón | — | Abre el cuadro de diálogo de potencia TX, potencia de sintonía, inhibición y control de amplificador por banda. |
+| **Show TX in Waterfall:** | Interruptor | On / Off | Dibuja la señal TX en la visualización del waterfall durante la transmisión. |
+| **TX Follows Active Slice / Active Slice Follows TX** | Botón | Mutuamente excluyentes | Controla si la TX sigue al slice activo o si el slice activo sigue a la TX. |
 
 ## Consejos
 
-- **Max Power:** en la pestaña TX es un límite global. Los límites por banda establecidos en TX Band Settings operan dentro de ese límite.
-- Puede acceder a TX Band Settings sin abrir Radio Setup usando `Settings > TX Band Settings...` directamente desde el menú.
+- El spinbox **Max Power:** en la pestaña TX es un límite global. Los límites por banda establecidos en el cuadro de diálogo TX Band Settings operan dentro de ese techo.
+- Puede acceder al mismo cuadro de diálogo TX Band Settings desde `Settings > TX Band Settings...` sin necesidad de abrir Radio Setup primero.
+- Use **Inhibit during TUNE** (disponible en el menú `Settings`) para suprimir salidas TX específicas —ACC TX, TX1, TX2 o TX3— durante la sintonía.
 
 ## Relacionado
 
 - [Descripción general de Radio Setup](overview.md)
-- [Verificar el número de serie, versión de hardware, región y opciones del radio](check-radio-serial-hardware-version-region-and-options.md)
+- [Asignar un cable USB como CAT, BCD, bit o PTT](assign-a-usb-cable-as-cat-bcd-bit-or-ptt.md)

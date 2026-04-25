@@ -1,44 +1,43 @@
 # Deshabilitar un flujo IQ para liberar ancho de banda
 
-Deshabilitar un flujo DAX IQ activo impide que consuma ancho de banda DSP del radio y rendimiento de red. Haga esto cuando una aplicación SDR externa ya no necesite los datos IQ, o cuando desee recuperar recursos para otras rebanadas (slices).
+Cada flujo IQ activo consume ancho de banda del radio y recursos de procesamiento. Use este procedimiento para desactivar un flujo que ya no necesita.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a un radio Flex. El applet DAX IQ requiere una conexión de radio activa.
-- Abra el applet DAX IQ haciendo clic en el botón IQ de la bandeja en la barra lateral derecha. El applet está oculto de forma predeterminada.
-- Identifique qué canal (IQ 1–4) desea deshabilitar. El botón de alternancia de ese canal debe mostrar actualmente "On".
+- AetherSDR debe estar conectado a un radio FLEX-8600.
+- El applet DAX IQ debe estar visible. Si no lo está, haga clic en el botón de bandeja **IQ** de la barra lateral derecha para mostrarlo.
+- Identifique qué canal (IQ 1–4) desea deshabilitar verificando cuál botón de alternancia muestra **On**.
 
 ## Pasos
 
-1. Haga clic en el botón IQ de la bandeja en la barra lateral derecha para mostrar el applet DAX IQ si aún no está visible.
-2. Encuentre la fila del canal que desea detener: IQ 1, IQ 2, IQ 3 o IQ 4.
-3. Haga clic en el botón "On" en el extremo derecho de esa fila.
-4. La etiqueta del botón cambia a "Off", el estilo del botón cambia a la apariencia inactiva y el medidor de nivel se restablece a 0.
+1. Localice la fila del canal que desea deshabilitar (IQ 1, IQ 2, IQ 3 o IQ 4).
+2. Haga clic en el botón **On** ubicado en el extremo derecho de esa fila.
+3. La etiqueta del botón cambia a **Off**, el estilo del botón se atenúa y el medidor de nivel se reinicia a 0.
 
-El flujo ahora está deshabilitado. El radio deja de transmitir datos IQ para ese canal.
+El flujo queda cerrado en el radio. El radio no conserva el estado de los flujos entre sesiones; AetherSDR registra su elección en `DaxIqEnabled1` hasta `DaxIqEnabled4` para poder restaurar el mismo estado cuando vuelva a conectarse.
 
 ## Qué hace cada control
 
-| Control | Función | Valor predeterminado | Valores válidos |
-|---|---|---|---|
-| IQ 1–4 Off/On | Activa o desactiva el flujo IQ para ese canal. Al hacer clic mientras está en "On", deshabilita el flujo y restablece el medidor. | Off | Off, On |
-| Tasa IQ 1–4 | Establece la frecuencia de muestreo del canal. No tiene efecto mientras el flujo está deshabilitado, pero conserva su valor. | 48k | 24k, 48k, 96k, 192k |
-| Medidor IQ 1–4 | Muestra el nivel RMS en tiempo real del flujo IQ. Se restablece a 0 de inmediato cuando el flujo se deshabilita. | 0 | 0–100 |
+| Control | Valor predeterminado | Comportamiento |
+|---|---|---|
+| **IQ 1..4 Off/On** (botón de alternancia) | Off | Al hacer clic mientras muestra **On**, envía una solicitud de deshabilitación al radio, restablece la etiqueta a **Off** y borra el medidor de nivel. |
+| **IQ 1..4 meter** (medidor de nivel) | 0 | Muestra el nivel RMS del flujo (0–100). Se reinicia a 0 cuando el flujo se deshabilita o el radio se desconecta. |
+| **IQ 1..4 rate** (cuadro combinado) | 48k | Selecciona la tasa de muestreo: 24k, 48k, 96k o 192k. Se sincroniza con la tasa reportada por el radio mientras el flujo está activo. Se guarda por canal en `DaxIqRate1` hasta `DaxIqRate4`. |
 
-## Sugerencias
+## Consejos
 
-- Los flujos IQ son por sesión y el radio no los conserva. Si AetherSDR se desconecta y vuelve a conectar, los cuatro canales regresan a "Off" independientemente de su estado anterior.
-- Deshabilitar un flujo también restablece su medidor de nivel a 0. Si el medidor continúa mostrando un valor superior a 0 brevemente después de hacer clic en "Off", se estabilizará una vez que el radio confirme que el flujo se ha detenido y el estado del botón se sincronice con el radio.
-- Si el software SDR externo aún mantiene el flujo abierto, el botón puede revertirse a "On" cuando el radio le reporte el estado del flujo a AetherSDR. Cierre la aplicación externa primero y luego deshabilite el flujo.
+- Deshabilitar un flujo no modifica su tasa de muestreo guardada. La tasa que tenía seleccionada seguirá configurada al volver a habilitar el flujo.
+- Si se desconecta y vuelve a conectarse, AetherSDR espera brevemente antes de rehabilitar los flujos que estaban activos. Si desea que un flujo permanezca inactivo tras la reconexión, asegúrese de que su botón muestre **Off** antes de desconectarse — las configuraciones `DaxIqEnabled1`–`DaxIqEnabled4` controlan qué flujos se restauran.
+- Deshabilitar los flujos que no estén en uso antes de cambiar las tasas de muestreo en los flujos activos reduce la probabilidad de que el radio rechace el cambio de tasa.
 
 ## Solución de problemas
 
-- **El botón revierte a "On" inmediatamente después de hacer clic** — El radio está reportando el flujo como aún activo, probablemente porque un software externo conectado a ese canal IQ lo mantiene abierto. Cierre la aplicación externa e intente de nuevo.
-- **El medidor de nivel no se restablece a 0** — El medidor se restablece cuando el radio confirma que el flujo ha desaparecido. Un breve retraso es normal. Si no se restablece en absoluto, es posible que el flujo no se haya deshabilitado correctamente; verifique el estado de la conexión de su radio.
+- **El botón muestra Off pero la aplicación SDR externa sigue reportando un flujo** — Es posible que el flujo en el lado del radio aún no haya sido eliminado. Desconéctese y vuelva a conectarse al radio para forzar un estado de sesión limpio.
+- **El botón vuelve a On inmediatamente después de hacer clic en Off** — El radio rechazó la solicitud de deshabilitación. Verifique su conexión de red y confirme que ningún otro cliente SmartSDR tenga el flujo bloqueado.
 
-## Relacionados
+## Temas relacionados
 
 - [Habilitar un flujo IQ para software SDR externo](enable-an-iq-stream-for-external-sdr-software.md)
+- [Seleccionar la tasa de muestreo IQ (24k/48k/96k/192k)](pick-the-iq-sample-rate-24k-48k-96k-192k.md)
 - [Monitorear el nivel RMS de cada flujo IQ](monitor-the-rms-level-of-each-iq-stream.md)
-- [Seleccionar la frecuencia de muestreo IQ (24k/48k/96k/192k)](pick-the-iq-sample-rate-24k-48k-96k-192k.md)
 - [Descripción general de DAX IQ](overview.md)

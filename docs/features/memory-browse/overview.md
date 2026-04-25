@@ -1,41 +1,40 @@
-# Descripción general del Explorador de memorias
+# Descripción general del Explorador de Memorias
 
-El Explorador de memorias es un panel lateral de solo lectura que lista las memorias almacenadas en su radio Flex conectada, junto al panadapter. Resalta automáticamente la memoria más cercana a la frecuencia sintonizada en ese momento y permite saltar a cualquier memoria con un doble clic o la tecla Enter.
+El Explorador de Memorias es un panel lateral de solo lectura que muestra las memorias almacenadas en su radio junto al panadapter. Al sintonizar, resalta automáticamente la memoria más cercana a su frecuencia actual para que pueda orientarse rápidamente y saltar a un canal almacenado sin abandonar la pantalla principal.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio. El Explorador de memorias requiere una conexión de radio activa.
-- La radio debe tener memorias configuradas. Use `Settings > Memory...` para abrir el diálogo de configuración de memorias si no aparece ninguna.
+- AetherSDR debe estar conectado a una radio FLEX-8600.
+- La radio debe tener al menos una memoria configurada. Use `Settings > Memory...` para administrar las memorias.
 
 ## Cómo funciona
 
-El Explorador de memorias se ubica como panel lateral en la ventana principal cuando la navegación por memorias está habilitada. No tiene botón en la bandeja del sistema ni modo de ventana independiente.
+El Explorador de Memorias aparece como un panel lateral en la ventana principal. Cuando hay memorias presentes, el panel muestra una tabla de dos columnas con todas las memorias almacenadas que tienen una frecuencia válida. La tabla está ordenada por frecuencia, de menor a mayor.
 
-Cuando las memorias están cargadas, el panel las muestra en una tabla de dos columnas ordenada por frecuencia en orden ascendente. A medida que sintoniza, el panel compara continuamente su frecuencia actual con todas las memorias almacenadas y resalta la fila correspondiente a la coincidencia más cercana. El panel se desplaza automáticamente para mantener visible la fila resaltada.
+Al sintonizar la radio, el panel recalcula continuamente qué memoria es la más cercana a la frecuencia activa y resalta esa fila. El panel se desplaza automáticamente para mantener la fila resaltada visible.
 
-Si la radio no tiene memorias cargadas, la tabla se oculta y el panel muestra en su lugar el mensaje "No memories are available yet."
+Cuando no hay memorias cargadas, el panel muestra el mensaje "No memories are available yet." en lugar de la tabla.
 
-Las entradas sin valor de frecuencia quedan excluidas completamente de la lista.
-
-Cuando el nombre de una memoria no está definido, el panel recurre al nombre del grupo de esa memoria. Si ninguno de los dos está definido, muestra el número de índice de la memoria con el formato `Memory N`.
+**Activar una memoria:** Haga doble clic en cualquier fila, o seleccione una fila y presione Enter, para activar esa memoria en la radio.
 
 ## Qué hace cada control
 
-| Control | Tipo | Comportamiento |
-|---|---|---|
-| Tabla de memorias | Lista | Muestra todas las memorias con una frecuencia válida. Las columnas son **Frequency** (MHz, 6 decimales) y **Name**. Haga doble clic en una fila, o selecciónela y pulse Enter, para activar esa memoria. La tabla está ordenada por frecuencia, de forma ascendente. |
-| Fila resaltada | Indicador | La fila cuya frecuencia es la más cercana a la frecuencia sintonizada actualmente queda resaltada. El panel se desplaza para mantener esta fila centrada. |
-| "No memories are available yet." | Indicador | Se muestra en lugar de la tabla cuando la radio no tiene memorias con una frecuencia válida. |
+| Control | Descripción |
+|---|---|
+| Tabla de memorias | Lista todas las memorias con una frecuencia válida. Columnas: Frequency (MHz, 6 decimales) y Name. Selección simple; solo lectura. Haga doble clic o presione Enter en una fila para activar esa memoria. |
+| Fila resaltada | Indica la memoria cuya frecuencia es la más cercana a la frecuencia sintonizada actualmente. El panel se desplaza para mantener esta fila centrada. |
+| "No memories are available yet." | Se muestra en lugar de la tabla cuando la radio no tiene memorias con una frecuencia válida. Desaparece automáticamente una vez que hay memorias disponibles. |
 
-El Explorador de memorias no tiene configuraciones propias persistentes.
+**Visualización del nombre:** La columna Name muestra el nombre de la memoria si está definido, el nombre del grupo si no hay nombre de memoria, o "Memory N" (donde N es el índice de la memoria) si ninguno está definido.
 
 ## Consejos
 
-- Al pasar el cursor sobre una celda **Frequency** o **Name** truncada, se muestra el valor completo en un tooltip.
-- Si dos memorias están a la misma distancia de la frecuencia actual, se resalta la que tiene el número de índice menor.
+- La fila resaltada se actualiza al sintonizar — no es necesario realizar ninguna acción para refrescarla.
+- Si dos memorias están a la misma distancia de la frecuencia actual, se resalta la que tiene el índice de memoria más bajo.
+- Las memorias con una frecuencia de 0 o sin frecuencia definida se excluyen completamente de la tabla.
 
-## Temas relacionados
+## Relacionado
 
-- [Explorar las memorias almacenadas en la radio](browse-the-radio-s-stored-memories.md)
+- [Explorar las memorias almacenadas de la radio](browse-the-radio-s-stored-memories.md)
 - [Saltar a la memoria más cercana a la frecuencia actual](jump-to-the-memory-closest-to-the-current-frequency.md)
-- [Activar una memoria con un doble clic](activate-a-memory-with-a-single-double-click.md)
+- [Activar una memoria con un solo doble clic](activate-a-memory-with-a-single-double-click.md)

@@ -1,50 +1,49 @@
-# Activar o desactivar la estimación de ruido adaptativa de NR4
+# Habilitar o deshabilitar la estimación adaptativa de ruido de NR4
 
-La estimación de ruido adaptativa de NR4 reestima continuamente el piso de ruido a medida que cambian las condiciones de la banda. Desactivarla fija la estimación en su último valor calculado, lo que puede ser útil en entornos de ruido muy estables, pero provocará supresión insuficiente o excesiva cuando el ruido cambie.
+La estimación adaptativa de ruido de NR4 remide continuamente el piso de ruido a medida que las condiciones cambian en la banda. Habilitarla permite que el motor siga las interferencias variables; deshabilitarla congela la estimación del piso de ruido, lo que puede ser útil cuando el ruido de fondo es muy estable y uniforme.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar en ejecución. No se requiere conexión de radio para ajustar los parámetros de DSP.
-- NR4 debe ser el motor de reducción de ruido activo en su cadena de recepción. Si está usando NR2, MNR o DFNR, este ajuste no tiene efecto.
+- AetherSDR debe estar en ejecución. No se requiere una conexión de radio para cambiar este ajuste.
+- Abra el diálogo AetherDSP Settings mediante `Settings > AetherDSP Settings...`.
 
 ## Pasos
 
-1. Haga clic en `Settings > AetherDSP Settings...`.
+1. Vaya a `Settings > AetherDSP Settings...`.
 2. Haga clic en la pestaña **NR4**.
 3. Marque o desmarque **Adaptive Noise Estimation**.
-   - Marcado (predeterminado): NR4 reestima continuamente el piso de ruido.
-   - Desmarcado: NR4 mantiene la estimación de ruido fija.
+   - Marcada (predeterminado): NR4 re-estima continuamente el piso de ruido.
+   - Desmarcada: la estimación del piso de ruido queda congelada en el valor capturado la última vez que se inició NR4.
 
-El cambio surte efecto de inmediato y se guarda automáticamente.
+El ajuste se guarda de inmediato. No se necesita confirmación ni reinicio.
 
 ## Qué hace cada control
 
-| Control | Tipo | Predeterminado | Rango válido | Clave de ajuste |
-|---|---|---|---|---|
-| **Adaptive Noise Estimation** | Casilla de verificación | Marcado | On / Off | `NR4AdaptiveNoise` |
-| **Noise Estimation Method** | Botones de opción | SPP-MMSE | SPP-MMSE \| Brandt \| Martin | `NR4NoiseEstimationMethod` |
-| **Reduction (dB):** | Control deslizante | 10.0 | 0.0–40.0 dB | `NR4ReductionAmount` |
-| **Smoothing (%):** | Control deslizante | 0 | 0–100 | `NR4SmoothingFactor` |
-| **Whitening (%):** | Control deslizante | 0 | 0–100 | `NR4WhiteningFactor` |
-| **Masking Depth:** | Control deslizante | 0.50 | 0.00–1.00 | `NR4MaskingDepth` |
-| **Suppression:** | Control deslizante | 0.50 | 0.00–1.00 | `NR4SuppressionStrength` |
-| **Reset Defaults** | Botón | — | — | — |
+| Control | Predeterminado | Rango válido | Clave de ajuste |
+|---|---|---|---|
+| **Noise Estimation Method** (botones de opción: SPP-MMSE, Brandt, Martin) | SPP-MMSE | SPP-MMSE \| Brandt \| Martin | `NR4NoiseEstimationMethod` |
+| **Adaptive Noise Estimation** (casilla de verificación) | Habilitado | On / Off | `NR4AdaptiveNoise` |
+| **Reduction (dB):** | 10.0 dB | 0.0–40.0 dB | `NR4ReductionAmount` |
+| **Smoothing (%):** | 0 | 0–100 | `NR4SmoothingFactor` |
+| **Whitening (%):** | 0 | 0–100 | `NR4WhiteningFactor` |
+| **Masking Depth:** | 0.50 | 0.00–1.00 | `NR4MaskingDepth` |
+| **Suppression:** | 0.50 | 0.00–1.00 | `NR4SuppressionStrength` |
+| **Reset Defaults** (botón) | — | — | — |
 
 ## Consejos
 
-- Si el piso de ruido en la banda es estable (por ejemplo, un entorno local silencioso a altas horas de la noche), desactivar **Adaptive Noise Estimation** puede evitar que el estimador derive hacia los picos de señal y suprima inadvertidamente estaciones débiles.
-- Si desactiva la estimación adaptativa y luego nota que la reducción de ruido ya no sigue correctamente tras un cambio en las condiciones de la banda, vuelva a activarla y espere unos segundos para que el estimador converja antes de ajustar otros controles deslizantes.
-- La selección de **Noise Estimation Method** determina qué algoritmo alimenta al estimador adaptativo. SPP-MMSE es el predeterminado y se adapta a la mayoría de las condiciones; cambie a Brandt o Martin si trabaja con pisos de ruido que varían rápidamente o lentamente, respectivamente.
-- Haga clic en **Reset Defaults** para restaurar `NR4AdaptiveNoise` al estado marcado junto con todos los demás parámetros de NR4.
+- Si el carácter del ruido en su frecuencia cambia rápidamente (ruido de pulsos, ráfagas de QRM), mantenga **Adaptive Noise Estimation** habilitada para que el estimador pueda seguir el piso cambiante.
+- Si nota que el estimador de ruido atenúa señales durante una transmisión prolongada de una estación débil, intente deshabilitar **Adaptive Noise Estimation** para evitar que el motor trate la señal entrante como parte del piso de ruido.
+- Al hacer clic en **Reset Defaults** en la pestaña NR4 se restauran todos los parámetros de NR4 a sus valores predeterminados, incluida la re-habilitación de **Adaptive Noise Estimation**.
 
-## Resolución de problemas
+## Solución de problemas
 
-- **La supresión de ruido deja de seguir el seguimiento tras un desvanecimiento QSB** — Es probable que la estimación de ruido adaptativa esté desactivada. Abra `Settings > AetherDSP Settings...`, seleccione la pestaña **NR4** y marque **Adaptive Noise Estimation**.
-- **NR4 suprime los picos de señal junto con el ruido** — Es posible que el estimador esté adaptándose de forma demasiado agresiva. Desactive **Adaptive Noise Estimation** temporalmente, o reduzca **Reduction (dB):** y **Suppression:** a valores más bajos.
+- **Las señales deseadas se están suprimiendo junto con el ruido** — es posible que el estimador adaptativo esté clasificando una señal débil o constante como ruido. Desmarque **Adaptive Noise Estimation** para congelar la estimación del piso de ruido.
+- **La supresión de ruido deja de seguir el piso después de un tiempo** — verifique que **Adaptive Noise Estimation** esté marcada. Si el carácter del ruido ha cambiado significativamente desde que se inició AetherSDR, la estimación congelada puede ya no corresponder al piso actual.
 
-## Temas relacionados
+## Relacionados
 
 - [Ajustar la cantidad de reducción de NR4 en dB](adjust-nr4-reduction-amount-in-db.md)
-- [Ajustar la profundidad de enmascaramiento y la intensidad de supresión de NR4](tune-nr4-masking-depth-and-suppression-strength.md)
-- [Restablecer los parámetros de NR2 o NR4 a los valores predeterminados](reset-nr2-or-nr4-parameters-to-defaults.md)
+- [Ajustar la profundidad de enmascaramiento y la fuerza de supresión de NR4](tune-nr4-masking-depth-and-suppression-strength.md)
+- [Restablecer los parámetros de NR2 o NR4 a sus valores predeterminados](reset-nr2-or-nr4-parameters-to-defaults.md)
 - [Elegir la reducción de ruido adecuada: NR2, NR4, DFNR, MNR](../../operating/dsp/noise-reduction-overview.md)

@@ -1,28 +1,34 @@
 # Limpiar el registro antes de reproducir un error
 
-Limpiar el registro antes de provocar un error garantiza que el archivo de registro resultante contenga únicamente los eventos relacionados con ese error, lo que facilita su diagnóstico y reporte.
+Limpiar el registro antes de provocar un problema garantiza que el archivo de registro contenga únicamente la sesión relevante, lo que facilita aislar e informar el problema.
 
 ## Antes de comenzar
 
-- Abra AetherSDR. No se requiere conexión a una radio para esta tarea.
-- Conozca los pasos necesarios para reproducir el error, de modo que pueda provocarlo inmediatamente después de limpiar el registro.
+- Abra AetherSDR. No se requiere conexión a una radio para este procedimiento.
+- Si desea capturar salida detallada durante la reproducción, habilite primero las categorías de registro relevantes. Consulte [Habilitar el registro detallado para un subsistema específico](enable-verbose-logging-for-a-specific-subsystem.md).
 
 ## Pasos
 
 1. Haga clic en `Help > Support...` para abrir el diálogo Support & Diagnostics.
-2. Haga clic en `Clear Log`. Esto trunca el archivo de registro actual de inmediato — no aparece ningún mensaje de confirmación.
-3. Verifique que el visor de registro esté vacío y luego reproduzca el error.
-4. Haga clic en `Refresh` para recargar el archivo de registro y confirme que las nuevas entradas han sido capturadas.
-5. Haga clic en `Open Log Folder` si necesita adjuntar el archivo de registro a un reporte de error.
+2. Haga clic en `Clear Log`.
+3. Confirme que el visor de registro está ahora vacío.
+4. Cierre el diálogo o déjelo abierto, y luego realice las acciones que provocan el error.
+5. Regrese a `Help > Support...` y haga clic en `Refresh` para recargar el archivo de registro.
+6. Revise el visor de registro para confirmar que se capturó la salida relevante.
+7. Haga clic en `Open Log Folder` para acceder al archivo de registro en el explorador de archivos de su sistema operativo, si necesita adjuntarlo a un informe.
 
 ## Consejos
 
-- Active el registro detallado para el subsistema correspondiente antes de limpiar, de modo que la ejecución de reproducción capture información detallada. Use las casillas de categoría o haga clic en `Enable All` para activar todas las categorías de registro a la vez.
-- Limpie el registro y reproduzca el error en una secuencia continua e ininterrumpida. Cualquier reinicio de AetherSDR entre la limpieza y la reproducción puede agregar entradas de inicio no relacionadas.
+- Haga clic en `Refresh` después de reproducir el error antes de leer el registro. El visor de registro no se actualiza automáticamente.
+- Si tiene intención de presentar un informe inmediatamente después de capturar el registro, haga clic en `File an Issue` para iniciar el flujo de informe de errores asistido por IA. Consulte [Presentar un informe de errores asistido por IA](file-an-ai-assisted-bug-report.md).
+
+## Solución de problemas
+
+- **El visor de registro sigue mostrando entradas antiguas después de hacer clic en `Clear Log`** — Haga clic en `Refresh` para recargar el archivo ya truncado. El visor no borra su contenido automáticamente al truncarse.
 
 ## Relacionados
 
-- [Activar el registro detallado para un subsistema específico](enable-verbose-logging-for-a-specific-subsystem.md)
+- [Habilitar el registro detallado para un subsistema específico](enable-verbose-logging-for-a-specific-subsystem.md)
 - [Ver el registro en tiempo real sin salir de la aplicación](view-the-live-log-without-leaving-the-app.md)
+- [Presentar un informe de errores asistido por IA](file-an-ai-assisted-bug-report.md)
 - [Abrir la carpeta de registros para obtener múltiples archivos](open-the-log-folder-to-grab-multiple-files.md)
-- [Presentar un reporte de error asistido por IA](file-an-ai-assisted-bug-report.md)

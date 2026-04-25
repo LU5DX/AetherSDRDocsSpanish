@@ -1,51 +1,45 @@
 # Descripción general de la ayuda sin conexión de AetherSDR
 
-AetherSDR incluye un lector de ayuda integrado que muestra guías en formato Markdown directamente en la aplicación. La ayuda está disponible sin conexión a internet, por lo que puede consultarla en la mesa de trabajo o en el campo.
+AetherSDR incluye un lector de ayuda integrado que muestra documentación Markdown incluida en el programa sin necesidad de conexión a internet. Úselo para leer guías de inicio, aprender sobre los modos de cancelación de ruido, configurar modos de datos y más.
 
 ## Cómo funciona
 
-Cada entrada del menú `Help` abre una instancia independiente del lector de ayuda, precargada con el tema correspondiente a ese elemento de menú. Los temas disponibles son:
+Cada tema de ayuda se abre en su propia ventana HelpDialog. La ventana es independiente de la conexión al radio; puede leer la ayuda en cualquier momento, incluso cuando no hay ningún radio conectado.
 
-| Elemento de menú | Tema |
-|---|---|
-| `Help > Getting Started...` | Primeros pasos con AetherSDR |
-| `Help > AetherSDR Help...` | Documento de ayuda completo de AetherSDR |
-| `Help > Understanding Noise Cancellation...` | Reducción de ruido NR2, NR4, DFNR y MNR |
-| `Help > Configuring AetherSDR Controls...` | Referencia de controles de AetherSDR |
-| `Help > Configuring Data Modes...` | Configuración de modos digitales |
-| `Help > Contributing to AetherSDR...` | Informes de errores y contribuciones |
+Abra cualquier tema desde el menú Help:
 
-Cada diálogo se abre de forma independiente. Es posible tener más de un tema abierto al mismo tiempo.
+- `Help > Getting Started...`
+- `Help > AetherSDR Help...`
+- `Help > Understanding Noise Cancellation...`
+- `Help > Configuring AetherSDR Controls...`
+- `Help > Configuring Data Modes...`
+- `Help > Contributing to AetherSDR...`
 
-La ventana se abre con un tamaño de 760 × 680 píxeles y puede reducirse hasta un mínimo de 520 × 420 píxeles.
-
-Si AetherSDR no encuentra el archivo incluido para un tema, el visor de Markdown muestra un mensaje indicando que el archivo de ayuda no está disponible, junto con instrucciones para reinstalar la aplicación.
+Cada entrada abre una ventana independiente precargada con ese tema. Es posible tener varias ventanas de ayuda abiertas al mismo tiempo.
 
 ## Qué hace cada control
 
-| Control | Tipo | Comportamiento |
-|---|---|---|
-| `AETHERSDR OFFLINE HELP` | Indicador (encabezado secundario) | Encabezado de marca que se muestra sobre el título del tema. Solo lectura. |
-| Title | Indicador | Muestra el nombre del tema indicado al abrir el diálogo. Solo lectura. |
-| Subtitle | Indicador | Línea fija: "Bundled help is available even when your station computer is offline." Solo lectura. |
-| Visor de Markdown | Área de texto desplazable | Renderiza el tema Markdown cargado. Admite desplazamiento interno. Los enlaces externos se abren en el navegador predeterminado. |
-| Hint / footer | Indicador | Muestra: "Tip: The Help menu keeps each guide separate so you can reopen just the topic you need." Solo lectura. |
-| Close | Botón | Cierra el diálogo de ayuda. |
-
-Ningún ajuste de este diálogo se guarda de forma persistente.
+| Control | Descripción |
+|---|---|
+| **AETHERSDR OFFLINE HELP** | Encabezado de marca que aparece sobre el título del tema. Indicador de solo lectura. |
+| **Title** | Muestra el nombre del tema como título de la ventana. Solo lectura. |
+| **Subtitle** | Descripción de una línea: "Bundled help is available even when your station computer is offline." Solo lectura. |
+| **Find:** campo | Escriba un término o asunto para buscar dentro del tema actual. El borde del campo se vuelve rojo cuando no hay coincidencias. Se activa con el atajo de teclado estándar de búsqueda o haciendo clic en el campo. |
+| **Next** | Encuentra la siguiente aparición del término buscado. Se habilita solo cuando el campo Find contiene texto. Presione Return en el campo Find para el mismo efecto. Regresa al inicio del documento cuando se llega al final. |
+| **Previous** | Encuentra la aparición anterior del término buscado. Se habilita solo cuando el campo Find contiene texto. Presione Shift+Return en el campo Find para el mismo efecto. Regresa al final cuando se llega al inicio. |
+| **Markdown viewer** | Muestra el tema de ayuda cargado. Solo lectura. Los enlaces externos se abren en el navegador del sistema. |
+| **Hint / footer** | Muestra el consejo: "The Help menu keeps each guide separate so you can reopen just the topic you need." Solo lectura. |
+| **Close** | Cierra la ventana de ayuda. |
 
 ## Consejos
 
-- Los elementos del menú `Help` son independientes. Abra `Help > Understanding Noise Cancellation...` y `Help > Configuring Data Modes...` en paralelo si necesita ambos.
-- No se requiere conexión a la radio para abrir ningún tema de ayuda.
+- El campo Find busca únicamente en el tema actualmente abierto. Para buscar en una guía diferente, ábrala desde el menú Help y use Find en esa ventana.
+- Si no se encuentra el término buscado desde la posición de desplazamiento actual, el visor regresa automáticamente al inicio o al final y muestra "Wrapped to top" o "Wrapped to bottom" como indicador de estado junto al campo Find. Si no hay ninguna coincidencia, muestra "No matches."
+- No se guardan configuraciones asociadas al lector de ayuda. No se almacena nada al cerrarlo.
 
-## Solución de problemas
+## Relacionado
 
-- **El visor de Markdown muestra "Help file not available"** — El recurso de ayuda incluido en la instalación no se encuentra. Reinstale AetherSDR e inténtelo de nuevo.
-
-## Relacionados
-
-- [Abrir la guía de primeros pasos incluida](open-bundled-getting-started-guide.md)
+- [Abrir la guía de inicio incluida en el programa](open-bundled-getting-started-guide.md)
 - [Leer el documento de ayuda completo de AetherSDR](read-the-full-aethersdr-help-document.md)
 - [Conocer las diferencias entre NR2, NR4, DFNR y MNR](learn-the-differences-between-nr2-nr4-dfnr-and-mnr.md)
 - [Configurar los modos digitales paso a paso](configure-digital-modes-step-by-step.md)

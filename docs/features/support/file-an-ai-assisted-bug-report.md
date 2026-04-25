@@ -1,55 +1,55 @@
-# Crear un informe de error asistido por IA
+# Registrar un error con asistencia de IA
 
-AetherSDR puede preparar un aviso de diagnóstico — pre-rellenado con su versión, sistema operativo e información del radio — que usted pega en un asistente de IA para generar un informe de error de GitHub con estructura clara. Utilice esta función cuando necesite ayuda para describir un problema antes de enviarlo en GitHub.
+Use el flujo de registro de errores con asistencia de IA para obtener ayuda al redactar un problema de GitHub claro y completo. AetherSDR copia en el portapapeles un prompt de diagnóstico prellenado —que incluye su versión, sistema operativo y radio conectado— y lo guía a través de un asistente de IA y el formulario de problemas de GitHub.
 
 ## Antes de comenzar
 
-- Reproduzca o anote los detalles del problema que desea reportar.
-- Opcionalmente, limpie y vuelva a capturar el registro justo antes de enviarlo para que contenga solo datos relevantes. Consulte [Limpiar el registro antes de reproducir un error](clear-the-log-before-reproducing-a-bug.md).
-- No se requiere una conexión de radio, pero si está conectado, el paquete incluirá automáticamente el modelo de su radio, la versión de firmware y su indicativo.
+- Reproduzca el problema al menos una vez para poder describir lo que ocurrió.
+- Si desea adjuntar registros de diagnóstico, limpie el registro y reproduzca el problema primero, de modo que el registro contenga solo la salida relevante. Consulte [Limpiar el registro antes de reproducir un error](clear-the-log-before-reproducing-a-bug.md).
+- No se requiere una conexión de radio; sin embargo, si está conectado, el paquete incluirá automáticamente el modelo de radio, el firmware y la información de serie.
 
 ## Pasos
 
-1. Haga clic en `Help > Support...` para abrir el diálogo **Support & Diagnostics**.
-2. Haga clic en **File an Issue**.
-   AetherSDR crea un paquete de soporte (registros y configuraciones) y copia un aviso de diagnóstico en su portapapeles. El aviso viene pre-rellenado con su versión de AetherSDR, versión de Qt, sistema operativo e información del radio.
-3. En el diálogo **AI-Assisted Bug Report** que aparece, haga clic en el servicio de IA que desea utilizar: **Claude**, **ChatGPT**, **Gemini**, **Grok** o **Perplexity**. Su navegador predeterminado abrirá ese servicio.
-4. En la ventana de chat de la IA, pegue el contenido del portapapeles (el aviso ya está allí desde el paso 2).
-5. Al final del aviso, reemplace el texto de marcador de posición con una descripción de lo que salió mal — por ejemplo, qué estaba haciendo, qué ocurrió y qué esperaba que sucediera.
-6. Envíe el mensaje y espere a que la IA genere un informe de error de GitHub con formato.
+1. Haga clic en `Help > Support...` para abrir el cuadro de diálogo Support & Diagnostics.
+2. Haga clic en `File an Issue`.
+   AetherSDR crea un paquete de soporte (registros y configuración) y copia un prompt de diagnóstico en el portapapeles. El prompt incluye su versión de AetherSDR, versión de Qt, sistema operativo e información de radio si está conectado.
+3. En el cuadro de diálogo AI-Assisted Bug Report que aparece, haga clic en el servicio de IA que desea usar: `Claude`, `ChatGPT`, `Gemini`, `Grok` o `Perplexity`.
+   Su navegador predeterminado se abre en ese servicio.
+4. En el chat de IA, pegue el contenido del portapapeles.
+5. Al final del prompt, reemplace el texto de marcador de posición con una descripción sencilla de lo que salió mal. Por ejemplo: "The waterfall freezes after about 10 minutes" o "Audio cuts out when I switch bands."
+6. Envíe el prompt y espere a que la IA produzca un informe de error con formato.
 7. Copie la respuesta de la IA.
-8. Regrese al diálogo **AI-Assisted Bug Report** (que permanece abierto en AetherSDR) y haga clic en **Submit Bug Report**. AetherSDR abre el formulario de nuevo issue de GitHub en su navegador y abre la carpeta que contiene su paquete de soporte.
-9. Pegue la respuesta de la IA en el formulario del issue de GitHub.
-10. Arrastre el archivo del paquete de soporte desde la carpeta que se abrió hasta el formulario del issue de GitHub para adjuntarlo.
+8. Regrese a AetherSDR. Si el cuadro de diálogo sigue abierto, haga clic en `Submit Bug Report`.
+   Su navegador abre el formulario de nuevo problema de GitHub con la etiqueta `bug` preseleccionada, y la carpeta que contiene su paquete de soporte se abre en el explorador de archivos del sistema operativo.
+9. Pegue el informe de error de la IA en el formulario de problema de GitHub.
+10. Arrastre el archivo del paquete de soporte desde la carpeta que se abrió hasta el formulario de problema de GitHub para adjuntarlo.
+11. Envíe el problema en GitHub.
 
 ## Qué hace cada control
 
-| Control | Comportamiento |
+| Control | Qué hace |
 |---|---|
-| **Claude** | Abre `https://claude.ai/new` en su navegador. |
-| **ChatGPT** | Abre `https://chat.openai.com/` en su navegador. |
-| **Gemini** | Abre `https://gemini.google.com/` en su navegador. |
-| **Grok** | Abre `https://grok.x.ai/` en su navegador. |
-| **Perplexity** | Abre `https://www.perplexity.ai/` en su navegador. |
-| **Submit Bug Report** | Abre el formulario de nuevo issue de GitHub (pre-etiquetado como `bug`) y abre la carpeta del paquete de soporte para adjuntarlo mediante arrastrar y soltar. |
-| **Close** | Cierra el diálogo sin enviar el informe. |
+| `Claude` | Abre `https://claude.ai/new` en su navegador. |
+| `ChatGPT` | Abre `https://chat.openai.com/` en su navegador. |
+| `Gemini` | Abre `https://gemini.google.com/` en su navegador. |
+| `Grok` | Abre `https://grok.x.ai/` en su navegador. |
+| `Perplexity` | Abre `https://www.perplexity.ai/` en su navegador. |
+| `Submit Bug Report` | Abre el formulario de nuevo problema de GitHub (etiquetado previamente como `bug`) y abre la carpeta del paquete de soporte para adjuntarla mediante arrastrar y soltar. |
 
 ## Consejos
 
-- El aviso de diagnóstico instruye a la IA para que redacte el informe completo en una sola respuesta sin hacer preguntas de seguimiento. Proporcione a la IA el mayor detalle posible en su descripción — cuanto más específico sea, mejor será el resultado.
-- Si hizo clic en un botón de IA y luego cerró el diálogo **AI-Assisted Bug Report** antes de enviarlo, haga clic en **File an Issue** nuevamente para volver a abrirlo y use **Submit Bug Report**. Se creará un nuevo paquete de soporte.
-- Si está conectado a su radio cuando hace clic en **File an Issue**, el paquete incluye automáticamente el modelo del radio, número de serie, versión de firmware y dirección IP. Si no está conectado, conéctese primero y luego haga clic en **File an Issue** para incluir esos datos.
-- Active el registro detallado (verbose logging) para el subsistema correspondiente antes de reproducir el error, de modo que el paquete de soporte contenga información útil. Consulte [Activar el registro detallado para un subsistema específico](enable-verbose-logging-for-a-specific-subsystem.md).
+- El prompt de diagnóstico instruye a la IA para que redacte el informe de error completo en una sola respuesta, sin hacer preguntas de seguimiento. Solo necesita agregar su descripción al final del prompt pegado.
+- El paquete de soporte se crea al hacer clic en `File an Issue`, antes de interactuar con cualquier IA. Si reproduce el problema después de abrir el cuadro de diálogo, haga clic en `Close`, limpie el registro, reproduzca el error y luego inicie el flujo de nuevo para que el paquete contenga registros actualizados.
+- Si cierra el cuadro de diálogo AI-Assisted Bug Report y necesita registrar el problema más tarde, haga clic en `Submit Bug Report` desde una nueva sesión de `File an Issue` para volver a abrir el formulario de GitHub y la carpeta del paquete.
 
 ## Solución de problemas
 
-- **Aparece la advertencia "Failed to create support bundle."** — AetherSDR no pudo escribir el paquete en el disco. Verifique que tenga permiso de escritura en su directorio de datos de usuario. El aviso de diagnóstico sigue copiado en su portapapeles, por lo que puede continuar con los pasos de IA y enviar el issue manualmente sin el archivo adjunto.
-- **No se abre ningún navegador al hacer clic en un botón de IA** — Verifique que su sistema operativo tenga configurado un navegador predeterminado y que pueda abrir URLs externas. En Linux, asegúrese de que `xdg-open` funcione correctamente.
-- **La información del radio muestra "not connected" en el aviso** — AetherSDR no estaba conectado al radio cuando hizo clic en **File an Issue**. Conéctese mediante `Settings > Connect to Radio...` y haga clic en **File an Issue** nuevamente si los datos del radio son relevantes para su informe.
+- **Aparece la advertencia "Failed to create support bundle"** — AetherSDR no pudo escribir el paquete en el disco. Verifique que tenga permisos de escritura en su directorio de inicio y que haya espacio disponible en disco; luego intente de nuevo.
+- **El navegador no se abre al hacer clic en un botón de IA** — Verifique que haya un navegador predeterminado configurado en su sistema operativo. En Linux, compruebe que `xdg-open` esté instalado y asociado a un manejador HTTP.
+- **La información de radio muestra "not connected" en el prompt** — La radio no estaba conectada cuando hizo clic en `File an Issue`. Agregue el modelo de radio y la versión de firmware manualmente en el chat de IA después de pegar el prompt.
 
 ## Relacionado
 
 - [Limpiar el registro antes de reproducir un error](clear-the-log-before-reproducing-a-bug.md)
-- [Activar el registro detallado para un subsistema específico](enable-verbose-logging-for-a-specific-subsystem.md)
-- [Abrir la carpeta de registros para obtener múltiples archivos](open-the-log-folder-to-grab-multiple-files.md)
-- [Descripción general de Support & Diagnostics](overview.md)
+- [Habilitar el registro detallado para un subsistema específico](enable-verbose-logging-for-a-specific-subsystem.md)
+- [Abrir la carpeta de registros para obtener varios archivos](open-the-log-folder-to-grab-multiple-files.md)

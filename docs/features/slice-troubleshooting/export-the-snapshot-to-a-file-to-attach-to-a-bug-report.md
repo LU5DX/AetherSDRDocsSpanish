@@ -1,6 +1,6 @@
-# Exportar el snapshot a un archivo para adjuntarlo a un reporte de error
+# Exportar la instantánea a un archivo para adjuntar a un informe de error
 
-Guarde el snapshot actual de diagnóstico del slice (instantánea del estado del slice) como un archivo JSON para adjuntarlo a un issue de GitHub o a una solicitud de soporte.
+Guarde la instantánea (snapshot) actual del slice como archivo JSON para adjuntarla a un issue de GitHub o a una solicitud de soporte.
 
 ## Antes de comenzar
 
@@ -9,28 +9,23 @@ Guarde el snapshot actual de diagnóstico del slice (instantánea del estado del
 
 ## Pasos
 
-1. Abra `Help > Slice Troubleshooting...`.
-2. Haga clic en la pestaña `JSON` para confirmar que el snapshot contiene datos.
-3. Si el snapshot está desactualizado, haga clic en `Refresh Snapshot` para releer el estado actual del slice.
-4. Haga clic en `Export JSON...`.
-5. En el diálogo de archivo, confirme o cambie el nombre del archivo y el destino. El nombre de archivo predeterminado es `aethersdr-slice-troubleshooting-YYYYMMDD-HHmmss.json` en su directorio de inicio.
-6. Haga clic en Save.
-7. Revise la etiqueta de estado en la parte inferior del diálogo. Una exportación exitosa no muestra ningún error. Si el archivo no pudo escribirse, la etiqueta de estado muestra `Unable to write '<path>'`.
-8. Adjunte el archivo `.json` guardado a su reporte de error.
+1. Haga clic en `Help > Slice Troubleshooting...` para abrir el diálogo Slice Troubleshooting.
+2. Haga clic en `Refresh Snapshot` para asegurarse de que la instantánea refleje el estado actual de la radio.
+3. Haga clic en `Export JSON...`.
+4. En el diálogo de guardado de archivo que aparece, elija una carpeta de destino y un nombre de archivo, luego confirme el guardado.
+5. Adjunte el archivo guardado a su informe de error o issue de GitHub.
+
+La etiqueta de estado en la parte inferior del diálogo confirma el resultado de la exportación.
 
 ## Consejos
 
-- El nombre de archivo predeterminado incluye una marca de tiempo, por lo que las exportaciones repetidas no se sobreescriben entre sí.
-- Si solo necesita el texto y no desea un archivo, use `Copy JSON` para colocar el snapshot en el portapapeles.
+- Si acaba de cambiar la configuración del slice (modo, antena, estado de silencio), haga clic en `Refresh Snapshot` antes de exportar para que el archivo refleje el estado más reciente.
+- La pestaña `JSON (tab)` muestra exactamente lo que se guardará. Revísela antes de exportar si desea confirmar el contenido de la instantánea.
+- Si solo necesita pegar los datos en lugar de adjuntar un archivo, use `Copy JSON` en su lugar.
 
-## Solución de problemas
+## Relacionado
 
-- **La etiqueta de estado muestra `Unable to write '<path>'`** — La ruta seleccionada no tiene permisos de escritura. Seleccione un directorio donde tenga permiso de escritura, como su directorio de inicio o el Escritorio.
-- **El snapshot parece desactualizado** — Haga clic en `Refresh Snapshot` antes de hacer clic en `Export JSON...`. El diálogo no vuelve a consultar la radio automáticamente después de abrirse.
-
-## Relacionados
-
-- [Descripción general de Slice Troubleshooting](overview.md)
-- [Actualizar el snapshot después de cambiar el estado del slice](refresh-the-snapshot-after-changing-slice-state.md)
-- [Copiar el snapshot JSON completo al portapapeles](copy-the-full-json-snapshot-to-the-clipboard.md)
-- [Capturar un snapshot del slice para soporte](capture-a-slice-snapshot-for-support.md)
+- [Capturar una instantánea del slice para soporte](capture-a-slice-snapshot-for-support.md)
+- [Copiar la instantánea JSON completa al portapapeles](copy-the-full-json-snapshot-to-the-clipboard.md)
+- [Actualizar la instantánea tras cambiar el estado del slice](refresh-the-snapshot-after-changing-slice-state.md)
+- [Leer una lista en lenguaje sencillo de los problemas sospechados del slice](read-a-plain-language-list-of-suspected-slice-problems.md)

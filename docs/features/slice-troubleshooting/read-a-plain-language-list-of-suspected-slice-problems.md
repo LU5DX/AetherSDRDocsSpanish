@@ -1,43 +1,42 @@
-# Leer una lista en lenguaje claro de posibles problemas de slice
+# Leer una lista en lenguaje sencillo de los problemas detectados en un slice
 
-El diálogo Slice Troubleshooting analiza el estado actual en memoria de los slices (canales de recepción) de AetherSDR y muestra un resumen en lenguaje claro de los problemas más probables, como audio ausente, silenciamiento bloqueado o antena no detectada. Úselo cuando un slice se comporte de forma inesperada y desee un diagnóstico rápido antes de contactar al soporte.
+El diálogo Slice Troubleshooting analiza el estado actual del slice (canal de recepción) y presenta los problemas detectados en lenguaje sencillo. Úselo cuando un slice se comporte de manera inesperada y desee un resumen rápido antes de revisar la configuración o contactar al soporte técnico.
 
 ## Antes de comenzar
 
 - AetherSDR debe estar conectado al radio. El diálogo requiere una conexión activa con el radio.
-- La instantánea refleja el estado en memoria de AetherSDR en el momento en que se toma. No consulta nuevamente el radio. Si acaba de cambiar la configuración de un slice, actualice la instantánea antes de leer los resultados.
 
 ## Pasos
 
 1. Haga clic en `Help > Slice Troubleshooting...`.
-2. El diálogo se abre con la pestaña **Issue Summary** activa y una instantánea ya tomada.
-3. Lea la lista de problemas detectados en la pestaña **Issue Summary**.
-4. Si ha cambiado el estado del slice desde que abrió el diálogo, haga clic en **Refresh Snapshot** para actualizar la lista.
-5. Cuando termine, haga clic en **Close**.
+2. En el diálogo Slice Troubleshooting, haga clic en la pestaña `Issue Summary`.
+3. Lea la lista de problemas detectados. Cada elemento describe un posible problema, como ausencia de audio, silencio (mute) bloqueado o antena no detectada.
+4. Si la lista no refleja el estado actual del radio, haga clic en `Refresh Snapshot` para volver a leer el estado del slice y luego revise nuevamente la pestaña `Issue Summary`.
+5. Para compartir el resumen, haga clic en `Copy Summary`. El texto se copia al portapapeles. La etiqueta de estado en la parte inferior del diálogo confirma el resultado.
+6. Haga clic en `Close` cuando termine.
 
 ## Qué hace cada control
 
 | Control | Tipo | Comportamiento |
 |---|---|---|
-| **Issue Summary** (pestaña) | Pestaña | Lista de problemas detectados en lenguaje claro. |
-| **JSON** (pestaña) | Pestaña | Instantánea JSON completa de los slices y canales DAX. |
-| **Refresh Snapshot** | Botón | Vuelve a leer el estado del slice en la instantánea y actualiza ambas pestañas. |
-| **Copy Summary** | Botón | Copia el texto del resumen de problemas al portapapeles. |
-| **Copy JSON** | Botón | Copia el JSON completo al portapapeles. |
-| **Export JSON...** | Botón | Guarda el JSON en un archivo. |
-| **Close** | Botón | Cierra el diálogo. |
-| Etiqueta de estado | Indicador | Muestra el resultado de la última acción, por ejemplo "Issue summary copied to clipboard." o los conteos de slices y medidores tras una actualización. |
+| `Issue Summary` | Pestaña | Muestra una lista en lenguaje sencillo de los problemas detectados. |
+| `JSON` | Pestaña | Muestra la instantánea JSON completa de los slices y canales DAX. |
+| `Refresh Snapshot` | Botón | Vuelve a leer el estado del slice en la instantánea. |
+| `Copy Summary` | Botón | Copia el texto del resumen de problemas al portapapeles. |
+| `Copy JSON` | Botón | Copia la instantánea JSON completa al portapapeles. |
+| `Export JSON...` | Botón | Guarda la instantánea JSON en un archivo. |
+| `Close` | Botón | Cierra el diálogo. |
+| Etiqueta de estado | Indicador | Muestra el resultado de la última acción de copia o exportación, por ejemplo "Copied to clipboard". |
 
 ## Consejos
 
-- La etiqueta de estado en la parte inferior del diálogo muestra los conteos de la instantánea tras cada actualización: número de slices, medidores globales y total de medidores. Úsela para confirmar que la instantánea capturó lo que usted esperaba.
-- Si el resumen de problemas está vacío, no se detectaron problemas en la instantánea actual. Pruebe con **Refresh Snapshot** si ha cambiado el estado del slice recientemente.
-- Para compartir los hallazgos con el soporte, haga clic en **Copy Summary** y péguelo en un issue de GitHub o en una publicación del foro. Para diagnóstico asistido por inteligencia artificial, use **Copy JSON** o **Export JSON...** en su lugar.
+- El diálogo no consulta el radio de forma continua. Si cambia la configuración del slice después de abrir el diálogo, haga clic en `Refresh Snapshot` antes de volver a leer la pestaña `Issue Summary`.
+- La pestaña `Issue Summary` es adecuada para pegar en reportes de problemas de GitHub. Para diagnóstico asistido por inteligencia artificial, utilice la pestaña `JSON`.
 
 ## Relacionados
 
 - [Descripción general de Slice Troubleshooting](overview.md)
-- [Actualizar la instantánea tras cambiar el estado del slice](refresh-the-snapshot-after-changing-slice-state.md)
-- [Capturar una instantánea de slice para el soporte](capture-a-slice-snapshot-for-support.md)
+- [Capturar una instantánea del slice para soporte técnico](capture-a-slice-snapshot-for-support.md)
+- [Actualizar la instantánea después de cambiar el estado del slice](refresh-the-snapshot-after-changing-slice-state.md)
 - [Copiar la instantánea JSON completa al portapapeles](copy-the-full-json-snapshot-to-the-clipboard.md)
-- [Exportar la instantánea a un archivo para adjuntar a un informe de error](export-the-snapshot-to-a-file-to-attach-to-a-bug-report.md)
+- [Exportar la instantánea a un archivo para adjuntar a un reporte de error](export-the-snapshot-to-a-file-to-attach-to-a-bug-report.md)

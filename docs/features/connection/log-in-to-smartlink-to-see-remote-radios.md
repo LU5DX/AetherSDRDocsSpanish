@@ -1,51 +1,46 @@
 # Iniciar sesión en SmartLink para ver radios remotos
 
-SmartLink le permite ver y conectarse a una radio Flex que se encuentra en una ubicación diferente a la de su computadora. Esta página explica cómo iniciar sesión en su cuenta de SmartLink para que los radios remotos aparezcan en la lista.
+SmartLink le permite acceder a un FLEX-8600 en una ubicación remota a través de internet. Esta página explica cómo iniciar sesión en su cuenta de FlexRadio SmartLink para que AetherSDR pueda mostrar los radios disponibles.
 
 ## Antes de comenzar
 
-- Tiene una cuenta de FlexRadio SmartLink (correo electrónico y contraseña).
-- La computadora que ejecuta AetherSDR tiene acceso a internet.
-- AetherSDR está abierto y no hay ninguna radio conectada actualmente (el panel de conexión está visible).
+- Debe tener una cuenta de FlexRadio con acceso a SmartLink. Si no la tiene, créela en el sitio web de FlexRadio antes de continuar.
+- El radio remoto debe estar registrado en SmartLink y encendido.
+- AetherSDR no debe estar conectado a ningún radio. El panel de conexión aparece automáticamente cuando no hay ningún radio conectado.
 
 ## Pasos
 
-1. Abra el panel de conexión. Si no está visible, vaya a `Settings > Connect to Radio...`.
-2. Haga clic en **Remote with SmartLink**. Esto cambia el panel a la página de SmartLink.
-3. En el grupo **SmartLink account**, ingrese el correo electrónico de su cuenta de FlexRadio en el campo **Email**.
-4. Ingrese su contraseña en el campo **Password**. La contraseña no se guarda entre sesiones.
-5. Haga clic en **Sign In**.
-6. Espere a que la etiqueta de estado se actualice. Cuando la autenticación es exitosa, su nombre, indicativo o "Signed in to SmartLink" aparece sobre la lista de radios.
-7. La lista **Remote radios** se llena con los radios disponibles para su cuenta.
-
-Para finalizar la sesión, haga clic en **Sign Out**.
+1. Abra el panel de conexión. Si AetherSDR ya muestra la interfaz principal, vaya a `Settings > Connect to Radio...`.
+2. Haga clic en `Remote with SmartLink`. El panel cambia a la página de SmartLink.
+3. En **SmartLink account**, ingrese el correo electrónico de su cuenta de FlexRadio en el campo `SmartLink account: Email`.
+4. Ingrese su contraseña en el campo `SmartLink account: Password`. La contraseña no se guarda entre sesiones.
+5. Haga clic en `Sign In`. AetherSDR se autentica con SmartLink y, si tiene éxito, llena la lista `Remote radios` con los radios disponibles para su cuenta.
 
 ## Qué hace cada control
 
-| Control | Qué hace | Configuración persistente |
+| Control | Función | Configuración persistente |
 |---|---|---|
-| Botón de modo **Remote with SmartLink** | Cambia el panel a la página de SmartLink. | `ConnectionMode` |
-| Campo **Email** | El correo electrónico de su cuenta de FlexRadio. | `SmartLinkEmail` |
-| Campo **Password** | La contraseña de su cuenta de FlexRadio. No se guarda entre sesiones. | — |
-| **Sign In** | Se autentica con SmartLink y solicita la lista de radios. | — |
-| **Sign Out** | Cierra la sesión de SmartLink y borra la lista de radios. | — |
-| Lista **Remote radios** | Muestra los radios SmartLink WAN disponibles para su cuenta después de iniciar sesión. | — |
+| Botón de modo `Remote with SmartLink` | Cambia el panel a la página de SmartLink. | `ConnectionMode` |
+| `SmartLink account: Email` | El correo electrónico de su cuenta de FlexRadio. | `SmartLinkEmail` |
+| `SmartLink account: Password` | Su contraseña de SmartLink. No se guarda al finalizar la sesión. | — |
+| `Sign In` | Se autentica con SmartLink y recupera la lista de radios remotos. | — |
+| `Remote radios` | Muestra los radios WAN disponibles para su cuenta después de iniciar sesión. | — |
+| `Sign Out` | Finaliza la sesión actual de SmartLink. | — |
 
 ## Consejos
 
-- Su dirección de correo electrónico se guarda en `SmartLinkEmail` y se completa automáticamente en el siguiente inicio. Su contraseña nunca se conserva; debe ingresarla de nuevo en cada sesión.
-- Si ve su nombre e indicativo en la etiqueta de estado pero la lista **Remote radios** está vacía, es posible que la radio en la estación remota esté desconectada o no esté registrada en su cuenta.
+- `SmartLinkEmail` es persistente, por lo que su dirección de correo electrónico aparece completada automáticamente en el próximo inicio. La contraseña nunca se almacena.
+- Después de iniciar sesión, la etiqueta de estado debajo del grupo de cuenta muestra su nombre, indicativo de llamada o una confirmación de que ha iniciado sesión, según el contenido de su perfil de cuenta.
 
 ## Solución de problemas
 
-- **Sign In no responde o la etiqueta de estado muestra un error** — Verifique que su correo electrónico y contraseña sean correctos. Compruebe que la computadora tenga acceso a internet. El servicio SmartLink requiere conectividad HTTPS saliente.
-- **La lista Remote radios está vacía después de iniciar sesión** — Es posible que la radio remota esté apagada o que su conexión a internet esté interrumpida. Confirme que la radio está en línea en la ubicación remota.
-- **El campo Email aparece en blanco al iniciar** — `SmartLinkEmail` no fue guardado. Ingrese la dirección e inicie sesión; quedará guardado para sesiones futuras tras una interacción exitosa con el panel.
+- **La lista `Remote radios` está vacía después de iniciar sesión** — Es posible que el radio remoto esté apagado, no registrado en SmartLink o asociado a una cuenta de FlexRadio diferente. Confirme que el radio esté encendido y registrado bajo la misma cuenta que utilizó para iniciar sesión.
+- **`Sign In` produce un error** — Verifique que su correo electrónico y contraseña sean correctos. Un error tipográfico en el campo de correo electrónico es una causa frecuente, ya que el campo no tiene corrección automática. Compruebe sus credenciales en el sitio web de FlexRadio.
+- **La página de SmartLink no es accesible** — El software de cortafuegos o VPN en este equipo puede estar bloqueando el tráfico saliente de SmartLink. Use `Open Network Diagnostics` (disponible en la página Local) para verificar la conectividad, o consulte [Conectar por IP a través de una VPN o red enrutada](../../getting-started/setup/connect-by-ip-across-a-vpn-or-routed-network.md) si su configuración requiere una ruta IP directa.
 
-## Relacionados
+## Relacionado
 
-- [Conectarse a una radio remota a través de SmartLink](../../getting-started/setup/connect-to-a-remote-radio-through-smartlink.md)
-- [Conectarse a una radio local por LAN](../../getting-started/setup/connect-to-a-local-lan-radio.md)
-- [Conectarse por IP a través de una VPN o red enrutada](../../getting-started/setup/connect-by-ip-across-a-vpn-or-routed-network.md)
+- [Conectarse a un radio remoto a través de SmartLink](../../getting-started/setup/connect-to-a-remote-radio-through-smartlink.md)
+- [Conectarse a un radio local en LAN](../../getting-started/setup/connect-to-a-local-lan-radio.md)
 - [Activar el modo de bajo ancho de banda para enlaces lentos](enable-low-bandwidth-mode-for-slow-links.md)
-- [Operación remota a través de SmartLink](../../operating/remote/remote-operation-smartlink.md)
+- [Operar en remoto a través de SmartLink](../../operating/remote/remote-operation-smartlink.md)

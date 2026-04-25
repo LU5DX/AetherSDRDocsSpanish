@@ -1,36 +1,37 @@
 # Saltar a la memoria más cercana a la frecuencia actual
 
-El Memory Browser resalta automáticamente la memoria cuya frecuencia almacenada es la más próxima a su sintonía actual. Esta página explica cómo interpretar ese resaltado y usarlo para orientarse dentro de sus memorias guardadas.
+El Explorador de Memorias resalta automáticamente la memoria cuya frecuencia almacenada es la más próxima a su sintonía actual. Utilice esta función para encontrar y confirmar rápidamente el punto de referencia más cercano sin desplazarse manualmente.
 
 ## Antes de comenzar
 
-- La radio debe estar conectada. El Memory Browser requiere una conexión activa con la radio.
-- Al menos una memoria con una frecuencia válida debe estar cargada en la radio. Si no hay memorias disponibles, el panel muestra "No memories are available yet." y no hay nada que resaltar.
-- El panel lateral del Memory Browser debe estar visible. Consulte [Descripción general del Memory Browser](overview.md) para saber cómo habilitarlo.
+- AetherSDR debe estar conectado a una radio FLEX-8600.
+- El panel lateral del Explorador de Memorias debe estar abierto. Consulte [Descripción general del Explorador de Memorias](overview.md).
+- La radio debe tener al menos una memoria con una frecuencia válida almacenada. Si no hay ninguna cargada, el panel muestra "No memories are available yet." y no se produce ningún resaltado.
 
 ## Pasos
 
-1. Sintonice el VFO de su radio a cualquier frecuencia usando su método habitual.
-2. Observe el panel del Memory Browser junto al panadapter. El panel se actualiza automáticamente — no es necesario presionar ningún botón.
-3. Localice la fila resaltada en la tabla de memorias. Esa fila corresponde a la memoria cuya frecuencia almacenada es la más cercana a su frecuencia sintonizada actual.
-4. El panel se desplaza automáticamente para mantener la fila resaltada centrada en la vista.
+1. Abra el panel lateral del Explorador de Memorias. Se encuentra junto al panadapter en la ventana principal.
+2. Sintonice la radio en cualquier frecuencia mediante el VFO o el panadapter.
+3. Observe la tabla de memorias. La fila correspondiente a la memoria más cercana a su frecuencia actual se resalta automáticamente.
+4. Si la fila resaltada no está visible, el panel la desplaza hasta el centro de la tabla.
 
 ## Qué hace cada control
 
 | Control | Comportamiento |
 |---|---|
-| Tabla de memorias | Lista todas las memorias con frecuencias válidas, ordenadas por frecuencia. Columnas: Frequency (MHz, seis decimales), Name. |
-| Fila resaltada | Marca la única memoria más cercana a la frecuencia sintonizada actual. Se actualiza cada vez que cambia la sintonía. |
-| "No memories are available yet." | Se muestra en lugar de la tabla cuando la radio no tiene memorias con frecuencias válidas cargadas. |
+| Tabla de memorias | Lista todas las memorias almacenadas ordenadas por frecuencia. Columnas: Frequency (MHz), Name. |
+| Fila resaltada | Marca la única memoria cuya frecuencia es la más cercana a la frecuencia sintonizada actualmente. Se actualiza cada vez que cambia la sintonía. |
+| "No memories are available yet." | Se muestra en lugar de la tabla cuando la radio no tiene memorias cargadas. |
 
 ## Consejos
 
-- La tabla está ordenada por frecuencia, no por índice de memoria, por lo que la fila resaltada siempre aparecerá cerca de otras entradas con frecuencias similares.
-- Si dos memorias están a igual distancia de la frecuencia actual, se resalta la que tiene el índice de memoria menor.
-- El resaltado se actualiza mientras sintoniza, por lo que puede barrer el VFO y observar cómo el resaltado se desplaza por la lista para encontrar un grupo de memorias en un segmento de banda.
+- La tabla está ordenada por frecuencia, de modo que la fila resaltada también indica la posición de su frecuencia actual en relación con todas las memorias almacenadas.
+- Si dos memorias están igualmente cerca de la frecuencia actual, se resalta aquella con el índice de memoria más bajo.
+- Las memorias con una frecuencia de 0 quedan excluidas de la tabla y del cálculo de la coincidencia más cercana.
+- El nombre mostrado de una memoria proviene de su campo de nombre si está definido, del nombre de grupo si el nombre está en blanco, o de "Memory N" como alternativa.
 
 ## Relacionado
 
-- [Descripción general del Memory Browser](overview.md)
-- [Explorar las memorias almacenadas en la radio](browse-the-radio-s-stored-memories.md)
+- [Descripción general del Explorador de Memorias](overview.md)
+- [Explorar las memorias almacenadas de la radio](browse-the-radio-s-stored-memories.md)
 - [Activar una memoria con un doble clic](activate-a-memory-with-a-single-double-click.md)

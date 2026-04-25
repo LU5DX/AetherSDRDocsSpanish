@@ -1,40 +1,40 @@
 # Cambiar el estimador de potencia de ruido NR2 (OSMS/MMSE/NSTAT)
 
-El estimador de potencia de ruido (NPE) de NR2 controla cómo el motor NR2 de AetherSDR mide el piso de ruido antes de aplicar ganancia. Cambiar entre OSMS, MMSE y NSTAT permite adaptar el estimador al tipo de ruido con el que se trabaja: estable, promediado o de variación rápida.
+El estimador de potencia de ruido (NPE) de NR2 determina cómo el motor NR2 de AetherSDR mide el nivel de ruido de fondo. Cambiar entre OSMS, MMSE y NSTAT le permite adaptar el estimador al tipo de ruido con el que está trabajando.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar en ejecución. No se requiere conexión a una radio para cambiar esta configuración.
-- NR2 debe estar activo en su slice para que el cambio tenga efecto audible.
+- AetherSDR debe estar en ejecución. No se requiere una conexión de radio para cambiar este ajuste.
+- NR2 debe estar activo en su slice para que el cambio tenga un efecto audible.
 
 ## Pasos
 
 1. Haga clic en `Settings > AetherDSP Settings...`.
-2. Haga clic en la pestaña **NR2**.
-3. En el grupo **NPE Method**, haga clic en uno de los tres botones de opción: **OSMS**, **MMSE** o **NSTAT**.
+2. En el cuadro de diálogo AetherDSP Settings, haga clic en la pestaña **NR2**.
+3. En **NPE Method**, haga clic en uno de los tres botones de opción: **OSMS**, **MMSE** o **NSTAT**.
 
-La selección surte efecto de inmediato y se guarda en `NR2NpeMethod`.
+El ajuste surte efecto de inmediato y se guarda automáticamente en `NR2NpeMethod`.
 
 ## Qué hace cada control
 
-| Control | Tipo | Valor predeterminado | Valores válidos | Clave de configuración | Comportamiento |
+| Control | Tipo | Predeterminado | Valores válidos | Clave de ajuste | Comportamiento |
 |---|---|---|---|---|---|
-| **NPE Method** | Botones de opción | OSMS | OSMS \| MMSE \| NSTAT | `NR2NpeMethod` | Selecciona el estimador de potencia de ruido utilizado por NR2. Se almacena como entero 0–2. |
+| NPE Method — **OSMS** | botón de opción | ✓ predeterminado | — | `NR2NpeMethod` = 0 | Optimal Smoothing Minimum Statistics. Rastrea el nivel de ruido de fondo mediante una estimación de mínimo continuo. Ideal para ruido estable y estacionario. |
+| NPE Method — **MMSE** | botón de opción | — | — | `NR2NpeMethod` = 1 | Minimum Mean Squared Error. Minimiza el error esperado en la estimación del ruido. Una opción equilibrada para condiciones mixtas. |
+| NPE Method — **NSTAT** | botón de opción | — | — | `NR2NpeMethod` = 2 | Non-Stationary estimation. Se adapta a ruido que cambia rápidamente con el tiempo, como QRM cuya naturaleza varía. |
 
-**OSMS** — Optimal Smoothing Minimum Statistics. Rastrea el piso de ruido mediante una estimación de mínimo continuo. Ideal para ruido estable y de variación lenta.
-
-**MMSE** — Minimum Mean Squared Error. Minimiza el error esperado en la estimación del ruido. Una opción equilibrada de propósito general.
-
-**NSTAT** — Non-Stationary estimation. Se adapta al ruido que cambia con el tiempo. Úselo cuando el ruido de fondo sea variable o intermitente.
+`NR2NpeMethod` se almacena como un entero: 0 = OSMS, 1 = MMSE, 2 = NSTAT.
 
 ## Consejos
 
-- Si escucha artefactos de ruido musical tras cambiar de estimador, habilite **AE Filter (artifact elimination)** en la misma pestaña. Su clave de configuración es `NR2AeFilter` y está activado de forma predeterminada.
-- Si cambia el método NPE y no queda satisfecho, haga clic en **Reset Defaults** en la pestaña NR2 para restaurar OSMS junto con todos los demás parámetros de NR2 a sus valores predeterminados (Gamma / OSMS / AE activado / 1.50 / 0.85 / 0.20).
+- OSMS es el valor predeterminado y funciona bien para ruido atmosférico o de banda constante.
+- Si el nivel de ruido de fondo varía con rapidez (por ejemplo, al cambiar de estación o al cambiar las condiciones de la banda), pruebe NSTAT, que se readapta de forma más agresiva.
+- MMSE es un término medio: tiende a dejar menos ruido residual que OSMS en condiciones moderadas, sin los artefactos de variación rápida que NSTAT puede introducir.
+- Para restaurar todos los parámetros de NR2 a sus valores predeterminados (incluido NPE Method de vuelta a OSMS), haga clic en **Reset Defaults** en la parte inferior de la pestaña **NR2**.
 
-## Relacionados
+## Relacionado
 
-- [Ajustar la profundidad de reducción y el umbral de voz de NR2](tune-nr2-reduction-depth-and-voice-threshold.md)
-- [Cambiar el método de ganancia de NR2 entre Linear, Log, Gamma y Trained](switch-nr2-gain-method-between-linear-log-gamma-and-trained.md)
-- [Restablecer los parámetros de NR2 o NR4 a los valores predeterminados](reset-nr2-or-nr4-parameters-to-defaults.md)
+- [Ajustar la profundidad de reducción NR2 y el umbral de voz](tune-nr2-reduction-depth-and-voice-threshold.md)
+- [Cambiar el método de ganancia NR2 entre Linear, Log, Gamma y Trained](switch-nr2-gain-method-between-linear-log-gamma-and-trained.md)
+- [Restablecer los parámetros de NR2 o NR4 a sus valores predeterminados](reset-nr2-or-nr4-parameters-to-defaults.md)
 - [Elegir la reducción de ruido adecuada: NR2, NR4, DFNR, MNR](../../operating/dsp/noise-reduction-overview.md)

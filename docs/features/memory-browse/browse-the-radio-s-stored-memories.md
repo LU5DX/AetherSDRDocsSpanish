@@ -1,36 +1,36 @@
-# Explorar las memorias almacenadas en el radio
+# Explorar las memorias almacenadas en la radio
 
-El Explorador de memorias es un panel lateral de solo lectura que enumera todas las memorias almacenadas en el radio. Úselo para revisar qué hay guardado, ver frecuencias y nombres de un vistazo, y saltar o activar cualquier entrada.
+El navegador de memorias (Memory Browser) es un panel lateral de solo lectura que lista todas las memorias almacenadas en el FLEX-8600 conectado. Úselo para ver sus frecuencias guardadas de un vistazo y para navegar a cualquier memoria directamente desde la vista del panadapter.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. El Explorador de memorias requiere una conexión activa con el radio.
-- Las memorias deben estar configuradas previamente en el radio. Si no existe ninguna, el panel muestra "No memories are available yet." en lugar de una lista.
-- La exploración de memorias debe estar habilitada para que el panel aparezca en la ventana principal. Consulte [Descripción general del Explorador de memorias](overview.md) para saber cómo habilitarla.
+- AetherSDR debe estar conectado a la radio. El Memory Browser requiere una conexión de radio activa.
+- Las memorias deben estar configuradas previamente en la radio. Si no se ha guardado ninguna, el panel muestra "No memories are available yet." y la tabla no aparece.
 
 ## Pasos
 
-1. Abra `Settings > Memory...` para verificar que las memorias estén configuradas en el radio.
-2. Cierre el diálogo. El panel del Explorador de memorias aparece como un panel lateral junto al panadapter cuando la exploración de memorias está habilitada.
-3. Desplace la tabla de memorias para encontrar la entrada que desea. Las columnas son **Frequency** y **Name**.
-4. Sintonice su VFO. La fila más cercana a la frecuencia sintonizada actual se resalta automáticamente, y la tabla se desplaza para mantener esa fila visible.
+1. Abra `Settings > Memory...` para verificar que la exploración de memorias esté habilitada y que las memorias estén configuradas.
+2. El panel Memory Browser aparece como un panel lateral dentro de la ventana principal, junto al panadapter. No es necesario realizar ninguna acción adicional para abrirlo una vez que la exploración de memorias está habilitada.
+3. Desplace la tabla de memorias para encontrar la entrada deseada. La tabla lista todas las memorias con frecuencias válidas, ordenadas por frecuencia de forma ascendente. Cada fila muestra dos columnas: **Frequency** (en MHz, seis decimales) y **Name**.
+4. Para identificar qué memoria está más cerca de su frecuencia sintonizada actual, busque la fila resaltada. La fila resaltada indica la memoria cuya frecuencia es la más próxima a la frecuencia VFO actual. El panel se desplaza automáticamente para mantener esa fila visible.
+5. Para activar una memoria, haga doble clic en su fila o selecciónela y presione Enter.
 
 ## Qué hace cada control
 
 | Control | Comportamiento | Notas |
 |---|---|---|
-| Tabla de memorias | Enumera todas las memorias almacenadas con una frecuencia válida. Las filas están ordenadas por frecuencia, de menor a mayor. | Columnas: Frequency (MHz, 6 decimales), Name. Los nombres demasiado largos se truncan con puntos suspensivos. |
-| Fila resaltada | Marca la memoria cuya frecuencia es la más cercana a la frecuencia sintonizada actual. Se actualiza a medida que sintoniza. | Solo una fila está resaltada a la vez. |
-| "No memories are available yet." | Se muestra en lugar de la tabla cuando el radio no tiene memorias cargadas. | La tabla se oculta mientras este indicador es visible. |
+| Tabla de memorias | Lista todas las memorias almacenadas con frecuencias válidas. Haga doble clic o presione Enter para activar una fila. | Columnas: **Frequency**, **Name**. Ordenadas por frecuencia ascendente. |
+| Fila resaltada | Marca la memoria más cercana a la frecuencia sintonizada actual. | Se actualiza automáticamente al sintonizar. El panel se desplaza para mantener la fila resaltada centrada. |
+| "No memories are available yet." | Se muestra en lugar de la tabla cuando la radio no tiene memorias cargadas. | La tabla permanece oculta hasta que exista al menos una memoria con una frecuencia válida. |
 
 ## Consejos
 
-- La columna **Name** de una memoria muestra el nombre de la memoria si está definido, el nombre del grupo si no hay nombre de memoria, o "Memory N" (donde N es el índice) si ninguno está definido.
-- Las memorias con una frecuencia de cero se excluyen completamente de la tabla.
-- La fila resaltada se desplaza automáticamente al centro del área visible cuando el cambio de sintonía modifica la coincidencia más cercana.
+- Si una memoria no tiene nombre, el panel recurre al nombre de su grupo. Si ninguno está definido, se muestra como "Memory" seguido de su número de índice.
+- Las memorias con una frecuencia de cero o menor quedan excluidas de la tabla por completo.
+- La columna **Frequency** tiene un ancho fijo de 96 píxeles. Los nombres largos en la columna **Name** se truncan con puntos suspensivos. Pase el cursor sobre una fila para ver el nombre o la frecuencia completos en un tooltip.
 
-## Relacionados
+## Temas relacionados
 
-- [Descripción general del Explorador de memorias](overview.md)
+- [Descripción general del Memory Browser](overview.md)
+- [Activar una memoria con un solo doble clic](activate-a-memory-with-a-single-double-click.md)
 - [Saltar a la memoria más cercana a la frecuencia actual](jump-to-the-memory-closest-to-the-current-frequency.md)
-- [Activar una memoria con un doble clic](activate-a-memory-with-a-single-double-click.md)

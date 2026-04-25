@@ -1,40 +1,43 @@
-# Reactivar una etapa específica tras un bypass global
+# Rehabilitar una etapa específica tras un bypass global
 
-Cuando BYPASS está activo, todas las etapas de TX DSP se deshabilitan simultáneamente. Esta página muestra cómo reactivar una sola etapa dejando el resto en bypass.
+Después de usar BYPASS para silenciar todas las etapas de DSP de TX a la vez, puede rehabilitar etapas individuales sin desactivar primero el bypass global. Esto resulta útil cuando desea auditar una sola etapa de forma aislada mientras el resto de la cadena permanece en silencio.
 
 ## Antes de comenzar
 
 - El contenedor PooDoo Audio (TXDSP) debe estar visible. Si no lo está, haga clic en el botón PUDU de la bandeja en la barra lateral derecha para mostrarlo.
-- TX debe estar seleccionado (no RX). El botón TX está marcado por defecto; si RX está seleccionado, haga clic en TX.
-- BYPASS debe estar activado (borde ámbar, color saturado). Si no lo está, consulte [Bypass de todas las etapas TX a la vez](bypass-every-tx-stage-at-once.md).
+- TX debe estar seleccionado en el encabezado del applet de cadena (no RX).
+- BYPASS debe estar ya activo (el interruptor BYPASS está marcado).
 
 ## Pasos
 
-1. Localice la tira de cadena. Los bloques de etapa — Eq, Comp, Gate, DeEss, Tube, Enh / PUDU, Reverb — son visibles en la tira horizontal debajo de la fila de encabezado TX / RX / BYPASS.
-2. Identifique la etapa que desea reactivar.
-3. Haga clic una vez en ese bloque de etapa. Un solo clic conmuta el estado de bypass únicamente para esa etapa, reactivándola sin afectar ninguna otra.
+1. Localice el interruptor BYPASS en la fila de encabezado de la PooDoo Audio Chain. Confirme que está marcado (borde y relleno de color ámbar).
+2. Encuentre la etapa que desea rehabilitar en la tira de cadena — por ejemplo, Chain stage (Comp) o Chain stage (Eq).
+3. Haga clic una sola vez en el mosaico de esa etapa. La etapa cambia de estado de bypass a activa. Su estado visual se actualiza de inmediato.
+4. Repita el paso 3 para cualquier otra etapa individual que desee rehabilitar.
+
+Las etapas que rehabilite manualmente mientras BYPASS está marcado se preservan fuera del snapshot de bypass. Si posteriormente desmarca BYPASS, solo se restauran las etapas que estaban activas antes de que BYPASS se activara por primera vez; las etapas que activó manualmente durante el bypass conservan su estado actual.
 
 ## Qué hace cada control
 
-| Control | Tipo | Valor predeterminado | Comportamiento | Clave de configuración |
-|---|---|---|---|---|
-| BYPASS | Botón de alternancia | Desactivado | Activado: guarda una instantánea de todas las etapas habilitadas y las deshabilita todas. Desactivado: restaura exactamente las etapas que estaban activas antes. | — |
-| Etapa de cadena (Eq) | Controlador de arrastre | — | Un clic alterna el bypass de la etapa de EQ. Doble clic abre su editor. Arrastrar reordena. | `ClientCompTxChainStages` |
-| Etapa de cadena (Comp) | Controlador de arrastre | — | Un clic alterna el bypass del compresor. Doble clic abre su editor. Arrastrar reordena. | `ClientCompTxChainStages` |
-| Etapa de cadena (Gate) | Controlador de arrastre | — | Un clic alterna el bypass de la puerta de ruido. Doble clic abre su editor. Arrastrar reordena. | `ClientCompTxChainStages` |
-| Etapa de cadena (DeEss) | Controlador de arrastre | — | Un clic alterna el bypass del de-esser. Doble clic abre su editor. Arrastrar reordena. | `ClientCompTxChainStages` |
-| Etapa de cadena (Tube) | Controlador de arrastre | — | Un clic alterna el bypass del saturador de tubo. Doble clic abre su editor. Arrastrar reordena. | `ClientCompTxChainStages` |
-| Etapa de cadena (Enh / PUDU) | Controlador de arrastre | — | Un clic alterna el bypass del excitador PUDU. Doble clic abre su editor. Arrastrar reordena. | `ClientCompTxChainStages` |
-| Etapa de cadena (Reverb) | Controlador de arrastre | — | Un clic alterna el bypass de la reverberación. Doble clic abre su editor. Arrastrar reordena. | `ClientCompTxChainStages` |
+| Control | Comportamiento | Valor predeterminado | Clave de configuración |
+|---|---|---|---|
+| BYPASS | Marcado: guarda un snapshot de las etapas habilitadas actualmente y las desactiva todas. Desmarcado: vuelve a habilitar solo las etapas que estaban activas antes de que se activara BYPASS. | Desmarcado | — |
+| Chain stage (Eq) | Un clic alterna el bypass de la etapa de EQ. | — | `ClientCompTxChainStages` |
+| Chain stage (Comp) | Un clic alterna el bypass del compresor. | — | `ClientCompTxChainStages` |
+| Chain stage (Gate) | Un clic alterna el bypass de la puerta de ruido. | — | `ClientCompTxChainStages` |
+| Chain stage (DeEss) | Un clic alterna el bypass del de-esser. | — | `ClientCompTxChainStages` |
+| Chain stage (Tube) | Un clic alterna el bypass del saturador de tubo. | — | `ClientCompTxChainStages` |
+| Chain stage (Enh / PUDU) | Un clic alterna el bypass del excitador PUDU. | — | `ClientCompTxChainStages` |
+| Chain stage (Reverb) | Un clic alterna el bypass del reverb. | — | `ClientCompTxChainStages` |
 
 ## Consejos
 
-- Al hacer clic en un bloque de etapa mientras BYPASS está activado, se reactiva esa etapa de forma independiente. La instantánea de BYPASS no absorbe este cambio: si posteriormente desactiva BYPASS, solo se restauran las etapas que estaban habilitadas antes de que BYPASS se activara por primera vez. Las etapas que se conmutaron manualmente mientras BYPASS estaba activo se conservan fuera de esa instantánea.
-- La indicación debajo de la tira de cadena dice "Click to bypass · Double click to edit · Drag to reorder" y solo es visible en modo TX.
+- Para devolver toda la cadena a su estado anterior al bypass en una sola acción, desmarque BYPASS. Solo se restauran las etapas que estaban habilitadas antes del snapshot de bypass; las etapas que activó individualmente mientras BYPASS estaba activo no se ven afectadas por esta restauración.
+- La indicación de interacción que aparece debajo de la tira de cadena dice "Click to bypass · Double click to edit · Drag to reorder" — el clic simple siempre actúa como interruptor de bypass independientemente del estado de BYPASS.
+- BYPASS no tiene efecto en modo RX. Cambie a TX antes de intentar rehabilitar etapas.
 
 ## Relacionados
 
-- [Bypass de todas las etapas TX a la vez](bypass-every-tx-stage-at-once.md)
+- [Aplicar bypass a todas las etapas de TX a la vez](bypass-every-tx-stage-at-once.md)
+- [Descripción general de PooDoo Audio Chain](overview.md)
 - [Abrir el editor flotante de una etapa desde la cadena](open-a-stage-s-floating-editor-from-the-chain.md)
-- [Reordenar la cadena TX DSP](reorder-the-tx-dsp-chain.md)
-- [Descripción general de la cadena PooDoo Audio](overview.md)

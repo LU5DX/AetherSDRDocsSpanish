@@ -1,25 +1,27 @@
-# Aprenda las diferencias entre NR2, NR4, DFNR y MNR
+# Conozca las diferencias entre NR2, NR4, DFNR y MNR
 
-AetherSDR incluye un tema de ayuda integrado que explica los modos de reducción de ruido disponibles en la radio — NR2, NR4, DFNR y MNR — para que pueda elegir el algoritmo adecuado según sus condiciones de operación sin necesitar una conexión a Internet.
+Esta página explica cómo abrir la guía de cancelación de ruido incluida en AetherSDR, que describe las diferencias entre los modos de reducción de ruido NR2, NR4, DFNR y MNR disponibles en el FLEX-8600.
 
 ## Antes de comenzar
 
-- No se requiere conexión a la radio para leer este tema de ayuda.
-- AetherSDR debe estar instalado y en ejecución.
+- No se requiere conexión a una radio para leer este tema de ayuda.
+- AetherSDR debe estar instalado con sus archivos de ayuda incluidos intactos.
 
 ## Pasos
 
-1. Haga clic en `Help` en la barra de menú.
-2. Haga clic en `Understanding Noise Cancellation...`.
-3. Lea el tema en el visor de Markdown. Desplácese según sea necesario.
-4. Haga clic en `Close` cuando haya terminado.
+1. Haga clic en `Help > Understanding Noise Cancellation...` en la barra de menú.
+2. El HelpDialog se abre con el título establecido en el tema de cancelación de ruido.
+3. Lea el contenido en el visor de Markdown. El tema cubre las diferencias entre NR2, NR4, DFNR y MNR.
+4. Para buscar dentro del tema, escriba un término en el campo Find y haga clic en Next o Previous para avanzar por los resultados. Presione Return para encontrar el siguiente resultado; presione Shift+Return para encontrar el resultado anterior.
+5. Haga clic en Close cuando termine.
 
 ## Consejos
 
-- El menú Help mantiene cada guía por separado. Puede volver a abrir `Help > Understanding Noise Cancellation...` en cualquier momento sin interrumpir su sesión de radio.
-- Si desea ajustar directamente los parámetros de NR2, NR4, DFNR o MNR, abra `Settings > AetherDSP Settings...`.
+- El borde del campo Find se vuelve rojo cuando no existen coincidencias para su término de búsqueda. Borre el campo o revise su término e inténtelo de nuevo.
+- Si el archivo de ayuda no se carga, AetherSDR muestra un mensaje en el visor. Reinstale la aplicación para restaurar los archivos de ayuda faltantes.
+- Cada tema de ayuda en el menú Help es independiente. Puede volver a abrir únicamente este tema en cualquier momento sin alejarse de otras guías.
 
 ## Relacionados
 
 - [Lea el documento de ayuda completo de AetherSDR](read-the-full-aethersdr-help-document.md)
-- [Abra la guía de inicio integrada](open-bundled-getting-started-guide.md)
+- [Abra la guía de introducción incluida](open-bundled-getting-started-guide.md)

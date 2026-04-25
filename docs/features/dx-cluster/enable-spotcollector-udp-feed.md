@@ -1,44 +1,44 @@
-# Activar la fuente UDP de SpotCollector
+# Habilitar el feed UDP de SpotCollector
 
-AetherSDR puede recibir spots DX transmitidos por SpotCollector de Ham Radio Deluxe a través de UDP y mostrarlos en el panadapter. Use esta página para iniciar el receptor y, opcionalmente, habilitarlo en cada arranque.
+AetherSDR puede recibir spots de DX transmitidos por SpotCollector de Ham Radio Deluxe mediante UDP y mostrarlos en el panadapter. Esta página explica cómo iniciar el receptor, configurar el puerto correcto y habilitarlo para que arranque automáticamente.
 
 ## Antes de comenzar
 
-- Ham Radio Deluxe con SpotCollector debe estar en ejecución y configurado para transmitir datos de spots por UDP.
-- Conozca en qué puerto UDP está transmitiendo SpotCollector y confirme que coincide con el que configuró en AetherSDR.
+- SpotCollector debe estar instalado, configurado y en ejecución en la misma máquina o en la red local, y configurado para transmitir spots por UDP.
+- Anote el puerto UDP en el que SpotCollector está transmitiendo — deberá ingresarlo en AetherSDR.
 
 ## Pasos
 
 1. Abra `Settings > SpotHub...`.
 2. Haga clic en la pestaña **SpotCollector**.
-3. Establezca **UDP Port:** en el puerto en el que SpotCollector está transmitiendo. Rango válido: 1–65535. Este valor se guarda como `SpotCollectorPort`.
-4. Haga clic en **Start**. El indicador de estado cambia a **Listening** cuando el socket UDP se enlaza correctamente.
-5. Verifique que los datos entrantes aparezcan en la consola **SpotCollector Spots**.
-6. Para iniciar el receptor automáticamente en cada arranque, habilite **Auto-start on startup**. Esto se guarda como `SpotCollectorAutoStart`.
+3. Configure **UDP Port:** con el puerto en el que SpotCollector está transmitiendo. Rango válido: 1–65535. Este valor se guarda como `SpotCollectorPort`.
+4. Haga clic en **Start**.
+5. Confirme que el indicador de estado cambia a **Listening**. Los spots entrantes aparecerán en la consola **SpotCollector Spots** a medida que lleguen.
+6. Para que el receptor inicie automáticamente cada vez que AetherSDR se ejecute, habilite **Auto-start on startup**. Esto se guarda como `SpotCollectorAutoStart`.
 
 ## Qué hace cada control
 
-| Control | Comportamiento | Clave de configuración | Rango válido |
-|---|---|---|---|
-| **UDP Port:** | Puerto UDP en el que AetherSDR escucha las transmisiones de SpotCollector. | `SpotCollectorPort` | 1–65535 |
-| **Start / Stop** | Inicia o detiene el receptor UDP. | — | — |
-| **Auto-start on startup** | Inicia el receptor automáticamente cuando AetherSDR se lanza. | `SpotCollectorAutoStart` | — |
-| **SpotCollector Spots** | Consola de solo lectura que muestra los datos de spots recibidos. | — | — |
+| Control | Descripción | Clave de configuración |
+|---|---|---|
+| **UDP Port:** | Puerto UDP en el que AetherSDR escucha las transmisiones de SpotCollector. Rango válido: 1–65535. | `SpotCollectorPort` |
+| **Start / Stop** | Inicia o detiene el receptor UDP. | — |
+| **Auto-start on startup** | Inicia el receptor automáticamente al arrancar. | `SpotCollectorAutoStart` |
+| **SpotCollector Spots** | Consola de solo lectura que muestra los spots recibidos de SpotCollector. | — |
 
 ## Consejos
 
-- Los spots recibidos de SpotCollector aparecen en la lista unificada de spots en la pestaña **Spot List**, junto con spots de otras fuentes. La columna **Source** los identifica.
-- Si la superposición de spots en el panadapter no es visible, verifique que **Spots:** esté configurado como **Enabled** en la pestaña **Display**.
+- Los spots recibidos de SpotCollector aparecen junto a los spots de otras fuentes en la pestaña **Spot List**. La columna **Source** los identifica.
+- Si la capa de spots del panadapter no es visible, verifique que **Spots:** esté configurado en **Enabled** en la pestaña **Display**.
 
 ## Solución de problemas
 
-- **El estado permanece en Stopped después de hacer clic en Start** — Es posible que otra aplicación ya esté enlazada al mismo puerto UDP. Cambie **UDP Port:** a un puerto libre y actualice SpotCollector para que coincida.
-- **La consola SpotCollector Spots está vacía** — Confirme que SpotCollector esté en ejecución y configurado para transmitir en el mismo puerto UDP. Verifique que ningún cortafuegos esté bloqueando el tráfico UDP local en ese puerto.
-- **Los spots no aparecen en el panadapter** — Abra la pestaña **Display** y confirme que **Spots:** esté en **Enabled**.
+- **El estado permanece en Stopped o no aparecen spots** — Verifique que SpotCollector esté transmitiendo activamente y que el puerto UDP en AetherSDR coincida con el puerto configurado en SpotCollector. Compruebe que ningún cortafuegos esté bloqueando el tráfico UDP en ese puerto.
+- **El receptor inicia pero el panadapter no muestra spots** — Confirme que la capa de spots principal esté activa: abra la pestaña **Display** y verifique que **Spots:** esté en **Enabled**.
 
-## Relacionado
+## Relacionados
 
 - [Descripción general de SpotHub](overview.md)
 - [Ajustar densidad, posición, tamaño de fuente y duración de los spots](tune-spot-density-position-font-size-and-lifetime.md)
-- [Sintonizar un spot haciendo doble clic en la lista de spots](tune-to-a-spot-by-double-clicking-the-spot-list.md)
 - [Elegir colores para cada fuente de spots](pick-colors-for-each-spot-source.md)
+- [Sintonizar un spot haciendo doble clic en la lista de spots](tune-to-a-spot-by-double-clicking-the-spot-list.md)
+- [Borrar todos los spots del panadapter](clear-all-spots-from-the-panadapter.md)

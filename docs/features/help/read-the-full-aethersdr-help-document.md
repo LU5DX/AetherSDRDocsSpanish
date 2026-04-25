@@ -1,43 +1,49 @@
 # Leer el documento de ayuda completo de AetherSDR
 
-El HelpDialog es un lector de Markdown sin conexión integrado en AetherSDR. Úselo para consultar las guías de referencia incluidas sin necesidad de conexión a Internet.
+El sistema de ayuda de AetherSDR incluye varias guías sin conexión que cubren la configuración, la cancelación de ruido, los modos de datos y más. Use el menú Help para abrir cualquier tema sin necesidad de conexión a internet.
 
 ## Antes de comenzar
 
-- No se requiere conexión a radio para abrir temas de ayuda.
-- AetherSDR debe estar instalado con sus archivos de ayuda incluidos intactos. Si falta un archivo de ayuda, el visor muestra un mensaje de error en lugar del contenido del tema.
+- AetherSDR debe estar instalado y en ejecución. No se requiere conexión a un radio.
 
 ## Pasos
 
-1. Haga clic en `Help` en la barra de menú.
-2. Haga clic en `Help > AetherSDR Help...`.
-3. Se abre la ventana de ayuda. El encabezado muestra la etiqueta **AETHERSDR OFFLINE HELP** sobre el título y el subtítulo del tema.
-4. Desplácese por el visor de Markdown para leer el contenido.
-5. Haga clic en `Close` cuando termine.
+1. Haga clic en `Help` en la barra de menús.
+2. Seleccione cualquiera de los siguientes elementos para abrir la guía correspondiente:
+   - `Help > Getting Started...`
+   - `Help > AetherSDR Help...`
+   - `Help > Understanding Noise Cancellation...`
+   - `Help > Configuring AetherSDR Controls...`
+   - `Help > Configuring Data Modes...`
+   - `Help > Contributing to AetherSDR...`
+3. Lea el contenido en el visor Markdown. Desplácese según sea necesario.
+4. Para buscar dentro del tema abierto, escriba una palabra o frase en el campo `Find:`.
+5. Haga clic en `Next` para saltar a la siguiente coincidencia, o haga clic en `Previous` para ir a la coincidencia anterior. La búsqueda continúa en forma circular al llegar al final o al principio del documento.
+6. Haga clic en `Close` para cerrar el diálogo.
 
 ## Qué hace cada control
 
-| Control | Tipo | Comportamiento |
-|---|---|---|
-| **AETHERSDR OFFLINE HELP** | Indicador | Etiqueta de marca que se muestra sobre el título del tema. No es interactiva. |
-| Title | Indicador | Muestra el nombre del tema de ayuda abierto. |
-| Subtitle | Indicador | Descripción de una línea: "Bundled help is available even when your station computer is offline." |
-| Markdown viewer | Área de texto | Renderiza el archivo Markdown incluido para el tema. Solo lectura. Los enlaces externos se abren en el navegador predeterminado. |
-| Hint / footer | Indicador | Muestra el consejo: "The Help menu keeps each guide separate so you can reopen just the topic you need." |
-| `Close` | Botón | Cierra la ventana de ayuda. |
+| Control | Comportamiento |
+|---|---|
+| `AETHERSDR OFFLINE HELP` (encabezado superior) | Encabezado de marca que se muestra sobre el título del tema. Solo lectura. |
+| Title | Muestra el nombre del tema de ayuda abierto. Solo lectura. |
+| Subtitle | Descripción en una línea: "Bundled help is available even when your station computer is offline." Solo lectura. |
+| Campo `Find:` | Escriba un término de búsqueda para localizar texto dentro del tema actual. El texto de marcador dice "Subject or term". El borde se vuelve rojo cuando no hay coincidencias. |
+| `Next` | Encuentra la siguiente ocurrencia del término de búsqueda. Se habilita solo cuando el campo `Find:` contiene texto. Atajo de teclado: Return. |
+| `Previous` | Encuentra la ocurrencia anterior del término de búsqueda. Se habilita solo cuando el campo `Find:` contiene texto. Atajo de teclado: Shift+Return. |
+| Visor Markdown | Renderiza el tema de ayuda cargado. Los enlaces externos se abren en su navegador predeterminado. |
+| Hint / footer | Dice: "Tip: The Help menu keeps each guide separate so you can reopen just the topic you need." Solo lectura. |
+| `Close` | Cierra el diálogo de ayuda. |
 
 ## Consejos
 
-- Cada tema de ayuda se abre en su propia ventana. Puede abrir varios temas uno al lado del otro eligiendo diferentes elementos del menú `Help` sin cerrar la ventana anterior.
-- Los seis temas están disponibles desde el menú `Help`: `Help > Getting Started...`, `Help > AetherSDR Help...`, `Help > Understanding Noise Cancellation...`, `Help > Configuring AetherSDR Controls...`, `Help > Configuring Data Modes...` y `Help > Contributing to AetherSDR...`.
-
-## Solución de problemas
-
-- **El visor muestra "Help file not available" en lugar del contenido** — Falta un archivo de ayuda incluido en la instalación. Reinstale AetherSDR y confirme que todos los archivos estén presentes, o reporte el archivo faltante al proyecto.
+- Cada elemento del menú Help abre un diálogo independiente, por lo que puede tener más de un tema abierto al mismo tiempo.
+- Presione el atajo estándar de búsqueda (`Ctrl+F` en Linux y Windows, `Cmd+F` en macOS) mientras el diálogo esté enfocado para mover el cursor directamente al campo `Find:`.
+- Si no se encuentra un término de búsqueda, el borde del campo `Find:` se vuelve rojo y el área de estado muestra "No matches". Al borrar el campo se restablece el estado.
 
 ## Relacionados
 
-- [Abrir la guía de inicio rápido incluida](open-bundled-getting-started-guide.md)
+- [Abrir la guía de inicio incluida](open-bundled-getting-started-guide.md)
 - [Conocer las diferencias entre NR2, NR4, DFNR y MNR](learn-the-differences-between-nr2-nr4-dfnr-and-mnr.md)
 - [Configurar modos digitales paso a paso](configure-digital-modes-step-by-step.md)
 - [Entender cómo contribuir con informes de errores y PRs](understand-how-to-contribute-bug-reports-and-prs.md)

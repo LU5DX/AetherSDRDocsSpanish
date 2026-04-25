@@ -1,34 +1,41 @@
-# Omitir las notas de la versión actual
+# Omitir las notas de versión de la versión actual
 
-Cuando AetherSDR detecta una versión más reciente disponible, el diálogo What's New ofrece una forma de evitar que vuelva a aparecer para esa versión sin necesidad de leer las notas completas.
+Cuando AetherSDR detecta que hay una versión más reciente disponible, el diálogo What's New incluye una opción para evitar que vuelva a aparecer para esa versión. Úsela si ya ha leído las notas y no desea que el diálogo se muestre de nuevo en el próximo inicio.
 
 ## Antes de comenzar
 
-- El diálogo What's New debe estar abierto y mostrar una actualización disponible. El botón `Skip this version` aparece únicamente cuando hay una actualización disponible.
+- El botón "Skip this version" aparece únicamente cuando hay una actualización disponible. Si no se detecta ninguna actualización, el botón no se muestra.
+- El diálogo What's New debe estar abierto. Se abre automáticamente tras un cambio de versión, o manualmente mediante `Help > What's New...`.
 
 ## Pasos
 
-1. Abra `Help > What's New...` si el diálogo no está ya en pantalla.
-2. Haga clic en `Skip this version`.
+1. Abra el diálogo What's New. Si no está visible en pantalla, vaya a `Help > What's New...`.
+2. Confirme que el botón "Skip this version" es visible en el pie del diálogo. Si no aparece, no se ha detectado ninguna actualización y la opción de omitir no está disponible.
+3. Haga clic en "Skip this version".
 
-El diálogo se cierra y `LastSeenVersion` se actualiza a la versión actual. AetherSDR no volverá a mostrar las notas de esta versión en futuros inicios.
+El diálogo se cierra. AetherSDR escribe la cadena de versión actual en `LastSeenVersion` y la guarda. El diálogo What's New no aparecerá automáticamente en el próximo inicio para esta versión.
 
 ## Qué hace cada control
 
-| Control | Comportamiento | Ajuste persistido |
-|---|---|---|
-| Navegador de notas | Vista HTML desplazable con las entradas entre la última versión vista y la versión actual. | — |
-| `Got it — 73!` | Cierra el diálogo y marca la versión actual como vista. | `LastSeenVersion` |
-| `Upgrade` | Se muestra solo cuando hay una actualización disponible. Abre la página de descarga. | — |
-| `Skip this version` | Se muestra solo cuando hay una actualización disponible. Escribe la versión actual en `LastSeenVersion` y cierra el diálogo, suprimiendo futuros avisos para esta versión. | `LastSeenVersion` |
-| Hint | Línea de pie breve con orientación. Solo lectura. | — |
+| Control | Tipo | Comportamiento | Clave de configuración |
+|---|---|---|---|
+| Visor de notas de versión | Vista HTML desplazable | Muestra las entradas de versión entre la última versión vista y la versión actual. | — |
+| "Got it — 73!" | Botón | Cierra el diálogo y marca la versión como vista. | `LastSeenVersion` |
+| "Upgrade" | Botón | Se muestra solo cuando hay una actualización disponible. Abre la página de descarga. | — |
+| "Skip this version" | Botón | Se muestra solo cuando hay una actualización disponible. Guarda la versión actual en `LastSeenVersion` y cierra el diálogo para que el aviso no vuelva a aparecer. | `LastSeenVersion` |
+| Hint | Indicador | Línea breve en el pie del diálogo con orientación al usuario. | — |
 
 ## Consejos
 
-- Si omite una versión y más adelante desea leer sus notas, abra `Help > What's New...` en cualquier momento. Esa ruta muestra todas las entradas de la versión actual independientemente del valor de `LastSeenVersion`.
+- "Skip this version" y "Got it — 73!" ambos escriben en `LastSeenVersion`. La diferencia práctica es de intención: "Got it — 73!" reconoce las notas de la versión actual, mientras que "Skip this version" descarta el aviso de actualización sin realizar ninguna acción adicional.
+- Para releer las notas de versión en cualquier momento, use `Help > What's New...`. Esto abre el diálogo independientemente del valor guardado en `LastSeenVersion`.
+
+## Solución de problemas
+
+- **"Skip this version" no es visible** — El botón solo aparece cuando AetherSDR ha detectado que hay una actualización disponible. Si no se detecta ninguna actualización, solo se muestra "Got it — 73!". Este es el comportamiento esperado.
 
 ## Relacionado
 
-- [Leer qué cambió en la nueva versión](read-what-changed-in-the-new-version.md)
+- [Releer las notas de versión más tarde desde el menú Help](re-read-release-notes-later-via-help-menu.md)
 - [Abrir el flujo de actualización para una compilación más reciente](open-the-upgrade-flow-for-a-newer-build.md)
-- [Releer las notas más adelante desde el menú Help](re-read-release-notes-later-via-help-menu.md)
+- [Leer qué cambió en la nueva versión](read-what-changed-in-the-new-version.md)

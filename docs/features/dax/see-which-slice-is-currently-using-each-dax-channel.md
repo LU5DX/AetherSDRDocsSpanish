@@ -1,41 +1,36 @@
-# Ver qué slice está usando cada canal DAX en un momento dado
+# Ver qué slice está usando cada canal DAX
 
-El applet DAX Audio muestra un indicador de estado por canal junto a cada fila de canal DAX. Úselo para confirmar qué slice está enrutado actualmente a DAX 1–4 y qué slice tiene los privilegios de TX, sin necesidad de abrir diálogos adicionales.
+El applet DAX Audio muestra un indicador de asignación de slice junto a cada canal DAX para que pueda confirmar de un vistazo qué slice está enrutado a cada destino, sin abrir ningún menú ni cuadro de diálogo.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. Los indicadores se actualizan desde el estado en vivo del radio y muestran `—` cuando no hay conexión.
+- AetherSDR debe estar conectado al radio. Los indicadores de asignación de slice reflejan el estado en vivo del radio y muestran `—` cuando no hay ningún radio conectado.
 - El applet DAX debe estar visible. Está oculto de forma predeterminada.
 
 ## Pasos
 
-1. Haga clic en el botón **DAX** de la barra lateral derecha para abrir el applet DAX Audio.
-2. Lea el indicador de estado a la derecha de cada etiqueta de canal:
-   - **DAX 1:** a **DAX 4:** — cada uno muestra `—` (ningún slice asignado) o `Slice A` a `Slice H` (el slice actualmente enrutado a ese canal).
-   - **TX:** — muestra `—` o la letra del slice que tiene actualmente los privilegios de TX.
-
-No se requiere ninguna acción adicional. Los indicadores se actualizan automáticamente cada vez que cambian las asignaciones DAX de los slices o el slice de TX.
+1. Haga clic en el botón de bandeja **DAX** de la barra lateral derecha para abrir el applet DAX Audio.
+2. Observe el indicador de estado a la derecha de cada etiqueta de canal (**DAX 1:**, **DAX 2:**, **DAX 3:**, **DAX 4:**).
+3. Lea el valor del indicador:
+   - `Slice A` hasta `Slice H` — ese slice está enrutado actualmente a este canal DAX.
+   - `—` — ningún slice está asignado a este canal.
+4. Para verificar qué slice está controlando actualmente el flujo DAX TX, lea el indicador de estado a la derecha de la etiqueta **TX:**.
 
 ## Qué hace cada control
 
-| Indicador | Ubicación | Valores posibles | Significado |
+| Etiqueta | Tipo | Valores posibles | Significado |
 |---|---|---|---|
-| Estado de asignación de slice (DAX 1) | A la derecha de la etiqueta "DAX 1:" | `—`, `Slice A`–`Slice H` | El slice enrutado al canal DAX 1, si existe. |
-| Estado de asignación de slice (DAX 2) | A la derecha de la etiqueta "DAX 2:" | `—`, `Slice A`–`Slice H` | El slice enrutado al canal DAX 2, si existe. |
-| Estado de asignación de slice (DAX 3) | A la derecha de la etiqueta "DAX 3:" | `—`, `Slice A`–`Slice H` | El slice enrutado al canal DAX 3, si existe. |
-| Estado de asignación de slice (DAX 4) | A la derecha de la etiqueta "DAX 4:" | `—`, `Slice A`–`Slice H` | El slice enrutado al canal DAX 4, si existe. |
-| Estado de asignación de TX | A la derecha de la etiqueta "TX:" | `—`, `Slice A`–`Slice H` | El slice que tiene actualmente los privilegios de TX (controla el flujo DAX TX). |
-
-Ninguno de estos indicadores tiene una clave de configuración persistente. Son de solo lectura y reflejan el estado en vivo del radio.
+| Indicador de asignación de slice (DAX 1–4) | Indicador | `—` o `Slice A`–`Slice H` | El slice enrutado actualmente a ese canal RX. Se actualiza automáticamente cuando cambian las asignaciones DAX de los slices. Sin configuración persistida. |
+| Indicador de asignación TX | Indicador | `—` o `Slice A`–`Slice H` | El slice que tiene actualmente los privilegios de TX. Se actualiza automáticamente cuando cambia el slice TX. Sin configuración persistida. |
 
 ## Consejos
 
-- Si todos los indicadores muestran `—` y el radio está conectado, ningún slice tiene asignado un canal DAX. Asigne un canal DAX a un slice desde los controles de slice en la ventana principal.
-- El indicador de TX y los indicadores de canales RX se actualizan de forma independiente. Un slice puede aparecer en ambos si es el slice de TX y también tiene asignado un canal DAX RX.
+- Los indicadores se actualizan en tiempo real. Si reasigna un slice a un canal DAX diferente en el radio, la etiqueta cambia de inmediato sin necesidad de actualización manual.
+- Un canal que muestra `—` no transporta audio. Si espera audio en un canal y ve `—`, asigne un canal DAX al slice correspondiente desde el radio o desde los controles de slice en AetherSDR.
 
-## Relacionado
+## Relacionados
 
 - [Descripción general de DAX Audio](overview.md)
-- [Activar DAX para enrutar el audio del slice a WSJT-X / FLDigi / otro software digital](enable-dax-to-route-slice-audio-to-wsjt-x-fldigi-other-digital-software.md)
-- [Identificar qué slice es el slice de TX](identify-which-slice-is-the-tx-slice.md)
+- [Habilitar DAX para enrutar audio de slice a WSJT-X / FLDigi / otro software digital](enable-dax-to-route-slice-audio-to-wsjt-x-fldigi-other-digital-software.md)
+- [Identificar cuál es el slice TX](identify-which-slice-is-the-tx-slice.md)
 - [Ajustar la ganancia DAX RX por canal](set-dax-rx-gain-per-channel.md)

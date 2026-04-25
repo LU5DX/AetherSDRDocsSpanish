@@ -1,69 +1,67 @@
 # Descripción general de Diagnósticos de red
 
-El diálogo Network Diagnostics ofrece una vista en tiempo real del enlace entre AetherSDR y su radio Flex: puntos finales de conexión, latencia de ida y vuelta, tasas de datos por flujo, conteos de pérdida de paquetes y estado del búfer de audio. Úselo para confirmar que la ruta de red es estable o para aislar la causa de interrupciones de audio y parpadeos en el waterfall.
+El diálogo Network Diagnostics le ofrece una vista en tiempo real del enlace entre AetherSDR y su FLEX-8600. Úselo para inspeccionar los extremos TCP/UDP, el tiempo de ida y vuelta, las tasas de datos por categoría, la pérdida de paquetes y el estado del búfer de audio — todo actualizado una vez por segundo sin necesidad de una conexión de radio activa.
 
 ## Cómo funciona
 
-Abra el diálogo con `Settings > Network...`. No requiere una conexión de radio activa, aunque la mayoría de los indicadores mostrarán valores de marcador de posición hasta que se conecte.
+Abra el diálogo desde `Settings > Network...`. Se actualiza automáticamente cada segundo. Todos los indicadores son de solo lectura; no hay nada que configurar aquí. Haga clic en Close cuando haya terminado.
 
-Todos los valores se actualizan automáticamente una vez por segundo. El diálogo es de solo lectura — no se modifica ninguna configuración aquí. Haga clic en Close cuando haya terminado.
+El diálogo está dividido en cuatro grupos:
 
-El diálogo está organizado en cuatro grupos.
+### Network Status
 
-### Estado de red
-
-Ruta de conexión y latencia TCP. Confirma qué ruta utiliza AetherSDR para llegar a la radio.
+Confirma qué ruta de red está usando AetherSDR y su capacidad de respuesta.
 
 | Indicador | Qué muestra |
 |---|---|
 | Status | Estado general del enlace. |
-| Target Radio IP | Dirección IP de la radio conectada. Muestra "Not connected" cuando no hay ninguna radio presente. |
-| Selected Source | Interfaz de red local o ruta de enlace utilizada para la conexión. |
-| Local TCP | Punto final TCP local (dirección y puerto). |
-| Local UDP | Punto final UDP local (dirección y puerto). |
-| First UDP Packet | Si se ha recibido un paquete UDP desde la conexión (Yes / No). |
-| Latency (RTT) | Tiempo de ida y vuelta actual en milisegundos. Muestra "< 1 ms" cuando es inferior a 1 ms. |
-| Max Latency (RTT) | Mayor RTT registrado desde la última conexión. |
+| Target Radio IP | Dirección IP de la radio conectada, o "Not connected". |
+| Selected Source | NIC local o ruta de enlace utilizada para la conexión. |
+| Local TCP | Extremo TCP local (dirección y puerto). |
+| Local UDP | Extremo UDP local (dirección y puerto). |
+| First UDP Packet | Si se ha recibido el primer paquete UDP entrante ("Yes" o "No"). |
+| Latency (RTT) | Tiempo de ida y vuelta actual en milisegundos, mostrado como "< 1 ms" cuando es inferior a 1 ms. |
+| Max Latency (RTT) | RTT más alto registrado desde la última conexión. |
 
-### Tasas de flujo entrante
+### Incoming Stream Rates
 
-Tasas de bits de recepción y transmisión actuales por tipo de flujo, en kbps. Variaciones grandes pueden indicar una entrega irregular incluso cuando no se pierden paquetes.
-
-| Indicador | Qué muestra |
-|---|---|
-| Audio | Tasa de entrada para el flujo de audio. |
-| FFT | Tasa de entrada para el flujo FFT (panadapter). |
-| Waterfall | Tasa de entrada para el flujo del waterfall. |
-| Meters | Tasa de entrada para el flujo de medidores. |
-| DAX | Tasa de entrada para el flujo de audio DAX. |
-| Total RX | Bytes de entrada agregados por segundo en todos los flujos. |
-| Total TX | Bytes de salida agregados por segundo. |
-
-### Pérdida de paquetes (saltos de secuencia)
-
-Pérdida de paquetes inferida a partir de números de secuencia VITA-49 faltantes. Cada entrada muestra paquetes descartados, total de paquetes y un porcentaje. Una pérdida de cero aquí no descarta la presencia de jitter o ráfagas tardías.
+Muestra las tasas de bits de recepción y transmisión actuales, desglosadas por tipo de flujo. Variaciones grandes pueden indicar entrega en ráfagas incluso cuando no se pierden paquetes.
 
 | Indicador | Qué muestra |
 |---|---|
-| Audio | Conteo de descarte y tasa para el flujo de audio. |
-| FFT | Conteo de descarte y tasa para el flujo FFT. |
-| Waterfall | Conteo de descarte y tasa para el flujo del waterfall. |
-| Meters | Conteo de descarte y tasa para el flujo de medidores. |
-| DAX | Conteo de descarte y tasa para el flujo DAX. |
+| Audio | Tasa de entrada del flujo de audio, en kbps. |
+| FFT | Tasa de entrada de datos FFT, en kbps. |
+| Waterfall | Tasa de entrada de datos de cascada (waterfall), en kbps. |
+| Meters | Tasa de entrada de datos de medidores, en kbps. |
+| DAX | Tasa de entrada de audio DAX, en kbps. |
+| Total RX | Tasa de entrada agregada de todos los flujos, en kbps. |
+| Total TX | Tasa de salida agregada, en kbps. |
 
-### Reproducción de audio
+### Packet Loss (Sequence Gaps)
 
-Estado del búfer en el lado del altavoz. Si los subdesbordamientos aumentan mientras el búfer permanece cerca de cero, la reproducción está en inanición. El intervalo de llegada y el jitter miden el tiempo, no la pérdida de paquetes.
+Informa la pérdida de paquetes inferida a partir de números de secuencia VITA-49 faltantes. Un valor de cero aquí no descarta la presencia de jitter o ráfagas de paquetes tardíos.
 
 | Indicador | Qué muestra |
 |---|---|
-| RX Buffer Now | Nivel de llenado actual del búfer de audio, en bytes y milisegundos. |
-| RX Buffer Peak | Mayor nivel de llenado del búfer registrado desde la conexión. |
-| Underruns (total) | Conteo acumulado de subdesbordamientos de audio. |
-| Underruns (last sec) | Subdesbordamientos registrados en la ventana de un segundo más reciente. |
-| Audio Arrival Gap | Intervalo de llegada entre paquetes para el paquete de audio más reciente. |
-| Max Arrival Gap | Mayor intervalo de llegada entre paquetes observado desde la conexión. |
-| Jitter Estimate | Jitter suavizado del flujo de audio entrante. |
+| Audio | Paquetes descartados / paquetes totales (porcentaje) del flujo de audio. |
+| FFT | Descartados / total para datos FFT. |
+| Waterfall | Descartados / total para datos de cascada (waterfall). |
+| Meters | Descartados / total para datos de medidores. |
+| DAX | Descartados / total para audio DAX. |
+
+### Audio Playback
+
+Informa el estado del búfer en el lado del altavoz. Un número creciente de subdesbordamientos (underruns) combinado con un búfer casi vacío indica que la canalización de reproducción está sin datos. El gap de llegada y el jitter miden la temporización de los paquetes, no la pérdida de paquetes.
+
+| Indicador | Qué muestra |
+|---|---|
+| RX Buffer Now | Nivel actual de llenado del búfer de audio, en bytes y milisegundos. |
+| RX Buffer Peak | Nivel máximo de llenado del búfer registrado desde la conexión, en bytes y milisegundos. |
+| Underruns (total) | Recuento acumulado de subdesbordamientos del búfer de audio. |
+| Underruns (last sec) | Subdesbordamientos ocurridos en el intervalo de un segundo más reciente. |
+| Audio Arrival Gap | Gap medido entre llegadas consecutivas de paquetes de audio entrantes. |
+| Max Arrival Gap | Mayor gap de llegada registrado desde la conexión. |
+| Network Jitter | Estimación de jitter suavizada para el flujo de audio. |
 
 ## Controles
 
@@ -73,14 +71,14 @@ Estado del búfer en el lado del altavoz. Si los subdesbordamientos aumentan mie
 
 ## Consejos
 
-- El diálogo puede dejarse abierto mientras se opera. Como se actualiza cada segundo, tiene un impacto insignificante en la interfaz.
-- Cero descartados en el grupo Packet Loss no garantiza audio limpio. Compruebe Jitter Estimate y Max Arrival Gap para detectar problemas relacionados con el tiempo incluso cuando la pérdida es cero.
-- Max Latency (RTT) se acumula desde el momento de la conexión. Reconéctese a la radio para reiniciarlo.
+- El diálogo no requiere una conexión de radio activa para abrirse, pero la mayoría de los indicadores mostrarán valores de marcador de posición hasta que se establezca una conexión.
+- Los indicadores de pérdida de paquetes cuentan los saltos en los números de secuencia de los flujos VITA-49. Un recuento de cero no garantiza una entrega limpia — use el grupo Audio Playback para verificar los problemas de temporización de forma independiente.
+- "< 1 ms" en los campos RTT significa que el valor medido está por debajo de 1 ms, no que la medición haya fallado.
 
 ## Relacionados
 
 - [Verificar la IP de la radio y la dirección de enlace local](verify-the-radio-s-ip-and-local-bind-address.md)
-- [Medir el RTT y los descartados de paquetes durante problemas de audio](measure-rtt-and-packet-drops-during-audio-problems.md)
-- [Comprobar las tasas de datos por categoría (audio, FFT, waterfall, medidores, DAX)](check-per-category-data-rates-audio-fft-waterfall-meters-dax.md)
+- [Medir el RTT y la pérdida de paquetes durante problemas de audio](measure-rtt-and-packet-drops-during-audio-problems.md)
+- [Verificar las tasas de datos por categoría (audio, FFT, waterfall, meters, DAX)](check-per-category-data-rates-audio-fft-waterfall-meters-dax.md)
 - [Diagnosticar subdesbordamientos de audio y jitter](../../troubleshooting/networkdiagnostics/diagnose-audio-underruns-and-jitter.md)
 - [Observar la marca de tiempo del primer paquete UDP tras la conexión](../../getting-started/setup/watch-the-first-udp-packet-timestamp-after-connect.md)

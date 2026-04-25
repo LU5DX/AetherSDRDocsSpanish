@@ -1,34 +1,33 @@
 # Activar el guardado automático para que los ajustes de TX siempre persistan
 
-Active el guardado automático para que cualquier cambio realizado en los ajustes de transmisión y micrófono se escriba automáticamente en el perfil activo, sin necesidad de guardar manualmente después de cada ajuste.
+Cuando el guardado automático está habilitado, cualquier cambio que realice en los ajustes de TX y micrófono se escribe de vuelta al perfil activo de forma automática, por lo que no se pierde nada al cambiar de perfil o reiniciar.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. El Profile Manager requiere una conexión activa con el radio.
-- Debe existir al menos un perfil de transmisión en el radio para que el guardado automático tenga un perfil donde escribir.
+- AetherSDR debe estar conectado a la radio. El Profile Manager requiere una conexión de radio activa.
+- Debe existir al menos un perfil de transmisión o micrófono en la radio para que el guardado automático tenga un perfil al que escribir.
 
 ## Pasos
 
 1. Haga clic en `Profiles > Profile Manager...` para abrir el diálogo Profile Manager.
-2. Haga clic en la pestaña **Auto-Save**.
-3. Marque **Auto-save profile changes**.
-4. Haga clic en **Close**.
+2. Haga clic en la pestaña `Auto-Save (tab)`.
+3. Marque `Auto-save profile changes`.
 
-El ajuste surte efecto de inmediato. AetherSDR envía el cambio al radio y guarda su preferencia como `AutoSaveTransmitProfile`.
+AetherSDR envía el cambio a la radio de inmediato. No se requiere ningún paso adicional de guardado. Para deshabilitar el guardado automático, desmarque `Auto-save profile changes`.
 
 ## Qué hace cada control
 
-| Control | Descripción | Clave persistida |
+| Control | Descripción | Clave de configuración |
 |---|---|---|
-| **Auto-save profile changes** | Cuando está marcado, los cambios en los ajustes de TX y micrófono se guardan automáticamente en el perfil activo. Cuando no está marcado, los cambios no se escriben hasta que los guarde manualmente desde la pestaña **Transmit** o **Microphone**. | `AutoSaveTransmitProfile` |
+| `Auto-save profile changes` | Cuando está marcado, los cambios en los ajustes de TX y micrófono se guardan automáticamente en el perfil activo de la radio. Cuando está desmarcado, los cambios se descartan a menos que guarde un perfil manualmente. | `AutoSaveTransmitProfile` |
 
 ## Consejos
 
-- Para guardar el estado actual de transmisión con un nombre específico en lugar de depender del guardado automático, use la pestaña **Transmit** y haga clic en **Save** con un nombre introducido en el campo **Profile name**.
-- El guardado automático aplica tanto a los ajustes de TX como a los de micrófono, no solo a uno de los dos.
+- El guardado automático se aplica a los perfiles de transmisión y micrófono activos en ese momento. Si no hay ningún perfil activo en la radio, el guardado automático no tiene a dónde escribir. Cargue un perfil primero usando la pestaña `Transmit (tab)` o `Microphone (tab)` antes de habilitar el guardado automático.
+- Para guardar manualmente un estado específico sin habilitar el guardado automático, use el botón `Save` en la pestaña `Transmit (tab)` o `Microphone (tab)`.
 
-## Relacionado
+## Relacionados
 
 - [Cambiar a un perfil de transmisión guardado](switch-to-a-saved-transmit-profile.md)
-- [Guardar el estado actual del radio como un nuevo perfil global](save-the-current-radio-state-as-a-new-global-profile.md)
-- [Crear un perfil de micrófono independiente por micrófono](create-a-separate-mic-profile-per-microphone.md)
+- [Crear un perfil de micrófono separado por micrófono](create-a-separate-mic-profile-per-microphone.md)
+- [Descripción general del Profile Manager](overview.md)

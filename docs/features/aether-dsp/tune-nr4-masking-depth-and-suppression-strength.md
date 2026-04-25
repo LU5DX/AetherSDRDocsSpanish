@@ -1,42 +1,45 @@
-# Ajustar la profundidad de enmascaramiento y la intensidad de supresión de NR4
+# Ajustar la profundidad de enmascaramiento y la fuerza de supresión de NR4
 
-La pestaña **NR4** en AetherDSP Settings expone dos controles — `NR4MaskingDepth` y `NR4SuppressionStrength` — que en conjunto determinan con qué agresividad NR4 (libspecbleach) atenúa el ruido entre las sílabas del habla. Ajustar estos controles permite equilibrar el ruido residual frente a la naturalidad de la voz.
+Use esta página para ajustar la profundidad de enmascaramiento espectral y la fuerza de supresión general de NR4, controlando con qué agresividad el motor NR4 atenúa el ruido en relación con el contenido similar a la voz.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar en ejecución. No se requiere conexión a la radio para cambiar estos ajustes.
-- NR4 debe ser el motor de reducción de ruido activo en el slice que está escuchando. Si aún no ha habilitado NR4, los controles deslizantes tendrán efecto en cuanto lo haga.
+- Abra AetherSDR.
+- NR4 debe estar seleccionado como su motor de reducción de ruido activo. Consulte [Cómo elegir la reducción de ruido adecuada: NR2, NR4, DFNR, MNR](../../operating/dsp/noise-reduction-overview.md) si no está seguro.
 
 ## Pasos
 
-1. Abra `Settings > AetherDSP Settings...`.
+1. Haga clic en `Settings > AetherDSP Settings...`.
 2. Haga clic en la pestaña **NR4**.
-3. Localice el control deslizante **Masking Depth:**. Arrástrelo hacia la izquierda o la derecha para establecer la profundidad de enmascaramiento espectral (rango 0.00–1.00, valor predeterminado 0.50). El valor actual se muestra a la derecha del control.
-4. Localice el control deslizante **Suppression:**. Arrástrelo hacia la izquierda o la derecha para establecer la intensidad de supresión general (rango 0.00–1.00, valor predeterminado 0.50). El valor actual se muestra a la derecha del control.
-5. Monitoree el audio en tiempo real. Ajuste hasta que el ruido residual sea aceptablemente bajo sin que se perciba degradación de la voz.
-6. Cierre el diálogo. Los valores se guardan inmediatamente cuando se mueve cada control deslizante; no se requiere ninguna acción de guardado separada.
+3. Ajuste **Masking Depth:** para establecer con qué profundidad se aplica el enmascaramiento espectral. Los valores más bajos aplican menos enmascaramiento; los valores más altos aplican más.
+4. Ajuste **Suppression:** para establecer la fuerza de supresión general de NR4. Los valores más bajos son más suaves; los valores más altos son más agresivos.
+5. Cierre el diálogo. Los cambios surten efecto de inmediato.
 
 ## Qué hace cada control
 
-| Control | Predeterminado | Rango válido | Clave persistida | Comportamiento |
-|---|---|---|---|---|
-| **Masking Depth:** | 0.50 | 0.00–1.00 | `NR4MaskingDepth` | Controla con qué profundidad el enmascaramiento espectral suprime los bins estimados como ruido. Valores más altos aumentan el enmascaramiento con el riesgo de atenuar señales débiles. |
-| **Suppression:** | 0.50 | 0.00–1.00 | `NR4SuppressionStrength` | Establece la intensidad de supresión general de NR4. Valores más altos eliminan más ruido; valores muy altos pueden introducir artefactos de procesamiento. |
+| Control | Valor predeterminado | Rango válido | Clave de configuración |
+|---|---|---|---|
+| **Masking Depth:** | 0.50 | 0.00–1.00 | `NR4MaskingDepth` |
+| **Suppression:** | 0.50 | 0.00–1.00 | `NR4SuppressionStrength` |
+
+**Masking Depth:** controla la profundidad del enmascaramiento espectral aplicado por el motor NR4. En 0.00 el enmascaramiento no se aplica; en 1.00 se aplica a profundidad máxima.
+
+**Suppression:** establece la fuerza de supresión general del motor NR4. En 0.00 la supresión es mínima; en 1.00 es máxima.
 
 ## Consejos
 
-- Estos dos controles interactúan entre sí: un valor alto de **Suppression:** combinado con un valor bajo de **Masking Depth:** tiende a producir un residual más seco y plano, mientras que ajustar ambos en niveles moderados (alrededor de 0.50) generalmente preserva el carácter más natural de la voz.
-- Si desea volver a una línea base conocida como correcta, haga clic en **Reset Defaults** en la pestaña NR4. Esto restaura **Masking Depth:** a 0.50 y **Suppression:** a 0.50, junto con todos los demás parámetros de NR4.
-- Los cambios surten efecto de inmediato sin necesidad de reiniciar AetherSDR ni de reconectarse a la radio.
+- Comience con ambos controles deslizantes en sus valores predeterminados (0.50) y realice ajustes incrementales pequeños. Aumentar demasiado **Suppression:** puede causar artefactos audibles en señales débiles.
+- Si queda ruido residual después de aumentar **Suppression:**, aumente también **Masking Depth:** de forma gradual. Los dos controles interactúan: la profundidad de enmascaramiento define qué bins espectrales son el objetivo, mientras que la supresión determina cuánta reducción de ganancia se les aplica.
+- Use **Reset Defaults** para devolver ambos controles deslizantes —junto con todos los demás parámetros de NR4— a sus valores de fábrica (SPP-MMSE, adaptativo activado, 10.0 dB, Smoothing 0, Whitening 0, Masking Depth 0.50, Suppression 0.50).
 
 ## Solución de problemas
 
-- **Al aumentar Suppression: las voces suenan huecas o con efecto de fase** — reduzca **Suppression:** hacia 0.30–0.40 y verifique que **Adaptive Noise Estimation** esté habilitado para que la estimación del piso de ruido se mantenga actualizada. Consulte [Habilitar o deshabilitar la estimación de ruido adaptativa de NR4](enable-or-disable-nr4-adaptive-noise-estimation.md).
-- **Los controles deslizantes no producen ningún efecto audible** — es posible que NR4 no sea el motor de reducción de ruido activo en el slice actual, o que la cantidad general de **Reduction (dB):** esté establecida en 0.0. Consulte [Ajustar la cantidad de reducción de NR4 en dB](adjust-nr4-reduction-amount-in-db.md).
+- **La voz suena apagada después de aumentar Suppression:** — El nivel de supresión es demasiado alto. Reduzca **Suppression:** y, si es necesario, reduzca también **Masking Depth:** para restaurar la claridad de la voz.
+- **El piso de ruido sigue siendo audible con Suppression: al máximo** — Verifique que **Reduction (dB):** esté configurado con un valor suficientemente alto y que **Adaptive Noise Estimation** esté habilitado. Consulte [Ajustar la cantidad de reducción de NR4 en dB](adjust-nr4-reduction-amount-in-db.md) y [Habilitar o deshabilitar la estimación de ruido adaptativa de NR4](enable-or-disable-nr4-adaptive-noise-estimation.md).
 
-## Relacionado
+## Relacionados
 
 - [Ajustar la cantidad de reducción de NR4 en dB](adjust-nr4-reduction-amount-in-db.md)
 - [Habilitar o deshabilitar la estimación de ruido adaptativa de NR4](enable-or-disable-nr4-adaptive-noise-estimation.md)
 - [Restablecer los parámetros de NR2 o NR4 a los valores predeterminados](reset-nr2-or-nr4-parameters-to-defaults.md)
-- [Elegir la reducción de ruido adecuada: NR2, NR4, DFNR, MNR](../../operating/dsp/noise-reduction-overview.md)
+- [Cómo elegir la reducción de ruido adecuada: NR2, NR4, DFNR, MNR](../../operating/dsp/noise-reduction-overview.md)

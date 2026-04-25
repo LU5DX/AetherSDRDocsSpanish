@@ -1,38 +1,35 @@
 # Cambiar el puerto TCI
 
-El servidor TCI escucha en un puerto TCP configurable. Cambie el puerto si el valor predeterminado entra en conflicto con otra aplicación o si su software de registro o de modos digitales requiere un número de puerto específico.
+Cambie el puerto en el que escucha el servidor WebSocket de TCI. Haga esto cuando el puerto predeterminado entre en conflicto con otra aplicación o cuando su software de registro o de modos digitales requiera un puerto específico.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. El applet TCI requiere una conexión activa con el radio.
-- Abra el applet TCI haciendo clic en el botón **TCI** de la bandeja en la barra lateral derecha, si no está visible todavía.
+- AetherSDR debe estar conectado a su radio FLEX-8600. El applet de TCI no está disponible sin una conexión de radio.
+- Abra el applet de TCI haciendo clic en el botón TCI de la bandeja en la barra lateral derecha, si no está visible todavía.
 
 ## Pasos
 
-1. Localice el campo **Port** en la parte inferior del applet TCI, a la derecha de la etiqueta "Port:".
-2. Haga clic en el campo **Port** y escriba el nuevo número de puerto. Los valores válidos son 1024–65535. El valor predeterminado es `50001`.
-3. Presione **Enter** o haga clic fuera del campo para confirmar. Si ingresa un valor fuera del rango 1024–65535, el campo se restablece a `50001` y guarda ese valor.
-4. Si el servidor ya está en ejecución (Enable está marcado), se reinicia automáticamente en el nuevo puerto. No se requiere ninguna acción adicional.
-
-El nuevo puerto se guarda en `TciPort` y persiste entre sesiones.
+1. En el applet de TCI, ubique el campo Port junto a la etiqueta "Port:".
+2. Haga clic en el campo Port y escriba el nuevo número de puerto. Los valores válidos son 1024–65535. El valor predeterminado es `50001`. Los valores fuera de este rango vuelven automáticamente a `50001`.
+3. Presione Enter o Tab para confirmar el cambio. La configuración se guarda inmediatamente en `TciPort`.
+4. Si el servidor está habilitado en ese momento, se reinicia automáticamente en el nuevo puerto. El indicador de estado se actualiza para mostrar el nuevo número de puerto y la cantidad de clientes conectados.
 
 ## Qué hace cada control
 
-| Control | Predeterminado | Rango válido | Configuración guardada |
-|---|---|---|---|
-| Campo **Port** | `50001` | 1024–65535 | `TciPort` |
-| Interruptor **Enable** | Desactivado | Activado / Desactivado | — |
-| Indicador de estado del servidor | `(stopped)` | `(stopped)`, `:<port> (N clients)`, `(port in use)` | — |
+| Control | Predeterminado | Rango válido | Clave persistida | Comportamiento |
+|---|---|---|---|---|
+| Port | `50001` | 1024–65535 | `TciPort` | Establece el puerto WebSocket. Si el servidor está en ejecución cuando se cambia el valor, el servidor se reinicia en el nuevo puerto. Los valores fuera de rango vuelven a `50001`. |
+| Enable | Off | On / Off | — | Inicia o detiene el servidor TCI. Si el puerto ya está en uso, el botón vuelve a Off y el estado muestra `(port in use)`. |
 
 ## Consejos
 
-- El indicador de estado del servidor se actualiza inmediatamente después de un cambio de puerto. Si el estado muestra `(port in use)` y **Enable** vuelve a aparecer desmarcado, otro proceso ya está enlazado a ese puerto. Elija un número de puerto diferente.
-- Si tiene habilitada la opción `Settings > Autostart TCI with AetherSDR`, el valor guardado en `TciPort` se utiliza en el siguiente inicio sin necesidad de ninguna acción adicional.
+- Si cambia el puerto mientras el servidor está detenido, el nuevo valor se guarda y se utiliza la próxima vez que haga clic en Enable.
+- Informe al software cliente de TCI (Log4OM, herramientas SunSDR, etc.) el nuevo número de puerto antes de reiniciar el servidor; de lo contrario, los clientes no podrán conectarse.
 
 ## Solución de problemas
 
-- **El estado muestra `(port in use)` y Enable se desactiva** — El puerto ya está en uso por otra aplicación. Ingrese un número de puerto diferente y haga clic en **Enable** nuevamente.
-- **El campo Port se restablece a 50001** — El valor ingresado estaba fuera del rango 1024–65535. Ingrese un valor dentro de ese rango.
+- **El estado muestra `(port in use)` y Enable vuelve a Off** — Otra aplicación ya está vinculada a ese puerto. Elija un número de puerto diferente y haga clic en Enable nuevamente.
+- **Los clientes no pueden conectarse tras un cambio de puerto** — El software cliente todavía tiene configurado el puerto anterior. Actualice el puerto en el cliente y vuelva a conectarse.
 
 ## Relacionados
 

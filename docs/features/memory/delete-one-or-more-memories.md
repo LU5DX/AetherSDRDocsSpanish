@@ -1,50 +1,35 @@
-# Eliminar una o varias memorias
+# Eliminar una o más memorias
 
-Use esta página para eliminar una memoria o un lote de memorias del radio. Las memorias eliminadas se borran del radio de forma permanente tras la confirmación.
+Use el cuadro de diálogo Memory Channels para eliminar una o más entradas de memoria almacenadas en el radio. Las memorias eliminadas se borran de forma permanente tras la confirmación.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. El diálogo Memory Channels requiere una conexión activa con el radio.
-- Abra el diálogo mediante `Settings > Memory...`.
+- El radio debe estar conectado. El cuadro de diálogo Memory Channels requiere una conexión activa con el radio.
+- Identifique las memorias que desea eliminar. Use el campo Search: o el filtro Profile: para reducir la lista si es necesario.
 
 ## Pasos
 
 1. Abra `Settings > Memory...`.
-2. Seleccione la memoria o memorias que desea eliminar.
-   - Haga clic en una fila para seleccionarla.
-   - Use Shift-clic para seleccionar un rango contiguo.
-   - En Linux y Windows, use Ctrl-clic para agregar o quitar filas individuales de la selección. En macOS, use Command-clic.
-   - Para seleccionar todas las filas, haga clic en **Select All**.
-   - Para reducir la lista antes de seleccionar, use el campo **Search:** o el cuadro combinado **Profile:**. Consulte [Buscar memorias por nombre](search-memories-by-name.md) y [Filtrar memorias por perfil](filter-memories-by-profile.md).
-3. Confirme que el contador de selección (por ejemplo, "3 selected") corresponde a su intención.
-4. Haga clic en **Remove**.
-5. Cuando aparezca el diálogo de confirmación, confirme la eliminación.
+2. En la tabla de memorias, seleccione la fila o filas que desea eliminar.
+   - Haga clic en una sola fila para seleccionarla.
+   - Haga Shift-clic para seleccionar un rango contiguo.
+   - Haga Ctrl-clic (o Command-clic en macOS) para agregar o quitar filas individuales de la selección.
+   - Para seleccionar todas las filas, haga clic en `Select All`.
+3. Verifique el contador de selección que aparece en el indicador en la parte inferior derecha del cuadro de diálogo (por ejemplo, `3 selected`).
+4. Haga clic en `Remove`.
+5. Cuando aparezca el cuadro de diálogo de confirmación, confirme la eliminación.
 
 Las memorias seleccionadas se eliminan del radio.
 
-## Qué hace cada control
-
-| Control | Descripción |
-|---|---|
-| **Select All** | Selecciona todas las filas visibles en ese momento en la tabla. |
-| **Remove** | Elimina todas las filas seleccionadas. Presenta un aviso de confirmación antes de borrar. |
-| **Search:** | Filtra la tabla por nombre de memoria, reduciendo las filas disponibles para la selección. |
-| **Profile:** | Filtra la tabla para mostrar solo las memorias que pertenecen al perfil global elegido. |
-| Contador de selección | Muestra el número de filas seleccionadas en ese momento como "N selected". |
-
 ## Consejos
 
-- Use **Select All** después de filtrar con **Search:** o **Profile:** para seleccionar rápidamente un subconjunto con nombre antes de hacer clic en **Remove**.
-- La indicación debajo de la tabla sirve como recordatorio: "Tip: Double-click tunes. Shift-click selects a range. Ctrl-click adds or removes rows." (En macOS, Ctrl-clic aparece como Command-clic.) Úsela para construir su selección con precisión antes de eliminar.
+- Use `Search:` para filtrar la tabla por nombre antes de seleccionar, de modo que pueda encontrar las memorias deseadas rápidamente sin desplazarse. Consulte [Buscar memorias por nombre](search-memories-by-name.md).
+- Use `Profile:` para filtrar por grupo antes de hacer clic en `Select All` si desea eliminar todas las memorias de un perfil en particular. Consulte [Filtrar memorias por perfil](filter-memories-by-profile.md).
+- Antes de eliminar un conjunto grande de memorias, considere exportarlas primero como respaldo. Consulte [Exportar memorias para respaldo o compartir](export-memories-for-backup-or-sharing.md).
 
-## Solución de problemas
+## Temas relacionados
 
-- **Remove no está disponible o no tiene efecto** — Debe haber al menos una fila seleccionada. Haga clic en una fila de la tabla y luego en **Remove**.
-- **La memoria que desea eliminar no es visible** — Es posible que un término de búsqueda o un filtro de perfil la esté ocultando. Borre el campo **Search:** y restablezca **Profile:** a su estado sin filtro; luego localice la fila.
-
-## Relacionado
-
-- [Agregar una memoria en la frecuencia actual](add-a-memory-at-current-frequency.md)
 - [Buscar memorias por nombre](search-memories-by-name.md)
 - [Filtrar memorias por perfil](filter-memories-by-profile.md)
-- [Exportar memorias para respaldo o uso compartido](export-memories-for-backup-or-sharing.md)
+- [Exportar memorias para respaldo o compartir](export-memories-for-backup-or-sharing.md)
+- [Agregar una memoria en la frecuencia actual](add-a-memory-at-current-frequency.md)

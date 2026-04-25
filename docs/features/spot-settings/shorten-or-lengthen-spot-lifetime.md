@@ -1,33 +1,33 @@
 # Acortar o alargar la duración de los spots
 
-Use esta página para controlar cuánto tiempo permanecen visibles los spots de DX en el panadapter antes de que expiren. Una duración más corta mantiene la pantalla despejada; una duración más larga es útil durante condiciones de banda lentas cuando los spots llegan con poca frecuencia.
+Ajuste cuánto tiempo permanecen visibles los spots de DX en el panadapter antes de desvanecerse. Una duración más corta mantiene la pantalla ordenada; una duración más larga permite ver spots que llegaron hace minutos u horas.
 
 ## Antes de comenzar
 
-- El diálogo Spot Settings no está en el menú principal. Debe abrirlo desde el menú contextual del panadapter o desde la superposición de spots.
-- Los spots deben estar habilitados (`IsSpotsEnabled`) para que el ajuste de duración tenga algún efecto visible.
+- AetherSDR debe estar en ejecución. No se requiere conexión a un equipo de radio para cambiar esta configuración.
+- El diálogo **Spot Settings** debe ser accesible desde el menú contextual del panadapter o desde la capa de spots (Spots overlay).
 
 ## Pasos
 
-1. Haga clic derecho en el panadapter (o haga clic en la superposición de spots) para abrir el diálogo **Spot Settings**.
-2. Localice el control deslizante **Spot Lifetime:**.
-3. Arrastre el control hacia la izquierda para acortar la duración o hacia la derecha para alargarla. La etiqueta a la derecha del control se actualiza de inmediato y muestra el valor actual en segundos, minutos u horas (por ejemplo, `30 secs`, `5 mins`, `1 hr`).
-4. Suelte el control. El nuevo valor se guarda automáticamente.
+1. Haga clic derecho en el panadapter (o haga clic en el Spots overlay) para abrir el diálogo **Spot Settings**.
+2. Localice la fila **Spot Lifetime:**.
+3. Arrastre el control deslizante hacia la izquierda para reducir la duración o hacia la derecha para aumentarla. La etiqueta a la derecha del control se actualiza de forma inmediata y muestra el valor actual en segundos, minutos, horas o días.
+4. Suelte el control deslizante. El nuevo valor se guarda automáticamente en `SpotsLifetime` (`DxClusterSpotLifetimeSec`).
 
 ## Qué hace cada control
 
-| Control | Comportamiento | Valor predeterminado | Clave persistida |
-|---|---|---|---|
-| Control deslizante **Spot Lifetime:** | Establece cuánto tiempo permanece un spot en el panadapter antes de desaparecer. La escala no es lineal: la parte izquierda avanza de 10 a 55 segundos en incrementos de 5 segundos, la parte central avanza de 5 a 55 minutos en incrementos de 5 minutos, y la parte derecha avanza de 1 a 24 horas en incrementos de 1 hora. | 30 minutos | `SpotsLifetime` |
+| Control | Comportamiento | Valor predeterminado | Rango válido | Clave de configuración |
+|---|---|---|---|---|
+| Control deslizante **Spot Lifetime:** | Define cuánto tiempo permanece un spot en el panadapter antes de desvanecerse. La escala es no lineal: avanza en pasos de 10–55 sec (en pasos de 5 sec), luego de 5–55 min (en pasos de 5 min), luego de 1–24 hr (en pasos de 1 hr), y finaliza en 1 day. | 30 min | 10 sec – 24 hr (1 day) | `SpotsLifetime` / `DxClusterSpotLifetimeSec` |
 
 ## Consejos
 
-- La etiqueta del control deslizante redondea al valor de paso más cercano, por lo que no es posible ingresar un número arbitrario de segundos — utilice el paso más cercano.
-- Si configuró previamente la duración de los spots en una versión anterior de AetherSDR que almacenaba el valor en minutos, el diálogo migra ese valor a segundos automáticamente la primera vez que se abre.
-- En el extremo derecho del rango del control, la etiqueta muestra `1 day` (24 horas), que es la duración máxima.
+- La etiqueta del control deslizante usa unidades legibles: los valores inferiores a 60 segundos se muestran como `sec`, los valores inferiores a una hora se muestran como `min` o `mins`, y los valores de una hora o más se muestran como `hr` o `hrs`. Las 24 horas se muestran como `1 day`.
+- Si actualizó desde una versión anterior de AetherSDR, la configuración se migra automáticamente desde la clave antigua basada en minutos a la clave actual basada en segundos. No se requiere ninguna acción manual.
 
 ## Relacionado
 
 - [Descripción general de Spot Settings](overview.md)
 - [Activar o desactivar los spots](turn-spots-on-or-off.md)
 - [Eliminar todos los spots del panadapter](clear-every-spot-from-the-panadapter.md)
+- [Cambiar la densidad y la posición vertical de los spots](change-spot-density-and-vertical-position.md)
