@@ -74,6 +74,7 @@ plugins:
   - search:
       lang: es
   - tags
+  - awesome-pages
 
 markdown_extensions:
   - abbr
