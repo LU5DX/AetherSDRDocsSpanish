@@ -1,41 +1,41 @@
-# Activar MOX para accionar manualmente el transmisor
+# Activar MOX para transmitir manualmente
 
-MOX permite accionar el transmisor sin usar el PTT del micrófono ni un pedal de pie. Úselo para mantener el equipo en transmisión durante pruebas, ajuste de audio o cualquier situación en la que necesite control manual de TX.
+MOX permite activar el transmisor de forma manual, sin pedal ni línea PTT. Úselo cuando necesite portadora continua para pruebas, llamadas en red o cualquier situación en la que desee control directo por software del TX.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al equipo. MOX requiere una conexión activa con el equipo.
-- Abra el applet TX Controls. Si no está visible, haga clic en el botón TX tray en la barra lateral derecha.
+- Conéctese a una radio FLEX-8600. MOX requiere una conexión de radio activa.
+- Abra el applet TX Controls. Haga clic en el botón TX del área de notificación en la barra lateral derecha, o confirme que el applet ya es visible en el Applet Panel.
 
 ## Pasos
 
-1. En el applet TX Controls, localice la fila de cuatro botones: TUNE, MOX, ATU, MEM.
-2. Haga clic en MOX.
-3. El botón se pone rojo y el equipo acciona el transmisor.
-4. Haga clic en MOX nuevamente para desaccionar. El botón vuelve a su apariencia predeterminada (azul) y el equipo regresa a recepción.
+1. En el applet TX Controls, ubique la fila que contiene TUNE, MOX, ATU y MEM.
+2. Haga clic en MOX para activar el transmisor. El botón se pone rojo para confirmar que el TX está activo.
+3. Haga clic en MOX de nuevo para volver a recepción. El botón regresa a su estado predeterminado (azul apagado).
 
 ## Qué hace cada control
 
 | Control | Tipo | Comportamiento |
 |---|---|---|
-| MOX | Botón de alternancia | Activa y desactiva la transmisión manual. Rojo mientras TX está accionado; azul (apagado) mientras está en recepción. |
-| RF Pwr | Medidor | Muestra la potencia directa a la salida del excitador. Escala: 0–120 W (sin amplificador); rojo por encima de 100 W. Modelo Aurora 500W: 0–600 W, rojo por encima de 500 W. |
-| SWR | Medidor | Muestra la relación de onda estacionaria en el excitador. Escala: 1.0–3.0; rojo por encima de 2.5. |
-| RF Power | Control deslizante | Establece el nivel de potencia RF de transmisión. Valor predeterminado: 100. Rango: 0–100. |
+| MOX | Botón de alternancia | Alterna la transmisión manual. Rojo cuando el TX está activo; azul (apagado) cuando está en recepción. |
+| RF Pwr | Medidor | Muestra la potencia directa en la salida del excitador. Escala: 0–120 W (sin amplificador); rojo por encima de 100 W. |
+| SWR | Medidor | Muestra la relación de onda estacionaria. Rojo por encima de 2.5. |
 
 ## Consejos
 
-- Observe los medidores RF Pwr y SWR mientras MOX está activo para confirmar que el equipo está transmitiendo y que el sistema de antena se encuentra dentro de límites aceptables.
-- MOX y TUNE son controles independientes. Si ya hay una portadora de ajuste en curso (TUNE muestra "TUNING..."), deténgala antes de usar MOX.
+- Observe los medidores RF Pwr y SWR mientras MOX esté activo para confirmar la potencia esperada y un SWR seguro.
+- MOX activa el transmisor independientemente del modo. Asegúrese de que el micrófono, el manipulador o la fuente de audio estén configurados antes de activar MOX en una frecuencia en uso.
+- Para transmitir una portadora limpia en verificaciones de SWR, use TUNE con el control deslizante Tune Pwr en lugar de MOX. Consulte [Iniciar una portadora de ajuste para verificar el SWR](start-a-tune-carrier-to-check-swr.md).
 
-## Solución de problemas
+## Resolución de problemas
 
-- **El botón MOX no responde** — El applet TX Controls requiere una conexión activa con el equipo. Verifique que AetherSDR esté conectado al FLEX-8600 mediante `Settings > Connect to Radio...`.
-- **El equipo transmite pero RF Pwr indica cero** — Verifique que el control deslizante RF Power no esté ajustado en 0.
+- **El botón MOX no responde** — Es posible que la conexión de radio esté inactiva. Verifique el estado de la conexión y vuelva a conectarse mediante `Settings > Connect to Radio...`.
+- **MOX se activa pero RF Pwr indica cero** — Es posible que el control deslizante RF Power esté en 0. Auméntelo antes de activar la transmisión.
+- **MOX permanece en rojo después de hacer clic** — Una actualización del protocolo SmartSDR proveniente de la radio puede estar manteniendo el estado de TX. Haga clic en MOX una vez más para desactivarlo; si el botón permanece en rojo, verifique si hay una fuente de PTT bloqueada en la radio.
 
-## Relacionados
+## Temas relacionados
 
 - [Descripción general de TX Controls](overview.md)
-- [Establecer la potencia de salida RF](set-rf-output-power.md)
 - [Iniciar una portadora de ajuste para verificar el SWR](start-a-tune-carrier-to-check-swr.md)
-- [Realice su primer QSO con AetherSDR](../../getting-started/tutorials/first-qso.md)
+- [Configurar la potencia de salida de RF](set-rf-output-power.md)
+- [Realizar su primer QSO con AetherSDR](../../getting-started/tutorials/first-qso.md)

@@ -1,41 +1,40 @@
-# Activar el squelch y ajustar su umbral
+# Activar el silenciador (squelch) y ajustar su umbral
 
-Use el squelch para silenciar el audio del slice (receptor parcial) cuando no hay señal presente. Es especialmente útil en FM y en bandas con mucho ruido, donde se desea silencio entre transmisiones.
+El squelch silencia el audio del slice cuando la señal recibida cae por debajo de un nivel establecido. Esto es útil en FM, AM o cualquier modo en el que desee que el altavoz permanezca en silencio entre transmisiones.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. El applet RX Controls requiere una conexión activa al radio.
-- Seleccione el slice al que desea aplicar el squelch usando las pestañas de slice (A–H) en la parte superior del applet RX Controls.
+- AetherSDR debe estar conectado al radio. El applet RX Controls requiere una conexión activa con el radio.
+- El applet RX Controls debe estar visible. Si no lo está, haga clic en el botón RX tray en la barra lateral derecha para mostrarlo.
 
 ## Pasos
 
-1. Haga clic en el botón de bandeja **RX** en la barra lateral derecha para abrir el applet RX Controls, si no está visible todavía.
-2. Si tiene más de un slice, haga clic en la pestaña de slice correspondiente (A–H) para vincular el applet al slice correcto.
-3. Mueva el control deslizante **Squelch level** hasta el umbral deseado. El valor predeterminado es 20; el rango válido es 0–100. Un valor más alto requiere una señal más fuerte para abrir el squelch.
-4. Haga clic en **SQL** para activar el squelch. El botón se activa y el squelch entra en efecto con el nivel establecido en el paso 3.
-
-Para desactivar el squelch, haga clic en **SQL** nuevamente.
+1. En el applet RX Controls, seleccione el slice que desea ajustar haciendo clic en su pestaña (de A a H) si hay más de un slice activo.
+2. Mueva el control deslizante de nivel de squelch para establecer el umbral. El valor predeterminado es 20 y el rango válido es 0–100. Un valor más alto significa que la señal debe ser más fuerte para abrir el squelch.
+3. Haga clic en SQL para activar el squelch. El botón se resalta cuando el squelch está activo.
+4. Ajuste el control deslizante de nivel de squelch hasta que el audio se abra de forma confiable en las señales que desea escuchar y se cierre entre ellas.
+5. Para desactivar el squelch, haga clic en SQL nuevamente.
 
 ## Qué hace cada control
 
-| Control | Tipo | Predeterminado | Rango | Comportamiento |
-|---|---|---|---|---|
-| **SQL** | Botón de alternancia | Desactivado | Activado / Desactivado | Activa el squelch en el nivel actual del control deslizante. El audio se silencia hasta que una señal supera el umbral. |
-| **Squelch level** | Control deslizante | 20 | 0–100 | Establece el umbral del squelch. Solo tiene efecto cuando **SQL** está activado. Valores más altos requieren una señal más fuerte para abrir el squelch. |
+| Control | Valor predeterminado | Rango válido | Comportamiento |
+|---|---|---|---|
+| SQL | Desactivado | Activado / Desactivado | Activa el squelch en el nivel actual del control deslizante. El audio se silencia cuando la señal está por debajo del umbral. |
+| Nivel de squelch | 20 | 0–100 | Establece el umbral del squelch. Solo tiene efecto cuando SQL está activado. Los valores más altos requieren una señal más fuerte para abrir el squelch. |
 
 ## Consejos
 
-- Ajuste el control deslizante **Squelch level** antes de hacer clic en **SQL**, de modo que el squelch se abra en el umbral correcto en el momento de la activación.
-- Si el squelch nunca se abre, disminuya el control deslizante **Squelch level**. Si nunca se cierra, auméntelo.
-- El nivel de squelch no tiene efecto cuando **SQL** está desactivado.
+- Ajuste el control deslizante de nivel de squelch antes de hacer clic en SQL para que el audio no se corte mientras realiza el ajuste.
+- Si no puede encontrar un nivel que se abra de forma confiable en señales débiles pero permanezca cerrado con el ruido, intente reducir el valor hacia 0 en pequeños incrementos.
+- El control deslizante de nivel de squelch no tiene efecto cuando SQL está desactivado.
 
 ## Solución de problemas
 
-- **El audio siempre está silenciado después de activar SQL** — El control deslizante **Squelch level** está configurado demasiado alto. Disminuya el control deslizante hasta que el squelch se abra con la señal objetivo y, a continuación, haga clic en **SQL** nuevamente.
-- **El squelch nunca se cierra entre transmisiones** — El control deslizante **Squelch level** está configurado demasiado bajo. Auméntelo hasta que el ruido débil deje de abrirlo.
+- **El audio permanece silenciado después de hacer clic en SQL** — El nivel de squelch está configurado demasiado alto para la señal entrante. Reduzca el control deslizante de nivel de squelch hasta que el audio se abra.
+- **El squelch nunca se cierra con el ruido** — El nivel de squelch es demasiado bajo. Aumente el valor del control deslizante hasta que el audio se silencie entre transmisiones.
 
-## Relacionados
+## Temas relacionados
 
 - [Descripción general de RX Controls](overview.md)
 - [Cambiar el modo (USB, LSB, CW, AM, FM, etc.)](change-mode-usb-lsb-cw-am-fm-etc.md)
-- [Cambiar entre múltiples slices usando la fila de pestañas A..H](switch-between-multiple-slices-using-the-a-h-tab-row.md)
+- [Trabajar con un repetidor FM con tono CTCSS y desplazamiento +/-](work-an-fm-repeater-with-ctcss-tone-and-offset.md)

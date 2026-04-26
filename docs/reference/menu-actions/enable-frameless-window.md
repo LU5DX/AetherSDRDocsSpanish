@@ -1,32 +1,48 @@
-# Activar la ventana sin marco
+# Activar ventana sin marco
 
-`View > Frameless Window` elimina la decoración de ventana del sistema operativo (barra de título, bordes y controles de ventana) para recuperar espacio en pantalla.
+`View > Frameless Window` activa o desactiva el estilo de ventana sin marco personalizado para la ventana principal de AetherSDR. Cuando está activado, AetherSDR gestiona su propia barra de título, lo que proporciona una apariencia uniforme en distintos entornos de escritorio y un control preciso sobre los elementos decorativos de la ventana.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar en ejecución y conectado a un radio Flex.
+- AetherSDR debe estar en ejecución.
+- Frameless Window está activado de forma predeterminada en la versión v0.9.0. Si actualizó desde una versión anterior, se activa automáticamente una vez de manera forzada.
 
 ## Pasos
 
 1. Haga clic en `View` en la barra de menú.
-2. Haga clic en `Frameless Window`.
+2. Haga clic en `Frameless Window`. Una marca de verificación junto al elemento indica que está activado.
 
-La marca de verificación junto a `Frameless Window` indica que el modo está activo y que la decoración de ventana del sistema operativo está oculta.
-
-Para restaurar la decoración de ventana, haga clic de nuevo en `View > Frameless Window` para desactivar la opción.
+También puede presionar `Ctrl+Shift+F` para alternar el ajuste sin abrir el menú.
 
 ## Qué hace cada control
 
-| Control | Descripción | Atajo |
-|---|---|---|
-| `Frameless Window` | Elemento de menú activable. Cuando está marcado, oculta la barra de título y los bordes de la ventana del sistema operativo. Cuando está desmarcado, restaura la decoración de ventana normal. | `Ctrl+Shift+F` |
+| Control | Descripción | Predeterminado | Clave persistida |
+|---|---|---|---|
+| `View > Frameless Window` | Activa o desactiva `Qt::FramelessWindowHint` en la ventana principal. Cuando está activado, se eliminan las decoraciones nativas del sistema operativo y se reemplazan con la barra de título propia de AetherSDR de 20px. | Activado | `FramelessWindow` |
+
+**Cuando Frameless Window está activado:**
+
+- Aparece una barra de título personalizada de 20px en la parte superior de la ventana. Arrástrela para mover la ventana.
+- Haga doble clic en la barra de título para maximizar o restaurar la ventana.
+- Los botones de minimizar, maximizar y cerrar aparecen en la barra de título.
+- Aparece un controlador de cambio de tamaño en la esquina inferior derecha de la ventana.
+
+**Cuando Frameless Window está desactivado:**
+
+- Se restauran las decoraciones nativas del sistema operativo.
+- La barra de título personalizada y el controlador de cambio de tamaño de la esquina inferior derecha quedan ocultos.
 
 ## Consejos
 
-- Para mover una ventana de AetherSDR que no tiene barra de título, arrástrela desde la barra de herramientas propia de la aplicación o desde el área del panadapter, según el comportamiento de su entorno de escritorio.
-- Si también desea reducir los elementos de interfaz propios de AetherSDR, consulte [Activar el modo mínimo](enable-minimal-mode.md), que oculta la barra de título y los controles internos de forma independiente a la decoración del sistema operativo.
+- Si su entorno de escritorio o gestor de ventanas entra en conflicto con la barra de título personalizada de AetherSDR (por ejemplo, barras de título dobles o controles de ventana ausentes), desactive Frameless Window para volver a las decoraciones nativas.
+- El ajuste se conserva entre reinicios mediante `FramelessWindow`.
+
+## Solución de problemas
+
+- **Se ven dos barras de título** — El gestor de ventanas está dibujando su propia barra de título sobre la de AetherSDR. Vaya a `View > Frameless Window` y confirme que la marca de verificación está presente. Si el problema persiste, revise la configuración de su gestor de ventanas para ver si está sobrescribiendo las decoraciones del lado del cliente.
+- **La ventana no se puede mover ni redimensionar tras desactivar Frameless Window** — Es posible que la barra de título nativa aún no haya aparecido. Intente minimizar y restaurar la ventana para que el gestor de ventanas vuelva a dibujar sus decoraciones.
 
 ## Relacionados
 
-- [Activar el modo mínimo](enable-minimal-mode.md)
-- [Configurar la escala de interfaz](configure-ui-scale.md)
+- [Configurar escala de interfaz](configure-ui-scale.md)
+- [Activar modo mínimo](enable-minimal-mode.md)

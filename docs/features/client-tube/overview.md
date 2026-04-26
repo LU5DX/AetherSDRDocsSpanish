@@ -1,49 +1,52 @@
-# Descripción general del Tube Saturator
+# Descripción general: Aetherial Mic-PreAmp (TX) / Aetherial Dynamic Tube (RX)
 
-El Tube Saturator es una etapa de procesamiento de audio en el lado TX que moldea la señal transmitida mediante un modelo de válvula con barrido de polarización, añadiendo riqueza armónica y saturación. Úselo para darle mayor presencia y carácter a su audio antes de que llegue al radio.
+AetherSDR incluye un saturador de tubo dinámico del lado del cliente que opera de forma independiente en las rutas de audio de transmisión y recepción. Úselo para añadir riqueza armónica a su señal transmitida (Aetherial Mic-PreAmp) o para dar forma al tono del audio recibido (Aetherial Dynamic Tube), sin modificar ningún DSP del lado del radio.
 
 ## Antes de comenzar
 
-- El applet Tube Saturator permanece oculto hasta que la etapa Tube esté habilitada. Habilítela desde el widget CHAIN en el contenedor PooDoo Audio (TXDSP), o haga doble clic en la etapa Tube dentro del widget CHAIN para abrir el editor flotante.
-- El applet aparece como el subcontenedor `TUBE` dentro del contenedor principal PooDoo Audio (TXDSP).
+- La etapa de tubo debe habilitarse mediante el widget CHAIN en el lado TX o RX correspondiente antes de que el applet sea visible.
+- No se requiere conexión al radio para configurar los parámetros del tubo.
 
 ## Cómo funciona
 
-El Tube Saturator procesa la señal de audio TX a través de una curva de transferencia no lineal que modela el comportamiento de saturación de válvulas. La forma de la curva cambia en tiempo real a medida que se ajustan Drive, Bias y el modelo de válvula activo.
+AetherSDR instancia dos copias completamente independientes del saturador de tubo: una vinculada a la ruta TX (titulada **Aetherial Mic-PreAmp**) y otra vinculada a la ruta RX (titulada **Aetherial Dynamic Tube**). Cada copia tiene su propio conjunto de controles y ajustes persistidos. Los cambios realizados en el applet acoplado y los cambios realizados en el editor flotante se sincronizan automáticamente.
 
-El applet muestra un gráfico compacto de la curva de transferencia. Una bola de entrada en vivo se desplaza a lo largo de la curva, indicando en qué punto del régimen de saturación se encuentra el nivel de señal actual: completamente lineal cerca del centro y progresivamente saturado hacia los bordes. La posición de la bola se actualiza a aproximadamente 30 Hz y se suaviza ligeramente para evitar saltos bruscos.
+**Apertura del applet.** Los subcontenedores TX y RX aparecen dentro del contenedor principal Aetherial Audio (TXDSP) en el panel de applets. Permanecen ocultos hasta que la etapa Tube se habilita mediante el widget CHAIN. Hacer doble clic en la etapa TUBE en el widget CHAIN abre el editor sin marco correspondiente, titulado **Aetherial Tube — TX** o **Aetherial Tube — RX**. Hacer clic derecho en la barra de título del subcontenedor permite flotarlo, extraerlo u ocultarlo.
 
-Los cinco controles determinan con qué intensidad se impulsa la señal hacia la válvula (Drive), el carácter tonal del resultado (Tone), la asimetría del punto de operación (Bias), el nivel de salida posterior a la saturación (Output) y la mezcla entre la señal seca original y la señal saturada (Mix). Todos los ajustes se guardan y se mantienen sincronizados entre el applet y el editor flotante.
+**La curva de transferencia.** El applet muestra una curva de transferencia compacta que se dobla en tiempo real conforme se ajustan Drive, Bias y el modelo de tubo. Una bola de entrada en vivo recorre la curva al nivel de señal actual, mostrando en qué régimen de saturación opera la señal.
 
-El bypass se gestiona desde el widget CHAIN, no desde el applet en sí.
+**Flujo de señal.** La señal pasa por Drive (ganancia de entrada hacia el modelo de tubo), luego por la función de transferencia del tubo moldeada por Bias, luego por el filtrado Tone, luego por Output (ajuste de nivel posterior al tubo), con Mix mezclando el resultado procesado (wet) con la señal sin procesar (dry).
+
+**Sincronización de ajustes.** Los cinco controles del applet acoplado y sus equivalentes en el editor flotante se consultan mutuamente a aproximadamente 30 Hz. Ajustar un control en cualquiera de las dos ubicaciones actualiza el otro.
 
 ## Qué hace cada control
 
-| Control | Valor predeterminado | Rango | Ajuste guardado | Descripción |
-|---|---|---|---|---|
-| Transfer curve | — | — | — | Muestra la curva de transferencia actual de la válvula. Se curva y desplaza al cambiar Drive, Bias y el modelo. |
-| Live input ball | — | — | — | El punto se mueve a lo largo de la curva de transferencia según el nivel de entrada actual, mostrando el régimen de saturación activo. |
-| Drive | 0.0 dB | 0.0 a 24.0 dB | `ClientTubeTxDriveDb` | Impulsa más señal hacia la etapa de válvula. Valores más altos curvan la curva con mayor agresividad. |
-| Tone | 0.00 | -1.0 a 1.0 | `ClientTubeTxTone` | Valores negativos oscurecen la señal saturada; valores positivos la aclaran. |
-| Bias | 0 % | 0 % a 100 % | `ClientTubeTxBiasAmount` | Desplaza el punto de operación en la curva de transferencia, modificando el balance entre armónicos pares e impares. |
-| Output | 0.0 dB | -24.0 a 12.0 dB | `ClientTubeTxOutputGainDb` | Ganancia de compensación o recorte posterior a la válvula. Úsela para compensar los cambios de nivel introducidos por la saturación. |
-| Mix | 100 % | 0 % a 100 % | `ClientTubeTxDryWet` | Mezcla las señales seca (sin procesar) y saturada. Al 100 % solo pasa la señal saturada. |
+Los siguientes controles y valores predeterminados se aplican tanto a la instancia TX como a la RX. Las claves de ajuste se muestran para la instancia TX; la instancia RX utiliza las claves `ClientTubeRx*` correspondientes.
 
-El estado habilitado de la etapa Tube se guarda como `ClientTubeTxEnabled` y se controla desde el widget CHAIN.
+| Control | Predeterminado | Rango válido | Clave persistida (TX) | Comportamiento |
+|---|---|---|---|---|
+| Curva de transferencia | — | — | — | Muestra la curva de transferencia del tubo actual. La bola de entrada en vivo se desplaza a lo largo de la curva al nivel de entrada actual. Indicador de solo lectura. |
+| Drive | 0.0 dB | 0.0 – 24.0 dB | `ClientTubeTxDriveDb` | Empuja más señal hacia la etapa de tubo. Valores más altos producen mayor saturación y curvatura. |
+| Tone | 0.00 | -1.0 – 1.0 | `ClientTubeTxTone` | Da forma al carácter espectral de la señal saturada. Valores negativos oscurecen el tono; valores positivos lo aclaran. |
+| Bias | 0 % | 0 – 100 % | `ClientTubeTxBiasAmount` | Desplaza el punto de operación en la curva de transferencia, cambiando el equilibrio entre armónicos pares e impares. |
+| Output | 0.0 dB | -24.0 – 12.0 dB | `ClientTubeTxOutputGainDb` | Ganancia de compensación o ajuste posterior al tubo. Úsela para compensar los cambios de nivel introducidos por Drive. |
+| Mix | 100 % | 0 – 100 % | `ClientTubeTxDryWet` | Mezcla la señal saturada (wet) con la señal sin procesar (dry). 100 % es completamente saturado; 0 % es completamente seco. |
+
+Los equivalentes de la ruta RX utilizan `ClientTubeRxEnabled`, `ClientTubeRxDriveDb`, `ClientTubeRxTone`, `ClientTubeRxBiasAmount`, `ClientTubeRxOutputGainDb` y `ClientTubeRxDryWet`.
 
 ## Consejos
 
-- Comience con Drive en 0.0 dB y auméntelo lentamente hasta que la curva de transferencia se curve de forma visible. Ese punto de curvatura es donde comienza la saturación.
-- Use Mix por debajo del 100 % para incorporar solo una porción de la señal saturada, lo que puede añadir calidez sin una coloración evidente.
-- Aumentar Bias desplaza la curva de forma asimétrica, lo que introduce más armónicos de orden par y modifica el carácter de la saturación.
-- Si la saturación eleva su nivel percibido, reduzca Output para compensar antes de ajustar otros parámetros.
-- Los cambios realizados en el editor flotante se reflejan automáticamente en los controles del applet, y viceversa.
+- Comience con Drive en 0.0 dB y auméntelo lentamente mientras observa cómo se dobla la curva de transferencia. El punto en que la curva se desvía notablemente de una línea recta marca el inicio de la saturación.
+- Use Mix por debajo del 100 % para mezclar la saturación de forma sutil sin reemplazar completamente la señal seca. Esto es especialmente útil en RX para preservar la claridad mientras se añade calidez.
+- Bias desplaza qué armónicos predominan. Cantidades pequeñas (10–20 %) introducen asimetría y armónicos de orden par, característicos de etapas de tubo en configuración single-ended.
+- Después de aumentar Drive, reduzca Output para mantener el nivel procesado equiparado al nivel sin procesar.
+- Las instancias TX y RX son completamente independientes. Los ajustes cambiados en un lado no afectan al otro.
 
-## Relacionados
+## Relacionado
 
-- [Ajuste Drive hasta que la curva comience a curvarse](dial-drive-until-the-curve-starts-to-bend.md)
-- [Modifique Bias para ajustar el balance de armónicos pares e impares](shift-bias-to-tweak-the-even-odd-harmonic-balance.md)
+- [Ajuste Drive hasta que la curva comience a doblarse (calidez en TX o moldeado de tono en RX)](dial-drive-until-the-curve-starts-to-bend-tx-warmth-or-rx-tone-shaping.md)
+- [Desplace Bias para ajustar el equilibrio de armónicos pares e impares](shift-bias-to-tweak-the-even-odd-harmonic-balance.md)
 - [Aclare u oscurezca la señal saturada con Tone](brighten-or-darken-the-saturated-signal-with-tone.md)
 - [Compense los cambios de nivel con Output](compensate-level-changes-with-output.md)
 - [Mezcle la saturación en paralelo con Mix](parallel-blend-saturation-with-mix.md)
-- [Desactive la válvula desde la cadena](bypass-the-tube-from-the-chain.md)
+- [Omita el tubo desde cualquiera de las cadenas](bypass-the-tube-from-either-chain.md)

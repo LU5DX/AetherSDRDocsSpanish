@@ -1,20 +1,20 @@
 # Primeros pasos
 
-`Help > Getting Started...` abre la guía integrada para principiantes sobre cómo conectarse y usar AetherSDR con su radio Flex.
+`Help > Getting Started...` abre la guía para principiantes integrada, con instrucciones para conectarse y usar AetherSDR con una radio FLEX-8600.
 
 ## Antes de comenzar
 
-- AetherSDR está instalado y en ejecución en su computadora.
-- Su radio Flex está encendido y es accesible en la red local.
+- AetherSDR está instalado y en ejecución en su sistema.
 
 ## Pasos
 
-1. Haga clic en `Help` en la barra de menú.
-2. Haga clic en `Getting Started...`.
-3. Lea la guía que se abre en el diálogo de ayuda.
+1. Haga clic en **Help** en la barra de menú.
+2. Haga clic en **Getting Started...**.
+
+La guía para principiantes se abre en una nueva ventana.
 
 ## Relacionados
 
 - [Ayuda de AetherSDR](aethersdr-help.md)
-- [Descripción del panel de applets de AetherSDR](../../getting-started/concepts/understanding-applets.md)
 - [Configuración de los controles de AetherSDR](configuring-aethersdr-controls.md)
+- [Descripción del panel de applets de AetherSDR](../../getting-started/concepts/understanding-applets.md)

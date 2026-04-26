@@ -1,33 +1,40 @@
-# Configurar la velocidad de manipulación CW en PPM
+# Ajustar la velocidad de manipulación CW en WPM
 
-Use el control deslizante Speed del applet Phone/CW para controlar la velocidad a la que AetherSDR manipula el FLEX-8600 cuando opera en modo CW. La velocidad se establece en palabras por minuto (WPM) y se envía directamente al radio.
+Use esta página para ajustar la velocidad con la que AetherSDR manipula la radio en modo CW. La velocidad se configura en palabras por minuto (WPM) y se envía directamente al FLEX-8600.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. Los controles de CW solo están disponibles cuando hay conexión activa.
-- El slice activo debe estar en un modo CW. El applet Phone/CW cambia al panel CW automáticamente cuando el modo del slice es CW.
+- AetherSDR debe estar conectado a la radio. El applet P/CW requiere una conexión de radio activa.
+- El slice activo debe estar en modo CW. El applet Phone/CW cambia automáticamente al subpanel de CW cuando el slice está en modo CW; el control deslizante Speed solo es visible en ese subpanel.
 
 ## Pasos
 
-1. Ubique el botón de bandeja `P/CW` en la barra lateral derecha y confirme que el applet Phone/CW esté visible. Si no lo está, haga clic en el botón de bandeja `P/CW` para mostrarlo.
-2. Confirme que el subpanel CW esté visible. Si el slice activo está en modo CW, el applet cambia al panel CW automáticamente. Si aún ve el panel Phone, configure primero el modo del slice en CW.
-3. Localice el control deslizante **Speed (CW)**.
-4. Arrastre el control deslizante **Speed (CW)** hacia la izquierda para reducir los WPM o hacia la derecha para aumentarlos.
+1. Haga clic en el botón de bandeja **P/CW** en la barra lateral derecha para abrir el applet Phone/CW, si aún no está visible.
+2. Confirme que el subpanel de CW se está mostrando. Si el slice activo está en modo CW, el applet muestra los controles de CW, incluyendo **Speed (CW)**, **Delay (CW)** y **ALC**. Si ve los controles de micrófono en su lugar, cambie primero el slice activo a un modo CW.
+3. Arrastre el control deslizante **Speed (CW)** hasta el valor de WPM deseado. El rango válido es de 5–100 WPM.
 
 ## Qué hace cada control
 
-| Control | Descripción | Valor predeterminado | Rango válido | Clave de configuración |
+| Control | Tipo | Valor predeterminado | Rango | Clave persistida |
 |---|---|---|---|---|
-| Speed (CW) | Establece la velocidad de manipulación CW enviada al radio | — | 5–100 WPM | — |
+| Speed (CW) | Deslizador | — | 5–100 WPM | — |
+
+El control deslizante **Speed (CW)** establece la velocidad de manipulación CW en la radio. Los cambios surten efecto de inmediato y se aplican a las transmisiones con paleta, manipulador recto y CWX.
 
 ## Consejos
 
-- El panel CW también contiene el control deslizante **Delay (CW)** (0–2000 ms, paso 10) para el tiempo de break-in, y el interruptor **Breakin** para QSK completo. Ajustar la velocidad no afecta esos controles.
-- El applet vuelve al panel Phone automáticamente cuando el slice activo sale del modo CW, pero el radio conserva su configuración de velocidad.
+- El control deslizante Speed no tiene una clave de configuración persistida. El valor lo conserva el firmware de la radio; AetherSDR lo lee de la radio al volver a conectarse.
+- Si usa el tono lateral local (**Local STn**), este sigue automáticamente la velocidad de manipulación de la radio — no se necesita ningún ajuste adicional.
 
-## Temas relacionados
+## Solución de problemas
 
-- [Configurar el retardo de break-in en CW](set-cw-break-in-delay.md)
-- [Habilitar la manipulación con paleta iámbica](enable-iambic-paddle-keying.md)
-- [Cambiar el tono CW / frecuencia de sidetone](change-cw-pitch-sidetone-frequency.md)
-- [Escuchar un monitor de sidetone en transmisión](listen-to-a-tx-sidetone-monitor.md)
+- **El subpanel de CW no es visible** — El applet muestra los controles Phone cuando el slice activo no está en modo CW. Cambie el modo del slice a CW y el applet mostrará automáticamente los controles de CW, incluyendo **Speed (CW)**.
+- **El control deslizante aparece pero no responde** — Verifique que la conexión de radio esté activa. El applet P/CW requiere una conexión de radio en vivo para enviar los cambios de velocidad.
+
+## Relacionados
+
+- [Ajustar el retardo de break-in CW](set-cw-break-in-delay.md)
+- [Activar la manipulación con paleta iámbica](enable-iambic-paddle-keying.md)
+- [Cambiar el tono CW / frecuencia del tono lateral](change-cw-pitch-sidetone-frequency.md)
+- [Activar el tono lateral CW local de baja latencia (Local STn) para trabajar con paleta, manipulador recto o CWX](enable-the-low-latency-local-cw-sidetone-local-stn-for-fast-paddle-straight-key-cwx-work.md)
+- [Escuchar un monitor de tono lateral en TX](listen-to-a-tx-sidetone-monitor.md)

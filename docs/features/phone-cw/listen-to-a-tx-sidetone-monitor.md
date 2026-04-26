@@ -1,35 +1,45 @@
-# Escuchar el monitor de tono lateral de TX
+# Escuchar el monitor de sidetone de TX
 
-El monitor de tono lateral de TX le permite escuchar su propio audio transmitido en los auriculares mientras opera en modos de voz. Úselo para confirmar que su audio es limpio y está al nivel correcto sin depender de un receptor separado.
+El applet Phone/CW proporciona dos formas independientes de monitorear el audio transmitido: un monitor de banda lateral del lado del radio (modos Phone) y un monitor de sidetone CW del lado del radio (modo CW). Utilícelos para escuchar su propia señal durante la transmisión sin depender de rutas de audio externas.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio.
-- El slice activo debe estar en un modo de voz (SSB, AM, FM). El applet Phone/CW muestra los controles de voz únicamente cuando hay un modo de voz activo; al cambiar a CW se muestra el panel CW en su lugar.
-- Abra el applet Phone/CW en el panel de applets. Si no está visible, haga clic en el botón de bandeja **P/CW** en la barra lateral derecha.
+- AetherSDR debe estar conectado al radio. El applet Phone/CW solo funciona cuando hay una conexión de radio activa.
+- El applet P/CW debe estar visible en el Panel de Applets. Si no lo está, haga clic en el botón de bandeja **P/CW** en la barra lateral derecha para abrirlo.
+- Confirme en qué modo se encuentra el slice activo. El applet muestra automáticamente el panel Phone en modos de voz y el panel CW en modo CW.
 
 ## Pasos
 
-1. En el applet Phone/CW, localice el botón de alternancia **MON**.
-2. Haga clic en **MON** para activar el monitor de tono lateral. El botón se ilumina cuando está activo.
-3. Ajuste el control deslizante **Monitor volume** (0–100) para establecer el nivel del monitor en sus auriculares.
-4. Para desactivar el monitor, haga clic en **MON** nuevamente.
+### Modos Phone (SSB, AM, FM)
+
+1. Abra el applet **P/CW** desde la barra lateral derecha.
+2. Confirme que se muestra el panel Phone (no el panel CW).
+3. Haga clic en **MON** para activar el monitor de banda lateral. El botón se ilumina cuando está activo.
+4. Arrastre el control deslizante **Monitor volume** para ajustar el nivel del monitor. Rango válido: 0–100.
+
+### Modo CW
+
+1. Abra el applet **P/CW** desde la barra lateral derecha.
+2. Confirme que se muestra el panel CW. Si el slice activo está en un modo CW, el applet cambia a él automáticamente.
+3. Haga clic en **Sidetone** para activar el monitor de sidetone CW del radio. El botón se ilumina cuando está activo.
+4. Arrastre el control deslizante **Sidetone volume** para ajustar el nivel del monitor. Rango válido: 0–100.
 
 ## Qué hace cada control
 
-| Control | Descripción | Valor predeterminado | Rango válido | Clave de configuración |
-|---|---|---|---|---|
-| MON | Activa o desactiva el monitor de tono lateral de TX. | Off | On / Off | — |
-| Monitor volume | Establece el volumen de reproducción del monitor de banda lateral. | — | 0–100 | — |
+| Control | Tipo | Valor predeterminado | Rango válido | Clave persistida | Comportamiento |
+|---|---|---|---|---|---|
+| **MON** | Botón de alternancia | — | On / Off | — | Activa el monitor de banda lateral para los modos Phone. |
+| **Monitor volume** | Control deslizante | — | 0–100 | — | Ajusta el volumen del monitor de banda lateral. |
+| **Sidetone** | Botón de alternancia | — | On / Off | — | Activa el monitor de sidetone CW del radio. |
+| **Sidetone volume** | Control deslizante | — | 0–100 | — | Ajusta el volumen del monitor CW. |
 
 ## Consejos
 
-- El monitor reproduce lo que el radio está transmitiendo realmente, por lo que refleja cualquier procesamiento de voz o compresión aplicado por el control **PROC**.
-- Si utiliza **PC** como fuente de micrófono, el valor de ganancia del micrófono se almacena en el lado del cliente como `PcMicGain` (valor predeterminado 50, rango 0–100) en lugar de ser reportado por el radio.
+- El monitor de sidetone CW del lado del radio enruta el audio a través de la ruta DAX del radio. Si necesita menor latencia (aproximadamente 10 ms) para trabajar con paddle, manipulador recto o CWX, utilice en su lugar el sidetone **Local STn** del lado del cliente. Consulte [Activar el sidetone CW local de baja latencia (Local STn) para trabajo rápido con paddle / manipulador recto / CWX](enable-the-low-latency-local-cw-sidetone-local-stn-for-fast-paddle-straight-key-cwx-work.md).
+- **MON** y **Sidetone** son controles separados en paneles distintos. Activar uno no afecta al otro.
 
 ## Relacionados
 
-- [Descripción general de Phone/CW](overview.md)
-- [Ajustar la ganancia del micrófono y activar la mezcla del accesorio](adjust-mic-gain-and-enable-the-accessory-mix.md)
-- [Activar el procesador de voz en nivel NOR, DX o DX+](enable-speech-processor-at-nor-dx-or-dx-level.md)
-- [Seleccionar una fuente de micrófono (MIC, BAL, LINE, ACC, PC)](pick-a-mic-source-mic-bal-line-acc-pc.md)
+- [Activar el sidetone CW local de baja latencia (Local STn) para trabajo rápido con paddle / manipulador recto / CWX](enable-the-low-latency-local-cw-sidetone-local-stn-for-fast-paddle-straight-key-cwx-work.md)
+- [Cambiar el tono CW / frecuencia de sidetone](change-cw-pitch-sidetone-frequency.md)
+- [Ajustar el volumen del sidetone local independientemente del monitor del radio](set-the-local-sidetone-volume-independently-of-the-radio-monitor.md)

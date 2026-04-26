@@ -1,36 +1,40 @@
 # Aclarar u oscurecer la señal saturada con Tone
 
-El control **Tone** inclina el balance de frecuencias de la señal saturada por el tubo hacia un carácter más brillante o más oscuro. Úselo después de ajustar Drive para dar forma al color tonal de la saturación sin cambiar el nivel de salida general.
+El control Tone define el carácter tonal de la salida saturada. Úselo para añadir aire y presencia (valores positivos) o para suavizar la aspereza y calentar el sonido (valores negativos) después de que la etapa de tubo ya ha coloreado la señal.
 
 ## Antes de comenzar
 
-- El applet Tube Saturator debe estar visible. Aparece como el sub-contenedor TUBE dentro del contenedor principal PooDoo Audio (TXDSP).
-- La etapa de tubo debe estar habilitada mediante el widget CHAIN. Si el applet está oculto, habilite la etapa primero para que aparezca el sub-contenedor TUBE.
+- La etapa de tubo debe estar habilitada para el lado correspondiente (TX o RX). Consulte [Omitir el tubo desde cualquiera de las cadenas](bypass-the-tube-from-either-chain.md).
+- El subcontenedor Aetherial Mic-PreAmp (TX) o Aetherial Dynamic Tube (RX) debe estar visible en el Panel de Applets. Si no está visible, habilite la etapa de tubo mediante el widget CHAIN en el lado correspondiente, o haga doble clic en la etapa TUBE en el widget CHAIN para abrir el editor flotante.
 
 ## Pasos
 
-1. Localice el sub-contenedor TUBE en el panel del applet.
-2. Encuentre el control **Tone** — el segundo control desde la izquierda en la fila de cinco controles, entre Drive y Bias.
-3. Gire **Tone** en sentido horario para aclarar la señal saturada (hacia `1.00`), o en sentido antihorario para oscurecerla (hacia `-1.00`).
-4. Observe la etiqueta debajo del control; muestra el valor actual como un número con dos decimales, por ejemplo `0.25` o `-0.50`.
-5. Para volver al punto neutro, haga doble clic en **Tone** para restablecerlo a su valor predeterminado de `0.00`.
+1. Localice la fila de cinco controles en la parte inferior del applet Aetherial Mic-PreAmp (TX) o Aetherial Dynamic Tube (RX). Los controles son, de izquierda a derecha: Drive, Tone, Bias, Output, Mix.
+2. Gire el control **Tone** hacia la derecha (positivo) para aclarar la señal saturada, o hacia la izquierda (negativo) para oscurecerla.
+3. Lea el valor actual en la etiqueta ubicada debajo del control. La etiqueta se muestra en el formato `X.XX` (por ejemplo, `0.50` o `-0.75`).
+4. Suelte el control. La configuración se guarda automáticamente.
+
+Como alternativa, haga doble clic en la etapa TUBE en el widget CHAIN para abrir el editor flotante titulado **Aetherial Tube — TX** o **Aetherial Tube — RX**, donde el mismo control Tone está disponible en un tamaño mayor.
 
 ## Qué hace cada control
 
-| Control | Predeterminado | Rango válido | Clave persistida | Comportamiento |
-|---------|----------------|--------------|------------------|----------------|
-| Tone | `0.00` | `-1.0` a `1.0` | `ClientTubeTxTone` | Los valores negativos oscurecen; los valores positivos aclaran la señal saturada. Mapeo lineal en todo el rango. |
+| Control | Valor predeterminado | Rango válido | Clave de configuración persistida |
+|---------|---------------------|--------------|-----------------------------------|
+| Tone (TX) | `0.00` | −1.0 a 1.0 | `ClientTubeTxTone` |
+| Tone (RX) | `0.00` | −1.0 a 1.0 | `ClientTubeRxTone` |
+
+Los valores negativos oscurecen la señal saturada; los valores positivos la aclaran. El mapeo es lineal en todo el rango. Un valor de `0.00` no aplica ninguna corrección tonal.
 
 ## Consejos
 
-- El control Tone afecta únicamente la porción saturada de la señal. Si Mix está por debajo del 100 %, la ruta seca no se ve afectada, por lo que el cambio tonal se mezclará de forma proporcional.
-- Los cambios realizados en Tone desde el editor flotante de Tube se reflejan en el control del applet en aproximadamente 33 ms, y viceversa. Puede ajustar desde cualquiera de las dos ubicaciones.
-- Los ajustes pequeños — valores entre `-0.30` y `0.30` — suelen ser suficientes. Los valores extremos pueden sonar poco naturales dependiendo de los ajustes de Drive y Bias.
+- Tone actúa sobre la señal después de que la etapa de tubo la colorea con Drive y Bias. Configure Drive y Bias primero, luego use Tone para ajustar el resultado, en lugar de trabajar en el orden inverso.
+- La visualización de la curva de transferencia se actualiza en tiempo real mientras ajusta Tone, lo que proporciona una referencia visual junto con el cambio audible.
+- Las instancias TX y RX son completamente independientes. Ajustar Tone en el lado TX no tiene ningún efecto en el lado RX y viceversa.
 
 ## Relacionados
 
-- [Descripción general del Tube Saturator](overview.md)
-- [Ajustar Drive hasta que la curva comience a curvarse](dial-drive-until-the-curve-starts-to-bend.md)
+- [Descripción general de Aetherial Mic-PreAmp (TX) / Aetherial Dynamic Tube (RX)](overview.md)
+- [Ajustar Drive hasta que la curva comience a curvarse (calidez en TX o modelado de tono en RX)](dial-drive-until-the-curve-starts-to-bend-tx-warmth-or-rx-tone-shaping.md)
 - [Desplazar Bias para ajustar el balance de armónicos pares e impares](shift-bias-to-tweak-the-even-odd-harmonic-balance.md)
 - [Compensar cambios de nivel con Output](compensate-level-changes-with-output.md)
-- [Mezcla paralela de saturación con Mix](parallel-blend-saturation-with-mix.md)
+- [Omitir el tubo desde cualquiera de las cadenas](bypass-the-tube-from-either-chain.md)

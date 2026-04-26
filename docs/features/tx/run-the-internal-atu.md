@@ -1,49 +1,47 @@
-# Activar el ATU interno
+# Ejecutar el ATU interno
 
-Use el sintonizador de antena automático (ATU) interno para encontrar la mejor adaptación de impedancia para su antena en la frecuencia actual. Esto reduce el ROE y protege los transistores finales antes de operar.
+Use esta página para iniciar un ciclo del sintonizador automático de antena (ATU) en el FLEX-8600. El ATU encuentra una red de adaptación que minimiza la ROE en la frecuencia actual.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600. El applet TX Controls requiere una conexión de radio activa.
-- Su radio debe tener un ATU interno instalado y habilitado. Los controles ATU y MEM se deshabilitan cuando un amplificador TGXL está en modo OPERATE.
-- Configure el nivel de potencia de la portadora de sintonía antes de comenzar. Se recomienda un nivel de potencia bajo (valor predeterminado 10) para el ciclo de sintonía.
+- AetherSDR debe estar conectado al radio. El applet TX Controls solo está activo cuando hay una conexión de radio presente.
+- El radio no debe estar en modo TGXL OPERATE. El ATU está deshabilitado en ese modo.
+- Ajuste la potencia de sintonía a un nivel apropiado antes de comenzar. Consulte [Establecer la potencia del portador de sintonía](set-tune-carrier-power.md).
 
 ## Pasos
 
-1. Haga clic en el botón TX del área de notificación en la barra lateral derecha para abrir el applet TX Controls si no está visible.
-2. Verifique el control deslizante **Tune Pwr**. El valor predeterminado es 10. Ajústelo si es necesario antes de sintonizar.
-3. Haga clic en **ATU**.
+1. Haga clic en el botón TX del panel lateral derecho para abrir TX Controls si no está visible todavía.
+2. Ajuste el control deslizante `Tune Pwr` a la potencia de portador deseada (predeterminado: 10, rango: 0–100).
+3. Haga clic en `ATU`.
 
-La radio inicia inmediatamente su ciclo de sintonía ATU. Observe los tres indicadores de estado del ATU:
-
-- **Success** se ilumina en verde cuando el sintonizador encuentra una adaptación aceptable.
-- **Byp** se ilumina en naranja si el ATU entra en modo bypass o bypass manual.
-- **Mem** se ilumina en verde si el sintonizador aplicó una memoria almacenada en lugar de realizar un barrido completo.
+El radio transmite un portador y ejecuta el ciclo de sintonía. Observe los indicadores `Success`, `Byp` y `Mem` debajo del selector TX Profile para seguir el resultado.
 
 ## Qué hace cada control
 
-| Control | Tipo | Valor predeterminado | Comportamiento |
-|---|---|---|---|
-| ATU | Botón | — | Inicia el ciclo de sintonía del ATU interno. Deshabilitado cuando el TGXL está en modo OPERATE. |
-| MEM | Botón alternante | — | Activa o desactiva la recuperación de memoria del ATU. Deshabilitado cuando el TGXL está en modo OPERATE. |
-| Tune Pwr | Control deslizante | 10 | Establece el nivel de potencia de la portadora de sintonía durante la sintonización. Rango 0–100. |
-| Success | Indicador | apagado | Se ilumina en verde cuando el estado del ATU es Successful u OK. |
-| Byp | Indicador | apagado | Se ilumina en naranja cuando el ATU está en Bypass o ManualBypass. |
-| Mem | Indicador | apagado | Se ilumina en verde cuando el ATU utiliza una memoria almacenada. |
+| Control | Tipo | Descripción | Predeterminado | Rango |
+|---|---|---|---|---|
+| ATU | Botón momentáneo | Inicia el ciclo de sintonía del ATU interno. Deshabilitado en modo TGXL OPERATE. | — | — |
+| Tune Pwr | Control deslizante | Establece la potencia del portador utilizada durante la sintonía. | 10 | 0–100 |
+| Success | Indicador | Se ilumina en verde cuando el resultado de la sintonía del ATU es exitoso. | Apagado | Apagado / verde |
+| Byp | Indicador | Se ilumina en naranja cuando el ATU está en bypass o bypass manual. | Apagado | Apagado / naranja |
+| Mem | Indicador | Se ilumina en verde cuando el ATU utiliza una memoria almacenada. | Apagado | Apagado / verde |
+| MEM | Botón de alternancia | Activa o desactiva la recuperación de memoria del ATU. Deshabilitado en modo TGXL OPERATE. | — | On / Off |
 
-## Sugerencias
+## Consejos
 
-- Si cambia de banda o se desplaza significativamente en frecuencia, haga clic en **ATU** nuevamente para re-sintonizar. Una adaptación almacenada de una frecuencia distante puede no ser óptima.
-- Para permitir que la radio reutilice adaptaciones almacenadas previamente sin ejecutar un barrido de sintonía completo cada vez, habilite **MEM** antes de hacer clic en **ATU**.
+- Si `Byp` se ilumina tras el ciclo, el ATU no pudo encontrar una adaptación y se ha puesto en bypass. Revise el sistema de antena o pruebe con una frecuencia diferente.
+- Si `Mem` se ilumina inmediatamente después de hacer clic en ATU, el radio aplicó una memoria almacenada en lugar de ejecutar un ciclo de sintonía completo. Consulte [Recuperar una memoria del ATU](recall-an-atu-memory.md) para más detalles sobre la gestión de memorias.
+- Mantenga la potencia de sintonía lo suficientemente baja para cumplir con las condiciones de su licencia y los requisitos del amplificador. El valor predeterminado del control deslizante `Tune Pwr` es 10.
 
 ## Solución de problemas
 
-- **Los botones ATU y MEM aparecen atenuados** — Un amplificador TGXL está conectado y se encuentra en modo OPERATE. Saque el TGXL del modo OPERATE antes de usar el ATU.
-- **Byp se ilumina en naranja después de sintonizar** — El ATU no pudo encontrar una adaptación dentro de su rango y se ha puesto en bypass. Revise el sistema de antena y el cable coaxial en busca de fallas y vuelva a intentarlo.
+- **El botón ATU aparece desactivado** — El radio está en modo TGXL OPERATE. El ATU no puede iniciarse en este modo. Primero cambie el TGXL fuera del modo OPERATE.
+- **El indicador Success no se ilumina tras la sintonía** — El ATU no pudo encontrar una adaptación aceptable. Revise la conexión de antena y la ROE en el indicador `SWR`. Intente reducir la desviación de frecuencia respecto al punto de resonancia de la antena.
+- **Byp se ilumina en lugar de Success** — El ATU se ha puesto en bypass. Es posible que el sistema de antena esté fuera del rango de adaptación del sintonizador.
 
-## Relacionados
+## Temas relacionados
 
 - [Recuperar una memoria del ATU](recall-an-atu-memory.md)
-- [Configurar la potencia de la portadora de sintonía](set-tune-carrier-power.md)
-- [Iniciar una portadora de sintonía para verificar el ROE](start-a-tune-carrier-to-check-swr.md)
-- [Configurar la potencia de salida de RF](set-rf-output-power.md)
+- [Establecer la potencia del portador de sintonía](set-tune-carrier-power.md)
+- [Iniciar un portador de sintonía para verificar la ROE](start-a-tune-carrier-to-check-swr.md)
+- [Establecer la potencia de salida de RF](set-rf-output-power.md)

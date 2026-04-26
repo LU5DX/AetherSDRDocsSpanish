@@ -1,48 +1,44 @@
-# Elegir entre comportamiento de gate y expansor suave mediante el Ratio
+# Elegir comportamiento de gate o expansor suave mediante el ratio
 
-El control **Ratio** determina la agresividad con que el gate atenúa el audio por debajo del umbral. Los valores bajos producen una expansión descendente suave; los valores altos producen un gate duro que corta casi por completo. Ajustando este único control es posible seleccionar cualquier punto de ese espectro sin modificar ningún otro ajuste.
+El mando **Ratio** controla con qué agresividad el gate atenúa el audio por debajo del umbral. Un valor alto produce un corte brusco y casi total (comportamiento de gate clásico); un valor bajo produce una reducción más suave y gradual (expansor descendente suave). Elegir el valor adecuado evita conmutaciones abruptas de encendido/apagado sin dejar de eliminar el ruido de fondo.
 
 ## Antes de comenzar
 
-- La etapa Gate debe estar habilitada. Si el subcontenedor GATE no es visible en el panel PooDoo Audio (TXDSP), habilite la etapa Gate mediante el widget CHAIN o haga doble clic en la etapa Gate en el widget CHAIN para abrir el editor flotante Gate.
-- Debe ser capaz de producir audio cerca del nivel de ruido de fondo (ventiladores, ambiente de la sala) para que el efecto sea audible mientras realiza los ajustes.
+- El gate debe estar habilitado en el lado que desea ajustar (TX o RX). Habilítelo mediante el widget CHAIN o haciendo doble clic en la etapa GATE del widget CHAIN para abrir el editor flotante.
+- El subcontenedor "Aetherial TX Gate" o "Aetherial AGC-T" debe estar visible en el Applet Panel.
 
 ## Pasos
 
-1. Localice el subcontenedor GATE dentro del panel PooDoo Audio (TXDSP).
-2. Encuentre el control etiquetado como **Ratio** — muestra su valor como `X.X:1`.
-3. Gire **Ratio** hacia **1.0** (mínimo) para obtener expansión descendente suave: el audio por debajo del umbral se atenúa gradualmente, con fundidos de sonido natural entre palabras.
-4. Gire **Ratio** hacia **10.0** (máximo) para obtener un comportamiento de gate duro: el audio por debajo del umbral se corta de forma brusca, aproximándose a un silenciamiento total.
-5. Observe la barra de reducción de ganancia mientras habla y luego guarda silencio. Un relleno ámbar moderado confirma que la atenuación está ocurriendo. Un relleno de ancho completo con valores de ratio altos indica que un corte duro está en efecto.
-6. Verifique la curva de transferencia — la pendiente de la curva por debajo del umbral se hace más pronunciada a medida que aumenta el ratio, mostrando visualmente el corte más duro.
+1. Localice el subcontenedor **Aetherial TX Gate** (lado TX) o el subcontenedor **Aetherial AGC-T** (lado RX) en el Applet Panel.
+2. Busque el mando **Ratio** en la fila de cinco mandos situada en la parte inferior del applet. Su etiqueta muestra el formato `X.X:1`.
+3. Gire **Ratio** hacia `1.0:1` para obtener un expansor descendente suave: el audio por debajo del umbral se atenúa de forma gradual en lugar de cortarse bruscamente.
+4. Gire **Ratio** hacia `10.0:1` para obtener un corte más brusco, similar al de un gate: el audio por debajo del umbral se reduce de forma pronunciada, aproximándose al silencio en el valor de **Floor**.
+5. Observe la barra de reducción de ganancia (la franja ámbar sobre la fila de mandos) mientras la entrada esté por debajo del umbral. Un relleno ámbar más profundo confirma que se está aplicando mayor atenuación.
+6. Hable o reproduzca audio cruzando el umbral y observe la curva de transferencia. La bola de entrada en vivo se desplaza a lo largo de la curva; la pendiente de la curva por debajo del umbral se pronuncia a medida que aumenta el Ratio.
 
 ## Qué hace cada control
 
-| Control | Valor predeterminado | Rango válido | Clave persistida | Comportamiento |
+| Control | Valor predeterminado | Rango válido | Clave persistida (TX / RX) | Comportamiento |
 |---|---|---|---|---|
-| Ratio | 2.0 | 1.0 a 10.0 | `ClientGateTxRatio` | Controla la pendiente de atenuación por debajo del umbral. Los valores más bajos actúan como un expansor descendente suave; los valores más altos actúan como un gate duro. Se muestra como `X.X:1`. |
-| Thresh | −40.0 dB | −80.0 a 0.0 dB | `ClientGateTxThresholdDb` | Nivel por debajo del cual el gate comienza a atenuar. El ratio se aplica en relación con este punto. |
-| Floor | −15.0 dB | −80.0 a 0.0 dB | `ClientGateTxFloorDb` | Atenuación máxima que el gate puede aplicar, independientemente del ratio. La barra de reducción de ganancia incluye una marca en −15 dB que señala este valor predeterminado. |
-| Barra de reducción de ganancia | — | 0 a 40 dB GR | — | Franja ámbar horizontal, rellena desde la derecha. Muestra la profundidad actual de atenuación mientras el gate está activo. |
-| Curva de transferencia | — | — | — | Representa la curva estática de entrada a salida. La pendiente por debajo del umbral refleja el ajuste actual del ratio. La bola de entrada en tiempo real indica si el gate está actualmente abierto o cerrado. |
+| **Ratio** | `2.0` | `1.0` a `10.0` | `ClientGateTxRatio` / `ClientGateRxRatio` | Pendiente de la curva de transferencia por debajo del umbral. `1.0:1` = sin atenuación (expansor desactivado). `10.0:1` = corte casi total. Mapeo de mando lineal. |
+| **Thresh** | `-40.0 dB` | `-80.0` a `0.0 dB` | `ClientGateTxThresholdDb` / `ClientGateRxThresholdDb` | Nivel por debajo del cual el gate comienza a atenuar. El Ratio solo tiene efecto por debajo de este punto. |
+| **Floor** | `-15.0 dB` | `-80.0` a `0.0 dB` | `ClientGateTxFloorDb` / `ClientGateRxFloorDb` | Atenuación máxima que el gate puede aplicar, independientemente del Ratio. Una marca en −15 dB en la barra de reducción de ganancia señala este valor predeterminado. |
 
 ## Consejos
 
-- Un ratio de 2.0:1 (el valor predeterminado) es un punto de partida razonable para voz: reduce el ruido de fondo de forma notable sin el corte artificial de un gate duro.
-- Si la voz suena recortada o entrecortada con ratios altos, aumente el valor de Floor hacia 0 dB para limitar el corte máximo, o reduzca el ratio.
-- El control Floor limita la atenuación independientemente de cuán alto se configure el ratio. Si un gate duro no corta con suficiente profundidad, verifique que Floor esté configurado lo suficientemente bajo (por ejemplo, −40 dB o menor) para permitir el corte completo.
-- Los cambios realizados en el editor flotante Gate se reflejan en los controles del applet GATE dentro de un ciclo de actualización, y viceversa.
+- Un ratio de `2.0:1` (el valor predeterminado) funciona como expansor descendente suave: es un buen punto de partida para el gate de voz en TX cuando el silencio abrupto entre palabras suena antinatural.
+- Aumentar el Ratio por encima de `5.0:1` se aproxima al comportamiento de gate real. Combine esto con un valor de **Floor** distinto de cero (por ejemplo, `-15.0 dB`) para evitar que el silencio total entre de forma brusca.
+- Los cambios realizados en los mandos del applet y en el editor flotante (abierto haciendo doble clic en la etapa GATE del widget CHAIN) se mantienen sincronizados automáticamente.
 
 ## Solución de problemas
 
-- **El Ratio está en 10.0:1 pero el ruido de fondo sigue siendo audible entre palabras** — el valor de Floor puede estar limitando la atenuación antes de que el gate alcance su máxima profundidad. Reduzca `ClientGateTxFloorDb` (por ejemplo, a −40.0 dB o por debajo) para permitir cortes más profundos.
-- **La voz suena artificialmente entrecortada incluso con ratios moderados** — el umbral puede estar demasiado alto, lo que provoca que el gate se active con voz baja además de con ruido. Reduzca `ClientGateTxThresholdDb` hasta que solo el ruido de fondo genuino quede por debajo de él.
-- **La curva de transferencia no se actualiza al girar el control Ratio** — la etapa GATE puede no estar habilitada. Habilítela mediante el widget CHAIN.
+- **El Ratio está al máximo pero el ruido de fondo sigue siendo audible entre palabras** — El ajuste de **Floor** está limitando la atenuación antes de llegar al silencio. Baje **Floor** hacia `-80.0 dB`, o baje **Thresh** para que el gate se active al nivel de ruido real. Consulte [Establecer el umbral TX justo por encima del nivel de ruido de sala](set-tx-threshold-just-above-room-noise-floor.md) y [Ajustar Floor para evitar el silencio antinatural entre palabras](set-floor-to-avoid-unnatural-silence-between-words.md).
+- **El audio se corta y reanuda de forma demasiado abrupta cuando el Ratio es alto** — Aumente **Release** para que el gate se cierre más lentamente, o baje **Ratio** hacia `2.0:1` para suavizar la transición. Consulte [Ajustar ataque/liberación para una apertura/cierre natural](tune-attack-release-for-natural-open-close.md).
 
-## Temas relacionados
+## Relacionados
 
-- [Establecer el umbral justo por encima del nivel de ruido de sala](set-threshold-just-above-room-noise-floor.md)
-- [Establecer Floor para evitar silencios artificiales entre palabras](set-floor-to-avoid-unnatural-silence-between-words.md)
-- [Ajustar ataque y liberación para una apertura y cierre naturales](tune-attack-release-for-natural-open-close.md)
-- [Observar la reducción de ganancia en tiempo real sin hablar](watch-live-gr-while-not-speaking.md)
-- [Descripción general del Noise Gate / Expansor](overview.md)
+- [Descripción general de Aetherial TX Gate / Aetherial AGC-T (RX)](overview.md)
+- [Establecer el umbral TX justo por encima del nivel de ruido de sala](set-tx-threshold-just-above-room-noise-floor.md)
+- [Ajustar Floor para evitar el silencio antinatural entre palabras](set-floor-to-avoid-unnatural-silence-between-words.md)
+- [Ajustar ataque/liberación para una apertura/cierre natural](tune-attack-release-for-natural-open-close.md)
+- [Ver la reducción de ganancia en vivo mientras no se transmite](watch-live-gr-while-not-speaking.md)

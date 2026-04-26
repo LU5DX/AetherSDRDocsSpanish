@@ -1,40 +1,47 @@
 # Seleccionar la antena RX o TX para este slice
 
-El applet RX Controls le permite elegir qué puerto de antena utiliza el radio para recibir y transmitir en cada slice de forma independiente. Cambie estos ajustes cuando tenga antenas separadas para diferentes bandas o cuando desee recibir en un puerto dedicado solo para RX.
+Cada slice tiene una antena RX y una antena TX independientes. Use el applet RX Controls para cambiar cualquiera de ellas sin afectar los demás slices.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. Los controles de antena no están disponibles sin una conexión activa.
-- La lista de antenas se obtiene de la configuración de puertos del propio radio. Confirme que sus antenas estén físicamente conectadas y nombradas en el radio antes de continuar.
+- Conéctese a una radio FLEX-8600. Los controles de antena requieren una conexión activa con la radio.
+- Abra el applet RX Controls. Siempre está visible en el panel de applets (barra lateral derecha). Si el panel está oculto, haga clic en el botón `RX` de la bandeja en la barra lateral derecha para mostrarlo.
+- Si tiene más de un slice, seleccione el correcto usando la fila de pestañas A–H en la parte superior del applet.
 
 ## Pasos
 
-1. Abra el applet RX Controls. Siempre es visible en el Panel de Applets (barra lateral derecha). Si no está visible, haga clic en el botón de bandeja `RX` en la barra lateral derecha para mostrarlo.
-2. Si tiene más de un slice, haga clic en la pestaña de slice correcta (A hasta H) en la parte superior del applet para vincularlo al slice que desea cambiar.
-3. En la fila de encabezado, localice las dos pequeñas etiquetas de antena. La etiqueta azul corresponde a la antena RX; la etiqueta roja, a la antena TX. Ambas tienen `ANT1` como valor predeterminado.
-4. **Para cambiar la antena RX:** haga clic en la etiqueta de antena azul (p. ej., `ANT1`). Se abre un menú con todos los puertos de antena disponibles. El puerto actualmente seleccionado tiene una marca de verificación. Haga clic en el puerto que desea usar para recibir.
-5. **Para cambiar la antena TX:** haga clic en la etiqueta de antena roja (p. ej., `ANT1`). Se abre un menú con los puertos habilitados para TX. Los puertos cuyos nombres comienzan con `RX` están excluidos porque son de solo recepción. Haga clic en el puerto que desea usar para transmitir.
-6. La etiqueta se actualiza de inmediato para mostrar la antena recién seleccionada. El radio aplica el cambio al slice activo.
+### Cambiar la antena RX
+
+1. Localice la etiqueta de antena azul en la fila de encabezado del applet RX Controls. Muestra la antena RX actual (por ejemplo, `ANT1`).
+2. Haga clic en la etiqueta azul. Se abre un menú con todas las antenas que reporta la radio.
+3. Haga clic en la antena que desea usar para recepción. Aparece una marca de verificación junto a la selección actual.
+
+### Cambiar la antena TX
+
+1. Localice la etiqueta de antena roja en la fila de encabezado, inmediatamente a la derecha de la etiqueta de antena RX azul. Muestra la antena TX actual (por ejemplo, `ANT1`).
+2. Haga clic en la etiqueta roja. Se abre un menú con las antenas habilitadas para transmisión. Los puertos de antena cuyos nombres comienzan con `RX` no se muestran, ya que son solo de recepción.
+3. Haga clic en la antena que desea usar para transmisión.
 
 ## Qué hace cada control
 
-| Control | Color | Predeterminado | Opciones válidas | Comportamiento |
+| Control | Color | Predeterminado | Valores válidos | Comportamiento |
 |---|---|---|---|---|
-| Etiqueta de antena RX | Azul | `ANT1` | Todos los puertos de la lista de antenas del radio | Haga clic para abrir un menú; al seleccionar una entrada se establece la antena de recepción para este slice. |
-| Etiqueta de antena TX | Rojo | `ANT1` | Todos los puertos excepto los que tienen el prefijo `RX` | Haga clic para abrir un menú; al seleccionar una entrada se establece la antena de transmisión para este slice. Los puertos de solo recepción se filtran. |
+| Botón de antena RX | Etiqueta azul | ANT1 | Nombres de antena del `ant_list` de la radio | Abre un menú; al seleccionar una entrada se establece la antena RX para este slice. |
+| Botón de antena TX | Etiqueta roja | ANT1 | Nombres de antena del `ant_list` de la radio, excluyendo los puertos con prefijo `RX` | Abre un menú; al seleccionar una entrada se establece la antena TX para este slice. Los puertos solo de recepción quedan filtrados. |
 
 ## Consejos
 
-- Las antenas RX y TX se configuran por slice. Al cambiar a una pestaña de slice diferente se modifica el slice que controla el applet; las etiquetas de antena se actualizan para reflejar las selecciones actuales de ese slice.
-- Si el nombre de un puerto comienza con `RX` (por ejemplo, `RXANT` o `RX2`), aparece en el menú RX pero está oculto en el menú TX.
+- Las selecciones de antena RX y TX son por slice. Cambiar la antena en el slice A no afecta al slice B.
+- Los nombres de antena disponibles provienen del `ant_list` reportado por la radio. Si falta una antena esperada, verifique la conexión física y el firmware de la radio.
+- Los puertos solo de recepción (aquellos cuyos nombres comienzan con `RX`) aparecen en el menú de antena RX, pero quedan excluidos del menú de antena TX.
 
 ## Solución de problemas
 
-- **El menú de antenas muestra menos puertos de los esperados** — La lista se obtiene del `ant_list` del radio. Los puertos que el firmware del radio no reporta no aparecerán. Verifique que el puerto esté habilitado en la configuración del propio radio y que el firmware 4.1.5 esté en ejecución.
-- **En la etiqueta de antena TX falta un puerto que sí aparece en el menú RX** — Es probable que el nombre del puerto comience con `RX`. Los puertos de solo recepción se excluyen intencionalmente del menú de selección de TX.
+- **Una antena que espero no aparece en la lista** — La lista se obtiene del `ant_list` de la radio en el momento de la conexión. Reconéctese a la radio y verifique que el puerto de antena esté habilitado en la configuración propia de la radio.
+- **Un puerto que quiero usar para TX no aparece en el menú TX** — Los puertos cuyos nombres comienzan con `RX` quedan filtrados del menú de antena TX. Estos puertos son solo de recepción a nivel de hardware y no pueden transmitir.
 
-## Relacionado
+## Relacionados
 
 - [Descripción general de RX Controls](overview.md)
 - [Cambiar entre múltiples slices usando la fila de pestañas A..H](switch-between-multiple-slices-using-the-a-h-tab-row.md)
-- [Comprender los slices y los VFO](../../getting-started/concepts/understanding-slices.md)
+- [Comprender los slices y los VFOs](../../getting-started/concepts/understanding-slices.md)

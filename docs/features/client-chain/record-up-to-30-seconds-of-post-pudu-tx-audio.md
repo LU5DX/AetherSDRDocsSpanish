@@ -1,43 +1,41 @@
-# Grabar hasta 30 segundos de audio TX posterior a PUDU
+# Grabar hasta 30 segundos de audio TX posterior al PUDU
 
-Use el grabador de monitor integrado para capturar una muestra breve de su audio TX procesado — después de cada etapa en la cadena, incluida PUDU — para escuchar exactamente cómo suena su señal en el aire sin necesidad de un segundo receptor.
+Use la grabadora de monitor integrada para capturar su audio TX procesado después de que pase por la etapa PUDU, luego reprodúzcalo de inmediato para evaluar la configuración de su cadena de audio.
 
 ## Antes de comenzar
 
-- El contenedor de PooDoo Audio (TXDSP) debe estar visible. Si no lo está, haga clic en el botón PUDU del área de notificación en la barra lateral derecha para mostrarlo.
-- La entrada de micrófono debe estar configurada como fuente PC y DAX debe estar desactivado. El botón de grabación permanece deshabilitado hasta que ambas condiciones se cumplan.
-- Debe estar en la vista de cadena TX. Haga clic en TX en el encabezado del applet si actualmente está seleccionado RX.
+- El contenedor Aetherial Audio (TXDSP) debe estar visible. Si no lo está, haga clic en el botón de bandeja etiquetado como **PUDU** en la barra lateral derecha para mostrarlo.
+- La cadena TX debe ser la vista activa. Haga clic en **TX** en el encabezado del applet si actualmente está seleccionado **RX**.
+- La fuente de micrófono debe estar configurada en PC y DAX debe estar desactivado. El botón de grabación se deshabilita cuando estas condiciones no se cumplen.
 
 ## Pasos
 
-1. Confirme que el botón ⏺ (grabar) en el encabezado del applet está habilitado. Si aparece atenuado, revise la fuente de micrófono y el estado de DAX como se describió anteriormente.
-2. Haga clic en ⏺ para iniciar la grabación. El botón parpadea en rojo mientras la captura está activa. La grabación se detiene automáticamente después de 30 segundos.
-3. Para detener la grabación antes de que transcurran 30 segundos, haga clic en ⏺ nuevamente.
-4. La reproducción comienza automáticamente cuando la grabación se detiene. El botón ▶ (reproducir) parpadea en verde durante la reproducción.
-5. Para detener la reproducción antes de que termine, haga clic en ▶.
+1. Confirme que el botón **TX** en el encabezado de Aetherial Audio Chain esté marcado. Si no lo está, haga clic en **TX**.
+2. Haga clic en el botón **⏺** (Record) en la fila del encabezado, a la derecha de los selectores **TX** / **RX**. El botón parpadea en rojo para indicar que la grabación está activa.
+3. Hable frente a su micrófono. La grabación se detiene automáticamente después de 30 segundos, o haga clic en **⏺** nuevamente para detenerla antes.
+4. Cuando la grabación se detiene, la reproducción comienza automáticamente. El botón **▶** (Play) parpadea en verde durante la reproducción.
 
 ## Qué hace cada control
 
-| Control | Comportamiento | Notas |
-|---|---|---|
-| ⏺ (grabar) | Inicia o detiene la captura del audio TX posterior a PUDU. La duración máxima de grabación es de 30 segundos. | Habilitado cuando la entrada de micrófono está lista y la reproducción no está activa. Parpadea en rojo durante la grabación. Deshabilitado cuando está atenuado. |
-| ▶ (reproducir) | Reproduce la grabación más reciente. Haga clic nuevamente para cancelar. | Habilitado solo después de que existe una grabación y no hay ninguna grabación en curso. Parpadea en verde durante la reproducción. |
+| Control | Comportamiento | Valor predeterminado | Notas |
+|---|---|---|---|
+| **⏺** (Record) | Inicia la captura del audio TX posterior al PUDU; haga clic nuevamente para detener antes. La reproducción comienza automáticamente cuando finaliza la grabación. | Desmarcado | Parpadea en rojo durante la grabación. Deshabilitado cuando la fuente del micrófono no es PC, DAX está activado o la reproducción está en curso. Oculto cuando **RX** es la pestaña activa. |
+| **▶** (Play) | Reproduce el audio capturado; haga clic nuevamente para cancelar la reproducción. | Desmarcado | Parpadea en verde durante la reproducción. Solo se habilita una vez que existe una grabación y la grabación no está activa. Oculto cuando **RX** es la pestaña activa. |
 
 ## Consejos
 
-- No es necesario transmitir para usar el grabador; el grabador captura el audio procesado de la cadena del lado del cliente, no el audio emitido al aire.
-- Si desea escuchar el efecto de una sola etapa, omita todas las demás usando BYPASS antes de grabar y luego compare una segunda grabación con BYPASS desactivado. Consulte [Omitir todas las etapas TX a la vez](bypass-every-tx-stage-at-once.md).
-- El grabador captura el audio después de cada etapa en la cadena, incluido el excitador PUDU. Para escuchar la cadena sin PUDU, haga clic una sola vez en el mosaico de la etapa PUDU para omitirla antes de grabar.
+- El botón **⏺** permanece habilitado durante la grabación, por lo que puede hacer clic en él para detenerla antes de alcanzar el límite de 30 segundos.
+- El botón **▶** permanece habilitado durante la reproducción, por lo que puede hacer clic en él para cancelarla en cualquier momento.
+- Al cambiar al modo **RX** se ocultan los botones **⏺** y **▶**. Vuelva a **TX** para acceder a ellos nuevamente.
 
-## Solución de problemas
+## Resolución de problemas
 
-- **⏺ permanece atenuado** — La entrada de micrófono no está configurada como fuente PC, DAX está activo o hay una reproducción en curso. Desactive DAX, configure la fuente de micrófono como PC y espere a que finalice cualquier reproducción.
-- **La reproducción no comienza automáticamente después de que la grabación se detiene** — No se capturó audio (por ejemplo, la grabación se detuvo de inmediato). Haga clic en ⏺ para grabar nuevamente y hable al micrófono durante la sesión.
-- **▶ está atenuado después de grabar** — La grabación aún está en curso. Haga clic en ⏺ para detenerla primero.
+- **El botón ⏺ aparece en gris** — La fuente del micrófono no está configurada en PC, DAX está habilitado o la reproducción está en curso. Deshabilite DAX, configure la entrada del micrófono en PC y espere a que finalice la reproducción antes de grabar.
+- **El botón ▶ aparece en gris** — Aún no existe ninguna grabación o la grabación está actualmente activa. Complete una grabación primero.
+- **El botón ⏺ no es visible** — La pestaña **RX** está activa. Haga clic en **TX** para cambiar a la cadena TX; los botones de grabar y reproducir solo aparecen en el modo TX.
 
 ## Relacionados
 
 - [Reproducir el audio PUDU capturado](play-back-the-captured-pudu-audio.md)
-- [Omitir todas las etapas TX a la vez](bypass-every-tx-stage-at-once.md)
-- [Abrir el editor flotante de una etapa desde la cadena](open-a-stage-s-floating-editor-from-the-chain.md)
-- [Descripción general de la cadena PooDoo Audio](overview.md)
+- [Descripción general de Aetherial Audio Chain](overview.md)
+- [Alternar entre la edición de las cadenas TX y RX](switch-between-editing-the-tx-and-rx-chains.md)

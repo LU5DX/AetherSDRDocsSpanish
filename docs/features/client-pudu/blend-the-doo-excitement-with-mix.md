@@ -1,35 +1,38 @@
-# Combinar la excitación Doo con Mix
+# Mezcle la excitación Doo con Mix
 
-Use el control Doo / Mix para determinar cuánta excitación de alta frecuencia del Doo se mezcla de vuelta en su señal de transmisión. Un valor más bajo mantiene el efecto sutil; un valor más alto hace que la mejora de presencia y aire sea más prominente.
+Use el control Doo / Mix para regular cuánto de la excitación de altas frecuencias de Doo se mezcla de vuelta en la señal seca. Un valor de Mix demasiado alto puede introducir aspereza; un valor demasiado bajo hace que el procesamiento Doo tenga poco efecto audible.
 
 ## Antes de comenzar
 
-- El applet PUDU Exciter debe estar visible. Permanece oculto hasta que la etapa PUDU se habilite mediante el widget CHAIN o el editor flotante de PUDU.
-- El motor de audio debe estar en funcionamiento y conectado a la cadena de transmisión para que los cambios surtan efecto en tiempo real.
+- La etapa PUDU debe estar habilitada en el widget CHAIN para el lado correspondiente (TX o RX). Consulte [Omitir PUDU desde cualquiera de las cadenas](bypass-pudu-from-either-chain.md).
+- Abra el editor Poodoo haciendo doble clic en la etapa PUDU dentro del widget CHAIN. El editor se titula "Aetherial Poodoo™ — TX" o "Aetherial Poodoo™ — RX" según el lado en el que esté trabajando.
 
 ## Pasos
 
-1. Localice el applet PUDU Exciter en el contenedor principal PooDoo Audio (TXDSP).
-2. Encuentre el grupo **Doo** — los tres controles giratorios bajo la etiqueta del corchete derecho.
-3. Gire el tercer control de ese grupo, etiquetado **Mix**, para establecer la mezcla wet/dry de la etapa Doo.
-4. Observe el indicador de valor bajo el control. Muestra un porcentaje (por ejemplo, `30 %`).
-5. Suelte el control. La configuración se guarda automáticamente.
+1. Localice el grupo **Doo** — los tres controles a la derecha de la fila de mandos, bajo la etiqueta de corchete "Doo".
+2. Identifique el tercer control del grupo Doo, denominado **Mix**.
+3. Gire el mando **Mix** para mezclar la señal de altas frecuencias excitada con la señal seca. El valor se muestra como porcentaje directamente sobre el mando.
+4. Suelte el mando. El ajuste se guarda automáticamente.
 
 ## Qué hace cada control
 
-| Control | Predeterminado | Rango válido | Clave persistida | Comportamiento |
-|---|---|---|---|---|
-| Doo / Mix | 30 % | 0 % a 100 % (almacenado como 0.0 a 1.0) | `ClientPuduTxDooMix` | Mezcla linealmente la señal de alta frecuencia procesada con la señal seca. 0 % no aplica ningún efecto Doo; 100 % pasa únicamente la señal procesada. |
+| Control | Valor predeterminado | Rango válido | Ajuste persistido |
+|---|---|---|---|
+| Doo / Mix (TX) | 30 % | 0 % a 100 % | `ClientPuduTxDooMix` |
+| Doo / Mix (RX) | 30 % | 0 % a 100 % | `ClientPuduRxDooMix` |
+
+El mando tiene una respuesta lineal. Al 0 %, el procesador Doo queda completamente excluido de la mezcla y no tiene efecto sobre la señal. Al 100 %, solo la señal procesada pasa a la salida — no se mezcla señal seca. Los lados TX y RX mantienen valores de Mix completamente independientes.
 
 ## Consejos
 
-- Comience con el valor predeterminado de 30 % y auméntelo gradualmente mientras transmite hacia una carga dummy o monitorea su audio de TX. El logotipo de PooDoo pulsa con el RMS de la señal wet, proporcionando una indicación visual de cuánta señal procesada está presente.
-- Doo / Mix funciona junto con Doo / Air (`ClientPuduTxDooHarmonicsDb`). Si Air está configurado bajo, subir Mix tendrá poco efecto audible. Ajuste Air primero y luego use Mix al gusto.
-- Valores de Mix muy altos pueden hacer que el efecto suene duro en SSB. Los valores entre 20 % y 50 % son típicos para uso de voz.
+- Comience con el valor predeterminado de 30 % y auméntelo gradualmente mientras escucha el efecto sobre la presencia o la inteligibilidad.
+- El logotipo de PooDoo pulsa con el nivel RMS de la señal húmeda. Un pulso más rápido y pronunciado al subir Mix confirma que la etapa Doo está contribuyendo a la salida.
+- Si aún no ha posicionado la banda Doo en la frecuencia correcta, ajuste Mix a 0 % temporalmente mientras regula Doo / Tune y, a continuación, vuelva a subir Mix. Consulte [Centrar Doo en la banda de presencia para su micrófono (TX) o para la inteligibilidad en RX](centre-doo-on-the-presence-band-for-your-mic-tx-or-for-rx-intelligibility.md).
 
 ## Relacionado
 
-- [Agregar aire con Doo Harmonics](add-air-with-doo-harmonics.md)
-- [Centrar Doo en la banda de presencia de su micrófono](centre-doo-on-the-presence-band-for-your-mic.md)
-- [Combinar la mejora Poo con Mix](blend-the-poo-enhancement-with-mix.md)
-- [Descripción general del PUDU Exciter](overview.md)
+- [Añadir aire con Doo Harmonics](add-air-with-doo-harmonics.md)
+- [Centrar Doo en la banda de presencia para su micrófono (TX) o para la inteligibilidad en RX](centre-doo-on-the-presence-band-for-your-mic-tx-or-for-rx-intelligibility.md)
+- [Mezclar la mejora Poo con Mix](blend-the-poo-enhancement-with-mix.md)
+- [Omitir PUDU desde cualquiera de las cadenas](bypass-pudu-from-either-chain.md)
+- [Descripción general de Aetherial TX Poodoo / Aetherial RX Poodoo](overview.md)

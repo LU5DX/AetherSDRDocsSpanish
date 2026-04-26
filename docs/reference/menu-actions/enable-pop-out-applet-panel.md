@@ -1,6 +1,6 @@
 # Habilitar el panel de applets flotante
 
-`View > Pop Out Applet Panel` separa el panel de applets en su propia ventana independiente, o lo acopla de nuevo a la ventana principal de AetherSDR. Use esta opción cuando desee mover el panel de applets a un segundo monitor o reposicionarlo de forma independiente de la ventana principal.
+Use `View > Pop Out Applet Panel` para desacoplar el panel de applets de la ventana principal y convertirlo en una ventana flotante independiente, o para acoplarlo de nuevo a la ventana principal.
 
 ## Antes de comenzar
 
@@ -10,17 +10,22 @@
 
 1. Haga clic en `View` en la barra de menú.
 2. Haga clic en `Pop Out Applet Panel`.
-   El panel de applets se desacopla de la ventana principal y aparece como una ventana flotante independiente.
-3. Para acoplarlo de nuevo, haga clic en `View > Pop Out Applet Panel` otra vez.
-   La marca de verificación se elimina y el panel regresa a su posición acoplada.
+   El panel de applets se desacopla y aparece en una ventana flotante independiente. Cuando el panel está flotante, aparece una marca de verificación junto al elemento del menú.
+3. Para acoplar el panel de nuevo a la ventana principal, haga clic en `View > Pop Out Applet Panel` otra vez.
+
+## Qué hace cada control
+
+| Control | Descripción | Atajo | Valor predeterminado |
+|---|---|---|---|
+| `Pop Out Applet Panel` | Activable. Cuando está marcado, convierte el panel de applets en una ventana flotante independiente; cuando está desmarcado, lo acopla de nuevo a la ventana principal. | `Ctrl+Shift+S` | Acoplado (desmarcado) |
 
 ## Consejos
 
-- El atajo de teclado `Ctrl+Shift+S` activa o desactiva el modo flotante sin necesidad de abrir el menú.
-- Cuando está flotante, la ventana del panel de applets puede moverse y redimensionarse de forma independiente. Arrástrela a un segundo monitor si lo necesita.
+- También puede alternar el estado flotante con el atajo de teclado `Ctrl+Shift+S` sin necesidad de abrir el menú.
+- Mover o redimensionar la ventana flotante no afecta el diseño de la ventana principal.
 
-## Relacionado
+## Relacionados
 
 - [Habilitar el panel de applets](enable-applet-panel.md)
 - [Restablecer el orden de los applets](reset-applet-order.md)
-- [Descripción general del panel de applets de AetherSDR](../../getting-started/concepts/understanding-applets.md)
+- [Descripción del panel de applets de AetherSDR](../../getting-started/concepts/understanding-applets.md)

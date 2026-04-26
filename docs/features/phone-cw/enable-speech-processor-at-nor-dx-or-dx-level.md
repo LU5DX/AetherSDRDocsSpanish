@@ -1,46 +1,45 @@
 # Activar el procesador de voz en nivel NOR, DX o DX+
 
-Use el applet Phone/CW para activar el procesador de voz y elegir con qué intensidad comprime el audio de transmisión. Los niveles más altos aumentan la potencia promedio en los picos de voz, lo que puede mejorar la legibilidad en condiciones difíciles.
+Use el applet Phone/CW para activar el procesador de voz y seleccionar cuánta compresión aplica el FLEX-8600 al audio transmitido. NOR es el procesamiento normal, DX añade más compresión y DX+ aplica el máximo.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. El applet Phone/CW solo está activo con una conexión de radio.
-- El slice activo debe estar en un modo de voz (SSB, AM, FM). En modo CW, el applet cambia al panel CW y los controles del procesador no se muestran.
+- AetherSDR debe estar conectado a la radio. El applet Phone/CW solo está activo cuando se ha establecido una conexión con la radio.
+- El slice activo debe estar en un modo de voz (SSB, AM, FM). El panel Phone no se muestra cuando el slice está en modo CW.
 
 ## Pasos
 
-1. Localice el applet Phone/CW en el Panel de Applets (barra lateral derecha). Si no está visible, haga clic en el botón de bandeja **P/CW** de la barra lateral derecha para mostrarlo.
-2. En la fila que contiene **PROC**, haga clic en **PROC** para activar el procesador de voz. El botón se ilumina en verde cuando está activo.
-3. Mueva el control deslizante **NOR/DX/DX+** al nivel deseado:
-   - Posición 0 (izquierda): **NOR** — compresión normal
-   - Posición 1 (centro): **DX** — compresión moderada
-   - Posición 2 (derecha): **DX+** — compresión máxima
-4. Observe el indicador **Compression** para confirmar que el procesador está aplicando compresión. El indicador se llena de derecha a izquierda; una lectura más hacia la izquierda indica mayor compresión.
+1. Haga clic en el botón de bandeja **P/CW** en la barra lateral derecha para abrir el applet Phone/CW si aún no está visible.
+2. Haga clic en **PROC** para activar el procesador de voz. El botón se ilumina en verde cuando está activo.
+3. Arrastre el control deslizante **NOR/DX/DX+** hasta la posición que corresponda al nivel de compresión deseado:
+   - Posición 0 (izquierda): NOR — procesamiento normal
+   - Posición 1 (centro): DX — compresión aumentada
+   - Posición 2 (derecha): DX+ — compresión máxima
+4. Observe el medidor **Compression** para confirmar la cantidad de compresión que se está aplicando. El medidor se llena de derecha a izquierda y cubre de −25 a 0 dB.
 
 ## Qué hace cada control
 
 | Control | Tipo | Valor predeterminado | Rango válido | Clave persistente |
 |---|---|---|---|---|
-| **PROC** | Botón alternante | Desactivado | Activado / Desactivado | — |
+| **PROC** | Botón de alternancia | Off | On / Off | — |
 | **NOR/DX/DX+** | Deslizador | 0 (NOR) | 0 (NOR), 1 (DX), 2 (DX+) | — |
 | **Compression** | Medidor (solo lectura) | — | −25 a 0 dB (relleno invertido) | — |
 | **Level** | Medidor (solo lectura) | — | −40 a +10 dBFS (rojo por encima de 0) | — |
 
 ## Consejos
 
-- El indicador **Compression** usa relleno invertido: la barra crece de derecha a izquierda a medida que aumenta la compresión. Una barra que alcanza el borde izquierdo indica limitación intensa.
-- El indicador **Level** muestra el pico del micrófono en dBFS. Mantenga los picos por debajo de 0 dBFS (la zona roja comienza por encima de 0) antes de activar una compresión elevada; operar el procesador con una señal de entrada sobrecargada produce distorsión en lugar de mayor potencia promedio de audio.
-- Si **Mic source** está configurado en **PC**, el valor de ganancia del micrófono se almacena en el cliente como `PcMicGain` (valor predeterminado 50, rango 0–100) porque el radio siempre reporta un nivel de 0 para esa fuente. Ajuste **Mic gain** antes de aumentar el nivel del procesador para establecer una entrada limpia.
+- El medidor **Compression** muestra la compresión en tiempo real únicamente durante la transmisión. Úselo para verificar que el procesador está actuando y para evitar una compresión excesiva.
+- El medidor **Level** muestra el nivel de pico del micrófono en dBFS. Ajuste la ganancia del micrófono antes de modificar el nivel del procesador, de modo que este reciba una señal consistente.
+- La posición del deslizador **NOR/DX/DX+** se envía a la radio independientemente de si **PROC** está activado, por lo que puede preseleccionar el nivel antes de activar el procesador.
 
 ## Solución de problemas
 
-- **El botón PROC no está visible** — El slice activo está en modo CW. Cambie el slice a un modo de voz; el applet mostrará el panel Phone.
-- **El indicador Compression muestra 0 dB con PROC activado** — El procesador está habilitado pero recibe poca señal de entrada o ninguna. Confirme que **Mic source** y **Mic gain** estén configurados correctamente y que el radio esté transmitiendo.
-- **No hay cambio en la calidad de la señal entre NOR, DX y DX+** — Verifique que PROC esté activado (iluminado en verde). Mover el control deslizante **NOR/DX/DX+** no tiene efecto cuando PROC está desactivado.
+- **El botón PROC es visible pero el medidor Compression nunca se mueve** — confirme que el slice activo no está en modo CW; el panel Phone cambia automáticamente al panel CW cuando se selecciona un modo CW, ocultando los controles del procesador.
+- **El medidor Compression indica 0 dB con PROC activado** — el procesador está activo pero no recibe ninguna señal de entrada. Verifique la selección de **Mic source** y el deslizador **Mic gain**. Si la fuente es PC, tenga en cuenta que la radio siempre reporta nivel de micrófono 0 para la fuente PC; la ganancia se mantiene en el lado del cliente mediante `PcMicGain`.
 
 ## Relacionados
 
-- [Descripción general de Phone/CW](overview.md)
 - [Ajustar la ganancia del micrófono y activar la mezcla de accesorio](adjust-mic-gain-and-enable-the-accessory-mix.md)
 - [Seleccionar una fuente de micrófono (MIC, BAL, LINE, ACC, PC)](pick-a-mic-source-mic-bal-line-acc-pc.md)
 - [Seleccionar un perfil de micrófono para un micrófono específico](select-a-mic-profile-for-a-specific-microphone.md)
+- [Escuchar un monitor de sidetone de TX](listen-to-a-tx-sidetone-monitor.md)

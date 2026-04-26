@@ -1,21 +1,23 @@
 # FlexControl
 
-`Settings > FlexControl...` abre la configuración del puerto serie para el control VFO por hardware FlexControl. Use esta página para asignar el puerto serie que AetherSDR utiliza para comunicarse con un dispositivo FlexControl.
+`Settings > FlexControl...` abre la configuración del puerto serie para la interfaz de hardware FlexControl, lo que permite asignar y configurar el puerto serie que AetherSDR utiliza para comunicarse con un controlador de perilla FlexControl.
 
 ## Antes de comenzar
 
-- Conecte su hardware FlexControl a la computadora antes de abrir este diálogo.
-- AetherSDR debe estar compilado con soporte para puerto serie (`HAVE_SERIALPORT`). Si `FlexControl...` no aparece en el menú `Settings`, su versión no incluye esta función.
+- El dispositivo de hardware FlexControl debe estar físicamente conectado a su computadora mediante un adaptador serie o USB-serie.
+- AetherSDR debe haber sido compilado con soporte para puerto serie (`HAVE_SERIALPORT`). Si `FlexControl...` no aparece en el menú `Settings`, su versión no incluye esta función.
+- AetherSDR debe estar en ejecución.
 
 ## Pasos
 
-1. Haga clic en `Settings > FlexControl...`.
-2. Se abre el diálogo Radio Setup en la pestaña Serial.
-3. Seleccione el puerto serie correspondiente a su dispositivo FlexControl de la lista de puertos disponibles.
-4. Haga clic en `OK` para guardar la configuración.
+1. Haga clic en `Settings` en la barra de menú.
+2. Haga clic en `FlexControl...`.
+3. En el cuadro de diálogo que se abre, seleccione el puerto serie al que está conectado su dispositivo FlexControl.
+4. Ajuste los parámetros adicionales del puerto serie según sea necesario.
+5. Haga clic en el control de confirmación para aplicar la configuración.
 
-## Relacionado
+## Relacionados
 
 - [Cables USB](usb-cables.md)
-- [Configuración de controles de AetherSDR](configuring-aethersdr-controls.md)
+- [Configuración de los controles de AetherSDR](configuring-aethersdr-controls.md)
 - [Primeros pasos](getting-started.md)

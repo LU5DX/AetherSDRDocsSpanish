@@ -1,26 +1,29 @@
 # Habilitar el inicio automático de TCI con AetherSDR
 
-Esta página explica cómo configurar AetherSDR para que inicie su servidor TCI automáticamente cada vez que se lanza la aplicación. Use esta función si ejecuta software de registro de QSO o de concursos que se conecta a AetherSDR mediante TCI.
+Esta página explica cómo configurar AetherSDR para que inicie el servidor TCI automáticamente cada vez que se lanza la aplicación, de modo que no sea necesario habilitar TCI manualmente tras cada reinicio.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar compilado con soporte para WebSockets. Si `Settings > Autostart TCI with AetherSDR` no aparece en el menú, su versión no incluye esta función.
-- Conéctese a su radio Flex antes de habilitar el inicio automático si desea verificar que TCI funciona correctamente tras el cambio.
+- AetherSDR debe estar compilado con soporte WebSocket (`HAVE_WEBSOCKETS`). Si el elemento de menú no aparece, su compilación no incluye TCI.
+- Debe estar familiarizado con la forma en que el software cliente TCI se conecta al servidor TCI de AetherSDR.
 
 ## Pasos
 
 1. Haga clic en `Settings` en la barra de menú.
 2. Haga clic en `Autostart TCI with AetherSDR`.
 
-El elemento es una entrada de menú con casilla de verificación. Una marca indica que la opción está activada. Al hacer clic se activa o desactiva la marca y el cambio se guarda inmediatamente en `AutoStartTCI`.
-
-3. Reinicie AetherSDR para confirmar que el servidor TCI se inicia al lanzar la aplicación.
+El elemento de menú es un interruptor de selección. Una marca de verificación junto a la etiqueta indica que el inicio automático está habilitado. Al hacer clic de nuevo se elimina la marca y se deshabilita el inicio automático.
 
 ## Qué hace cada control
 
-| Control | Descripción | Valor predeterminado | Clave persistente |
+| Control | Descripción | Valor predeterminado | Clave guardada |
 |---|---|---|---|
-| `Autostart TCI with AetherSDR` | Cuando está marcado, AetherSDR inicia el servidor TCI cada vez que se lanza, sin requerir intervención manual. | Desactivado | `AutoStartTCI` |
+| `Autostart TCI with AetherSDR` | Cuando está marcado, AetherSDR inicia el servidor TCI inmediatamente al lanzarse, sin requerir activación manual. | Desactivado | `AutoStartTCI` |
+
+## Consejos
+
+- Si solo utiliza clientes TCI en algunas ocasiones, deje el inicio automático desactivado e inicie el servidor TCI manualmente cuando sea necesario, para evitar el uso innecesario de recursos.
+- La configuración se guarda de inmediato al activar o desactivar el elemento de menú. No se requiere reiniciar AetherSDR para que los lanzamientos futuros respeten el nuevo valor.
 
 ## Relacionados
 

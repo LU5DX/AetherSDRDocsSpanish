@@ -1,49 +1,57 @@
-# Descripción general del compresor
+# Descripción general de Aetherial Compressor (TX) / Aetherial AGC-C (RX)
 
-El compresor del lado del cliente es un procesador de rango dinámico de TX integrado en la cadena de audio de AetherSDR. Reduce los niveles de pico antes de la transmisión, lo que permite aumentar la potencia promedio sin distorsionar la señal.
+AetherSDR incluye un compresor de rango dinámico del lado del cliente que funciona en dos instancias independientes: **Aetherial Compressor** en la ruta TX y **Aetherial AGC-C** en la ruta RX. Use la instancia TX para controlar los picos de voz antes de transmitir; use la instancia RX para nivelar los niveles de audio recibido.
 
 ## Antes de comenzar
 
-- El panel COMPRESSOR forma parte de la cadena de procesamiento PooDoo Audio (TXDSP). Permanece oculto hasta que la etapa Compressor esté habilitada — desactívela mediante el widget CHAIN o el editor flotante para que el panel sea visible.
-- No se requiere conexión a la radio para configurar el compresor.
+- Ambas instancias residen dentro del contenedor principal **Aetherial Audio (TXDSP)** en el panel de applets. Cada tarjeta permanece oculta hasta que su etapa está habilitada — desactívela mediante el widget CHAIN o el editor flotante del lado correspondiente.
+- No se requiere conexión a un radio para configurar el compresor. Los ajustes se guardan localmente.
 
 ## Cómo funciona
 
-El compresor monitorea en tiempo real el nivel del audio de TX. Cuando la señal supera el umbral definido, el compresor reduce la ganancia según la relación especificada. Los tiempos de ataque y liberación controlan la rapidez con que el compresor actúa y deja de actuar. La ganancia de compensación recupera el nivel general perdido por la compresión.
+Cada instancia procesa audio de forma independiente. El compresor monitorea el nivel de la señal de entrada. Cuando el nivel supera el umbral, atenúa la salida según la relación de compresión elegida. Attack y Release controlan la velocidad de respuesta. Makeup recupera la ganancia perdida por la compresión. Un limitador opcional (configurado en el editor completo) establece un techo fijo en la salida.
 
-El applet COMPRESSOR ofrece una vista compacta de todo esto a la vez:
+La tarjeta del applet de cada instancia muestra:
 
-- La **curva de transferencia** muestra la relación estática de ganancia entrada/salida como una curva. Una bola en movimiento recorre la curva para indicar dónde se encuentra el nivel de envolvente actual. Esta vista es de solo lectura en el applet; la curva es editable en el editor flotante.
-- La **barra de reducción de ganancia** es una franja horizontal de color ámbar que se llena desde la derecha. Muestra cuánta atenuación está aplicando el compresor en ese momento, hasta un máximo de 20 dB. Una marca en −6 dB indica una cantidad de reducción de ganancia típica en uso. El medidor se actualiza a aproximadamente 30 Hz con balística suavizada.
+- Una **curva de transferencia** — un gráfico estático de entrada/salida con una bola de envolvente en vivo que se desplaza a lo largo de la curva en tiempo real, indicando el punto de operación actual.
+- Una **barra de reducción de ganancia** — una franja horizontal ámbar que se llena desde la derecha. La escala va de 0 a 20 dB de reducción de ganancia. Una marca señala el punto de −6 dB como referencia de trabajo habitual. La franja se actualiza a aproximadamente 30 Hz.
 
-Dos controles que afectan si el compresor está activo — habilitar/omitir y la configuración de rodilla y limitador — no se encuentran en el propio applet. La función de omisión se controla desde el widget CHAIN (un solo clic) o el editor flotante. La configuración de rodilla y limitador solo está disponible en el editor flotante.
+Para abrir el editor completo de cualquiera de las instancias — el cual añade controles de knee y limitador no disponibles en el applet — haga doble clic en la etapa COMP del widget CHAIN en el lado TX o RX. El editor se abre con el título **Aetherial Compressor — TX** o **Aetherial Compressor — RX** según corresponda.
 
 ## Qué hace cada control
 
-| Control | Valor predeterminado | Rango válido | Ajuste persistente | Comportamiento |
-|---|---|---|---|---|
-| Thresh | −18.0 dB | −60.0 a 0.0 dB | `ClientCompTxThresholdDb` | Define el nivel de entrada a partir del cual comienza la compresión. Valores más bajos comprimen más la señal. |
-| Ratio | 3.0 | 1.0 a 20.0 | `ClientCompTxRatio` | Define la agresividad con que se controlan los picos una vez superado el umbral. Se muestra como X.XX:1. Usa mapeo logarítmico del control. |
-| Attack | 20.0 ms | 0.1 a 300.0 ms | `ClientCompTxAttackMs` | Define la rapidez con que responde el compresor cuando la señal supera el umbral. Usa mapeo exponencial del control. |
-| Release | 200 ms | 5 a 2000 ms | `ClientCompTxReleaseMs` | Define la rapidez con que se recupera la ganancia cuando la señal cae por debajo del umbral. Usa mapeo exponencial del control. |
-| Makeup | 0.0 dB | −12.0 a +24.0 dB | `ClientCompTxMakeupDb` | Agrega de vuelta la ganancia perdida por la compresión. Los valores positivos se muestran con signo + explícito. |
-| `ClientCompTxEnabled` | — | activado/desactivado | `ClientCompTxEnabled` | Indica si la etapa del compresor está activa u omitida. Se controla desde el widget CHAIN o el editor flotante, no directamente desde el applet. |
-| `ClientCompTxKneeDb` | — | — | `ClientCompTxKneeDb` | Ancho de rodilla. Solo accesible en el editor flotante. |
-| `ClientCompTxLimEnabled` | — | activado/desactivado | `ClientCompTxLimEnabled` | Habilita el limitador de salida. Solo accesible en el editor flotante. |
-| `ClientCompTxLimCeilingDb` | — | — | `ClientCompTxLimCeilingDb` | Nivel de techo del limitador. Solo accesible en el editor flotante. |
+Los cinco mandos aparecen en una fila en la parte inferior de cada tarjeta de applet. Tanto la instancia TX (Aetherial Compressor) como la RX (Aetherial AGC-C) comparten el mismo diseño de mandos con estado independiente.
+
+| Mando | Valor predeterminado | Rango válido | Clave TX | Clave RX | Comportamiento |
+|---|---|---|---|---|---|
+| Thresh | −18.0 dB | −60.0 a 0.0 dB | `ClientCompTxThresholdDb` | `ClientCompRxThresholdDb` | Establece el nivel a partir del cual comienza la compresión. Mapeado linealmente. La etiqueta muestra el valor como `-18.0 dB`. |
+| Ratio | 3.0 | 1.0 a 20.0 | `ClientCompTxRatio` | `ClientCompRxRatio` | Establece con qué fuerza se controlan los picos una vez superado el umbral. Mapeado logarítmicamente. La etiqueta muestra el valor como `X.XX:1`. |
+| Attack | 20.0 ms | 0.1 a 300.0 ms | `ClientCompTxAttackMs` | `ClientCompRxAttackMs` | Establece la rapidez con que el compresor actúa al superar el umbral. Mapeado exponencialmente. La etiqueta muestra `X.X ms` por debajo de 10, `X ms` por encima. |
+| Release | 200 ms | 5 a 2000 ms | `ClientCompTxReleaseMs` | `ClientCompRxReleaseMs` | Establece la rapidez con que la ganancia se recupera tras bajar la entrada por debajo del umbral. Mapeado exponencialmente. La etiqueta muestra `X ms`. |
+| Makeup | 0.0 dB | −12.0 a 24.0 dB | `ClientCompTxMakeupDb` | `ClientCompRxMakeupDb` | Recupera la ganancia perdida por la compresión. La etiqueta muestra un signo `+` explícito para valores positivos. |
+
+Ajustes adicionales gestionados únicamente desde el editor completo:
+
+| Clave de ajuste (TX) | Clave de ajuste (RX) | Descripción |
+|---|---|---|
+| `ClientCompTxEnabled` | `ClientCompRxEnabled` | Indica si la etapa del compresor está activa (bypass desactivado). |
+| `ClientCompTxKneeDb` | `ClientCompRxKneeDb` | Anchura del knee suave en dB. Ajustable en el editor flotante. |
+| `ClientCompTxLimEnabled` | `ClientCompRxLimEnabled` | Indica si el limitador de salida está activo. |
+| `ClientCompTxLimCeilingDb` | `ClientCompRxLimCeilingDb` | Techo fijo aplicado por el limitador. |
 
 ## Consejos
 
-- Observe la barra de reducción de ganancia mientras habla a su nivel de voz normal. Trate de mantener el relleno ámbar trabajando principalmente a la izquierda de la marca de −6 dB para obtener un resultado de sonido natural.
-- La bola de la curva de transferencia ofrece una comprobación visual rápida de que el umbral está ajustado correctamente — si la bola nunca se mueve de la posición de reposo, es posible que el umbral esté demasiado alto para su nivel de señal.
-- La configuración de rodilla y limitador solo está disponible en el editor flotante. Haga doble clic en la etapa Comp del widget CHAIN para abrirlo.
+- La bola de envolvente sobre la curva de transferencia proporciona retroalimentación visual continua. Si la bola descansa claramente por encima del knee en reposo, el umbral está demasiado bajo — suba Thresh hasta que la bola solo cruce el knee en los picos.
+- La marca de −6 dB en la barra de reducción de ganancia es una referencia útil. Un relleno ámbar constante hasta esa marca, o ligeramente más allá, indica una compresión activa y moderada. Si el relleno alcanza el borde derecho de la barra, el compresor está trabajando con una reducción igual o superior a 20 dB.
+- Las instancias TX y RX son completamente independientes. Los cambios en Aetherial Compressor (TX) no afectan a Aetherial AGC-C (RX) y viceversa.
+- Los controles de knee y limitador no están disponibles en la tarjeta del applet. Abra el editor completo para acceder a ellos.
 
-## Temas relacionados
+## Relacionados
 
-- [Ajustar el umbral del compresor](adjust-compressor-threshold.md)
-- [Configurar la relación de compresión para voz](set-compression-ratio-for-voice.md)
-- [Ajustar el ataque y la liberación para un sonido natural](tune-attack-release-for-a-natural-sounding-squeeze.md)
-- [Aplicar ganancia de compensación tras la compresión](apply-make-up-gain-after-compression.md)
-- [Observar la reducción de ganancia en vivo mientras habla](watch-live-gain-reduction-while-speaking.md)
+- [Ajustar el umbral del compresor (lado TX o RX)](adjust-compressor-threshold-tx-or-rx-side.md)
+- [Establecer la relación de compresión para voz (TX) o para audio recibido (RX AGC-C)](set-compression-ratio-for-voice-tx-or-for-received-audio-rx-agc-c.md)
+- [Ajustar attack / release para una compresión de sonido natural](tune-attack-release-for-a-natural-sounding-squeeze.md)
+- [Aplicar ganancia de compensación (make-up gain) tras la compresión](apply-make-up-gain-after-compression.md)
+- [Observar la reducción de ganancia en vivo mientras habla o escucha](watch-live-gain-reduction-while-speaking-or-listening.md)
 - [Omitir el compresor desde la cadena](bypass-the-compressor-from-the-chain.md)
-- [Abrir el editor completo del compresor para los controles de rodilla y limitador](open-the-full-compressor-editor-for-knee-and-limiter-controls.md)
+- [Abrir el editor completo del compresor para los controles de knee y limitador](open-the-full-compressor-editor-for-knee-and-limiter-controls.md)

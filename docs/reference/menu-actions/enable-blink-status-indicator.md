@@ -1,30 +1,26 @@
-# Activar el Indicador de Estado Parpadeante
+# Activar el indicador de estado parpadeante
 
-`View > Blink Status Indicator` controla si el indicador de estado en la barra de título parpadea para señalar el latido del radio. Desactivarlo detiene el parpadeo sin ocultar el indicador.
+`View > Blink Status Indicator` es un elemento de menú con casilla de verificación que controla si el indicador de estado de la barra de título parpadea para señalar el latido del radio. Desactivarlo mantiene el indicador estático si el parpadeo resulta molesto.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar en ejecución y conectado a un radio Flex para observar el parpadeo del latido.
+- AetherSDR debe estar en ejecución.
+- No es necesario que haya un radio FLEX-8600 conectado para cambiar esta configuración, pero el comportamiento de parpadeo solo es visible cuando hay un latido de radio activo.
 
 ## Pasos
 
-1. Haga clic en `View` en la barra de menú.
-2. Haga clic en `Blink Status Indicator` para activarlo o desactivarlo.
-
-Una marca de verificación junto al elemento indica que el parpadeo está habilitado. Al seleccionarlo nuevamente se elimina la marca y se detiene el parpadeo.
+1. Haga clic en `View` en la barra de menús.
+2. Haga clic en `Blink Status Indicator` para activar o desactivar la opción.
+   - Una marca de verificación junto al elemento indica que el parpadeo está activado.
+   - Sin marca de verificación, el indicador permanece estático.
 
 ## Qué hace cada control
 
 | Control | Valor predeterminado | Descripción |
 |---|---|---|
-| `Blink Status Indicator` | Activado (marcado) | Cuando está marcado, el indicador de la barra de título parpadea para señalar el latido del radio. Cuando no está marcado, el indicador permanece estático. |
+| `Blink Status Indicator` | Activado (marcado) | Cuando está activado, el indicador de estado de la barra de título parpadea en respuesta a la señal de latido del radio. Cuando está desactivado, el indicador permanece estático. |
 
-## Consejos
+## Relacionados
 
-- Si la actividad en la barra de título resulta distractora durante sesiones de operación prolongadas, desmarque `Blink Status Indicator` para detener el parpadeo sin afectar la conexión con el radio.
-
-## Relacionado
-
-- [Primeros pasos](getting-started.md)
-- [Activar la ventana sin marcos](enable-frameless-window.md)
-- [Activar el modo mínimo](enable-minimal-mode.md)
+- [Activar ventana sin bordes](enable-frameless-window.md)
+- [Activar modo mínimo](enable-minimal-mode.md)

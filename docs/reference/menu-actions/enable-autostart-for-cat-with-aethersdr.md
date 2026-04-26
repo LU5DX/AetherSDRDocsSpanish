@@ -1,31 +1,36 @@
 # Habilitar el inicio automático de CAT con AetherSDR
 
-Esta página explica cómo habilitar el inicio automático de los puertos serie virtuales para control CAT cuando se inicia AetherSDR. Use esta función si desea que su software de registro de QSO o de concursos con soporte CAT se conecte a AetherSDR inmediatamente al arranque, sin necesidad de habilitar CAT manualmente en cada sesión.
+Habilitar el inicio automático de CAT indica a AetherSDR que cree puertos serie virtuales para el control CAT cada vez que la aplicación se inicia, de modo que el software externo de registro o de concurso pueda conectarse sin intervención manual.
 
 ## Antes de comenzar
 
-- El inicio automático de CAT crea puertos serie virtuales y solo está disponible en Linux y macOS. Los usuarios de Windows deben consultar un método CAT alternativo, como rigctld.
-- Compruebe que su software de terceros está configurado para conectarse al puerto serie virtual que creará AetherSDR.
+- AetherSDR debe estar ejecutándose en Linux o macOS. Esta función crea puertos serie virtuales y no está disponible en Windows.
+- Confirme que ningún software que desee conectar mediante CAT tenga los puertos virtuales abiertos desde una sesión anterior.
 
 ## Pasos
 
 1. Haga clic en `Settings` en la barra de menú.
 2. Haga clic en `Autostart CAT with AetherSDR`.
 
-El elemento de menú es seleccionable. Una marca de verificación junto a la etiqueta indica que el inicio automático de CAT está habilitado. Al hacer clic de nuevo se elimina la marca y se deshabilita el inicio automático. La configuración se conserva entre sesiones bajo la clave `AutoStartCAT`.
+El elemento de menú es seleccionable. Una marca de verificación junto a la etiqueta indica que el inicio automático está habilitado. Hacer clic en el elemento nuevamente elimina la marca y deshabilita el inicio automático.
 
 ## Qué hace cada control
 
-| Control | Descripción | Valor predeterminado | Clave persistente |
-|---|---|---|---|
-| `Autostart CAT with AetherSDR` | Cuando está marcado, AetherSDR crea puertos serie virtuales para control CAT cada vez que se inicia. Compatible con Linux y macOS. | Desactivado (sin marcar) | `AutoStartCAT` |
+| Control | Descripción | Clave persistente |
+|---|---|---|
+| `Autostart CAT with AetherSDR` | Elemento de menú seleccionable. Cuando está marcado, AetherSDR crea puertos serie virtuales para el control CAT en cada inicio (solo en Linux y macOS). | `AutoStartCAT` |
+
+## Consejos
+
+- La configuración surte efecto en el próximo inicio de AetherSDR. Activar o desactivar la opción durante una sesión en curso no inicia ni detiene CAT de inmediato; reinicie la aplicación para aplicar el cambio.
+- Si también utiliza rigctld para el control CAT, consulte [Habilitar el inicio automático de rigctld con AetherSDR](enable-autostart-for-rigctld-with-aethersdr.md) — ejecutar ambos simultáneamente puede causar conflictos de puertos.
 
 ## Solución de problemas
 
-- **El elemento de menú está presente pero CAT no se inicia en Windows** — El inicio automático de CAT mediante puertos serie virtuales no es compatible con Windows. Use `Autostart rigctld with AetherSDR` como interfaz CAT alternativa en esa plataforma.
-- **El software de terceros indica que el puerto serie no está disponible** — Verifique que el software esté configurado para usar el puerto virtual correcto y que ningún otro proceso tenga el puerto abierto. Desmarque y vuelva a marcar `Autostart CAT with AetherSDR` para forzar la recreación de los puertos virtuales y, a continuación, reinicie AetherSDR.
+- **Los puertos serie virtuales no aparecen después de habilitar el inicio automático** — Verifique que está ejecutando AetherSDR en Linux o macOS. Esta función no está activa en Windows. Confirme también que ha reiniciado AetherSDR después de habilitar la configuración.
+- **El software CAT no puede abrir el puerto virtual** — Es posible que otro proceso ya tenga el puerto abierto. Cierre cualquier otro cliente CAT y luego reinicie AetherSDR.
 
-## Temas relacionados
+## Relacionados
 
 - [Habilitar el inicio automático de rigctld con AetherSDR](enable-autostart-for-rigctld-with-aethersdr.md)
 - [Habilitar el inicio automático de TCI con AetherSDR](enable-autostart-for-tci-with-aethersdr.md)

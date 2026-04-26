@@ -1,40 +1,38 @@
 # Seleccionar un perfil de micrófono para un micrófono específico
 
-El applet Phone/CW permite cargar un perfil de procesamiento de micrófono con nombre almacenado en el radio. Úselo cuando cambie entre micrófonos que requieran ajustes diferentes de ecualización, compresión o ganancia.
+El cuadro combinado **Mic profile** carga un perfil de procesamiento de transmisión con nombre almacenado en el radio, lo que permite cambiar rápidamente entre preajustes de ecualización y procesamiento optimizados para distintos micrófonos.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. El cuadro combinado "Mic profile" se llena con la lista de perfiles del radio y aparecerá vacío si no hay conexión.
-- El slice activo debe estar en un modo Phone (SSB, AM, FM). En modo CW, el applet muestra los controles CW en lugar de los controles Phone.
+- AetherSDR debe estar conectado al radio. La lista **Mic profile** se obtiene del radio y aparece vacía cuando no hay conexión.
+- El slice activo debe estar en un modo de voz (USB, LSB, AM, FM). El panel Phone no se muestra cuando el slice está en modo CW.
 
 ## Pasos
 
-1. Abra el panel de applets si no está visible. Haga clic en el botón **P/CW** de la bandeja en la barra lateral derecha, o use `View > Applet Panel` para mostrar el panel.
-2. Confirme que se muestra el sub-panel Phone. Si se muestran los controles CW, el slice activo está en modo CW — cambie primero el slice a un modo de voz.
-3. Localice el cuadro combinado **Mic profile**. Aparece directamente debajo de los medidores Level y Compression, encima de la fila **Mic source**.
-4. Haga clic en el cuadro combinado **Mic profile** y seleccione el nombre del perfil que corresponde a su micrófono.
-
-El radio carga el perfil seleccionado de inmediato.
+1. Haga clic en el botón de bandeja **P/CW** en la barra lateral derecha para abrir el applet Phone/CW, si no está visible todavía.
+2. Confirme que el panel Phone está visible. Si en su lugar se muestra el panel CW, cambie el slice activo a un modo de voz.
+3. Haga clic en el cuadro combinado **Mic profile**. La lista se completa con los perfiles almacenados en el radio.
+4. Seleccione el nombre de perfil que corresponde a su micrófono. AetherSDR carga ese perfil en el radio de inmediato.
 
 ## Qué hace cada control
 
-| Control | Tipo | Comportamiento | Predeterminado | Rango válido | Clave de configuración |
+| Control | Tipo | Comportamiento | Predeterminado | Rango | Clave de ajuste |
 |---|---|---|---|---|---|
-| Mic profile | Cuadro combinado | Carga el perfil de procesamiento de micrófono con nombre en el radio. | — | Se llena desde la lista de perfiles del radio | — |
+| **Mic profile** | Cuadro combinado | Carga el perfil de procesamiento de micrófono indicado en el radio. | — | Se obtiene del radio | — |
 
 ## Consejos
 
-- Los perfiles se almacenan en el radio, no en AetherSDR. Para crear o eliminar perfiles, use `Profiles > Profile Manager...`.
-- Después de cambiar de perfil, observe el medidor **Level** (−40 a +10 dBFS, rojo por encima de 0) para confirmar que la ganancia del nuevo perfil es adecuada para su micrófono.
-- Si utiliza un micrófono de PC (Mic source configurado en **PC**), el valor de ganancia del micrófono se mantiene en el lado del cliente como `PcMicGain` y no se ve afectado por la carga del perfil.
+- Los nombres de los perfiles se definen en el radio, no en AetherSDR. Para crear, renombrar o eliminar perfiles, use `Profiles > Profile Manager...`.
+- Tras seleccionar un perfil, verifique el indicador **Level** (−40 a +10 dBFS, rojo por encima de 0) y el indicador **Compression** (−25 a 0 dB) para comprobar que los ajustes del perfil son adecuados para su micrófono.
+- Si la fuente de micrófono es **PC**, el radio siempre reporta un nivel de micrófono de 0. Use el control deslizante **Mic gain** (0–100, predeterminado 50) para ajustar la ganancia en el lado del cliente; este valor se guarda como `PcMicGain`.
 
 ## Solución de problemas
 
-- **El cuadro combinado "Mic profile" está vacío** — El radio no tiene perfiles de micrófono guardados, o AetherSDR no está conectado. Verifique el estado de la conexión y luego use `Profiles > Profile Manager...` para crear al menos un perfil.
-- **Seleccionar un perfil no produce ningún efecto audible** — Compruebe que **Mic source** esté configurado en la entrada a la que está conectado físicamente su micrófono. Un perfil cargado para una fuente no modificará el procesamiento de una fuente diferente.
+- **El cuadro combinado Mic profile está vacío** — El radio no tiene perfiles de micrófono definidos, o AetherSDR no está conectado. Verifique la conexión mediante `Settings > Connect to Radio...` y, a continuación, cree un perfil con `Profiles > Profile Manager...`.
+- **El panel Phone no está visible; se muestra el panel CW en su lugar** — El slice activo está en modo CW. Cambie el slice a un modo de voz para mostrar el panel Phone y el control **Mic profile**.
 
 ## Relacionados
 
 - [Seleccionar una fuente de micrófono (MIC, BAL, LINE, ACC, PC)](pick-a-mic-source-mic-bal-line-acc-pc.md)
-- [Ajustar la ganancia del micrófono y habilitar la mezcla de accesorios](adjust-mic-gain-and-enable-the-accessory-mix.md)
-- [Habilitar el procesador de voz en nivel NOR, DX o DX+](enable-speech-processor-at-nor-dx-or-dx-level.md)
+- [Ajustar la ganancia del micrófono y habilitar la mezcla de accesorio](adjust-mic-gain-and-enable-the-accessory-mix.md)
+- [Activar el procesador de voz en nivel NOR, DX o DX+](enable-speech-processor-at-nor-dx-or-dx-level.md)

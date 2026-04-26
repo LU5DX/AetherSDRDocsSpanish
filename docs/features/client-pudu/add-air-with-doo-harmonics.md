@@ -1,36 +1,44 @@
-# Agregar aire con Doo Harmonics
+# Añadir aire con Doo Harmonics
 
-Use el control **Doo / Air** para ajustar cuánta excitación armónica agrega el procesador Doo en la banda de alta frecuencia. Al aumentarlo, se añade presencia y "aire" al audio transmitido.
+Use el control Doo / Air para añadir excitación armónica y presencia en la banda de alta frecuencia. Esto eleva el "aire" percibido en TX para que su señal se destaque, o en RX para mejorar la inteligibilidad del audio entrante.
 
 ## Antes de comenzar
 
-- La etapa PUDU debe estar habilitada y visible. Permanece oculta hasta que se habilite mediante el widget CHAIN o el editor flotante. Consulte [Omitir PUDU desde la cadena](bypass-pudu-from-the-chain.md).
-- AetherSDR debe estar conectado a su radio FLEX-8600 con el enrutamiento de audio activo.
+- La etapa PUDU debe estar habilitada en la cadena de audio. Si no es visible, habilítela mediante el widget CHAIN en el lado TX o RX correspondiente.
+- Abra el applet Aetherial TX Poodoo™ o Aetherial RX Poodoo™ en el Panel de Applets, o haga doble clic en la etapa PUDU en el widget CHAIN para abrir el editor flotante titulado "Aetherial Poodoo™ — TX" o "Aetherial Poodoo™ — RX".
 
 ## Pasos
 
-1. Abra el applet PUDU Exciter. Aparece como el subcontenedor **PUDU** dentro del contenedor principal PooDoo Audio (TXDSP).
-2. Localice el grupo **Doo** — el conjunto de tres controles en el lado derecho, marcado con la etiqueta de corchete "Doo".
-3. Gire el control **Air** (el control central del grupo Doo) en sentido horario para aumentar la cantidad de armónicos añadidos en la banda de frecuencia Doo, o en sentido antihorario para reducirla.
-4. Observe el logotipo de PooDoo — su brillo pulsa con el RMS de la señal procesada, lo que ofrece una indicación aproximada de cuánta señal wet se está produciendo.
+1. Localice el grupo **Doo** — los tres controles en el lado derecho del applet, bajo la etiqueta de corchete "Doo".
+2. Gire el control **Air** para establecer la cantidad de contenido armónico añadido en la banda de alta frecuencia. El valor se muestra en dB debajo del control.
+3. Observe cómo aumenta el pulso del logotipo PooDoo a medida que sube el nivel de la señal procesada. Utilícelo como indicador aproximado de la cantidad de procesamiento aplicado.
+4. Si el resultado es demasiado agresivo, reduzca **Air** o disminuya **Doo / Mix** para mezclar el efecto nuevamente con la señal seca.
+
+Los ajustes se guardan automáticamente. El valor persiste en `ClientPuduTxDooHarmonicsDb` (TX) o `ClientPuduRxDooHarmonicsDb` (RX).
 
 ## Qué hace cada control
 
-| Control | Valor predeterminado | Rango válido | Clave persistida | Comportamiento |
+| Control | Valor predeterminado | Rango válido | Ajuste persistente (TX / RX) | Comportamiento |
 |---|---|---|---|---|
-| Air | 6.0 dB | 0.0 a 24.0 dB | `ClientPuduTxDooHarmonicsDb` | Establece la cantidad de contenido armónico añadido en la banda de alta frecuencia Doo. Mapeo lineal. |
-| Doo / Tune | 5000 Hz | 1000 a 10000 Hz | `ClientPuduTxDooTuneHz` | Centra la banda de frecuencia donde se aplica Air. Mapeo logarítmico. |
-| Doo / Mix | 30 % | 0 a 100 % | `ClientPuduTxDooMix` | Mezcla la banda alta excitada con la señal dry. |
+| Doo / Air | 6.0 dB | 0.0 a 24.0 dB | `ClientPuduTxDooHarmonicsDb` / `ClientPuduRxDooHarmonicsDb` | Establece la cantidad de armónicos añadidos en la banda de frecuencia Doo. Mapeo lineal. |
+| Doo / Tune | 5000 Hz | 1000 a 10000 Hz | `ClientPuduTxDooTuneHz` / `ClientPuduRxDooTuneHz` | Centra la banda de excitación de alta frecuencia. Mapeo logarítmico. Se muestra como X.X kHz por encima de 1 kHz, X Hz por debajo. |
+| Doo / Mix | 30 % | 0 a 100 % | `ClientPuduTxDooMix` / `ClientPuduRxDooMix` | Mezcla los agudos excitados con la señal seca. Mapeo lineal. |
 
 ## Consejos
 
-- El control **Air** y el control **Doo / Tune** funcionan en conjunto. Ajuste **Doo / Tune** a la frecuencia de presencia o aire de su micrófono antes de aumentar **Air**, de modo que los armónicos se añadan donde su micrófono ya tiene salida.
-- Use **Doo / Mix** para contener el efecto general sin necesidad de reducir **Air**. Esto preserva el carácter armónico mientras controla el balance wet/dry.
-- En el modo **Even**, la generación de armónicos sigue el modelado asimétrico de la línea Aphex — los armónicos añadidos son más cálidos. En el modo **Odd**, el modelado simétrico tanh de la línea Behringer produce armónicos más brillantes. El control **Air** se comporta igual en ambos modos, pero el carácter de lo que añade es diferente.
+- Comience con **Air** en 6.0 dB (valor predeterminado) y **Doo / Mix** en 30 % (valor predeterminado); luego aumente **Air** gradualmente mientras escucha el efecto sobre el material de programa.
+- El control **Doo / Tune** centra la banda donde se añaden los armónicos. Ajústelo para que coincida con el pico de presencia de su micrófono en TX, o con el rango de inteligibilidad del audio entrante en RX. Consulte [Centrar Doo en la banda de presencia para su micrófono (TX) o para la inteligibilidad en RX](centre-doo-on-the-presence-band-for-your-mic-tx-or-for-rx-intelligibility.md) para conocer ese procedimiento.
+- El modo Even (linaje Aphex) produce armónicos pares más cálidos; el modo Odd (linaje Behringer) produce armónicos impares más brillantes. El carácter de **Air** difiere entre ambos. Consulte [Elegir el carácter Aphex (Even) frente a Behringer (Odd)](pick-aphex-even-vs-behringer-odd-character.md).
 
-## Relacionados
+## Solución de problemas
 
-- [Centrar Doo en la banda de presencia de su micrófono](centre-doo-on-the-presence-band-for-your-mic.md)
+- **El control Air no produce ningún efecto audible** — Es posible que la etapa PUDU esté omitida (bypassed). Verifique que la etapa esté habilitada en el widget CHAIN. Consulte [Omitir PUDU desde cualquier cadena](bypass-pudu-from-either-chain.md).
+- **El efecto suena duro con valores moderados de Air** — Disminuya **Doo / Mix** para reducir la mezcla procesada en lugar de eliminar **Air** por completo. Consulte [Mezclar la excitación Doo con Mix](blend-the-doo-excitement-with-mix.md).
+
+## Temas relacionados
+
+- [Descripción general de Aetherial TX Poodoo / Aetherial RX Poodoo](overview.md)
+- [Centrar Doo en la banda de presencia para su micrófono (TX) o para la inteligibilidad en RX](centre-doo-on-the-presence-band-for-your-mic-tx-or-for-rx-intelligibility.md)
 - [Mezclar la excitación Doo con Mix](blend-the-doo-excitement-with-mix.md)
-- [Elegir el carácter Aphex (Even) vs Behringer (Odd)](pick-aphex-even-vs-behringer-odd-character.md)
-- [Descripción general de PUDU Exciter](overview.md)
+- [Elegir el carácter Aphex (Even) frente a Behringer (Odd)](pick-aphex-even-vs-behringer-odd-character.md)
+- [Omitir PUDU desde cualquier cadena](bypass-pudu-from-either-chain.md)

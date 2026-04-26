@@ -1,43 +1,53 @@
-# Ajustar el Floor para evitar el silencio antinatural entre palabras
+# Ajustar Floor para evitar el silencio antinatural entre palabras
 
-El control Floor limita la profundidad máxima de atenuación que puede aplicar el gate a su audio. Sin un floor definido, un gate duro corta completamente al silencio entre palabras, lo que suena antinatural en voz. Establecer un floor moderado permite que pase una pequeña cantidad de audio mientras el gate está cerrado, preservando la sensación de una transmisión en vivo.
+El control **Floor** establece la atenuación máxima que la puerta puede aplicar cuando se cierra. Subir Floor por encima de su valor predeterminado permite que pase una pequeña cantidad de audio durante las pausas, lo que evita el silencio muerto antinatural que produce un corte brusco entre palabras o frases.
 
 ## Antes de comenzar
 
-- La etapa Gate debe estar habilitada. Consulte [Omitir el gate desde la cadena](bypass-the-gate-from-the-chain.md) para confirmar que la etapa está activa.
-- Abra el applet GATE: es el subcontenedor etiquetado GATE dentro del contenedor principal PooDoo Audio (TXDSP). Si no está visible, haga doble clic en la etapa Gate en el widget CHAIN para abrir el editor flotante de Gate, o haga clic derecho en la barra de título del subcontenedor GATE y seleccione la opción correspondiente.
+- La puerta de TX debe estar habilitada. El subcontenedor "Aetherial TX Gate" permanece oculto hasta que la etapa Gate esté activa — consulte [Omitir la puerta desde la cadena](bypass-the-gate-from-the-chain.md).
+- Abra el subcontenedor "Aetherial TX Gate" dentro del contenedor principal Aetherial Audio (TXDSP), o haga doble clic en la etapa GATE del widget CHAIN para abrir el editor flotante "Aetherial Gate — TX".
 
 ## Pasos
 
-1. Localice el control Floor en la fila de cinco controles en la parte inferior del applet GATE. Es el control más a la derecha, etiquetado "Floor".
-2. Observe la barra de reducción de ganancia (Gain-reduction) mientras hace una pausa al hablar. El relleno ámbar muestra cuánta atenuación está aplicando el gate en ese momento. La marca de referencia en la posición -15 dB señala el floor predeterminado.
-3. Gire el control Floor en sentido horario (hacia 0 dB) para reducir la atenuación máxima y permitir que pase más audio cuando el gate está cerrado.
-4. Gire el control Floor en sentido antihorario (hacia -80 dB) para aumentar la atenuación máxima y cortar más profundamente entre palabras.
-5. Hable normalmente y haga pausas deliberadas. Ajuste hasta que las transiciones entre palabras suenen naturales, sin que sean abruptamente silenciosas ni inusualmente calladas.
+1. Localice el control **Floor** — el más a la derecha de los cinco controles situados debajo de la curva de transferencia.
+2. Gire **Floor** en sentido horario (hacia 0 dB) para reducir la profundidad de atenuación. La puerta cortará el audio únicamente hasta el valor de Floor cuando se cierre.
+3. Observe la barra de reducción de ganancia mientras hace una pausa al hablar. El relleno ámbar debe dejar de crecer en el punto que corresponde a su ajuste de Floor. Una marca en la barra indica −15.0 dB, que es el valor predeterminado.
+4. Pronuncie una frase y luego haga una pausa. Ajuste **Floor** hasta que las pausas suenen naturales — presentes pero silenciosas, no completamente mudas.
 
 ## Qué hace cada control
 
-| Control | Valor predeterminado | Rango válido | Clave de persistencia | Comportamiento |
-|---|---|---|---|---|
-| Floor | -15.0 dB | -80.0 a 0.0 dB | `ClientGateTxFloorDb` | Atenuación máxima que el gate puede aplicar. Valores más altos (más cercanos a 0 dB) permiten que pase más audio cuando el gate está cerrado. Valores más bajos cortan más profundamente. |
-| Barra de reducción de ganancia | — | 0 a 40 dB GR | — | Franja ámbar horizontal, rellena desde la derecha. Muestra la profundidad de atenuación mientras el gate está cerrado. La marca en -15 dB señala la posición del floor predeterminado. |
+| Control | Predeterminado | Rango válido | Clave persistida (TX / RX) |
+|---|---|---|---|
+| Floor | −15.0 dB | −80.0 a 0.0 dB | `ClientGateTxFloorDb` / `ClientGateRxFloorDb` |
+| Thresh | −40.0 dB | −80.0 a 0.0 dB | `ClientGateTxThresholdDb` / `ClientGateRxThresholdDb` |
+| Ratio | 2.0 | 1.0 a 10.0 | `ClientGateTxRatio` / `ClientGateRxRatio` |
+| Attack | 0.5 ms | 0.1 a 100.0 ms | `ClientGateTxAttackMs` / `ClientGateRxAttackMs` |
+| Release | 100 ms | 5 a 2000 ms | `ClientGateTxReleaseMs` / `ClientGateRxReleaseMs` |
+| Barra de reducción de ganancia | — | 0 a 40 dB GR mostrados | — |
+
+Floor controla la atenuación máxima aplicada cuando la puerta está cerrada. A −80.0 dB la puerta puede cortar casi por completo; a 0 dB no aplica ninguna atenuación, lo que en la práctica omite la acción de reducción de ganancia.
+
+La barra de reducción de ganancia se llena de ámbar desde la derecha. La marca en −15 dB señala la posición predeterminada de Floor. Cuando Floor se ajusta a un valor menos profundo que −15 dB, el relleno ámbar se detendrá antes de la marca durante las pausas normales.
 
 ## Consejos
 
-- El Floor predeterminado de -15.0 dB es moderado de forma intencional. Mantiene una señal residual tenue entre palabras, que la mayoría de los oyentes considera más natural que el silencio completo.
-- Si está usando un Ratio bajo (comportamiento de expansor suave), el gate puede que nunca alcance el Floor incluso con la atenuación máxima — el Floor solo limita el máximo, no establece un objetivo.
-- La curva de transferencia del applet GATE se actualiza para reflejar su ajuste de Floor. Observe el plateau inferior de la curva mientras realiza ajustes para ver el efecto visualmente junto con la bola de entrada en tiempo real.
-- Los cambios se guardan de inmediato. El valor de Floor persiste entre reinicios mediante `ClientGateTxFloorDb`.
+- Un valor de Floor entre −20.0 dB y −10.0 dB es un rango de partida práctico para la mayoría de los micrófonos. Comience con el valor predeterminado −15.0 dB y ajuste a oído.
+- Si el ruido ambiental es audible durante las pausas incluso con Floor elevado, baje **Thresh** para que la puerta se cierre solo ante el silencio genuino y luego suba Floor nuevamente para controlar el nivel residual. Consulte [Ajustar el umbral de TX justo por encima del nivel de ruido ambiental](set-tx-threshold-just-above-room-noise-floor.md).
+- El mismo control Floor y la clave `ClientGateRxFloorDb` existen en el lado RX ("Aetherial AGC-T"). Ajustar Floor allí controla cuánto ruido de banda se permite pasar durante los períodos de silencio en recepción. Consulte [Usar AGC-T en RX para suprimir el ruido de banda por debajo de un nivel elegido](use-agc-t-on-rx-to-suppress-band-noise-below-a-chosen-floor.md).
+- Los cambios surten efecto de inmediato y se guardan automáticamente. No se requiere ningún botón Apply ni OK.
 
 ## Solución de problemas
 
-- **El audio se corta a silencio completo entre palabras a pesar de un valor de Floor alto** — Confirme que la etapa de gate no está en bypass. Revise la barra de reducción de ganancia: si muestra el relleno ámbar completo llegando al borde derecho, el gate está aplicando la atenuación máxima. Suba el Floor (más cercano a 0 dB) y observe la barra para confirmar que limita el relleno.
-- **El control Floor no tiene efecto audible** — Es posible que el gate no esté disparándose. Si la bola de entrada en la curva de transferencia permanece por encima del umbral, el gate está abierto y el Floor no se está aplicando. Baje Thresh para que el gate realmente se cierre entre palabras.
+- **Las pausas siguen sonando completamente silenciosas después de subir Floor** — confirme que la puerta no esté siendo anulada también por un Ratio muy alto. Un Ratio cercano a 10:1 actúa como una puerta dura independientemente de Floor. Baje Ratio hacia 2.0:1 para un comportamiento más suave. Consulte [Elegir el comportamiento de puerta frente a expansor suave mediante el ratio](choose-gate-vs-soft-expander-behaviour-via-ratio.md).
+- **El control Floor no tiene efecto** — es posible que la etapa de puerta esté omitida. Verifique el widget CHAIN y vuelva a habilitar la etapa Gate si aparece atenuada. Consulte [Omitir la puerta desde la cadena](bypass-the-gate-from-the-chain.md).
+- **La barra de reducción de ganancia se llena por completo durante las pausas a pesar de tener Floor elevado** — la barra muestra la señal de reducción de ganancia en bruto proveniente del motor; si Floor está configurado pero la barra sigue marcando el máximo, verifique que se esté ajustando el lado correcto (TX frente a RX).
 
-## Temas relacionados
+## Relacionados
 
-- [Descripción general del Noise Gate / Expansor](overview.md)
-- [Ajustar el umbral justo por encima del nivel de ruido ambiental](set-threshold-just-above-room-noise-floor.md)
-- [Elegir el comportamiento de gate o expansor suave mediante el ratio](choose-gate-vs-soft-expander-behaviour-via-ratio.md)
-- [Ajustar el ataque y la liberación para una apertura y cierre naturales](tune-attack-release-for-natural-open-close.md)
-- [Observar la reducción de ganancia en tiempo real mientras no se habla](watch-live-gr-while-not-speaking.md)
+- [Descripción general de Aetherial TX Gate / Aetherial AGC-T (RX)](overview.md)
+- [Ajustar el umbral de TX justo por encima del nivel de ruido ambiental](set-tx-threshold-just-above-room-noise-floor.md)
+- [Elegir el comportamiento de puerta frente a expansor suave mediante el ratio](choose-gate-vs-soft-expander-behaviour-via-ratio.md)
+- [Ajustar attack / release para una apertura/cierre natural](tune-attack-release-for-natural-open-close.md)
+- [Observar la reducción de ganancia en vivo mientras no se habla](watch-live-gr-while-not-speaking.md)
+- [Omitir la puerta desde la cadena](bypass-the-gate-from-the-chain.md)
+- [Usar AGC-T en RX para suprimir el ruido de banda por debajo de un nivel elegido](use-agc-t-on-rx-to-suppress-band-noise-below-a-chosen-floor.md)

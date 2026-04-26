@@ -1,61 +1,76 @@
 # Descripción general de TX Controls
 
-El applet TX Controls es la interfaz principal para gestionar la potencia de transmisión, el ajuste de frecuencia y la adaptación de antena en el FLEX-8600. Proporciona medidores, controles deslizantes, selección de perfiles y controles de manipulación en un único panel.
+El applet TX Controls le da acceso directo a todas las funciones de transmisión desde un único panel: medición de potencia, ajuste del nivel de salida, selección de perfiles, sintonía de antena y linealización de señal. Ábralo cuando necesite ajustar la configuración de transmisión o monitorear la salida durante un QSO.
+
+## Antes de comenzar
+
+- Conéctese a una radio FLEX-8600. TX Controls requiere una conexión de radio activa.
+- Confirme que el panel de applets esté visible. Si no lo está, haga clic en `View > Applet Panel` para mostrarlo.
 
 ## Cómo funciona
 
-El applet TX Controls siempre está visible en el Panel de Applets (barra lateral derecha). Haga clic en el botón de bandeja TX para mostrarlo u ocultarlo. El applet requiere una conexión de radio activa para funcionar.
+El applet TX Controls siempre está presente en el panel de applets del lado derecho. Alterne su visibilidad con el botón TX de la barra lateral derecha. El applet se divide en cinco áreas funcionales:
 
-El applet está organizado en cinco áreas funcionales:
+**Medidores de potencia** — dos barras indicadoras horizontales en la parte superior del applet muestran la salida del transmisor en tiempo real.
 
-**Medidores de potencia** — Dos barras indicadoras horizontales en la parte superior del applet muestran lecturas de transmisión en tiempo real:
+- **RF Pwr** muestra la potencia directa en la salida del excitador. La escala es de 0–120 W en hardware FLEX-8600 estándar (zona roja por encima de 100 W) o de 0–600 W en hardware Aurora de 500 W (zona roja por encima de 500 W). La escala cambia automáticamente según el modelo de radio conectado.
+- **SWR** muestra la relación de onda estacionaria en el excitador. La escala va de 1.0 a 3.0; la barra se vuelve roja por encima de 2.5.
 
-- **RF Pwr** — Potencia directa a la salida del excitador. La escala es de 0–120 W para configuraciones estándar, o de 0–600 W para los modelos Aurora 500W. La barra se vuelve roja por encima de 100 W (o por encima de 500 W en los modelos Aurora).
-- **SWR** — Relación de onda estacionaria en el excitador, mostrada en una escala de 1.0–3.0. La barra se vuelve roja por encima de 2.5.
+**Controles deslizantes de potencia** — dos controles deslizantes permiten establecer los niveles de salida antes de transmitir.
 
-**Controles deslizantes de potencia** — Dos controles deslizantes establecen los niveles de potencia enviados al radio:
+- **RF Power** establece el nivel de potencia RF de transmisión. El rango es de 0–100, con valor predeterminado de 100.
+- **Tune Pwr** establece el nivel de potencia de la portadora de sintonía. El rango es de 0–100, con valor predeterminado de 10. Manténgalo bajo para proteger el amplificador final y la antena durante la sintonía.
 
-- **RF Power** — Establece el nivel de potencia de RF de transmisión. Rango: 0–100. Valor predeterminado: 100.
-- **Tune Pwr** — Establece el nivel de potencia de la portadora de ajuste. Rango: 0–100. Valor predeterminado: 10.
+A la derecha de cada control deslizante se muestra un indicador numérico con el valor actual.
 
-Ambos controles deslizantes muestran su valor actual como número a la derecha del control.
+**TX Profile** — un selector desplegable con los perfiles almacenados en la radio. Al seleccionar un perfil, este se carga inmediatamente en la radio. Utilícelo para cambiar entre configuraciones como SSB, digital o modos de concurso.
 
-**Perfil TX y estado del ATU** — Un menú desplegable y tres indicadores comparten una única fila:
+**Indicadores de estado del ATU** — tres pequeños indicadores junto al selector TX Profile informan el estado del sintonizador de antena interno:
 
-- **TX Profile** — Selecciona el perfil de transmisión activo. La lista se obtiene de los perfiles almacenados en el radio. Al seleccionar un perfil, este se carga de inmediato.
-- **Success** — Se ilumina en verde cuando el ATU informa una adaptación exitosa.
-- **Byp** — Se ilumina en naranja cuando el ATU está en modo de derivación (bypass) o derivación manual.
-- **Mem** — Se ilumina en verde cuando el ATU utiliza una memoria almacenada.
+| Indicador | Se enciende cuando |
+|-----------|-------------|
+| Success | La sintonía del ATU se completó correctamente (apagado en caso contrario) |
+| Byp | El ATU está en bypass o bypass manual (naranja) |
+| Mem | El ATU opera desde una memoria almacenada (verde) |
 
-**Botones de acción** — Cuatro botones controlan la transmisión y el ajuste de antena:
+**Botones de acción** — una fila de cuatro botones controla las operaciones de transmisión y sintonía:
 
-- **TUNE** — Inicia una portadora de ajuste. La etiqueta del botón cambia a "TUNING..." con fondo rojo mientras está activo. Haga clic de nuevo para detenerlo.
-- **MOX** — Activa o desactiva la transmisión manual. El botón se vuelve rojo mientras el transmisor está manipulado.
-- **ATU** — Inicia el ciclo de ajuste del ATU interno. Está deshabilitado cuando el transverter TGXL se encuentra en modo OPERATE.
-- **MEM** — Activa o desactiva la recuperación de memoria del ATU. Está deshabilitado cuando el transverter TGXL se encuentra en modo OPERATE.
+| Botón | Tipo | Comportamiento |
+|--------|------|----------|
+| TUNE | Pulsador | Inicia una portadora de sintonía. La etiqueta cambia a "TUNING..." con fondo rojo mientras está activo. Haga clic de nuevo para detenerlo. |
+| MOX | Conmutador | Activa el transmisor manualmente. Se vuelve rojo mientras TX está activo. |
+| ATU | Pulsador | Inicia el ciclo de sintonía del ATU interno. Deshabilitado cuando el TGXL está en modo OPERATE. |
+| MEM | Conmutador | Habilita o deshabilita la recuperación de memoria del ATU. Deshabilitado cuando el TGXL está en modo OPERATE. |
 
-**Indicadores de APD y estado** — La fila inferior controla la Predistorsión Adaptativa (APD):
+**APD (Predistorsión Adaptativa)** — la fila inferior contiene el conmutador APD y su grupo de indicadores de estado.
 
-- **APD** — Activa o desactiva la predistorsión adaptativa en el radio.
-- **Active** — Se ilumina en verde cuando el APD está activado y el ecualizador está aplicado de forma activa.
-- **Cal** — Se ilumina en verde cuando el APD está activado y aún se está calibrando.
-- **Avail** — Se ilumina en verde cuando el APD está activado y hay una calibración disponible pero aún no aplicada.
+- **APD** activa o desactiva la predistorsión adaptativa en la radio. Cuando está habilitado, el botón se ilumina en verde.
+- Tres indicadores en el panel interior a la derecha de APD muestran el progreso del proceso APD:
 
-El estado del APD avanza por los indicadores en secuencia: Cal (calibrando) → Avail (calibración lista) → Active (ecualizador aplicado).
+| Indicador | Significado |
+|-----------|---------|
+| Cal | APD está activado y actualmente calibrando |
+| Avail | APD está activado y hay una calibración disponible pero aún no aplicada |
+| Active | APD está activado y el ecualizador está aplicado activamente |
+
+La progresión normal tras habilitar APD es Cal → Avail → Active.
 
 ## Consejos
 
-- Mantenga **Tune Pwr** bajo (el valor predeterminado de 10 es un punto de partida razonable) para evitar someter el amplificador o la antena a esfuerzo innecesario durante los ciclos del ATU.
-- La escala del medidor **RF Pwr** cambia automáticamente según el modelo de radio que detecte AetherSDR; no se requiere ajuste manual.
-- **ATU** y **MEM** aparecen deshabilitados cuando el TGXL está en modo OPERATE. Saque el TGXL del modo OPERATE antes de intentar operaciones con el ATU.
+- Establezca **Tune Pwr** en un valor bajo (10 es el predeterminado) antes de ejecutar el ATU o verificar el SWR. Sintonizar con alta potencia puede dañar un sistema de antena no adaptado.
+- El botón **TUNE** envía una portadora continua en la frecuencia y modo actuales. Asegúrese de estar dentro de la banda autorizada por su licencia antes de activarlo.
+- **MOX** no depende de ningún modo ni de ninguna entrada PTT: activa el transmisor de forma incondicional. Úselo con precaución.
+- Los botones ATU y MEM se deshabilitan cuando el amplificador TGXL está en modo OPERATE para evitar interferencias con el estado de sintonía propio del amplificador.
 
-## Relacionados
+## Relacionado
 
-- [Establecer la potencia de salida de RF](set-rf-output-power.md)
-- [Establecer la potencia de la portadora de ajuste](set-tune-carrier-power.md)
-- [Cambiar perfiles TX (por ejemplo, SSB, Digital)](switch-tx-profiles-e-g-ssb-digital.md)
-- [Iniciar una portadora de ajuste para verificar el SWR](start-a-tune-carrier-to-check-swr.md)
-- [Activar MOX para manipular el transmisor manualmente](toggle-mox-to-manually-key-the-transmitter.md)
-- [Usar el ATU interno](run-the-internal-atu.md)
+- [Establecer la potencia de salida RF](set-rf-output-power.md)
+- [Establecer la potencia de la portadora de sintonía](set-tune-carrier-power.md)
+- [Cambiar perfiles TX (p. ej., SSB, Digital)](switch-tx-profiles-e-g-ssb-digital.md)
+- [Iniciar una portadora de sintonía para verificar el SWR](start-a-tune-carrier-to-check-swr.md)
+- [Activar MOX para teclear el transmisor manualmente](toggle-mox-to-manually-key-the-transmitter.md)
+- [Ejecutar el ATU interno](run-the-internal-atu.md)
 - [Recuperar una memoria del ATU](recall-an-atu-memory.md)
-- [Activar el APD para linealizar el transmisor](enable-apd-to-linearise-the-transmitter.md)
+- [Habilitar APD para linealizar el transmisor](enable-apd-to-linearise-the-transmitter.md)
+- [Ejecutar una sintonía de dos tonos](run-a-two-tone-tune.md)
+- [Realizar su primer QSO con AetherSDR](../../getting-started/tutorials/first-qso.md)

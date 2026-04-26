@@ -1,41 +1,37 @@
-# Omitir la etapa de EQ de la cadena
+# Omitir la etapa de EQ en la cadena
 
-Elimine el EQ paramétrico del lado del cliente de la cadena de procesamiento de audio sin borrar la configuración de bandas. Use esto cuando desee comparar audio procesado y sin procesar, o deshabilitar temporalmente el EQ sin perder su configuración.
+Use esta página para omitir el EQ paramétrico del lado del cliente en la ruta TX o RX sin eliminar su configuración de bandas. Omitir es útil para comparaciones A/B o para deshabilitar temporalmente el EQ mientras mantiene su curva intacta.
 
 ## Antes de comenzar
 
-- El ClientEqApplet (etiquetado "CEQ") debe ser visible en el panel de applets. Permanece oculto hasta que la etapa de EQ se habilite mediante el widget CHAIN o el editor flotante.
-- Abra el editor flotante de EQ haciendo doble clic en la etapa de EQ en el widget CHAIN. El control de omisión se encuentra en ese editor, no en el mosaico compacto del applet CEQ.
+- El contenedor principal Aetherial Audio (TXDSP) debe estar visible en el panel de applets.
+- La etapa de EQ que desea omitir ya debe estar habilitada y presente en el widget CHAIN; si no aparece ninguna etapa de EQ (TX ni RX) en la cadena, consulte [Descripción general del EQ paramétrico Aetherial (TX / RX)](overview.md).
 
 ## Pasos
 
-1. Haga doble clic en la etapa de EQ en el widget CHAIN para abrir el editor flotante de EQ.
-2. En el editor flotante, localice el interruptor de habilitación para la ruta que desea omitir: RX o TX.
-3. Haga clic en el interruptor para deshabilitar el EQ en esa ruta.
+1. Ubique el widget CHAIN para la ruta que desea omitir: TX o RX.
+2. Haga clic una sola vez en el mosaico de la etapa de EQ en el widget CHAIN para esa ruta.
 
-El mosaico del applet CEQ refleja el cambio: `ClientEqRxEnabled` o `ClientEqTxEnabled` se establece en false para la ruta afectada, y el EQ se elimina de la cadena de señal. La configuración de bandas almacenada en `ClientEqRxBands` y `ClientEqTxBands` se conserva.
+   Al hacer clic en la etapa de EQ se activa o desactiva el modo de omisión en esa ruta. Cuando la omisión está activa, la etapa queda excluida de la cadena de procesamiento. Su configuración de bandas (`ClientEqTxBands` o `ClientEqRxBands`) se conserva y la etapa puede volver a habilitarse haciendo clic de nuevo.
+
+3. Repita el procedimiento para la otra ruta si es necesario: los estados de omisión de TX y RX son independientes.
 
 ## Qué hace cada control
 
-| Control | Ruta | Clave persistida | Predeterminado | Comportamiento |
-|---|---|---|---|---|
-| Interruptor de habilitación RX | Recepción | `ClientEqRxEnabled` | — | Inserta u omite el EQ en la cadena de audio RX. Las bandas se conservan al omitir. |
-| Interruptor de habilitación TX | Transmisión | `ClientEqTxEnabled` | — | Inserta u omite el EQ en la cadena de audio TX. Las bandas se conservan al omitir. |
-| `ClientEqRxBands` | Recepción | `ClientEqRxBands` | — | Configuración de bandas persistida para la ruta RX. No se ve afectada por la omisión. |
-| `ClientEqTxBands` | Transmisión | `ClientEqTxBands` | — | Configuración de bandas persistida para la ruta TX. No se ve afectada por la omisión. |
+| Control | Ruta | Ajuste persistido | Efecto al omitir |
+|---|---|---|---|
+| Mosaico de etapa de EQ (TX) en el widget CHAIN | TX | `ClientEqTxEnabled` | Elimina el EQ de TX de la cadena de audio; las bandas de TX se conservan. |
+| Mosaico de etapa de EQ (RX) en el widget CHAIN | RX | `ClientEqRxEnabled` | Elimina el EQ de RX de la cadena de audio; las bandas de RX se conservan. |
 
 ## Consejos
 
-- Omitir una ruta no afecta a la otra. Puede omitir el EQ de RX mientras mantiene activo el EQ de TX, o viceversa.
-- La curva de respuesta de EQ sumada en el mosaico del applet CEQ muestra el estado actual de la ruta seleccionada. Cuando se omite, la curva refleja que el EQ está inactivo.
-
-## Solución de problemas
-
-- **El mosaico del applet CEQ no es visible** — El mosaico permanece oculto hasta que la etapa de EQ se habilite desde el widget CHAIN o el editor flotante. Habilite la etapa primero y luego omítala si es necesario.
-- **Hacer doble clic en el widget CHAIN no abre el editor flotante** — Confirme que está haciendo doble clic directamente sobre el bloque de la etapa de EQ dentro del widget CHAIN, no sobre el contenedor que lo rodea.
+- Los sub-applets "Aetherial TX EQ" y "Aetherial RX EQ" se ocultan cuando la etapa de EQ correspondiente está deshabilitada. Si el applet desaparece después de activar la omisión, este comportamiento es el esperado.
+- La configuración de bandas almacenada en `ClientEqTxBands` y `ClientEqRxBands` no se ve afectada al activar o desactivar la omisión. Al volver a habilitar la etapa, su curva se restaura exactamente.
+- Para comparar su curva de EQ con una respuesta plana, haga clic rápidamente en el mosaico de la etapa para activar y desactivar la omisión.
 
 ## Relacionados
 
-- [Descripción general del EQ paramétrico (cliente)](overview.md)
-- [Abrir el editor flotante para agregar, eliminar o ajustar bandas](open-the-floating-editor-to-add-remove-tune-bands.md)
-- [Alternar entre la vista de EQ de RX y TX](switch-between-viewing-rx-and-tx-eq.md)
+- [Descripción general del EQ paramétrico Aetherial (TX / RX)](overview.md)
+- [Abrir el editor sin marco para agregar, eliminar o ajustar bandas en cualquiera de los lados](open-the-frameless-editor-to-add-remove-tune-bands-on-either-side.md)
+- [Inspeccionar la curva de EQ de TX y el espectro en vivo](inspect-the-tx-eq-curve-and-live-spectrum.md)
+- [Inspeccionar la curva de EQ de RX y el espectro en vivo](inspect-the-rx-eq-curve-and-live-spectrum.md)

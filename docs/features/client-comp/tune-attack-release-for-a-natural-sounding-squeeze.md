@@ -1,55 +1,51 @@
-# Ajuste del Ataque y la Liberación para una Compresión de Sonido Natural
+# Ajustar el ataque y la liberación para una compresión de sonido natural
 
-Ajuste los controles Attack y Release en el applet Compressor para controlar con qué rapidez el compresor responde a los picos de voz y se recupera entre sílabas. Establecer correctamente estos dos valores evita que el compresor produzca bombeo en transitorios rápidos o que reaccione tan lentamente que los picos escapen.
+Los controles de ataque (Attack) y liberación (Release) determinan con qué rapidez el compresor actúa sobre las transientes fuertes y con qué rapidez las suelta después. Calibrarlos correctamente es lo que distingue una compresión transparente y natural de un artefacto de bombeo audible.
 
 ## Antes de comenzar
 
-- La etapa Compressor debe estar habilitada (bypass desactivado). Si el panel COMPRESSOR está oculto, habilite la etapa mediante el widget CHAIN o haga doble clic en la etapa Comp en el widget CHAIN para abrir el editor flotante y habilitarla desde allí. Consulte [Omitir el compresor desde la cadena](bypass-the-compressor-from-the-chain.md).
-- El subcontenedor COMPRESSOR debe estar visible dentro del contenedor principal PooDoo Audio (TXDSP).
-- Necesita una fuente de audio (micrófono) activa para que la barra de reducción de ganancia proporcione retroalimentación en tiempo real mientras ajusta.
+- El applet Aetherial Compressor (TX) o Aetherial AGC-C (RX) debe estar visible. El panel permanece oculto hasta que su etapa se habilita mediante el widget CHAIN. Consulte [Omitir el compresor desde la cadena](bypass-the-compressor-from-the-chain.md) si el panel no aparece.
+- Decida si está ajustando la ruta TX (subcontenedor "Aetherial Compressor") o la ruta RX (subcontenedor "Aetherial AGC-C"). Ambas tienen controles de Attack y Release independientes con los mismos rangos y comportamiento.
 
 ## Pasos
 
-1. Localice el subcontenedor COMPRESSOR dentro del contenedor principal PooDoo Audio (TXDSP).
-2. Encuentre el control Attack en la fila de cinco controles en la parte inferior del applet.
-3. Gire Attack para establecer con qué rapidez el compresor actúa tras superar la señal el umbral. El valor predeterminado es 20.0 ms. Para voz, comience ahí y aumente hacia 50–80 ms si las consonantes suenan apagadas, o disminuya hacia 5–10 ms si los picos están escapando.
-4. Encuentre el control Release inmediatamente a la derecha de Attack.
-5. Gire Release para establecer con qué rapidez regresa la ganancia después de que la señal cae por debajo del umbral. El valor predeterminado es 200 ms. Aumente Release si escucha bombeo o respiración entre palabras; disminúyalo si el compresor mantiene el nivel reducido demasiado tiempo entre sílabas.
-6. Hable al micrófono a un nivel normal y observe la barra Gain-reduction. El relleno ámbar debe moverse de forma fluida con su voz. La marca de referencia en la barra indica 6 dB de reducción, que es una cantidad de trabajo típica. Si la barra sube y baja con un ritmo audible, el Release es demasiado corto para su cadencia de habla.
-7. Una vez que la barra Gain-reduction se mueve de forma uniforme sin bombeo, los ajustes de ataque y liberación funcionan correctamente en conjunto.
+1. Localice la fila de cinco perillas en la parte inferior del panel del compresor. Las perillas están etiquetadas de izquierda a derecha: Thresh, Ratio, Attack, Release y Makeup.
+2. Observe la barra de reducción de ganancia (la franja horizontal ámbar sobre la fila de perillas) mientras habla al micrófono (TX) o mientras se reproduce audio (RX). La franja se llena desde la derecha; una marca indica 6 dB de reducción.
+3. Gire la perilla **Attack** para establecer con qué rapidez responde el compresor después de que la señal supera el umbral. Gire a la izquierda para un cierre más rápido (mayor control de transientes); a la derecha para un inicio más lento (mayor paso de transientes).
+4. Gire la perilla **Release** para establecer con qué rapidez se recupera la ganancia después de que la señal cae por debajo del umbral. Gire a la izquierda para una liberación más rápida (sonido más apretado); a la derecha para una liberación más lenta (más suave, menos bombeo).
+5. Observe la bola de envolvente en vivo sobre la curva de transferencia, encima de la fila de perillas. Una bola que sube y baja bruscamente en cada sílaba indica que Release es demasiado rápido. Una bola que nunca regresa al reposo indica que Release es demasiado lento.
+6. Repita los pasos 3–5 hasta que la barra de reducción de ganancia se sitúe cerca de la marca de −6 dB durante los picos normales de la voz y el sonido resulte uniforme sin bombeo.
 
 ## Qué hace cada control
 
-| Control | Valor predeterminado | Rango válido | Clave de ajuste |
+| Perilla | Valor predeterminado | Rango válido | Clave persistida (TX / RX) |
 |---|---|---|---|
-| Attack | 20.0 ms | 0.1 a 300.0 ms | `ClientCompTxAttackMs` |
-| Release | 200 ms | 5 a 2000 ms | `ClientCompTxReleaseMs` |
-| Barra Gain-reduction | — | 0 a 20 dB GR | — |
+| Attack | 20.0 ms | 0.1 a 300.0 ms | `ClientCompTxAttackMs` / `ClientCompRxAttackMs` |
+| Release | 200 ms | 5 a 2000 ms | `ClientCompTxReleaseMs` / `ClientCompRxReleaseMs` |
 
-**Attack** — Establece con qué rapidez el compresor actúa después de que la entrada supera el umbral. Utiliza un mapeo de control exponencial; la etiqueta muestra los valores por debajo de 10 ms como `X.X ms` y los valores en 10 ms o superiores como `X ms`.
+**Attack** — Asignación exponencial de la perilla. Los valores inferiores a 10 ms se muestran como `X.X ms`; los valores de 10 ms en adelante se muestran como `X ms`. Tiempos de ataque más cortos suprimen los picos con mayor rapidez, pero pueden atenuar las consonantes. Tiempos de ataque más largos permiten que las transientes pasen antes de que la compresión actúe.
 
-**Release** — Establece con qué rapidez regresa la ganancia después de que la entrada cae por debajo del umbral. Utiliza un mapeo de control exponencial; la etiqueta muestra los valores como `X ms`.
-
-**Barra Gain-reduction** — Una franja ámbar horizontal que se llena desde la derecha. Alcanza un máximo de 20 dB de reducción. Una marca señala el punto de 6 dB. Úsela como referencia visual principal mientras ajusta el ataque y la liberación.
+**Release** — Asignación exponencial de la perilla. Se muestra como `X ms`. Tiempos de liberación más cortos permiten que la ganancia se recupere rápidamente entre sílabas; si son demasiado cortos, el compresor genera un bombeo audible. Tiempos de liberación más largos producen una reducción de ganancia más suave y sostenida, pero pueden reducir la inteligibilidad si se configuran demasiado largos.
 
 ## Consejos
 
-- La barra Gain-reduction se actualiza aproximadamente a 30 Hz con balística suavizada, por lo que los cambios pequeños y rápidos en su voz aparecerán ligeramente promediados. Evalúe el bombeo por el oído, no únicamente por el medidor.
-- Attack y Release interactúan con Ratio y Thresh. Si cambia el umbral o la relación de forma significativa, vuelva a verificar el ataque y la liberación. Consulte [Ajustar el umbral del compresor](adjust-compressor-threshold.md) y [Establecer la relación de compresión para voz](set-compression-ratio-for-voice.md).
-- Para una compresión lenta y transparente en voz, pruebe Attack alrededor de 30–50 ms y Release alrededor de 300–500 ms. Para un control de picos más preciso, pruebe Attack alrededor de 5–10 ms y Release alrededor de 100–150 ms.
-- La curva de transferencia y su punto de envoltura en tiempo real muestran la relación estática entrada/salida, pero no animan directamente los tiempos de ataque y liberación. Use la barra Gain-reduction para retroalimentación dinámica.
+- La barra de reducción de ganancia se actualiza a aproximadamente 30 Hz con balística suavizada, por lo que refleja la envolvente promediada en lugar de los picos instantáneos. Confíe en su oído junto con el medidor.
+- Un punto de partida que funciona bien para la mayoría de las transmisiones de voz en SSB: Attack de 10–20 ms, Release de 150–300 ms. Ajuste a partir de ahí según el comportamiento de la barra de reducción de ganancia.
+- Haga doble clic en la etapa COMP del widget CHAIN para abrir el editor completo, que también expone los controles Knee y Limiter. Un Knee suavizado puede reducir la necesidad de una temporización de ataque extremadamente precisa. Consulte [Abrir el editor completo del compresor para los controles de knee y limitador](open-the-full-compressor-editor-for-knee-and-limiter-controls.md).
+- Tanto Attack como Release se guardan inmediatamente al mover una perilla; no se necesita ningún paso de guardado explícito.
 
 ## Solución de problemas
 
-- **Bombeo o respiración audible entre palabras** — El Release es demasiado corto. Aumente Release hasta que el nivel se recupere de forma uniforme entre sílabas en lugar de regresar bruscamente.
-- **Los transitorios rápidos o las consonantes suenan aplastados** — El Attack es demasiado corto. Aumente Attack para dejar pasar el transitorio inicial antes de que el compresor actúe.
-- **El compresor no reacciona en absoluto a los picos** — Es posible que Attack esté en su valor máximo o cerca de él (300.0 ms). Disminuya Attack. Confirme también que la etapa del compresor está habilitada y que el umbral está configurado por debajo de su nivel de entrada habitual. Consulte [Ajustar el umbral del compresor](adjust-compressor-threshold.md).
-- **La barra Gain-reduction está fijada en el máximo** — El compresor está aplicando su reducción máxima de 20 dB. Es probable que el Release sea demasiado largo en relación con su cadencia de habla, o que Ratio y Thresh juntos sean demasiado agresivos. Reduzca Release y luego vuelva a verificar Thresh y Ratio.
+- **Bombeo o respiración audibles en cada sílaba** — Release es demasiado rápido. Aumente el valor de Release. Pruebe un rango de 200–500 ms como punto de partida.
+- **La ganancia nunca se recupera completamente entre palabras; todo suena comprimido** — Release es demasiado lento, o Ratio es demasiado alto. Disminuya Release y verifique que Ratio no esté por encima de 6:1 para trabajo de voz normal.
+- **Las transientes fuertes aún recortan incluso con un Attack rápido** — Attack no puede ajustarse a 0 ms; el mínimo es 0.1 ms. Si el recorte persiste, habilite el limitador en el editor completo. Consulte [Abrir el editor completo del compresor para los controles de knee y limitador](open-the-full-compressor-editor-for-knee-and-limiter-controls.md).
+- **El valor de la perilla se restablece de forma inesperada** — Otra fuente (como la carga de un perfil) puede haber sobrescrito `ClientCompTxAttackMs` o `ClientCompTxReleaseMs`. Vuelva a ajustar y el nuevo valor se conservará de inmediato.
 
-## Relacionado
+## Relacionados
 
-- [Ver la reducción de ganancia en tiempo real mientras habla](watch-live-gain-reduction-while-speaking.md)
-- [Ajustar el umbral del compresor](adjust-compressor-threshold.md)
-- [Establecer la relación de compresión para voz](set-compression-ratio-for-voice.md)
+- [Descripción general de Aetherial Compressor (TX) / Aetherial AGC-C (RX)](overview.md)
+- [Ajustar el umbral del compresor (lado TX o RX)](adjust-compressor-threshold-tx-or-rx-side.md)
+- [Configurar la relación de compresión para voz (TX) o para audio recibido (RX AGC-C)](set-compression-ratio-for-voice-tx-or-for-received-audio-rx-agc-c.md)
 - [Aplicar ganancia de compensación después de la compresión](apply-make-up-gain-after-compression.md)
-- [Abrir el editor completo del compresor para los controles de rodilla y limitador](open-the-full-compressor-editor-for-knee-and-limiter-controls.md)
+- [Observar la reducción de ganancia en vivo mientras habla o escucha](watch-live-gain-reduction-while-speaking-or-listening.md)
+- [Abrir el editor completo del compresor para los controles de knee y limitador](open-the-full-compressor-editor-for-knee-and-limiter-controls.md)

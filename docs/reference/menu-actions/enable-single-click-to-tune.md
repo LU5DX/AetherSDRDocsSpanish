@@ -4,29 +4,27 @@ Esta página explica cómo habilitar la sintonización con un solo clic en el pa
 
 ## Antes de comenzar
 
-- AetherSDR debe estar en ejecución y conectado a una radio Flex.
-- Un panadapter debe estar visible en la ventana principal.
+- AetherSDR debe estar en ejecución y conectado a una radio FLEX-8600.
+- Un panadapter debe ser visible en la ventana principal.
 
 ## Pasos
 
 1. Haga clic en `View` en la barra de menú.
 2. Haga clic en `Single-Click to Tune`.
 
-El elemento de menú es seleccionable. Una marca de verificación junto a la etiqueta indica que la sintonización con un solo clic está activa. Al hacer clic en el elemento nuevamente se elimina la marca y se restaura el comportamiento predeterminado de doble clic.
+Aparece una marca de verificación junto al elemento cuando está habilitado. Haga clic de nuevo para volver al comportamiento de doble clic.
 
 ## Qué hace cada control
 
-| Control | Descripción | Predeterminado |
+| Control | Valor predeterminado | Comportamiento |
 |---|---|---|
-| `View > Single-Click to Tune` | Cuando está marcado, un solo clic en el panadapter resintoniza el VFO a esa frecuencia. Cuando no está marcado, se requiere un doble clic. | Sin marcar (se requiere doble clic) |
+| `View > Single-Click to Tune` | Desactivado (sin marcar) | Cuando está marcado, un solo clic en el panadapter resintoniza el VFO a esa frecuencia. Cuando está sin marcar, se requiere un doble clic. |
 
 ## Consejos
 
-- Si utiliza frecuentemente el panadapter para explorar frecuencias, la sintonización con un solo clic reduce el esfuerzo de reposicionar el VFO.
-- Si nota que el VFO salta de forma inesperada mientras interactúa con la pantalla del panadapter, deshabilite esta opción para restaurar el requisito de doble clic.
+- Si nota que resintoniza accidentalmente mientras lee el panadapter, deshabilite esta opción para restaurar el requisito de doble clic.
 
-## Relacionados
+## Relacionado
 
-- [Habilitar Pan Follows VFO](enable-pan-follows-vfo.md)
-- [Configurar el plan de banda](configure-band-plan.md)
-- [Habilitar el modo mínimo](enable-minimal-mode.md)
+- [Habilitar panorámica que sigue al VFO](enable-pan-follows-vfo.md)
+- [Configurar plan de banda](configure-band-plan.md)

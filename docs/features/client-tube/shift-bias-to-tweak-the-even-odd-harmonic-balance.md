@@ -1,45 +1,42 @@
-# Ajustar el Bias para equilibrar los armónicos pares e impares
+# Ajustar el balance de armónicos pares e impares con Bias
 
-El control **Bias** desplaza el punto de operación del modelo de válvula sobre la curva de transferencia, cambiando la proporción entre armónicos pares e impares en la señal saturada. Úselo para añadir calidez asimétrica o para conseguir un timbre más complejo y rico en armónicos.
+El control Bias desplaza el punto de operación en la curva de transferencia del tubo, modificando la proporción de armónicos pares e impares en la señal saturada. Úselo para pasar de un carácter simétrico con predominio de armónicos impares hacia uno más cálido con armónicos pares, o a cualquier punto intermedio.
 
 ## Antes de comenzar
 
-- La etapa Tube Saturator debe estar habilitada y visible. Si el subcontenedor TUBE está oculto, habilite la etapa mediante el widget CHAIN o haga doble clic en la etapa Tube en el widget CHAIN para abrir el editor flotante de Tube.
-- El Drive ya debe estar ajustado lo suficientemente alto como para que la curva de transferencia muestre una curvatura visible. Sin cierto nivel de Drive, el Bias tiene poco efecto audible.
+- La etapa Tube debe estar habilitada en el lado que desea ajustar (TX o RX). Consulte [Omitir el tubo desde cualquiera de las cadenas](bypass-the-tube-from-either-chain.md) si la etapa está actualmente bypaseada.
+- El applet debe estar visible. Si no lo está, abra el contenedor principal Aetherial Audio (TXDSP) y localice el subcontenedor "Aetherial Mic-PreAmp" (TX) o "Aetherial Dynamic Tube" (RX).
 
 ## Pasos
 
-1. Abra el subcontenedor TUBE dentro del contenedor principal PooDoo Audio (TXDSP) en el panel de applets.
-2. Localice la pantalla de curva de transferencia en la parte superior del applet. La bola de entrada en tiempo real recorre la curva según el nivel de entrada actual.
-3. Gire el control **Bias**. Parta del valor predeterminado de 0 % y aumente hacia 100 % mientras observa cómo la curva se dobla asimétricamente.
-4. Transmita una señal estable — por ejemplo, hable al micrófono en SSB o emita un tono — y escuche el cambio en el carácter armónico a medida que el Bias aumenta.
-5. Detenga el ajuste en el valor donde el equilibrio de armónicos pares/impares se adapte a su gusto. La curva de transferencia y la bola de entrada en tiempo real se actualizan al instante para reflejar el nuevo punto de operación.
+1. Localice la fila de cinco controles en la parte inferior del applet: Drive, Tone, Bias, Output, Mix.
+2. Encuentre el control denominado **Bias** — el tercero en la fila.
+3. Gire el control **Bias** hasta el valor deseado. La etiqueta debajo del control muestra el valor actual como porcentaje (por ejemplo, `50 %`).
+4. Observe la curva de transferencia ubicada sobre la fila de controles. El punto de operación de la curva se desplaza al girar el control, visualizando el cambio en el balance de armónicos.
+5. La bola de entrada en tiempo real sobre la curva de transferencia se mueve de manera continua, indicando dónde se encuentra el nivel de entrada actual en la nueva curva.
 
-## Qué hace cada control
+Para abrir el editor flotante ampliado y obtener un control más fino, haga doble clic en la etapa TUBE del widget CHAIN en el lado correspondiente. El editor se titula "Aetherial Tube — TX" o "Aetherial Tube — RX". El control Bias también está disponible allí, y tanto el applet como el editor permanecen sincronizados.
 
-| Control | Valor predeterminado | Rango | Clave persistida | Comportamiento |
-|---|---|---|---|---|
-| Bias | 0 % | 0 % a 100 % | `ClientTubeTxBiasAmount` | Desplaza el punto de operación sobre la curva de transferencia. Los valores más altos incrementan la saturación asimétrica, alterando la mezcla de armónicos pares/impares. |
-| Drive | 0.0 dB | 0.0 a 24.0 dB | `ClientTubeTxDriveDb` | Introduce más señal en la etapa de válvula. Mayor Drive hace que los cambios de Bias sean más pronunciados. |
-| Curva de transferencia | — | — | — | Dibuja la curva de transferencia de válvula actual. Se actualiza de inmediato al cambiar el Bias. La bola de entrada en tiempo real muestra el régimen de saturación actual. |
+## Función de cada control
+
+| Control | Valor por defecto | Rango válido | Ajuste persistente |
+|---|---|---|---|
+| Bias (TX) | 0 % | 0 % a 100 % (interno: 0.0 a 1.0) | `ClientTubeTxBiasAmount` |
+| Bias (RX) | 0 % | 0 % a 100 % (interno: 0.0 a 1.0) | `ClientTubeRxBiasAmount` |
+
+En 0 % el punto de operación está centrado, produciendo un carácter con predominio de armónicos impares. Al aumentar Bias, el punto de operación se desplaza fuera del centro, introduciendo armónicos pares. La curva de transferencia en el applet refleja visualmente este desplazamiento.
 
 ## Consejos
 
-- El Bias funciona en conjunto con el Drive. Con un Drive de 0.0 dB, la curva es casi lineal y el Bias tiene un efecto audible mínimo. Aumente primero el Drive hasta que la curva se curve y, después, ajuste el Bias.
-- La asimetría de la curva de transferencia se vuelve visible cuando el Bias supera el 0 %. Úsela como referencia visual junto con el resultado auditivo.
-- Si el cambio de Bias desplaza notablemente el nivel de salida general, utilice el control **Output** (`ClientTubeTxOutputGainDb`, valor predeterminado 0.0 dB, rango −24.0 a 12.0 dB) para compensarlo.
-- Los cambios realizados en el Bias desde el editor flotante de Tube se reflejan en el control del applet en aproximadamente 33 ms, y viceversa.
-
-## Solución de problemas
-
-- **El control Bias no tiene efecto audible** — Es probable que el Drive esté en 0.0 dB o cerca de ese valor. Aumente el Drive hasta que la curva de transferencia muestre una curvatura clara y, luego, ajuste el Bias.
-- **El cambio de Bias desaparece al reiniciar AetherSDR** — El valor se persiste en `ClientTubeTxBiasAmount`. Si el ajuste no se está guardando, confirme que la etapa Tube esté completamente habilitada antes de cerrar la aplicación.
+- Bias interactúa con Drive. Valores más altos de Drive introducen más señal en la curva, por lo que el efecto de un ajuste determinado de Bias se vuelve más pronunciado. Ajuste Drive primero y luego afine Bias.
+- Los controles del applet y los del editor flotante comparten el mismo estado y se sincronizan en aproximadamente 33 ms tras cualquier cambio realizado en cualquiera de las dos ubicaciones.
+- Los cambios se guardan inmediatamente en `ClientTubeTxBiasAmount` o `ClientTubeRxBiasAmount` después de cada movimiento del control.
 
 ## Temas relacionados
 
-- [Descripción general del Tube Saturator](overview.md)
-- [Ajustar el Drive hasta que la curva comience a curvarse](dial-drive-until-the-curve-starts-to-bend.md)
-- [Compensar cambios de nivel con Output](compensate-level-changes-with-output.md)
+- [Descripción general de Aetherial Mic-PreAmp (TX) / Aetherial Dynamic Tube (RX)](overview.md)
+- [Ajustar Drive hasta que la curva comience a curvarse (calidez en TX o modelado de tono en RX)](dial-drive-until-the-curve-starts-to-bend-tx-warmth-or-rx-tone-shaping.md)
 - [Aclarar u oscurecer la señal saturada con Tone](brighten-or-darken-the-saturated-signal-with-tone.md)
+- [Compensar cambios de nivel con Output](compensate-level-changes-with-output.md)
 - [Mezclar la saturación en paralelo con Mix](parallel-blend-saturation-with-mix.md)
-- [Omitir la válvula desde la cadena](bypass-the-tube-from-the-chain.md)
+- [Omitir el tubo desde cualquiera de las cadenas](bypass-the-tube-from-either-chain.md)

@@ -1,51 +1,50 @@
-# Ver la reducción de ganancia en tiempo real mientras lee una frase sibilante
+# Ver la reducción de ganancia en vivo mientras lee una frase sibilante
 
-Use la barra de reducción de ganancia del applet De-Esser para ver cuánta atenuación está aplicando el de-esser en tiempo real. Leer una frase con abundantes sonidos de "S" y "T" mientras observa la barra le permite confirmar que los ajustes de Thresh y Amount funcionan correctamente antes de salir al aire.
+La barra de reducción de ganancia (GR) del Aetherial De-Esser se actualiza en tiempo real mientras transmite o habla. Use este procedimiento para observar cómo responde el medidor al leer una frase sibilante, de modo que pueda confirmar que el de-esser detecta sus sonidos "S" y "T" antes de salir al aire.
 
 ## Antes de comenzar
 
-- La etapa De-Ess debe estar habilitada mediante el widget CHAIN. El applet DESS permanece oculto hasta que la etapa esté activa.
-- El sub-contenedor DESS debe estar visible dentro del contenedor principal PooDoo Audio (TXDSP). Si no está visible, haga clic derecho en la barra de título del sub-contenedor DESS y seleccione la opción para mostrarlo, o haga doble clic en la etapa DeEss en el widget CHAIN para abrir el editor flotante De-Ess.
-- Su micrófono y la ruta de audio TX deben estar activos para que el audio en vivo pase a través del de-esser.
+- El Aetherial De-Esser debe estar habilitado mediante el widget CHAIN. El applet permanece oculto hasta que la etapa De-Ess esté activa.
+- Su micrófono debe estar enrutado a través de la cadena de audio TX y producir señal — ya sea activando el radio o utilizando un modo de monitor/prueba para que el audio fluya por el DSP.
+- Abra el sub-contenedor "Aetherial De-Esser" dentro del contenedor principal Aetherial Audio (TXDSP), o haga doble clic en la etapa DESS del widget CHAIN para abrir el editor flotante "Aetherial De-Esser — TX".
 
 ## Pasos
 
-1. Abra el sub-contenedor DESS en el contenedor principal PooDoo Audio (TXDSP).
-2. Localice la barra de reducción de ganancia — la franja horizontal directamente debajo de la curva de respuesta de la cadena lateral (sidechain).
-3. Active el transmisor y lea en voz alta una frase sibilante (por ejemplo, "sixty-six sizzling sausages").
-4. Observe cómo la barra de reducción de ganancia se llena desde la derecha con un color rojo suave en cada sonido de "S" o "T". La escala de la barra va de 0 a 24 dB; una marca en la posición de un cuarto desde la derecha indica el punto −6 dB.
-5. Si la barra nunca se llena, el de-esser no está activándose — reduzca Thresh hacia un valor más negativo.
-6. Si la barra llega al máximo en cada sílaba, no solo en las sibilantes, aumente Thresh hacia 0 dB o reduzca Amount.
-7. Procure que la barra alcance aproximadamente la marca de −6 dB en las sibilantes más pronunciadas y que vuelva a vacío entre palabras.
+1. Verifique que la etapa De-Ess esté habilitada en el widget CHAIN. El applet será visible una vez que la etapa esté activa.
+2. Localice la **barra de reducción de ganancia** — la franja horizontal situada directamente debajo de la curva de respuesta del sidechain.
+3. Active el radio o habilite su ruta de audio para que el audio del micrófono fluya a través del DSP de TX.
+4. Pronuncie una frase con sibilancia intensa — por ejemplo, "She sells seashells by the seashore" — con su nivel y distancia de micrófono habituales.
+5. Observe cómo la **barra de reducción de ganancia** se llena de derecha a izquierda en rojo suave en cada sonido "S" o "T". Si no hay relleno, el de-esser no está actuando; si el relleno alcanza el ancho completo, se están aplicando hasta 24 dB de reducción.
+6. Anote el punto en que la barra alcanza típicamente su pico. La marca de graduación sobre la barra indica el punto de −6 dB, que es el valor predeterminado de **Amount** y un objetivo habitual para un de-essing transparente.
+7. Si la barra nunca se mueve, reduzca **Thresh** hacia −60.0 dB hasta que comience a responder. Si la barra está pegada a la derecha en cada sílaba, aumente **Thresh** hacia 0.0 dB.
+8. Repita la frase hasta que la barra responda únicamente en los picos sibilantes genuinos, no en el habla ordinaria.
 
 ## Qué hace cada control
 
-| Control | Valor predeterminado | Rango válido | Clave persistida | Comportamiento |
+| Control | Valor predeterminado | Rango válido | Clave persistente | Comportamiento |
 |---|---|---|---|---|
-| Curva de respuesta de la cadena lateral | — | — | — | Dibuja la forma del filtro de paso de banda; una bola en movimiento marca la frecuencia central actual. |
-| Barra de reducción de ganancia | — | 0 a 24 dB GR | — | Franja horizontal de rojo suave, rellena desde la derecha. Muestra la atenuación que se aplica en ese momento a la banda de sibilancia. Una marca indica el punto −6 dB. Se actualiza a aproximadamente 30 Hz. |
-| Freq | 6000 Hz | 1000 a 12000 Hz | `ClientDeEssTxFrequencyHz` | Establece la frecuencia central de la banda de sibilancia. Utiliza mapeo logarítmico. |
-| Q | 2.00 | 0.5 a 5.0 | `ClientDeEssTxQ` | Establece el ancho de banda de la banda de sibilancia. Un Q mayor produce una banda más estrecha. |
-| Thresh | −30.0 dB | −60.0 a 0.0 dB | `ClientDeEssTxThresholdDb` | Nivel por encima del cual el de-esser comienza a atenuar. |
+| Curva de respuesta del sidechain | — | — | — | Dibuja la respuesta del filtro de paso de banda. Una esfera en movimiento indica la frecuencia central actual. |
+| Barra de reducción de ganancia | — | 0 a 24 dB GR | — | Franja horizontal en rojo suave, rellena desde la derecha. Se actualiza a aproximadamente 30 Hz. Una marca indica el punto de −6 dB. |
+| Freq | 6000 Hz | 1000 a 12000 Hz | `ClientDeEssTxFrequencyHz` | Frecuencia central de la banda de sibilancia. Utiliza mapeo logarítmico. |
+| Q | 2.00 | 0.5 a 5.0 | `ClientDeEssTxQ` | Ancho de banda de la banda de sibilancia. Mayor Q = más estrecho. |
+| Thresh | −30.0 dB | −60.0 a 0.0 dB | `ClientDeEssTxThresholdDb` | Nivel por encima del cual el de-esser comienza a atenuar la banda. |
 | Amount | −6.0 dB | −24.0 a 0.0 dB | `ClientDeEssTxAmountDb` | Atenuación máxima aplicada en el pico de sibilancia. |
 
 ## Consejos
 
-- La barra de reducción de ganancia se actualiza a aproximadamente 30 Hz, por lo que los transitorios rápidos de "S" pueden aparecer como destellos breves. Esto es normal.
-- La bola de frecuencia central en la curva de respuesta de la cadena lateral se mueve junto con Freq. Observar tanto la bola como la barra al mismo tiempo ayuda a confirmar que el de-esser está centrado en la parte correcta de su voz.
-- Evite que la barra llegue a 24 dB: eso indica una reducción mayor de la que permite Amount, lo que significa que Thresh está configurado demasiado bajo.
+- El medidor funciona a aproximadamente 30 Hz, por lo que los transitorios breves e intensos pueden aparecer como destellos momentáneos. Esto es normal.
+- Mantenga el control **Amount** en su valor predeterminado de −6.0 dB mientras observa el medidor por primera vez. Redúzcalo solo después de haber confirmado que el medidor se activa con los sonidos correctos.
+- Si la esfera sobre la curva de respuesta del sidechain se encuentra lejos de donde se ubican sus picos de sibilancia, use **Freq** para desplazarla. El medidor solo mostrará GR cuando la energía en la banda de **Freq** actual supere **Thresh**.
 
 ## Solución de problemas
 
-- **La barra de reducción de ganancia permanece vacía durante el habla** — El de-esser no se está activando. Reduzca Thresh (más negativo) hasta que la barra reaccione ante las sibilantes pronunciadas. Confirme también que la etapa De-Ess está habilitada en el widget CHAIN y que el audio está pasando realmente por la cadena TX.
-- **La barra de reducción de ganancia se llena continuamente, no solo en las sibilantes** — Thresh es demasiado bajo o Freq está centrado en una frecuencia que domina su voz. Aumente Thresh o desplace Freq hacia una frecuencia más alta donde la sibilancia esté más aislada.
-- **El applet DESS no está visible** — La etapa De-Ess no está habilitada. Habilítela mediante el widget CHAIN o haciendo doble clic en la etapa DeEss en el widget CHAIN para abrir el editor flotante y luego activarla desde allí.
+- **La barra de reducción de ganancia nunca se mueve** — El de-esser no está actuando. Verifique que la etapa De-Ess esté habilitada en el widget CHAIN, que el audio esté fluyendo por el DSP de TX y que **Thresh** no esté ajustado demasiado alto (demasiado cerca de 0.0 dB) para el nivel de su micrófono.
+- **La barra de reducción de ganancia está pegada a la derecha en cada sílaba, incluso en el habla no sibilante** — **Thresh** está ajustado demasiado bajo. Auméntelo hacia 0.0 dB hasta que las vocales ordinarias dejen de activar el medidor.
+- **La barra se mueve pero no escucha ningún efecto al aire** — **Amount** puede estar ajustado demasiado cerca de 0.0 dB. Redúzcalo hacia −24.0 dB para obtener una reducción más audible, o confirme que la etapa no está omitida (bypassed) en el widget CHAIN.
 
 ## Relacionados
 
-- [Descripción general del De-Esser](overview.md)
-- [Ajustar el umbral justo por debajo de los picos más altos de 'S'](set-threshold-just-below-the-loudest-s-peaks.md)
-- [Ajustar Amount para lograr el de-essing más transparente](dial-amount-for-the-most-transparent-de-essing.md)
-- [Desplazar Freq para localizar el pico de sibilancia](sweep-freq-to-locate-peak-sibilance.md)
-- [Estrechar o ampliar la banda de la cadena lateral con Q](narrow-or-widen-the-sidechain-band-with-q.md)
-- [Desactivar el de-esser desde la cadena](bypass-the-de-esser-from-the-chain.md)
+- [Ajustar el umbral justo por debajo de los picos de "S" más intensos](set-threshold-just-below-the-loudest-s-peaks.md)
+- [Ajustar Amount para el de-essing más transparente](dial-amount-for-the-most-transparent-de-essing.md)
+- [Barrer Freq para localizar el pico de sibilancia](sweep-freq-to-locate-peak-sibilance.md)
+- [Omitir el de-esser desde la cadena](bypass-the-de-esser-from-the-chain.md)

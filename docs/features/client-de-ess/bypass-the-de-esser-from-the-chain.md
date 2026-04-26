@@ -1,32 +1,28 @@
-# Omitir el de-esser en la cadena
+# Omitir el de-esser de la cadena
 
-Use esta página para deshabilitar la etapa de de-esser de modo que el audio pase sin ninguna reducción de sibilancias. La omisión (bypass) es útil al comparar el audio TX procesado y sin procesar, o cuando desea saltarse el de-essing en una sesión específica sin modificar sus ajustes configurados.
+Elimine el Aetherial De-Esser de su ruta de audio TX sin modificar ninguna de sus configuraciones. Omitirlo es útil cuando desea comparar el audio procesado con el original, o desactivar temporalmente el de-essing para una sesión determinada.
 
 ## Antes de comenzar
 
-- La etapa De-Esser debe existir previamente en la cadena PooDoo Audio (TXDSP). Si aún no la ha agregado, consulte [Descripción general del De-Esser](overview.md).
-- El subcontenedor DESS o el widget CHAIN deben estar visibles en el panel de applets.
+- AetherSDR debe estar abierto y la cadena de procesamiento Aetherial Audio (TXDSP) debe ser visible.
+- La etapa DESS ya debe existir en el widget CHAIN. Si el de-esser nunca ha sido habilitado, es posible que la etapa DESS no esté presente — consulte [Descripción general del Aetherial De-Esser](overview.md).
 
 ## Pasos
 
-1. Localice la etapa **DeEss** en el widget CHAIN dentro del contenedor PooDoo Audio (TXDSP).
-2. Haga clic una vez en la etapa **DeEss** para activar o desactivar el bypass.
+1. Localice el widget CHAIN en el contenedor Aetherial Audio (TXDSP).
+2. Encuentre la etapa **DESS** en la cadena.
+3. Haga clic una vez en la etapa **DESS** para activar o desactivar el bypass.
 
-Cuando la etapa está en bypass, `ClientDeEssTxEnabled` se establece en `false`. Los cuatro controles de ajuste, la curva de respuesta del sidechain y la barra de reducción de ganancia permanecen visibles, pero el de-esser no aplica ninguna atenuación al audio TX. Sus ajustes de `Freq`, `Q`, `Thresh` y `Amount` se conservan y surten efecto de inmediato al reactivar la etapa.
+Cuando está en bypass, la etapa se marca visualmente como inactiva y el de-esser queda eliminado de la ruta de audio TX. Al hacer clic de nuevo, se vuelve a habilitar. La configuración `ClientDeEssTxEnabled` se actualiza de inmediato.
 
 ## Consejos
 
-- Un solo clic activa o desactiva el bypass; un doble clic abre el editor flotante De-Ess. Evite hacer doble clic si solo desea activar el bypass.
-- La barra de reducción de ganancia en el subcontenedor DESS no mostrará movimiento mientras la etapa esté en bypass, lo que confirma que el bypass está activo.
-- Activar el bypass desde el widget CHAIN no restablece ninguno de los cuatro valores de los controles. Al reactivar la etapa, se restaura el de-essing completo con sus últimos ajustes guardados.
+- Omitir la etapa no restablece ningún valor de los controles. Freq, Q, Thresh y Amount conservan sus valores actuales cuando vuelve a habilitar la etapa.
+- Para abrir el editor completo y realizar ajustes detallados, haga doble clic en la etapa **DESS** en lugar de hacer un solo clic.
 
-## Solución de problemas
+## Relacionados
 
-- **Al hacer clic en la etapa DeEss no ocurre nada** — Confirme que está haciendo clic en el mosaico de la etapa del widget CHAIN y no en la barra de título del subcontenedor DESS. Hacer clic derecho en la barra de título ofrece opciones de flotante/desplegable/ocultar, no de bypass.
-- **La barra de reducción de ganancia sigue mostrando actividad después del bypass** — El medidor realiza consultas a aproximadamente 30 Hz y puede mostrar una lectura residual breve. Si continúa, verifique que `ClientDeEssTxEnabled` haya sido realmente conmutado al reabrir el editor flotante mediante doble clic y comprobando el estado de habilitación.
-
-## Relacionado
-
-- [Descripción general del De-Esser](overview.md)
+- [Descripción general del Aetherial De-Esser](overview.md)
+- [Barrer Freq para localizar el pico de sibilancia](sweep-freq-to-locate-peak-sibilance.md)
+- [Ajustar el umbral justo por debajo de los picos de 'S' más fuertes](set-threshold-just-below-the-loudest-s-peaks.md)
 - [Ajustar Amount para el de-essing más transparente](dial-amount-for-the-most-transparent-de-essing.md)
-- [Ver la reducción de ganancia en vivo al leer una frase sibilante](watch-live-gr-while-reading-a-sibilant-phrase.md)

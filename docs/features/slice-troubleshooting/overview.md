@@ -1,6 +1,6 @@
-# Resolución de problemas de slice
+# Descripción general de solución de problemas de slice
 
-El diálogo Slice Troubleshooting captura una instantánea de cada slice y canal DAX en la radio conectada, y luego la analiza en busca de problemas probables, como audio ausente, silenciamiento bloqueado y antena no configurada. Úselo para diagnosticar problemas de slice por su cuenta o para recopilar información que compartir con soporte técnico.
+El diálogo Slice Troubleshooting captura una instantánea completa del estado de los slices, panadapters, transverters y canales DAX de su radio, y los verifica en busca de problemas comunes. Úselo para diagnosticar problemas de audio, silenciamiento, antena y transverter, o para recopilar datos de diagnóstico antes de contactar al soporte técnico.
 
 ## Antes de comenzar
 
@@ -8,36 +8,35 @@ El diálogo Slice Troubleshooting captura una instantánea de cada slice y canal
 
 ## Cómo funciona
 
-Abra el diálogo desde `Help > Slice Troubleshooting...`. Al abrirse, AetherSDR lee el estado actual de todos los slices y canales DAX en una instantánea. El diálogo presenta esa instantánea en dos vistas, accesibles como pestañas.
+Abra el diálogo desde `Help > Slice Troubleshooting...`. AetherSDR lee el estado actual de cada slice, panadapter, transverter y canal DAX, y construye una instantánea. La instantánea está disponible en dos formas: un resumen de problemas en lenguaje claro y una representación JSON completa. Puede actualizar la instantánea en cualquier momento, copiar cualquiera de las dos formas al portapapeles, o guardar el JSON en un archivo.
 
-**Pestaña Issue Summary** — muestra una lista con viñetas en lenguaje claro de los problemas detectados en la instantánea, como dispositivos de audio ausentes, estados de silenciamiento bloqueados o antenas sin configurar. Revise esta pestaña primero para obtener una lectura rápida de lo que puede estar fallando.
+El diálogo verifica automáticamente los problemas más probables, incluyendo audio faltante, condiciones de silenciamiento bloqueado, asignaciones de antena faltantes y problemas de validez del transverter. Los problemas detectados aparecen como una lista de viñetas en la pestaña Issue Summary.
 
-**Pestaña JSON** — muestra la instantánea completa como JSON estructurado, con cada propiedad de slice y asignación de canal DAX. Use esta vista cuando la pestaña Issue Summary no capture suficiente detalle, o cuando un contacto de soporte solicite los datos sin procesar.
-
-La instantánea se toma cuando se abre el diálogo. Si cambia la configuración de los slices mientras el diálogo está abierto, haga clic en "Refresh Snapshot" para volver a leer el estado actual antes de copiar o exportar.
+Este diálogo no guarda ninguna configuración. Lee el estado de la radio en el momento en que usted lo abre o hace clic en Refresh Snapshot.
 
 ## Qué hace cada control
 
 | Control | Tipo | Comportamiento |
 |---|---|---|
-| Issue Summary (tab) | Pestaña | Muestra una lista con viñetas en lenguaje claro de los problemas de slice detectados. |
-| JSON (tab) | Pestaña | Muestra la instantánea JSON completa de los slices y canales DAX. |
-| Refresh Snapshot | Botón | Vuelve a leer el estado de los slices y actualiza ambas pestañas con los datos actuales. |
-| Copy Summary | Botón | Copia el texto de Issue Summary al portapapeles. |
+| Issue Summary (tab) | Pestaña | Muestra una lista de viñetas en lenguaje claro con los problemas detectados en la configuración actual de slices. |
+| JSON (tab) | Pestaña | Muestra la instantánea JSON completa de slices, panadapters, transverters y canales DAX. |
+| Refresh Snapshot | Botón | Vuelve a leer el estado actual de los slices y reconstruye la instantánea. Haga clic aquí después de cambiar cualquier configuración de slice. |
+| Copy Summary | Botón | Copia el texto del resumen de problemas al portapapeles. |
 | Copy JSON | Botón | Copia la instantánea JSON completa al portapapeles. |
-| Export JSON... | Botón | Abre un diálogo de archivo para guardar la instantánea JSON en un fichero. |
+| Export JSON... | Botón | Abre un diálogo de archivo para guardar la instantánea JSON en un archivo. |
 | Close | Botón | Cierra el diálogo. |
-| Status label | Indicador | Muestra el resultado de la acción de copia o exportación más reciente (por ejemplo, "Copied to clipboard"). |
+| Etiqueta de estado | Indicador | Muestra el resultado de la última acción de copia o exportación, por ejemplo "Copied to clipboard". |
 
 ## Consejos
 
-- Haga clic en "Refresh Snapshot" después de realizar cualquier cambio en la configuración de los slices — el diálogo no se actualiza automáticamente.
-- Use "Copy Summary" para pegar una lista concisa de problemas en una publicación de un foro de soporte. Use "Copy JSON" o "Export JSON..." cuando un contacto de soporte necesite la instantánea completa.
+- Haga clic en Refresh Snapshot después de realizar cualquier cambio en la configuración de slice, antena o transverter, para que la instantánea refleje el estado actualizado antes de copiarla o exportarla.
+- Use Copy Summary para pegar una lista concisa de problemas en una publicación de foro o en un ticket de soporte. Use Copy JSON o Export JSON... cuando el equipo de soporte solicite datos de diagnóstico completos.
 
-## Relacionados
+## Temas relacionados
 
-- [Capturar una instantánea de slice para soporte](capture-a-slice-snapshot-for-support.md)
-- [Leer una lista en lenguaje claro de los problemas de slice sospechados](read-a-plain-language-list-of-suspected-slice-problems.md)
+- [Capturar una instantánea de slice para soporte técnico](capture-a-slice-snapshot-for-support.md)
+- [Leer una lista en lenguaje claro de problemas sospechados en slices](read-a-plain-language-list-of-suspected-slice-problems.md)
+- [Actualizar la instantánea después de cambiar el estado de un slice](refresh-the-snapshot-after-changing-slice-state.md)
 - [Copiar la instantánea JSON completa al portapapeles](copy-the-full-json-snapshot-to-the-clipboard.md)
 - [Exportar la instantánea a un archivo para adjuntar a un informe de error](export-the-snapshot-to-a-file-to-attach-to-a-bug-report.md)
-- [Actualizar la instantánea después de cambiar el estado del slice](refresh-the-snapshot-after-changing-slice-state.md)
+- [Inspeccionar los indicadores de RF/IF, desplazamiento y validez de cada transverter para diagnóstico XVTR](inspect-each-transverter-s-rf-if-offset-and-validity-flags-for-xvtr-diagnosis.md)

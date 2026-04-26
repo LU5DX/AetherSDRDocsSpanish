@@ -1,29 +1,28 @@
 # Activar Pan Follows VFO
 
-`View > Pan Follows VFO` es un elemento de menú con marca de verificación que mantiene el panadapter centrado en la frecuencia del VFO activo mientras sintoniza. Cuando está activado, la vista del panadapter se desplaza automáticamente para que el marcador del VFO permanezca visible en todo momento.
+`View > Pan Follows VFO` controla si el panadapter (visualizador panorámico) se desplaza automáticamente para mantener visible la frecuencia del VFO activo cuando se sintoniza fuera de la vista actual.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio Flex para que se muestre un panadapter.
+- AetherSDR debe estar conectado a una radio FLEX-8600 para que el panadapter esté activo.
 
 ## Pasos
 
 1. Haga clic en `View` en la barra de menú.
-2. Haga clic en `Pan Follows VFO` para alternar la marca de verificación.
-   - Una marca de verificación junto a la etiqueta significa que la función está **activada** (valor predeterminado).
-   - Sin marca de verificación, el panadapter no seguirá al VFO al sintonizar.
+2. Haga clic en `Pan Follows VFO` para activar o desactivar la marca de verificación.
+   - Marca presente: el panadapter se desplaza automáticamente para mantener el VFO en la vista.
+   - Marca ausente: el panadapter permanece fijo; el VFO puede moverse fuera del rango visible sin que la vista lo siga.
 
 ## Qué hace cada control
 
-| Control | Predeterminado | Comportamiento |
+| Control | Valor predeterminado | Comportamiento |
 |---|---|---|
-| `Pan Follows VFO` | Activado (marcado) | Cuando está marcado, el panadapter se desplaza automáticamente para mantener el marcador del VFO a la vista mientras sintoniza. Cuando no está marcado, el panadapter permanece fijo hasta que lo desplace manualmente. |
+| `Pan Follows VFO` | Activado (marcado) | Cuando está habilitado, el panadapter se desplaza cada vez que la frecuencia del VFO sale del rango de visualización actual. Cuando está deshabilitado, el panadapter no se mueve independientemente de la posición del VFO. |
 
 ## Consejos
 
-- Si prefiere desplazar el panadapter manualmente y sintonizar haciendo clic dentro de la vista actual, desactive `Pan Follows VFO` y active `View > Single-Click to Tune` al mismo tiempo.
+- Si prefiere desplazar el panadapter manualmente y sintonizar haciendo clic dentro del rango visible, deshabilite `Pan Follows VFO` y habilite `View > Single-Click to Tune` para que los clics resintonicen el VFO sin mover el centro del panadapter.
 
-## Relacionados
+## Relacionado
 
 - [Activar Single-Click to Tune](enable-single-click-to-tune.md)
-- [Configurar el plan de banda](configure-band-plan.md)

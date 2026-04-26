@@ -1,41 +1,40 @@
-# Activar Inhibit durante TUNE
+# Habilitar Inhibit durante TUNE
 
-Use `Settings > Inhibit during TUNE` para seleccionar qué líneas de salida TX suprime el radio Flex mientras el sintonizador está en funcionamiento. Esto evita que la RF llegue a amplificadores o conmutadores de antena que no deben recibir potencia de sintonización.
+Use `Settings > Inhibit during TUNE` para seleccionar qué salidas de TX suprime el FLEX-8600 mientras el sintonizador está en funcionamiento. Esto evita que la RF llegue a amplificadores o puertos de antena que no deben activarse durante un ciclo de sintonización.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio Flex.
-- Identifique qué conectores de salida TX de su radio están conectados al equipo que desea proteger durante la sintonización.
+- AetherSDR debe estar conectado a un radio FLEX-8600.
+- Confirme qué puertos de salida de TX están en uso en su estación antes de modificar estos ajustes.
 
 ## Pasos
 
-1. Haga clic en `Settings` en la barra de menús.
+1. Haga clic en `Settings` en la barra de menú.
 2. Pase el cursor sobre `Inhibit during TUNE` para abrir el submenú.
-3. Haga clic en una o más casillas de verificación de la lista para activar el inhibit en esas salidas:
-   - `None` — ninguna salida es suprimida durante la sintonización.
-   - `ACC TX` — suprime la línea ACC TX.
-   - `TX1` — suprime la salida TX1.
-   - `TX2` — suprime la salida TX2.
-   - `TX3` — suprime la salida TX3.
-4. Repita el proceso para cada salida que desee inhibir. Las selecciones son casillas de verificación independientes; puede activar cualquier combinación.
+3. Haga clic en cualquier combinación de las siguientes casillas de verificación para habilitar la inhibición en esas salidas durante la sintonización:
+   - `None`
+   - `ACC TX`
+   - `TX1`
+   - `TX2`
+   - `TX3`
+
+   Una marca de verificación junto a un elemento indica que esa salida será suprimida durante un ciclo de sintonización. Seleccionar `None` indica que ninguna salida está inhibida.
 
 ## Qué hace cada control
 
-| Casilla de verificación | Efecto durante TUNE |
-|---|---|
-| `None` | Ninguna salida es inhibida. La RF de sintonización pasa por todas las líneas TX configuradas. |
-| `ACC TX` | La línea de control ACC TX se mantiene inactiva mientras el sintonizador funciona. |
-| `TX1` | La salida TX1 es suprimida mientras el sintonizador funciona. |
-| `TX2` | La salida TX2 es suprimida mientras el sintonizador funciona. |
-| `TX3` | La salida TX3 es suprimida mientras el sintonizador funciona. |
+| Casilla | Efecto al activarla |
+|---------|---------------------|
+| `None` | Ninguna salida de TX es suprimida durante la sintonización. |
+| `ACC TX` | Suprime la salida ACC TX durante la sintonización. |
+| `TX1` | Suprime la salida TX1 durante la sintonización. |
+| `TX2` | Suprime la salida TX2 durante la sintonización. |
+| `TX3` | Suprime la salida TX3 durante la sintonización. |
 
 ## Consejos
 
-- Si utiliza un amplificador externo en TX1, active `TX1` para evitar que la potencia de sintonización lo alcance mientras el sintonizador interno recorre las frecuencias.
-- `None` y las casillas de verificación de salida individuales pueden interactuar: si `None` es la única selección, todas las salidas permanecen activas. Activar cualquier salida específica anula eso para esa línea.
-- La configuración de inhibit por banda está disponible en `Settings > TX Band Settings...`, que ofrece un control más preciso a nivel de banda.
+- Puede activar varias salidas simultáneamente. Por ejemplo, activar `TX1` y `TX2` inhibe ambos puertos mientras `TX3` permanece activo.
+- Los ajustes de inhibición por banda están disponibles en `Settings > TX Band Settings...`, lo que proporciona un control más preciso sobre el comportamiento de la inhibición por banda.
 
 ## Relacionado
 
 - [Configuración de los controles de AetherSDR](configuring-aethersdr-controls.md)
-- [Cables USB](usb-cables.md)

@@ -1,6 +1,6 @@
 # Importar/Exportar Perfiles
 
-Esta página describe el elemento de menú `Profiles > Import/Export Profiles...`, destinado a realizar copias de seguridad y compartir perfiles de AetherSDR.
+Esta página cubre el elemento de menú `Profiles > Import/Export Profiles...`, destinado a realizar copias de seguridad y compartir perfiles de AetherSDR.
 
 ## Antes de comenzar
 
@@ -9,9 +9,9 @@ Esta página describe el elemento de menú `Profiles > Import/Export Profiles...
 ## Pasos
 
 1. Haga clic en `Profiles > Import/Export Profiles...`.
-2. En este momento no se abre ningún diálogo. La función está planificada, pero no está disponible en la versión actual.
+2. No se abre ningún diálogo. La función aún no está implementada.
 
-## Relacionados
+## Temas relacionados
 
-- [Ayuda de AetherSDR](aethersdr-help.md)
 - [Primeros pasos](getting-started.md)
+- [Ayuda de AetherSDR](aethersdr-help.md)

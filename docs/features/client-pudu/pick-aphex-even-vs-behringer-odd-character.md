@@ -1,36 +1,40 @@
-# Seleccionar el carácter Aphex (Even) o Behringer (Odd)
+# Seleccionar el carácter Aphex (Par) o Behringer (Impar)
 
-El excitador PUDU ofrece dos algoritmos de modelado armónico. Cambiar entre ellos modifica el carácter tonal de los procesadores Poo (baja frecuencia) y Doo (alta frecuencia) de forma simultánea. Elija Even para un sonido más cálido, de linaje Aphex; elija Odd para un sonido más brillante, de linaje Behringer.
+Elija entre dos algoritmos de realce armónico en el excitador PUDU: el modo Even (linaje Aphex) para un carácter más cálido y asimétrico, o el modo Odd (linaje Behringer) para un sonido más brillante y simétrico. La selección se aplica de forma independiente a las cadenas de TX y RX.
 
 ## Antes de comenzar
 
-- La etapa PUDU debe estar habilitada en la cadena PooDoo Audio. Si el subcontenedor PUDU no está visible, habilite la etapa mediante el widget CHAIN o haga doble clic en la etapa PUDU (Enh) en el widget CHAIN para abrir el editor flotante de PUDU.
-- El applet PUDU se encuentra dentro del contenedor principal PooDoo Audio (TXDSP) en el panel de applets.
+- La etapa PUDU debe ser visible en la cadena Aetherial Audio. Si el applet está oculto, habilite la etapa PUDU mediante el widget CHAIN en el lado TX o RX, o haga doble clic en la etapa PUDU en el widget CHAIN para abrir el editor flotante.
+- Decida si está ajustando la ruta de transmisión ("Aetherial TX Poodoo™") o la ruta de recepción ("Aetherial RX Poodoo™"). Los dos lados son completamente independientes.
 
 ## Pasos
 
-1. Localice los dos botones etiquetados **Even** y **Odd** cerca de la parte superior del applet PUDU, debajo del logotipo de PooDoo.
-2. Haga clic en **Even** para seleccionar el modelado asimétrico de linaje Aphex — predominantemente armónicos pares, más cálido, con saturación LF Big Bottom.
-3. Haga clic en **Odd** para seleccionar el modelado simétrico tanh de linaje Behringer — armónicos impares puros, más brillante, con un compresor de graves de alimentación directa (feed-forward).
+1. Localice el applet correcto —"Aetherial TX Poodoo™" para transmisión o "Aetherial RX Poodoo™" para recepción— dentro del contenedor principal Aetherial Audio (TXDSP) en el panel de applets.
+2. Encuentre los dos botones de modo directamente debajo del logotipo de PooDoo: `Even` y `Odd`.
+3. Haga clic en `Even` para seleccionar el modelado asimétrico de linaje Aphex — predominantemente armónicos pares, más cálido, con saturación LF tipo Big Bottom. El botón se ilumina en ámbar cuando está activo.
+4. Haga clic en `Odd` para seleccionar el modelado simétrico tanh de linaje Behringer — armónicos impares puros, más brillante, con un compresor de graves de alimentación directa (feed-forward).
+5. Repita el procedimiento en el otro applet si desea el mismo carácter en ambas cadenas.
 
-El botón seleccionado se resalta en ámbar. El cambio surte efecto de inmediato y se guarda en `ClientPuduTxMode`.
+La selección se guarda inmediatamente en `ClientPuduTxMode` (TX) o `ClientPuduRxMode` (RX).
 
 ## Qué hace cada control
 
-| Control | Comportamiento | Clave persistida |
-|---------|----------------|------------------|
-| **Even** | Selecciona el modelado asimétrico de linaje Aphex. Produce predominantemente armónicos pares con saturación LF Big Bottom. Exclusivo con **Odd**. | `ClientPuduTxMode` |
-| **Odd** | Selecciona el modelado simétrico tanh de linaje Behringer. Produce armónicos impares puros con un compresor de graves feed-forward. Exclusivo con **Even**. | `ClientPuduTxMode` |
+| Control | Comportamiento | Valor predeterminado | Valores válidos | Clave de ajuste |
+|---|---|---|---|---|
+| `Even` | Selecciona el modelado asimétrico de linaje Aphex. Exclusivo con `Odd`. | — | Seleccionado / no seleccionado | `ClientPuduTxMode` / `ClientPuduRxMode` |
+| `Odd` | Selecciona el modelado simétrico tanh de linaje Behringer. Exclusivo con `Even`. | — | Seleccionado / no seleccionado | `ClientPuduTxMode` / `ClientPuduRxMode` |
+
+Solo uno de `Even` u `Odd` puede estar activo a la vez. Al seleccionar uno, el otro se deselecciona automáticamente.
 
 ## Consejos
 
-- El modo Even tiende a favorecer la voz e instrumentos cálidos; el modo Odd tiende a favorecer señales que necesitan más presencia y definición.
-- Cambiar de modo no restablece ninguno de los controles de Poo o Doo, por lo que puede auditar ambos caracteres con los mismos ajustes de drive y mezcla para compararlos directamente.
-- El logotipo de PooDoo pulsa con el nivel de señal procesada — obsérvelo mientras alterna entre modos para confirmar que el excitador está activo.
+- El modo Even es adecuado para señales de voz cuando el objetivo es calidez y cuerpo en las bajas frecuencias. El modo Odd es preferible cuando se busca mayor presencia y brillo.
+- El logotipo de PooDoo pulsa con el RMS de la señal procesada (wet), por lo que puede ver la reacción del excitador al cambiar de modo sin necesidad de monitorear el audio.
+- Los seis controles Poo y Doo permanecen activos independientemente del modo seleccionado; su efecto sobre la señal cambia de carácter según el modo elegido.
 
 ## Relacionado
 
-- [Descripción general del excitador PUDU](overview.md)
-- [Ajustar el Poo Drive para mayor grosor en baja frecuencia](dial-poo-drive-for-lf-thickness.md)
-- [Añadir aire con los armónicos Doo](add-air-with-doo-harmonics.md)
-- [Omitir PUDU desde la cadena](bypass-pudu-from-the-chain.md)
+- [Descripción general de Aetherial TX Poodoo / Aetherial RX Poodoo](overview.md)
+- [Ajustar el Drive Poo para mayor grosor en bajas frecuencias](dial-poo-drive-for-lf-thickness.md)
+- [Agregar aire con Doo Harmonics](add-air-with-doo-harmonics.md)
+- [Omitir el PUDU desde cualquier cadena](bypass-pudu-from-either-chain.md)

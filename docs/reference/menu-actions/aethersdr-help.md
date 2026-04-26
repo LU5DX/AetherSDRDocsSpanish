@@ -1,6 +1,6 @@
 # Ayuda de AetherSDR
 
-Abre la documentación principal de usuario de AetherSDR. Úsela cuando necesite material de referencia o guía mientras la aplicación está en ejecución.
+Abre la documentación principal de usuario de AetherSDR. Úsela cuando necesite consultar el manual completo desde dentro de la aplicación.
 
 ## Antes de comenzar
 
@@ -8,8 +8,8 @@ Abre la documentación principal de usuario de AetherSDR. Úsela cuando necesite
 
 ## Pasos
 
-1. Haga clic en `Help` en la barra de menú.
-2. Haga clic en `AetherSDR Help...`.
+1. Haga clic en **Help** en la barra de menú.
+2. Haga clic en **AetherSDR Help...**.
 
 La documentación principal de usuario se abre.
 

@@ -1,37 +1,34 @@
-# Compensar las reflexiones respecto a la señal seca con Pre
+# Desplace las reflexiones del sonido seco con Pre
 
-Use el mando Pre para insertar un intervalo entre la señal seca y las primeras reflexiones de reverberación. Al aumentar Pre, la cola de reverberación se percibe más separada de la voz, lo que puede mejorar la claridad en transmisiones de voz sin reducir el efecto de sala general.
+El mando Pre agrega un intervalo entre la señal seca y el inicio de la cola de reverberación. Úselo para mantener su voz nítida y en primer plano mientras la reverberación florece detrás de ella.
 
 ## Antes de comenzar
 
-- La etapa Reverb debe estar habilitada en el widget CHAIN o en el editor flotante Reverb. El subcontenedor REVERB permanece oculto hasta que la etapa esté activa.
-- Abra el subcontenedor REVERB dentro del contenedor principal PooDoo Audio (TXDSP), o haga doble clic en la etapa Reverb del widget CHAIN para abrir el editor flotante Reverb.
+- La etapa Reverb debe estar habilitada en el widget CHAIN. El applet permanece oculto hasta que la etapa esté activa.
+- Abra el applet Aetherial FreeVerb o el editor flotante. Para abrir el editor, haga doble clic en la etapa VERB del widget CHAIN; la ventana lleva el título "Aetherial FreeVerb — TX".
 
 ## Pasos
 
-1. Localice la fila de cinco mandos en el subcontenedor REVERB o en el editor flotante Reverb.
-2. Encuentre el mando etiquetado como **Pre**.
-3. Haga clic y arrastre el mando Pre hacia arriba para aumentar el pre-delay, o hacia abajo para disminuirlo. Mantenga presionado Shift mientras arrastra para un ajuste más fino.
-4. Lea el valor actual en la etiqueta situada debajo del mando, que se muestra como `X ms`.
-5. Suelte cuando la etiqueta muestre el pre-delay deseado.
-
-Para restablecer Pre a su valor predeterminado, haga doble clic en el mando.
+1. Localice el mando Pre en la fila de cinco mandos (Size, Decay, Damp, **Pre**, Mix).
+2. Gire Pre en sentido horario para aumentar el retardo entre la señal seca y las primeras reflexiones, o en sentido antihorario para reducirlo.
+3. Observe la etiqueta debajo del mando; muestra el valor en milisegundos (por ejemplo, `20 ms`).
+4. Deténgase cuando la cola de reverberación se sienta separada de su voz sin sonar desconectada.
 
 ## Qué hace cada control
 
-| Control | Predeterminado | Rango válido | Configuración persistida | Comportamiento |
-|---------|---------------|--------------|--------------------------|----------------|
-| Pre | 20 ms | 0 a 100 ms | `ClientReverbTxPreDelayMs` | Mapeo lineal. Establece el retardo entre la señal seca y las primeras reflexiones de reverberación. Los valores más altos desplazan la cola más hacia atrás respecto a la voz. |
+| Control | Valor por defecto | Rango válido | Clave persistida | Comportamiento |
+|---------|-------------------|--------------|------------------|----------------|
+| Pre | 20 ms | 0 a 100 ms | `ClientReverbTxPreDelayMs` | Mapeo lineal. Establece el tiempo entre la señal seca y las primeras reflexiones de reverberación. |
 
 ## Consejos
 
-- Un valor de Pre de 0 ms hace que las reflexiones comiencen de inmediato, mezclándose estrechamente con la voz seca. Valores de 20–40 ms proporcionan una sensación de sala más natural en voz.
-- La rueda de desplazamiento del ratón ajusta Pre en pasos del 1 % del rango total (aproximadamente 1 ms por muesca). El arrastre con Shift reduce el movimiento a un cuarto de la velocidad para una colocación precisa.
-- Pre funciona junto con Mix. Si la cola parece estar ahogando la voz, reduzca Mix en lugar de bajar Pre hasta el mínimo.
+- Un valor de Pre de 0 ms hace que las reflexiones comiencen de inmediato, lo que puede difuminar los transitorios. Los valores entre 15 y 30 ms son habituales para voz a fin de preservar la inteligibilidad.
+- Pre interactúa con Decay: un Pre corto combinado con un Decay largo puede hacer que la cola parezca comenzar antes de lo esperado. Aumente Pre si la reverberación parece engullir el borde inicial de las palabras.
+- Tanto el mando del applet compacto (etiquetado Pre) como el del editor flotante (etiquetado PreDly) controlan el mismo parámetro `ClientReverbTxPreDelayMs` y permanecen sincronizados.
 
 ## Relacionados
 
-- [Descripción general de la reverberación](overview.md)
-- [Ajustar un Mix sutil — entre el 10 y el 15 % es lo habitual para voz](dial-in-a-subtle-mix-10-15-is-typical-for-voice.md)
-- [Ajustar el decay al gusto sin enturbiar el habla](tune-decay-to-taste-without-muddying-speech.md)
+- [Descripción general de Aetherial FreeVerb](overview.md)
+- [Ajuste el decay a su gusto sin enturbiar la voz](tune-decay-to-taste-without-muddying-speech.md)
+- [Establezca un Mix sutil — entre 10 y 15 % es típico para voz](dial-in-a-subtle-mix-10-15-is-typical-for-voice.md)
 - [Omitir la reverberación desde la cadena](bypass-reverb-from-the-chain.md)

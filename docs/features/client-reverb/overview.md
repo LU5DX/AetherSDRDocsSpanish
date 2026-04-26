@@ -1,45 +1,47 @@
-# Descripción general de Reverb
+# Descripción general de Aetherial FreeVerb
 
-El applet Reverb añade una cola de reverberación basada en Freeverb al audio que usted transmite. Úselo para agregar una sutil ambientación de sala o recinto a las transmisiones de voz antes de que la señal salga del cliente.
+Aetherial FreeVerb añade una cola de reverberación basada en Freeverb al audio que usted transmite, dándole a su voz una sensación de ambiente de sala o de salón. Se aplica únicamente a la cadena TX — no existe una contraparte RX.
 
 ## Antes de comenzar
 
-- La etapa Reverb debe habilitarse mediante el widget CHAIN o el editor flotante de Reverb antes de que aparezca el applet. El applet permanece oculto hasta que la etapa esté activa.
-- Reverb es un efecto TX del lado del cliente. Procesa el audio en su computadora, no en el radio.
+- La etapa Reverb debe estar habilitada en el widget CHAIN dentro del applet Aetherial Audio (TXDSP). El sub-contenedor "Aetherial FreeVerb" y sus controles permanecen ocultos hasta que la etapa esté habilitada.
+- No se requiere conexión a una radio para ajustar los parámetros de reverberación.
 
 ## Cómo funciona
 
-El applet Reverb aparece como un subcontenedor con la etiqueta **REVERB** dentro del contenedor principal PooDoo Audio (TXDSP). Presenta una fila compacta de cinco mandos — **Size**, **Decay**, **Damp**, **Pre** y **Mix** — que en conjunto dan forma al carácter de la cola de reverberación aplicada a su audio saliente.
+Aetherial FreeVerb inserta un procesador de reverberación Freeverb en la cadena de audio TX del lado del cliente, después de cualquier etapa DSP anterior. Cuando la etapa VERB está activa, los cinco controles giratorios — Size, Decay, Damp, Pre y Mix — dan forma al carácter y al nivel de la cola de reverberación añadida a su voz transmitida.
 
-Los valores de los mandos se sincronizan con el editor flotante de Reverb a aproximadamente 30 Hz. Los cambios realizados en el applet o en el editor flotante se reflejan en ambos lugares de forma inmediata.
+Los controles aparecen en dos lugares que permanecen sincronizados a aproximadamente 30 Hz:
 
-Para abrir el editor flotante de Reverb, haga doble clic en la etapa Reverb dentro del widget CHAIN. Para flotar, desprender u ocultar el subcontenedor **REVERB**, haga clic derecho en su barra de título.
+- **El sub-contenedor "Aetherial FreeVerb"** — una fila compacta de cinco controles giratorios integrada dentro del contenedor principal Aetherial Audio (TXDSP) en el panel del applet.
+- **El editor flotante titulado "Aetherial FreeVerb — TX"** — una versión ampliada de los mismos controles, que se abre haciendo doble clic en la etapa VERB del widget CHAIN. También puede hacer clic derecho en la barra de título del sub-contenedor "Aetherial FreeVerb" para hacerlo flotar, separarlo u ocultarlo.
 
-No se requiere conexión con el radio para ajustar los parámetros de Reverb.
+Girar cualquier control en cualquiera de las dos vistas actualiza inmediatamente la otra. Los ajustes se guardan automáticamente al modificar un control.
 
 ## Qué hace cada control
 
-| Mando | Valor predeterminado | Rango válido | Configuración persistida | Comportamiento |
-|-------|----------------------|--------------|--------------------------|----------------|
-| **Size** | 50 % | 0 – 100 % | `ClientReverbTxSize` | Define el tamaño del recinto modelado. Mapeo lineal. |
-| **Decay** | 1.20 s | 0.3 – 5.0 s | `ClientReverbTxDecayS` | Define la longitud de la cola de reverberación. Mapeo exponencial; incrementos pequeños en el extremo inferior tienen más efecto que el mismo movimiento en el extremo superior. |
-| **Damp** | 50 % | 0 – 100 % | `ClientReverbTxDamping` | Controla la rapidez con que las frecuencias altas se atenúan en la cola. Valores más altos atenúan las frecuencias altas con mayor velocidad, produciendo una reverberación más cálida y oscura. Mapeo lineal. |
-| **Pre** | 20 ms | 0 – 100 ms | `ClientReverbTxPreDelayMs` | Define el predelay entre la señal seca y las primeras reflexiones. Mapeo lineal. |
-| **Mix** | 15 % | 0 – 100 % | `ClientReverbTxMix` | Define el balance seco/húmedo. Mapeo lineal. |
+| Control | Valor predeterminado | Rango válido | Comportamiento | Clave de ajuste |
+|---------|----------------------|--------------|----------------|-----------------|
+| Size | 50 % | 0–100 % | Establece el tamaño de sala modelado. Mapeo lineal. | `ClientReverbTxSize` |
+| Decay | 1.20 s | 0.3–5.0 s | Establece la longitud de la cola de reverberación. Mapeo exponencial — el control recorre de 0.3 s a 5.0 s con mayor precisión en los valores más cortos. | `ClientReverbTxDecayS` |
+| Damp | 50 % | 0–100 % | Los valores más altos atenúan las frecuencias agudas más rápidamente en la cola, produciendo una reverberación más cálida y menos brillante. Mapeo lineal. | `ClientReverbTxDamping` |
+| Pre | 20 ms | 0–100 ms | Establece la pre-demora entre la señal seca y las primeras reflexiones. Mapeo lineal. | `ClientReverbTxPreDelayMs` |
+| Mix | 15 % | 0–100 % | Establece el balance seco/húmedo. 0 % es completamente seco; 100 % es completamente húmedo. Mapeo lineal. | `ClientReverbTxMix` |
 
-El estado habilitado/deshabilitado de la etapa de reverberación se persiste en `ClientReverbTxEnabled`.
+El estado habilitado/deshabilitado de la etapa se guarda como `ClientReverbTxEnabled`.
 
 ## Consejos
 
-- Un Mix de 10–15 % es típico para voz. Valores más altos se vuelven perceptibles rápidamente y pueden deteriorar la inteligibilidad del habla.
-- Valores cortos de Decay (0.3–0.8 s) con un Size pequeño producen un efecto de sala reducida. Valores más largos de Decay con un Size grande aproximan un recinto de tipo sala de conciertos.
-- Aumentar Damp puede ayudar a suavizar la dureza en la cola de reverberación sin necesidad de reducir el Mix.
+- Para voz, un valor de Mix entre 10–15 % es lo habitual. El valor predeterminado de 15 % es un buen punto de partida.
+- Los valores altos de Decay (por encima de 3 s) pueden enlodar el habla. Comience con el valor predeterminado de 1.20 s y auméntelo solo si el efecto de sala suena demasiado corto.
+- Aumentar Damp reduce el brillo de las frecuencias altas en la cola, lo que puede ayudar a que la reverberación quede detrás del habla en lugar de encima de ella.
+- El editor flotante ("Aetherial FreeVerb — TX") ofrece controles giratorios más grandes para un ajuste preciso. Su posición y tamaño se guardan automáticamente entre sesiones.
 
-## Relacionados
+## Temas relacionados
 
 - [Omitir la reverberación desde la cadena](bypass-reverb-from-the-chain.md)
-- [Ajustar un Mix sutil — 10–15 % es típico para voz](dial-in-a-subtle-mix-10-15-is-typical-for-voice.md)
-- [Separar las reflexiones de la señal seca con Pre](offset-reflections-from-the-dry-signal-with-pre.md)
-- [Reducir el brillo en las frecuencias altas de la cola con Damp](reduce-the-high-end-sparkle-of-the-tail-with-damp.md)
-- [Definir el tamaño del recinto para una sensación de sala pequeña o grande](set-room-size-for-a-small-or-large-hall-feel.md)
-- [Ajustar el Decay al gusto sin ensuciar el habla](tune-decay-to-taste-without-muddying-speech.md)
+- [Ajustar un Mix sutil — entre 10–15 % es lo habitual para voz](dial-in-a-subtle-mix-10-15-is-typical-for-voice.md)
+- [Afinar el Decay al gusto sin enlodar el habla](tune-decay-to-taste-without-muddying-speech.md)
+- [Reducir el brillo de las frecuencias altas de la cola con Damp](reduce-the-high-end-sparkle-of-the-tail-with-damp.md)
+- [Establecer el tamaño de sala para un ambiente de sala pequeña o grande](set-room-size-for-a-small-or-large-hall-feel.md)
+- [Desfasar las reflexiones respecto a la señal seca con Pre](offset-reflections-from-the-dry-signal-with-pre.md)

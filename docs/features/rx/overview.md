@@ -1,107 +1,117 @@
-# Descripción general de los controles RX
+# Descripción general de los controles de RX
 
-El applet RX Controls le proporciona control de recepción por slice: sintonía de frecuencia, modo, ancho de filtro, selección de antena, CAG, salida de audio, squelch, RIT/XIT y ajustes de repetidor FM. Todo lo que afecta la forma en que un slice recibe y presenta el audio reside aquí.
-
-## Antes de comenzar
-
-- Conéctese a una radio FLEX-8600. El applet requiere una conexión de radio activa.
-- El applet RX siempre es visible en el panel de applets (barra lateral derecha). Si el panel está oculto, muéstrelo con View > Applet Panel, o haga clic en el botón de bandeja RX de la barra lateral derecha.
+El applet RX Controls le brinda control individual por slice sobre cada parámetro de recepción: modo, frecuencia, filtro, AGC, audio, squelch, RIT/XIT y configuración del repetidor FM. Todos estos controles actúan sobre el slice que esté seleccionado en ese momento en el applet.
 
 ## Cómo funciona
 
-El applet está vinculado a un slice a la vez. Cuando la radio tiene más de un slice activo, aparece una fila de pestañas etiquetadas de A a H en la parte superior del applet. Haga clic en cualquier pestaña para vincular el applet a ese slice. Todos los controles reflejan y operan únicamente sobre ese slice.
+El applet RX Controls está siempre visible en el Panel de Applets del lado derecho. Actívelo o desactívelo con el botón `RX` de la bandeja en la barra lateral derecha. Cuando hay más de un slice activo, aparece una fila de pestañas de slice (A a H) en la parte superior del applet; al hacer clic en una pestaña se vincula el applet a ese slice. Todos los controles que aparecen a continuación leen y escriben únicamente en ese slice.
 
-Los cambios realizados en el applet se envían inmediatamente a la radio mediante el protocolo SmartSDR. No existe un paso Apply o Save para la mayoría de los controles. La única excepción son los preajustes de ancho de filtro: los anchos de preajuste personalizados se guardan en la clave AppSettings `FilterPresets` y persisten entre sesiones.
+El applet está organizado en grupos funcionales, de arriba a abajo:
+
+**Fila de encabezado** — identidad del slice, bloqueo, selección de antena e indicadores de estado.
+
+**Fila de frecuencia y modo** — lectura del VFO, selector de modo y control del paso de sintonía.
+
+**Fila de filtro** — botones de preajuste, un widget de banda de paso arrastrable e indicador del ancho de filtro actual.
+
+**Fila de audio** — silencio, ganancia AF y paneo estéreo.
+
+**Fila de squelch** — activación del squelch y umbral.
+
+**Fila de AGC** — modo AGC y umbral. Oculta en los modos de la familia FM.
+
+**Fila de RIT/XIT** — desplazamientos de sintonía incremental para RX y TX de forma independiente.
+
+**Fila del repetidor FM** — tono CTCSS, desplazamiento del repetidor y controles de dirección. Visible únicamente en los modos FM, NFM y DFM.
 
 ## Qué hace cada control
 
-### Selección de slice y encabezado
+### Fila de encabezado
 
-| Control | Valor predeterminado | Comportamiento |
-|---|---|---|
-| Pestañas de slice (A..H) | — | Selecciona el slice que controla el applet. La fila de pestañas se oculta cuando solo hay un slice activo. |
-| Insignia de slice | A | Muestra la letra del slice actualmente vinculado. El color refleja la identidad del slice. |
-| 🔓 / 🔒 | 🔓 (desbloqueado) | Activa o desactiva el bloqueo de sintonía. Un slice bloqueado ignora los cambios de frecuencia provenientes de clics, desplazamiento o control externo. |
-| ANT1 (antena RX) | ANT1 | Abre un menú de antenas disponibles. Seleccione una para establecer la antena RX de este slice. La etiqueta es azul. |
-| ANT1 (antena TX) | ANT1 | Abre un menú de antenas con capacidad TX (los puertos solo de RX quedan excluidos). Seleccione una para establecer la antena TX de este slice. La etiqueta es roja. |
-| Etiqueta de ancho de filtro | 2.7K | Indicador de solo lectura que muestra el ancho de banda de filtro actual. Se actualiza cuando se aplica un preajuste o se arrastra la banda de paso. |
-| QSK | apagado (gris) | Se ilumina en ámbar cuando el CW full break-in está activo. Solo lectura; se controla desde el applet CW. |
-| TX (insignia) | — | Haga clic para designar este slice como el slice TX. |
+| Control | Valor predeterminado | Rango válido / opciones | Clave persistente | Comportamiento |
+|---|---|---|---|---|
+| Pestañas de slice (A..H) | — | 1–8 pestañas, limitadas por el hardware | — | Selecciona a qué slice está vinculado el applet. La fila se oculta cuando solo hay un slice disponible. |
+| Insignia de slice | A | A–H | — | Muestra la letra del slice vinculado actualmente, con color según la identidad del slice. |
+| 🔓 / 🔒 | 🔓 (desbloqueado) | — | — | Activa o desactiva el bloqueo de sintonía. Un slice bloqueado ignora los cambios de frecuencia provenientes del panadapter o de la entrada de frecuencia. |
+| ANT1 (antena RX) | ANT1 | De la lista de antenas del equipo | — | Abre un menú de antenas disponibles; al seleccionar una se establece la antena RX para este slice. La etiqueta es azul. |
+| ANT1 (antena TX) | ANT1 | De la lista de antenas del equipo, excluyendo los puertos solo de RX | — | Abre un menú de antenas con capacidad TX; al seleccionar una se establece la antena TX para este slice. La etiqueta es roja. Los puertos cuyos nombres comienzan con `RX` quedan filtrados. |
+| 2.7K (ancho de filtro) | 2.7K | — | — | Indicador de solo lectura. Muestra el ancho de banda del filtro actual. Se actualiza cuando se aplica un preajuste o se arrastra la banda de paso. |
+| QSK | apagado (gris) | apagado (gris) / encendido (ámbar) | — | Solo lectura. Se ilumina en ámbar cuando el break-in total de CW está activo. Se controla desde el applet CW. |
+| TX (insignia) | — | — | — | Haga clic para designar este slice como el slice TX. |
 
-### Modo y frecuencia
+### Fila de frecuencia y modo
 
-| Control | Valor predeterminado | Comportamiento |
-|---|---|---|
-| Combo de modo | USB | Establece el modo del slice. Modos disponibles: USB, LSB, CW, AM, SAM, FM, NFM, DFM, DIGU, DIGL, RTTY. Cambiar el modo remodela el filtro y los preajustes de paso. |
-| Etiqueta de frecuencia | 0.000.000 | Muestra la frecuencia VFO actual con agrupación por puntos. Haga clic para entrar en modo de edición. |
-| Edición de frecuencia | — | Escriba una frecuencia en MHz y presione Enter para sintonizar y volver a centrar el panadapter. Acepta valores de 0.001 a 54.000 MHz (hasta 450.000 MHz con una antena transverter). |
-| STEP | 100 Hz | Establece el tamaño del paso de sintonía. Haga clic en < o > o use la rueda de desplazamiento para recorrer la lista de pasos por modo. Las opciones de paso dependen del modo activo (ejemplo para SSB: 1, 10, 50, 100, 500, 1000, 2000, 3000 Hz). |
+| Control | Valor predeterminado | Rango válido / opciones | Clave persistente | Comportamiento |
+|---|---|---|---|---|
+| Selector de modo | USB | USB, LSB, CW, AM, SAM, FM, NFM, DFM, DIGU, DIGL, RTTY | — | Establece el modo del slice. Reorganiza los botones de preajuste de filtro y la lista de pasos para el nuevo modo. |
+| Etiqueta de frecuencia | 0.000.000 | — | — | Muestra la frecuencia actual del VFO con agrupación por puntos. Haga clic para entrar en modo de edición. |
+| Edición de frecuencia | — | 0.001–54.000 MHz (hasta 450.000 MHz en una antena transverter) | — | Escriba una frecuencia en MHz y presione Enter para sintonizar y recentrar el panadapter. Presione Escape para cancelar y restaurar la frecuencia anterior. |
+| STEP | 100 Hz | Lista por modo (p. ej. SSB: 1, 10, 50, 100, 500, 1000, 2000, 3000 Hz) | — | Haga clic en `<` / `>` o use la rueda del ratón para recorrer los tamaños de paso. Los pasos disponibles cambian según el modo. |
 
-### Filtro
+### Fila de filtro
 
-| Control | Valor predeterminado | Comportamiento |
-|---|---|---|
-| Preajustes de ancho de filtro | — | Los botones aplican un ancho de filtro preajustado para el modo actual. Haga clic derecho en un botón de preajuste para guardar el ancho de filtro actual en ese slot. Se ocultan en los modos FM, NFM y DFM. Los preajustes se almacenan en `FilterPresets`. |
-| Widget de banda de paso del filtro | — | Arrastre el borde inferior o superior de la visualización de la banda de paso para establecer un límite de filtro personalizado. |
+| Control | Valor predeterminado | Rango válido / opciones | Clave persistente | Comportamiento |
+|---|---|---|---|---|
+| Preajustes de ancho de filtro | — | USB/LSB: 1800–3300 Hz; AM/SAM: 5600–14000 Hz; CW: 50–400 Hz; DIGU/DIGL: 100–2000 Hz; RTTY: 250–1000 Hz | `FilterPresets` | Haga clic en un botón para aplicar ese ancho de filtro. Haga clic derecho en un botón para guardar el ancho de filtro actual como ese preajuste. Los botones se ocultan en los modos FM, NFM y DFM. Los preajustes se almacenan por modo. |
+| Widget de banda de paso del filtro | — | — | — | Arrastre el borde inferior o superior para ajustar directamente los límites de la banda de paso del filtro. |
 
-### CAG
+### Fila de audio
 
-| Control | Valor predeterminado | Rango válido | Comportamiento |
-|---|---|---|---|
-| Modo CAG | Med | Off, Slow, Med, Fast | Establece el modo de CAG. Se oculta en los modos de la familia FM. |
-| Umbral de CAG | 65 | 0–100 | Establece el umbral de CAG. Cuando el modo CAG está en Off, ajusta en cambio el nivel CAG-off. |
+| Control | Valor predeterminado | Rango válido | Clave persistente | Comportamiento |
+|---|---|---|---|---|
+| 🔊 / 🔇 (silencio) | 🔊 (con audio) | — | — | Silencia o activa la salida de audio del slice. |
+| Ganancia AF | 70 | 0–100 | — | Ajusta el nivel de salida de audio del slice. |
+| Paneo L / R | 50 | 0 (todo a la izquierda) – 100 (todo a la derecha) | — | Panea el audio del slice entre los canales izquierdo y derecho. Doble clic restablece el valor a 50 (centro). |
 
-### Salida de audio
+### Fila de squelch
 
-| Control | Valor predeterminado | Rango válido | Comportamiento |
-|---|---|---|---|
-| 🔊 / 🔇 (silencio) | 🔊 (sin silencio) | — | Silencia o reactiva la salida de audio del slice. |
-| Ganancia AF | 70 | 0–100 | Ajusta el nivel de salida de audio del slice. |
-| Panorama L / R | 50 | 0–100 | Desplaza el audio del slice entre izquierda (0) y derecha (100). Doble clic restablece el valor a 50 (centro). |
-| SQL | apagado | — | Activa el squelch al nivel actual del deslizador. |
-| Nivel de squelch | 20 | 0–100 | Establece el umbral del squelch. No tiene efecto cuando SQL está apagado. |
+| Control | Valor predeterminado | Rango válido | Clave persistente | Comportamiento |
+|---|---|---|---|---|
+| SQL | apagado | — | — | Activa el squelch en el nivel actual del deslizador. |
+| Nivel de squelch | 20 | 0–100 | — | Establece el umbral del squelch. No tiene efecto mientras SQL está apagado. |
 
-### RIT y XIT
+### Fila de AGC
 
-| Control | Valor predeterminado | Comportamiento |
-|---|---|---|
-| RIT | apagado | Activa o desactiva la sintonía incremental de recepción. Cuando está activo, la frecuencia de recepción del slice se desplaza según el offset RIT sin mover el VFO. |
-| RIT 0 | — | Pone a cero el offset RIT de inmediato. |
-| Offset RIT | +0 Hz | Ajusta el offset RIT en pasos de 10 Hz. Use < / > o la rueda de desplazamiento. |
-| XIT | apagado | Activa o desactiva la sintonía incremental de transmisión. Cuando está activo, la frecuencia TX se desplaza según el offset XIT sin cambiar la recepción. |
-| XIT 0 | — | Pone a cero el offset XIT de inmediato. |
-| Offset XIT | +0 Hz | Ajusta el offset XIT en pasos de 10 Hz. Use < / > o la rueda de desplazamiento. |
+| Control | Valor predeterminado | Rango válido / opciones | Clave persistente | Comportamiento |
+|---|---|---|---|---|
+| Modo AGC | Med | Off, Slow, Med, Fast | — | Establece el modo AGC del slice. Oculto en los modos de la familia FM. |
+| Umbral AGC | 65 | 0–100 | — | Establece el umbral del AGC. Cuando el modo AGC es Off, este control ajusta en su lugar el nivel de ganancia RF manual. La información emergente refleja qué valor se está ajustando. |
 
-### Controles de repetidor FM
+### Fila de RIT / XIT
 
-Estos controles son visibles solo cuando el modo del slice es FM, NFM o DFM.
+| Control | Valor predeterminado | Rango válido | Clave persistente | Comportamiento |
+|---|---|---|---|---|
+| RIT | apagado | — | — | Activa o desactiva la Sintonía Incremental de Recepción. |
+| RIT 0 | — | — | — | Pone a cero el desplazamiento RIT de inmediato. |
+| Desplazamiento RIT | +0 Hz | Paso: 10 Hz | — | Haga clic en `<` / `>` o use la rueda del ratón para ajustar el desplazamiento RIT en pasos de 10 Hz. |
+| XIT | apagado | — | — | Activa o desactiva la Sintonía Incremental de Transmisión. |
+| XIT 0 | — | — | — | Pone a cero el desplazamiento XIT de inmediato. |
+| Desplazamiento XIT | +0 Hz | Paso: 10 Hz | — | Haga clic en `<` / `>` o use la rueda del ratón para ajustar el desplazamiento XIT en pasos de 10 Hz. |
 
-| Control | Valor predeterminado | Rango válido | Comportamiento |
-|---|---|---|---|
-| Modo de tono (FM) | Off | Off, CTCSS TX | Selecciona si se transmite un tono CTCSS. |
-| Valor del tono CTCSS | — | 67.0 Hz a 254.1 Hz (41 tonos estándar EIA/TIA-603) | Selecciona la frecuencia del tono CTCSS. Se habilita solo cuando el modo de tono está configurado en CTCSS TX. |
-| Offset (FM) | 0.0 MHz | 0.0–100.0 MHz (paso 0.1) | Establece la frecuencia de offset del repetidor FM. |
-| − (offset hacia abajo) | — | — | Establece la dirección del offset TX del repetidor hacia abajo (TX por debajo de RX). |
-| Simplex | marcado | — | Establece el offset del repetidor en simplex (TX igual a RX). |
-| + (offset hacia arriba) | — | — | Establece la dirección del offset TX del repetidor hacia arriba (TX por encima de RX). |
-| REV | — | — | Invierte el signo del offset TX para trabajar un par de repetidor invertido. |
+### Fila del repetidor FM (solo modos FM, NFM, DFM)
+
+| Control | Valor predeterminado | Rango válido / opciones | Clave persistente | Comportamiento |
+|---|---|---|---|---|
+| Modo de tono (FM) | Off | Off, CTCSS TX | — | Selecciona si se envía un tono CTCSS en la transmisión. |
+| Valor del tono CTCSS | — | 41 tonos estándar, 67.0–254.1 Hz (EIA/TIA-603) | — | Selecciona la frecuencia del tono CTCSS. Se habilita únicamente cuando el modo de tono es CTCSS TX. |
+| Desplazamiento (FM) | 0.0 MHz | 0.0–100.0 MHz, paso 0.1 | — | Establece la frecuencia de desplazamiento del repetidor FM. |
+| − (desplazamiento hacia abajo) | — | — | — | Fija la frecuencia TX por debajo de la frecuencia RX en la cantidad del desplazamiento. |
+| Simplex | marcado | — | — | Fija la frecuencia TX igual a la frecuencia RX (sin desplazamiento). |
+| + (desplazamiento hacia arriba) | — | — | — | Fija la frecuencia TX por encima de la frecuencia RX en la cantidad del desplazamiento. |
+| REV | — | — | — | Invierte la dirección del desplazamiento TX para trabajar un par de repetidor invertido. |
 
 ## Consejos
 
-- El deslizador de panorama L / R tiene un pequeño punto de marca central en su ranura. Haga doble clic para volver al centro (50) sin necesidad de ajustarlo manualmente.
-- Los preajustes de ancho de filtro son por modo. Los anchos de preajuste personalizados que guarde en un modo no afectan a otros modos.
-- Los puertos de antena solo para RX (aquellos cuyos nombres comienzan con "RX") se excluyen automáticamente del menú de antena TX.
+- Los valores de los preajustes de filtro se guardan por modo bajo `FilterPresets`. Si hace clic derecho en un botón de preajuste y almacena un ancho personalizado, este persiste entre sesiones para ese modo.
+- El deslizador de paneo L / R tiene una marca central en la ranura. Haga doble clic en cualquier punto del deslizador para volver al centro (50) de inmediato.
+- La información emergente del umbral AGC cambia su etiqueta según si el modo AGC es Off o está activo, de modo que siempre sabe qué parámetro está ajustando.
+- El botón de bloqueo de sintonía 🔓 / 🔒 es la forma más rápida de evitar que un slice sea resintonizado accidentalmente mientras hace clic en el panadapter.
 
 ## Temas relacionados
 
-- [Comprender los slices y los VFO](../../getting-started/concepts/understanding-slices.md)
-- [Sintonizar la radio a una frecuencia (escriba MHz en el indicador)](tune-the-radio-to-a-frequency-type-mhz-in-the-readout.md)
+- [Comprender los slices y los VFOs](../../getting-started/concepts/understanding-slices.md)
+- [Cambiar entre múltiples slices usando la fila de pestañas A..H](switch-between-multiple-slices-using-the-a-h-tab-row.md)
+- [Sintonizar el equipo a una frecuencia (escribir MHz en la lectura)](tune-the-radio-to-a-frequency-type-mhz-in-the-readout.md)
 - [Cambiar el modo (USB, LSB, CW, AM, FM, etc.)](change-mode-usb-lsb-cw-am-fm-etc.md)
 - [Seleccionar un preajuste de ancho de filtro para el modo actual](pick-a-filter-width-preset-for-the-current-mode.md)
 - [Seleccionar la antena RX o TX para este slice](select-the-rx-or-tx-antenna-for-this-slice.md)
-- [Activar el squelch y ajustar su umbral](turn-on-the-squelch-and-set-its-threshold.md)
-- [Usar RIT para desplazar la frecuencia de recepción de una estación con deriva](use-rit-to-offset-the-receive-frequency-for-a-drifting-station.md)
-- [Usar XIT para desplazar la frecuencia de transmisión sin cambiar la recepción](use-xit-to-offset-the-transmit-frequency-without-changing-rx.md)
-- [Trabajar un repetidor FM con tono CTCSS y offset +/-](work-an-fm-repeater-with-ctcss-tone-and-offset.md)
-- [Bloquear el slice para evitar una resintonización accidental](lock-the-slice-to-prevent-accidental-retuning.md)
-- [Cambiar entre múltiples slices usando la fila de pestañas A..H](switch-between-multiple-slices-using-the-a-h-tab-row.md)

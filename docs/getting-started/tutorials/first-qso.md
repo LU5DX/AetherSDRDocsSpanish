@@ -1,107 +1,111 @@
-# Haga su primer QSO con AetherSDR
+# Realice su primer QSO con AetherSDR
 
-Esta página le guía a través del proceso de conexión a su FLEX-8600, sintonización de una frecuencia y realización de un contacto de voz. Siga los pasos en orden la primera vez.
+Esta página le guía por el proceso de conectarse a su FLEX-8600, sintonizar una frecuencia, verificar la configuración de transmisión y establecer un contacto. La primera vez, siga los pasos en orden.
 
 ## Antes de comenzar
 
-- AetherSDR está instalado y en ejecución en su computadora.
-- Su FLEX-8600 está encendido y accesible — ya sea en la misma LAN o a través de SmartLink.
-- Hay una antena conectada al radio.
-- Conoce la frecuencia y el modo de la estación con la que desea trabajar.
+- AetherSDR está instalado y en ejecución.
+- Su FLEX-8600 está encendido y accesible — ya sea en la misma LAN, a través de SmartLink o mediante una dirección IP conocida.
+- Su micrófono y auriculares están configurados en los ajustes de audio del radio.
+- Conoce la frecuencia y el modo de la estación con la que desea comunicarse.
 
 ## Pasos
 
-### 1. Conéctese al radio
+### 1. Conéctese a su radio
 
-1. La pantalla "Connect to a Radio" aparece automáticamente en la ventana principal cuando no hay ningún radio conectado. Si no aparece, elija `Settings > Connect to Radio...`.
-2. El modo predeterminado es **Local**. Si su radio está en la misma red, aparecerá en la lista **Available radios** en pocos segundos.
-3. Seleccione su radio en la lista.
+1. El panel **Connect to a Radio** aparece en la ventana principal. Si no aparece, vaya a `Settings > Connect to Radio...`.
+2. Seleccione **Local** si el radio está en su LAN. Espere unos segundos a que la lista **Available radios** se rellene.
+3. Resalte su radio en la lista **Available radios**.
 4. Haga clic en **Connect Selected Radio**.
-5. Si no aparece ningún radio, haga clic en **Retry Discovery** y espere. Si el radio aún no se encuentra, consulte [Reintentar el descubrimiento cuando no aparecen radios](../../features/connection/retry-discovery-when-no-radios-appear.md).
+
+La etiqueta de estado avanza por "searching" y "connecting" y luego muestra "connected" cuando se establece el enlace. El panel de applets se activa en el lado derecho.
+
+> Si la lista permanece vacía, haga clic en **Retry Discovery**. Si el radio está en una subred diferente o en una VPN, haga clic en **Connect by IP** y consulte [Conectarse por IP a través de una VPN o red enrutada](../setup/connect-by-ip-across-a-vpn-or-routed-network.md).
 
 ### 2. Abra el applet RX Controls
 
-1. El botón **RX** está en la barra lateral derecha (Panel de applets). Haga clic en él si el panel RX Controls no está visible todavía.
+Haga clic en el botón **RX** de la barra lateral derecha para expandir el applet RX Controls. El slice **A** está seleccionado de forma predeterminada.
 
-### 3. Establezca el modo
+### 3. Establezca el modo de operación
 
-1. En el applet RX Controls, busque el **Mode combo** (muestra **USB** de forma predeterminada).
-2. Haga clic en él y seleccione el modo que corresponde al contacto — por ejemplo, **USB** para un contacto SSB en 20 m, o **LSB** para 40 m/80 m.
+En el **Mode combo**, seleccione el modo que corresponde al contacto que desea realizar — por ejemplo, **USB** para la mayoría de las comunicaciones telefónicas en HF, **LSB** para las bandas de 40/80/160 m en teléfono, o **CW** para Morse.
+
+Los preajustes de filtro debajo del indicador de frecuencia se actualizan automáticamente según el modo elegido.
 
 ### 4. Sintonice la frecuencia
 
-1. Haga clic en el **Frequency label** (la pantalla grande con puntos, p. ej. `0.000.000`). Se convierte en un campo editable.
-2. Escriba la frecuencia en MHz — por ejemplo:
-   ```
-   14.225
-   ```
-3. Presione **Enter**. El radio sintoniza esa frecuencia y el panadapter se recentra.
+1. Haga clic en la **Frequency label** (que muestra una lectura punteada como `0.000.000`). Esta se convierte en un campo de edición.
+2. Escriba la frecuencia en MHz — por ejemplo, `14.225` para 14.225 MHz.
+3. Presione **Enter**. El radio sintoniza y el panadapter se recentra en la nueva frecuencia.
 
-### 5. Establezca el ancho de filtro
+Si necesita cancelar sin cambiar la frecuencia, presione **Escape**.
 
-1. En el applet RX Controls, haga clic en uno de los botones **Filter width presets** para elegir un ancho de banda de recepción adecuado para el modo. Para SSB, 2700 Hz es un punto de partida habitual.
+### 5. Elija el ancho de filtro
 
-### 6. Verifique el audio de recepción
+Haga clic en uno de los botones **Filter width presets** para seleccionar el ancho de banda adecuado para su modo. Para SSB las opciones son 1800, 2100, 2400, 2700, 2900 y 3300 Hz. El ancho de filtro actual se muestra en la **Filter width label** (por ejemplo, `2.7K`).
 
-1. Confirme que el control deslizante **AF gain** no está en cero (el valor predeterminado es 70).
-2. Confirme que el botón de silencio 🔊 / 🔇 está en estado activo (🔊).
-3. Escuche las señales en el panadapter y en el audio.
+### 6. Verifique la antena de recepción
 
-### 7. Abra el applet TX Controls
+Confirme que el combo **ANT1 (RX antenna)** muestra la antena en la que desea recibir. Cámbielo si es necesario.
 
-1. Haga clic en el botón **TX** de la barra lateral derecha para abrir el applet TX Controls.
+### 7. Ajuste la ganancia AF
 
-### 8. Establezca la potencia de transmisión
+Ajuste el control deslizante **AF gain** para escuchar cómodamente. El valor predeterminado es 70 (rango 0–100).
 
-1. Ajuste el control deslizante **RF Power** al nivel de salida deseado (el valor predeterminado es 100; el rango válido es 0–100).
+### 8. Abra el applet TX Controls
 
-### 9. Verifique que este slice sea el slice de TX
+Haga clic en el botón **TX** de la barra lateral derecha para expandir el applet TX Controls.
 
-1. En el applet RX Controls, confirme que el indicador **TX (badge)** está iluminado para el slice **A** (el slice predeterminado). Si no lo está, haga clic en el botón **TX (badge)** para designar este slice como el slice de transmisión.
+### 9. Establezca la potencia de transmisión
 
-### 10. Verifique la antena de TX
+Mueva el control deslizante **RF Power** al nivel de salida deseado. El valor predeterminado es 100 (rango 0–100). Observe el medidor **RF Pwr** y el medidor **SWR** durante el siguiente paso.
 
-1. En el applet RX Controls, confirme que el cuadro combinado rojo **ANT1 (TX antenna)** muestra la antena por la que desea transmitir. Haga clic en él para cambiarla si es necesario.
+### 10. Verifique la antena de transmisión
 
-### 11. Verifique el ROS antes de transmitir (recomendado)
+De vuelta en el applet RX Controls, confirme que el combo **ANT1 (TX antenna)** muestra la antena de transmisión correcta para esta banda.
 
-1. En el applet TX Controls, haga clic en **TUNE**. La etiqueta del botón cambia a **TUNING...** y se transmite una portadora al nivel **Tune Pwr** (predeterminado 10).
-2. Observe el medidor de **SWR**. Una lectura claramente por debajo de 2.5 es aceptable. El rojo comienza por encima de 2.5.
-3. Haga clic en **TUNE** nuevamente (o espere a que finalice) para detener la portadora.
-4. Si el ROS es elevado, verifique la conexión de la antena o active el ATU interno — consulte [Activar el ATU interno](../../features/tx/run-the-internal-atu.md).
+### 11. Compruebe el SWR con una portadora de ajuste (opcional pero recomendado)
 
-### 12. Transmita
+1. En el applet TX Controls, ajuste el control deslizante **Tune Pwr** a un nivel bajo (el valor predeterminado es 10).
+2. Haga clic en **TUNE**. La etiqueta del botón cambia a **TUNING...** con fondo rojo mientras la portadora está activa.
+3. Lea el medidor **SWR**. Cuando esté satisfecho, haga clic en **TUNE** nuevamente para detenerla.
 
-1. Active el micrófono normalmente (VOX, pedal o PTT) para transmitir. También puede hacer clic en **MOX** en el applet TX Controls para activar el transmisor manualmente — el botón se pone rojo durante la transmisión.
-2. Hable y luego suelte el PTT o haga clic en **MOX** nuevamente para volver a recepción.
+Una buena lectura de SWR (por debajo de 2.0) indica que su sistema de antena está listo.
 
-### 13. Confirme el contacto
+### 12. Establezca el contacto
 
-1. Registre el QSO en su aplicación de registro preferida.
+Cuando la frecuencia esté libre y la otra estación esté lista:
+
+1. Active su micrófono o manipulador. El radio pasará a transmitir.
+2. Para activar el transmisor manualmente durante pruebas, haga clic en **MOX** en el applet TX Controls. El botón se vuelve rojo mientras la transmisión está activa. Haga clic en **MOX** nuevamente para volver a recepción.
+3. Observe el medidor **RF Pwr** para confirmar la potencia de salida y el medidor **SWR** para confirmar el comportamiento de la antena.
 
 ## Consejos
 
-- El valor predeterminado del control deslizante **AF gain** es 70 y el del control deslizante **L / R pan** es 50 (centro). Al hacer doble clic en el control de paneo, este se restablece al centro.
-- El cuadro combinado **AGC mode** tiene como valor predeterminado **Med**. Si las señales son muy fuertes o muy débiles, pruebe **Slow** o **Fast**.
-- Si resintoniza accidentalmente el VFO mientras transmite o registra, haga clic en el botón 🔓 del applet RX Controls para bloquear la frecuencia del slice. El ícono cambia a 🔒 cuando está bloqueado.
-- El control deslizante **RF Power** establece la potencia como un porcentaje de la salida máxima del radio, no directamente en watts. Observe el medidor **RF Pwr** en el applet TX Controls para ver la potencia directa real.
+- Si está trabajando con una estación que está ligeramente fuera de su frecuencia de recepción, active **RIT** en el applet RX Controls y use el spinbox **RIT offset** para desplazar la recepción sin mover su frecuencia de transmisión. Haga clic en **RIT 0** para zerarlo al terminar.
+- Si escucha retroalimentación de su propia transmisión, reduzca el **AF gain** durante la transmisión o use auriculares.
+- Los controles deslizantes **RF Power** y **Tune Pwr**, el combo **TX Profile** y los selectores de antena mantienen su estado entre sesiones para el mismo radio.
+- Para evitar resintonizar accidentalmente el slice durante un QSO, haga clic en el botón de alternancia 🔓 en el applet RX Controls para bloquear la frecuencia. Cambia a 🔒 cuando está bloqueado.
 
 ## Solución de problemas
 
-- **No aparece ningún radio en la lista Available radios** — Es posible que el radio no esté en la misma subred, o que el descubrimiento no haya finalizado. Haga clic en **Retry Discovery**. Si sigue sin aparecer, intente conectarse por IP: consulte [Conectarse por IP a través de una VPN o red enrutada](../setup/connect-by-ip-across-a-vpn-or-routed-network.md).
-- **Sin audio de recepción** — Verifique que el botón de silencio muestre 🔊 (sin silencio) y que el control deslizante **AF gain** esté por encima de cero. Compruebe también que la salida de audio del sistema esté configurada correctamente.
-- **MOX activa el radio pero el ROS es muy alto** — Detenga la transmisión de inmediato. Verifique que la antena esté conectada y que el puerto **ANT1 (TX antenna)** correcto esté seleccionado. Active el ATU si está instalado.
-- **El Frequency label no acepta entrada del teclado** — Haga clic directamente sobre la pantalla de frecuencia para entrar en modo de edición, luego escriba el valor en MHz y presione **Enter**.
+- **Aparece "No local radios found yet" y la lista permanece vacía** — Haga clic en **Retry Discovery**. Compruebe que el radio esté encendido y en el mismo segmento de red. Si está en una subred diferente, use **Connect by IP** o SmartLink.
+- **MOX activa el radio pero el medidor RF Pwr muestra cero** — Compruebe que el control deslizante **RF Power** esté por encima de 0 y que la antena TX correcta esté seleccionada en el combo **ANT1 (TX antenna)**.
+- **El SWR aparece en rojo (por encima de 2.5)** — Revise sus conexiones de coaxial y antena. Active el ATU interno si su equipo lo incluye: haga clic en **ATU** en el applet TX Controls.
+- **El audio es muy bajo o está ausente en recepción** — Compruebe el control deslizante **AF gain** (valor predeterminado 70) y confirme que el interruptor de silencio 🔊 / 🔇 esté en el estado sin silencio (🔊).
 
 ## Relacionados
 
 - [Conectarse a un radio en LAN local](../setup/connect-to-a-local-lan-radio.md)
 - [Conectarse a un radio remoto a través de SmartLink](../setup/connect-to-a-remote-radio-through-smartlink.md)
-- [Sintonizar el radio a una frecuencia (escribir MHz en la pantalla)](../../features/rx/tune-the-radio-to-a-frequency-type-mhz-in-the-readout.md)
+- [Conectarse por IP a través de una VPN o red enrutada](../setup/connect-by-ip-across-a-vpn-or-routed-network.md)
+- [Sintonizar el radio a una frecuencia (escribir MHz en el indicador)](../../features/rx/tune-the-radio-to-a-frequency-type-mhz-in-the-readout.md)
 - [Cambiar el modo (USB, LSB, CW, AM, FM, etc.)](../../features/rx/change-mode-usb-lsb-cw-am-fm-etc.md)
-- [Seleccionar un preset de ancho de filtro para el modo actual](../../features/rx/pick-a-filter-width-preset-for-the-current-mode.md)
-- [Establecer la potencia de salida de RF](../../features/tx/set-rf-output-power.md)
-- [Iniciar una portadora de ajuste para verificar el ROS](../../features/tx/start-a-tune-carrier-to-check-swr.md)
+- [Seleccionar un preajuste de ancho de filtro para el modo actual](../../features/rx/pick-a-filter-width-preset-for-the-current-mode.md)
+- [Seleccionar la antena RX o TX para este slice](../../features/rx/select-the-rx-or-tx-antenna-for-this-slice.md)
+- [Iniciar una portadora de ajuste para comprobar el SWR](../../features/tx/start-a-tune-carrier-to-check-swr.md)
+- [Establecer la potencia de salida RF](../../features/tx/set-rf-output-power.md)
 - [Activar el ATU interno](../../features/tx/run-the-internal-atu.md)
-- [Alternar MOX para activar manualmente el transmisor](../../features/tx/toggle-mox-to-manually-key-the-transmitter.md)
+- [Usar RIT para desplazar la frecuencia de recepción de una estación con deriva](../../features/rx/use-rit-to-offset-the-receive-frequency-for-a-drifting-station.md)
 - [Bloquear el slice para evitar resintonizaciones accidentales](../../features/rx/lock-the-slice-to-prevent-accidental-retuning.md)
+- [Reintentar el descubrimiento cuando no aparecen radios](../../features/connection/retry-discovery-when-no-radios-appear.md)

@@ -1,35 +1,35 @@
-# Reduzca el brillo excesivo de la cola con Damp
+# Reduzca el brillo agudo de la cola con Damp
 
-El control **Damp** determina con qué rapidez se atenúan las frecuencias altas en la cola de reverberación. Al aumentarlo se elimina la calidad brillante y aérea de las decaídas largas — útil cuando la reverberación suena demasiado metálica o dura en voz.
+El control **Damp** regula la velocidad con la que las frecuencias altas se atenúan dentro de la cola de reverberación. Al aumentarlo, se elimina el brillo aéreo y brillante que puede hacer que la reverberación de voz suene poco natural en el aire.
 
 ## Antes de comenzar
 
-- El applet Reverb debe estar visible. Permanece oculto hasta que la etapa Reverb se habilita mediante el widget CHAIN o el editor flotante Reverb. Consulte [Omitir la reverberación desde la cadena](bypass-reverb-from-the-chain.md) si necesita habilitar la etapa primero.
-- El contenedor principal TXDSP (PooDoo Audio) debe estar abierto en el panel de applets para que el subcontenedor REVERB sea accesible.
+- La etapa de reverberación debe estar habilitada en el widget CHAIN. Si no lo está, el applet Aetherial FreeVerb permanece oculto y Damp no tiene efecto.
+- El applet Aetherial FreeVerb o su editor flotante deben estar visibles. Consulte [Descripción general de Aetherial FreeVerb](overview.md) si aún no lo ha abierto.
 
 ## Pasos
 
-1. Localice el subcontenedor **REVERB** dentro del contenedor principal PooDoo Audio (TXDSP) en el panel de applets.
-2. Encuentre el control **Damp** — el tercer control de la fila de cinco (Size, Decay, Damp, Pre, Mix).
-3. Arrastre el control **Damp** hacia arriba para aumentar el amortiguamiento. La etiqueta muestra el valor actual como porcentaje.
-4. Transmita y escuche. Los valores más altos hacen que las frecuencias altas de la cola decaigan más rápido, produciendo una reverberación más cálida y oscura.
-5. Ajuste hasta que la cola se mezcle naturalmente con su voz sin sonar apagada.
+1. Abra el editor de Aetherial FreeVerb haciendo doble clic en la etapa VERB del widget CHAIN. Se abre la ventana sin marco titulada "Aetherial FreeVerb — TX".
+2. Localice el control **Damp** — el tercer control desde la izquierda en la fila de cinco controles.
+3. Gire **Damp** en sentido horario para aumentar el amortiguamiento. Los valores más altos hacen que las frecuencias altas decaigan más rápido, reduciendo el brillo en la cola.
+4. Gire **Damp** en sentido antihorario para permitir que las frecuencias altas persistan más tiempo, generando una cola más brillante y abierta.
+5. Suelte el control. El valor se guarda inmediatamente en `ClientReverbTxDamping`.
 
 ## Qué hace cada control
 
-| Control | Predeterminado | Rango válido | Configuración persistida | Comportamiento |
-|---------|---------------|--------------|--------------------------|----------------|
-| Damp | 50 % | 0 % a 100 % | `ClientReverbTxDamping` | Lineal. Los valores más altos amortiguan las frecuencias altas más rápido en la cola de reverberación. El 0 % deja la cola sin filtrar; el 100 % suprime fuertemente el contenido de alta frecuencia a lo largo de toda la cola. |
+| Control | Valor predeterminado | Rango | Clave de persistencia | Comportamiento |
+|---------|----------------------|-------|-----------------------|----------------|
+| Damp | 50 % | 0 % – 100 % | `ClientReverbTxDamping` | Los valores más altos amortiguan las frecuencias altas más rápido en la cola de reverberación. Mapeo lineal. |
 
 ## Consejos
 
-- Comience con el valor predeterminado de 50 % y auméntelo en incrementos pequeños. Para la mayoría del trabajo de voz, los valores entre 50–70 % eliminan la dureza sin que la cola suene turbia.
-- Si la cola todavía suena demasiado brillante después de aumentar Damp, acorte también Decay. Ambos controles funcionan en conjunto: un Decay largo con Damp bajo produce la mayor energía en frecuencias altas a lo largo del tiempo.
-- Haga doble clic en el control **Damp** para restablecerlo a su valor predeterminado de 50 %.
+- Un valor alrededor de 50–70 % es adecuado para la mayoría del trabajo con voz. Suaviza la cola sin hacer que la reverberación suene apagada.
+- Si la cola suena opaca o indefinida, reduzca **Damp** hacia 20–30 % para dejar pasar más contenido de alta frecuencia.
+- **Damp** interactúa con **Decay**: un decaimiento largo con amortiguamiento bajo produce una cola brillante y prolongada que puede enmascarar la voz. Aumente **Damp** si también aumenta Decay.
 
-## Relacionados
+## Temas relacionados
 
-- [Ajuste la decaída a su gusto sin enturbiar la voz](tune-decay-to-taste-without-muddying-speech.md)
-- [Configure el tamaño de sala para una sensación de sala pequeña o grande](set-room-size-for-a-small-or-large-hall-feel.md)
-- [Establezca una mezcla sutil — 10-15 % es típico para voz](dial-in-a-subtle-mix-10-15-is-typical-for-voice.md)
-- [Omitir la reverberación desde la cadena](bypass-reverb-from-the-chain.md)
+- [Descripción general de Aetherial FreeVerb](overview.md)
+- [Ajuste el decaimiento a su gusto sin enturbiar la voz](tune-decay-to-taste-without-muddying-speech.md)
+- [Configure una mezcla sutil — 10–15 % es típico para voz](dial-in-a-subtle-mix-10-15-is-typical-for-voice.md)
+- [Omita la reverberación desde la cadena](bypass-reverb-from-the-chain.md)

@@ -1,46 +1,47 @@
-# Reactivar una etapa específica después de un bypass global
+# Reactivar una etapa específica tras un bypass global
 
-Después de usar BYPASS para silenciar todas las etapas de TX DSP a la vez, es posible que desee volver a activar una sola etapa sin liberar el bypass global. Esta página muestra cómo hacerlo sin alterar la instantánea que BYPASS está manteniendo.
+Después de usar BYPASS para silenciar toda la cadena TX o RX, es posible recuperar una o más etapas individuales sin desactivar el bypass global ni restaurar todas las etapas a la vez. Basta con hacer clic una vez en el bloque de la etapa.
 
 ## Antes de comenzar
 
-- El contenedor PooDoo Audio (TXDSP) debe estar visible. Si no lo está, haga clic en el botón PUDU de la bandeja en la barra lateral derecha para mostrarlo.
-- TX debe ser el modo activo en el applet. Confirme que el botón de alternancia TX esté marcado (ámbar). BYPASS no tiene efecto en modo RX.
-- BYPASS debe estar ya marcado. Si no lo está, este procedimiento no aplica — haga clic directamente en una etapa para alternarla.
+- El Aetherial Audio Chain debe estar visible. Si no lo está, haga clic en el botón PUDU de la bandeja en la barra lateral derecha para mostrarlo.
+- BYPASS debe estar activo en este momento (ámbar, activo) en la cadena — TX o RX — donde desea reactivar una etapa.
+- Asegúrese de estar visualizando el lado correcto de la cadena. Haga clic en TX o RX en el encabezado del applet para confirmarlo.
 
 ## Pasos
 
-1. Localice la tira de cadena en el contenedor PooDoo Audio. Las etapas se muestran de izquierda a derecha: Eq, Comp, Gate, DeEss, Tube, Enh / PUDU, Reverb.
-2. Encuentre la etapa que desea reactivar. Las etapas en bypass aparecen visualmente inactivas.
-3. Haga clic una vez en esa etapa. Un solo clic alterna el estado de bypass únicamente para esa etapa, volviéndola a activar mientras todas las demás etapas en bypass permanecen desactivadas.
-4. Repita el proceso para cualquier otra etapa individual que desee restaurar.
+1. Observe la fila de encabezado del Aetherial Audio Chain. Confirme que BYPASS está marcado (borde y relleno ámbar).
+2. Si necesita trabajar en la cadena TX, haga clic en TX. Si necesita trabajar en la cadena RX, haga clic en RX.
+3. Localice el bloque de la etapa que desea reactivar — por ejemplo, COMP en la cadena TX o GATE en la cadena RX.
+4. Haga clic una vez en el bloque de la etapa. La etapa cambia de estado de bypass a activo.
+5. Repita el paso 4 para cualquier otra etapa individual que desee restaurar.
+
+El botón BYPASS permanece marcado. Solo las etapas en las que hizo clic están ahora activas; el resto permanece en bypass. Las etapas reactivadas de esta manera se preservan fuera del instantánea de bypass, por lo que al desactivar BYPASS más adelante solo se restauran las etapas que estaban activas *antes* de que BYPASS se activara por primera vez.
 
 ## Qué hace cada control
 
-| Control | Comportamiento | Valor predeterminado | Clave de configuración |
-|---|---|---|---|
-| BYPASS | Marcado: toma una instantánea de las etapas actualmente habilitadas y las deshabilita todas. Desmarcado: restaura exactamente las etapas que estaban activas antes. | Desmarcado | — |
-| Etapa de cadena (Eq) | Un clic alterna el bypass para la etapa de ecualización. | — | `ClientCompTxChainStages` |
-| Etapa de cadena (Comp) | Un clic alterna el bypass para el compresor. | — | `ClientCompTxChainStages` |
-| Etapa de cadena (Gate) | Un clic alterna el bypass para el gate. | — | `ClientCompTxChainStages` |
-| Etapa de cadena (DeEss) | Un clic alterna el bypass para el de-esser. | — | `ClientCompTxChainStages` |
-| Etapa de cadena (Tube) | Un clic alterna el bypass para el saturador de tubo. | — | `ClientCompTxChainStages` |
-| Etapa de cadena (Enh / PUDU) | Un clic alterna el bypass para el excitador PUDU. | — | `ClientCompTxChainStages` |
-| Etapa de cadena (Reverb) | Un clic alterna el bypass para el reverb. | — | `ClientCompTxChainStages` |
+| Control | Tipo | Valor predeterminado | Comportamiento | Clave de configuración |
+|---|---|---|---|---|
+| TX | Botón de alternancia | Marcado | Cambia el applet para mostrar e interactuar con la cadena DSP TX (EQ, COMP, GATE, DESS, TUBE, PUDU, VERB). | `PooDooAudioActiveTab` |
+| RX | Botón de alternancia | Sin marcar | Cambia el applet para mostrar e interactuar con la cadena DSP RX (EQ, GATE, COMP, TUBE, PUDU). | `PooDooAudioActiveTab` |
+| BYPASS | Botón de alternancia | Sin marcar | Marcado: toma una instantánea de las etapas activas en ese momento y las desactiva todas. Sin marcar: restaura solo las etapas que estaban activas antes. TX y RX mantienen instantáneas independientes. | — |
+| Etapa de la cadena TX (EQ / COMP / GATE / DESS / TUBE / PUDU / VERB) | Bloque de etapa | — | Un clic alterna el bypass de esa etapa. Doble clic abre su editor sin marco. Arrastrar reordena la cadena. | `ClientCompTxChainStages` |
+| Etapa de la cadena RX (EQ / GATE / COMP / TUBE / PUDU) | Bloque de etapa | — | Un clic alterna el bypass de esa etapa. Doble clic abre su editor sin marco. Arrastrar reordena la cadena. | `ClientCompRxChainStages` |
 
 ## Consejos
 
-- Las etapas alternadas manualmente mientras BYPASS está marcado se registran fuera de la instantánea. Si posteriormente desmarca BYPASS, solo se restauran las etapas que estaban activas antes de marcar BYPASS por primera vez — las etapas que reactivó individualmente durante el bypass no forman parte de esa instantánea.
-- Para restaurar todas las etapas previamente habilitadas a la vez, simplemente desmarque BYPASS. Esto es más rápido que hacer clic en cada etapa individualmente.
-- La sugerencia que aparece debajo de la tira de cadena dice "Click to bypass · Double click to edit · Drag to reorder" y es visible siempre que el modo TX esté activo. Hacer doble clic en una etapa abre su editor en lugar de alternarla.
+- Las etapas alternadas manualmente mientras BYPASS está activo no se registran en la instantánea de bypass. Si reactiva una etapa mientras BYPASS está marcado y luego lo desmarca, esa etapa permanece activa — la restauración de la instantánea no la desactivará.
+- TX y RX mantienen instantáneas de bypass independientes. Hacer clic en BYPASS en un lado no afecta al otro.
+- La línea de ayuda debajo de la cadena muestra "Click to bypass · Double click to edit · Drag to reorder" como recordatorio de que un solo clic es siempre una alternancia.
 
 ## Solución de problemas
 
-- **Hacer clic en una etapa no produce ningún efecto visible** — Confirme que TX sea el modo activo. La vista de cadena RX es un marcador de posición y BYPASS no tiene efecto allí. Haga clic en TX para volver.
-- **Desmarcar BYPASS no restaura la etapa que reactivó manualmente** — Esto es esperado. Las etapas que alterna individualmente mientras BYPASS está marcado quedan excluidas de la instantánea que BYPASS registra. Configure la etapa después de desmarcar BYPASS.
+- **Hacer clic en un bloque de etapa no produce ningún efecto** — Confirme que el contenedor del Aetherial Audio Chain está completamente expandido y que está haciendo clic en el bloque de la etapa en sí, no en el espacio entre bloques.
+- **Desmarcar BYPASS restaura una etapa que quería mantener en bypass** — Cualquier etapa que estuviera activa antes de que BYPASS se marcara por primera vez se restaurará al desmarcar BYPASS. Para mantener una etapa en bypass tras desactivar BYPASS, haga clic en ella una vez después de desmarcar BYPASS para volver a desactivarla.
 
-## Relacionado
+## Relacionados
 
-- [Poner en bypass todas las etapas TX a la vez](bypass-every-tx-stage-at-once.md)
-- [Abrir el editor flotante de una etapa desde la cadena](open-a-stage-s-floating-editor-from-the-chain.md)
-- [Alternar entre la vista de cadena TX y el marcador de posición RX](switch-between-tx-chain-view-and-rx-placeholder.md)
+- [Activar bypass en todas las etapas TX a la vez](bypass-every-tx-stage-at-once.md)
+- [Activar bypass en todas las etapas RX a la vez](bypass-every-rx-stage-at-once.md)
+- [Cambiar entre la edición de las cadenas TX y RX](switch-between-editing-the-tx-and-rx-chains.md)
+- [Descripción general del Aetherial Audio Chain](overview.md)
