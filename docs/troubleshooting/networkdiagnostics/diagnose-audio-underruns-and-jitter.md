@@ -1,49 +1,49 @@
-# Diagnosticar subdesbordamientos de audio y jitter
+# Diagnosticar subdesbordamientos de búfer de audio y jitter
 
-Use el diálogo Network Diagnostics para leer en tiempo real los indicadores del búfer de audio y el jitter, e identifique la causa de clics, interrupciones o audio entrecortado.
+Use esta página para leer los indicadores de búfer de audio y jitter en Network Diagnostics, e identificar por qué el audio recibido suena entrecortado, silencioso o con fallas.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar en ejecución. El diálogo no requiere una conexión de radio activa, pero los indicadores de audio solo son significativos mientras esté conectado y recibiendo audio.
-- Reproduzca el problema de audio antes de leer los indicadores — los contadores acumulan valores desde la última conexión y las tasas se actualizan cada segundo.
+- AetherSDR debe estar en ejecución. El diálogo no requiere una conexión de radio activa, pero los indicadores de audio solo tienen sentido cuando hay una radio conectada y transmitiendo audio.
+- Abra el diálogo y déjelo visible mientras reproduce el problema de audio.
 
 ## Pasos
 
-1. Abra `Settings > Network...`. El diálogo Network Diagnostics se abre.
+1. Haga clic en `Settings > Network...` para abrir el diálogo Network Diagnostics.
 2. Localice el grupo **Audio Playback** en la zona inferior derecha del diálogo.
-3. Lea **RX Buffer Now**. Muestra el nivel actual de llenado del búfer de audio en bytes y milisegundos. Si este valor está cerca de cero mientras los subdesbordamientos aumentan, la reproducción está sin datos suficientes.
-4. Lea **RX Buffer Peak**. Muestra el nivel máximo de llenado del búfer registrado desde la conexión. Un pico muy bajo junto con subdesbordamientos frecuentes confirma que el búfer nunca acumula un margen adecuado.
-5. Lea **Underruns (total)**. Es el recuento acumulado de subdesbordamientos de audio desde la conexión.
-6. Lea **Underruns (last sec)**. Muestra cuántos subdesbordamientos ocurrieron en la ventana de un segundo más reciente. Un valor distinto de cero aquí indica que el problema está activo en este momento.
-7. Lea **Audio Arrival Gap** y **Max Arrival Gap**. Muestran el intervalo de llegada entre paquetes. Un **Max Arrival Gap** grande en relación con un **Audio Arrival Gap** normal indica ráfagas ocasionales de paquetes tardíos en lugar de un flujo constante.
-8. Lea **Network Jitter**. Es la estimación de jitter suavizada para el flujo de audio. Un jitter alto combinado con un valor bajo de **RX Buffer Now** es el indicador principal de que el búfer de recepción es demasiado pequeño para absorber la variación de temporización en esta ruta de red.
-9. Verifique el grupo **Packet Loss (Sequence Gaps)**. Observe la fila de caídas **Audio**. Cero caídas con jitter alto significa que los paquetes llegan, pero no a tiempo. Caídas de audio distintas de cero indican que los paquetes se están perdiendo realmente.
-10. Haga clic en **Close** cuando termine.
+3. Observe **RX Buffer Now** y **RX Buffer Peak**. Los valores se muestran en bytes y milisegundos. Un búfer que se mantiene cerca de cero mientras los subdesbordamientos aumentan indica que el hilo de reproducción no recibe datos suficientes.
+4. Observe **Underruns (total)** y **Underruns (last sec)**. **Underruns (last sec)** se reinicia cada segundo, por lo que un valor distinto de cero sostenido aquí significa que el problema está ocurriendo en ese momento y no es histórico.
+5. Observe **Audio Arrival Gap** y **Max Arrival Gap**. Estos muestran el tiempo de llegada entre paquetes. Un **Max Arrival Gap** grande en relación con **Audio Arrival Gap** indica ráfagas de paquetes tardíos, aunque no se haya descartado ningún paquete.
+6. Observe **Network Jitter**. Es una estimación suavizada de la variación de temporización en el flujo de audio. Un jitter en aumento junto con subdesbordamientos crecientes apunta a un problema de entrega en la red, no a un problema con el dispositivo de audio local.
+7. Verifique el grupo **Packet Loss (Sequence Gaps)**. Busque la fila **Audio** dentro de ese grupo. Un contador de descartes distinto de cero confirma pérdida real de paquetes, además de cualquier jitter.
+8. Haga clic en Close cuando termine.
 
 ## Qué hace cada control
 
 | Indicador | Significado |
 |---|---|
-| **RX Buffer Now** | Nivel actual de llenado del búfer de audio, mostrado en bytes y milisegundos. |
-| **RX Buffer Peak** | Nivel máximo de llenado del búfer registrado desde la conexión. |
-| **Underruns (total)** | Recuento acumulado de subdesbordamientos de audio desde la conexión. |
-| **Underruns (last sec)** | Subdesbordamientos observados en el último intervalo de un segundo. |
-| **Audio Arrival Gap** | Intervalo típico de llegada entre paquetes para el flujo de audio. |
-| **Max Arrival Gap** | Mayor intervalo individual entre paquetes registrado desde la conexión. |
-| **Network Jitter** | Estimación de jitter suavizada para el flujo de audio. |
-| **Audio** (fila Packet Loss) | Paquetes de audio descartados inferidos a partir de saltos en la secuencia VITA, mostrados como errores / paquetes totales y porcentaje. |
+| **RX Buffer Now** | Nivel de llenado actual del búfer de audio, en bytes y milisegundos. |
+| **RX Buffer Peak** | Mayor nivel de llenado del búfer registrado desde que se abrió el diálogo. |
+| **Underruns (total)** | Contador acumulado de subdesbordamientos del búfer de audio desde la conexión. |
+| **Underruns (last sec)** | Subdesbordamientos contados en el intervalo de un segundo más reciente. |
+| **Audio Arrival Gap** | Intervalo de llegada típico entre paquetes, en milisegundos. |
+| **Max Arrival Gap** | Mayor intervalo individual entre paquetes registrado, en milisegundos. |
+| **Network Jitter** | Estimación suavizada del jitter para el flujo de audio, en milisegundos. |
+
+Todos los indicadores se actualizan cada segundo.
 
 ## Consejos
 
-- El diálogo se actualiza cada segundo. Observe **Underruns (last sec)** en lugar de **Underruns (total)** para determinar si el problema es actual o histórico.
-- Cero pérdida de paquetes en el grupo **Packet Loss** no descarta el jitter. Los paquetes pueden llegar tarde — causando subdesbordamientos — sin ser contados como caídas.
-- Grandes variaciones en la tasa **Audio** del grupo **Incoming Stream Rates** pueden indicar una entrega en ráfagas, incluso cuando no se detectan saltos de secuencia.
+- Una pérdida de paquetes de cero en la fila de descartes de **Audio** no descarta el jitter. Los paquetes pueden llegar tarde en ráfagas sin ser descartados, y **Max Arrival Gap** reflejará eso donde el contador de descartes no lo hará.
+- Si **Underruns (last sec)** es cero pero **Underruns (total)** es distinto de cero, el problema fue transitorio y puede haberse resuelto por sí solo.
+- Si **RX Buffer Peak** es alto pero **RX Buffer Now** está cerca de cero y los subdesbordamientos aumentan, el búfer se llenó brevemente al conectar y luego se vació. Esto puede indicar que el dispositivo de salida de audio está consumiendo datos más rápido que la tasa de llegada del flujo entrante.
 
 ## Solución de problemas
 
-- **Underruns (last sec) es distinto de cero pero Audio drops muestra cero** — Los paquetes están llegando en ráfagas. El jitter de red está consumiendo el búfer. Revise su switch, la calidad del cableado o cualquier configuración de QoS en la ruta entre su computadora y la radio.
-- **Tanto los subdesbordamientos como las caídas de Audio están aumentando** — Los paquetes se pierden antes de llegar. Consulte [Medir RTT y pérdida de paquetes durante problemas de audio](../../features/network-diagnostics/measure-rtt-and-packet-drops-during-audio-problems.md) para seguir los pasos adicionales.
-- **RX Buffer Peak es muy bajo** — El búfer nunca acumuló un margen significativo. Esto puede ocurrir si el audio comenzó a recibirse inmediatamente después de la conexión antes de que el búfer se inicializara; desconéctese y vuelva a conectarse, luego monitoree nuevamente.
+- **Subdesbordamientos en aumento, RX Buffer Now cerca de cero, Network Jitter bajo** — La red está entregando audio a tiempo, pero el dispositivo de salida de audio local puede estar consumiendo datos más rápido de lo que llegan los paquetes. Verifique la frecuencia de muestreo de salida de audio y la configuración del dispositivo en `Settings > Radio Setup...`.
+- **Subdesbordamientos en aumento, Max Arrival Gap mucho mayor que Audio Arrival Gap** — Los paquetes están llegando en ráfagas. La ruta de red tiene retardo variable. Reduzca el tráfico en la red local o cambie a una conexión por cable.
+- **Contador de descartes de Audio distinto de cero en el grupo Packet Loss** — Los paquetes se están perdiendo en tránsito, no solo retrasando. Verifique si hay interferencia inalámbrica o cambie de interfaz de red. Consulte [Medir RTT y pérdida de paquetes durante problemas de audio](../../features/network-diagnostics/measure-rtt-and-packet-drops-during-audio-problems.md).
+- **Network Jitter en aumento constante** — La ruta de red es cada vez más inestable. Verifique **Latency (RTT)** y **Max Latency (RTT)** en el grupo **Network Status** para obtener evidencia corroborante.
 
 ## Relacionado
 

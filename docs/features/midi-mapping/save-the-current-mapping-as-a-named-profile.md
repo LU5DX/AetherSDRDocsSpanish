@@ -1,38 +1,40 @@
-# Guardar la asignación actual como un perfil con nombre
+# Guardar el Mapeado Actual como un Perfil con Nombre
 
-Guarde sus asignaciones MIDI actuales con un nombre para poder recargarlas más adelante. Esto es útil cuando cambia entre controladores o desea mantener asignaciones separadas para diferentes modos de operación.
+Guarde sus asignaciones MIDI actuales con un nombre para poder recuperarlas más tarde o cambiar entre configuraciones de controlador sin tener que reaprender cada asignación.
 
 ## Antes de comenzar
 
-- Abra el diálogo MIDI Controller Mapping desde `Settings > MIDI Mapping...`.
-- Tenga al menos una asignación en la tabla Bindings. Guardar una asignación vacía está permitido, pero rara vez es útil.
+- Debe existir al menos una asignación en la tabla Bindings. Un mapeado vacío se puede guardar, pero no es útil.
+- Abra `Settings > MIDI Mapping...` para acceder al diálogo MIDI Controller Mapping.
 
 ## Pasos
 
-1. En el cuadro combinado **Profile:**, escriba un nombre para el perfil. El cuadro combinado es editable — haga clic en él y escriba directamente.
-2. Haga clic en Save.
+1. Abra `Settings > MIDI Mapping...`.
+2. Confirme que la tabla Bindings muestra las asignaciones que desea guardar.
+3. En el campo **Profile:**, escriba un nombre para el perfil. El campo acepta texto libre; también muestra los nombres de perfiles existentes en su lista desplegable si se ha guardado alguno anteriormente.
+4. Haga clic en **Save**.
 
-El perfil se almacena de inmediato. El cuadro combinado **Profile:** se actualiza y el nuevo nombre aparece en la lista.
+El perfil se almacena de inmediato. La lista desplegable **Profile:** se actualiza para incluir el nuevo nombre.
 
 ## Qué hace cada control
 
-| Control | Tipo | Comportamiento | Configuración persistida |
-|---|---|---|---|
-| Profile: | Cuadro combinado (editable) | Escriba un nombre nuevo o seleccione uno existente. Acepta texto libre. | — |
-| Save | Botón | Guarda las asignaciones actuales con el nombre mostrado en **Profile:**. Si ya existe un perfil con ese nombre, se sobreescribe. | — |
-| Load | Botón | Carga las asignaciones del perfil seleccionado en **Profile:**. Reemplaza todas las asignaciones actuales. | — |
+| Control | Función | Clave de configuración |
+|---|---|---|
+| **Profile:** | Cuadro combinado editable. Escriba un nombre nuevo para crear un perfil, o seleccione un nombre existente de la lista desplegable para sobreescribirlo. | — |
+| **Save** | Guarda las asignaciones actuales con el nombre indicado en **Profile:**. No hace nada si el campo está vacío. | — |
+| **Load** | Reemplaza las asignaciones actuales con las almacenadas bajo el nombre de perfil seleccionado. | — |
 
-## Sugerencias
+## Consejos
 
-- Los nombres de perfil se recortan de espacios iniciales y finales antes de guardarse. Un nombre vacío o compuesto solo de espacios no se guardará.
-- Para sobreescribir un perfil existente, seleccione su nombre en el cuadro combinado **Profile:** y haga clic en Save nuevamente.
+- Si escribe un nombre que ya existe en **Profile:** y hace clic en **Save**, ese perfil se sobreescribe sin ningún mensaje de confirmación.
+- Para mantener asignaciones separadas para distintos controladores, utilice un nombre descriptivo, como el modelo del controlador o el caso de uso.
 
 ## Solución de problemas
 
-- **Hacer clic en Save no tiene efecto** — El campo **Profile:** está en blanco o contiene solo espacios. Escriba un nombre antes de hacer clic en Save.
-- **Un nombre de perfil que escribió no aparece en la lista después de guardar** — Es posible que el nombre contenga solo espacios. Confirme que el campo muestre caracteres visibles y haga clic en Save nuevamente.
+- **Al hacer clic en Save no ocurre nada** — El campo **Profile:** está vacío o contiene solo espacios. Escriba un nombre primero.
+- **El nombre de un perfil no aparece en la lista desplegable después de guardarlo** — Haga clic en cualquier lugar para cerrar la lista desplegable y vuelva a abrirla; la lista se actualiza después de cada guardado.
 
-## Temas relacionados
+## Relacionado
 
 - [Cargar un perfil MIDI guardado anteriormente](load-a-previously-saved-midi-profile.md)
 - [Registrar una nueva asignación con el modo Learn](record-a-new-binding-with-learn-mode.md)

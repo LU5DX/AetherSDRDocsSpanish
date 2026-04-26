@@ -1,53 +1,53 @@
-# Registrar un nuevo enlace con el modo Learn
+# Registrar una nueva asignación con el modo Learn
 
-Use el modo Learn para asignar un control MIDI físico — un mando, fader o botón — a un parámetro de AetherSDR moviendo el control mientras AetherSDR escucha. Esto es más rápido y confiable que ingresar manualmente los valores de canal y número MIDI.
+Use el modo Learn para mapear un mando, fader o botón físico de su controlador MIDI a un parámetro en AetherSDR. Tras hacer clic en Learn, mueva el control en su hardware y AetherSDR registra la asignación automáticamente.
 
 ## Antes de comenzar
 
-- Debe haber un controlador MIDI conectado a su computadora y visible para el sistema operativo.
-- El puerto MIDI debe estar abierto en AetherSDR. Si no lo está, consulte [Conectar un controlador MIDI](../../getting-started/setup/connect-a-midi-controller.md).
+- Su controlador MIDI debe estar conectado al equipo y visible como dispositivo de entrada MIDI.
+- El puerto MIDI debe estar abierto en AetherSDR. Si el estado del puerto muestra "Disconnected", conéctelo primero — consulte [Conectar un controlador MIDI](../../getting-started/setup/connect-a-midi-controller.md).
 
 ## Pasos
 
 1. Abra `Settings > MIDI Mapping...`.
-2. En el cuadro combinado **Category**, seleccione la categoría que contiene el parámetro que desea enlazar (por ejemplo, `RX`, `TX` o `All`).
-3. En el cuadro combinado **Parameter**, seleccione el parámetro de destino.
-4. Haga clic en `Learn`. La etiqueta del botón cambia a `Cancel Learn`, lo que indica que AetherSDR está esperando un mensaje MIDI.
-5. Mueva el mando, fader o botón de su controlador que desea asignar.
-6. AetherSDR captura el mensaje y agrega una nueva fila a la tabla **Bindings**. La etiqueta del botón vuelve a `Learn`.
-7. Si desea cancelar sin registrar, haga clic en `Cancel Learn` en lugar de mover un control.
-8. Repita los pasos 2–6 para cada enlace adicional.
-9. Haga clic en `Close` cuando termine. Los enlaces se guardan automáticamente al completarse el modo Learn.
+2. En la sección **Parameter Bindings**, use el cuadro combinado **Category** para filtrar la lista — elija entre All, RX, TX, Phone/CW, EQ o Global.
+3. Use el cuadro combinado **Parameter** para seleccionar el parámetro de destino que desea controlar.
+4. Haga clic en **Learn**. La etiqueta del botón cambia a **Cancel Learn**.
+5. Mueva el mando o fader, o presione el botón del controlador MIDI que desea asignar. AetherSDR detecta el mensaje MIDI entrante y registra la asignación.
+6. El botón vuelve a **Learn** automáticamente cuando se captura la asignación. La nueva asignación aparece como una fila en la **Bindings table**.
+7. Haga clic en **Close** al terminar, o continúe agregando asignaciones repitiendo los pasos 2–6.
 
-## Función de cada control
+## Qué hace cada control
 
 | Control | Descripción |
 |---|---|
-| Cuadro combinado **Category** | Filtra la lista **Parameter** por categoría de control. Las opciones incluyen `All`, `RX`, `TX`, `Phone/CW`, `EQ` y `Global`. |
-| Cuadro combinado **Parameter** | Selecciona el parámetro de AetherSDR al que se enlazará la próxima captura de Learn. |
-| `Learn` | Comienza a escuchar el próximo mensaje MIDI entrante y lo enlaza al parámetro seleccionado. Hacer clic nuevamente mientras escucha cancela la operación. |
-| Tabla **Bindings** | Muestra todos los enlaces registrados. Columnas: Parameter, MIDI Source, Channel, Invert, Relative y un botón de eliminar. |
-| Casilla **Invert** (por fila) | Invierte la dirección del control para ese enlace. |
-| Casilla **Relative** (por fila) | Trata el control como un encoder continuo en lugar de una fuente de valor absoluto. |
-| Indicador de actividad | Muestra el mensaje MIDI más reciente recibido (canal, tipo, número y valor). Es útil para confirmar que el controlador está enviando datos antes de hacer clic en `Learn`. |
+| **Category** | Filtra la lista de parámetros por una categoría de control específica (All, RX, TX, Phone/CW, EQ, Global). |
+| **Parameter** | Selecciona el parámetro de destino que se desea asignar. |
+| **Learn** | Comienza a escuchar el siguiente mensaje MIDI y lo vincula al parámetro seleccionado. Haga clic de nuevo (mostrado como **Cancel Learn**) para cancelar. |
+| **Bindings table** | Muestra todas las asignaciones actuales. Columnas: Parameter, MIDI Source, Channel, Invert, Relative y un botón de eliminar. |
+| **Invert** | Invierte la dirección del control para esa fila de asignación. |
+| **Relative** | Trata el control asignado como un encoder continuo en lugar de un control de valor absoluto. |
+| **× (delete row)** | Elimina esa asignación individual. |
+| **Clear All** | Elimina todas las asignaciones a la vez. |
 
-## Sugerencias
+## Consejos
 
-- Observe el indicador de actividad mientras mueve un control antes de hacer clic en `Learn`. Si no aparece nada, el puerto no está abierto o el controlador no está enviando datos.
-- Si el parámetro incorrecto está seleccionado cuando mueve el control, haga clic en `Cancel Learn`, corrija la selección en **Parameter** y haga clic en `Learn` nuevamente.
-- Después de registrar varios enlaces, use `Save` con un nombre en el campo **Profile:** para conservar el mapeo. Consulte [Guardar el mapeo actual como un perfil con nombre](save-the-current-mapping-as-a-named-profile.md).
+- El **Activity indicator** en la sección MIDI Device muestra el mensaje MIDI más reciente recibido (canal, tipo, número y valor). Úselo para confirmar que su controlador está enviando datos antes de hacer clic en Learn.
+- Si selecciona el parámetro incorrecto antes de hacer clic en Learn, haga clic en **Cancel Learn** para cancelar sin crear una asignación; luego seleccione el parámetro correcto e inténtelo de nuevo.
+- Las asignaciones se guardan automáticamente cuando Learn finaliza. Para conservar sus asignaciones entre sesiones, guárdelas como un perfil con nombre — consulte [Guardar la asignación actual como un perfil con nombre](save-the-current-mapping-as-a-named-profile.md).
+- Active **Auto-connect on startup** (guardado como `MidiAutoConnect`) para que el puerto se reabra automáticamente la próxima vez. El puerto seleccionado se guarda como `MidiPort`.
 
 ## Solución de problemas
 
-- **`Learn` se agota el tiempo o el botón permanece con la etiqueta `Cancel Learn` después de mover un control** — Es posible que el puerto MIDI no esté abierto. Verifique el indicador de estado del puerto; si muestra `Closed`, haga clic en `Connect` y vuelva a intentar Learn.
-- **El indicador de actividad muestra un mensaje pero no se crea ningún enlace** — Es posible que el campo de parámetro haya estado vacío. Asegúrese de que haya un parámetro seleccionado en el cuadro combinado **Parameter** antes de hacer clic en `Learn`.
-- **El controlador envía datos pero el indicador de actividad está en blanco** — Es posible que el puerto seleccionado en el cuadro combinado **Port:** no coincida con el controlador. Haga clic en `Refresh` para reescanear, seleccione el puerto correcto y haga clic en `Connect`.
+- **Learn no se completa al mover un control** — Verifique que el estado del puerto muestre "Connected" en la sección MIDI Device. Si muestra "Disconnected", seleccione el puerto correcto en el cuadro combinado **Port:** y haga clic en **Connect**. Use el Activity indicator para confirmar que se están recibiendo mensajes MIDI entrantes.
+- **El cuadro combinado Parameter está vacío** — Es posible que la categoría seleccionada no tenga parámetros mapeados. Establezca **Category** en All y compruebe si la lista de parámetros se llena.
+- **Learn captura el control incorrecto** — Haga clic en **Cancel Learn**, espere hasta que no se esté moviendo ningún control en el hardware, luego haga clic en **Learn** de nuevo y mueva únicamente el control deseado.
 
 ## Relacionados
 
 - [Conectar un controlador MIDI](../../getting-started/setup/connect-a-midi-controller.md)
-- [Invertir un mando o tratarlo como un encoder continuo](invert-a-knob-or-treat-it-as-an-endless-encoder.md)
-- [Eliminar un enlace](delete-a-binding.md)
-- [Guardar el mapeo actual como un perfil con nombre](save-the-current-mapping-as-a-named-profile.md)
-- [Cargar un perfil MIDI guardado anteriormente](load-a-previously-saved-midi-profile.md)
 - [Conectar automáticamente el controlador MIDI al inicio](../../getting-started/setup/auto-connect-midi-controller-on-startup.md)
+- [Invertir un mando o tratarlo como encoder continuo](invert-a-knob-or-treat-it-as-an-endless-encoder.md)
+- [Eliminar una asignación](delete-a-binding.md)
+- [Guardar la asignación actual como un perfil con nombre](save-the-current-mapping-as-a-named-profile.md)
+- [Cargar un perfil MIDI guardado anteriormente](load-a-previously-saved-midi-profile.md)

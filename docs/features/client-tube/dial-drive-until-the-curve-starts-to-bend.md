@@ -1,39 +1,39 @@
-# Drive: gire el control hasta que la curva empiece a doblarse
+# Ajuste Drive hasta que la curva comience a curvarse
 
-Drive controla con qué intensidad se empuja la señal hacia el modelo de válvula. Al aumentarlo, la curva de transferencia se dobla visiblemente y se aleja de una diagonal recta, que es el punto en que comienza la saturación armónica.
+Drive controla con qué intensidad se empuja la señal hacia la etapa de tubo. Al aumentarlo, la curva de transferencia se desvía visiblemente de una línea recta — el punto donde comienza la saturación armónica.
 
 ## Antes de comenzar
 
-- La etapa Tube Saturator debe estar habilitada. Si el subcontenedor TUBE no es visible, habilite la etapa mediante el widget CHAIN o haga doble clic en la etapa Tube en el widget CHAIN para abrir el editor flotante de Tube.
-- Abra el subcontenedor TUBE dentro del contenedor padre PooDoo Audio (TXDSP) para que la curva de transferencia y los mandos sean visibles.
+- La etapa Tube Saturator debe estar habilitada. Si el subcontenedor TUBE está oculto, habilite la etapa desde el widget CHAIN o haga doble clic en la etapa Tube en el widget CHAIN para abrir el editor flotante de Tube.
+- Abra el subcontenedor TUBE dentro del contenedor padre PooDoo Audio (TXDSP). Debería ver la curva de transferencia y los cinco controles giratorios debajo de ella.
 
 ## Pasos
 
-1. Observe el display de la curva de transferencia en la parte superior del applet TUBE. Con Drive en 0.0 dB, la curva es una línea diagonal casi recta.
-2. Gire el mando Drive en sentido horario. La etiqueta del mando se actualiza en tiempo real y muestra el valor como `X.X dB`.
-3. Observe la curva. A medida que Drive aumenta, los hombros de la curva comienzan a aplanarse y doblarse. Detenga el ajuste cuando el doblez alcance la cantidad de saturación deseada.
-4. Hable al micrófono (o genere un tono). La bola de entrada en vivo se desplaza a lo largo de la curva, mostrando el punto en que opera su señal sobre la función de transferencia. Procure que la bola permanezca en la región doblada durante los picos típicos.
-5. Si el nivel general ha cambiado notablemente, use el mando Output para compensarlo. Consulte [Compensar cambios de nivel con Output](compensate-level-changes-with-output.md).
+1. Localice la curva de transferencia en la parte superior del applet TUBE. Con Drive en 0.0 dB, la curva es casi una línea diagonal recta.
+2. Observe la bola de entrada en tiempo real — se desplaza a lo largo de la curva según el nivel de entrada actual, mostrando dónde se encuentra su señal en la característica de transferencia.
+3. Gire el control Drive lentamente en sentido horario. La curva de transferencia comienza a curvarse en la parte superior e inferior a medida que Drive aumenta, lo que indica el inicio de la saturación.
+4. Detenga el ajuste cuando la curvatura sea visible en el nivel donde se desplaza la bola de entrada en tiempo real. Este es el régimen de saturación para su nivel de señal actual.
+5. Si el nivel de salida ha aumentado notablemente, compénselo usando el control Output. Consulte [Compensar cambios de nivel con Output](compensate-level-changes-with-output.md).
 
 ## Qué hace cada control
 
-| Control | Valor predeterminado | Rango válido | Configuración persistente | Comportamiento |
+| Control | Valor predeterminado | Rango válido | Clave persistida | Comportamiento |
 |---|---|---|---|---|
-| Drive | 0.0 dB | 0.0 – 24.0 dB | `ClientTubeTxDriveDb` | Empuja más señal hacia la etapa de válvula. Valores más altos producen mayor doblez de la curva y más contenido armónico. |
-| Curva de transferencia | — | — | — | Dibuja la curva de transferencia actual de la válvula. Se actualiza de inmediato al cambiar Drive, Bias o el modelo. |
-| Bola de entrada en vivo | — | — | — | Un punto que se mueve a lo largo de la curva de transferencia según el nivel de entrada actual suavizado, indicando el régimen de saturación activo. |
+| Drive | 0.0 dB | 0.0 – 24.0 dB | `ClientTubeTxDriveDb` | Empuja más señal hacia la etapa de tubo. Valores más altos curvan la curva más lejos de la linealidad. |
+| Curva de transferencia | — | — | — | Dibuja la curva de transferencia de tubo configurada actualmente. Se actualiza en tiempo real al cambiar Drive. |
+| Bola de entrada en tiempo real | — | — | — | Punto que se desplaza sobre la curva según el nivel de entrada actual, visualizando el régimen de saturación. |
 
 ## Consejos
 
-- La bola se suaviza con una constante de tiempo corta, por lo que las transitorias breves no la desplazarán hacia los extremos. Juzgue la región de operación observando la bola durante voz sostenida o tono continuo, no en picos instantáneos.
-- Drive interactúa con Bias: una vez que tenga el doblez de curva deseado, ajuste Bias para modificar la mezcla armónica sin cambiar la cantidad total de doblez. Consulte [Ajustar Bias para modificar el balance de armónicos pares e impares](shift-bias-to-tweak-the-even-odd-harmonic-balance.md).
-- Si abre el editor flotante de Tube al mismo tiempo, ambas vistas permanecen sincronizadas. Los cambios realizados en cualquiera de los dos lugares se reflejan en el otro en aproximadamente 33 ms.
+- Comience con Drive por debajo de 6 dB y auméntelo lentamente. La curvatura se hace evidente mucho antes del máximo de 24.0 dB; valores elevados de Drive producen una distorsión armónica intensa.
+- La forma de la curva también depende de Bias y del modelo de tubo seleccionado en el editor flotante. Si la curva se curva asimétricamente, Bias es distinto de cero — consulte [Ajustar Bias para modificar el balance de armónicos pares e impares](shift-bias-to-tweak-the-even-odd-harmonic-balance.md).
+- Los cambios realizados en el editor flotante de Tube se reflejan en los controles del applet en aproximadamente 33 ms y viceversa, por lo que puede usar cualquiera de los dos para ajustar Drive.
 
 ## Solución de problemas
 
-- **La curva de transferencia no se dobla sin importar qué tan alto se ajuste Drive** — confirme que la etapa Tube esté habilitada. Una etapa deshabilitada muestra el applet pero no procesa audio, por lo que la curva puede no responder como se espera. Use el widget CHAIN para verificar que la etapa esté activa. Consulte [Omitir la válvula desde la cadena](bypass-the-tube-from-the-chain.md).
-- **La bola de entrada en vivo no se mueve** — la bola requiere un motor de audio activo y una señal en vivo. Confirme que la radio esté conectada y que el audio fluya hacia la cadena TX DSP.
-- **La posición del mando no coincide con el valor mostrado en el editor flotante** — el applet se sincroniza cada 33 ms. Si los valores aparecen momentáneamente desfasados, espere un ciclo de sincronización o mueva cualquiera de los mandos ligeramente para forzar una actualización.
+- **La curva de transferencia no es visible** — El subcontenedor TUBE solo es visible cuando la etapa Tube está habilitada. Habilite la etapa desde el widget CHAIN y luego regrese al applet TUBE.
+- **La bola de entrada en tiempo real está fija en el extremo izquierdo** — Ninguna señal está pasando por la cadena TX. Verifique que esté transmitiendo o enviando audio hacia la ruta TX.
+- **Girar Drive no produce ningún cambio audible** — Compruebe que Mix esté por encima de 0 %. Con 0 %, la señal completamente seca omite el tubo por completo. Consulte [Mezcla en paralelo de la saturación con Mix](parallel-blend-saturation-with-mix.md).
 
 ## Relacionados
 
@@ -41,5 +41,5 @@ Drive controla con qué intensidad se empuja la señal hacia el modelo de válvu
 - [Ajustar Bias para modificar el balance de armónicos pares e impares](shift-bias-to-tweak-the-even-odd-harmonic-balance.md)
 - [Compensar cambios de nivel con Output](compensate-level-changes-with-output.md)
 - [Aclarar u oscurecer la señal saturada con Tone](brighten-or-darken-the-saturated-signal-with-tone.md)
-- [Mezclar la saturación en paralelo con Mix](parallel-blend-saturation-with-mix.md)
-- [Omitir la válvula desde la cadena](bypass-the-tube-from-the-chain.md)
+- [Mezcla en paralelo de la saturación con Mix](parallel-blend-saturation-with-mix.md)
+- [Omitir el tubo desde la cadena](bypass-the-tube-from-the-chain.md)

@@ -1,40 +1,34 @@
-# Verificar el voltaje de alimentación CC del radio
+# Verificar la tensión de alimentación CC del equipo
 
-El applet Meters incluye un medidor de voltaje de alimentación en tiempo real que muestra el voltaje que recibe el radio desde su fuente de alimentación CC. Úselo para confirmar que su fuente de alimentación entrega un voltaje adecuado antes y durante la operación.
+El applet Meters muestra en tiempo real la tensión de alimentación CC del equipo. Úselo para confirmar que su fuente de alimentación entrega una tensión estable bajo carga.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. El applet Meters requiere una conexión activa con el radio.
-- El panel de applets debe estar visible. Si está oculto, use `View > Applet Panel` para mostrarlo.
+- AetherSDR debe estar conectado al equipo. El applet Meters requiere una conexión activa con el equipo.
+- El panel de applets debe estar visible. Si no lo está, actívelo mediante `View > Applet Panel`.
 
 ## Pasos
 
-1. Localice el botón de bandeja `MTR` en la barra lateral derecha del panel de applets.
-2. Haga clic en `MTR` para abrir el applet Meters.
-3. Lea el medidor `+13.8V` bajo el encabezado de sección **Radio Hardware**.
+1. Haga clic en el botón de bandeja **MTR** en la barra lateral derecha para abrir el applet Meters.
+2. Lea el indicador **+13.8V** bajo el encabezado de sección **Radio Hardware**.
 
-La barra se llena de izquierda a derecha. El color de relleno es verde en el rango de operación normal, cambia a amarillo a medida que el voltaje sube hacia la zona de advertencia, y se torna rojo por encima de 15.0 V.
+La barra se llena de izquierda a derecha. El indicador se vuelve rojo cuando la lectura supera los 15 V.
 
 ## Qué hace cada control
 
-| Control | Descripción | Rango válido | Umbral rojo |
+| Control | Qué muestra | Rango válido | Rojo por encima de |
 |---|---|---|---|
-| `+13.8V` | Voltaje de alimentación CC en tiempo real desde la entrada de energía del radio | 10.0–16.0 V | > 15.0 V |
+| +13.8V | Tensión de alimentación CC del equipo | 10.0–16.0 V | 15 V |
 
-Ninguna clave de configuración está asociada a este medidor. El valor se lee directamente del radio y no se almacena.
+No existe ningún ajuste almacenado para este indicador. El valor se lee directamente desde el equipo.
 
 ## Consejos
 
-- Una lectura consistentemente inferior a 13.0 V bajo carga de transmisión sugiere que la fuente de alimentación o el cableado no pueden sostener el consumo de corriente del radio. Verifique la corriente nominal de su fuente y el calibre del cable.
-- El medidor utiliza balística suavizada, por lo que las caídas de voltaje breves y repentinas pueden aparecer levemente atenuadas en la pantalla.
+- Observe el indicador **+13.8V** mientras transmite. Una caída de tensión significativa bajo carga de TX puede indicar una fuente de alimentación subdimensionada o en falla.
+- El indicador utiliza una respuesta amortiguada, por lo que los transitorios rápidos pueden no ser visibles en su valor de pico instantáneo.
 
-## Solución de problemas
-
-- **El medidor `+13.8V` no muestra movimiento o indica 0 V** — Es posible que el radio aún no haya enviado telemetría. Verifique que la conexión con el radio esté activa. El medidor se actualiza únicamente cuando el radio envía datos de telemetría de hardware.
-- **El panel de applets no aparece** — Haga clic en `View > Applet Panel` para restaurarlo y luego haga clic en el botón de bandeja `MTR`.
-
-## Relacionados
+## Relacionado
 
 - [Descripción general de Meters](overview.md)
-- [Monitorear la temperatura del PA durante transmisiones largas](watch-pa-temperature-during-long-overs.md)
-- [Monitorear la velocidad del ventilador principal](monitor-the-main-cooling-fan-speed.md)
+- [Vigilar la temperatura del PA durante transmisiones prolongadas](watch-pa-temperature-during-long-overs.md)
+- [Monitorear la velocidad del ventilador principal de refrigeración](monitor-the-main-cooling-fan-speed.md)

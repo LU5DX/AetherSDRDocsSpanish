@@ -1,39 +1,38 @@
 # Seleccionar la tasa de muestreo IQ (24k/48k/96k/192k)
 
-Esta página explica cómo cambiar la tasa de muestreo de cualquiera de los cuatro canales DAX IQ. Haga esto para que coincida con la tasa esperada por el software SDR externo que recibe el flujo IQ.
+Esta página explica cómo cambiar la tasa de muestreo IQ para cualquiera de los cuatro canales DAX IQ. Use una tasa más alta cuando su software SDR externo requiera mayor ancho de banda; use una tasa más baja para reducir la carga de CPU y de red.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600. El applet DAX IQ no funciona sin una conexión de radio activa.
-- El applet DAX IQ debe estar visible. Si no lo está, haga clic en el botón **IQ** de la bandeja en la barra lateral derecha para mostrarlo.
+- AetherSDR debe estar conectado a una radio FLEX-8600.
+- El applet DAX IQ debe estar visible. Si no lo está, haga clic en el botón IQ del área de notificación en la barra lateral derecha para mostrarlo.
 
 ## Pasos
 
-1. Abra el applet DAX IQ haciendo clic en el botón **IQ** de la bandeja en la barra lateral derecha, si aún no está visible.
-2. Localice la fila del canal que desea cambiar: **IQ 1**, **IQ 2**, **IQ 3** o **IQ 4**.
-3. Haga clic en el cuadro combinado de tasa en esa fila. Muestra la tasa actual (predeterminada: **48k**).
-4. Seleccione una de las tasas disponibles: **24k**, **48k**, **96k** o **192k**.
+1. Localice la fila del canal que desea modificar: **IQ 1**, **IQ 2**, **IQ 3** o **IQ 4**.
+2. Haga clic en el cuadro combinado de tasa en esa fila. Actualmente muestra la tasa activa (predeterminada **48k**).
+3. Seleccione una de las cuatro tasas: **24k**, **48k**, **96k** o **192k**.
 
-La nueva tasa entra en vigor de inmediato y se envía a la radio. Si el flujo de ese canal está activo, el cuadro combinado reflejará la tasa informada por la radio.
+La nueva tasa entra en vigor de inmediato y se envía a la radio. Si el flujo de ese canal está activo, el cuadro combinado se sincronizará con la tasa reportada por la radio para confirmar que el cambio fue aceptado.
 
 ## Qué hace cada control
 
-| Control | Descripción | Predeterminado | Valores válidos | Configuración persistida |
+| Control | Descripción | Valor predeterminado | Valores válidos | Configuración persistida |
 |---|---|---|---|---|
-| Cuadro combinado de tasa (IQ 1–4) | Establece la tasa de muestreo IQ de ese canal en muestras por segundo. | 48k (48000) | 24k (24000), 48k (48000), 96k (96000), 192k (192000) | `DaxIqRate1` – `DaxIqRate4` |
-| Botón de alternancia Off/On (IQ 1–4) | Habilita o deshabilita el flujo IQ de ese canal. | Off | Off, On | `DaxIqEnabled1` – `DaxIqEnabled4` |
-| Medidor de nivel (IQ 1–4) | Muestra el nivel RMS del flujo IQ activo, en escala de 0 a 100. | 0 | 0–100 | — |
+| Cuadro combinado de tasa (IQ 1–4) | Establece la tasa de muestreo IQ para ese canal | 48k | 24k (24000), 48k (48000), 96k (96000), 192k (192000) | `DaxIqRate1` – `DaxIqRate4` |
+| Interruptor Off/On (IQ 1–4) | Habilita o deshabilita el flujo IQ para ese canal | Off | Off, On | `DaxIqEnabled1` – `DaxIqEnabled4` |
+| Medidor de nivel (IQ 1–4) | Muestra el nivel RMS del flujo activo (escala de 0 a 100) | 0 | 0–100 | — |
 
 ## Consejos
 
-- El cuadro combinado de tasa se mantiene sincronizado con la radio. Si la radio informa una tasa diferente después de establecer el flujo, el cuadro combinado se actualiza automáticamente para coincidir.
-- La tasa seleccionada se guarda entre sesiones. Cuando AetherSDR se vuelve a conectar a la radio, restaura la tasa que eligió por última vez para cada canal.
-- Las tasas de muestreo más altas capturan más ancho de banda, pero aumentan la carga de CPU y red entre la radio y la computadora.
+- El cuadro combinado de tasa se sincroniza con la tasa reportada por la radio cuando un flujo está activo. Si el valor seleccionado no se mantiene, la radio rechazó el cambio de tasa; intente deshabilitar el flujo primero, cambiar la tasa y luego volver a habilitarlo.
+- Los ajustes de tasa son persistidos. Al reconectarse, AetherSDR restaura la última tasa utilizada para cada canal desde `DaxIqRate1` hasta `DaxIqRate4`.
+- El estado de habilitación del flujo también es persistido. Si un canal quedó en **On** al desconectarse, AetherSDR lo volverá a habilitar automáticamente aproximadamente 1.5 segundos después de la reconexión, para permitir que la configuración de sesión de la radio se complete primero.
 
 ## Solución de problemas
 
-- **El cuadro combinado de tasa vuelve a un valor diferente después de cambiarlo** — La radio informó una tasa de muestreo diferente para ese flujo activo. El cuadro combinado se sincroniza con el valor informado por la radio cuando un flujo está activo. Deshabilite el flujo con el botón **Off/On**, cambie la tasa y luego vuelva a habilitarlo.
-- **El cuadro combinado de tasa está presente, pero los cambios no tienen efecto visible** — Es posible que el flujo de ese canal no esté habilitado. Haga clic en el botón **Off** para cambiarlo a **On** y que la radio abra el flujo con la tasa seleccionada.
+- **El cuadro combinado de tasa revierte al valor anterior después de la selección** — La radio rechazó el cambio de tasa mientras el flujo estaba activo. Haga clic en **On** para cambiar el canal a **Off**, establezca la tasa deseada y luego haga clic en **Off** para volver a **On**.
+- **El cuadro combinado muestra una tasa diferente a la seleccionada** — La radio reportó una tasa distinta para el flujo activo y el cuadro combinado se sincronizó para coincidir con ella. El valor reportado por la radio es autoritativo cuando hay un flujo en ejecución.
 
 ## Relacionados
 

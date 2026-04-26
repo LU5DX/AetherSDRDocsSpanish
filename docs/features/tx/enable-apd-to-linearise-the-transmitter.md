@@ -1,42 +1,41 @@
 # Activar APD para linealizar el transmisor
 
-APD (Predistorsión Adaptativa) reduce la no linealidad del transmisor aplicando un ecualizador de corrección a la señal de salida. Actívelo cuando desee mejorar la calidad de la señal y reducir los productos de IMD en el aire.
+APD (Adaptive Pre-Distortion) reduce la no linealidad del transmisor calibrando y aplicando un ecualizador a la salida del excitador. Actívelo cuando desee mejorar la calidad de la señal y reducir las emisiones espurias en transmisión.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. APD es una función del lado del radio y requiere una conexión activa.
+- AetherSDR debe estar conectado al radio. APD requiere una conexión de radio activa.
 - El applet TX debe estar visible en el Panel de Applets. Si no lo está, haga clic en el botón TX del panel lateral derecho.
 
 ## Pasos
 
-1. Localice el botón APD en la parte inferior del applet TX Controls.
+1. En el Panel de Applets, localice la fila en la parte inferior del applet TX Controls que contiene el botón APD.
 2. Haga clic en APD. El fondo del botón se vuelve verde cuando APD está activado.
 3. Observe los indicadores de estado a la derecha de APD:
-   - **Cal** se ilumina en verde mientras el radio recopila datos de calibración.
-   - **Avail** se ilumina en verde cuando una calibración está lista pero aún no se ha aplicado.
-   - **Active** se ilumina en verde cuando el ecualizador está aplicado y APD está completamente operativo.
-4. Espere a que **Active** se ilumine. No se requiere ninguna acción adicional.
+   - **Cal** se ilumina en verde mientras el radio está calibrando.
+   - **Avail** se ilumina en verde cuando una calibración ha finalizado pero aún no se ha aplicado.
+   - **Active** se ilumina en verde cuando el ecualizador está aplicado y la predistorsión está en funcionamiento.
 
-Para desactivar APD, haga clic en APD nuevamente. El botón vuelve a su estado apagado y los tres indicadores se atenúan.
+No se requiere ninguna acción adicional. El radio avanza de Cal a Avail a Active de forma automática.
+
+Para desactivar APD, haga clic en APD nuevamente. El botón vuelve a su estado predeterminado (apagado) y los tres indicadores se apagan.
 
 ## Qué hace cada control
 
-| Control | Tipo | Comportamiento | Valor predeterminado |
+| Control | Tipo | Comportamiento | Predeterminado |
 |---|---|---|---|
-| APD | Botón alternante | Activa o desactiva la Predistorsión Adaptativa en el radio. Verde cuando está encendido, apagado cuando está desactivado. | Desactivado |
-| Active | Indicador | Se ilumina en verde cuando APD está activado y el ecualizador se aplica activamente a la señal de transmisión. | Apagado |
-| Cal | Indicador | Se ilumina en verde cuando APD está activado y el radio aún recopila datos de calibración. | Apagado |
-| Avail | Indicador | Se ilumina en verde cuando APD está activado y un resultado de calibración está disponible pero aún no se ha aplicado. | Apagado |
-
-La progresión normal tras activar APD es: **Cal** → **Avail** → **Active**.
+| APD | Botón de alternancia | Activa o desactiva la predistorsión adaptativa en el radio. Fondo verde cuando está activado. | Off |
+| Active | Indicador | Se ilumina en verde cuando APD está activado y el ecualizador está aplicado activamente. | Apagado |
+| Cal | Indicador | Se ilumina en verde cuando APD está activado y aún está calibrando. | Apagado |
+| Avail | Indicador | Se ilumina en verde cuando APD está activado y hay un resultado de calibración disponible pero aún no aplicado. | Apagado |
 
 ## Consejos
 
-- Si **Cal** permanece iluminado durante un tiempo prolongado, transmitir (aunque sea brevemente con MOX o TUNE) proporciona al radio datos de señal para completar la calibración más rápido.
-- El estado de APD se controla a nivel del radio. Si se desconecta y vuelve a conectar, AetherSDR reflejará el estado de APD que el radio tenga en ese momento.
+- Los tres indicadores muestran la progresión en orden: Cal → Avail → Active. Si el indicador permanece en Cal durante un período prolongado, es posible que el radio aún esté recopilando datos de transmisiones en curso.
+- APD opera sobre la salida del excitador. Verifique los medidores RF Pwr y SWR durante el funcionamiento normal para confirmar que el transmisor opera dentro del rango esperado antes de activar APD.
 
-## Relacionado
+## Temas relacionados
 
 - [Descripción general de TX Controls](overview.md)
-- [Iniciar una portadora de ajuste para verificar la ROE](start-a-tune-carrier-to-check-swr.md)
-- [Alternar MOX para activar manualmente el transmisor](toggle-mox-to-manually-key-the-transmitter.md)
+- [Configurar la potencia de salida de RF](set-rf-output-power.md)
+- [Iniciar una portadora de ajuste para verificar el SWR](start-a-tune-carrier-to-check-swr.md)

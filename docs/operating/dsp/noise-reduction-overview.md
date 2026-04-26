@@ -1,129 +1,134 @@
-# Elegir la reducción de ruido adecuada: NR2, NR4, DFNR, MNR
+# Cómo elegir la reducción de ruido adecuada: NR2, NR4, DFNR, MNR
 
-AetherSDR ofrece cuatro motores de reducción de ruido del lado del cliente — NR2, NR4, DFNR y MNR — cada uno adecuado para diferentes condiciones de señal y tipos de ruido. Esta página explica qué hace cada motor y cómo decidir cuál usar, y muestra dónde configurarlo.
+AetherSDR ofrece cuatro motores de reducción de ruido del lado del cliente. Esta página explica qué hace cada uno y cómo decidir cuál usar, para que pueda abrir la pestaña correcta en AetherDSP Settings y comenzar a ajustar.
 
 ## Antes de comenzar
 
-- No se requiere conexión de radio para abrir o ajustar AetherDSP Settings.
-- MNR está disponible únicamente en macOS.
-- DFNR utiliza DeepFilterNet3; confirme que su sistema cumple los requisitos de CPU antes de habilitarlo con alta atenuación.
+- Abra `Settings > AetherDSP Settings...` para acceder al diálogo AetherDSP Settings.
+- No se requiere una conexión de radio para configurar estos parámetros.
 
 ## Pasos
 
 1. Abra `Settings > AetherDSP Settings...`.
-2. Haga clic en la pestaña del motor que desea usar: **NR2**, **NR4**, **MNR** o **DFNR**.
-3. Ajuste los controles de ese motor (consulte la tabla a continuación).
-4. Para restablecer cualquier motor a los valores de fábrica, haga clic en **Reset Defaults** en la parte inferior de su pestaña (disponible en NR2 y NR4).
+2. Haga clic en la pestaña del motor que desea usar: **NR2**, **NR4**, **DFNR** o **MNR**.
+3. Ajuste los controles de esa pestaña. Los ajustes se guardan inmediatamente; no hay botón Apply.
+4. Si desea restaurar una pestaña a sus valores predeterminados de fábrica, haga clic en **Reset Defaults** en la parte inferior de la pestaña NR2 o NR4.
 
 ## Qué hace cada control
 
-### Pestaña NR2
+### Pestaña NR2 — reducción de ruido musical
 
-NR2 es un motor de reducción de ruido musical en el dominio de la frecuencia. Úselo cuando desee un control preciso sobre cuán agresivamente se suprime el ruido en relación con la fidelidad de la voz.
+NR2 es un motor en el dominio de la frecuencia enfocado en suprimir los artefactos tonales de "ruido musical" que son comunes en SSB y en trabajo con señales débiles. Úselo cuando escuche una calidad temblorosa o fluctuante en el ruido, en lugar de un silbido plano.
 
-| Control | Tipo | Predeterminado | Rango válido | Clave de ajuste |
+| Control | Tipo | Predeterminado | Rango | Clave de ajuste |
 |---|---|---|---|---|
-| Gain Method | Botón de opción | Gamma | Linear \| Log \| Gamma \| Trained | `NR2GainMethod` |
-| NPE Method | Botón de opción | OSMS | OSMS \| MMSE \| NSTAT | `NR2NpeMethod` |
-| AE Filter (artifact elimination) | Casilla de verificación | Activado | — | `NR2AeFilter` |
+| Gain Method | Botones de opción | Gamma | Linear \| Log \| Gamma \| Trained | `NR2GainMethod` |
+| NPE Method | Botones de opción | OSMS | OSMS \| MMSE \| NSTAT | `NR2NpeMethod` |
+| AE Filter (eliminación de artefactos) | Casilla | Habilitado | — | `NR2AeFilter` |
 | Reduction Depth: | Control deslizante | 1.50 | 0.50–2.00 | `NR2GainMax` |
 | Smoothing: | Control deslizante | 0.85 | 0.50–0.98 | `NR2GainSmooth` |
 | Voice Threshold: | Control deslizante | 0.20 | 0.05–0.50 | `NR2Qspp` |
+| Reset Defaults | Botón | — | — | — |
 
-**Gain Method** selecciona el mapeo de la curva de ganancia aplicado a cada bin de frecuencia. Gamma se ajusta a los patrones típicos de amplitud de voz y es el valor predeterminado. Trained usa un modelo construido a partir de muestras reales de voz y ruido, lo que puede ofrecer mejor rendimiento con tipos de ruido reconocibles. Linear y Log ofrecen mapeos progresivamente más simples.
+**Gain Method** selecciona la curva utilizada para calcular cuánta ganancia aplicar a cada bin espectral. Gamma es el valor predeterminado y es adecuado para la mayoría del trabajo de voz. Trained usa un modelo construido a partir de muestras reales de voz y ruido, y puede rendir mejor en señales débiles de DX. Linear y Log ofrecen asignaciones más simples si desea un comportamiento predecible y auditable.
 
-**NPE Method** selecciona cómo NR2 estima el piso de ruido. OSMS rastrea el piso mediante un mínimo progresivo y funciona bien con ruido estacionario. MMSE minimiza el error de estimación esperado. NSTAT se adapta al ruido que cambia con el tiempo.
+**NPE Method** controla cómo NR2 estima el piso de ruido. OSMS rastrea el piso mediante un mínimo continuo y es robusto con ruido estable. MMSE minimiza el error cuadrático medio de estimación. NSTAT se adapta a ruido que cambia rápidamente con el tiempo.
 
-**AE Filter (artifact elimination)** aplica un postfiltro que reduce los artefactos de timbre y ruido musical. Déjelo activado a menos que esté evaluando la salida sin procesar de NR2.
+**AE Filter (eliminación de artefactos)** aplica un postfiltro para reducir el repique y los residuos de ruido musical. Déjelo habilitado a menos que esté comparando deliberadamente la salida bruta de NR2.
 
-**Reduction Depth:** establece cuánto puede atenuar el ruido NR2. Los valores más altos suprimen más ruido, pero aumentan el riesgo de distorsión de la voz.
+**Reduction Depth:** establece con qué agresividad NR2 atenúa el ruido. Valores más altos suprimen más ruido, pero pueden distorsionar la voz.
 
-**Smoothing:** controla con qué rapidez reacciona la estimación de ruido a los cambios. Los valores más altos son más estables, pero se adaptan más lentamente.
+**Smoothing:** controla la rapidez con que la estimación de ruido sigue los cambios. Valores más altos producen una estimación más estable, pero reaccionan más lentamente ante ráfagas repentinas de ruido.
 
-**Voice Threshold:** establece el umbral de probabilidad de presencia de voz por debajo del cual un bin se trata como ruido. Los valores más bajos preservan la voz débil, pero pueden dejar pasar más ruido.
+**Voice Threshold:** es el umbral de probabilidad de presencia de voz por debajo del cual NR2 trata un bin como ruido. Valores más bajos protegen la voz más débil, pero dejan pasar más ruido.
 
 ---
 
-### Pestaña NR4
+### Pestaña NR4 — reducción de banda ancha con libspecbleach
 
-NR4 utiliza la biblioteca libspecbleach. Expone controles separados para el método de estimación de ruido, el seguimiento adaptativo y el modelado espectral. Use NR4 cuando desee una reducción calibrada explícitamente en dB y control sobre el color del ruido residual.
+NR4 está construido sobre libspecbleach y es adecuado para ruido de banda ancha: interferencia de red eléctrica, ruido de banda y ruido atmosférico bajo señales SSB. Ofrece reducción calibrada explícitamente en dB y una etapa de blanqueo espectral.
 
-| Control | Tipo | Predeterminado | Rango válido | Clave de ajuste |
+| Control | Tipo | Predeterminado | Rango | Clave de ajuste |
 |---|---|---|---|---|
-| Noise Estimation Method | Botón de opción | SPP-MMSE | SPP-MMSE \| Brandt \| Martin | `NR4NoiseEstimationMethod` |
-| Adaptive Noise Estimation | Casilla de verificación | Activado | — | `NR4AdaptiveNoise` |
+| Noise Estimation Method | Botones de opción | SPP-MMSE | SPP-MMSE \| Brandt \| Martin | `NR4NoiseEstimationMethod` |
+| Adaptive Noise Estimation | Casilla | Habilitado | — | `NR4AdaptiveNoise` |
 | Reduction (dB): | Control deslizante | 10.0 dB | 0.0–40.0 dB | `NR4ReductionAmount` |
 | Smoothing (%): | Control deslizante | 0 | 0–100 | `NR4SmoothingFactor` |
 | Whitening (%): | Control deslizante | 0 | 0–100 | `NR4WhiteningFactor` |
 | Masking Depth: | Control deslizante | 0.50 | 0.00–1.00 | `NR4MaskingDepth` |
 | Suppression: | Control deslizante | 0.50 | 0.00–1.00 | `NR4SuppressionStrength` |
+| Reset Defaults | Botón | — | — | — |
 
-**Noise Estimation Method** selecciona el estimador del piso de ruido. SPP-MMSE equilibra la estimación de ruido con la preservación de la voz. Brandt usa suavizado recursivo a través de bandas de frecuencia críticas y maneja bien el ruido no estacionario. Martin rastrea los mínimos espectrales progresivos y es robusto para pisos de ruido que varían lentamente.
+**Noise Estimation Method** establece el estimador del piso de ruido. SPP-MMSE equilibra la estimación de ruido con la preservación de la voz. Brandt usa suavizado recursivo en bandas de frecuencia críticas y maneja bien el ruido no estacionario. Martin usa mínimos espectrales continuos y es robusto cuando el piso de ruido cambia lentamente.
 
-**Adaptive Noise Estimation** habilita la reestimación continua del piso de ruido. Desactívelo solo si el piso de ruido es estable y desea fijar una estimación inicial.
+**Adaptive Noise Estimation** habilita la reestimación continua del piso de ruido. Desactívelo solo si desea fijar la estimación a una instantánea.
 
-**Reduction (dB):** establece la atenuación máxima que aplicará NR4. 10 dB es un punto de partida conservador; aumente hacia 40 dB para ruido intenso, aceptando mayor procesamiento.
+**Reduction (dB):** es el control principal de profundidad. Comience con el valor predeterminado de 10.0 dB y auméntelo solo según sea necesario; valores altos en anchos de banda amplios pueden degradar la calidad de voz.
 
-**Smoothing (%):** aplica suavizado en el dominio del tiempo a la estimación de ruido. 0 significa que no hay suavizado adicional más allá del que proporciona el método de estimación.
+**Smoothing (%):** aplica suavizado en el dominio temporal a la estimación de ruido. Auméntelo para estabilizar la estimación ante ruido en ráfagas.
 
-**Whitening (%):** aplana la forma espectral del ruido residual. Los valores más altos hacen que el ruido restante suene más uniforme en lugar de tonal.
+**Whitening (%):** aplana la forma espectral del ruido residual después de la reducción, cambiando un piso de ruido con color por un silbido más plano.
 
-**Masking Depth:** controla la profundidad con la que se aplica el enmascaramiento espectral a los bins de ruido.
+**Masking Depth:** controla cuán profundamente se aplica la supresión por enmascaramiento espectral.
 
-**Suppression:** establece la intensidad general de supresión de NR4 en todo el espectro.
+**Suppression:** establece la intensidad general de supresión de NR4.
 
 ---
 
-### Pestaña DFNR
+### Pestaña DFNR — DeepFilterNet3
 
-DFNR ejecuta DeepFilterNet3, un supresor basado en redes neuronales. Requiere más CPU que NR2 o NR4, pero puede manejar de manera eficaz el ruido complejo y no estacionario. Use DFNR cuando los otros motores dejen ruido estructurado audible.
+DFNR ejecuta DeepFilterNet3, un filtro de red neuronal. Opera sobre la cadena de audio y no requiere estimación del piso de ruido. Es la opción más eficaz para la inteligibilidad en bandas congestionadas, pero tiene el mayor costo de CPU de los cuatro motores.
 
-| Control | Tipo | Predeterminado | Rango válido | Clave de ajuste |
+| Control | Tipo | Predeterminado | Rango | Clave de ajuste |
 |---|---|---|---|---|
-| Attenuation Limit | Control deslizante | 100 | 0–100 dB | `DfnrAttenLimit` |
+| Attenuation Limit | Control deslizante | 100 dB | 0–100 dB | `DfnrAttenLimit` |
 | Post-Filter Beta | Control deslizante | 0.00 | 0.00–0.30 | `DfnrPostFilterBeta` |
 
-**Attenuation Limit** establece la atenuación máxima de ruido que aplicará DeepFilterNet3. 0 es modo de paso; 100 es el máximo. Reduzca este valor si escucha audio con procesamiento excesivo o sonido hueco.
+**Attenuation Limit** limita la atenuación máxima que DeepFilterNet3 puede aplicar. En 0, deja pasar la señal sin cambios; en 100, aplica la atenuación máxima. Redúzcalo en señales fuertes para evitar la supresión excesiva.
 
-**Post-Filter Beta** aplica un postfiltro adicional sobre la salida de la red neuronal para una supresión extra. 0.00 desactiva el postfiltro. Auméntelo con precaución; los valores más altos pueden introducir artefactos.
+**Post-Filter Beta** aplica un postfiltro adicional sobre la salida de DeepFilterNet3 para una supresión extra. El valor predeterminado de 0.00 lo deshabilita. Auméntelo con precaución; valores altos pueden degradar la calidad de la voz.
 
 ---
 
-### Pestaña MNR (solo macOS)
+### Pestaña MNR — reducción MMSE-Wiener para macOS
 
-MNR es un reductor de ruido MMSE-Wiener con suavizado de ganancia asimétrico. Solo funciona en macOS.
+MNR es un filtro MMSE-Wiener con suavizado de ganancia asimétrico. Solo está disponible en macOS.
 
-| Control | Tipo | Predeterminado | Rango válido | Clave de ajuste |
+| Control | Tipo | Predeterminado | Rango | Clave de ajuste |
 |---|---|---|---|---|
-| Enable MNR (macOS only) | Casilla de verificación | (leído del motor de audio) | — | `MnrEnabled` |
+| Enable MNR (macOS only) | Casilla | Leído desde el motor de audio | — | `MnrEnabled` |
 | Strength | Control deslizante | 100 | 0–100 | `MnrStrength` |
 
-**Enable MNR (macOS only)** activa o desactiva el motor. Su estado inicial refleja el estado actual del motor de audio.
+**Enable MNR (macOS only)** activa el motor. El estado inicial refleja lo que informa el motor de audio, no un valor predeterminado almacenado.
 
-**Strength** ajusta la agresividad. 0 es suave; 100 es la supresión máxima. `MnrStrength` se almacena como un valor normalizado entre 0.00 y 1.00.
+**Strength** establece la agresividad. 0 es leve; 100 es la supresión máxima.
 
 ---
+
+### Cómo elegir entre los motores
+
+| Situación | Motor sugerido |
+|---|---|
+| Artefactos de ruido musical, fluctuación en el ruido SSB | NR2 |
+| Ruido atmosférico de banda ancha o interferencia de red eléctrica | NR4 |
+| Máxima inteligibilidad, CPU disponible | DFNR |
+| Ruta de audio del sistema macOS, procesamiento ligero | MNR |
+
+No está limitado a un solo motor a la vez; los botones de bandeja de cada motor los activan de forma independiente. Comience con uno y agregue un segundo solo si el primero es insuficiente.
 
 ## Consejos
 
-- Comience con NR2 en los ajustes predeterminados (Gamma / OSMS / AE activado / Reduction Depth 1.50) para trabajo de voz SSB típico. Preserva la naturalidad de la voz mejor que un corte plano en dB.
-- Si el piso de ruido cambia durante un contacto (QSB, aperturas de banda), habilite **Adaptive Noise Estimation** en NR4 o cambie **NPE Method** en NR2 a NSTAT.
-- Use **Whitening (%)** en NR4 para reducir el ruido residual tonal o "chispeante" sin aumentar la reducción general.
-- Establezca **Attenuation Limit** de DFNR en un valor más bajo (40–60) antes de experimentar hacia arriba; en 100 aplica la supresión neural máxima, lo que puede hacer que las señales débiles suenen procesadas.
-- En macOS, puede combinar MNR con NR2 o NR4 si es necesario, pero comience con un solo motor a la vez para escuchar lo que aporta cada uno.
-- Haga clic en **Reset Defaults** en la pestaña NR2 o NR4 en cualquier momento para volver a los valores de fábrica mostrados en las tablas anteriores.
+- En la pestaña NR2, haga clic en **Reset Defaults** para volver a Gamma / OSMS / AE Filter activado / 1.50 / 0.85 / 0.20 en cualquier momento.
+- En la pestaña NR4, haga clic en **Reset Defaults** para volver a SPP-MMSE / adaptativo activado / 10.0 dB / 0 / 0 / 0.50 / 0.50.
+- La pestaña MNR está presente en todas las plataformas, pero **Enable MNR (macOS only)** no tiene efecto en Linux ni en Windows.
+- Establecer el **Attenuation Limit** de DFNR en 0 deshabilita la supresión de DeepFilterNet3 sin cerrar el diálogo, lo que es útil para comparaciones A/B.
 
-## Solución de problemas
-
-- **La voz suena hueca o robótica** — La reducción es demasiado alta. En NR2, baje **Reduction Depth:** por debajo de 1.50. En NR4, reduzca **Reduction (dB):** o baje **Suppression:**. En DFNR, reduzca **Attenuation Limit**.
-- **Persiste ruido musical o timbre después de NR2** — Confirme que **AE Filter (artifact elimination)** esté marcado.
-- **Los controles de MNR están desactivados** — MNR es solo para macOS. En Linux o Windows, la pestaña está presente, pero el motor no está disponible.
-- **DFNR no tiene efecto** — Verifique que **Attenuation Limit** esté por encima de 0. Un valor de 0 es modo de paso.
-- **La estimación de ruido de NR4 se desvía en una banda silenciosa** — Desmarque **Adaptive Noise Estimation** para fijar la estimación, o cambie **Noise Estimation Method** a Martin, que está diseñado para pisos que varían lentamente.
-
-## Relacionado
+## Relacionados
 
 - [Descripción general de AetherDSP Settings](../../features/aether-dsp/overview.md)
 - [Ajustar la profundidad de reducción y el umbral de voz de NR2](../../features/aether-dsp/tune-nr2-reduction-depth-and-voice-threshold.md)
 - [Cambiar el método de ganancia de NR2 entre Linear, Log, Gamma y Trained](../../features/aether-dsp/switch-nr2-gain-method-between-linear-log-gamma-and-trained.md)
-- [Cambiar el método NR
+- [Cambiar el estimador de potencia de ruido de NR2 (OSMS/MMSE/NSTAT)](../../features/aether-dsp/change-nr2-noise-power-estimator-osms-mmse-nstat.md)
+- [Ajustar la cantidad de reducción de NR4 en dB](../../features/aether-dsp/adjust-nr4-reduction-amount-in-db.md)
+- [Habilitar o deshabilitar la estimación adaptativa de ruido de NR4](../../features/aether-dsp/enable-or-disable-nr4-adaptive-noise-estimation.md)
+- [Ajustar la profundidad de enmascaramiento y la intensidad de supresión de NR4](../../features/aether-dsp/tune-nr4-masking-depth-and-

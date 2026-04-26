@@ -1,31 +1,40 @@
 # Exportar la instantánea a un archivo para adjuntar a un informe de error
 
-Guarde la instantánea (snapshot) actual del slice como archivo JSON para adjuntarla a un issue de GitHub o a una solicitud de soporte.
+Use esta página para guardar la instantánea JSON del diálogo Slice Troubleshooting en un archivo en disco, de modo que pueda adjuntarla a un informe de error o solicitud de soporte.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio. El diálogo requiere una conexión de radio activa.
-- Abra el diálogo Slice Troubleshooting mediante `Help > Slice Troubleshooting...`.
+- AetherSDR debe estar conectado al radio. El diálogo Slice Troubleshooting requiere una conexión de radio activa.
+- Abra el diálogo Slice Troubleshooting mediante `Help > Slice Troubleshooting...` si aún no está abierto.
 
 ## Pasos
 
-1. Haga clic en `Help > Slice Troubleshooting...` para abrir el diálogo Slice Troubleshooting.
-2. Haga clic en `Refresh Snapshot` para asegurarse de que la instantánea refleje el estado actual de la radio.
-3. Haga clic en `Export JSON...`.
-4. En el diálogo de guardado de archivo que aparece, elija una carpeta de destino y un nombre de archivo, luego confirme el guardado.
-5. Adjunte el archivo guardado a su informe de error o issue de GitHub.
+1. En el diálogo Slice Troubleshooting, haga clic en la pestaña `JSON` para confirmar que la instantánea contiene datos actuales. Si los datos parecen desactualizados, haga clic en `Refresh Snapshot` antes de exportar.
+2. Haga clic en `Export JSON...`.
+3. En el diálogo de guardar archivo que se abre, elija una carpeta de destino y un nombre de archivo, luego confirme el guardado.
+4. Verifique la etiqueta de estado en la parte inferior del diálogo para confirmar que la exportación fue exitosa.
 
-La etiqueta de estado en la parte inferior del diálogo confirma el resultado de la exportación.
+## Qué hace cada control
+
+| Control | Tipo | Comportamiento |
+|---|---|---|
+| `Issue Summary` (pestaña) | Pestaña | Muestra una lista de viñetas en lenguaje sencillo de los problemas detectados. |
+| `JSON` (pestaña) | Pestaña | Muestra la instantánea JSON completa de los slices y canales DAX. |
+| `Refresh Snapshot` | Botón | Vuelve a leer el estado del slice en la instantánea. Haga clic antes de exportar si el estado del slice ha cambiado. |
+| `Copy Summary` | Botón | Copia el texto del resumen de problemas al portapapeles. |
+| `Copy JSON` | Botón | Copia el JSON completo al portapapeles. |
+| `Export JSON...` | Botón | Abre un diálogo de guardar archivo y escribe la instantánea JSON en disco. |
+| `Close` | Botón | Cierra el diálogo. |
+| Etiqueta de estado | Indicador | Muestra el resultado de la última acción de copia o exportación. |
 
 ## Consejos
 
-- Si acaba de cambiar la configuración del slice (modo, antena, estado de silencio), haga clic en `Refresh Snapshot` antes de exportar para que el archivo refleje el estado más reciente.
-- La pestaña `JSON (tab)` muestra exactamente lo que se guardará. Revísela antes de exportar si desea confirmar el contenido de la instantánea.
-- Si solo necesita pegar los datos en lugar de adjuntar un archivo, use `Copy JSON` en su lugar.
+- Haga clic en `Refresh Snapshot` inmediatamente antes de exportar si ha cambiado alguna configuración del slice desde que abrió el diálogo. La exportación escribe lo que se muestra actualmente en la pestaña `JSON`.
+- Si necesita pegar la instantánea directamente en un formulario web o correo electrónico en lugar de adjuntar un archivo, use `Copy JSON` en su lugar.
 
 ## Relacionado
 
-- [Capturar una instantánea del slice para soporte](capture-a-slice-snapshot-for-support.md)
+- [Descripción general de Slice Troubleshooting](overview.md)
+- [Capturar una instantánea de slice para soporte](capture-a-slice-snapshot-for-support.md)
 - [Copiar la instantánea JSON completa al portapapeles](copy-the-full-json-snapshot-to-the-clipboard.md)
-- [Actualizar la instantánea tras cambiar el estado del slice](refresh-the-snapshot-after-changing-slice-state.md)
-- [Leer una lista en lenguaje sencillo de los problemas sospechados del slice](read-a-plain-language-list-of-suspected-slice-problems.md)
+- [Actualizar la instantánea después de cambiar el estado del slice](refresh-the-snapshot-after-changing-slice-state.md)

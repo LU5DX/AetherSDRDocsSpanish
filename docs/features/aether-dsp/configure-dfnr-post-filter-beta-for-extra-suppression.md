@@ -1,38 +1,38 @@
-# Configurar el beta del postfiltro DFNR para supresión adicional
+# Configurar el beta del post-filtro DFNR para supresión adicional
 
-Use esta página para ajustar el beta del postfiltro de DeepFilterNet3, que aplica una etapa de supresión adicional sobre la atenuación principal. Aumente este valor cuando el ruido residual siga siendo audible después de configurar el límite de atenuación.
+Use esta página para ajustar el valor beta del post-filtro de DeepFilterNet3, que aplica una etapa de supresión adicional sobre la reducción de ruido DFNR principal. Aumentar el beta incrementa la eliminación de ruido residual a costa de cierta naturalidad del audio.
 
 ## Antes de comenzar
 
-- AetherDSP Settings se puede abrir sin una conexión de radio activa.
-- DFNR (DeepFilterNet3) debe estar seleccionado como motor de reducción de ruido activo. Si no está seguro de qué motor utilizar, consulte [Cómo elegir la reducción de ruido adecuada: NR2, NR4, DFNR, MNR](../../operating/dsp/noise-reduction-overview.md).
+- Abra AetherSDR y confirme que DFNR está activo en el receptor que desea ajustar.
+- Tenga en cuenta que `DfnrPostFilterBeta` es independiente de `DfnrAttenLimit`; ambos controles afectan la salida DFNR pero operan en etapas diferentes.
 
 ## Pasos
 
 1. Haga clic en `Settings > AetherDSP Settings...` para abrir el diálogo AetherDSP Settings.
 2. Haga clic en la pestaña **DFNR**.
-3. Ajuste el control deslizante **Post-Filter Beta** al valor deseado (predeterminado: `0.00`, rango: `0.00`–`0.30`).
-4. Cierre el diálogo. El valor se guarda inmediatamente al mover el control deslizante.
+3. Arrastre el control deslizante **Post-Filter Beta** hasta el valor deseado. El valor predeterminado es `0.00` (post-filtro desactivado); el máximo es `0.30`.
+4. Suelte el control deslizante. El ajuste se guarda inmediatamente en `DfnrPostFilterBeta`.
 
 ## Qué hace cada control
 
-| Control | Predeterminado | Rango válido | Clave de configuración | Comportamiento |
+| Control | Predeterminado | Rango válido | Clave de ajuste | Comportamiento |
 |---|---|---|---|---|
-| **Attenuation Limit** | `100` | `0`–`100` dB | `DfnrAttenLimit` | Establece la atenuación máxima de ruido aplicada por DeepFilterNet3. `0` es paso directo; `100` es el máximo. |
-| **Post-Filter Beta** | `0.00` | `0.00`–`0.30` | `DfnrPostFilterBeta` | Aplica un postfiltro adicional para supresión extra sobre el límite de atenuación. |
+| **Post-Filter Beta** | 0.00 | 0.00 – 0.30 | `DfnrPostFilterBeta` | Aplica un post-filtro adicional para supresión extra después de la etapa principal de DeepFilterNet3. Valores más altos aumentan la supresión. 0.00 desactiva el post-filtro por completo. |
+| **Attenuation Limit** | 100 | 0 – 100 dB | `DfnrAttenLimit` | Establece la atenuación máxima de ruido aplicada por DeepFilterNet3 antes de la etapa del post-filtro. 0 deja pasar el audio sin procesar; 100 aplica la atenuación máxima. |
 
 ## Consejos
 
-- Comience con **Post-Filter Beta** en `0.00` y auméntelo en incrementos pequeños. Los valores más altos proporcionan mayor supresión, pero pueden afectar la naturalidad de la voz.
-- Si el piso de ruido es aceptable pero ráfagas ocasionales lo superan, pruebe un valor moderado de **Post-Filter Beta**, como `0.05`–`0.10`, antes de aumentar más el **Attenuation Limit**.
-- **Attenuation Limit** en `0` omite por completo la atenuación de DFNR, dejando **Post-Filter Beta** como la única etapa activa.
+- Comience con incrementos pequeños de beta (pasos de 0.05) y escuche si hay pérdida de claridad vocal antes de seguir aumentando.
+- Si el ruido residual sigue siendo audible después de elevar **Post-Filter Beta** a 0.30, considere también aumentar **Attenuation Limit** en lugar de llevar el beta más allá de su rango.
+- Establecer **Post-Filter Beta** en `0.00` deja la salida de DFNR sin cambios por el post-filtro, lo cual es apropiado cuando la etapa de atenuación principal por sí sola ofrece resultados limpios.
 
 ## Solución de problemas
 
-- **Post-Filter Beta no produce efecto audible** — Confirme que DFNR es el motor de reducción de ruido activo en su cadena de recepción. Si **Attenuation Limit** está en `0`, la atenuación de DFNR queda desactivada; aumente primero **Attenuation Limit** para que DFNR procese el audio.
-- **La voz suena distorsionada tras aumentar Post-Filter Beta** — Reduzca **Post-Filter Beta** hacia `0.00`. Los valores superiores a `0.15` pueden introducir artefactos audibles en señales débiles o con bajo SNR.
+- **El audio suena apagado o con exceso de procesamiento** — Reduzca **Post-Filter Beta** hacia `0.00`. Los valores altos de beta suprimen componentes de voz de bajo nivel junto con el ruido.
+- **No se percibe ningún cambio al mover el control deslizante** — Confirme que el motor DFNR está habilitado en el receptor activo. El post-filtro no tiene efecto si DFNR no está en funcionamiento.
 
-## Relacionados
+## Temas relacionados
 
 - [Establecer el límite de atenuación de DeepFilterNet3 para señales fuertes o débiles](set-deepfilternet3-attenuation-limit-for-strong-or-weak-signals.md)
 - [Cómo elegir la reducción de ruido adecuada: NR2, NR4, DFNR, MNR](../../operating/dsp/noise-reduction-overview.md)

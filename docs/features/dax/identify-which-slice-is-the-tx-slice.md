@@ -1,35 +1,31 @@
-# Identificar cuál slice es el slice de TX
+# Identificar qué slice es el slice TX
 
-El applet DAX Audio muestra un indicador en vivo de asignación de TX que le indica qué slice tiene actualmente los privilegios de TX. Úselo cuando necesite confirmar qué slice maneja el flujo DAX TX antes de transmitir audio digital.
+El applet DAX Audio muestra un indicador en vivo de asignación TX para que pueda ver de un vistazo qué slice (canal de receptor virtual) tiene actualmente los privilegios de transmisión. Esto es útil cuando se operan múltiples slices o software de modos digitales, donde es necesario confirmar que el slice correcto está controlando el flujo DAX TX.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a la radio. El indicador de TX requiere una conexión de radio activa.
-- El applet DAX debe estar visible. Si no lo ve, haga clic en el botón DAX del panel lateral derecho para abrirlo.
+- AetherSDR debe estar conectado al radio. El indicador de asignación TX requiere una conexión de radio activa.
+- El applet DAX debe estar visible. Si no lo está, haga clic en el botón DAX de la barra lateral derecha para abrirlo.
 
 ## Pasos
 
-1. Haga clic en el botón **DAX** del panel lateral derecho para abrir el applet DAX Audio.
-2. Observe la fila **TX:** en la parte inferior del applet.
-3. Lea el indicador de estado inmediatamente a la derecha de la etiqueta **TX:**.
-   - Si un slice tiene privilegios de TX, el indicador muestra **Slice A** hasta **Slice H**, correspondiendo a la letra asignada a ese slice.
-   - Si ningún slice tiene actualmente privilegios de TX, el indicador muestra **—**.
+1. Haga clic en el botón DAX de la barra lateral derecha para abrir el applet DAX Audio.
+2. Observe la fila TX en la parte inferior del applet. La etiqueta inmediatamente a la derecha de "TX:" muestra el slice TX actual.
+3. Lea el indicador de asignación TX. Muestra `—` (ningún slice TX asignado) o `Slice A` hasta `Slice H` (la letra del slice que actualmente tiene los privilegios TX).
 
 ## Qué hace cada control
 
-| Control | Descripción | Estados | Clave persistida |
-|---|---|---|---|
-| Indicador de asignación de TX | Muestra qué slice tiene actualmente los privilegios de TX y maneja el flujo DAX TX. Se actualiza automáticamente cuando el TX cambia entre slices. | **—** (ninguno) o **Slice A–H** | None |
-| Ganancia+medidor de TX | Medidor de nivel y control deslizante de ganancia combinados para el flujo DAX TX. | 0.0–1.0 (valor predeterminado 0.5) | `DaxTxGain` |
+| Control | Descripción | Estados |
+|---|---|---|
+| Indicador de asignación TX | Muestra qué slice tiene actualmente los privilegios TX y controla el flujo DAX TX. Se actualiza automáticamente cuando se transfiere el TX entre slices. Sin configuración persistente. | `—` o `Slice A`–`Slice H` |
 
 ## Consejos
 
-- El indicador de TX se actualiza de inmediato cada vez que los privilegios de TX se transfieren a un slice diferente. No es necesario actualizar ni volver a abrir el applet.
-- Las filas de RX por encima de la fila **TX:** muestran qué slice está enrutado a cada canal DAX (DAX 1 al DAX 4). Esos indicadores siguen el mismo formato **Slice A–H** o **—** y son independientes del indicador de TX.
+- El indicador TX se actualiza en tiempo real. Si transfiere el TX a un slice diferente (por ejemplo, haciendo clic en el botón TX de un slice en el panadapter), el indicador cambia inmediatamente sin necesidad de ninguna acción en el applet DAX.
+- Las filas de canales RX ubicadas sobre la fila TX tienen cada una su propio indicador de asignación de slice, que muestra `—` o `Slice A`–`Slice H`. Esas filas indican qué slice está enrutado a cada canal DAX RX, lo cual es independiente de la asignación TX. Consulte [Ver qué slice está usando actualmente cada canal DAX](see-which-slice-is-currently-using-each-dax-channel.md).
 
-## Relacionado
+## Relacionados
 
-- [Ver qué slice está utilizando cada canal DAX](see-which-slice-is-currently-using-each-dax-channel.md)
-- [Configurar la ganancia DAX TX](set-dax-tx-gain.md)
-- [Habilitar DAX para enrutar el audio del slice a WSJT-X / FLDigi / otro software digital](enable-dax-to-route-slice-audio-to-wsjt-x-fldigi-other-digital-software.md)
+- [Ver qué slice está usando actualmente cada canal DAX](see-which-slice-is-currently-using-each-dax-channel.md)
+- [Habilitar DAX para enrutar el audio del slice a WSJT-X / FLDigi / otro software de modos digitales](enable-dax-to-route-slice-audio-to-wsjt-x-fldigi-other-digital-software.md)
 - [Descripción general de DAX Audio](overview.md)

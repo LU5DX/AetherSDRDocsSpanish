@@ -1,34 +1,38 @@
 # Configurar el retardo de break-in de CW
 
-El applet Phone/CW permite configurar cuánto tiempo espera el equipo después del último elemento CW antes de volver a recepción. Ajustar este retardo evita que el equipo cambie a RX entre caracteres a alta velocidad, o le permite regresar rápidamente para QSOs con respuesta inmediata.
+El retardo de break-in de CW controla cuánto tiempo espera el equipo después del último elemento transmitido antes de volver a la recepción. Ajustar este valor evita que el receptor recupere la escucha de forma prematura durante intercambios rápidos.
 
 ## Antes de comenzar
 
-- Conéctese a un equipo radio Flex. El applet Phone/CW requiere una conexión activa con el equipo.
-- Configure el slice activo en un modo CW. El applet cambia automáticamente al subpanel de CW cuando el slice está en CW; el control Delay no es visible en modos de voz.
+- AetherSDR debe estar conectado al equipo.
+- El slice activo debe estar en un modo CW. El applet Phone/CW muestra los controles de CW automáticamente solo cuando se selecciona un modo CW.
 
 ## Pasos
 
-1. Localice el botón de bandeja **P/CW** en la barra lateral derecha y confirme que el applet está visible. Si el applet está oculto, haga clic en el botón de bandeja **P/CW** para mostrarlo.
-2. Verifique que el applet muestre el subpanel de CW. Si el slice activo está en modo CW, los controles de CW aparecen automáticamente.
-3. Localice el control deslizante **Delay (CW)**.
-4. Arrastre el control deslizante **Delay (CW)** hasta el valor deseado. El retardo se aplica de inmediato.
+1. Si el applet Phone/CW no está visible, haga clic en el botón **P/CW** de la barra lateral derecha para mostrarlo.
+2. Localice el control deslizante **Delay** en el subpanel de CW.
+3. Arrastre el control deslizante **Delay** hasta el valor deseado. El rango válido es de 0 a 2000 ms en pasos de 10.
+4. Para habilitar el break-in completo (QSK) sin retardo, haga clic en **Breakin** para activarlo.
 
 ## Qué hace cada control
 
-| Control | Descripción | Valor predeterminado | Rango válido | Clave de configuración |
+| Control | Tipo | Valor predeterminado | Rango válido | Clave de persistencia |
 |---|---|---|---|---|
-| **Delay (CW)** | Establece el retardo de break-in: cuánto tiempo espera el equipo después del último elemento transmitido antes de volver a recepción. | — | 0–2000 ms, paso 10 | — |
-| **Breakin** | Activa o desactiva el break-in completo (QSK). Cuando está habilitado, el equipo cambia a RX entre cada elemento. | — | On / Off | — |
+| **Delay** | Control deslizante | — | 0–2000 ms (paso 10) | — |
+| **Breakin** | Botón de alternancia | — | On / Off | — |
+
+- **Delay** — Establece el tiempo que el equipo espera después del último elemento transmitido antes de volver a la recepción.
+- **Breakin** — Activa o desactiva el break-in completo (QSK). Cuando está activo, el equipo vuelve a la recepción inmediatamente entre elementos transmitidos, independientemente del valor de **Delay**.
 
 ## Consejos
 
-- Configure **Delay (CW)** en 0 ms con **Breakin** activo para operación QSK completa.
-- A velocidades más altas, aumente el retardo ligeramente para evitar conmutaciones RX/TX entre caracteres.
+- Un valor de **Delay** de 0 ms con **Breakin** activo proporciona un comportamiento QSK verdadero.
+- Aumente el valor de **Delay** si el receptor recupera la escucha demasiado rápido y esto interrumpe su ritmo de manipulación durante pile-ups.
 
 ## Relacionado
 
+- [Descripción general de Phone/CW](overview.md)
 - [Configurar la velocidad de manipulación CW en WPM](set-cw-keying-speed-in-wpm.md)
 - [Habilitar la manipulación con paleta iámbica](enable-iambic-paddle-keying.md)
-- [Cambiar el tono CW / frecuencia de sidetone](change-cw-pitch-sidetone-frequency.md)
-- [Escuchar el monitor de sidetone de TX](listen-to-a-tx-sidetone-monitor.md)
+- [Cambiar el tono de CW / frecuencia del sidetone](change-cw-pitch-sidetone-frequency.md)
+- [Escuchar un monitor de sidetone de TX](listen-to-a-tx-sidetone-monitor.md)

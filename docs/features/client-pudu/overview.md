@@ -1,39 +1,32 @@
 # Descripción general del excitador PUDU
 
-El excitador PUDU es la pieza central de la cadena DSP de transmisión de PooDoo Audio. Añade cuerpo en bajas frecuencias ("Poo") y presencia o aire en altas frecuencias ("Doo") al audio transmitido, mediante dos procesadores paralelos independientes, cada uno con su propio carácter, sintonía y mezcla húmedo/seco.
+El excitador PUDU es la pieza central de la cadena de TX de PooDoo Audio. Añade realce armónico y modelado tonal al audio transmitido en dos regiones de frecuencia: cuerpo de bajos ("Poo") y presencia y aire en alta frecuencia ("Doo").
 
 ## Antes de comenzar
 
-- La etapa PUDU debe estar habilitada en el widget CHAIN antes de que el applet sea visible. El subcontenedor permanece oculto hasta que la etapa esté activa.
-- No se requiere conexión a ningún radio para ajustar la configuración de PUDU.
+- La etapa PUDU debe estar habilitada en el widget CHAIN antes de que el applet PUDU sea visible. El subcontenedor permanece oculto hasta que la etapa esté activa.
+- El contenedor principal de PooDoo Audio (TXDSP) debe estar abierto en el panel de applets.
 
 ## Cómo funciona
 
-PUDU procesa el audio de transmisión en dos bandas paralelas.
+PUDU procesa el audio en dos bandas independientes, cada una controlada por un grupo de tres mandos.
 
-**Mode** selecciona el carácter general de ambos procesadores. Haga clic en **Even** para obtener el modelado asimétrico de linaje Aphex — predominantemente armónicos pares, más cálido, con saturación de bajas frecuencias tipo Big Bottom. Haga clic en **Odd** para obtener el modelado simétrico tanh de linaje Behringer — armónicos impares puros, más brillante, con un compresor de graves de alimentación hacia adelante. Los dos botones son mutuamente excluyentes; el modo seleccionado se guarda en `ClientPuduTxMode`.
+**Selección de modo** — Los botones de opción Even y Odd en la parte superior del applet seleccionan el carácter del modelado armónico aplicado en ambas bandas. El modo Even utiliza saturación asimétrica de linaje Aphex, produciendo predominantemente armónicos pares con un carácter más cálido y saturación de bajos frecuentes Big Bottom. El modo Odd utiliza modelado simétrico tanh de linaje Behringer, produciendo armónicos impares puros con un carácter más brillante y un compresor de graves de alimentación directa. Los dos botones son mutuamente excluyentes; la selección activa se muestra en ámbar.
 
-**Grupo Poo** — los tres controles bajo la etiqueta "Poo" dan forma a la banda de bajas frecuencias:
+**Grupo Poo** — Los tres mandos bajo el indicador "Poo" actúan sobre la banda de baja frecuencia. Drive empuja con más fuerza el saturador o compresor. Tune centra la banda de frecuencia en el fundamental objetivo. Mix mezcla la banda de bajos procesada con la señal sin procesar.
 
-- **Drive** establece con qué intensidad se lleva el saturador o compresor de bajas frecuencias. Valores más altos añaden mayor densidad y grosor en las bajas.
-- **Tune** centra la banda de enfoque de bajas frecuencias en una frecuencia específica.
-- **Mix** mezcla la banda baja procesada con la señal seca. Al 0 % el procesador Poo queda completamente puenteado; al 100 % es completamente húmedo.
+**Grupo Doo** — Los tres mandos bajo el indicador "Doo" actúan sobre la banda de alta frecuencia. Tune centra la banda de excitación en la región de presencia o aire. Air controla la cantidad de armónicos añadidos en esa banda. Mix mezcla los agudos excitados con la señal sin procesar.
 
-**Grupo Doo** — los tres controles bajo la etiqueta "Doo" añaden presencia y aire en la banda de altas frecuencias:
+El logotipo animado de PooDoo pulsa en brillo con el RMS de la señal procesada (húmeda), proporcionando una indicación visual continua de que la etapa está activa y transmitiendo audio.
 
-- **Tune** centra la banda de excitación de altas frecuencias en una frecuencia específica. El mapeo es logarítmico, por lo que el control avanza más lentamente en frecuencias más altas.
-- **Air** establece la cantidad de armónicos añadidos en la banda Doo.
-- **Mix** mezcla las altas frecuencias excitadas con la señal seca.
-
-El **logotipo de PooDoo** en la parte superior del applet pulsa en brillo con el nivel RMS de la señal procesada (húmeda), ofreciendo una indicación visual de que el excitador está activo y recibiendo audio.
-
-El puenteo y la habilitación se gestionan desde el widget CHAIN, no mediante controles dentro del applet. Para abrir el editor flotante de PUDU, haga doble clic en la etapa PUDU (Enh) en el widget CHAIN.
+Para abrir el editor flotante, haga doble clic en la etapa PUDU (Enh) en el widget CHAIN. Para hacer flotar, separar u ocultar el subcontenedor, haga clic derecho en la barra de título del subcontenedor PUDU.
 
 ## Qué hace cada control
 
-| Control | Valor predeterminado | Rango válido | Ajuste persistente |
+| Control | Valor predeterminado | Rango válido | Ajuste persistido |
 |---|---|---|---|
-| Even / Odd | — | Una u otra | `ClientPuduTxMode` |
+| Even | — | — | `ClientPuduTxMode` |
+| Odd | — | — | `ClientPuduTxMode` |
 | Poo / Drive | 6.0 dB | 0.0 – 24.0 dB | `ClientPuduTxPooDriveDb` |
 | Poo / Tune | 100 Hz | 50 – 160 Hz | `ClientPuduTxPooTuneHz` |
 | Poo / Mix | 30 % | 0 – 100 % | `ClientPuduTxPooMix` |
@@ -41,22 +34,21 @@ El puenteo y la habilitación se gestionan desde el widget CHAIN, no mediante co
 | Doo / Air | 6.0 dB | 0.0 – 24.0 dB | `ClientPuduTxDooHarmonicsDb` |
 | Doo / Mix | 30 % | 0 – 100 % | `ClientPuduTxDooMix` |
 
-El estado de habilitación/deshabilitación se guarda por separado como `ClientPuduTxEnabled` y se controla desde el widget CHAIN.
+El ajuste `ClientPuduTxEnabled` guarda si la etapa PUDU está activa en la cadena.
 
 ## Consejos
 
-- El pulso del logotipo de PooDoo es una comprobación rápida de que el audio fluye por la ruta húmeda. Si el logotipo no pulsa durante la transmisión, verifique que la etapa PUDU esté habilitada en el widget CHAIN.
-- Poo / Tune responde de forma lineal; por lo tanto, ajústelo cerca de la frecuencia fundamental de su voz para obtener el realce de bajas más focalizado.
-- Doo / Tune utiliza una escala logarítmica. Un pequeño movimiento físico cerca del extremo superior del rango abarca un amplio intervalo de frecuencias; use giros lentos y deliberados al apuntar a un pico de presencia específico.
-- Mantenga Poo / Mix y Doo / Mix en valores moderados (20–40 %) como punto de partida. El procesamiento paralelo con niveles de mezcla altos puede hacer que la señal suene excesivamente procesada en el extremo receptor.
+- Poo / Tune responde a un mapeo de frecuencia lineal, por lo que los ajustes pequeños cerca de 50 Hz y cerca de 160 Hz desplazan la banda en la misma cantidad absoluta. Ajuste Tune cerca del fundamental de su voz antes de aumentar Drive o Mix.
+- Doo / Tune utiliza un mapeo logarítmico, por lo que el mando cubre más octavas hacia el extremo superior de su recorrido. Un valor de 5.0 kHz es la etiqueta mostrada en la posición predeterminada; los valores por debajo de 1000 Hz se muestran en Hz.
+- Mantenga Poo / Mix y Doo / Mix en valores conservadores — ambos tienen un valor predeterminado de 30 %. Valores de mezcla elevados con ajustes altos de Drive pueden incrementar la potencia media de forma significativa.
 
 ## Relacionados
 
 - [Elegir el carácter Aphex (Even) o Behringer (Odd)](pick-aphex-even-vs-behringer-odd-character.md)
-- [Ajustar Poo Drive para grosor en bajas frecuencias](dial-poo-drive-for-lf-thickness.md)
-- [Sintonizar Poo a la frecuencia fundamental de su voz](tune-poo-to-the-fundamental-of-your-voice.md)
-- [Mezclar el realce de Poo con Mix](blend-the-poo-enhancement-with-mix.md)
-- [Centrar Doo en la banda de presencia de su micrófono](centre-doo-on-the-presence-band-for-your-mic.md)
-- [Añadir aire con los armónicos de Doo](add-air-with-doo-harmonics.md)
-- [Mezclar la excitación de Doo con Mix](blend-the-doo-excitement-with-mix.md)
-- [Puentear PUDU desde la cadena](bypass-pudu-from-the-chain.md)
+- [Ajustar Poo Drive para obtener grosor en bajas frecuencias](dial-poo-drive-for-lf-thickness.md)
+- [Sintonizar Poo al fundamental de su voz](tune-poo-to-the-fundamental-of-your-voice.md)
+- [Mezclar el realce Poo con Mix](blend-the-poo-enhancement-with-mix.md)
+- [Centrar Doo en la banda de presencia para su micrófono](centre-doo-on-the-presence-band-for-your-mic.md)
+- [Añadir aire con los armónicos Doo](add-air-with-doo-harmonics.md)
+- [Mezclar la excitación Doo con Mix](blend-the-doo-excitement-with-mix.md)
+- [Omitir PUDU desde la cadena](bypass-pudu-from-the-chain.md)

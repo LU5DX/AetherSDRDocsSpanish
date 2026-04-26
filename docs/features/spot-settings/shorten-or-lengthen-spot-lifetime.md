@@ -1,31 +1,37 @@
-# Acortar o alargar la duración de los spots
+# Acortar o alargar la vida útil de los spots
 
-Ajuste cuánto tiempo permanecen visibles los spots de DX en el panadapter antes de desvanecerse. Una duración más corta mantiene la pantalla ordenada; una duración más larga permite ver spots que llegaron hace minutos u horas.
+Use esta página para controlar cuánto tiempo permanecen visibles los spots de DX en el panadapter antes de desvanecerse. Una vida útil más corta mantiene la pantalla despejada; una más larga le permite rastrear spots durante sesiones de operación prolongadas.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar en ejecución. No se requiere conexión a un equipo de radio para cambiar esta configuración.
-- El diálogo **Spot Settings** debe ser accesible desde el menú contextual del panadapter o desde la capa de spots (Spots overlay).
+- AetherSDR debe estar en ejecución. No se requiere una conexión de radio para cambiar esta configuración.
+- El diálogo **Spot Settings** debe estar accesible desde el menú contextual del panadapter o desde la superposición Spots.
 
 ## Pasos
 
-1. Haga clic derecho en el panadapter (o haga clic en el Spots overlay) para abrir el diálogo **Spot Settings**.
+1. Haga clic derecho en el panadapter (o en la superposición Spots) para abrir el menú contextual y seleccione la opción que abre **Spot Settings**.
 2. Localice la fila **Spot Lifetime:**.
-3. Arrastre el control deslizante hacia la izquierda para reducir la duración o hacia la derecha para aumentarla. La etiqueta a la derecha del control se actualiza de forma inmediata y muestra el valor actual en segundos, minutos, horas o días.
-4. Suelte el control deslizante. El nuevo valor se guarda automáticamente en `SpotsLifetime` (`DxClusterSpotLifetimeSec`).
+3. Arrastre el control deslizante hacia la izquierda para acortar la vida útil o hacia la derecha para alargarla. La etiqueta a la derecha del control se actualiza de inmediato para mostrar el valor actual en segundos, minutos u horas.
+4. Suelte el control deslizante. El nuevo valor se guarda automáticamente.
 
 ## Qué hace cada control
 
-| Control | Comportamiento | Valor predeterminado | Rango válido | Clave de configuración |
+| Control | Descripción | Valor predeterminado | Rango | Clave de configuración |
 |---|---|---|---|---|
-| Control deslizante **Spot Lifetime:** | Define cuánto tiempo permanece un spot en el panadapter antes de desvanecerse. La escala es no lineal: avanza en pasos de 10–55 sec (en pasos de 5 sec), luego de 5–55 min (en pasos de 5 min), luego de 1–24 hr (en pasos de 1 hr), y finaliza en 1 day. | 30 min | 10 sec – 24 hr (1 day) | `SpotsLifetime` / `DxClusterSpotLifetimeSec` |
+| Control deslizante **Spot Lifetime:** | Establece cuánto tiempo permanecen los spots en el panadapter antes de desvanecerse. El control utiliza una escala no lineal: las posiciones a la izquierda cubren de 10 a 55 segundos (en pasos de 5 segundos), el centro cubre de 5 a 55 minutos (en pasos de 5 minutos) y la derecha cubre de 1 a 24 horas (en pasos de 1 hora). La etiqueta muestra el valor actual formateado en segundos (`sec`), minutos (`mins`) u horas (`hrs`), con 24 horas mostradas como `1 day`. | 30 min | 10 sec – 24 hr | `SpotsLifetime` (`DxClusterSpotLifetimeSec` internamente, en segundos) |
 
 ## Consejos
 
-- La etiqueta del control deslizante usa unidades legibles: los valores inferiores a 60 segundos se muestran como `sec`, los valores inferiores a una hora se muestran como `min` o `mins`, y los valores de una hora o más se muestran como `hr` o `hrs`. Las 24 horas se muestran como `1 day`.
-- Si actualizó desde una versión anterior de AetherSDR, la configuración se migra automáticamente desde la clave antigua basada en minutos a la clave actual basada en segundos. No se requiere ninguna acción manual.
+- El control deslizante se ajusta a pasos predefinidos, no a valores arbitrarios. La resolución más fina es de 5 segundos en el extremo inferior y de 1 hora en el extremo superior.
+- Si actualizó desde una versión anterior de AetherSDR, la aplicación migra automáticamente su antiguo valor de vida útil por minuto a la nueva clave por segundo en el primer inicio.
+- Establecer una vida útil muy larga (varias horas) puede resultar en un panadapter saturado en bandas con mucha actividad. Use el botón **Clear All Spots** en el mismo diálogo para eliminar los spots acumulados de inmediato.
 
-## Relacionado
+## Solución de problemas
+
+- **Los spots desaparecen antes de la vida útil configurada** — Verifique que **Spots:** esté establecido en **Enabled** en el mismo diálogo. Si la configuración `IsSpotsEnabled` se desactiva y se vuelve a activar, los spots ya mostrados pueden reiniciar su contador de vida útil.
+- **El control deslizante salta más allá del valor deseado** — La escala es no lineal. Muévase lentamente cerca de los puntos de transición (alrededor de 55 segundos y 55 minutos) donde cambia el tamaño del paso.
+
+## Relacionados
 
 - [Descripción general de Spot Settings](overview.md)
 - [Activar o desactivar los spots](turn-spots-on-or-off.md)

@@ -1,38 +1,35 @@
-# Configurar el límite de atenuación de DeepFilterNet3 para señales fuertes o débiles
+# Establecer el límite de atenuación de DeepFilterNet3 para señales fuertes o débiles
 
-La configuración `DfnrAttenLimit` controla con qué agresividad DeepFilterNet3 suprime el ruido. Reducirla preserva más la señal original en señales fuertes y limpias; aumentarla maximiza la supresión en señales enterradas en ruido.
+Ajuste la agresividad con la que DeepFilterNet3 (DFNR) suprime el ruido. Un límite más bajo preserva más el carácter de la señal en señales ya fuertes; los 100 dB completos son apropiados cuando se necesita la máxima eliminación de ruido.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar en ejecución. No se requiere conexión a la radio para ajustar esta configuración.
-- DeepFilterNet3 (DFNR) debe estar activo en su cadena de recepción para que esta configuración tenga algún efecto audible.
+- AetherDSP Settings puede abrirse sin una conexión de radio.
+- DFNR debe estar activo en un slice receptor para que los cambios tengan efecto audible.
 
 ## Pasos
 
-1. Haga clic en `Settings > AetherDSP Settings...` para abrir el diálogo AetherDSP Settings.
-2. Haga clic en la pestaña `DFNR`.
-3. Arrastre el control deslizante `Attenuation Limit` hasta el valor deseado.
+1. Haga clic en `Settings > AetherDSP Settings...`.
+2. Haga clic en la pestaña **DFNR**.
+3. Arrastre el control deslizante **Attenuation Limit** hasta el valor deseado.
+
+El nuevo valor surte efecto de inmediato; no se requiere confirmación. El ajuste se guarda automáticamente como `DfnrAttenLimit`.
 
 ## Qué hace cada control
 
-| Control | Predeterminado | Rango válido | Clave persistida | Comportamiento |
+| Control | Valor predeterminado | Rango válido | Clave de ajuste | Comportamiento |
 |---|---|---|---|---|
-| `Attenuation Limit` | 100 | 0–100 dB | `DfnrAttenLimit` | Establece la atenuación máxima de ruido que DeepFilterNet3 puede aplicar. 0 deja pasar la señal sin procesar; 100 permite la atenuación máxima. |
-| `Post-Filter Beta` | 0.00 | 0.00–0.30 | `DfnrPostFilterBeta` | Aplica un filtro adicional posterior sobre el límite de atenuación para una supresión extra. |
+| Attenuation Limit | 100 | 0–100 dB | `DfnrAttenLimit` | Establece la atenuación de ruido máxima aplicada por DeepFilterNet3. 0 dB es paso total sin filtro; 100 dB es supresión máxima. |
+| Post-Filter Beta | 0.00 | 0.00–0.30 | `DfnrPostFilterBeta` | Aplica un filtro posterior adicional sobre DFNR para mayor supresión. |
 
 ## Consejos
 
-- Para señales fuertes con un piso de ruido limpio, reduzca `Attenuation Limit` (por ejemplo, 20–40) para disminuir los artefactos de procesamiento y preservar la naturalidad del audio.
-- Para señales débiles en ruido intenso, ajuste `Attenuation Limit` a 100 para permitir que DeepFilterNet3 aplique su capacidad de supresión máxima.
-- Si persiste ruido residual al llegar a 100, combínelo con un valor distinto de cero en `Post-Filter Beta`. Consulte [Configurar el post-filter beta de DFNR para supresión adicional](configure-dfnr-post-filter-beta-for-extra-suppression.md).
-
-## Solución de problemas
-
-- **Cambiar el control deslizante no produce ningún efecto audible** — Es posible que DFNR no sea el motor de reducción de ruido activo en su slice de recepción. Confirme que DeepFilterNet3 esté habilitado en su cadena de recepción.
-- **El audio suena sobreprocesado o distorsionado con valores altos** — Reduzca `Attenuation Limit`. Los valores superiores a 60–70 pueden introducir artefactos en algunos tipos de señal.
+- Establezca **Attenuation Limit** en un valor más bajo (por ejemplo, 20–40 dB) cuando la señal entrante ya sea fuerte y desee evitar el procesamiento excesivo que puede hacer que la voz suene antinatural.
+- Establezca **Attenuation Limit** en un valor más alto (por ejemplo, 80–100 dB) cuando el piso de ruido sea alto y la señal sea débil.
+- Combine un **Attenuation Limit** moderado con un **Post-Filter Beta** distinto de cero si persiste ruido residual después de aumentar el límite. Consulte [Configurar el post-filter beta de DFNR para mayor supresión](configure-dfnr-post-filter-beta-for-extra-suppression.md).
 
 ## Relacionados
 
-- [Configurar el post-filter beta de DFNR para supresión adicional](configure-dfnr-post-filter-beta-for-extra-suppression.md)
+- [Configurar el post-filter beta de DFNR para mayor supresión](configure-dfnr-post-filter-beta-for-extra-suppression.md)
 - [Cómo elegir la reducción de ruido adecuada: NR2, NR4, DFNR, MNR](../../operating/dsp/noise-reduction-overview.md)
-- [Descripción general de AetherDSP Settings](overview.md)
+- [Ajustar la cantidad de reducción de NR4 en dB](adjust-nr4-reduction-amount-in-db.md)

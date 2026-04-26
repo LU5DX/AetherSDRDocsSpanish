@@ -1,40 +1,41 @@
-# Saturación en paralelo mediante Mix
+# Saturación en paralelo con mezcla mediante Mix
 
-El control Mix mezcla la señal seca (sin procesar) con la señal de tubo completamente saturada. Reducir Mix por debajo del 100 % permite añadir carácter armónico conservando la claridad transitoria y el tono natural de la señal original — una técnica denominada saturación en paralelo.
+El control Mix mezcla la señal seca (sin procesar) con la salida completamente saturada (húmeda). Úselo para agregar riqueza armónica mientras conserva el carácter transitorio de la señal original — una técnica conocida como compresión en paralelo o saturación en paralelo.
 
 ## Antes de comenzar
 
-- La etapa Tube Saturator debe estar habilitada en el widget CHAIN. Si no lo está, Mix no produce ningún efecto audible.
-- Abra el sub-contenedor TUBE dentro del contenedor padre PooDoo Audio (TXDSP). Si no es visible, haga doble clic en la etapa Tube del widget CHAIN para abrir el editor flotante Tube, o haga clic derecho en la barra de título del sub-contenedor TUBE y elija mostrarlo.
+- La etapa Tube Saturator debe estar habilitada mediante el widget CHAIN. Consulte [Omitir el tubo desde la cadena](bypass-the-tube-from-the-chain.md).
+- El subcontenedor TUBE debe estar visible dentro del contenedor principal PooDoo Audio (TXDSP).
 
 ## Pasos
 
-1. Localice el control Mix en la fila de cinco mandos situada en la parte inferior del applet TUBE.
-2. Gire Mix para ajustar el balance seco/húmedo. La etiqueta muestra el valor actual como porcentaje (por ejemplo, `50 %`).
-   - `100 %` — únicamente la señal saturada.
-   - `0 %` — únicamente la señal seca; la saturación queda sin efecto.
-   - Los valores intermedios producen una mezcla proporcional.
-3. Ajuste Drive, Output o Tone según sea necesario para compensar cambios de nivel o de tono en el punto de mezcla elegido.
+1. Abra el subcontenedor TUBE dentro del contenedor principal PooDoo Audio (TXDSP). Si no está visible, haga doble clic en la etapa Tube en el widget CHAIN para abrir el editor flotante Tube, o haga clic derecho en la barra de título del subcontenedor TUBE y seleccione la opción correspondiente para mostrarlo.
+2. Localice el control Mix — el knob situado más a la derecha en la fila de cinco knobs en la parte inferior del applet.
+3. Gire Mix hacia 0 % para aumentar la proporción de señal seca. Gírelo hacia 100 % para utilizar más señal saturada.
+4. Ajuste Mix al valor en el que el audio transmitido suene pleno sin perder la claridad de la señal original. Un punto de partida de 50 % a 70 % es típico para la saturación en paralelo.
 
-## Qué hace cada control
+## Función de cada control
 
 | Control | Valor predeterminado | Rango válido | Ajuste persistente |
-|---------|----------------------|--------------|-------------------|
-| Mix | 100 % | 0 % a 100 % (almacenado como 0.0 a 1.0) | `ClientTubeTxDryWet` |
+|---------|----------------------|--------------|--------------------|
+| Mix | 100 % | 0 % a 100 % (interno: 0.0 a 1.0) | `ClientTubeTxDryWet` |
 
-Mix es una mezcla lineal seco/húmedo. Al 100 % la salida es la señal procesada por el tubo. Al 0 % la salida es la entrada sin modificar. Los valores intermedios suman ambas señales de forma proporcional.
-
-El applet se sincroniza con el editor flotante Tube cada 33 ms, por lo que un valor modificado en cualquiera de los dos lugares se refleja en el otro sin ninguna acción adicional.
+Al 100 % la salida es completamente la señal saturada. Al 0 % la etapa de tubo queda efectivamente omitida en cuanto al contenido de audio, aunque permanece activa en la cadena de señal. Los valores intermedios mezclan la señal seca y la húmeda de forma proporcional.
 
 ## Consejos
 
-- Comience con Drive ajustado moderadamente (6–12 dB) antes de reducir Mix. Un Drive bajo con Mix al 100 % produce menos saturación que un Drive más alto mezclado al 30–50 % de Mix, aunque ambos enfoques suenan diferente — experimente hasta encontrar el carácter deseado.
-- Use el control Output para restaurar el nivel sonoro después de reducir Mix, ya que mezclar señal seca suele disminuir el nivel percibido del efecto de saturación.
-- La bola de entrada activa sobre la curva de transferencia sigue reflejando la cantidad total de Drive independientemente del ajuste de Mix. Úsela para evaluar el régimen de saturación; use sus oídos para evaluar la mezcla.
+- Los cambios realizados en Mix desde el editor flotante Tube se reflejan en el knob del applet en aproximadamente 33 ms, y viceversa.
+- Si la señal mezclada suena más fuerte que la señal seca sola, use el control Output para reducir el nivel. Consulte [Compensar cambios de nivel con Output](compensate-level-changes-with-output.md).
+- Para obtener calidez sutil sin distorsión evidente, ajuste Drive al máximo para doblar la curva y luego reduzca Mix a 20 %–40 %.
+
+## Solución de problemas
+
+- **El control Mix no tiene efecto** — Confirme que la etapa Tube esté habilitada en el widget CHAIN. Si la etapa está omitida (bypass), no se produce señal húmeda y el control Mix no puede alterar la salida.
+- **La posición del knob no coincide con lo que configuró en el editor flotante** — El applet se sincroniza cada ~33 ms. Espere un momento y el knob se actualizará para reflejar el valor actual.
 
 ## Relacionados
 
+- [Omitir el tubo desde la cadena](bypass-the-tube-from-the-chain.md)
+- [Ajustar Drive hasta que la curva comience a doblarse](dial-drive-until-the-curve-starts-to-bend.md)
+- [Compensar cambios de nivel con Output](compensate-level-changes-with-output.md)
 - [Descripción general del Tube Saturator](overview.md)
-- [Ajuste Drive hasta que la curva comience a curvarse](dial-drive-until-the-curve-starts-to-bend.md)
-- [Compense los cambios de nivel con Output](compensate-level-changes-with-output.md)
-- [Omita el tubo desde la cadena](bypass-the-tube-from-the-chain.md)

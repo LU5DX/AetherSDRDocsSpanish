@@ -1,42 +1,47 @@
 # Conectar un controlador MIDI
 
-Use esta página para seleccionar su dispositivo de entrada MIDI, abrir el puerto y confirmar que AetherSDR está recibiendo mensajes de su controlador.
+Esta página explica cómo seleccionar y conectar un controlador MIDI en AetherSDR para que los mandos físicos, faders y botones del dispositivo queden disponibles para asignaciones de parámetros.
 
 ## Antes de comenzar
 
-- El controlador MIDI debe estar conectado a la computadora y reconocido por el sistema operativo antes de abrir AetherSDR.
-- La compatibilidad con MIDI debe estar compilada (`HAVE_MIDI`). Si `Settings > MIDI Mapping...` no aparece en el menú, su versión de compilación no incluye MIDI.
+- El controlador MIDI debe estar conectado y reconocido por el sistema operativo antes de abrir AetherSDR.
+- AetherSDR debe haberse compilado con soporte MIDI (`Settings > MIDI Mapping...` debe estar presente en el menú; si no aparece, su versión no incluye MIDI).
 
 ## Pasos
 
-1. Vaya a `Settings > MIDI Mapping...`. Se abre el diálogo MIDI Controller Mapping.
-2. En el cuadro combinado Port:, seleccione su controlador MIDI de la lista de dispositivos disponibles. Si la lista está vacía o su dispositivo no aparece, haga clic en Refresh para volver a buscar.
-3. Haga clic en Connect. La etiqueta de estado del puerto cambia a **Connected:** seguida del nombre del dispositivo. Si la conexión falla, la etiqueta permanece como **Disconnected**.
-4. Mueva un mando, fader o botón en su controlador. El indicador de actividad muestra el mensaje más reciente recibido, por ejemplo `Ch 1 CC #7 = 64`. Esto confirma que AetherSDR está recibiendo datos MIDI.
-5. Si desea que AetherSDR abra este dispositivo automáticamente en cada inicio, marque Auto-connect on startup. Esta configuración se guarda como `MidiAutoConnect`.
-6. Haga clic en Close.
+1. Vaya a `Settings > MIDI Mapping...`. Se abre el diálogo **MIDI Controller Mapping**.
+2. En la sección **MIDI Device**, abra el menú desplegable **Port:** y seleccione su controlador de la lista.
+3. Si su controlador no aparece, haga clic en **Refresh**. AetherSDR vuelve a explorar los puertos MIDI disponibles y actualiza la lista **Port:**.
+4. Haga clic en **Connect**. AetherSDR abre el puerto seleccionado. El área de estado del puerto cambia a **Connected:** seguido del nombre del dispositivo, y la etiqueta del botón **Connect** cambia a **Disconnect**.
+5. Gire un mando o presione un botón en el controlador. El indicador de actividad junto al estado del puerto debe mostrar el mensaje MIDI más reciente recibido (por ejemplo, `Ch 1 CC #7 = 64`). Esto confirma que el dispositivo está enviando datos.
+6. Para que AetherSDR reabra este puerto cada vez que inicie, marque **Auto-connect on startup**.
+7. Haga clic en **Close** cuando termine.
 
 ## Qué hace cada control
 
-| Control | Tipo | Comportamiento | Clave de configuración |
+| Control | Tipo | Comportamiento | Ajuste guardado |
 |---|---|---|---|
-| Port: | Cuadro combinado | Selecciona el dispositivo de entrada MIDI. | `MidiPort` |
-| Refresh | Botón | Vuelve a buscar los puertos MIDI disponibles. | — |
-| Connect | Botón | Abre o cierra el puerto MIDI seleccionado. La etiqueta cambia a **Disconnect** cuando el puerto está abierto. | — |
-| Auto-connect on startup | Casilla de verificación | Reabre el puerto MIDI guardado cada vez que AetherSDR se inicia. | `MidiAutoConnect` |
-| Port status | Indicador | Muestra **Connected:** con el nombre del dispositivo, o **Disconnected**. | — |
-| Activity indicator | Indicador | Muestra el mensaje MIDI más reciente recibido (canal, tipo, número, valor). | — |
+| **Port:** | Desplegable | Selecciona el dispositivo de entrada MIDI a utilizar. | `MidiPort` |
+| **Refresh** | Botón | Vuelve a explorar los puertos MIDI disponibles y actualiza la lista **Port:**. | — |
+| **Connect** | Botón | Abre el puerto MIDI seleccionado. La etiqueta cambia a **Disconnect** mientras el puerto está abierto; al hacer clic de nuevo lo cierra. | — |
+| **Auto-connect on startup** | Casilla de verificación | Cuando está marcada, AetherSDR reabre el último puerto MIDI conectado al iniciar. | `MidiAutoConnect` |
+| Estado del puerto | Indicador | Muestra **Connected:** seguido del nombre del dispositivo cuando el puerto está abierto, o **Disconnected** cuando está cerrado. | — |
+| Indicador de actividad | Indicador | Muestra el mensaje MIDI más reciente recibido (canal, tipo, número y valor). | — |
+
+## Consejos
+
+- Si el estado del puerto muestra **Connected** pero el indicador de actividad nunca se actualiza, verifique que su controlador esté configurado para transmitir en un canal MIDI y que ninguna otra aplicación tenga el puerto bloqueado en modo exclusivo.
+- El indicador de actividad se actualiza en tiempo real. Úselo para verificar que el puerto correcto está seleccionado antes de crear asignaciones.
 
 ## Solución de problemas
 
-- **La lista de Port: está vacía** — El sistema operativo aún no ha enumerado el dispositivo. Desconecte y vuelva a conectar el controlador, luego haga clic en Refresh.
-- **Connect falla y el estado permanece en Disconnected** — Es posible que otra aplicación tenga acceso exclusivo al puerto MIDI. Cierre cualquier DAW, enrutador MIDI virtual u otra aplicación SDR que pueda mantener el puerto abierto y, a continuación, haga clic de nuevo en Connect.
-- **El indicador de actividad no muestra mensajes después de conectar** — Verifique que el controlador esté enviando en el canal y tipo de mensaje que espera. Pruebe moviendo un control diferente. Si no aparece nada, es posible que el puerto se haya abierto pero el dispositivo no esté transmitiendo.
+- **`Settings > MIDI Mapping...` no aparece en el menú** — Su versión de AetherSDR fue compilada sin soporte MIDI. Obtenga una versión que incluya la función `HAVE_MIDI`.
+- **El controlador no aparece en la lista Port:** — Haga clic en **Refresh**. Si el dispositivo sigue sin aparecer, verifique que el sistema operativo lo reconozca (compruébelo en la configuración de dispositivos MIDI o de audio de su sistema) y que ninguna otra aplicación tenga un bloqueo exclusivo sobre el puerto.
+- **El estado del puerto muestra Connected pero el indicador de actividad está en blanco** — El dispositivo está abierto pero no envía datos. Verifique la alimentación del controlador, la conexión USB o DIN, y que esté configurado para emitir MIDI.
 
-## Relacionados
+## Relacionado
 
 - [Descripción general de MIDI Controller Mapping](../../features/midi-mapping/overview.md)
-- [Registrar un nuevo enlace con el modo Learn](../../features/midi-mapping/record-a-new-binding-with-learn-mode.md)
-- [Conectar automáticamente el controlador MIDI al inicio](auto-connect-midi-controller-on-startup.md)
-- [Cargar un perfil MIDI guardado anteriormente](../../features/midi-mapping/load-a-previously-saved-midi-profile.md)
-- [Guardar la asignación actual como un perfil con nombre](../../features/midi-mapping/save-the-current-mapping-as-a-named-profile.md)
+- [Conectar automáticamente el controlador MIDI al iniciar](auto-connect-midi-controller-on-startup.md)
+- [Registrar una nueva asignación con el modo Learn](../../features/midi-mapping/record-a-new-binding-with-learn-mode.md)
+- [Cargar un perfil MIDI guardado previamente](../../features/midi-mapping/load-a-previously-saved-midi-profile.md)

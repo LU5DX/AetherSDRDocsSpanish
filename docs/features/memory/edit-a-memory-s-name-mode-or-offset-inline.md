@@ -1,62 +1,45 @@
-# Editar el nombre, modo u offset de una memoria en línea
+# Editar el nombre, modo u offset de una memoria de forma inline
 
-Use esta página para cambiar el nombre, el modo, el offset del repetidor u otro campo editable de una memoria almacenada sin salir del diálogo Memory Channels.
+El diálogo Memory Channels permite cambiar cualquier campo de una memoria almacenada — incluyendo su nombre, modo, offset de repetidor y más — sin salir de la tabla. Use esta función cuando necesite corregir o actualizar una memoria después de haberla agregado.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a la radio. El diálogo Memory Channels requiere una conexión activa con la radio.
-- La memoria que desea editar debe existir previamente. Para crear una nueva memoria, consulte [Agregar una memoria en la frecuencia actual](add-a-memory-at-current-frequency.md).
+- AetherSDR debe estar conectado al radio. El diálogo Memory Channels requiere una conexión activa con el radio.
+- La memoria que desea editar ya debe existir en la tabla. Para crear una nueva memoria, consulte [Agregar una memoria en la frecuencia actual](add-a-memory-at-current-frequency.md).
 
 ## Pasos
 
 1. Abra `Settings > Memory...`.
-2. Localice la memoria que desea editar. Use el campo **Search:** o el cuadro combinado **Profile:** para reducir la lista si es necesario.
-3. Haga clic en la fila para seleccionarla.
-4. Haga clic en **Edit**. La fila seleccionada entra en modo de edición en línea.
-5. Haga clic en la celda que desea modificar — por ejemplo, la columna **Name**, **Mode** o **Repeater Offset** — y escriba el nuevo valor.
-6. Presione Enter o haga clic en otra celda para confirmar cada cambio.
-7. Repita el proceso para las demás columnas de la misma fila.
-8. Haga clic fuera de la fila o seleccione una fila diferente para finalizar la edición.
+2. En la tabla de memorias, haga clic en la fila que desea editar para seleccionarla.
+3. Haga clic en `Edit`. La fila entra en modo de edición inline y sus celdas se vuelven editables.
+4. Haga clic en la celda que desea modificar — por ejemplo, la columna **Name**, **Mode** o **Repeater Offset** — y escriba el nuevo valor.
+5. Presione Enter o haga clic en otra celda para confirmar cada cambio.
+6. Para finalizar la edición, haga clic en cualquier otra fila o presione Escape.
 
 ## Qué hace cada control
 
-| Columna | Qué almacena |
+| Control | Descripción |
 |---|---|
-| Group | Etiqueta de grupo o perfil de la memoria. |
-| Owner | Etiqueta de propietario de la memoria. |
-| Frequency | Frecuencia almacenada en MHz. |
-| Name | Etiqueta legible por el usuario. |
-| Mode | Modo de operación (p. ej., USB, LSB, CW, FM). |
-| Step | Tamaño del paso de sintonía. |
-| FM TX Offset Dir | Dirección del offset del repetidor. |
-| Repeater Offset | Valor del offset del repetidor. |
-| Tone Mode | Modo de tono CTCSS/DCS. |
-| Tone Value | Frecuencia o código del tono. |
-| Squelch | Squelch activado/desactivado (casilla de verificación). |
-| Squelch Level | Nivel umbral del squelch. |
-| RX Filter Low | Borde inferior del filtro de recepción. |
-| RX Filter High | Borde superior del filtro de recepción. |
-| RTTY Mark | Offset de frecuencia de marca RTTY. |
-| RTTY Shift | Valor de desplazamiento RTTY. |
-| DIGL Offset | Offset del modo DIGL. |
-| DIGU Offset | Offset del modo DIGU. |
-
-El botón **Edit** activa el modo de edición en línea sobre la memoria seleccionada. Todas las columnas listadas anteriormente son editables en línea.
+| Tabla de memorias | Muestra todas las filas de memorias. Columnas: Group, Owner, Frequency, Name, Mode, Step, FM TX Offset Dir, Repeater Offset, Tone Mode, Tone Value, Squelch, Squelch Level, RX Filter Low, RX Filter High, RTTY Mark, RTTY Shift, DIGL Offset, DIGU Offset. La edición inline se habilita después de hacer clic en `Edit`. |
+| `Edit` | Activa el modo de edición inline para la fila seleccionada. |
+| `Search:` | Filtra la tabla por nombre de memoria. Úselo para localizar una memoria antes de editarla. Cuenta con un botón para limpiar el campo; presione Enter para aplicar. |
+| `Profile:` | Filtra la tabla por el perfil global activo. |
 
 ## Consejos
 
-- También puede hacer doble clic en una fila para sintonizar la radio en esa memoria, en lugar de editarla. Para editar, use el botón **Edit** en vez de hacer doble clic.
-- Para encontrar una memoria específica rápidamente antes de editarla, escriba parte de su nombre en el campo **Search:**. La tabla se filtra mientras escribe.
+- También puede activar el modo de edición inline mediante el teclado después de seleccionar una fila, de acuerdo con el modo de edición por teclado de la tabla.
+- Hacer doble clic en una fila sintoniza el radio en esa memoria en lugar de abrirla para edición. Para editar, use el botón `Edit`.
+- Use `Search:` para reducir la tabla antes de seleccionar una fila a editar, especialmente si tiene muchas memorias almacenadas.
 
 ## Solución de problemas
 
-- **El botón Edit no hace nada** — No hay ninguna fila seleccionada. Haga clic en una fila de la tabla de memorias primero y luego haga clic en **Edit**.
-- **Los cambios no parecen guardarse** — Confirme cada edición de celda presionando Enter o moviendo el foco a otra celda antes de hacer clic fuera de la fila.
+- **`Edit` no tiene efecto** — Asegúrese de que exactamente una fila esté seleccionada antes de hacer clic en `Edit`. Si no hay ninguna fila seleccionada, el botón no activará el modo de edición.
+- **Los cambios no parecen guardarse** — El diálogo requiere una conexión activa con el radio. Si la conexión se interrumpió, reconéctese e ingrese el valor nuevamente.
 
-## Relacionados
+## Relacionado
 
 - [Agregar una memoria en la frecuencia actual](add-a-memory-at-current-frequency.md)
 - [Buscar memorias por nombre](search-memories-by-name.md)
 - [Filtrar memorias por perfil](filter-memories-by-profile.md)
-- [Sintonizar la radio en una memoria almacenada](tune-the-radio-to-a-stored-memory.md)
+- [Ordenar la tabla de memorias por encabezado de columna](sort-memory-table-by-column-header.md)
 - [Eliminar una o más memorias](delete-one-or-more-memories.md)

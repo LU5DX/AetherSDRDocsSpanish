@@ -1,52 +1,54 @@
-# Ajuste el umbral justo por encima del nivel de ruido de la sala
+# Ajustar el Umbral Justo Por Encima del Ruido de Fondo
 
-Ajuste el mando **Thresh** de modo que la gate comience a atenuar justo por encima del nivel de ruido ambiente de su sala. Esto mantiene el ruido de fondo silenciado entre transmisiones y permite que su voz pase con claridad.
+Ajuste el mando Thresh para que el gate se abra con su voz pero permanezca cerrado durante el ruido de fondo entre palabras. Un umbral demasiado bajo deja pasar el ruido ambiental; demasiado alto, recorta los bordes iniciales del habla.
 
 ## Antes de comenzar
 
-- La etapa Gate debe estar habilitada en el widget CHAIN. Consulte [Omitir la gate desde la cadena](bypass-the-gate-from-the-chain.md) si el applet GATE no está visible.
-- Permanezca en una sala silenciosa, en su posición normal de operación, para que la lectura del nivel de ruido sea representativa.
+- La etapa Gate debe estar habilitada en el widget CHAIN. Consulte [Omitir el gate desde la cadena](bypass-the-gate-from-the-chain.md) si el applet GATE no está visible.
+- Tenga presente una fuente de ruido típica en su estación (ventiladores, aire acondicionado, equipos cercanos) para que la lectura del piso de ruido sea representativa.
+- El subcontenedor GATE debe estar visible dentro del contenedor principal PooDoo Audio (TXDSP).
 
 ## Pasos
 
-1. Abra el subcontenedor GATE dentro del contenedor principal PooDoo Audio (TXDSP). Si no está visible, haga doble clic en la etapa Gate del widget CHAIN para abrir el editor flotante Gate, o haga clic derecho en la barra de título del subcontenedor GATE y elija mostrarlo.
-2. Observe el display **Transfer curve**. El punto de entrada en tiempo real muestra su nivel de entrada actual. Sin hablar, el punto debe ubicarse en el nivel de ruido de su sala.
-3. No hable. Anote dónde reposa el punto en la curva — ese es su nivel de ruido.
-4. Gire el mando **Thresh** hacia arriba (hacia 0 dB) hasta que quede entre 2 y 6 dB por encima de la posición de reposo del punto. La gate comenzará a atenuar cada vez que usted no esté hablando.
-5. Confirme observando la **barra de reducción de ganancia** (Gain-reduction bar): debe mostrar relleno ámbar durante el silencio y volver a vacía cuando usted habla a un nivel normal.
-6. Hable al micrófono. Verifique que el punto cruce el umbral, que la barra de reducción de ganancia caiga a vacío y que su audio pase sin cortes.
-7. Si la gate se abre con demasiada lentitud o recorta el inicio de las palabras, baje **Thresh** ligeramente o ajuste **Attack**. Consulte [Ajustar ataque/liberación para una apertura y cierre natural](tune-attack-release-for-natural-open-close.md).
+1. Abra el applet GATE. Si no está visible, haga doble clic en la etapa Gate del widget CHAIN para abrir el editor flotante Gate, o haga clic derecho en la barra de título del subcontenedor GATE y seleccione la opción para mostrarlo.
+2. Observe la curva de transferencia. La bola de entrada en vivo se mueve a lo largo de la curva en tiempo real, mostrando el nivel de entrada actual en relación con el umbral.
+3. Observe la barra Gain-reduction mientras **no está hablando**. Si no muestra relleno ámbar, el umbral ya está por encima del piso de ruido — pase al paso 6.
+4. Gire el mando Thresh lentamente en sentido horario (hacia 0 dB) mientras observa la barra Gain-reduction. Deténgase cuando el relleno ámbar aparezca de forma constante mientras el ambiente está en silencio y usted no está hablando. Este punto es su piso de ruido.
+5. Continúe girando Thresh en sentido horario 2–3 dB más allá de ese punto. Esto proporciona un margen pequeño para que el ruido límite no provoque que el gate fluctúe.
+6. Hable a su nivel normal de micrófono. Confirme que la bola de entrada sube por encima de la línea de umbral en la curva de transferencia y que la barra Gain-reduction cae cerca de cero mientras habla.
+7. Vuelva al silencio. Confirme que la barra Gain-reduction se llena de ámbar, lo que indica que el gate está cerrado y atenuando el ruido de fondo.
 
 ## Qué hace cada control
 
 | Control | Valor predeterminado | Rango válido | Clave persistida | Comportamiento |
 |---|---|---|---|---|
-| Thresh | -40.0 dB | -80.0 a 0.0 dB | `ClientGateTxThresholdDb` | Nivel por debajo del cual la gate comienza a atenuar. Ajústelo justo por encima del nivel de ruido. |
-| Ratio | 2.0 | 1.0 a 10.0 | `ClientGateTxRatio` | Valores más altos producen un corte más abrupto; valores más bajos actúan como un expansor descendente suave. |
-| Attack | 0.5 ms | 0.1 a 100.0 ms | `ClientGateTxAttackMs` | Rapidez con la que la gate se abre cuando la entrada supera el umbral. |
-| Release | 100 ms | 5 a 2000 ms | `ClientGateTxReleaseMs` | Rapidez con la que la gate se cierra cuando la entrada cae por debajo del umbral. |
-| Floor | -15.0 dB | -80.0 a 0.0 dB | `ClientGateTxFloorDb` | Atenuación máxima que la gate puede aplicar. |
-
-`ClientGateTxEnabled` controla si la etapa gate está activa.
+| Thresh | -40.0 dB | -80.0 a 0.0 dB | `ClientGateTxThresholdDb` | Nivel por debajo del cual el gate comienza a atenuar. Auméntelo por encima del piso de ruido. |
+| Ratio | 2.0 | 1.0 a 10.0 | `ClientGateTxRatio` | Pendiente de la atenuación por debajo del umbral. Valores más altos producen un corte más brusco. |
+| Attack | 0.5 ms | 0.1 a 100.0 ms | `ClientGateTxAttackMs` | Velocidad con la que el gate se abre cuando la entrada supera el umbral. |
+| Release | 100 ms | 5 a 2000 ms | `ClientGateTxReleaseMs` | Velocidad con la que el gate se cierra después de que la entrada cae por debajo del umbral. |
+| Floor | -15.0 dB | -80.0 a 0.0 dB | `ClientGateTxFloorDb` | Atenuación máxima que el gate puede aplicar. |
+| Curva de transferencia | — | — | — | Representa la curva de transferencia estática. La bola en vivo muestra el nivel de entrada actual e indica si el gate está abierto o cerrado. |
+| Barra Gain-reduction | — | 0 a 40 dB GR | — | Franja horizontal ámbar, rellena desde la derecha. La marca en -15 dB señala el valor predeterminado de Floor. |
 
 ## Consejos
 
-- La escala de la **barra de reducción de ganancia** va de 0 a 40 dB. La marca en -15 dB corresponde al valor predeterminado de **Floor** — un punto de referencia útil para la operación como expansor suave.
-- Los mandos del applet GATE y los del editor flotante Gate permanecen sincronizados. Los cambios realizados en cualquiera de las dos ubicaciones tienen efecto de inmediato y se guardan automáticamente.
-- Ajuste **Thresh** de forma conservadora, por debajo en lugar de demasiado alto. Un umbral excesivamente alto recortará el inicio de las palabras.
+- Ajuste el umbral mientras la radio está en una sesión de operación típica, no en un ambiente inusualmente silencioso. El piso de ruido que importa es el presente durante el uso real.
+- La escala de la barra Gain-reduction llega hasta 40 dB. Si la barra se llena completamente durante el ruido, el gate está aplicando la atenuación máxima; disminuya `ClientGateTxFloorDb` (valor más negativo) solo si necesita cortes más profundos.
+- Los cambios en Thresh tienen efecto inmediato y se guardan automáticamente. No se requiere ningún paso de confirmación.
+- Si el editor flotante Gate y el applet GATE están abiertos al mismo tiempo, los cambios en los mandos de cualquiera de las dos vistas se sincronizan con la otra en aproximadamente 33 ms.
 
 ## Solución de problemas
 
-- **El punto nunca cruza el umbral durante el habla** — Thresh está ajustado demasiado alto. Gire el mando **Thresh** hacia -80 dB hasta que el habla normal empuje el punto por encima de la línea de umbral.
-- **La gate no silencia el ruido de la sala entre palabras** — Thresh está ajustado demasiado bajo. Suba **Thresh** hasta que quede por encima de la posición de reposo del punto durante el silencio.
-- **La gate recorta el inicio de las palabras** — **Attack** es demasiado lento o **Thresh** está demasiado cerca del nivel del habla. Baje **Thresh** ligeramente o reduzca el valor de **Attack**. Consulte [Ajustar ataque/liberación para una apertura y cierre natural](tune-attack-release-for-natural-open-close.md).
-- **Silencio antinatural entre palabras** — **Floor** está aplicando demasiada atenuación. Suba **Floor** hacia 0 dB. Consulte [Ajustar Floor para evitar el silencio antinatural entre palabras](set-floor-to-avoid-unnatural-silence-between-words.md).
+- **La bola de entrada nunca supera la línea de umbral al hablar** — Thresh está ajustado demasiado alto. Gire el mando Thresh en sentido antihorario (hacia -80 dB) hasta que la bola cruce el umbral durante el habla normal.
+- **La barra Gain-reduction no muestra relleno ni en silencio** — Thresh está por debajo del piso de ruido. Aumente Thresh en sentido horario hasta que la barra muestre relleno ámbar cuando el ambiente esté en silencio.
+- **El gate fluctúa rápidamente entre abierto y cerrado** — El umbral está exactamente sobre el piso de ruido. Aumente Thresh 2–3 dB adicionales, o incremente Release para ralentizar el tiempo de cierre. Consulte [Ajustar attack / release para una apertura/cierre natural](tune-attack-release-for-natural-open-close.md).
+- **El applet GATE no está visible** — Es posible que la etapa Gate esté omitida u oculta. Consulte [Omitir el gate desde la cadena](bypass-the-gate-from-the-chain.md).
 
-## Temas relacionados
+## Relacionados
 
-- [Descripción general de Noise Gate / Expansor](overview.md)
-- [Ver la reducción de ganancia en tiempo real sin hablar](watch-live-gr-while-not-speaking.md)
-- [Ajustar ataque/liberación para una apertura y cierre natural](tune-attack-release-for-natural-open-close.md)
-- [Ajustar Floor para evitar el silencio antinatural entre palabras](set-floor-to-avoid-unnatural-silence-between-words.md)
-- [Elegir entre gate y expansor suave mediante el ratio](choose-gate-vs-soft-expander-behaviour-via-ratio.md)
-- [Omitir la gate desde la cadena](bypass-the-gate-from-the-chain.md)
+- [Descripción general del Noise Gate / Expansor](overview.md)
+- [Observar GR en vivo mientras no se habla](watch-live-gr-while-not-speaking.md)
+- [Ajustar attack / release para una apertura/cierre natural](tune-attack-release-for-natural-open-close.md)
+- [Ajustar Floor para evitar silencios artificiales entre palabras](set-floor-to-avoid-unnatural-silence-between-words.md)
+- [Elegir comportamiento de gate vs expansor suave mediante el ratio](choose-gate-vs-soft-expander-behaviour-via-ratio.md)
+- [Omitir el gate desde la cadena](bypass-the-gate-from-the-chain.md)

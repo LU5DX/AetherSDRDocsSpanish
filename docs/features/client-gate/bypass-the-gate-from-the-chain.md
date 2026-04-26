@@ -1,28 +1,30 @@
-# Omitir la Puerta de la Cadena
+# Omitir el Gate de la Cadena
 
-Esta página explica cómo omitir la puerta de ruido TX sin eliminar su configuración. Use la omisión cuando desee deshabilitar temporalmente la puerta — por ejemplo, para comparar el audio procesado con el no procesado — manteniendo intactos todos los parámetros ajustados.
+Omitir el gate lo elimina de la cadena de procesamiento de audio TX sin modificar ninguna de sus configuraciones. Use esta función cuando desee deshabilitar temporalmente el noise gate — por ejemplo, durante un check-in de red — y restaurarlo más adelante con la misma configuración.
 
 ## Antes de comenzar
 
-- La etapa Gate debe estar habilitada en el widget CHAIN antes de poder omitirla. Si el subcontenedor GATE no es visible en el contenedor principal PooDoo Audio (TXDSP), la puerta aún no ha sido añadida a la cadena.
-- No se requiere una conexión de radio para omitir la puerta; la configuración es local en AetherSDR.
+- La etapa GATE ya debe estar presente en el widget CHAIN dentro del contenedor PooDoo Audio (TXDSP).
+- El applet del subcontenedor GATE solo es visible cuando la etapa Gate está habilitada en el widget CHAIN; el bypass se realiza desde el propio widget CHAIN.
 
 ## Pasos
 
-1. Localice el widget **CHAIN** dentro del contenedor principal PooDoo Audio (TXDSP) en el panel de applets.
-2. Haga clic una vez en la etapa **Gate** en el widget CHAIN para activar o desactivar la omisión.
-   - Cuando está omitida, la puerta no aplica ninguna atenuación y la curva de transferencia y la barra de reducción de ganancia en el subcontenedor GATE reflejan el estado inactivo.
-   - Hacer clic de nuevo una vez reactiva la puerta; los valores de Thresh, Ratio, Attack, Release y Floor establecidos anteriormente se restauran de inmediato.
+1. Localice el widget CHAIN dentro del contenedor PooDoo Audio (TXDSP) en el panel de applets.
+2. Haga clic una vez en el bloque de la etapa Gate en el widget CHAIN para alternar su estado de bypass.
 
-El estado de omisión se persiste en `ClientGateTxEnabled`. Todos los demás parámetros de la puerta (`ClientGateTxThresholdDb`, `ClientGateTxRatio`, `ClientGateTxAttackMs`, `ClientGateTxReleaseMs`, `ClientGateTxFloorDb`) no se ven afectados por la omisión.
+La etapa Gate está en bypass cuando el bloque aparece inactivo en el widget CHAIN. El subcontenedor GATE permanece visible, pero el gate no aplica ninguna atenuación — la barra de reducción de ganancia mostrará 0 dB y la bola de la curva de transferencia seguirá el nivel de entrada sin activar ninguna reducción de ganancia.
+
+3. Para volver a habilitar el gate, haga clic una vez más en el bloque de la etapa Gate.
+
+El estado de bypass se guarda en `ClientGateTxEnabled`. Todos los valores de los controles (`ClientGateTxThresholdDb`, `ClientGateTxRatio`, `ClientGateTxAttackMs`, `ClientGateTxReleaseMs`, `ClientGateTxFloorDb`) permanecen sin cambios al activar el bypass.
 
 ## Consejos
 
-- Para abrir el editor flotante de Gate en lugar de alternar la omisión, haga doble clic en la etapa Gate en el widget CHAIN.
-- La barra de reducción de ganancia en el tile GATE se oscurece (sin relleno ámbar) mientras la puerta está omitida, lo que permite confirmar fácilmente a simple vista que la omisión está activa.
+- Activar el bypass desde el widget CHAIN es no destructivo. Los cinco controles de ajuste (Thresh, Ratio, Attack, Release, Floor) conservan sus valores y surten efecto de inmediato al volver a habilitar la etapa.
+- Para abrir el editor flotante del Gate y realizar ajustes detallados sin activar el bypass, haga doble clic en la etapa Gate en el widget CHAIN.
 
 ## Relacionados
 
-- [Descripción general de la puerta de ruido / expansor](overview.md)
+- [Descripción general del Noise Gate / Expansor](overview.md)
+- [Ajustar el umbral justo por encima del nivel de ruido ambiental](set-threshold-just-above-room-noise-floor.md)
 - [Ver la reducción de ganancia en tiempo real sin hablar](watch-live-gr-while-not-speaking.md)
-- [Establecer el umbral justo por encima del piso de ruido ambiental](set-threshold-just-above-room-noise-floor.md)

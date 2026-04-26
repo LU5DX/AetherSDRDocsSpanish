@@ -1,41 +1,38 @@
 # Copiar el texto CW decodificado al portapapeles
 
-Use el panel de decodificación CW para copiar texto Morse decodificado del aire — ya sea el buffer de decodificación completo o solo lo que esté visible en pantalla en ese momento.
+El panel de decodificación CW ofrece dos botones de copia que permiten transferir el texto Morse decodificado al portapapeles del sistema: ya sea el historial completo de decodificación o únicamente el texto visible en pantalla en ese momento.
 
 ## Antes de comenzar
 
-- El panel de decodificación CW debe estar abierto y decodificando activamente. Si no está visible, consulte [Activar el decodificador CW para leer Morse del aire](turn-on-the-cw-decoder-to-read-morse-off-air.md).
-- El decodificador CW requiere enrutamiento de audio del PC para recibir la señal. El panel muestra "(requires PC Audio)" como recordatorio.
+- El panel de decodificación CW debe estar abierto y decodificando activamente. Si no está visible, consulte [Activar el decodificador CW para leer Morse en el aire](turn-on-the-cw-decoder-to-read-morse-off-air.md).
+- El audio del PC debe estar enrutado hacia AetherSDR. El panel muestra "(requires PC Audio)" como recordatorio si el audio no está fluyendo.
 
 ## Pasos
 
-1. Localice el panel de decodificación CW en la parte inferior del applet Panadapter.
-2. Para copiar todo el contenido del buffer de decodificación, haga clic en `CPY ALL`. Todo el texto del buffer se coloca en el portapapeles.
-3. Para copiar solo el texto visible actualmente en el área de desplazamiento, haga clic en `CPY VIS`. Solo la porción visible se coloca en el portapapeles.
+1. Localice el panel de decodificación CW debajo del espectro panadapter y el waterfall.
+2. Elija qué texto copiar:
+   - Para copiar todo el contenido del búfer de decodificación, haga clic en `CPY ALL`.
+   - Para copiar únicamente el texto visible en el área de desplazamiento, haga clic en `CPY VIS`.
+3. Pegue en cualquier aplicación usando el comando de pegado estándar de su sistema.
+
+Para eliminar todo el texto decodificado del búfer después de copiar, haga clic en `CLR`.
 
 ## Qué hace cada control
 
-| Control | Comportamiento | Predeterminado | Rango | Clave de configuración |
+| Control | Comportamiento | Valor predeterminado | Rango | Clave de configuración |
 |---|---|---|---|---|
-| CPY ALL | Copia el buffer completo de texto decodificado al portapapeles. | — | — | — |
-| CPY VIS | Copia al portapapeles solo el texto visible actualmente en el área de desplazamiento. | — | — | — |
-| CLR | Borra completamente el buffer de decodificación CW. No afecta el portapapeles. | — | — | — |
-| Sens | Filtra decodificaciones de baja confianza. Valores más altos son más estrictos. | 30 | 0–100 | `CwDecoderSensitivity` |
-| Texto decodificado CW | Visualización continua de solo lectura del CW decodificado, coloreado según el nivel de confianza. Verde = mayor confianza; amarillo, naranja y rojo indican confianza progresivamente menor. | — | — | — |
+| `CPY ALL` | Copia el búfer completo de texto decodificado al portapapeles. | — | — | — |
+| `CPY VIS` | Copia únicamente el texto visible en el área de desplazamiento al portapapeles. | — | — | — |
+| `CLR` | Borra el búfer de decodificación CW. No afecta el portapapeles. | — | — | — |
+| Sens | Filtra decodificaciones de baja confianza; valores más altos rechazan más caracteres inciertos. | 30 | 0–100 | `CwDecoderSensitivity` |
 
 ## Consejos
 
-- Si el buffer acumuló una sesión larga pero solo desea el intercambio más reciente, desplace el texto decodificado hasta la parte que le interesa y use `CPY VIS` en lugar de `CPY ALL`.
-- Use `CLR` para resetear el buffer de decodificación antes de un nuevo contacto, de modo que `CPY ALL` capture únicamente el texto de ese contacto.
-- Ajuste el control deslizante Sens para reducir caracteres de ruido en el buffer antes de copiar. Un valor de 30 (el predeterminado) deja pasar la mayor parte del texto legible mientras rechaza las decodificaciones de menor confianza.
-
-## Solución de problemas
-
-- **CPY ALL coloca una cadena vacía en el portapapeles** — El buffer de decodificación está vacío. Verifique que el decodificador CW esté recibiendo audio y que el control deslizante Sens no esté ajustado tan alto que todas las decodificaciones estén siendo filtradas.
-- **CPY VIS copia menos texto del esperado** — Solo se copia el texto visible en el área de desplazamiento en el momento del clic. Desplace el panel de decodificación para mostrar el texto deseado antes de copiar.
+- El texto en el panel de decodificación está codificado por colores según el nivel de confianza. Los caracteres mostrados en rojo representan las decodificaciones de menor confianza y pueden contener errores. Si la precisión es importante, copie después de ajustar el control deslizante Sens hacia valores más altos para suprimir las decodificaciones deficientes — consulte [Ajustar la sensibilidad del decodificador CW para rechazar ruido](tune-cw-decoder-sensitivity-to-reject-noise.md).
+- `CPY VIS` resulta útil cuando ha desplazado la vista hacia una parte específica de un QSO y desea copiar únicamente ese fragmento al portapapeles.
 
 ## Relacionados
 
-- [Activar el decodificador CW para leer Morse del aire](turn-on-the-cw-decoder-to-read-morse-off-air.md)
+- [Activar el decodificador CW para leer Morse en el aire](turn-on-the-cw-decoder-to-read-morse-off-air.md)
 - [Ajustar la sensibilidad del decodificador CW para rechazar ruido](tune-cw-decoder-sensitivity-to-reject-noise.md)
-- [Fijar el tono o la velocidad del decodificador CW una vez que el seguimiento es correcto](lock-cw-decoder-pitch-or-speed-once-tracking-is-good.md)
+- [Bloquear el tono o la velocidad del decodificador CW cuando el seguimiento es correcto](lock-cw-decoder-pitch-or-speed-once-tracking-is-good.md)

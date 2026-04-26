@@ -1,49 +1,48 @@
 # Reordenar la cadena DSP de TX
 
-Arrastre las fichas de etapa en la tira PooDoo Audio Chain para cambiar el orden en que las etapas DSP procesan el audio de TX. El nuevo orden se guarda en `ClientCompTxChainStages`.
+Arrastre los mosaicos de etapa en el PooDoo Audio Chain para cambiar el orden en que el procesamiento DSP se aplica al audio transmitido. El nuevo orden se guarda automáticamente en `ClientCompTxChainStages`.
 
 ## Antes de comenzar
 
-- El contenedor PooDoo Audio (TXDSP) debe estar visible. Si no lo está, haga clic en el botón de bandeja etiquetado `PUDU` en la barra lateral derecha para mostrarlo.
-- TX debe estar seleccionado en el applet. El botón TX está marcado de forma predeterminada; si RX está seleccionado, haga clic en TX para volver a la vista de cadena interactiva.
+- El contenedor PooDoo Audio (TXDSP) debe estar visible. Si no lo está, haga clic en el botón de bandeja `PUDU` en la barra lateral derecha para mostrarlo.
+- La cadena de TX debe estar activa. Confirme que TX está seleccionado (resaltado ámbar) en la fila de encabezado. Si en su lugar está seleccionado RX, haga clic en TX.
 
 ## Pasos
 
-1. Localice la tira de cadena en la parte superior del contenedor PooDoo Audio. La tira muestra las etapas en su orden de procesamiento actual: Eq, Comp, Gate, DeEss, Tube, Enh, Reverb.
-2. Haga clic y mantenga presionada cualquier ficha de etapa (por ejemplo, Chain stage (Comp)).
-3. Arrastre la ficha hacia la izquierda o la derecha hasta la posición que desee en la cadena. Un indicador visual muestra dónde se colocará la etapa.
-4. Suelte el botón del mouse. La etapa se fija en su nueva posición y el orden se guarda en `ClientCompTxChainStages`.
+1. Localice la tira de cadena que muestra los mosaicos de etapa: Eq, Comp, Gate, DeEss, Tube, Enh / PUDU y Reverb.
+2. Haga clic y mantenga presionado el mosaico de etapa que desea mover.
+3. Arrastre el mosaico hacia la izquierda o la derecha hasta su nueva posición en la cadena.
+4. Suelte para soltar el mosaico. La cadena se actualiza de inmediato y el nuevo orden se guarda en `ClientCompTxChainStages`.
+5. Repita el procedimiento para cualquier otra etapa que desee reordenar.
 
 ## Qué hace cada control
 
-| Control | Tipo | Comportamiento | Valor predeterminado | Clave de configuración |
-|---|---|---|---|---|
-| TX | Botón de alternancia | Muestra la cadena DSP de TX interactiva. Color ámbar cuando está seleccionado. | Marcado | — |
-| RX | Botón de alternancia | Cambia a la vista de marcador de posición de RX. El arrastre no está disponible en este modo. | Sin marcar | — |
-| BYPASS | Botón de alternancia | Marcado: deshabilita todas las etapas a la vez. Sin marcar: restaura solo las etapas que estaban habilitadas antes. | Sin marcar | — |
-| Chain stage (Eq) | Controlador de arrastre | Un clic omite el ecualizador; doble clic abre el editor; arrastrar reordena. | — | — |
-| Chain stage (Comp) | Controlador de arrastre | Un clic omite el compresor; doble clic abre el editor; arrastrar reordena. | — | — |
-| Chain stage (Gate) | Controlador de arrastre | Un clic omite la puerta de ruido; doble clic abre el editor; arrastrar reordena. | — | — |
-| Chain stage (DeEss) | Controlador de arrastre | Un clic omite el de-esser; doble clic abre el editor; arrastrar reordena. | — | — |
-| Chain stage (Tube) | Controlador de arrastre | Un clic omite el saturador de válvulas; doble clic abre el editor; arrastrar reordena. | — | — |
-| Chain stage (Enh / PUDU) | Controlador de arrastre | Un clic omite el excitador PUDU; doble clic abre el editor; arrastrar reordena. | — | — |
-| Chain stage (Reverb) | Controlador de arrastre | Un clic omite el reverb; doble clic abre el editor; arrastrar reordena. | — | — |
+| Control | Tipo | Comportamiento |
+|---|---|---|
+| TX | Botón de alternancia | Selecciona la vista de la cadena de TX. Valor predeterminado: activado (ámbar). El reordenamiento solo está disponible en este modo. |
+| RX | Botón de alternancia | Selecciona la vista de la cadena de RX. Valor predeterminado: desactivado. El arrastre para reordenar no está disponible en este modo. |
+| BYPASS | Botón de alternancia | Valor predeterminado: desactivado. Cuando está activado, deshabilita todas las etapas a la vez. Desactívelo para restaurar las etapas que estaban activas anteriormente. No afecta el orden de las etapas. |
+| Etapa de cadena (Eq) | Controlador de arrastre | Un clic activa o desactiva el bypass del ecualizador. Doble clic abre el editor de EQ. Arrastre para reordenar. |
+| Etapa de cadena (Comp) | Controlador de arrastre | Un clic activa o desactiva el bypass del compresor. Doble clic abre el editor del compresor. Arrastre para reordenar. |
+| Etapa de cadena (Gate) | Controlador de arrastre | Un clic activa o desactiva el bypass del gate. Doble clic abre el editor del gate. Arrastre para reordenar. |
+| Etapa de cadena (DeEss) | Controlador de arrastre | Un clic activa o desactiva el bypass del de-esser. Doble clic abre el editor del de-esser. Arrastre para reordenar. |
+| Etapa de cadena (Tube) | Controlador de arrastre | Un clic activa o desactiva el bypass del saturador de tubo. Doble clic abre el editor de tubo. Arrastre para reordenar. |
+| Etapa de cadena (Enh / PUDU) | Controlador de arrastre | Un clic activa o desactiva el bypass del excitador PUDU. Doble clic abre el editor PUDU. Arrastre para reordenar. |
+| Etapa de cadena (Reverb) | Controlador de arrastre | Un clic activa o desactiva el bypass del reverb. Doble clic abre el editor de reverb. Arrastre para reordenar. |
 
 ## Consejos
 
-- El texto de ayuda debajo de la tira de cadena indica "Click to bypass · Double click to edit · Drag to reorder" y es visible siempre que el modo TX esté activo. Está oculto en el modo RX.
-- Un solo clic en una ficha de etapa omite esa etapa, no toda la cadena. Tenga cuidado de no hacer clic cuando su intención sea arrastrar.
-- BYPASS no restablece el orden de las etapas. El reordenamiento realizado mientras BYPASS está activo se conserva al desmarcar BYPASS.
+- El texto de ayuda debajo de la cadena indica "Click to bypass · Double click to edit · Drag to reorder" y solo se muestra en el modo TX.
+- Un solo clic en un mosaico de etapa aplica el bypass a esa etapa, no a toda la cadena. Use BYPASS para deshabilitar todo a la vez.
 
 ## Solución de problemas
 
-- **La tira de cadena no es visible** — Es posible que el botón RX esté seleccionado. Haga clic en TX para cambiar a la vista de cadena interactiva.
-- **El arrastre no tiene efecto** — Confirme que el contenedor PooDoo Audio muestra la cadena de TX. La interacción de arrastrar para reordenar no está disponible en la vista de marcador de posición de RX.
+- **Arrastrar un mosaico no tiene efecto** — Confirme que TX está seleccionado. La vista de RX no admite el reordenamiento en la versión actual.
+- **El botón de bandeja PUDU no está visible** — Abra el panel de applets mediante `View > Applet Panel` y luego localice el botón de bandeja PUDU en la barra lateral derecha.
 
 ## Relacionado
 
-- [Descripción general de PooDoo Audio Chain](overview.md)
-- [Omitir todas las etapas de TX a la vez](bypass-every-tx-stage-at-once.md)
+- [Descripción general del PooDoo Audio Chain](overview.md)
+- [Aplicar bypass a todas las etapas de TX a la vez](bypass-every-tx-stage-at-once.md)
 - [Abrir el editor flotante de una etapa desde la cadena](open-a-stage-s-floating-editor-from-the-chain.md)
-- [Volver a habilitar una etapa específica tras un bypass global](re-enable-a-specific-stage-after-a-global-bypass.md)
-- [Cambiar entre la vista de cadena TX y el marcador de posición RX](switch-between-tx-chain-view-and-rx-placeholder.md)
+- [Reactivar una etapa específica después de un bypass global](re-enable-a-specific-stage-after-a-global-bypass.md)

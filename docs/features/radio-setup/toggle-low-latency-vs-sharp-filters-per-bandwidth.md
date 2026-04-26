@@ -1,32 +1,32 @@
-# Alternar filtros de baja latencia o filtros selectivos por ancho de banda
+# Alternar entre filtros de baja latencia y filtros nítidos por ancho de banda
 
-Use esta página para elegir si AetherSDR aplica filtros de baja latencia o filtros selectivos (alta selectividad) para cada ancho de banda del receptor, y para forzar filtros de baja latencia específicamente en modos digitales.
+La pestaña **Filters** en Radio Setup permite elegir entre filtros DSP de baja latencia y filtros nítidos para cada ancho de banda de recepción, y opcionalmente forzar filtros de baja latencia en modos digitales. Use filtros de baja latencia cuando necesite un retardo de procesamiento mínimo; use filtros nítidos cuando necesite una mayor atenuación en la banda de rechazo.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a la radio. La pestaña **Filters** no es accesible sin una conexión de radio activa.
-- Abra el cuadro de diálogo Radio Setup mediante `Settings > Radio Setup...`.
+- AetherSDR debe estar conectado al radio. La pestaña **Filters** no es accesible sin una conexión activa al radio.
+- Abra Radio Setup mediante `Settings > Radio Setup...`.
 
 ## Pasos
 
 1. Haga clic en `Settings > Radio Setup...`.
 2. Haga clic en la pestaña **Filters**.
-3. Haga clic en **Low Latency / Sharp Filters** para alternar entre las dos familias de filtros para el ancho de banda actual. El botón refleja la selección activa.
-4. Para forzar filtros de baja latencia siempre que un modo digital (DIGU o DIGL) esté activo, marque **Use Low Latency Filters for Digital Modes**.
+3. Para cada entrada de ancho de banda, haga clic en el botón de alternancia **Low Latency / Sharp Filters** para cambiar entre las dos familias de filtros. El botón refleja la selección actual para ese ancho de banda.
+4. Si opera en modos digitales (DIGU/DIGL) y desea que los filtros de baja latencia se apliquen automáticamente, marque la opción **Use Low Latency Filters for Digital Modes**.
 
 ## Qué hace cada control
 
 | Control | Tipo | Comportamiento |
 |---|---|---|
-| **Low Latency / Sharp Filters** | Botón de alternancia | Cambia la preferencia de familia de filtros entre baja latencia y selectivos (alta selectividad) para el ancho de banda activo. |
-| **Use Low Latency Filters for Digital Modes** | Casilla de verificación | Cuando está marcada, los filtros de baja latencia se aplican automáticamente cuando el modo es DIGU o DIGL, independientemente del alternador global indicado arriba. |
+| **Low Latency / Sharp Filters** | Botón de alternancia | Cambia la preferencia de familia de filtros entre baja latencia y nítido para el ancho de banda asociado. |
+| **Use Low Latency Filters for Digital Modes** | Casilla de verificación | Cuando está marcada, fuerza los filtros de baja latencia siempre que el slice esté en modo DIGU o DIGL, independientemente de la configuración por ancho de banda. |
 
 ## Consejos
 
-- Los filtros de baja latencia reducen el retardo de procesamiento, lo cual beneficia a los modos digitales y la decodificación en tiempo real. Los filtros selectivos ofrecen flancos más pronunciados para una mejor supresión de señales adyacentes en fonia y CW.
-- La casilla **Use Low Latency Filters for Digital Modes** permite mantener filtros selectivos para SSB y CW, al tiempo que se obtiene latencia reducida en DIGU/DIGL sin necesidad de cambiar manualmente.
+- Los filtros nítidos tienen flancos más pronunciados y mejor rechazo de señales adyacentes, lo que beneficia la operación SSB y CW en bandas congestionadas. Los filtros de baja latencia reducen el retardo de grupo, lo que beneficia a los decodificadores de modos digitales sensibles a la latencia de procesamiento.
+- La casilla **Use Low Latency Filters for Digital Modes** actúa como anulación: incluso si un ancho de banda está configurado con filtros nítidos, los slices en modo digital usarán filtros de baja latencia cuando esta opción esté marcada.
 
-## Relacionado
+## Relacionados
 
 - [Descripción general de Radio Setup](overview.md)
-- [Elegir dispositivos de audio de entrada/salida del PC](choose-pc-input-output-audio-devices.md)
+- [Seleccionar dispositivos de audio de entrada/salida del PC](choose-pc-input-output-audio-devices.md)

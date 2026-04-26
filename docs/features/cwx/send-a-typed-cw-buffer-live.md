@@ -1,53 +1,53 @@
 # Enviar un búfer de CW escrito en tiempo real
 
-El panel CWX le permite escribir un mensaje y transmitirlo de inmediato en código Morse. Úselo cuando necesite enviar texto CW de forma libre que no esté almacenado en una macro.
+Use el panel CWX para escribir un mensaje de CW y transmitirlo de inmediato. Esta es la forma más rápida de enviar CW de texto libre sin necesidad de escribir una macro previamente.
 
 ## Antes de comenzar
 
-- Conéctese a una radio Flex. El panel CWX requiere una conexión de radio activa.
-- Configure el slice activo en modo CW, CWL o CWU. El panel CWX aparece en la ventana principal cuando hay un modo CW activo.
+- Conéctese a una radio FLEX-8600. El panel CWX requiere una conexión de radio activa.
+- Configure el slice activo en modo CW, CWL o CWU. El panel CWX aparece en la ventana principal cuando hay un slice en modo CW activo.
 
 ## Pasos
 
-1. Localice el panel CWX en el área central de la ventana principal.
-2. Haga clic en **Send** en la barra inferior para mostrar la vista de envío. Serán visibles el historial de envíos con desplazamiento y el área de entrada de texto.
-3. Haga clic en el **Send text area** (el campo de texto en la parte inferior de la vista de envío, que muestra el marcador de posición "Type CW message...").
-4. Escriba su mensaje. Use caracteres alfanuméricos estándar. Consulte la leyenda de prosigns del panel para ver los atajos de los prosigns CW más comunes.
-5. Presione **Enter** para transmitir el búfer. La radio comienza a enviar de inmediato. El texto enviado aparece como una burbuja en el historial de envíos con desplazamiento que se encuentra arriba.
-6. Para detener la transmisión en cualquier momento, presione **Escape**. Esto borra el búfer y cancela el envío en curso.
+1. En el panel CWX, haga clic en **Send** para asegurarse de que la vista de envío esté activa. El botón **Send** se encuentra en la barra inferior del panel.
+2. Haga clic dentro del **Send text area** — el campo de texto en la parte inferior de la vista de envío. El texto de marcador de posición dice "Type CW message...".
+3. Escriba su mensaje. Use caracteres ASCII estándar. Consulte la leyenda de prosignos que se muestra en el panel para ver los atajos de prosignos (=, +, (, &, $).
+4. Presione **Enter** para transmitir el búfer. La radio comienza a enviar de inmediato.
+5. Para abortar la transmisión en cualquier momento, presione **Escape**. Esto limpia el búfer y detiene el envío.
+
+Después de la transmisión, el texto enviado aparece en el área **Send history scroll**, encima del campo de texto, como una burbuja con marca de tiempo.
 
 ## Qué hace cada control
 
-| Control | Descripción | Valor predeterminado | Rango | Clave de configuración |
-|---|---|---|---|---|
-| **Send** | Muestra la vista de envío con historial y entrada de texto. | Activo al abrir | — | — |
-| **Live** | Muestra la vista de envío en tiempo real. | — | — | — |
-| **Setup** | Muestra el editor de macros y los controles QSK. | — | — | — |
-| **Speed:** | Velocidad de envío CW en WPM. | 20 | 5–100 | `CwxSpeedWpm` |
-| Send history scroll | Muestra los búferes enviados anteriormente con resaltado de caracteres. Se desplaza hacia arriba a medida que se envían nuevos búferes. | — | — | — |
-| Send text area | Campo de texto donde se escribe el mensaje CW. Presione Enter para enviar. | — | — | — |
-| **Delay:** | Retardo entre macros en milisegundos. | 5 | 0–2000 | `CwxDelay` |
-| **QSK** | Activa el QSK de ruptura completa. | Off | On/Off | `CwxQsk` |
-| Prosigns legend | Muestra los atajos para los prosigns CW más comunes. | — | — | — |
+| Control | Qué hace | Clave de configuración |
+|---|---|---|
+| **Send** | Cambia a la vista de envío, que muestra el historial y el campo de texto. | — |
+| **Live** | Cambia a la vista de envío en tiempo real. | — |
+| **Setup** | Cambia a la vista del editor de macros y configuración de QSK. | — |
+| **Speed:** | Establece la velocidad de envío de CW en WPM. Rango: 5–100 WPM. Valor predeterminado: 20 WPM. | `CwxSpeedWpm` |
+| Send text area | Escriba aquí su mensaje de CW. Presione Enter para enviar. | — |
+| Send history scroll | Muestra los búferes enviados anteriormente con marcas de tiempo. Solo lectura. | — |
+| **Delay:** | Establece el retardo entre macros en milisegundos. Rango: 0–2000 ms. Valor predeterminado: 5 ms. Disponible en la vista Setup. | `CwxDelay` |
+| **QSK** | Habilita QSK (break-in completo). Disponible en la vista Setup. | `CwxQsk` |
+| Prosigns legend | Muestra los atajos de caracteres para los prosignos de CW más comunes. Solo lectura. | — |
 
 ## Consejos
 
-- Ajuste **Speed:** en la barra inferior antes de enviar o entre envíos. El valor de `CwxSpeedWpm` se guarda y se restaura en el siguiente inicio.
-- El historial de envíos con desplazamiento empuja las burbujas anteriores hacia arriba a medida que se envían más búferes, de modo que las transmisiones recientes permanecen visibles en la parte inferior.
-- Presionar **Escape** es seguro incluso cuando la radio está inactiva: borrar un búfer vacío no tiene ningún efecto.
-- Los atajos de teclado F1–F12 activan macros cuando el slice activo está en modo CW o CWL. No interfieren con la entrada de texto escrito en el área de texto de envío.
+- F1–F12 envían macros preescritas mientras haya un slice en modo CW activo. Los atajos de teclado funcionan en toda la aplicación en los modos CW y CWL. Consulte [Activar una macro de CW con F1–F12](trigger-a-cw-macro-with-f1-f12.md).
+- Presionar **Escape** limpia el búfer de forma incondicional. En un panel CWX sin actividad, es una operación inofensiva sin efecto, por lo que siempre es seguro presionarlo.
+- Ajuste **Speed:** en la barra inferior sin necesidad de cambiar de vista. El cuadro de número es visible tanto en la vista de envío como en la vista de configuración.
 
 ## Solución de problemas
 
-- **El panel CWX no aparece** — Confirme que el slice activo está configurado en modo CW, CWL o CWU, y que AetherSDR está conectado a la radio.
-- **Presionar Enter no hace nada** — Haga clic primero en el área de texto de envío para darle el foco y, luego, presione Enter.
-- **Las teclas de función activan macros en lugar de aparecer como texto escrito** — F1–F12 son atajos globales de la aplicación cuando hay un slice en modo CW activo. Escriba texto usando solo teclas de letras y números; las teclas de función están reservadas para las macros.
+- **El panel CWX no aparece** — Confirme que el slice activo esté configurado en modo CW, CWL o CWU. El panel requiere un slice en modo CW y una conexión de radio activa.
+- **Presionar Enter no hace nada** — Haga clic dentro del Send text area primero para darle el foco, luego presione Enter.
+- **Escape no detiene la transmisión** — Escape activa un atajo a nivel de toda la aplicación. Si un cuadro de diálogo o un widget de texto captura la tecla primero, haga clic fuera de él y presione Escape nuevamente.
 
-## Relacionado
+## Relacionados
 
 - [Descripción general de CWX](overview.md)
-- [Cambiar la velocidad de envío CW en WPM](change-cw-send-speed-in-wpm.md)
-- [Activar una macro CW con F1–F12](trigger-a-cw-macro-with-f1-f12.md)
-- [Editar una cadena de macro CW](edit-a-cw-macro-string.md)
-- [Activar el QSK de ruptura completa](enable-qsk-full-break-in.md)
-- [Consultar los atajos de caracteres de prosigns](look-up-the-prosign-character-shortcuts.md)
+- [Activar una macro de CW con F1–F12](trigger-a-cw-macro-with-f1-f12.md)
+- [Editar una cadena de macro de CW](edit-a-cw-macro-string.md)
+- [Cambiar la velocidad de envío de CW en WPM](change-cw-send-speed-in-wpm.md)
+- [Habilitar QSK de break-in completo](enable-qsk-full-break-in.md)
+- [Consultar los atajos de caracteres de prosignos](look-up-the-prosign-character-shortcuts.md)

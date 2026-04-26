@@ -1,36 +1,36 @@
 # Aclarar u oscurecer la señal saturada con Tone
 
-Use el control **Tone** del applet Tube Saturator para modificar el carácter tonal de la señal saturada — los valores negativos la oscurecen y los valores positivos la aclaran.
+El control **Tone** inclina el balance de frecuencias de la señal saturada por el tubo hacia un carácter más brillante o más oscuro. Úselo después de ajustar Drive para dar forma al color tonal de la saturación sin cambiar el nivel de salida general.
 
 ## Antes de comenzar
 
-- La etapa Tube Saturator debe estar habilitada desde el widget CHAIN o el editor flotante Tube. El applet TUBE permanece oculto hasta que la etapa esté activa.
-- Abra el subcontenedor TUBE dentro del contenedor principal PooDoo Audio (TXDSP). Si no está visible, haga doble clic en la etapa Tube en el widget CHAIN para abrir el editor flotante, o haga clic derecho en la barra de título del subcontenedor TUBE y seleccione la opción correspondiente.
+- El applet Tube Saturator debe estar visible. Aparece como el sub-contenedor TUBE dentro del contenedor principal PooDoo Audio (TXDSP).
+- La etapa de tubo debe estar habilitada mediante el widget CHAIN. Si el applet está oculto, habilite la etapa primero para que aparezca el sub-contenedor TUBE.
 
 ## Pasos
 
-1. Localice el control **Tone** en la fila de cinco controles en la parte inferior del applet TUBE.
-2. Gire el control hacia la izquierda (hacia −1.0) para oscurecer la señal saturada, o hacia la derecha (hacia +1.0) para aclararla.
-3. Observe la curva de transferencia y la bola de entrada en vivo sobre los controles para ver cómo cambia el régimen de saturación al ajustar Tone.
-4. Suelte el control. El valor se guarda automáticamente en `ClientTubeTxTone`.
+1. Localice el sub-contenedor TUBE en el panel del applet.
+2. Encuentre el control **Tone** — el segundo control desde la izquierda en la fila de cinco controles, entre Drive y Bias.
+3. Gire **Tone** en sentido horario para aclarar la señal saturada (hacia `1.00`), o en sentido antihorario para oscurecerla (hacia `-1.00`).
+4. Observe la etiqueta debajo del control; muestra el valor actual como un número con dos decimales, por ejemplo `0.25` o `-0.50`.
+5. Para volver al punto neutro, haga doble clic en **Tone** para restablecerlo a su valor predeterminado de `0.00`.
 
 ## Qué hace cada control
 
-| Control | Valor predeterminado | Rango válido | Clave persistida | Comportamiento |
-|---|---|---|---|---|
-| Tone | 0.00 | −1.0 a 1.0 | `ClientTubeTxTone` | Los valores negativos oscurecen la señal saturada; los valores positivos la aclaran. La etiqueta muestra el valor con dos decimales. |
+| Control | Predeterminado | Rango válido | Clave persistida | Comportamiento |
+|---------|----------------|--------------|------------------|----------------|
+| Tone | `0.00` | `-1.0` a `1.0` | `ClientTubeTxTone` | Los valores negativos oscurecen; los valores positivos aclaran la señal saturada. Mapeo lineal en todo el rango. |
 
 ## Consejos
 
-- Un valor de Tone de 0.00 deja el carácter tonal de la señal saturada sin cambios respecto al modelo de tubo y al ajuste de Drive.
-- Los cambios realizados aquí se reflejan en el editor flotante Tube en aproximadamente 33 ms, y viceversa — ambas vistas permanecen sincronizadas.
-- Después de ajustar Tone, revise el control Output para compensar cualquier cambio de nivel percibido introducido por el desplazamiento tonal.
+- El control Tone afecta únicamente la porción saturada de la señal. Si Mix está por debajo del 100 %, la ruta seca no se ve afectada, por lo que el cambio tonal se mezclará de forma proporcional.
+- Los cambios realizados en Tone desde el editor flotante de Tube se reflejan en el control del applet en aproximadamente 33 ms, y viceversa. Puede ajustar desde cualquiera de las dos ubicaciones.
+- Los ajustes pequeños — valores entre `-0.30` y `0.30` — suelen ser suficientes. Los valores extremos pueden sonar poco naturales dependiendo de los ajustes de Drive y Bias.
 
 ## Relacionados
 
-- [Descripción general de Tube Saturator](overview.md)
+- [Descripción general del Tube Saturator](overview.md)
 - [Ajustar Drive hasta que la curva comience a curvarse](dial-drive-until-the-curve-starts-to-bend.md)
-- [Compensar cambios de nivel con Output](compensate-level-changes-with-output.md)
 - [Desplazar Bias para ajustar el balance de armónicos pares e impares](shift-bias-to-tweak-the-even-odd-harmonic-balance.md)
-- [Mezcla en paralelo de la saturación con Mix](parallel-blend-saturation-with-mix.md)
-- [Omitir el tubo desde la cadena](bypass-the-tube-from-the-chain.md)
+- [Compensar cambios de nivel con Output](compensate-level-changes-with-output.md)
+- [Mezcla paralela de saturación con Mix](parallel-blend-saturation-with-mix.md)

@@ -1,48 +1,49 @@
-# Descripción general del Parametric EQ (Client)
+# Descripción general del EQ paramétrico (cliente)
 
-El applet Parametric EQ (Client) aplica un ecualizador paramétrico del lado del cliente a sus rutas de audio de recepción y transmisión de forma independiente. Úselo para dar forma al audio antes de que llegue a sus altavoces o a la cadena del micrófono, sin modificar el DSP propio del radio.
+La función de EQ paramétrico (cliente) proporciona un ecualizador paramétrico del lado del cliente para las rutas de audio de recepción y transmisión. Úselo para moldear la respuesta en frecuencia del audio que pasa por AetherSDR sin modificar la cadena DSP propia del radio.
 
 ## Antes de comenzar
 
-- El applet está alojado dentro del contenedor principal PooDoo Audio (TXDSP) como el subcontenedor "CEQ". Permanece oculto hasta que la etapa de EQ se habilita mediante el widget CHAIN o el editor flotante.
-- No se requiere conexión con el radio para configurar el EQ.
+- AetherSDR debe estar en ejecución. No se requiere una conexión de radio para configurar el EQ, pero se necesita una ruta de audio activa para que la superposición del analizador muestre señal.
+- El applet de EQ está oculto de forma predeterminada. Habilite la etapa de EQ desde el widget CHAIN o el editor flotante para hacer visible el applet.
 
 ## Cómo funciona
 
-El applet presenta una vista compacta de una ruta de audio a la vez: ya sea RX o TX. Las pestañas **RX** y **TX** en la parte superior del applet seleccionan qué ruta se muestra. Cambiar de pestaña reasigna el área de curva a la instancia de EQ de esa ruta; no omite ni altera ninguna de las dos rutas.
+AetherSDR ejecuta una instancia de EQ para la ruta de recepción y otra para la ruta de transmisión. Cada instancia es independiente: tiene su propio conjunto de bandas, su propio estado habilitado/omitido y su propia configuración persistida.
 
-El área principal del applet es la pantalla del analizador y de la curva. Tiene 110 píxeles de alto y muestra dos capas al mismo tiempo:
+El subcontenedor **CEQ** se encuentra dentro del contenedor principal PooDoo Audio (TXDSP) en el panel de applets. Muestra un área compacta de curva y analizador (110 px de alto) para la ruta a la que está vinculado. Hay una ficha de applet por ruta: la ficha vinculada a RX muestra el EQ de RX; la ficha vinculada a TX muestra el EQ de TX. Ninguna ficha contiene un selector de ruta interno; la pestaña del widget de cadena determina qué lado se está editando.
 
-- **Respuesta de EQ sumada** — la respuesta en frecuencia combinada de todas las bandas habilitadas para la ruta seleccionada. La curva es plana cuando no hay bandas activas o todas están omitidas, y tiene forma cuando una o más bandas aportan ganancia o corte.
-- **Superposición del analizador FFT en tiempo real** — un espectro en tiempo real del audio que fluye por la ruta seleccionada. Esta superposición está inactiva cuando no hay audio presente y en funcionamiento cuando el audio está activo.
+La edición de bandas — agregar, eliminar y ajustar — ocurre en la ventana flotante **ClientEqEditor**, no en la ficha del applet. Ábrala haciendo doble clic en la etapa de EQ en el widget CHAIN. La ficha del applet es una vista de solo lectura: muestra el estado actual de la ruta, pero no acepta clics para mover o editar bandas.
 
-El área de curva es solo de visualización. Para agregar, eliminar o ajustar bandas, abra el editor flotante haciendo doble clic en la etapa de EQ en el widget CHAIN.
+El área de curva renderiza dos capas simultáneamente:
 
-La omisión (habilitar y deshabilitar la etapa de EQ por completo) se controla desde el widget CHAIN, no desde dentro del applet.
+- **Respuesta de EQ sumada** — la respuesta en frecuencia acumulada de todas las bandas habilitadas para la ruta vinculada. Cuando no hay bandas configuradas, el área muestra "(no bands — add one in the editor)". Cuando no hay EQ conectado, muestra "(no EQ connected)".
+- **Superposición del analizador FFT en vivo** — una FFT en tiempo real del audio que pasa por la ruta vinculada, dibujada como un degradado cian relleno. La escala vertical va de −70 dB en la parte inferior a 0 dB en la parte superior. La escala horizontal es logarítmica de 20 Hz a 20 kHz.
+
+La cuadrícula de frecuencias dibuja líneas verticales en 20, 50, 100, 200, 500, 1k, 2k, 5k, 10k y 20k Hz. Las líneas de referencia de dB horizontales aparecen en ±6 dB y ±12 dB, con una línea más brillante en 0 dB.
 
 ## Qué hace cada control
 
-| Control | Tipo | Valor predeterminado | Comportamiento | Ajuste persistido |
+| Control | Tipo | Predeterminado | Comportamiento | Clave de configuración |
 |---|---|---|---|---|
-| **RX** | Pestaña | Seleccionado | Selecciona la ruta de recepción; vincula el área de curva a la instancia de EQ de RX. Mutuamente excluyente con TX. | — |
-| **TX** | Pestaña | No seleccionado | Selecciona la ruta de transmisión; vincula el área de curva a la instancia de EQ de TX. Mutuamente excluyente con RX. | — |
-| Área del analizador / curva | Indicador | — | Muestra la respuesta de EQ sumada y la superposición del analizador FFT en tiempo real para la ruta seleccionada. Solo de visualización. | — |
-| Estado habilitado de RX | — | — | Indica si la etapa de EQ de RX está activa u omitida. Se controla mediante el widget CHAIN. | `ClientEqRxEnabled` |
-| Estado habilitado de TX | — | — | Indica si la etapa de EQ de TX está activa u omitida. Se controla mediante el widget CHAIN. | `ClientEqTxEnabled` |
-| Configuración de bandas de RX | — | — | Frecuencia, ganancia, Q y tipo para cada banda en la ruta de RX. Se edita en el editor flotante. | `ClientEqRxBands` |
-| Configuración de bandas de TX | — | — | Frecuencia, ganancia, Q y tipo para cada banda en la ruta de TX. Se edita en el editor flotante. | `ClientEqTxBands` |
+| Pestaña RX | Pestaña | Activada | Vincula el widget de curva a la instancia de EQ de RX. Mutuamente exclusiva con TX. | — |
+| Pestaña TX | Pestaña | Desactivada | Vincula el widget de curva a la instancia de EQ de TX. Mutuamente exclusiva con RX. | — |
+| Área de analizador / curva | Indicador (solo lectura) | — | Muestra la respuesta de EQ sumada y la superposición del analizador FFT en vivo para la ruta seleccionada. La edición se realiza en el ClientEqEditor flotante. | — |
+| `ClientEqRxEnabled` | Configuración persistida | — | Almacena el estado habilitado/omitido del EQ de RX. | `ClientEqRxEnabled` |
+| `ClientEqTxEnabled` | Configuración persistida | — | Almacena el estado habilitado/omitido del EQ de TX. | `ClientEqTxEnabled` |
+| `ClientEqRxBands` | Configuración persistida | — | Almacena la configuración de bandas del EQ de RX. | `ClientEqRxBands` |
+| `ClientEqTxBands` | Configuración persistida | — | Almacena la configuración de bandas del EQ de TX. | `ClientEqTxBands` |
 
 ## Consejos
 
-- El rango vertical del área de curva es ±18 dB. Las líneas de cuadrícula horizontales aparecen en ±6 dB y ±12 dB; la línea de referencia de 0 dB se dibuja ligeramente más brillante.
-- Las líneas de cuadrícula de frecuencia se ubican en 20, 50, 100, 200, 500, 1k, 2k, 5k, 10k y 20k Hz.
-- Las rutas de RX y TX son independientes. Cambiar la pestaña para revisar una ruta no afecta lo que hace la otra.
-- Haga clic derecho en la barra de título del subcontenedor "CEQ" para flotar, extraer u ocultar el applet si necesita más espacio en pantalla.
+- Haga clic derecho en la barra de título del subcontenedor **CEQ** para flotar, desprender u ocultar la ficha del applet si necesita más espacio en pantalla.
+- La respuesta de EQ sumada se calcula a partir de funciones de transferencia de prototipo analógico en el rango completo de 20 Hz a 20 kHz. La curva es una referencia ideal; la ruta de audio utiliza los biquads digitales equivalentes.
+- Los colores de las bandas siguen una paleta fija (gris, ámbar, amarillo, verde, verde azulado, azul, púrpura, gris). Con más de 8 bandas, los colores se repiten cíclicamente en lugar de reiniciarse desde el gris.
 
-## Relacionado
+## Relacionados
 
-- [Cambiar entre la vista de EQ de RX y TX](switch-between-viewing-rx-and-tx-eq.md)
 - [Omitir la etapa de EQ desde la cadena](bypass-the-eq-stage-from-the-chain.md)
-- [Abrir el editor flotante para agregar, eliminar o ajustar bandas](open-the-floating-editor-to-add-remove-tune-bands.md)
-- [Ver el espectro en tiempo real de la ruta seleccionada](see-the-live-spectrum-of-the-selected-path.md)
-- [Verificar que la curva sumada coincida con su objetivo previsto](verify-the-summed-curve-matches-your-mental-target.md)
+- [Abrir el editor flotante para agregar, eliminar y ajustar bandas](open-the-floating-editor-to-add-remove-tune-bands.md)
+- [Ver el espectro en vivo de la ruta seleccionada](see-the-live-spectrum-of-the-selected-path.md)
+- [Cambiar entre la visualización del EQ de RX y TX](switch-between-viewing-rx-and-tx-eq.md)
+- [Verificar que la curva sumada coincida con el objetivo deseado](verify-the-summed-curve-matches-your-mental-target.md)

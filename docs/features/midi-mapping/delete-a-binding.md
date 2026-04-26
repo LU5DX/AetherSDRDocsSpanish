@@ -1,45 +1,43 @@
-# Eliminar un binding
+# Eliminar una asignación
 
-Elimine un binding MIDI individual de la tabla de bindings, o borre todos a la vez. Use esto cuando una asignación de controlador sea incorrecta, redundante o ya no sea necesaria.
+Elimine una sola asignación MIDI de la tabla de asignaciones, o borre todas a la vez. Use esta opción cuando una asignación de control ya no sea necesaria o desee reasignar un mando físico a un parámetro diferente.
 
 ## Antes de comenzar
 
-- El diálogo MIDI Mapping debe estar abierto. Vaya a `Settings > MIDI Mapping...`.
-- Debe haber al menos un binding existente visible en la tabla de bindings.
+- El diálogo MIDI Controller Mapping debe estar abierto. Si no lo está, vaya a `Settings > MIDI Mapping...`.
+- Debe tener al menos una asignación existente visible en la tabla de asignaciones.
 
 ## Pasos
 
-### Eliminar un binding
+### Eliminar una sola asignación
 
 1. Abra `Settings > MIDI Mapping...`.
-2. Localice el binding que desea eliminar en la tabla de bindings.
+2. En la tabla de asignaciones, localice la fila correspondiente a la asignación que desea eliminar.
 3. Haga clic en `×` en la columna más a la derecha de esa fila.
 
-La fila se elimina de inmediato. El cambio se guarda automáticamente.
+La fila se elimina inmediatamente. El cambio se guarda de forma automática.
 
-### Eliminar todos los bindings a la vez
+### Eliminar todas las asignaciones a la vez
 
 1. Abra `Settings > MIDI Mapping...`.
 2. Haga clic en `Clear All`.
 
-Todas las filas de la tabla de bindings se eliminan. El cambio se guarda automáticamente.
+Todas las filas de la tabla de asignaciones se eliminan. El cambio se guarda de forma automática.
 
 ## Qué hace cada control
 
-| Control | Tipo | Comportamiento |
-|---|---|---|
-| Tabla de bindings | Lista | Muestra todos los bindings actuales. Columnas: Parameter, MIDI Source, Channel, Invert, Relative y una columna de eliminación. |
-| `×` (eliminar fila) | Botón | Elimina el binding de esa fila. |
-| `Clear All` | Botón | Elimina todos los bindings de la tabla. |
+| Control | Descripción |
+|---|---|
+| `×` (eliminar fila) | Elimina la asignación individual de esa fila. |
+| `Clear All` | Elimina todas las asignaciones de la tabla. |
 
 ## Consejos
 
-- No hay mensaje de confirmación para `×` ni para `Clear All`. Si elimina bindings por error, puede restaurarlos cargando un perfil guardado previamente.
-- Antes de realizar cambios grandes, guarde el estado actual usando `Save` para poder recuperarlo con `Load`.
+- Si elimina una asignación por error, puede restaurarla cargando un perfil guardado anteriormente. Consulte [Cargar un perfil MIDI guardado anteriormente](load-a-previously-saved-midi-profile.md).
+- Antes de usar `Clear All`, considere guardar primero sus asignaciones actuales como un perfil. Consulte [Guardar la asignación actual como un perfil con nombre](save-the-current-mapping-as-a-named-profile.md).
 
 ## Relacionado
 
-- [Registrar un nuevo binding con el modo Learn](record-a-new-binding-with-learn-mode.md)
-- [Guardar la asignación actual como perfil con nombre](save-the-current-mapping-as-a-named-profile.md)
-- [Cargar un perfil MIDI guardado previamente](load-a-previously-saved-midi-profile.md)
-- [Descripción general del mapeo de controlador MIDI](overview.md)
+- [Registrar una nueva asignación con el modo Learn](record-a-new-binding-with-learn-mode.md)
+- [Guardar la asignación actual como un perfil con nombre](save-the-current-mapping-as-a-named-profile.md)
+- [Cargar un perfil MIDI guardado anteriormente](load-a-previously-saved-midi-profile.md)

@@ -1,56 +1,69 @@
 # Medir RTT y pérdida de paquetes durante problemas de audio
 
-Use el diálogo Network Diagnostics para leer en tiempo real el tiempo de ida y vuelta (RTT) y los contadores de pérdida de paquetes por categoría mientras el audio se interrumpe. Esto le ayuda a distinguir una ruta de red con pérdidas de un problema local de búfer o jitter.
+Use el diálogo Network Diagnostics para leer el tiempo de ida y vuelta actual y los conteos de pérdida de paquetes por categoría mientras reproduce un problema de audio. Esto permite distinguir un problema en la ruta de red de un problema de configuración de audio local.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar en ejecución. El diálogo no requiere una conexión de radio activa, pero los contadores de RTT y pérdida solo mostrarán datos significativos mientras esté conectado.
-- Reproduzca o espere a que el problema de audio vuelva a ocurrir para poder observar los contadores en tiempo real.
+- AetherSDR debe estar en ejecución. El diálogo no requiere una conexión de radio activa, pero la mayoría de los indicadores estarán vacíos hasta que la radio esté conectada.
+- Reproduzca el problema de audio, o esté listo para reproducirlo, de modo que pueda observar los valores en tiempo real.
 
 ## Pasos
 
 1. Haga clic en `Settings > Network...` para abrir el diálogo Network Diagnostics.
-2. Observe el campo **Latency (RTT)**. Se actualiza cada segundo y muestra el tiempo de ida y vuelta actual en milisegundos.
-3. Observe el campo **Max Latency (RTT)**. Muestra el RTT más alto registrado desde que se conectó la radio. Un valor significativamente superior al **Latency (RTT)** habitual indica picos de latencia periódicos.
-4. En el grupo **Packet Loss (Sequence Gaps)**, revise la fila **Audio**. El valor se muestra como `errors / total packets (%)`. Cualquier porcentaje distinto de cero durante problemas de audio apunta a pérdida de paquetes en la red como causa.
-5. Revise las filas de pérdida restantes — **FFT**, **Waterfall**, **Meters** y **DAX** — para determinar si la pérdida se limita al flujo de audio o afecta a todas las categorías. La pérdida en todos los flujos apunta a un problema general en la ruta de red, en lugar de un problema específico del audio.
-6. Si los contadores de pérdida son cero pero el audio sigue fallando, vaya al grupo **Audio Playback** y revise **Underruns (total)**, **Underruns (last sec)**, **RX Buffer Now** y **Network Jitter**. Cero pérdidas con underruns en aumento indican un problema local de agotamiento de búfer o jitter, no pérdida de paquetes.
-7. Haga clic en Close cuando termine.
+2. Observe **Latency (RTT)** en el grupo Network Status. Muestra el tiempo de ida y vuelta actual hacia la radio en milisegundos. Los valores por debajo de 1 ms se muestran como `< 1 ms`.
+3. Observe **Max Latency (RTT)**. Muestra el RTT más alto registrado desde que la radio se conectó. Una brecha amplia entre **Latency (RTT)** y **Max Latency (RTT)** indica picos periódicos en la ruta de red.
+4. Observe la fila **Audio** en el grupo Packet Loss (Sequence Gaps). El valor muestra los paquetes descartados frente al total de paquetes y un porcentaje. Cualquier porcentaje distinto de cero durante problemas de audio apunta a pérdida de paquetes en la ruta UDP.
+5. Revise las filas de pérdida **FFT**, **Waterfall**, **Meters** y **DAX** en el mismo grupo para determinar si la pérdida es específica del flujo de audio o afecta a todas las categorías.
+6. Haga clic en Close cuando termine.
 
 ## Qué hace cada control
 
-| Indicador | Dónde aparece | Significado |
+| Indicador | Grupo | Significado |
 |---|---|---|
-| **Latency (RTT)** | Network Status | Tiempo de ida y vuelta actual hacia la radio, en milisegundos. Los valores inferiores a 1 ms se muestran como `< 1 ms`. |
-| **Max Latency (RTT)** | Network Status | RTT más alto observado desde que se conectó la radio. Se reinicia al reconectar. |
-| **Audio** (Packet Loss) | Packet Loss (Sequence Gaps) | Paquetes de audio perdidos inferidos a partir de números de secuencia VITA-49 faltantes, mostrados como `errors / total (%)`. |
-| **FFT** (Packet Loss) | Packet Loss (Sequence Gaps) | Paquetes FFT perdidos por el mismo método. |
-| **Waterfall** (Packet Loss) | Packet Loss (Sequence Gaps) | Paquetes de waterfall perdidos. |
-| **Meters** (Packet Loss) | Packet Loss (Sequence Gaps) | Paquetes de medidores perdidos. |
-| **DAX** (Packet Loss) | Packet Loss (Sequence Gaps) | Paquetes DAX perdidos. |
-| **RX Buffer Now** | Audio Playback | Nivel de llenado actual del búfer de recepción de audio, en bytes y milisegundos. |
-| **RX Buffer Peak** | Audio Playback | Nivel máximo de llenado del búfer observado desde la conexión. |
-| **Underruns (total)** | Audio Playback | Conteo acumulado de underruns del búfer de audio desde la conexión. |
-| **Underruns (last sec)** | Audio Playback | Underruns ocurridos en la ventana de un segundo más reciente. |
-| **Audio Arrival Gap** | Audio Playback | Intervalo de llegada entre paquetes, que mide la temporización de entrega. |
-| **Max Arrival Gap** | Audio Playback | Mayor intervalo entre paquetes observado desde la conexión. |
-| **Network Jitter** | Audio Playback | Estimación suavizada del jitter del flujo de audio. |
+| **Status** | Network Status | Estado general del enlace. |
+| **Target Radio IP** | Network Status | Dirección IP de la radio conectada. Muestra `Not connected` cuando no hay ninguna radio conectada. |
+| **Selected Source** | Network Status | Interfaz de red local o ruta de enlace utilizada para la conexión. |
+| **Local TCP** | Network Status | Extremo TCP local en uso. |
+| **Local UDP** | Network Status | Extremo UDP local en uso. |
+| **First UDP Packet** | Network Status | Indica si se ha recibido el primer paquete UDP (`Yes` o `No`). |
+| **Latency (RTT)** | Network Status | Tiempo de ida y vuelta actual, actualizado cada segundo. |
+| **Max Latency (RTT)** | Network Status | RTT más alto registrado desde la conexión. |
+| **Audio** (tasa) | Incoming Stream Rates | Tasa de ingreso del flujo de audio en kbps. |
+| **FFT** (tasa) | Incoming Stream Rates | Tasa de ingreso del flujo FFT en kbps. |
+| **Waterfall** (tasa) | Incoming Stream Rates | Tasa de ingreso del flujo waterfall en kbps. |
+| **Meters** (tasa) | Incoming Stream Rates | Tasa de ingreso del flujo Meters en kbps. |
+| **DAX** (tasa) | Incoming Stream Rates | Tasa de ingreso del flujo DAX en kbps. |
+| **Total RX** | Incoming Stream Rates | Total de bytes entrantes por segundo en todas las categorías. |
+| **Total TX** | Incoming Stream Rates | Total de bytes salientes por segundo. |
+| **Audio** (pérdidas) | Packet Loss (Sequence Gaps) | Paquetes de audio descartados / total de paquetes (porcentaje). Se infiere a partir de saltos en el número de secuencia VITA. |
+| **FFT** (pérdidas) | Packet Loss (Sequence Gaps) | Paquetes FFT descartados / total de paquetes (porcentaje). |
+| **Waterfall** (pérdidas) | Packet Loss (Sequence Gaps) | Paquetes waterfall descartados / total de paquetes (porcentaje). |
+| **Meters** (pérdidas) | Packet Loss (Sequence Gaps) | Paquetes Meters descartados / total de paquetes (porcentaje). |
+| **DAX** (pérdidas) | Packet Loss (Sequence Gaps) | Paquetes DAX descartados / total de paquetes (porcentaje). |
+| **RX Buffer Now** | Audio Playback | Nivel actual del búfer de audio en bytes y milisegundos. |
+| **RX Buffer Peak** | Audio Playback | Nivel máximo del búfer de audio desde la conexión. |
+| **Underruns (total)** | Audio Playback | Contador acumulado de subdesbordamientos del búfer de audio. |
+| **Underruns (last sec)** | Audio Playback | Subdesbordamientos registrados en el intervalo de un segundo más reciente. |
+| **Audio Arrival Gap** | Audio Playback | Temporización de llegada entre paquetes en el momento actual. |
+| **Max Arrival Gap** | Audio Playback | Mayor intervalo de llegada entre paquetes registrado desde la conexión. |
+| **Network Jitter** | Audio Playback | Estimación de jitter suavizada para el flujo de audio. |
 
-## Consejos
+Todos los valores se actualizan una vez por segundo.
 
-- Todos los valores se actualizan automáticamente una vez por segundo. Deje el diálogo abierto durante un período de problemas y observe qué contadores cambian en el momento en que el audio se degrada.
-- Cero pérdida de paquetes en el grupo **Packet Loss (Sequence Gaps)** no descarta el jitter. La nota del propio diálogo indica: "Zero loss here does not rule out jitter or late bursts." Revise también **Network Jitter** y **Max Arrival Gap**.
-- **Max Latency (RTT)** persiste durante toda la sesión. Si es mucho mayor que **Latency (RTT)** en el momento en que abre el diálogo, ya ocurrió un pico que pudo haber pasado desapercibido.
+## Sugerencias
+
+- Un valor de cero en el grupo Packet Loss no descarta el problema. Variaciones grandes en las filas de tasa del grupo Incoming Stream Rates pueden indicar entrega en ráfagas sin saltos en el número de secuencia. Revise **Audio Arrival Gap** y **Network Jitter** en el grupo Audio Playback para detectar problemas de temporización que no se manifiestan como pérdidas.
+- Si **Underruns (total)** sigue aumentando mientras **RX Buffer Now** está cerca de cero, el lado de reproducción de audio está siendo privado de datos. Esto apunta a un problema de configuración de audio local más que a pérdida de paquetes en la red. Consulte [Diagnosticar subdesbordamientos y jitter de audio](../../troubleshooting/networkdiagnostics/diagnose-audio-underruns-and-jitter.md).
+- Si aparecen pérdidas en todas las categorías (Audio, FFT, Waterfall, Meters), el problema probablemente se encuentra en la ruta de red y no en el procesamiento de audio del lado de la radio.
 
 ## Solución de problemas
 
-- **Todos los contadores de pérdida muestran 0 pero el audio sigue fallando** — El problema no es pérdida de paquetes. Revise **Underruns (last sec)** y **Network Jitter** en el grupo Audio Playback. Consulte [Diagnosticar underruns de audio y jitter](../../troubleshooting/networkdiagnostics/diagnose-audio-underruns-and-jitter.md).
-- **RTT muestra `< 1 ms` y todos los contadores de pérdida son cero** — Es posible que la radio no esté conectada. Confirme que **Status** y **Target Radio IP** en el grupo Network Status muestren una conexión activa. Consulte [Verificar la IP de la radio y la dirección de enlace local](verify-the-radio-s-ip-and-local-bind-address.md).
-- **Solo la fila de pérdida de Audio es distinta de cero mientras FFT, Waterfall y Meters muestran cero** — La pérdida es específica del flujo y no una falla general de la ruta de red. Esto puede indicar un comportamiento de QoS o del switch que trata los flujos UDP de forma diferente; el flujo UDP de audio puede estar siendo deprioritizado.
+- **Todos los indicadores muestran valores vacíos o cero inmediatamente después de abrir el diálogo** — La radio no está conectada. Conéctese a la radio primero y luego vuelva a abrir el diálogo mediante `Settings > Network...`.
+- **Latency (RTT) muestra `< 1 ms` pero el audio sigue siendo deficiente** — El RTT refleja la temporización del ping TCP. La temporización de los paquetes de audio UDP es independiente. Revise **Audio Arrival Gap**, **Max Arrival Gap** y **Network Jitter** para detectar problemas de entrega UDP.
 
-## Relacionado
+## Relacionados
 
-- [Descripción general de Network Diagnostics](overview.md)
-- [Verificar las tasas de datos por categoría (audio, FFT, waterfall, medidores, DAX)](check-per-category-data-rates-audio-fft-waterfall-meters-dax.md)
-- [Diagnosticar underruns de audio y jitter](../../troubleshooting/networkdiagnostics/diagnose-audio-underruns-and-jitter.md)
+- [Verificar las tasas de datos por categoría (audio, FFT, waterfall, meters, DAX)](check-per-category-data-rates-audio-fft-waterfall-meters-dax.md)
+- [Diagnosticar subdesbordamientos y jitter de audio](../../troubleshooting/networkdiagnostics/diagnose-audio-underruns-and-jitter.md)
 - [Verificar la IP de la radio y la dirección de enlace local](verify-the-radio-s-ip-and-local-bind-address.md)
+- [Descripción general de Network Diagnostics](overview.md)

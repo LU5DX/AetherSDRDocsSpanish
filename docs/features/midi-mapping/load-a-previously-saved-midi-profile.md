@@ -1,33 +1,40 @@
 # Cargar un perfil MIDI guardado previamente
 
-Cargue un perfil de mapeo MIDI con nombre para restaurar un conjunto completo de asignaciones guardadas anteriormente. Esto es útil al cambiar entre controladores o posiciones de operación.
+Cargar un perfil guardado reemplaza las asignaciones actuales con las almacenadas bajo ese nombre de perfil, lo que permite cambiar entre configuraciones de controlador sin tener que reasignar cada enlace manualmente.
 
 ## Antes de comenzar
 
-- Debe existir al menos un perfil. Si aún no ha guardado un perfil, consulte [Guardar el mapeo actual como un perfil con nombre](save-the-current-mapping-as-a-named-profile.md).
+- Debe existir un perfil MIDI previamente guardado. Si aún no ha guardado ninguno, consulte [Guardar la asignación actual como un perfil con nombre](save-the-current-mapping-as-a-named-profile.md).
 - Abra el diálogo MIDI Controller Mapping mediante `Settings > MIDI Mapping...`.
 
 ## Pasos
 
-1. En el cuadro combinado **Profile:**, seleccione el nombre del perfil que desea cargar. Si la lista está vacía, todavía no se ha guardado ningún perfil.
-2. Haga clic en **Load**.
+1. En el combo box **Profile:**, seleccione el nombre del perfil que desea cargar. Si la lista está vacía, no se ha guardado ningún perfil todavía.
+2. Haga clic en Load.
 
-Las asignaciones existentes se borran y se reemplazan con las almacenadas en el perfil seleccionado. La tabla de asignaciones se actualiza inmediatamente para reflejar el perfil cargado.
+Las asignaciones actuales se reemplazan con las almacenadas en el perfil seleccionado. La tabla Bindings se actualiza de inmediato para mostrar las asignaciones cargadas.
+
+## Qué hace cada control
+
+| Control | Tipo | Comportamiento | Clave de configuración |
+|---|---|---|---|
+| Profile: | Combo box | Selecciona un perfil de asignación MIDI guardado para cargar o guardar. Editable. | — |
+| Load | Botón | Reemplaza las asignaciones actuales con las del perfil seleccionado. | — |
+| Bindings table | Lista | Muestra las asignaciones activas tras la carga. | — |
 
 ## Consejos
 
-- Cargar un perfil sobrescribe todas las asignaciones actuales sin un mensaje de confirmación. Si desea conservar las asignaciones actuales, guárdelas como perfil antes de cargar otro.
-- El cuadro combinado **Profile:** es editable. Escriba un nombre o seleccione uno de la lista desplegable.
+- El combo box Profile: es editable. Si escribe un nombre que no coincide con ningún perfil guardado y hace clic en Load, no se cargará nada — no se mostrará ningún error y las asignaciones actuales permanecerán sin cambios.
+- Después de cargar, las asignaciones cargadas quedan persistidas de inmediato como las asignaciones activas. No es necesario hacer clic en Save nuevamente para mantenerlas activas durante la sesión actual.
 
 ## Solución de problemas
 
-- **Al hacer clic en Load no ocurre nada** — El campo **Profile:** puede estar vacío o contener solo espacios en blanco. Seleccione un nombre de perfil de la lista desplegable antes de hacer clic en Load.
-- **La lista Profile: está vacía** — Todavía no se ha guardado ningún perfil. Consulte [Guardar el mapeo actual como un perfil con nombre](save-the-current-mapping-as-a-named-profile.md).
-- **La tabla de asignaciones está vacía después de cargar** — El perfil seleccionado se guardó sin asignaciones, o los datos del perfil no pudieron leerse. Guarde un nuevo perfil con las asignaciones correctas e inténtelo de nuevo.
+- **Se hace clic en Load pero la tabla Bindings no cambia** — El nombre de perfil en el combo box Profile: no coincide con ningún perfil guardado, o el campo de nombre está vacío. Seleccione un nombre de la lista desplegable en lugar de escribirlo manualmente.
+- **La lista Profile: está vacía** — No se ha guardado ningún perfil. Consulte [Guardar la asignación actual como un perfil con nombre](save-the-current-mapping-as-a-named-profile.md).
 
-## Relacionados
+## Relacionado
 
-- [Guardar el mapeo actual como un perfil con nombre](save-the-current-mapping-as-a-named-profile.md)
+- [Guardar la asignación actual como un perfil con nombre](save-the-current-mapping-as-a-named-profile.md)
 - [Registrar una nueva asignación con el modo Learn](record-a-new-binding-with-learn-mode.md)
-- [Eliminar una asignación](delete-a-binding.md)
 - [Conectar un controlador MIDI](../../getting-started/setup/connect-a-midi-controller.md)
+- [Descripción general de MIDI Controller Mapping](overview.md)

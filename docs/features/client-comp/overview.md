@@ -1,54 +1,49 @@
 # Descripción general del compresor
 
-El compresor de TX del lado del cliente en AetherSDR reduce el rango dinámico del audio transmitido antes de que llegue al radio. Úselo para controlar los picos de voz, mantener una potencia promedio constante y reducir la posibilidad de salpicadura en SSB.
+El compresor del lado del cliente es un procesador de rango dinámico de TX integrado en la cadena de audio de AetherSDR. Reduce los niveles de pico antes de la transmisión, lo que permite aumentar la potencia promedio sin distorsionar la señal.
 
 ## Antes de comenzar
 
-- La etapa Compressor debe estar habilitada (bypass desactivado) mediante el widget CHAIN o el editor flotante antes de que el tile del applet COMPRESSOR sea visible.
-- No se requiere conexión con el radio para ajustar la configuración del compresor.
+- El panel COMPRESSOR forma parte de la cadena de procesamiento PooDoo Audio (TXDSP). Permanece oculto hasta que la etapa Compressor esté habilitada — desactívela mediante el widget CHAIN o el editor flotante para que el panel sea visible.
+- No se requiere conexión a la radio para configurar el compresor.
 
 ## Cómo funciona
 
-El compresor se ejecuta completamente en el lado del cliente: procesa el audio en AetherSDR antes de que la señal se envíe al radio Flex. Aplica un modelo estándar de reducción de ganancia: cuando el nivel de entrada supera el umbral, el compresor atenúa la señal según la relación configurada. Los tiempos de ataque y de recuperación controlan la rapidez con que el compresor actúa y se recupera. La ganancia de compensación (makeup gain) permite restaurar el nivel promedio perdido por la compresión.
+El compresor monitorea en tiempo real el nivel del audio de TX. Cuando la señal supera el umbral definido, el compresor reduce la ganancia según la relación especificada. Los tiempos de ataque y liberación controlan la rapidez con que el compresor actúa y deja de actuar. La ganancia de compensación recupera el nivel general perdido por la compresión.
 
-El tile del applet **COMPRESSOR** se encuentra dentro del contenedor principal PooDoo Audio (TXDSP). Muestra una curva de transferencia con un indicador de envolvente en tiempo real y un medidor horizontal de reducción de ganancia para observar la compresión mientras se transmite.
+El applet COMPRESSOR ofrece una vista compacta de todo esto a la vez:
 
-Para acceder a los controles de rodilla y limitador (`ClientCompTxKneeDb`, `ClientCompTxLimEnabled`, `ClientCompTxLimCeilingDb`), abra el editor flotante haciendo doble clic en la etapa Comp del widget CHAIN.
+- La **curva de transferencia** muestra la relación estática de ganancia entrada/salida como una curva. Una bola en movimiento recorre la curva para indicar dónde se encuentra el nivel de envolvente actual. Esta vista es de solo lectura en el applet; la curva es editable en el editor flotante.
+- La **barra de reducción de ganancia** es una franja horizontal de color ámbar que se llena desde la derecha. Muestra cuánta atenuación está aplicando el compresor en ese momento, hasta un máximo de 20 dB. Una marca en −6 dB indica una cantidad de reducción de ganancia típica en uso. El medidor se actualiza a aproximadamente 30 Hz con balística suavizada.
+
+Dos controles que afectan si el compresor está activo — habilitar/omitir y la configuración de rodilla y limitador — no se encuentran en el propio applet. La función de omisión se controla desde el widget CHAIN (un solo clic) o el editor flotante. La configuración de rodilla y limitador solo está disponible en el editor flotante.
 
 ## Qué hace cada control
 
-| Control | Descripción | Valor predeterminado | Rango | Clave de configuración |
+| Control | Valor predeterminado | Rango válido | Ajuste persistente | Comportamiento |
 |---|---|---|---|---|
-| Curva de transferencia | Dibuja la curva de transferencia estática de entrada/salida. Una bola en movimiento recorre la curva para mostrar el nivel de envolvente actual. Solo lectura en el applet; editable en el editor flotante. | — | — | — |
-| Barra de reducción de ganancia | Franja ámbar horizontal, rellena desde la derecha. Muestra cuánta atenuación se aplica en el momento. Una marca señala el punto de −6 dB como referencia de trabajo típica. La escala llega hasta 20 dB de reducción. | — | 0–20 dB GR | — |
-| Thresh | Nivel a partir del cual comienza la compresión. | −18.0 dB | −60.0 a 0.0 dB | `ClientCompTxThresholdDb` |
-| Ratio | Agresividad con que se controlan los picos una vez superado el umbral. Se muestra como X.XX:1. | 3.0 | 1.0 a 20.0 | `ClientCompTxRatio` |
-| Attack | Rapidez con que el compresor actúa después de que la entrada supera el umbral. | 20.0 ms | 0.1 a 300.0 ms | `ClientCompTxAttackMs` |
-| Release | Rapidez con que la ganancia se recupera después de que la entrada cae por debajo del umbral. | 200 ms | 5 a 2000 ms | `ClientCompTxReleaseMs` |
-| Makeup | Agrega la ganancia perdida por la compresión. Los valores positivos se muestran con signo `+` explícito. | 0.0 dB | −12.0 a 24.0 dB | `ClientCompTxMakeupDb` |
-
-Las siguientes configuraciones están disponibles únicamente en el editor flotante:
-
-| Clave de configuración | Propósito |
-|---|---|
-| `ClientCompTxEnabled` | Habilita o desactiva (bypass) la etapa del compresor. |
-| `ClientCompTxKneeDb` | Suaviza la transición hacia la compresión alrededor del umbral. |
-| `ClientCompTxLimEnabled` | Habilita el limitador de salida. |
-| `ClientCompTxLimCeilingDb` | Establece el techo máximo que aplica el limitador. |
+| Thresh | −18.0 dB | −60.0 a 0.0 dB | `ClientCompTxThresholdDb` | Define el nivel de entrada a partir del cual comienza la compresión. Valores más bajos comprimen más la señal. |
+| Ratio | 3.0 | 1.0 a 20.0 | `ClientCompTxRatio` | Define la agresividad con que se controlan los picos una vez superado el umbral. Se muestra como X.XX:1. Usa mapeo logarítmico del control. |
+| Attack | 20.0 ms | 0.1 a 300.0 ms | `ClientCompTxAttackMs` | Define la rapidez con que responde el compresor cuando la señal supera el umbral. Usa mapeo exponencial del control. |
+| Release | 200 ms | 5 a 2000 ms | `ClientCompTxReleaseMs` | Define la rapidez con que se recupera la ganancia cuando la señal cae por debajo del umbral. Usa mapeo exponencial del control. |
+| Makeup | 0.0 dB | −12.0 a +24.0 dB | `ClientCompTxMakeupDb` | Agrega de vuelta la ganancia perdida por la compresión. Los valores positivos se muestran con signo + explícito. |
+| `ClientCompTxEnabled` | — | activado/desactivado | `ClientCompTxEnabled` | Indica si la etapa del compresor está activa u omitida. Se controla desde el widget CHAIN o el editor flotante, no directamente desde el applet. |
+| `ClientCompTxKneeDb` | — | — | `ClientCompTxKneeDb` | Ancho de rodilla. Solo accesible en el editor flotante. |
+| `ClientCompTxLimEnabled` | — | activado/desactivado | `ClientCompTxLimEnabled` | Habilita el limitador de salida. Solo accesible en el editor flotante. |
+| `ClientCompTxLimCeilingDb` | — | — | `ClientCompTxLimCeilingDb` | Nivel de techo del limitador. Solo accesible en el editor flotante. |
 
 ## Consejos
 
-- La barra de reducción de ganancia se actualiza a aproximadamente 30 Hz. Obsérvela mientras habla para evaluar si la configuración es adecuada antes de transmitir en el aire.
-- La marca de −6 dB en la barra de reducción de ganancia es una referencia útil: una reducción constante en esa zona generalmente produce una compresión de sonido natural en voz SSB.
-- Los cinco controles del tile del applet son suficientes para la mayoría de los ajustes. Abra el editor flotante solo cuando necesite ajustar la rodilla o habilitar el limitador.
-- Haga clic derecho en la barra de título del subcontenedor COMPRESSOR para flotarlo, desplegarlo o ocultarlo.
+- Observe la barra de reducción de ganancia mientras habla a su nivel de voz normal. Trate de mantener el relleno ámbar trabajando principalmente a la izquierda de la marca de −6 dB para obtener un resultado de sonido natural.
+- La bola de la curva de transferencia ofrece una comprobación visual rápida de que el umbral está ajustado correctamente — si la bola nunca se mueve de la posición de reposo, es posible que el umbral esté demasiado alto para su nivel de señal.
+- La configuración de rodilla y limitador solo está disponible en el editor flotante. Haga doble clic en la etapa Comp del widget CHAIN para abrirlo.
 
 ## Temas relacionados
 
 - [Ajustar el umbral del compresor](adjust-compressor-threshold.md)
-- [Establecer la relación de compresión para voz](set-compression-ratio-for-voice.md)
-- [Ajustar el ataque y la recuperación para una compresión de sonido natural](tune-attack-release-for-a-natural-sounding-squeeze.md)
+- [Configurar la relación de compresión para voz](set-compression-ratio-for-voice.md)
+- [Ajustar el ataque y la liberación para un sonido natural](tune-attack-release-for-a-natural-sounding-squeeze.md)
 - [Aplicar ganancia de compensación tras la compresión](apply-make-up-gain-after-compression.md)
-- [Observar la reducción de ganancia en tiempo real mientras habla](watch-live-gain-reduction-while-speaking.md)
-- [Desactivar el compresor desde la cadena](bypass-the-compressor-from-the-chain.md)
+- [Observar la reducción de ganancia en vivo mientras habla](watch-live-gain-reduction-while-speaking.md)
+- [Omitir el compresor desde la cadena](bypass-the-compressor-from-the-chain.md)
 - [Abrir el editor completo del compresor para los controles de rodilla y limitador](open-the-full-compressor-editor-for-knee-and-limiter-controls.md)

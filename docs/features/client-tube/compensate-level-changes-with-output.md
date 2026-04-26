@@ -1,36 +1,33 @@
-# Compensar los cambios de nivel con Output
+# Compensar cambios de nivel con Output
 
-Agregar Drive o Bias modifica el nivel general de la señal saturada. El control Output aplica una ganancia de ajuste post-tubo para que pueda restaurar el nivel original o establecer un nivel objetivo deliberado antes de que la señal continúe por la cadena TX.
+El control **Output** aplica un ajuste de ganancia posterior al tubo, permitiéndole restaurar o reducir el nivel general después de que la etapa de tubo da forma a la señal. Úselo para igualar el nivel de salida saturado al que tenía antes de agregar Drive, o para reducir la señal si un Drive elevado la hace demasiado alta.
 
 ## Antes de comenzar
 
-- La etapa Tube Saturator debe estar habilitada. Consulte [Omitir el tubo de la cadena](bypass-the-tube-from-the-chain.md) para saber cómo habilitarla.
-- Abra el subcontenedor TUBE dentro del contenedor principal PooDoo Audio (TXDSP). Si no está visible, haga doble clic en la etapa Tube en el widget CHAIN para abrir el editor flotante Tube.
+- La etapa Tube Saturator debe estar habilitada y visible. Consulte [Omitir el tubo de la cadena](bypass-the-tube-from-the-chain.md) si el subcontenedor TUBE no aparece.
+- Abra el subcontenedor TUBE dentro del contenedor principal PooDoo Audio (TXDSP), o haga doble clic en la etapa Tube en el widget CHAIN para abrir el editor flotante de Tube.
 
 ## Pasos
 
-1. Transmita una señal estable o use una fuente de tono para que la bola de entrada en vivo sobre la curva de transferencia esté en movimiento.
-2. Localice el control Output — el cuarto control de la fila, etiquetado como **Output**.
-3. Gire Output en sentido horario para aumentar el nivel post-tubo, o en sentido antihorario para reducirlo.
-4. Deje de ajustar cuando el medidor de nivel de la etapa siguiente muestre el mismo valor que antes de agregar la saturación, o en el nivel que requiera su cadena TX.
+1. Localice el control **Output** — el cuarto control en la fila de cinco, etiquetado como "Output".
+2. Gire **Output** en sentido horario para aumentar la ganancia posterior al tubo, o en sentido antihorario para reducirla.
+3. Observe la curva de transferencia y su medidor de TX para confirmar que el nivel de salida está donde lo desea.
 
 ## Qué hace cada control
 
-| Control | Valor predeterminado | Rango válido | Ajuste persistido |
-|---|---|---|---|
-| Output | 0.0 dB | −24.0 to 12.0 dB | `ClientTubeTxOutputGainDb` |
+| Control | Valor predeterminado | Rango válido | Clave persistente |
+|---------|----------------------|--------------|-------------------|
+| Output | 0.0 dB | −24.0 a 12.0 dB | `ClientTubeTxOutputGainDb` |
 
-Output aplica una ganancia de compensación o recorte lineal después del modelo de tubo. No afecta la forma de la curva de transferencia: Drive, Tone y Bias permanecen sin cambios. La etiqueta del control muestra el valor actual como `X.X dB`.
+La etiqueta del control muestra el valor actual como `X.X dB`. La ganancia se aplica de forma lineal después del modelo de tubo, funcionando como una etapa de compensación o ajuste fino. No afecta la forma de la curva de transferencia.
 
 ## Consejos
 
-- Un buen punto de partida es ajustar primero Drive hasta que la curva de transferencia se curve de forma notable, y luego usar Output para devolver el nivel a 0.0 dB. A partir de ahí, ajuste según su preferencia.
-- Los cambios de Output se reflejan inmediatamente en la posición de la bola de entrada en vivo del widget de curva de transferencia, lo que le permite verificar que la señal sigue operando en el régimen de saturación deseado.
-- Si utiliza el editor flotante Tube al mismo tiempo que el applet TUBE, los controles de ambas vistas se sincronizan automáticamente.
+- Un punto de partida habitual: anote su nivel de TX con Drive en 0.0 dB, luego aumente Drive hasta que la curva se doble a su gusto, y después reduzca Output hasta que el nivel de TX regrese a la lectura original.
+- Los cambios de Output realizados en el editor flotante de Tube se reflejan en el control del applet en aproximadamente 33 ms, y viceversa.
 
-## Relacionado
+## Relacionados
 
 - [Ajustar Drive hasta que la curva comience a doblarse](dial-drive-until-the-curve-starts-to-bend.md)
-- [Desplazar Bias para ajustar el balance de armónicos pares e impares](shift-bias-to-tweak-the-even-odd-harmonic-balance.md)
 - [Mezcla en paralelo de la saturación con Mix](parallel-blend-saturation-with-mix.md)
-- [Aclarar u oscurecer la señal saturada con Tone](brighten-or-darken-the-saturated-signal-with-tone.md)
+- [Descripción general del Tube Saturator](overview.md)

@@ -1,35 +1,34 @@
 # Ajustar la potencia de portadora AM para transmisión en AM
 
-Use esta página para establecer el nivel de potencia de portadora AM al transmitir en modo AM. El nivel de portadora controla qué proporción de la potencia del transmisor se destina a la portadora sin modular.
+Use el control deslizante AM Carrier en el applet Phone para establecer el nivel de potencia de portadora al transmitir en modo AM. Reducir este valor disminuye la potencia de portadora no modulada; aumentarlo la incrementa.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio Flex.
-- La radio debe estar configurada en modo AM antes de que el nivel de portadora AM tenga algún efecto en la transmisión.
-- El applet Phone debe estar visible en el Panel de Applets.
+- AetherSDR debe estar conectado al radio. El applet Phone no está disponible sin una conexión activa al radio.
+- Su slice debe estar configurado en modo AM antes de que el nivel de portadora AM tenga algún efecto en la transmisión.
 
 ## Pasos
 
-1. Si el applet Phone no está visible, haga clic en el botón de bandeja **PHNE** en la barra lateral derecha para mostrarlo.
-2. Localice el control deslizante **AM Carrier** en el applet Phone.
-3. Arrastre el control deslizante **AM Carrier** hacia la izquierda o la derecha para establecer el nivel de portadora deseado. El valor numérico (0–100) se actualiza junto al control deslizante mientras arrastra.
+1. Si el applet Phone no es visible en la barra lateral derecha, haga clic en el botón de bandeja **PHNE** para mostrarlo.
+2. Localice la fila **AM Carrier** en la parte superior del applet Phone.
+3. Arrastre el control deslizante **AM Carrier** hacia la izquierda para disminuir la potencia de portadora o hacia la derecha para aumentarla. El valor numérico a la derecha del control deslizante se actualiza mientras arrastra (por ejemplo, **48**).
 
 ## Qué hace cada control
 
-| Control | Tipo | Rango | Valor predeterminado | Clave persistente |
+| Control | Tipo | Rango válido | Predeterminado | Clave persistida |
 |---|---|---|---|---|
 | AM Carrier | Deslizador | 0–100 | — | — |
 
-La etiqueta numérica a la derecha del control deslizante **AM Carrier** muestra el valor actual (por ejemplo, `48`). Este valor se envía directamente a la radio y AetherSDR no lo guarda entre sesiones; la radio lo restaura desde su propio estado al reconectarse.
+La etiqueta numérica junto al control deslizante muestra el valor actual. No existe una configuración persistida para el nivel de AM Carrier; el valor se lee desde el radio en cada conexión.
 
 ## Consejos
 
-- El nivel de portadora AM se aplica únicamente mientras la radio está en modo AM. Ajustarlo en otros modos no produce ningún efecto audible, pero el valor se sigue enviando a la radio.
-- Un nivel de portadora de 0 suprime la portadora por completo; un nivel de 100 establece la potencia de portadora máxima permitida por la configuración de banda TX de la radio.
+- El nivel actual se muestra como un número a la derecha del control deslizante (por ejemplo, **48**). Utilícelo para volver a un ajuste conocido después de experimentar.
+- El control deslizante AM Carrier no tiene efecto cuando el slice está en un modo que no es AM, como SSB o CW.
 
 ## Relacionado
 
 - [Descripción general de Phone](overview.md)
-- [Habilitar VOX y establecer el umbral de activación](enable-vox-and-set-trigger-threshold.md)
+- [Activar VOX y establecer el umbral de disparo](enable-vox-and-set-trigger-threshold.md)
 - [Establecer la frecuencia de corte inferior del audio TX](set-the-tx-audio-low-cut-frequency.md)
 - [Establecer la frecuencia de corte superior del audio TX](set-the-tx-audio-high-cut-frequency.md)

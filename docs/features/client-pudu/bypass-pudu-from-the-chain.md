@@ -1,27 +1,28 @@
 # Omitir PUDU de la cadena
 
-El excitador PUDU se activa y desactiva desde el widget CHAIN, no desde el interior del applet PUDU Exciter. Use esta página para quitar temporalmente PUDU de la cadena DSP de TX sin modificar ninguno de sus ajustes.
+Elimine temporalmente el excitador PUDU de la cadena DSP de TX sin modificar ninguna de sus configuraciones. Use esto cuando desee comparar su audio con y sin el procesamiento PUDU, o cuando necesite transmitir sin el efecto activo.
 
 ## Antes de comenzar
 
-- El contenedor principal PooDoo Audio (TXDSP) debe ser visible en el panel de applets.
-- La etapa PUDU (Enh) debe estar presente en el widget CHAIN.
+- La etapa PUDU debe estar ya presente en el widget CHAIN dentro del contenedor PooDoo Audio (TXDSP).
+- No se requiere conexión de radio para omitir o reactivar la etapa.
 
 ## Pasos
 
-1. Localice el widget CHAIN dentro del contenedor PooDoo Audio (TXDSP).
-2. Encuentre el bloque de etapa **PUDU (Enh)** en la cadena.
-3. Haga clic una vez en la etapa **PUDU (Enh)** para desactivarla. La etapa queda omitida y el audio pasa por la cadena sin el procesamiento de PUDU.
-4. Haga clic una vez más en la etapa **PUDU (Enh)** para volver a activarla.
+1. Localice el widget CHAIN en el contenedor PooDoo Audio (TXDSP).
+2. Haga clic una vez en la etapa **PUDU (Enh)** en el widget CHAIN.
 
-Cuando PUDU está omitido, el subcontenedor PUDU permanece oculto. El ajuste persistente `ClientPuduTxEnabled` se actualiza de inmediato. Todos los valores de los controles (`ClientPuduTxPooDriveDb`, `ClientPuduTxPooTuneHz`, `ClientPuduTxPooMix`, `ClientPuduTxDooTuneHz`, `ClientPuduTxDooHarmonicsDb`, `ClientPuduTxDooMix`) y el modo seleccionado (`ClientPuduTxMode`) se conservan.
+Un solo clic alterna la etapa PUDU entre activa y omitida. La etapa permanece en la cadena, pero el audio la atraviesa sin procesamiento mientras está omitida. La configuración `ClientPuduTxEnabled` se actualiza de inmediato y se conserva.
 
-## Consejos
+Para reactivar PUDU, haga clic una vez más en la etapa **PUDU (Enh)**.
 
-- Omitir desde el widget CHAIN es una operación no destructiva. Al volver a activarlo, se restauran todas las posiciones de los controles exactamente como las dejó.
-- Para abrir los controles de PUDU Exciter sin activar la etapa, haga doble clic en la etapa **PUDU (Enh)** en el widget CHAIN para abrir el editor flotante.
+## Sugerencias
+
+- Omitir la etapa mediante el widget CHAIN no restablece ningún valor de los controles. Todos los ajustes de Poo Drive, Poo Tune, Poo Mix, Doo Tune, Doo Air y Doo Mix se conservan.
+- Hacer doble clic en la etapa **PUDU (Enh)** en el widget CHAIN abre el editor flotante de PUDU en lugar de alternar la omisión. Use un solo clic para omitirla.
+- El logotipo de PooDoo dentro del applet de PUDU pulsa con el RMS de la señal procesada cuando PUDU está activo y deja de pulsar cuando está omitido.
 
 ## Relacionado
 
-- [Descripción general de PUDU Exciter](overview.md)
-- [Elegir carácter Aphex (par) o Behringer (impar)](pick-aphex-even-vs-behringer-odd-character.md)
+- [Descripción general del excitador PUDU](overview.md)
+- [Elegir el carácter Aphex (par) o Behringer (impar)](pick-aphex-even-vs-behringer-odd-character.md)

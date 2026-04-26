@@ -1,45 +1,41 @@
 # Ajustar la profundidad de enmascaramiento y la fuerza de supresión de NR4
 
-Use esta página para ajustar la profundidad de enmascaramiento espectral y la fuerza de supresión general de NR4, controlando con qué agresividad el motor NR4 atenúa el ruido en relación con el contenido similar a la voz.
+La pestaña NR4 en AetherDSP Settings expone dos controles que determinan con qué agresividad NR4 (libspecbleach) moldea el piso de ruido residual tras su etapa principal de reducción: `NR4MaskingDepth` y `NR4SuppressionStrength`. Ajústelos cuando desee un control más fino sobre el equilibrio entre la supresión de ruido y la naturalidad del audio.
 
 ## Antes de comenzar
 
-- Abra AetherSDR.
-- NR4 debe estar seleccionado como su motor de reducción de ruido activo. Consulte [Cómo elegir la reducción de ruido adecuada: NR2, NR4, DFNR, MNR](../../operating/dsp/noise-reduction-overview.md) si no está seguro.
+- AetherSDR debe estar en ejecución. No se requiere conexión a un radio para cambiar estos ajustes.
+- Abra `Settings > AetherDSP Settings...` para acceder al cuadro de diálogo.
 
 ## Pasos
 
 1. Haga clic en `Settings > AetherDSP Settings...`.
 2. Haga clic en la pestaña **NR4**.
-3. Ajuste **Masking Depth:** para establecer con qué profundidad se aplica el enmascaramiento espectral. Los valores más bajos aplican menos enmascaramiento; los valores más altos aplican más.
-4. Ajuste **Suppression:** para establecer la fuerza de supresión general de NR4. Los valores más bajos son más suaves; los valores más altos son más agresivos.
-5. Cierre el diálogo. Los cambios surten efecto de inmediato.
+3. Mueva el control deslizante **Masking Depth:** al valor deseado entre 0.00 y 1.00. El valor predeterminado es 0.50.
+4. Mueva el control deslizante **Suppression:** al valor deseado entre 0.00 y 1.00. El valor predeterminado es 0.50.
+5. Cierre el cuadro de diálogo. Los ajustes se guardan de inmediato al mover cada control deslizante.
 
 ## Qué hace cada control
 
-| Control | Valor predeterminado | Rango válido | Clave de configuración |
-|---|---|---|---|
-| **Masking Depth:** | 0.50 | 0.00–1.00 | `NR4MaskingDepth` |
-| **Suppression:** | 0.50 | 0.00–1.00 | `NR4SuppressionStrength` |
-
-**Masking Depth:** controla la profundidad del enmascaramiento espectral aplicado por el motor NR4. En 0.00 el enmascaramiento no se aplica; en 1.00 se aplica a profundidad máxima.
-
-**Suppression:** establece la fuerza de supresión general del motor NR4. En 0.00 la supresión es mínima; en 1.00 es máxima.
+| Control | Predeterminado | Rango válido | Clave de ajuste | Comportamiento |
+|---|---|---|---|---|
+| **Masking Depth:** | 0.50 | 0.00–1.00 | `NR4MaskingDepth` | Controla la profundidad del enmascaramiento espectral. Valores más altos aplican un enmascaramiento más profundo a los componentes de ruido por debajo del piso de ruido estimado. |
+| **Suppression:** | 0.50 | 0.00–1.00 | `NR4SuppressionStrength` | Establece la fuerza de supresión general de NR4. Valores más altos reducen más ruido; valores más bajos preservan más el carácter original de la señal. |
 
 ## Consejos
 
-- Comience con ambos controles deslizantes en sus valores predeterminados (0.50) y realice ajustes incrementales pequeños. Aumentar demasiado **Suppression:** puede causar artefactos audibles en señales débiles.
-- Si queda ruido residual después de aumentar **Suppression:**, aumente también **Masking Depth:** de forma gradual. Los dos controles interactúan: la profundidad de enmascaramiento define qué bins espectrales son el objetivo, mientras que la supresión determina cuánta reducción de ganancia se les aplica.
-- Use **Reset Defaults** para devolver ambos controles deslizantes —junto con todos los demás parámetros de NR4— a sus valores de fábrica (SPP-MMSE, adaptativo activado, 10.0 dB, Smoothing 0, Whitening 0, Masking Depth 0.50, Suppression 0.50).
+- Para restablecer ambos controles a sus valores predeterminados (0.50 y 0.50), haga clic en **Reset Defaults** en la parte inferior derecha de la pestaña NR4. Esto también restablece todos los demás parámetros de NR4 a sus valores predeterminados (SPP-MMSE, adaptativo activado, reducción de 10.0 dB, 0% de suavizado, 0% de blanqueamiento).
+- Si la señal suena sobreprocesada o delgada, reduzca primero **Suppression:** y luego **Masking Depth:** si es necesario.
+- Estos controles actúan sobre la salida de la etapa de reducción principal. Establezca **Reduction (dB):** en un valor razonable antes de ajustar con precisión el enmascaramiento y la supresión. Consulte [Ajustar la cantidad de reducción de NR4 en dB](adjust-nr4-reduction-amount-in-db.md).
 
 ## Solución de problemas
 
-- **La voz suena apagada después de aumentar Suppression:** — El nivel de supresión es demasiado alto. Reduzca **Suppression:** y, si es necesario, reduzca también **Masking Depth:** para restaurar la claridad de la voz.
-- **El piso de ruido sigue siendo audible con Suppression: al máximo** — Verifique que **Reduction (dB):** esté configurado con un valor suficientemente alto y que **Adaptive Noise Estimation** esté habilitado. Consulte [Ajustar la cantidad de reducción de NR4 en dB](adjust-nr4-reduction-amount-in-db.md) y [Habilitar o deshabilitar la estimación de ruido adaptativa de NR4](enable-or-disable-nr4-adaptive-noise-estimation.md).
+- **Los controles deslizantes no tienen efecto audible** — confirme que NR4 es el motor de reducción de ruido activo para el receptor. Los motores de AetherDSP se seleccionan por receptor desde la superposición del panadapter, no desde este cuadro de diálogo.
+- **Reset Defaults cambia más que solo estos dos controles deslizantes** — esto es lo esperado. **Reset Defaults** en la pestaña NR4 restaura todos los parámetros de NR4 de forma simultánea.
 
-## Relacionados
+## Relacionado
 
 - [Ajustar la cantidad de reducción de NR4 en dB](adjust-nr4-reduction-amount-in-db.md)
-- [Habilitar o deshabilitar la estimación de ruido adaptativa de NR4](enable-or-disable-nr4-adaptive-noise-estimation.md)
-- [Restablecer los parámetros de NR2 o NR4 a los valores predeterminados](reset-nr2-or-nr4-parameters-to-defaults.md)
+- [Activar o desactivar la estimación de ruido adaptativa de NR4](enable-or-disable-nr4-adaptive-noise-estimation.md)
+- [Restablecer los parámetros de NR2 o NR4 a sus valores predeterminados](reset-nr2-or-nr4-parameters-to-defaults.md)
 - [Cómo elegir la reducción de ruido adecuada: NR2, NR4, DFNR, MNR](../../operating/dsp/noise-reduction-overview.md)

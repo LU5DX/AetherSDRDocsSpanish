@@ -1,39 +1,37 @@
 # Verificar el número de serie, versión de hardware, región y opciones del radio
 
-Consulte los campos de identificación de solo lectura que reporta su FLEX-8600: número de serie del chasis, cadena de versión de hardware, región regulatoria y opciones licenciadas. Use esta página para confirmar la identidad del radio antes de enviar una solicitud de soporte o verificar una actualización de hardware.
+La pestaña **Radio** en Radio Setup muestra campos de identidad de hardware de solo lectura, reportados directamente por el radio: número de serie del chasis, versión de hardware, región regulatoria y opciones licenciadas. Consulte esta página cuando necesite confirmar qué hardware tiene conectado o verificar qué opciones están activas.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. Estos campos se completan a partir de una conexión activa con el radio.
+- AetherSDR debe estar conectado al radio. Estos campos son completados por el radio en el momento de la conexión y son de solo lectura.
 
 ## Pasos
 
 1. Haga clic en `Settings > Radio Setup...`.
-2. Haga clic en la pestaña **Radio**. Es la primera pestaña y se abre de forma predeterminada.
-3. En el grupo **Radio Information**, lea los siguientes indicadores:
+2. Haga clic en la pestaña **Radio** si no está ya seleccionada.
+3. En el grupo **Radio Information**, lea los siguientes campos:
    - **Radio SN** — número de serie del chasis.
-   - **HW Version** — cadena de versión de hardware.
-   - **Region** — región regulatoria (predeterminado: `USA`).
+   - **HW Version** — cadena de versión de hardware reportada por el radio.
+   - **Region** — región regulatoria (por defecto `USA` si el radio no reporta ninguna).
    - **Options** — opciones licenciadas activas en este radio.
 
 ## Qué hace cada control
 
-| Etiqueta | Tipo | Comportamiento | Predeterminado |
-|---|---|---|---|
-| Radio SN | Indicador | Número de serie del chasis. Solo lectura. | — |
-| HW Version | Indicador | Cadena de versión de hardware. Solo lectura. | — |
-| Region | Indicador | Región regulatoria del radio. Solo lectura. | USA |
-| Options | Indicador | Opciones licenciadas activas en esta unidad. Solo lectura. | — |
-| FlexControl | Indicador | Estado detectado del hardware FlexControl. Solo lectura. | — |
-| multiFLEX | Indicador | Estado de habilitación de multiFLEX. Solo lectura. | — |
+| Etiqueta | Tipo | Comportamiento |
+|---|---|---|
+| Radio SN | Indicador | Número de serie del chasis. Solo lectura; asignado por el radio. |
+| HW Version | Indicador | Cadena de versión de hardware. Solo lectura; asignada por el radio. |
+| Region | Indicador | Región regulatoria. Por defecto `USA` si el radio reporta un valor vacío. |
+| Options | Indicador | Opciones licenciadas activas en este radio (por ejemplo, GPS, PGXL). Solo lectura; asignadas por el radio. |
 
-## Consejos
+## Solución de problemas
 
-- Los cuatro campos son de solo lectura. Nada en esta página modifica el hardware del radio ni el estado de la licencia.
-- Si **Radio SN** aparece en blanco, el firmware del radio aún no ha reportado el número de serie del chasis. Desconecte y vuelva a conectar para activar una respuesta de estado actualizada.
+- **Todos los campos aparecen en blanco o con guiones** — el radio aún no ha reportado su identidad. Confirme que el radio esté completamente conectado y en línea, luego cierre y vuelva a abrir `Settings > Radio Setup...`.
+- **Region muestra `USA` pero el radio está configurado para una región diferente** — el firmware del radio reportó una cadena de región vacía; AetherSDR sustituye `USA` como valor de visualización predeterminado. Verifique el firmware del radio y la configuración de región en SmartSDR si el valor mostrado no es el esperado.
 
-## Relacionado
+## Relacionados
 
 - [Descripción general de Radio Setup](overview.md)
-- [Establecer el apodo, indicativo y nombre de estación del radio](set-the-radio-nickname-callsign-and-station-name.md)
-- [Cargar un nuevo firmware .ssdr en el radio](upload-a-new-firmware-ssdr-to-the-radio.md)
+- [Configurar el apodo, indicativo y nombre de estación del radio](set-the-radio-nickname-callsign-and-station-name.md)
+- [Cargar un nuevo firmware .ssdr al radio](upload-a-new-firmware-ssdr-to-the-radio.md)

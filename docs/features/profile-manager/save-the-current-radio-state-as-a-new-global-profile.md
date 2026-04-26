@@ -1,47 +1,42 @@
 # Guardar el estado actual de la radio como un nuevo perfil global
 
-Use esta página para capturar el estado actual de la radio — frecuencias, modos y configuraciones — como un perfil global con nombre que podrá recargar más adelante.
+Use el Administrador de perfiles para capturar el estado actual de la radio y almacenarlo como un perfil global con nombre. Los perfiles globales registran la configuración general de la radio y pueden recuperarse en cualquier momento desde el menú Profiles.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a la radio. El Administrador de perfiles requiere una conexión activa con la radio.
-- Decida el nombre del nuevo perfil antes de abrir el cuadro de diálogo.
+- AetherSDR debe estar conectado a la radio. El Administrador de perfiles requiere una conexión de radio activa.
+- Decida el nombre del nuevo perfil antes de comenzar.
 
 ## Pasos
 
-1. Haga clic en `Profiles > Profile Manager...`.
-2. Haga clic en la pestaña **Global**.
+1. Haga clic en `Profiles > Profile Manager...` para abrir el cuadro de diálogo Profile Manager.
+2. Haga clic en la pestaña **Global (tab)**.
 3. En el campo **Profile name**, escriba el nombre del nuevo perfil.
 4. Haga clic en **Save**.
 
-La radio guarda el estado actual con ese nombre. La **Profile list** se actualiza automáticamente cuando la radio confirma el nuevo perfil.
+La radio guarda el estado actual con el nombre que ingresó. El campo **Profile name** se vacía y la radio envía una lista actualizada a AetherSDR. El nuevo perfil aparece en **Profile list**.
 
 ## Qué hace cada control
 
 | Control | Tipo | Comportamiento | Clave de configuración |
 |---|---|---|---|
 | **Global (tab)** | Pestaña | Cambia a la vista de perfiles globales. | — |
-| **Profile name** | Campo de texto | Nombre que se usa al guardar un nuevo perfil. Si se deja en blanco, **Save** utiliza el nombre del elemento actualmente seleccionado en la **Profile list**. | — |
-| **Profile list** | Lista | Muestra todos los perfiles globales existentes. El perfil activo aparece resaltado. | — |
-| **Load** | Botón | Carga el perfil seleccionado en la radio. Solo se habilita cuando hay un perfil seleccionado. | — |
-| **Save** | Botón | Guarda el estado actual de la radio con el nombre escrito en **Profile name**. | — |
-| **Delete** | Botón | Elimina el perfil seleccionado tras un aviso de confirmación. Solo se habilita cuando hay un perfil seleccionado. | — |
+| **Profile name** | Campo de texto | Nombre que se usa al guardar un nuevo perfil. Si está vacío al hacer clic en Save, se usa el nombre del elemento seleccionado en Profile list. | — |
+| **Profile list** | Lista | Muestra todos los perfiles globales almacenados en la radio. El perfil activo aparece resaltado. | — |
+| **Load** | Botón | Carga el perfil seleccionado en la radio. Se habilita solo cuando hay un perfil seleccionado. | — |
+| **Save** | Botón | Guarda el estado actual de la radio con el nombre escrito en Profile name. | — |
+| **Delete** | Botón | Elimina el perfil seleccionado tras una confirmación. Se habilita solo cuando hay un perfil seleccionado. | — |
 | **Close** | Botón | Cierra el cuadro de diálogo Profile Manager. | — |
 
-## Consejos
+## Sugerencias
 
-- Si selecciona un perfil existente en la **Profile list**, su nombre se escribe automáticamente en el campo **Profile name**. Al hacer clic en **Save** en ese momento, se sobrescribe ese perfil con el estado actual de la radio.
-- También puede cargar un perfil haciendo doble clic en su entrada en la **Profile list**, en lugar de usar **Load**.
-- Para que los cambios de transmisión se escriban automáticamente de vuelta al perfil activo, habilite **Auto-save profile changes** en la pestaña **Auto-Save**. Esta configuración se almacena como `AutoSaveTransmitProfile`.
+- También puede cargar un perfil haciendo doble clic en su entrada dentro de **Profile list**, sin necesidad de hacer clic en **Load**.
+- Si selecciona un perfil existente de **Profile list**, su nombre se copia automáticamente en el campo **Profile name**. Al hacer clic en **Save** en ese momento, se sobrescribe ese perfil con el estado actual de la radio.
+- Los perfiles globales guardados aparecen en la lista dinámica bajo `Profiles` en la barra de menú y pueden cargarse con un solo clic desde allí.
 
-## Solución de problemas
+## Temas relacionados
 
-- **Save no hace nada** — Verifique que el campo **Profile name** no esté vacío y que ningún perfil de la lista esté seleccionado con el campo de nombre en blanco. Para que **Save** funcione, debe existir al menos una fuente de nombre.
-- **La Profile list no se actualiza después de guardar** — La lista se actualiza cuando la radio envía una actualización de estado. Si no aparece, verifique que la conexión con la radio siga activa mediante `Settings > Connect to Radio...`.
-
-## Relacionados
-
-- [Descripción general del Profile Manager](overview.md)
+- [Descripción general del Administrador de perfiles](overview.md)
 - [Revisar la lista de perfiles globales activos](review-the-list-of-active-global-profiles.md)
 - [Cambiar a un perfil de transmisión guardado](switch-to-a-saved-transmit-profile.md)
 - [Activar el guardado automático para que los ajustes de TX siempre persistan](turn-on-auto-save-so-tx-tweaks-always-persist.md)

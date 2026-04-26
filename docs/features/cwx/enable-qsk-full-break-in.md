@@ -1,29 +1,29 @@
 # Activar QSK (Full Break-in)
 
-QSK (full break-in) permite que el radio alterne entre transmisión y recepción entre los elementos individuales de CW, de modo que usted puede escuchar señales en los espacios entre sus propios puntos y rayas. Esta página muestra cómo activar o desactivar QSK en el panel CWX.
+QSK (full break-in) permite que el radio reciba entre cada dit y dah mientras transmite en CW. Actívelo en la vista CWX Setup para que el radio cambie a recepción durante las pausas en el envío.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. El panel CWX requiere una conexión de radio activa.
-- El slice activo debe estar en modo CW, CWL o CWU para que el panel CWX sea visible.
+- Conéctese a un radio FLEX-8600. El panel CWX requiere una conexión de radio activa.
+- Configure el slice activo en modo CW, CWL o CWU para que el panel CWX esté disponible.
 
 ## Pasos
 
-1. Abra el panel CWX en el área central de MainWindow.
-2. Haga clic en **Setup** en la parte inferior del panel. La vista Setup muestra los editores de macros, el control giratorio **Delay:** y el botón **QSK**.
-3. Haga clic en **QSK** para activar el full break-in. El botón aparece resaltado cuando está habilitado.
-4. Para desactivar QSK, haga clic en **QSK** nuevamente.
+1. Abra el panel CWX en la ventana principal.
+2. Haga clic en **Setup** en la parte inferior del panel para cambiar a la vista Setup.
+3. Haga clic en **QSK** para activarlo. El botón se resalta cuando está activo.
 
-## Qué hace cada control
+Para desactivar QSK, haga clic en **QSK** nuevamente.
 
-| Control | Comportamiento | Valor predeterminado | Rango válido | Clave de ajuste |
-|---|---|---|---|---|
-| **QSK** | Activa o desactiva QSK (full break-in). Botón de alternancia; resaltado cuando está activo. | — | On / Off | `CwxQsk` |
-| **Delay:** | Establece el retardo entre macros en milisegundos. | 5 | 0–2000 ms | `CwxDelay` |
+## Función de cada control
 
-## Relacionado
+| Control | Comportamiento | Predeterminado | Clave de configuración |
+|---------|----------------|----------------|------------------------|
+| **QSK** | Activa o desactiva QSK (full break-in). | Desactivado | `CwxQsk` |
+| **Delay:** | Retardo entre macros en milisegundos. | 5 | `CwxDelay` |
+
+## Temas relacionados
 
 - [Descripción general de CWX](overview.md)
-- [Enviar un búfer de CW escrito en tiempo real](send-a-typed-cw-buffer-live.md)
-- [Cambiar la velocidad de envío de CW en WPM](change-cw-send-speed-in-wpm.md)
-- [Editar una cadena de macro CW](edit-a-cw-macro-string.md)
+- [Enviar un búfer CW escrito en vivo](send-a-typed-cw-buffer-live.md)
+- [Activar una macro CW con F1–F12](trigger-a-cw-macro-with-f1-f12.md)

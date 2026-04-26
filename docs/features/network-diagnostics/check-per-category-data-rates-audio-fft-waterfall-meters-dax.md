@@ -1,43 +1,49 @@
 # Verificar las tasas de datos por categoría (audio, FFT, waterfall, medidores, DAX)
 
-El diálogo Network Diagnostics muestra las tasas de entrada en tiempo real y el conteo de paquetes perdidos para cada categoría de flujo — Audio, FFT, Waterfall, Meters y DAX — actualizados una vez por segundo. Utilícelo para identificar qué tipo de flujo está consumiendo ancho de banda o perdiendo paquetes durante un problema.
+El diálogo Network Diagnostics muestra las tasas de entrada en tiempo real para cada categoría de flujo — Audio, FFT, Waterfall, Meters y DAX — actualizado una vez por segundo. Úselo para identificar qué tipo de flujo está consumiendo ancho de banda o no está recibiendo datos durante problemas de recepción.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar en ejecución. El diálogo no requiere una conexión activa con la radio, pero los campos de tasa mostrarán 0 kbps hasta que la radio esté conectada y transmitiendo datos.
+- AetherSDR debe estar en ejecución. El diálogo se abre independientemente de si hay una radio conectada, pero las tasas mostrarán 0 kbps hasta que se establezca una conexión.
 
 ## Pasos
 
 1. Haga clic en `Settings > Network...`.
-2. Se abre el diálogo **Network Diagnostics**. Localice el grupo **Incoming Stream Rates** en la parte superior derecha del diálogo.
-3. Lea los campos de tasa por categoría: **Audio**, **FFT**, **Waterfall**, **Meters** y **DAX**. Cada uno muestra la tasa de entrada actual en kbps, recalculada cada segundo.
-4. Localice el grupo **Packet Loss (Sequence Gaps)** en la parte inferior izquierda. Lea los campos correspondientes de **Audio**, **FFT**, **Waterfall**, **Meters** y **DAX**. Cada uno muestra los paquetes descartados, el total de paquetes y el porcentaje de pérdida.
-5. Observe ambos grupos durante varios segundos para verificar si las tasas son estables o fluctúan. Variaciones grandes pueden indicar una entrega irregular incluso cuando no se pierden paquetes.
-6. Haga clic en **Close** cuando haya terminado.
+2. Localice el grupo **Incoming Stream Rates** en el lado derecho del diálogo.
+3. Lea los valores por categoría: **Audio**, **FFT**, **Waterfall**, **Meters** y **DAX** muestran cada uno la tasa actual en kbps, actualizada cada segundo.
+4. Para verificar cuántos paquetes se perdieron en cada categoría, localice el grupo **Packet Loss (Sequence Gaps)** en la parte inferior izquierda. Muestra los conteos de pérdida de **Audio**, **FFT**, **Waterfall**, **Meters** y **DAX** en el formato `errors / total packets (%)`.
+5. Al terminar, haga clic en Close.
 
 ## Qué hace cada control
 
 | Indicador | Ubicación | Significado |
 |---|---|---|
-| **Audio** (Incoming Stream Rates) | Grupo Incoming Stream Rates | Tasa de entrada del flujo de audio, en kbps. |
-| **FFT** (Incoming Stream Rates) | Grupo Incoming Stream Rates | Tasa de entrada de datos FFT (espectro del panadapter), en kbps. |
-| **Waterfall** (Incoming Stream Rates) | Grupo Incoming Stream Rates | Tasa de entrada de datos de mosaicos del waterfall, en kbps. |
-| **Meters** (Incoming Stream Rates) | Grupo Incoming Stream Rates | Tasa de entrada de datos de medidores, en kbps. |
-| **DAX** (Incoming Stream Rates) | Grupo Incoming Stream Rates | Tasa de entrada de datos de audio DAX, en kbps. |
-| **Total RX** | Grupo Incoming Stream Rates | Tasa de entrada agregada de todos los flujos, en kbps. |
-| **Total TX** | Grupo Incoming Stream Rates | Tasa de salida agregada, en kbps. |
-| **Audio** (Packet Loss) | Grupo Packet Loss (Sequence Gaps) | Paquetes de audio descartados / totales y porcentaje, inferidos a partir de brechas en la secuencia VITA. |
-| **FFT** (Packet Loss) | Grupo Packet Loss (Sequence Gaps) | Paquetes FFT descartados / totales y porcentaje. |
-| **Waterfall** (Packet Loss) | Grupo Packet Loss (Sequence Gaps) | Paquetes de waterfall descartados / totales y porcentaje. |
-| **Meters** (Packet Loss) | Grupo Packet Loss (Sequence Gaps) | Paquetes de medidores descartados / totales y porcentaje. |
-| **DAX** (Packet Loss) | Grupo Packet Loss (Sequence Gaps) | Paquetes DAX descartados / totales y porcentaje. |
+| **Audio** (tasa) | Incoming Stream Rates | Tasa de entrada del flujo de audio de recepción, en kbps. |
+| **FFT** (tasa) | Incoming Stream Rates | Tasa de entrada de los datos FFT del panadapter, en kbps. |
+| **Waterfall** (tasa) | Incoming Stream Rates | Tasa de entrada de los datos de teselas del waterfall, en kbps. |
+| **Meters** (tasa) | Incoming Stream Rates | Tasa de entrada de los datos de medidores, en kbps. |
+| **DAX** (tasa) | Incoming Stream Rates | Tasa de entrada de los flujos de audio DAX, en kbps. |
+| **Total RX** | Incoming Stream Rates | Tasa de entrada agregada de todos los flujos, en kbps. |
+| **Total TX** | Incoming Stream Rates | Tasa de salida agregada, en kbps. |
+| **Audio** (pérdidas) | Packet Loss (Sequence Gaps) | Errores de paquetes de audio frente al total de paquetes recibidos, con porcentaje. |
+| **FFT** (pérdidas) | Packet Loss (Sequence Gaps) | Errores de paquetes FFT frente al total de paquetes recibidos, con porcentaje. |
+| **Waterfall** (pérdidas) | Packet Loss (Sequence Gaps) | Errores de paquetes de waterfall frente al total de paquetes recibidos, con porcentaje. |
+| **Meters** (pérdidas) | Packet Loss (Sequence Gaps) | Errores de paquetes de medidores frente al total de paquetes recibidos, con porcentaje. |
+| **DAX** (pérdidas) | Packet Loss (Sequence Gaps) | Errores de paquetes DAX frente al total de paquetes recibidos, con porcentaje. |
 
-Las tasas se calculan a partir del delta de bytes durante el intervalo de un segundo anterior y se expresan en kbps. Los porcentajes de pérdida son acumulativos desde que se abrió el diálogo.
+Las tasas se expresan en kbps y se recalculan a partir de las diferencias de conteo de bytes cada segundo. Los conteos de pérdida se deducen a partir de los números de secuencia VITA-49 faltantes.
 
 ## Consejos
 
-- Cero pérdidas en el grupo **Packet Loss (Sequence Gaps)** no descarta la presencia de jitter o ráfagas de paquetes tardíos. Si el audio se interrumpe con cero pérdidas, revise el grupo **Audio Playback** para ver las cifras de subdesbordamiento (underrun) y jitter.
-- Una tasa DAX de 0 kbps mientras DAX está habilitado puede indicar que el puente DAX aún no se ha iniciado o no está enrutando audio. Verifique el estado de inicio automático en `Settings > Autostart DAX with AetherSDR`.
+- Una categoría que muestra 0 kbps mientras la radio está conectada y ese flujo debería estar activo indica un problema de configuración o enrutamiento en ese flujo específico, no un fallo general de red.
+- Grandes variaciones en la tasa de una categoría de segundo a segundo pueden indicar entrega irregular incluso cuando el conteo de pérdidas es cero. Verifique las tasas de **Waterfall** y **FFT** juntas: si el waterfall es irregular pero el FFT es estable, el problema probablemente se debe a la programación de teselas del waterfall y no a la ruta de red.
+- El porcentaje de pérdida solo es significativo una vez que el **total de paquetes** sea distinto de cero. Un valor de `0 / 0` significa que aún no se han recibido paquetes para esa categoría.
+
+## Solución de problemas
+
+- **Todas las tasas muestran 0 kbps** — La radio no está conectada o no se han iniciado flujos. Confirme el estado de la conexión en el grupo **Network Status**: **Target Radio IP** debe mostrar una dirección IP, no "Not connected".
+- **La tasa de DAX muestra 0 kbps pero otros flujos están activos** — Es posible que el puente de audio DAX no esté habilitado. Verifique `Settings > Autostart DAX with AetherSDR` o inicie DAX manualmente desde el panel de applets.
+- **El conteo de pérdidas sube en una categoría mientras las demás permanecen en cero** — La pérdida es específica de ese tipo de flujo. Esto puede indicar que la radio está enviando más datos de los que la ruta de red puede sostener para ese flujo en particular; intente reducir la tasa de actualización del FFT o del waterfall en la configuración de la radio.
 
 ## Relacionado
 

@@ -1,36 +1,38 @@
-# Establecer el apodo, indicativo y nombre de estación del radio
+# Configurar el apodo, indicativo y nombre de estación del radio
 
-Establezca el nombre legible, el indicativo y el identificador de estación almacenados en su FLEX-8600. Estos valores aparecen en las listas de clientes de multiFLEX y ayudan a identificar su radio en la red.
+Use esta página para asignar un apodo legible, un indicativo y un nombre de estación a su FLEX-8600. Estos valores identifican el radio y este cliente ante otras estaciones multiFLEX en la red.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. Los controles de la pestaña Radio (tab) no están disponibles sin una conexión activa al radio.
+- AetherSDR debe estar conectado al radio. La pestaña Radio (tab) en Radio Setup requiere una conexión activa con el radio.
 
 ## Pasos
 
 1. Abra `Settings > Radio Setup...`.
 2. Haga clic en la pestaña **Radio** si no está seleccionada.
-3. En el grupo **Radio Identification**, localice el campo **Nickname**. Escriba el nombre que desea asignar al radio.
+3. En el grupo **Radio Identification**, localice el campo **Nickname** y escriba el nombre que desea asignarle al radio.
 4. Presione Tab o haga clic fuera del campo. AetherSDR envía el nuevo apodo al radio de inmediato.
-5. En el campo **Callsign**, escriba el indicativo de su estación.
+5. Localice el campo **Callsign** y escriba su indicativo.
 6. Presione Tab o haga clic fuera del campo. AetherSDR envía el indicativo al radio de inmediato.
-7. En el campo **Station Name**, escriba el nombre para esta estación cliente. Este valor identifica su instancia de AetherSDR ante otras estaciones multiFLEX. Si se deja vacío, se usa de forma predeterminada el nombre de host del sistema operativo.
-8. Presione Tab o haga clic fuera del campo. AetherSDR guarda el valor localmente y lo envía al radio de inmediato.
+7. Localice el campo **Station Name** y escriba el nombre para este cliente de estación. Si lo deja en blanco, AetherSDR utiliza el nombre de host del sistema operativo por defecto.
+8. Presione Tab o haga clic fuera del campo. AetherSDR guarda el valor localmente y lo envía al radio.
+9. Haga clic en **Close** cuando termine.
 
 ## Qué hace cada control
 
-| Control | Descripción | Valor predeterminado | Configuración persistida |
+| Control | Descripción | Valor predeterminado | Clave persistente |
 |---|---|---|---|
-| **Nickname** | Nombre descriptivo asignado al radio. | Se completa con el nombre almacenado en el radio, si está definido. | Se almacena en el radio, no en AppSettings. |
-| **Callsign** | Indicativo de estación almacenado en el radio. | Se completa con el indicativo almacenado en el radio, si está definido. | Se almacena en el radio, no en AppSettings. |
-| **Station Name** | Nombre de este cliente AetherSDR, enviado al radio como identificador de estación cliente. | Nombre de host del sistema operativo si no se ha guardado ningún valor. | `StationName` |
+| **Nickname** | Etiqueta descriptiva para el radio, enviada al radio como `radio name`. | Nombre existente del radio | — (almacenado en el radio) |
+| **Callsign** | Indicativo de la estación, enviado al radio como `radio callsign`. | Indicativo existente del radio | — (almacenado en el radio) |
+| **Station Name** | Identifica este cliente AetherSDR ante otras estaciones multiFLEX. Se envía como `client station`. | Nombre de host del SO | `StationName` |
 
 ## Consejos
 
-- Cada campo se guarda en cuanto termina de editarlo — no hay un botón Save independiente. Mueva el foco fuera del campo para activar la actualización.
-- **Station Name** es especialmente útil en configuraciones multiFLEX donde más de un cliente se conecta al mismo radio simultáneamente. Defina un nombre distinto en cada equipo.
+- **Nickname** y **Callsign** se almacenan en el propio radio, por lo que persisten cuando diferentes computadoras cliente se conectan al mismo radio.
+- **Station Name** se almacena localmente en la configuración de AetherSDR (`StationName`) y también se anuncia al radio cada vez que lo edita. Otros clientes multiFLEX ven este nombre para distinguir qué estación es cuál.
+- Los cambios surten efecto en cuanto sale de cada campo — no existe un botón Save independiente para estos tres campos.
 
-## Relacionados
+## Relacionado
 
 - [Verificar número de serie, versión de hardware, región y opciones del radio](check-radio-serial-hardware-version-region-and-options.md)
 - [Descripción general de Radio Setup](overview.md)

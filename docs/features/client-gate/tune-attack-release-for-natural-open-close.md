@@ -1,51 +1,49 @@
-# Ajuste de ataque y liberación para una apertura/cierre natural
+# Ajuste del Attack y Release para una apertura/cierre natural
 
-Ajuste la rapidez con que el noise gate se abre al comenzar a hablar y se cierra al dejar de hacerlo. Los tiempos correctos de ataque y liberación evitan cortar la primera sílaba de una palabra y previenen un corte brusco e innatural entre palabras.
+Ajuste la velocidad con que el noise gate se abre al comenzar a hablar y se cierra al dejar de hacerlo. Unos tiempos correctos de attack y release evitan que el gate recorte el inicio de las palabras o produzca un corte audible al final de cada transmisión.
 
 ## Antes de comenzar
 
-- La etapa Gate debe estar habilitada. Consulte [Omitir el gate desde la cadena](bypass-the-gate-from-the-chain.md) si la etapa está actualmente desactivada.
-- Abra el applet GATE: localice el subcontenedor GATE dentro del contenedor padre PooDoo Audio (TXDSP) en el panel de applets. Si no es visible, haga doble clic en la etapa Gate del widget CHAIN para abrir el editor flotante Gate, o haga clic derecho en la barra de título del subcontenedor GATE y elija mostrarlo.
-- Tenga un micrófono conectado y audio en tránsito para que la bola de entrada de la curva de transferencia y la barra de reducción de ganancia reaccionen en tiempo real mientras realiza ajustes.
+- El applet GATE debe estar visible en el panel de applets. Aparece como un subcontenedor dentro del contenedor principal PooDoo Audio (TXDSP). Si está oculto, habilite la etapa Gate mediante el widget CHAIN o haga doble clic en la etapa Gate en el widget CHAIN para abrir el editor flotante de Gate.
+- El gate debe estar habilitado. Consulte [Desactivar el gate desde la cadena](bypass-the-gate-from-the-chain.md) si el gate está actualmente en bypass.
+- Establezca un umbral de trabajo antes de ajustar los tiempos. Consulte [Ajustar el umbral justo por encima del nivel de ruido ambiente](set-threshold-just-above-room-noise-floor.md).
 
 ## Pasos
 
-1. Observe la barra de reducción de ganancia mientras habla con normalidad. La franja ámbar debe llenarse brevemente con audio fuerte y vaciarse entre palabras. Si el gate corta el inicio de cada palabra, el Attack es demasiado lento; si se cierra de golpe a mitad de una respiración con un clic audible, el Release es demasiado rápido.
-2. Para corregir el corte al inicio de las palabras, gire el control **Attack** hacia la izquierda (valor menor). El valor predeterminado es 0.50 ms. Para la mayoría del trabajo de voz, valores entre 0.1 ms y 2.0 ms abren con suficiente rapidez para preservar las consonantes.
-3. Para corregir un cierre brusco o intermitente, gire el control **Release** hacia la derecha (valor mayor). El valor predeterminado es 100 ms. Un valor de 150–300 ms permite que el gate permanezca abierto durante las pausas naturales sin cerrarse bruscamente entre sílabas.
-4. Pronuncie una frase y observe la bola de entrada en la curva de transferencia. La bola debe cruzar la línea de umbral de forma limpia al comenzar cada palabra, sin una detención visible en el umbral.
-5. Observe cómo la barra de reducción de ganancia se vacía suavemente después de cada palabra. Si la franja ámbar persiste demasiado o provoca un efecto de bombeo, reduzca el Release hacia 50–100 ms.
-6. Repita los pasos 2–5 hasta que la apertura y el cierre se perciban transparentes durante el habla normal.
+1. Abra el applet GATE dentro del contenedor PooDoo Audio (TXDSP). Los cinco controles — Thresh, Ratio, Attack, Release, Floor — aparecen en fila debajo de la curva de transferencia y la barra de reducción de ganancia.
+2. Active el micrófono y hable normalmente mientras observa la barra de reducción de ganancia. La franja ámbar se contrae hacia la izquierda cuando el gate se abre y se expande hacia la derecha cuando se cierra.
+3. Gire el control Attack mientras habla. Los valores más bajos abren el gate más rápido; aumente el valor si el gate se abre demasiado bruscamente y provoca un efecto de bombeo audible en señales fuertes. La etiqueta muestra el valor actual en milisegundos (por ejemplo, `0.50 ms`).
+4. Haga pausas entre palabras y observe cómo se rellena la barra de reducción de ganancia. Gire el control Release para determinar la velocidad con que el gate se cierra después de que su voz caiga por debajo del umbral. Los valores más cortos cierran el gate rápidamente; los valores más largos permiten que la cola de cada palabra decaiga de forma natural antes de que comience la atenuación.
+5. Repita los pasos 3 y 4 hasta que el habla pase sin consonantes recortadas al abrirse y sin cortes bruscos al cerrarse.
 
-## Qué hace cada control
+## Función de cada control
 
-| Control | Predeterminado | Rango válido | Clave persistida | Comportamiento |
+| Control | Valor predeterminado | Rango válido | Clave persistida | Comportamiento |
 |---|---|---|---|---|
-| **Attack** | 0.50 ms | 0.1 a 100.0 ms | `ClientGateTxAttackMs` | Define la rapidez con que el gate se abre cuando la entrada supera el umbral. Escala de control exponencial. La etiqueta muestra `X.XX ms` por debajo de 10 ms y `X.X ms` por encima. |
-| **Release** | 100 ms | 5 a 2000 ms | `ClientGateTxReleaseMs` | Define la rapidez con que el gate se cierra cuando la entrada cae por debajo del umbral. Escala de control exponencial. La etiqueta muestra `X.X ms` por debajo de 100 ms y `X ms` por encima. |
-| **Barra de reducción de ganancia** | — | 0 a 40 dB GR | — | Franja ámbar horizontal, rellena desde la derecha. Muestra la profundidad de atenuación mientras el gate está cerrado. La marca de referencia en −15 dB corresponde al valor predeterminado de Floor. |
-| **Curva de transferencia** | — | — | — | Representa la curva de transferencia estática con una bola de entrada en vivo. La posición de la bola indica si el gate está actualmente por encima o por debajo del umbral. |
+| Attack | 0.5 ms | 0.1 a 100.0 ms | `ClientGateTxAttackMs` | Determina la rapidez con que el gate se abre cuando la entrada supera el umbral. Mapeado exponencialmente: desde el mínimo hasta el máximo abarca de 0.1 ms a 100.0 ms. |
+| Release | 100 ms | 5 a 2000 ms | `ClientGateTxReleaseMs` | Determina la rapidez con que el gate se cierra cuando la entrada cae por debajo del umbral. Mapeado exponencialmente: desde el mínimo hasta el máximo abarca de 5 ms a 2000 ms. |
+| Thresh | -40.0 dB | -80.0 a 0.0 dB | `ClientGateTxThresholdDb` | Nivel por debajo del cual el gate comienza a atenuar. Afecta al momento en que se activan los tiempos de Attack y Release. |
+| Floor | -15.0 dB | -80.0 a 0.0 dB | `ClientGateTxFloorDb` | Atenuación máxima que aplica el gate cuando está cerrado. No afecta a los tiempos, pero limita la profundidad del corte durante la fase de release. |
 
 ## Consejos
 
-- Attack y Release utilizan escala de control exponencial, por lo que los movimientos pequeños cerca del extremo inferior del rango producen cambios en milisegundos mayores que el mismo movimiento cerca del extremo superior. Realice ajustes pequeños y vuelva a probar después de cada uno.
-- Si el gate oscila rápidamente —abriéndose y cerrándose varias veces por palabra— aumente primero el Release. Si eso solo no es suficiente, suba también ligeramente el control **Thresh** para que el audio en niveles límite no cruce repetidamente el umbral.
-- La barra de reducción de ganancia y la bola de entrada se actualizan aproximadamente cada 33 ms. Observe ambas mientras pronuncia un pasaje que represente su situación de ruido más desfavorable, no solo palabras aisladas.
-- Los cambios tienen efecto de inmediato y se guardan automáticamente. No se requiere ningún paso de guardado adicional.
+- Comience con el Attack en el valor predeterminado (0.5 ms) y ajuste primero el Release. El Release tiene mayor efecto sobre la naturalidad percibida.
+- Si el inicio de las palabras suena recortado, aumente el Attack ligeramente (pruebe entre 2 y 5 ms) para que el gate tenga tiempo de abrirse antes de que llegue el transitorio.
+- Si el gate oscila — abriéndose y cerrándose rápidamente — aumente el Release para suavizar las pausas breves dentro de una palabra.
+- La bola en movimiento sobre la curva de transferencia indica si el gate está actualmente por encima o por debajo del umbral. Obsérvela seguir su voz para confirmar que los cambios de temporización están surtiendo efecto.
+- Los controles Attack y Release se sincronizan bidireccionalmente con el editor flotante de Gate. Los cambios realizados en cualquiera de las dos vistas se reflejan inmediatamente en la otra.
 
-## Solución de problemas
+## Resolución de problemas
 
-- **Se corta la primera consonante de cada palabra** — El Attack es demasiado lento. Reduzca Attack hacia 0.1 ms.
-- **El gate se cierra de forma audible entre sílabas dentro de una misma palabra** — El Release es demasiado corto. Aumente Release a 150 ms o más y vuelva a probar.
-- **El gate oscila entre abierto y cerrado rápidamente** — El nivel de entrada está rondando el umbral. Aumente Release a al menos 200 ms, o suba ligeramente Thresh para que los niveles marginales no activen el gate. Consulte [Establecer el umbral justo por encima del piso de ruido ambiente](set-threshold-just-above-room-noise-floor.md).
-- **La barra de reducción de ganancia no se mueve** — Es posible que la etapa Gate esté desactivada o deshabilitada. Consulte [Omitir el gate desde la cadena](bypass-the-gate-from-the-chain.md).
-- **Los valores del control no coinciden con lo que se muestra en el editor flotante Gate** — El applet sincroniza desde el motor aproximadamente cada 33 ms. Espere un momento; los valores deben reconciliarse automáticamente.
+- **Las consonantes iniciales se recortan** — El Attack es demasiado rápido en relación con el tiempo de subida de la señal, o el Thresh está demasiado alto. Reduzca el Thresh ligeramente o aumente el Attack (pruebe entre 2 y 10 ms) para permitir que el gate se abra antes del transitorio.
+- **El gate se cierra bruscamente en medio de una palabra durante pausas normales** — El Release es demasiado corto. Aumente el Release hacia valores de 200–500 ms para que las pausas breves no provoquen el cierre.
+- **El gate no se cierra entre palabras** — Es posible que el Release sea muy largo o que el Thresh esté por debajo del nivel de ruido ambiente. Compruebe primero el Thresh (consulte [Ajustar el umbral justo por encima del nivel de ruido ambiente](set-threshold-just-above-room-noise-floor.md)) y luego reduzca el Release.
+- **La barra de reducción de ganancia no se mueve** — Es posible que el gate esté en bypass o que el motor de audio no esté conectado. Confirme que la etapa Gate está activa en el widget CHAIN.
 
 ## Relacionados
 
-- [Descripción general del Noise Gate / Expansor](overview.md)
-- [Establecer el umbral justo por encima del piso de ruido ambiente](set-threshold-just-above-room-noise-floor.md)
-- [Establecer Floor para evitar silencios inaturales entre palabras](set-floor-to-avoid-unnatural-silence-between-words.md)
-- [Observar la reducción de ganancia en vivo mientras no se habla](watch-live-gr-while-not-speaking.md)
-- [Elegir el comportamiento de gate o expansor suave mediante el ratio](choose-gate-vs-soft-expander-behaviour-via-ratio.md)
-- [Omitir el gate desde la cadena](bypass-the-gate-from-the-chain.md)
+- [Ajustar el umbral justo por encima del nivel de ruido ambiente](set-threshold-just-above-room-noise-floor.md)
+- [Ajustar el Floor para evitar silencios artificiales entre palabras](set-floor-to-avoid-unnatural-silence-between-words.md)
+- [Elegir entre gate y expansor suave mediante el ratio](choose-gate-vs-soft-expander-behaviour-via-ratio.md)
+- [Observar la reducción de ganancia en tiempo real sin hablar](watch-live-gr-while-not-speaking.md)
+- [Desactivar el gate desde la cadena](bypass-the-gate-from-the-chain.md)

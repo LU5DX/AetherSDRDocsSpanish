@@ -1,36 +1,34 @@
 # Cambiar a una referencia externa de 10 MHz
 
-Esta página explica cómo configurar el FLEX-8600 para bloquear su oscilador interno a una señal de referencia externa de 10 MHz en lugar de la referencia incorporada. Utilice esta opción cuando tenga un oscilador disciplinado por GPS, un patrón de rubidio u otra fuente de precisión de 10 MHz conectada al puerto REF IN del panel trasero del equipo.
+Esta página explica cómo seleccionar una fuente de referencia externa de 10 MHz en el FLEX-8600, lo que sincroniza la base de tiempo del radio con un oscilador externo de alta estabilidad o un GPSDO, en lugar de la referencia interna.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al equipo. El diálogo Radio Setup no está disponible sin conexión.
-- La referencia externa de 10 MHz debe estar conectada al conector REF IN del panel trasero del equipo y debe estar activa antes de cambiar la fuente.
+- AetherSDR debe estar conectado al radio. El diálogo Radio Setup requiere una conexión activa al radio.
+- Debe haber una señal de referencia estable de 10 MHz presente en la entrada de referencia externa del radio antes de cambiar la fuente.
 
 ## Pasos
 
-1. Haga clic en `Settings > Radio Setup...`.
+1. Abra `Settings > Radio Setup...`.
 2. Haga clic en la pestaña **RX**.
 3. Localice el cuadro combinado **10 MHz Reference Source:**.
-4. Seleccione **External**.
+4. Seleccione **External** en el cuadro combinado.
 
-El equipo cambia el bloqueo de referencia de inmediato. No es necesario cerrar el diálogo ni hacer clic en Apply.
-
-Para volver al oscilador incorporado, regrese al mismo cuadro combinado y seleccione **Internal**.
+El radio aplica el cambio de inmediato. Para volver al oscilador interno, seleccione **Internal**.
 
 ## Qué hace cada control
 
-| Control | Tipo | Valores válidos | Comportamiento |
+| Control | Descripción | Valor predeterminado | Valores válidos |
 |---|---|---|---|
-| **10 MHz Reference Source:** | Cuadro combinado | `Internal` \| `External` | Selecciona si el reloj del ADC del equipo se deriva del oscilador interno o de una señal externa de 10 MHz presente en el conector REF IN. |
+| **10 MHz Reference Source:** | Selecciona si el radio se sincroniza con su oscilador interno o con una señal en la entrada de referencia externa de 10 MHz. | Internal | Internal, External |
 
-## Sugerencias
+## Consejos
 
-- Mientras se encuentra en la pestaña **RX**, los controles **Cal Frequency (MHz):** y **Freq Offset (ppb):** también están disponibles. Si su referencia externa tiene un desplazamiento conocido, puede ingresarlo en **Freq Offset (ppb):** en lugar de ejecutar nuevamente un barrido de calibración completo.
+- Si también está corrigiendo un error de frecuencia medido, ajuste **Freq Offset (ppb):** en la misma pestaña **RX** antes o después de cambiar la fuente de referencia.
 
 ## Solución de problemas
 
-- **El equipo no muestra bloqueo o presenta deriva de frecuencia tras cambiar a External** — Confirme que la señal de referencia esté presente en el puerto REF IN antes de realizar el cambio. Si la fuente externa no está presente o está por debajo del nivel requerido, el equipo puede operar en modo libre o comportarse de forma errática. Vuelva a **Internal** y verifique la fuente de referencia y el cableado.
+- **El radio no se sincroniza con la referencia externa** — Verifique que la señal externa esté presente, a 10 MHz y dentro de la especificación de nivel de entrada del radio antes de seleccionar **External**. Si la referencia desaparece después de cambiar, el radio perderá la sincronía; regrese el cuadro combinado a **Internal** hasta que la señal sea restaurada.
 
 ## Temas relacionados
 

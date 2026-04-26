@@ -1,42 +1,43 @@
-# Aplicar ganancia de compensación (makeup gain) después de la compresión
+# Aplicar ganancia de compensación después de la compresión
 
-Use el control **Makeup** para restaurar la sonoridad perdida por la compresión, de modo que su señal transmitida alcance un nivel consistente sin necesidad de reajustar manualmente la ganancia de excitación.
+Después de que el compresor reduce los picos, el nivel general de la señal disminuye. El control **Makeup** recupera la ganancia perdida para que el audio transmitido alcance el nivel de volumen deseado.
 
 ## Antes de comenzar
 
-- La etapa Compressor debe estar habilitada (bypass desactivado). Consulte [Omitir el compresor desde la cadena](bypass-the-compressor-from-the-chain.md).
+- La etapa Compressor debe estar habilitada (bypass desactivado). Si está en bypass, la ganancia de compensación no tiene efecto. Consulte [Omitir el compresor de la cadena](bypass-the-compressor-from-the-chain.md).
 - El subcontenedor COMPRESSOR debe estar visible dentro del contenedor principal PooDoo Audio (TXDSP).
 
 ## Pasos
 
-1. Localice la fila de cinco controles en la parte inferior del applet COMPRESSOR.
-2. Encuentre el control más a la derecha, etiquetado como **Makeup**.
-3. Gire el control **Makeup** en sentido horario para aumentar la ganancia, o en sentido antihorario para reducirla.
-4. Observe la barra de reducción de ganancia mientras habla. Intente compensar la cantidad típica de reducción de ganancia que se muestra — la marca de −6 dB en la franja ámbar es un punto de referencia útil.
-5. Suelte el control. El valor se guarda inmediatamente en `ClientCompTxMakeupDb`.
+1. Localice el subcontenedor COMPRESSOR en el panel de applets.
+2. Encuentre el control **Makeup** — el control más a la derecha en la fila de cinco controles.
+3. Gire o arrastre con clic el control **Makeup** para establecer la ganancia deseada.
+   - Los valores positivos se muestran con un signo `+` explícito, por ejemplo `+6.0 dB`.
+   - Observe la curva de transferencia y la barra de reducción de ganancia mientras habla para determinar cuánta ganancia restaurar.
+4. Suelte el control. El valor se guarda automáticamente en `ClientCompTxMakeupDb`.
 
 ## Qué hace cada control
 
-| Control | Valor predeterminado | Rango válido | Ajuste persistido |
+| Control | Valor predeterminado | Rango válido | Ajuste persistente |
 |---|---|---|---|
-| Makeup | 0.0 dB | −12.0 to +24.0 dB | `ClientCompTxMakeupDb` |
+| Makeup | `0.0 dB` | `-12.0 to 24.0 dB` | `ClientCompTxMakeupDb` |
 
-La etiqueta del control muestra un signo `+` explícito para valores positivos (por ejemplo, `+3.0 dB`) y ningún signo para valores negativos (por ejemplo, `-2.0 dB`). La ganancia de compensación se aplica después de la compresión y después de la etapa limitadora.
+El control **Makeup** utiliza un mapeo lineal. Añade una etapa de ganancia fija después del compresor. Aumentarlo compensa la reducción del nivel promedio causada por la reducción de ganancia; reducirlo por debajo de `0.0 dB` puede atenuar la señal posterior al compresor.
 
 ## Consejos
 
-- Comience con **Makeup** en `0.0 dB` y auméntelo en pasos pequeños mientras observa la barra de reducción de ganancia. Si el compresor está reduciendo aproximadamente 6 dB en los picos típicos de voz, agregar +6 dB de makeup devuelve la salida promedio al nivel sin comprimir.
-- Si necesita agregar más de 12–15 dB de makeup, es posible que el umbral o la razón de compresión estén configurados de forma demasiado agresiva. Consulte [Ajustar el umbral del compresor](adjust-compressor-threshold.md) y [Establecer la razón de compresión para voz](set-compression-ratio-for-voice.md).
-- La curva de transferencia en el applet no refleja visualmente la ganancia de compensación. Abra el editor completo para ver cómo interactúa el makeup con la rodilla (knee) y el techo del limitador. Consulte [Abrir el editor completo del Compressor para los controles de knee y limitador](open-the-full-compressor-editor-for-knee-and-limiter-controls.md).
+- Comience con el valor de **Makeup** aproximadamente igual a la lectura típica en la barra de reducción de ganancia. Si el compresor reduce en promedio 6 dB, pruebe `+6.0 dB` como punto de partida y luego ajuste a oído.
+- La marca de referencia en la barra de reducción de ganancia se ubica en el punto de 6 dB y ofrece una referencia visual rápida para una cantidad de compresión típica de trabajo.
+- Para una coincidencia más precisa, abra el editor completo donde también son accesibles el knee y el techo del limitador (`ClientCompTxLimCeilingDb`). Consulte [Abrir el editor completo del Compressor para los controles de knee y limitador](open-the-full-compressor-editor-for-knee-and-limiter-controls.md).
 
 ## Solución de problemas
 
-- **El control Makeup no tiene efecto** — Confirme que la etapa Compressor esté activa. Si la etapa está en bypass, se omite toda la cadena DSP del compresor, incluida la ganancia de compensación.
-- **La salida presenta saturación (clipping) después de agregar makeup** — Es posible que el techo del limitador (`ClientCompTxLimCeilingDb`) necesite ajuste. Abra el editor completo del Compressor para habilitar o ajustar el limitador. Consulte [Abrir el editor completo del Compressor para los controles de knee y limitador](open-the-full-compressor-editor-for-knee-and-limiter-controls.md).
+- **El control Makeup no tiene efecto** — Es posible que la etapa Compressor esté en bypass. Habilítela mediante el widget CHAIN o el editor flotante y luego ajuste Makeup nuevamente.
+- **La salida es demasiado alta después de añadir la ganancia de compensación** — Reduzca `ClientCompTxMakeupDb` o habilite el limitador y baje `ClientCompTxLimCeilingDb` para evitar el recorte (clipping). Consulte [Abrir el editor completo del Compressor para los controles de knee y limitador](open-the-full-compressor-editor-for-knee-and-limiter-controls.md).
 
-## Temas relacionados
+## Relacionados
 
-- [Observar la reducción de ganancia en tiempo real mientras habla](watch-live-gain-reduction-while-speaking.md)
+- [Observar la reducción de ganancia en vivo mientras habla](watch-live-gain-reduction-while-speaking.md)
 - [Ajustar el umbral del compresor](adjust-compressor-threshold.md)
-- [Establecer la razón de compresión para voz](set-compression-ratio-for-voice.md)
 - [Abrir el editor completo del Compressor para los controles de knee y limitador](open-the-full-compressor-editor-for-knee-and-limiter-controls.md)
+- [Establecer la relación de compresión para voz](set-compression-ratio-for-voice.md)

@@ -1,39 +1,39 @@
-# Activar grabación automática en TX y elegir una carpeta de destino
+# Activar grabación automática en TX y seleccionar una carpeta de destino
 
-Use esta página para configurar AetherSDR para que inicie la grabación automáticamente cada vez que transmita, y para elegir dónde se guardan esas grabaciones.
+AetherSDR puede iniciar automáticamente la grabación de audio cada vez que usted transmite y detenerla después de un período de silencio configurable. Esta página explica cómo activar esa función y configurar la carpeta donde se guardan las grabaciones.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. Los ajustes de grabación no están disponibles hasta que se establezca una conexión.
-- Decida si desea que el propio radio o su PC se encargue de la grabación. Consulte "Qué hace cada control" más adelante para conocer la diferencia.
+- AetherSDR debe estar conectado al radio. La pestaña Audio en Radio Setup no está disponible sin una conexión al radio.
+- Decida si desea que la grabación ocurra en el radio mismo o en el PC donde se ejecuta AetherSDR. Deberá configurar esto antes de activar la grabación automática.
 
 ## Pasos
 
 1. Abra `Settings > Radio Setup...`.
 2. Haga clic en la pestaña **Audio**.
-3. En **Recording:**, haga clic en **Radio Side** o **Client Side** para seleccionar dónde se captura el audio. La selección activa aparece resaltada.
-4. En el campo **Save to:**, escriba la ruta completa a la carpeta donde deben guardarse las grabaciones, o haga clic en **...** para abrir un explorador de carpetas y seleccionarla.
-5. Marque **Auto-record on TX**. A partir de ahora, la grabación se iniciará automáticamente cada vez que active el transmisor.
-6. Establezca **Idle timeout:** con el número de segundos de silencio tras los cuales la grabación se detiene automáticamente.
+3. En **Recording:**, haga clic en **Radio Side** o **Client Side** para seleccionar dónde se capturan las grabaciones. Esto establece `RecordMode`.
+4. En el campo **Save to:**, escriba directamente una ruta de carpeta o haga clic en **...** para buscar una carpeta. La ruta elegida se guarda como `RecordDir`.
+5. Marque **Auto-record on TX**. Esto establece `AutoRecordTx` y habilita la grabación automática cada vez que el radio pasa a modo de transmisión.
+6. Ajuste **Idle timeout:** al número de segundos de silencio tras los cuales se detiene la grabación. Esto establece `RecordIdleTimeout`.
 7. Cierre el diálogo. Los ajustes se guardan de inmediato.
 
 ## Qué hace cada control
 
-| Control | Qué hace | Valor predeterminado | Rango / valores válidos | Clave de ajuste |
+| Control | Comportamiento | Clave persistida | Valor predeterminado | Rango válido |
 |---|---|---|---|---|
-| **Recording: Radio Side / Client Side** | Selecciona si el audio se captura en el hardware del radio o en el PC que ejecuta AetherSDR. | — | Radio Side, Client Side | `RecordMode` |
-| **Save to:** | Ruta de la carpeta donde se escriben los archivos de grabación. | — | Cualquier ruta de directorio con permisos de escritura | `RecordDir` |
-| **...** | Abre un explorador de carpetas para seleccionar la carpeta de destino. | — | — | — |
-| **Auto-record on TX** | Cuando está marcado, la grabación se inicia automáticamente cada vez que el radio transmite y se detiene al expirar el tiempo de espera por inactividad. | — | Marcado / desmarcado | `AutoRecordTx` |
-| **Idle timeout:** | Segundos de silencio tras el fin de TX antes de que se cierre el archivo de grabación. | — | — | `RecordIdleTimeout` |
+| **Recording: Radio Side / Client Side** | Selecciona si el audio se captura en el radio o en el PC. | `RecordMode` | — | Radio Side, Client Side |
+| **Save to:** | Ruta de la carpeta donde se escriben los archivos de grabación. | `RecordDir` | — | Cualquier ruta de directorio válida |
+| **...** | Abre un explorador de carpetas para seleccionar el destino de las grabaciones. | — | — | — |
+| **Auto-record on TX** | Cuando está marcado, la grabación se inicia automáticamente cada vez que usted transmite. | `AutoRecordTx` | — | Marcado / desmarcado |
+| **Idle timeout:** | Segundos de silencio después de TX antes de que se cierre el archivo de grabación. | `RecordIdleTimeout` | — | — |
 
 ## Consejos
 
-- Si deja **Save to:** vacío, haga clic en **...** para explorar hasta una carpeta en lugar de escribir la ruta, para evitar errores tipográficos que podrían impedir silenciosamente que se escriban los archivos.
-- **Idle timeout:** mantiene las pausas breves sin transmisión dentro de un único archivo, en lugar de dividir cada transmisión en una grabación separada. Auméntelo si desea que los intercambios de un QSO queden capturados juntos.
+- Si desea que las grabaciones queden separadas por transmisión en lugar de combinarse en un único archivo largo, mantenga **Idle timeout:** corto para que el archivo se cierre poco después de soltar el PTT.
+- La ruta de **Save to:** debe existir y tener permisos de escritura antes de iniciar la grabación. AetherSDR no crea el directorio automáticamente.
 
 ## Relacionado
 
-- [Elegir dispositivos de audio de entrada/salida del PC](choose-pc-input-output-audio-devices.md)
+- [Seleccionar dispositivos de audio de entrada/salida del PC](choose-pc-input-output-audio-devices.md)
 - [Activar el refuerzo de audio o ampliar el búfer de audio para operación remota](turn-on-audio-boost-or-enlarge-the-audio-buffer-for-remote-operation.md)
-- [Elegir entre Opus y audio sin comprimir para SmartLink](pick-opus-vs-uncompressed-audio-for-smartlink.md)
+- [Elegir audio Opus o sin comprimir para SmartLink](pick-opus-vs-uncompressed-audio-for-smartlink.md)

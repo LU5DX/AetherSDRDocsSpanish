@@ -1,46 +1,49 @@
 # Descripción general del Tube Saturator
 
-El Tube Saturator es un procesador del lado de transmisión (TX) que moldea la señal transmitida mediante un modelo de válvula con barrido de polarización, añadiendo riqueza armónica antes de que la señal llegue al radio. Úselo para agregar calidez o carácter a SSB y otros modos de voz sin modificar nada en el radio Flex.
+El Tube Saturator es una etapa de procesamiento de audio en el lado TX que moldea la señal transmitida mediante un modelo de válvula con barrido de polarización, añadiendo riqueza armónica y saturación. Úselo para darle mayor presencia y carácter a su audio antes de que llegue al radio.
 
 ## Antes de comenzar
 
-- El Tube Saturator opera sobre la cadena de audio de transmisión. No tiene efecto sobre las señales recibidas.
-- La etapa TUBE debe habilitarse mediante el widget CHAIN o el editor flotante antes de que el applet sea visible en el contenedor PooDoo Audio (TXDSP).
+- El applet Tube Saturator permanece oculto hasta que la etapa Tube esté habilitada. Habilítela desde el widget CHAIN en el contenedor PooDoo Audio (TXDSP), o haga doble clic en la etapa Tube dentro del widget CHAIN para abrir el editor flotante.
+- El applet aparece como el subcontenedor `TUBE` dentro del contenedor principal PooDoo Audio (TXDSP).
 
 ## Cómo funciona
 
-El Tube Saturator inserta una función de transferencia no lineal —un modelo de válvula— en la cadena de audio TX. Drive empuja la señal más profundamente hacia la región no lineal de la curva. Bias desplaza el punto de operación sobre esa curva, modificando la proporción entre armónicos pares e impares. Tone aplica una inclinación espectral posterior a la saturación para aclarar u oscurecer el resultado. Output ajusta el nivel después de la saturación para que pueda compensar cualquier cambio de ganancia. Mix mezcla la señal saturada con la señal seca, lo que permite saturación en paralelo.
+El Tube Saturator procesa la señal de audio TX a través de una curva de transferencia no lineal que modela el comportamiento de saturación de válvulas. La forma de la curva cambia en tiempo real a medida que se ajustan Drive, Bias y el modelo de válvula activo.
 
-La pantalla de la curva de transferencia muestra la forma actual del modelo de válvula en tiempo real. Una bola indicadora de entrada en vivo se desplaza a lo largo de la curva según el nivel de entrada real, mostrando qué parte de la curva excita la señal en cada momento. Cuando Drive es bajo y la curva es casi recta, la saturación es mínima. A medida que Drive aumenta, la curva se dobla y la bola entra en la región no lineal.
+El applet muestra un gráfico compacto de la curva de transferencia. Una bola de entrada en vivo se desplaza a lo largo de la curva, indicando en qué punto del régimen de saturación se encuentra el nivel de señal actual: completamente lineal cerca del centro y progresivamente saturado hacia los bordes. La posición de la bola se actualiza a aproximadamente 30 Hz y se suaviza ligeramente para evitar saltos bruscos.
 
-Los cambios realizados en el editor flotante (que se abre haciendo doble clic en la etapa Tube en el widget CHAIN) se reflejan en los mandos del applet en aproximadamente 33 ms, y viceversa.
+Los cinco controles determinan con qué intensidad se impulsa la señal hacia la válvula (Drive), el carácter tonal del resultado (Tone), la asimetría del punto de operación (Bias), el nivel de salida posterior a la saturación (Output) y la mezcla entre la señal seca original y la señal saturada (Mix). Todos los ajustes se guardan y se mantienen sincronizados entre el applet y el editor flotante.
 
-Para abrir el applet: habilite la etapa Tube en el widget CHAIN. El subcontenedor TUBE aparece dentro del contenedor principal PooDoo Audio (TXDSP). Haga doble clic en la etapa Tube en el widget CHAIN para abrir el editor flotante. Haga clic derecho en la barra de título del subcontenedor TUBE para flotarlo, sacarlo o ocultarlo.
+El bypass se gestiona desde el widget CHAIN, no desde el applet en sí.
 
 ## Qué hace cada control
 
-| Control | Función | Valor predeterminado | Rango válido | Clave de configuración |
+| Control | Valor predeterminado | Rango | Ajuste guardado | Descripción |
 |---|---|---|---|---|
-| Transfer curve | Dibuja la curva de transferencia de válvula activa. La bola indicadora de entrada en vivo se mueve a lo largo de la curva según el nivel de entrada actual. Indicador de solo lectura. | — | — | — |
-| Drive | Empuja más señal hacia la etapa de válvula, aumentando la saturación. | 0.0 dB | 0.0 a 24.0 dB | `ClientTubeTxDriveDb` |
-| Tone | Inclina el balance de frecuencias de la señal saturada. Los valores negativos oscurecen; los positivos aclaran. | 0.00 | -1.0 a 1.0 | `ClientTubeTxTone` |
-| Bias | Desplaza el punto de operación sobre la curva de transferencia, cambiando la mezcla de armónicos entre órdenes pares e impares. | 0 % | 0 % a 100 % | `ClientTubeTxBiasAmount` |
-| Output | Ganancia de compensación o recorte posterior a la válvula. Úselo para compensar los cambios de nivel introducidos por la saturación. | 0.0 dB | -24.0 a 12.0 dB | `ClientTubeTxOutputGainDb` |
-| Mix | Mezcla las señales seca (sin procesar) y saturada. El 100 % pasa la señal completamente saturada; el 0 % pasa la señal seca sin cambios. | 100 % | 0 % a 100 % | `ClientTubeTxDryWet` |
+| Transfer curve | — | — | — | Muestra la curva de transferencia actual de la válvula. Se curva y desplaza al cambiar Drive, Bias y el modelo. |
+| Live input ball | — | — | — | El punto se mueve a lo largo de la curva de transferencia según el nivel de entrada actual, mostrando el régimen de saturación activo. |
+| Drive | 0.0 dB | 0.0 a 24.0 dB | `ClientTubeTxDriveDb` | Impulsa más señal hacia la etapa de válvula. Valores más altos curvan la curva con mayor agresividad. |
+| Tone | 0.00 | -1.0 a 1.0 | `ClientTubeTxTone` | Valores negativos oscurecen la señal saturada; valores positivos la aclaran. |
+| Bias | 0 % | 0 % a 100 % | `ClientTubeTxBiasAmount` | Desplaza el punto de operación en la curva de transferencia, modificando el balance entre armónicos pares e impares. |
+| Output | 0.0 dB | -24.0 a 12.0 dB | `ClientTubeTxOutputGainDb` | Ganancia de compensación o recorte posterior a la válvula. Úsela para compensar los cambios de nivel introducidos por la saturación. |
+| Mix | 100 % | 0 % a 100 % | `ClientTubeTxDryWet` | Mezcla las señales seca (sin procesar) y saturada. Al 100 % solo pasa la señal saturada. |
 
-El estado habilitado/deshabilitado de la etapa Tube se almacena como `ClientTubeTxEnabled`. El bypass se controla desde el widget CHAIN, no desde el applet en sí.
+El estado habilitado de la etapa Tube se guarda como `ClientTubeTxEnabled` y se controla desde el widget CHAIN.
 
 ## Consejos
 
-- Comience con Drive en un valor bajo y observe la curva de transferencia. La bola indica qué porción de la curva utiliza su señal — trate de mantener los picos en la región levemente curvada, en lugar de presionarlos contra los límites.
-- Después de aumentar Drive, use Output para devolver el nivel a su punto original, de modo que el procesamiento posterior y el nivel de audio TX se mantengan consistentes.
-- Ajustar Mix por debajo del 100 % le permite mezclar solo una parte de la saturación, lo cual puede ser útil cuando desea una mejora armónica sutil sin un cambio tonal pronunciado.
+- Comience con Drive en 0.0 dB y auméntelo lentamente hasta que la curva de transferencia se curve de forma visible. Ese punto de curvatura es donde comienza la saturación.
+- Use Mix por debajo del 100 % para incorporar solo una porción de la señal saturada, lo que puede añadir calidez sin una coloración evidente.
+- Aumentar Bias desplaza la curva de forma asimétrica, lo que introduce más armónicos de orden par y modifica el carácter de la saturación.
+- Si la saturación eleva su nivel percibido, reduzca Output para compensar antes de ajustar otros parámetros.
+- Los cambios realizados en el editor flotante se reflejan automáticamente en los controles del applet, y viceversa.
 
 ## Relacionados
 
-- [Ajuste Drive hasta que la curva comience a doblarse](dial-drive-until-the-curve-starts-to-bend.md)
-- [Desplace Bias para ajustar el balance de armónicos pares e impares](shift-bias-to-tweak-the-even-odd-harmonic-balance.md)
+- [Ajuste Drive hasta que la curva comience a curvarse](dial-drive-until-the-curve-starts-to-bend.md)
+- [Modifique Bias para ajustar el balance de armónicos pares e impares](shift-bias-to-tweak-the-even-odd-harmonic-balance.md)
 - [Aclare u oscurezca la señal saturada con Tone](brighten-or-darken-the-saturated-signal-with-tone.md)
 - [Compense los cambios de nivel con Output](compensate-level-changes-with-output.md)
 - [Mezcle la saturación en paralelo con Mix](parallel-blend-saturation-with-mix.md)
-- [Omita la válvula desde la cadena](bypass-the-tube-from-the-chain.md)
+- [Desactive la válvula desde la cadena](bypass-the-tube-from-the-chain.md)

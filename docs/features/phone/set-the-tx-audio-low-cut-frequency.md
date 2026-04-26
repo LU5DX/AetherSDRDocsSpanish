@@ -1,33 +1,35 @@
-# Configurar la frecuencia de corte inferior del audio TX
+# Establecer la frecuencia de corte inferior del audio de TX
 
-Use esta página para subir o bajar el límite de corte inferior del filtro de audio TX en el applet Phone. Ajustar el corte inferior elimina ruido de vibración, ruido de respiración o interferencias de baja frecuencia del audio transmitido.
+Use el applet Phone para subir o bajar el límite inferior del filtro de audio de TX. Reducir el extremo inferior elimina el ruido de baja frecuencia y los zumbidos en SSB y otros modos de voz.
 
 ## Antes de comenzar
 
-- Conéctese a una radio Flex. El applet Phone requiere una conexión de radio activa.
-- Confirme que el applet Phone sea visible en el Panel de Applets. Si no lo está, haga clic en el botón PHNE de la barra lateral derecha.
+- Conéctese a una radio FLEX-8600. El applet Phone requiere una conexión de radio activa.
+- Abra el Panel de Applets si no está visible. Si el panel está oculto, haga clic en el botón PHNE de la barra lateral derecha para mostrarlo.
 
 ## Pasos
 
-1. Localice el spinbox **Low Cut** en el applet Phone. Aparece como un encabezado con la etiqueta "Low Cut" sobre una fila de controles que muestra un botón `<`, un valor de frecuencia y un botón `>`.
-2. Haga clic en `<` para disminuir la frecuencia de corte inferior en 50 Hz, o haga clic en `>` para aumentarla en 50 Hz.
-3. Alternativamente, coloque el puntero del mouse sobre la etiqueta del valor de frecuencia y gire la rueda del mouse para incrementar o decrementar el valor en 50 Hz.
-4. Confirme que el valor mostrado refleje la frecuencia deseada.
+1. Haga clic en el botón PHNE de la barra lateral derecha para abrir el applet Phone.
+2. Localice la sección **Low Cut** en la parte inferior del applet. Muestra un encabezado con la etiqueta "Low Cut" sobre una fila que contiene un indicador de valor y dos botones triangulares de paso.
+3. Haga clic en `<` para disminuir la frecuencia de corte inferior en 50 Hz, o en `>` para aumentarla en 50 Hz. También puede colocar el puntero sobre el indicador de valor y desplazar la rueda del ratón para ajustar en los mismos incrementos.
+4. Lea la frecuencia actual en Hz en el indicador de valor situado entre los dos botones.
 
 ## Qué hace cada control
 
 | Control | Valor predeterminado | Rango válido | Comportamiento |
 |---|---|---|---|
-| `<` (Low Cut) | — | — | Disminuye el corte inferior del filtro TX en 50 Hz por clic. |
-| `>` (Low Cut) | — | — | Aumenta el corte inferior del filtro TX en 50 Hz por clic. |
-| Indicador del valor de corte inferior | 50 Hz | 0 Hz hasta (corte superior − 50 Hz), paso de 50 Hz | Muestra la frecuencia de corte inferior actual del filtro TX en Hz. También responde a la rueda del mouse. |
+| `<` (Low Cut) | — | — | Disminuye la frecuencia de corte inferior de TX en 50 Hz por clic. El mínimo es 0 Hz. |
+| `>` (Low Cut) | — | — | Aumenta la frecuencia de corte inferior de TX en 50 Hz por clic. El máximo es (corte superior − 50) Hz. |
+| Indicador de valor Low Cut | 50 Hz | 0 a (corte superior − 50), paso 50 Hz | Muestra la frecuencia de corte inferior actual. Admite ajuste con la rueda del ratón. |
+
+El valor de corte inferior no se guarda en la configuración de AetherSDR; lo conserva la radio.
 
 ## Consejos
 
-- El valor de corte inferior no puede igualar ni superar el valor de corte superior actual. El límite máximo es siempre el ajuste de corte superior actual menos 50 Hz.
-- Para eliminar más contenido de baja frecuencia — por ejemplo, para reducir las vibraciones del soporte del micrófono en SSB — aumente el valor de corte inferior hacia 200–300 Hz.
+- La frecuencia de corte inferior no puede alcanzar ni superar la frecuencia de corte superior. El límite máximo siempre es 50 Hz por debajo del valor de corte superior actual. Si el botón `>` no tiene efecto, ha alcanzado ese límite.
+- Un punto de partida típico para el corte inferior en SSB es 100–150 Hz, lo cual elimina el zumbido de baja frecuencia sin afectar notablemente la claridad de la voz.
 
-## Relacionados
+## Temas relacionados
 
-- [Configurar la frecuencia de corte superior del audio TX](set-the-tx-audio-high-cut-frequency.md)
-- [Descripción general del applet Phone](overview.md)
+- [Establecer la frecuencia de corte superior del audio de TX](set-the-tx-audio-high-cut-frequency.md)
+- [Descripción general de Phone](overview.md)

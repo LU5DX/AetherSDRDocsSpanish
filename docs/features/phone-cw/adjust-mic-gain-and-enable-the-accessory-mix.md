@@ -1,43 +1,42 @@
-# Ajustar la ganancia del micrófono y habilitar la mezcla con el accesorio
+# Ajustar la ganancia del micrófono y habilitar la mezcla de accesorio
 
-Use el applet Phone/CW para establecer el nivel de entrada del micrófono y, opcionalmente, combinar la entrada del conector de accesorio junto con su fuente de micrófono principal.
+Use el applet Phone/CW para establecer el nivel de entrada del micrófono y, opcionalmente, mezclar la entrada del puerto de accesorio cuando opere en un modo de voz.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. Los controles del applet Phone/CW solo están activos con una conexión de radio en vivo.
-- El slice activo debe estar en un modo de voz (SSB, AM, FM). En modo CW, el applet cambia al panel CW y los controles del micrófono no se muestran.
-- Abra el applet Phone/CW si no está visible: haga clic en el botón **P/CW** de la barra lateral derecha, o confirme que el panel del applet está visible mediante `View > Applet Panel`.
+- Conéctese a una radio FLEX-8600. El applet Phone/CW requiere una conexión de radio activa.
+- Configure el slice activo en un modo de voz (SSB, AM, FM). El applet muestra el panel Phone únicamente cuando el slice activo no está en modo CW.
 
 ## Pasos
 
-1. En el applet Phone/CW, localice la fila que contiene el cuadro combinado **Mic source**, el control deslizante **Mic gain** y el botón **+ACC**.
-2. Arrastre el control deslizante **Mic gain** hacia la izquierda o la derecha para establecer el nivel de entrada deseado. El valor numérico a la derecha del control se actualiza mientras arrastra. El rango válido es 0–100; el valor predeterminado es 50.
-3. Observe el indicador **Level** sobre el control deslizante. Mantenga los picos por debajo de 0 dBFS (el indicador se vuelve rojo por encima de 0). Apunte a picos en la región de −10 a −6 dBFS durante el habla normal.
-4. Para agregar la entrada del conector de accesorio a la mezcla, haga clic en **+ACC** hasta que se ilumine en verde. Haga clic de nuevo para deshabilitar la mezcla.
+1. Abra el panel de applets si no está visible. Haga clic en el botón **P/CW** de la barra lateral derecha, o vaya a `View > Applet Panel` para mostrar el panel y luego haga clic en **P/CW**.
+2. Confirme que se muestra el panel Phone. Si el slice activo está en modo CW, cámbielo primero a un modo de voz.
+3. Localice el control deslizante **Mic gain** en la fila que también contiene el cuadro combinado **Mic source** y el botón **+ACC**.
+4. Arrastre el control deslizante **Mic gain** hacia la izquierda o la derecha para establecer el nivel de entrada deseado. El rango válido es 0–100. El valor predeterminado es 50. El valor numérico se actualiza a la derecha del control deslizante mientras lo arrastra.
+5. Observe el indicador **Level** encima del control deslizante. Procure mantener los picos por debajo de 0 dBFS; el indicador se torna rojo por encima de 0 dBFS. El rango de visualización válido es −40 a +10 dBFS.
+6. Para mezclar la entrada del puerto de accesorio junto con la fuente de micrófono actualmente seleccionada, haga clic en **+ACC** hasta que se ilumine en verde. Haga clic en **+ACC** nuevamente para deshabilitar la mezcla.
 
-## Qué hace cada control
+## Función de cada control
 
-| Control | Tipo | Predeterminado | Rango | Clave de persistencia |
+| Control | Tipo | Predeterminado | Rango | Clave persistida |
 |---|---|---|---|---|
-| **Mic gain** | Control deslizante | 50 | 0–100 | `PcMicGain` (cuando Mic source es PC) |
+| **Mic gain** | Control deslizante | 50 | 0–100 | `PcMicGain` |
 | **+ACC** | Botón de alternancia | — | On / Off | — |
 | **Level** | Medidor | — | −40 a +10 dBFS (rojo por encima de 0) | — |
 
 ## Consejos
 
-- Cuando **Mic source** está configurado en **PC**, el radio no devuelve el nivel del micrófono desde el firmware. AetherSDR almacena el valor de **Mic gain** localmente usando `PcMicGain` y lo restaura en la próxima sesión. Para todas las demás fuentes (MIC, BAL, LINE, ACC), el radio retiene el valor.
-- **+ACC** mezcla la entrada ACC sobre cualquier fuente seleccionada en **Mic source**. No reemplaza la fuente principal.
-- El indicador **Compression** muestra cuánta reducción está aplicando el procesador de voz. Si el indicador no se mueve, el procesador de voz (PROC) está apagado.
+- Cuando **Mic source** está configurado en **PC**, la radio siempre reporta internamente un nivel de micrófono de 0. AetherSDR mantiene el valor de **Mic gain** de forma local mediante el ajuste `PcMicGain` y lo aplica en el lado del cliente. Establezca el nivel en el applet en lugar de depender del valor reportado por la radio.
+- **+ACC** agrega la entrada del puerto de accesorio sobre la fuente **Mic source** seleccionada. No reemplaza la selección de fuente actual.
 
 ## Solución de problemas
 
-- **El control deslizante Mic gain no tiene efecto y el indicador Level permanece en −150** — El radio no está transmitiendo y el monitoreo `met_in_rx` está desactivado. El indicador Level se suprime a −150 dBFS en ese estado. Accione el transmisor brevemente para confirmar que el control deslizante funciona.
-- **El valor de Mic gain se restablece a 50 después de reconectar** — Esto solo afecta a la fuente **PC**. El valor se guarda en `PcMicGain`. Si el control deslizante se restablece, es posible que la configuración almacenada no se haya escrito antes de que terminara la sesión. Reconecte y establezca el nivel nuevamente.
-- **El botón +ACC no tiene ningún efecto visible en el audio** — Confirme que el conector de accesorio tiene una señal de audio activa y que la entrada ACC del radio está físicamente conectada.
+- **El indicador Level muestra −150 dBFS y no responde mientras se recibe** — El medidor se suprime a −150 cuando la radio no está transmitiendo y met_in_rx está desactivado. El indicador se activa al transmitir.
+- **El control deslizante Mic gain se restablece a 0 al cambiar Mic source a PC** — La radio reporta mic_level=0 para la fuente PC. El control deslizante reflejará el valor almacenado localmente en `PcMicGain` en la siguiente actualización. Ajuste el control deslizante al nivel que prefiera y el valor se guardará.
 
-## Relacionado
+## Relacionados
 
 - [Seleccionar una fuente de micrófono (MIC, BAL, LINE, ACC, PC)](pick-a-mic-source-mic-bal-line-acc-pc.md)
-- [Habilitar el procesador de voz en nivel NOR, DX o DX+](enable-speech-processor-at-nor-dx-or-dx-level.md)
 - [Seleccionar un perfil de micrófono para un micrófono específico](select-a-mic-profile-for-a-specific-microphone.md)
-- [Escuchar un monitor de sidetone de TX](listen-to-a-tx-sidetone-monitor.md)
+- [Habilitar el procesador de voz en nivel NOR, DX o DX+](enable-speech-processor-at-nor-dx-or-dx-level.md)
+- [Escuchar un monitor de tono lateral de TX](listen-to-a-tx-sidetone-monitor.md)

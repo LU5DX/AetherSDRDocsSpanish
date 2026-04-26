@@ -1,48 +1,44 @@
-# Iniciar una portadora de ajuste para verificar la ROS
+# Iniciar un portador de sintonía para verificar el ROS
 
-Transmita una portadora continua a potencia reducida para leer la ROS en el medidor antes de establecer un contacto o ejecutar el ATU.
+Use la función TUNE para transmitir un portador estable a potencia reducida y así leer el ROS sin establecer un contacto. Esta es la forma estándar de verificar el ajuste de la antena antes de operar.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. El applet TX Controls requiere una conexión activa con el radio.
-- La antena y la línea de alimentación deben estar conectadas al radio.
-- Ajuste "Tune Pwr" a un nivel seguro para su sistema de antena antes de activar la portadora. El valor predeterminado es 10.
+- AetherSDR debe estar conectado al radio. El applet TX Controls solo funciona cuando hay una conexión de radio activa.
+- Confirme que la frecuencia y el modo estén configurados según lo que desea verificar.
+- Ajuste "Tune Pwr" a un nivel seguro para su antena y cualquier amplificador conectado antes de transmitir.
 
 ## Pasos
 
-1. Haga clic en el botón de bandeja **TX** en la barra lateral derecha para abrir el applet TX Controls.
-2. Verifique el control deslizante **Tune Pwr**. El valor predeterminado es 10. Ajústelo si necesita un nivel de salida diferente (rango válido: 0–100).
-3. Haga clic en **TUNE**.
-   La etiqueta del botón cambia a **TUNING...** y el fondo del botón se vuelve rojo. El radio transmite una portadora continua.
-4. Lea el medidor **SWR**. La escala va de 1.0 a 3.0; el indicador se vuelve rojo por encima de 2.5.
-5. Haga clic en **TUNING...** para detener la portadora.
-   El botón regresa a la etiqueta **TUNE**.
+1. Haga clic en el botón TX del panel lateral derecho para abrir el applet TX Controls si no está visible.
+2. Ajuste el control deslizante "Tune Pwr" al nivel de potencia deseado para el portador de sintonía. El valor predeterminado es 10; el rango válido es 0–100.
+3. Haga clic en TUNE. La etiqueta del botón cambia a "TUNING..." y el fondo del botón se vuelve rojo mientras el portador está activo.
+4. Lea el medidor de ROS. El indicador "SWR" muestra la relación de onda estacionaria en el excitador. La escala va de 1.0 a 3.0; los valores superiores a 2.5 se muestran en rojo.
+5. Haga clic en TUNE nuevamente (ahora etiquetado como "TUNING...") para detener el portador. El botón regresa a su etiqueta normal "TUNE".
 
-## Función de cada control
+## Qué hace cada control
 
 | Control | Tipo | Predeterminado | Rango válido | Comportamiento |
 |---|---|---|---|---|
-| **Tune Pwr** | Control deslizante | 10 | 0–100 | Establece el nivel de potencia de salida utilizado durante la portadora de ajuste. |
-| **TUNE** | Botón | — | — | El primer clic inicia la portadora (la etiqueta cambia a **TUNING...**). Haga clic de nuevo para detenerla. |
-| **SWR** | Medidor | — | 1.0–3.0 (rojo por encima de 2.5) | Muestra la relación de onda estacionaria en la salida del excitador mientras la portadora está activa. |
-| **RF Pwr** | Medidor | — | 0–120 W sin amplificador; 0–600 W Aurora 500W (rojo por encima de 100 W / 500 W) | Muestra la potencia directa en la salida del excitador. |
+| TUNE | Botón | — | — | Inicia o detiene el portador de sintonía. Muestra "TUNING..." con fondo rojo mientras está activo. |
+| Tune Pwr | Control deslizante | 10 | 0–100 | Establece el nivel de potencia del portador de sintonía enviado al radio. |
+| SWR | Medidor | — | 1.0–3.0 (rojo > 2.5) | Muestra la relación de onda estacionaria en el excitador durante la transmisión. |
+| RF Pwr | Medidor | — | 0–120 W sin amplificador; 0–600 W Aurora 500W (rojo > 100 W / > 500 W) | Muestra la potencia directa en la salida del excitador. |
 
 ## Consejos
 
-- Mantenga **Tune Pwr** bajo (10–20) para una verificación inicial. Auméntelo solo si su medidor de ROS necesita más señal para obtener una lectura estable.
-- El medidor **SWR** está activo siempre que el radio esté transmitiendo, no únicamente durante **TUNE**. También puede leerlo mientras usa **MOX**.
-- Para inhibir salidas de TX específicas durante el ajuste, use `Settings > Inhibit during TUNE` y seleccione las salidas que desea suprimir.
+- Mantenga "Tune Pwr" en el nivel mínimo necesario para obtener una lectura confiable del ROS. Un valor de 10 es suficiente para la mayoría de los analizadores de antena y sintonizadores internos.
+- Si desea usar el ATU interno, puede iniciar la sintonía del ATU directamente con el botón ATU; el ciclo del ATU utiliza el portador de sintonía automáticamente. Consulte [Usar el ATU interno](run-the-internal-atu.md).
 
 ## Solución de problemas
 
-- **El botón TUNE aparece desactivado** — El radio no está conectado. Verifique el estado de la conexión y consulte `Settings > Connect to Radio...`.
-- **El medidor SWR indica 1.0 y RF Pwr indica 0 durante TUNE** — La portadora se inició, pero ninguna potencia llega al medidor. Verifique la selección del puerto de antena en `Settings > Radio Setup...` y confirme que la línea de alimentación está conectada.
-- **La portadora no se detiene al hacer clic en TUNING...** — Haga clic en el botón una vez con firmeza. Si el problema persiste, haga clic en **MOX** para forzar al radio a salir del modo de transmisión y, a continuación, verifique que el firmware del radio sea la versión 4.1.5.
+- **El botón TUNE no tiene efecto** — El applet TX Controls requiere una conexión de radio activa. Verifique que AetherSDR esté conectado al FLEX-8600 mediante `Settings > Connect to Radio...`.
+- **El indicador SWR permanece en 1.0 durante la sintonía** — Es posible que el radio no esté detectando potencia reflejada. Verifique que el conector de antena y la línea de alimentación estén correctamente conectados al radio.
+- **El portador no se detiene** — Si al hacer clic en el botón por segunda vez no se detiene la sintonía, es posible que el radio haya perdido el comando. Haga clic en MOX una vez para forzar el apagado del transmisor y luego haga clic en MOX nuevamente para volver a recepción.
 
-## Temas relacionados
+## Relacionados
 
-- [Ajustar la potencia de la portadora de ajuste](set-tune-carrier-power.md)
-- [Ejecutar el ATU interno](run-the-internal-atu.md)
-- [Ajustar la potencia de salida de RF](set-rf-output-power.md)
-- [Usar MOX para activar el transmisor manualmente](toggle-mox-to-manually-key-the-transmitter.md)
-- [Descripción general de TX Controls](overview.md)
+- [Configurar la potencia del portador de sintonía](set-tune-carrier-power.md)
+- [Usar el ATU interno](run-the-internal-atu.md)
+- [Configurar la potencia de salida de RF](set-rf-output-power.md)
+- [Usar MOX para activar manualmente el transmisor](toggle-mox-to-manually-key-the-transmitter.md)

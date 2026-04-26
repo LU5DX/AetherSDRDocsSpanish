@@ -1,39 +1,42 @@
 # Seleccionar la fuente de micrófono (MIC, BAL, LINE, ACC, PC)
 
-Esta página explica cómo seleccionar la fuente de entrada de micrófono para el slice de transmisión activo. Úsela cuando desee alternar entre el micrófono del panel frontal, la entrada balanceada, la entrada de nivel de línea, el conector de accesorios o el audio de PC.
+Esta página muestra cómo seleccionar la fuente de entrada de micrófono para su FLEX-8600 en AetherSDR. La fuente correcta debe coincidir con el conector físico que está utilizando antes de transmitir.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio Flex.
-- El slice activo debe estar en un modo de voz (el panel Phone debe ser visible en el applet P/CW). Los controles de fuente de micrófono no se muestran cuando el slice está en modo CW.
+- AetherSDR debe estar conectado a su FLEX-8600.
+- El slice activo debe estar en un modo de voz (USB, LSB, AM, FM o similar). El panel Phone se oculta cuando el slice activo está en modo CW.
+- Abra el applet Phone/CW: haga clic en el botón de bandeja **P/CW** en la barra lateral derecha si el applet no está visible.
 
 ## Pasos
 
-1. Localice el botón de bandeja **P/CW** en la barra lateral derecha y confirme que el panel Phone está visible.
-2. Busque el cuadro combinado **Mic source**. Aparece a la izquierda del control deslizante de ganancia de micrófono, directamente debajo del cuadro combinado **Mic profile**.
-3. Haga clic en el cuadro combinado **Mic source** y seleccione una de las fuentes disponibles: `MIC`, `BAL`, `LINE`, `ACC` o `PC`.
-4. La radio cambia a la entrada seleccionada de inmediato.
-5. Si seleccionó `PC`, ajuste el control deslizante **Mic gain** al nivel de su preferencia. La radio no reporta un valor de ganancia para la fuente PC — AetherSDR almacena este valor localmente como `PcMicGain`.
+1. Localice el menú desplegable **Mic source** en el applet Phone/CW. Es un cuadro combinado estrecho (aproximadamente 55 px de ancho) en la misma fila que el control deslizante **Mic gain** y el botón **+ACC**.
+2. Haga clic en el menú desplegable **Mic source**.
+3. Seleccione una de las fuentes disponibles: `MIC`, `BAL`, `LINE`, `ACC` o `PC`. La selección se envía al radio de inmediato.
+4. Si seleccionó `PC`, ajuste el control deslizante **Mic gain** al nivel deseado (0–100; valor predeterminado 50). La fuente `PC` conserva su valor de ganancia localmente en `PcMicGain` porque el radio siempre reporta el nivel de micrófono como 0 para esta fuente.
+5. Observe el indicador **Level** (−40 a +10 dBFS). Hable o alimente audio y confirme que la aguja se mueve. Procure mantener los picos por debajo de 0 dBFS (el indicador se pone rojo por encima de 0).
 
 ## Qué hace cada control
 
-| Control | Tipo | Valores válidos | Predeterminado | Clave de configuración | Notas |
+| Control | Tipo | Predeterminado | Rango válido | Clave de configuración | Notas |
 |---|---|---|---|---|---|
-| **Mic source** | Cuadro combinado | `MIC`, `BAL`, `LINE`, `ACC`, `PC` | — | — | Envía la fuente seleccionada a la radio de inmediato. Pueden aparecer fuentes adicionales si la radio las reporta. |
-| **Mic gain** | Control deslizante | 0–100 | 50 | `PcMicGain` (solo fuente PC) | Cuando la fuente es `PC`, la radio siempre reporta `mic_level=0`; AetherSDR mantiene el valor en el lado del cliente mediante `PcMicGain`. Para todas las demás fuentes, el valor se almacena en la radio. |
+| Mic source | Cuadro combinado | — | MIC, BAL, LINE, ACC, PC | — | Se envía al radio al cambiar. |
+| Mic gain | Control deslizante | 50 | 0–100 | `PcMicGain` (solo fuente PC) | Para fuentes que no son PC, la ganancia se almacena en el radio. Para PC, el valor se conserva en el cliente. |
+| Level | Medidor | — | −40 a +10 dBFS (rojo por encima de 0) | — | Muestra el nivel de pico de entrada del micrófono. Indica −150 cuando no se está transmitiendo y la monitorización del micrófono está desactivada. |
 
-## Sugerencias
+## Consejos
 
-- El indicador **Level** (−40 a +10 dBFS, rojo por encima de 0) proporciona retroalimentación inmediata después de cambiar la fuente. Obsérvelo mientras habla para confirmar que la señal llega desde la nueva entrada.
-- Si también desea mezclar el conector de accesorios junto con otra fuente principal, use el botón de alternancia **+ACC** en lugar de seleccionar `ACC` como única fuente.
+- La fuente `PC` enruta el audio desde la entrada de sonido de su computadora. El radio no reporta el nivel de micrófono para esta fuente, por lo que el valor `PcMicGain` se almacena en AetherSDR y se aplica localmente.
+- Si desea mezclar un micrófono de accesorio con la fuente seleccionada, active **+ACC** en la misma fila después de elegir su fuente principal.
 
 ## Solución de problemas
 
-- **El indicador Level no muestra movimiento después de seleccionar una nueva fuente** — confirme la conexión física a esa entrada en la radio. El indicador Level se suprime cuando la radio no está transmitiendo y met_in_rx está desactivado; active la transmisión brevemente para verificar la entrada.
-- **El control deslizante Mic gain no tiene efecto cuando la fuente es PC** — esto es esperado. La radio ignora el valor de ganancia para la fuente PC; AetherSDR aplica el valor `PcMicGain` localmente. Ajuste el control deslizante y el valor almacenado se actualizará.
+- **El indicador Level no muestra movimiento después de seleccionar una fuente** — Confirme que está transmitiendo o que la monitorización del micrófono está activa. El indicador se suprime a −150 dBFS cuando ninguna de las dos condiciones es verdadera.
+- **Fuente PC seleccionada pero el control deslizante Mic gain no tiene efecto en el nivel reportado por el radio** — Esto es esperado. El radio siempre reporta mic_level=0 para la fuente PC. AetherSDR almacena la ganancia en `PcMicGain` y la aplica en el cliente.
+- **El panel Phone no está visible** — El applet cambia a los controles CW cuando el slice activo está en modo CW. Cambie el slice activo a un modo de voz para ver los controles de fuente de micrófono.
 
 ## Relacionados
 
-- [Ajustar la ganancia de micrófono y habilitar la mezcla de accesorios](adjust-mic-gain-and-enable-the-accessory-mix.md)
+- [Ajustar la ganancia del micrófono y activar la mezcla de accesorio](adjust-mic-gain-and-enable-the-accessory-mix.md)
 - [Seleccionar un perfil de micrófono para un micrófono específico](select-a-mic-profile-for-a-specific-microphone.md)
-- [Habilitar el procesador de voz en nivel NOR, DX o DX+](enable-speech-processor-at-nor-dx-or-dx-level.md)
+- [Activar el procesador de voz en nivel NOR, DX o DX+](enable-speech-processor-at-nor-dx-or-dx-level.md)

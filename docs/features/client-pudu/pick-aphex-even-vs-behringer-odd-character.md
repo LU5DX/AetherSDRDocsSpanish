@@ -1,35 +1,36 @@
 # Seleccionar el carácter Aphex (Even) o Behringer (Odd)
 
-El excitador PUDU ofrece dos sabores armónicos distintos. Use Even para una calidez estilo Aphex con saturación de bajas frecuencias Big Bottom, o Odd para una brillantez estilo Behringer con un compresor de graves de alimentación directa (feed-forward).
+El excitador PUDU ofrece dos algoritmos de modelado armónico. Cambiar entre ellos modifica el carácter tonal de los procesadores Poo (baja frecuencia) y Doo (alta frecuencia) de forma simultánea. Elija Even para un sonido más cálido, de linaje Aphex; elija Odd para un sonido más brillante, de linaje Behringer.
 
 ## Antes de comenzar
 
-- La etapa PUDU debe estar habilitada en la cadena PooDoo Audio. El applet PUDU permanece oculto hasta que la etapa esté activa. Consulte [Omitir PUDU desde la cadena](bypass-pudu-from-the-chain.md) si el applet no es visible.
-- Abra el applet PUDU: localice el subcontenedor PUDU dentro del contenedor principal PooDoo Audio (TXDSP), o haga doble clic en la etapa PUDU (Enh) en el widget CHAIN para abrir el editor flotante.
+- La etapa PUDU debe estar habilitada en la cadena PooDoo Audio. Si el subcontenedor PUDU no está visible, habilite la etapa mediante el widget CHAIN o haga doble clic en la etapa PUDU (Enh) en el widget CHAIN para abrir el editor flotante de PUDU.
+- El applet PUDU se encuentra dentro del contenedor principal PooDoo Audio (TXDSP) en el panel de applets.
 
 ## Pasos
 
-1. Localice la fila de alternancia de modo en la parte superior del applet PUDU, directamente debajo del logotipo de PooDoo.
-2. Haga clic en "Even" para seleccionar el modelado asimétrico de linaje Aphex — armónicos predominantemente pares, tono más cálido, con saturación de bajas frecuencias Big Bottom. El botón se ilumina en ámbar cuando está seleccionado.
-3. Haga clic en "Odd" para seleccionar el modelado simétrico tanh de linaje Behringer — armónicos impares puros, presencia más brillante, con un compresor de graves feed-forward en lugar de saturación de bajas frecuencias.
+1. Localice los dos botones etiquetados **Even** y **Odd** cerca de la parte superior del applet PUDU, debajo del logotipo de PooDoo.
+2. Haga clic en **Even** para seleccionar el modelado asimétrico de linaje Aphex — predominantemente armónicos pares, más cálido, con saturación LF Big Bottom.
+3. Haga clic en **Odd** para seleccionar el modelado simétrico tanh de linaje Behringer — armónicos impares puros, más brillante, con un compresor de graves de alimentación directa (feed-forward).
 
-La selección tiene efecto de inmediato y se guarda en `ClientPuduTxMode`.
+El botón seleccionado se resalta en ámbar. El cambio surte efecto de inmediato y se guarda en `ClientPuduTxMode`.
 
 ## Qué hace cada control
 
-| Control | Comportamiento | Valor predeterminado | Clave de ajuste |
-|---------|---------------|----------------------|-----------------|
-| Even | Selecciona el modelado asimétrico de linaje Aphex. Armónicos predominantemente pares, carácter más cálido, con saturación de bajas frecuencias Big Bottom. Excluyente con Odd. | — | `ClientPuduTxMode` |
-| Odd | Selecciona el modelado simétrico tanh de linaje Behringer. Armónicos impares puros, carácter más brillante, con un compresor de graves feed-forward. Excluyente con Even. | — | `ClientPuduTxMode` |
+| Control | Comportamiento | Clave persistida |
+|---------|----------------|------------------|
+| **Even** | Selecciona el modelado asimétrico de linaje Aphex. Produce predominantemente armónicos pares con saturación LF Big Bottom. Exclusivo con **Odd**. | `ClientPuduTxMode` |
+| **Odd** | Selecciona el modelado simétrico tanh de linaje Behringer. Produce armónicos impares puros con un compresor de graves feed-forward. Exclusivo con **Even**. | `ClientPuduTxMode` |
 
 ## Consejos
 
-- El modo Even es adecuado para voces que necesitan calidez y peso en los medios-bajos. El modo Odd es adecuado para voces que ya tienen cuerpo en las bajas frecuencias y necesitan presencia o corte.
-- El grupo Poo (Drive, Tune, Mix) moldea el procesador de bajas frecuencias; su comportamiento difiere sutilmente entre los dos modos porque el algoritmo de saturación subyacente cambia. Después de cambiar de modo, verifique su ajuste de Poo / Drive — lo que era apropiado en Even puede ser demasiado agresivo en Odd.
-- El logotipo de PooDoo pulsa con mayor brillo a medida que aumenta la señal procesada (wet). Úselo como verificación visual rápida de que el excitador está activo después de cambiar de modo.
+- El modo Even tiende a favorecer la voz e instrumentos cálidos; el modo Odd tiende a favorecer señales que necesitan más presencia y definición.
+- Cambiar de modo no restablece ninguno de los controles de Poo o Doo, por lo que puede auditar ambos caracteres con los mismos ajustes de drive y mezcla para compararlos directamente.
+- El logotipo de PooDoo pulsa con el nivel de señal procesada — obsérvelo mientras alterna entre modos para confirmar que el excitador está activo.
 
-## Relacionados
+## Relacionado
 
 - [Descripción general del excitador PUDU](overview.md)
-- [Ajustar el Poo Drive para grosor en bajas frecuencias](dial-poo-drive-for-lf-thickness.md)
+- [Ajustar el Poo Drive para mayor grosor en baja frecuencia](dial-poo-drive-for-lf-thickness.md)
+- [Añadir aire con los armónicos Doo](add-air-with-doo-harmonics.md)
 - [Omitir PUDU desde la cadena](bypass-pudu-from-the-chain.md)
