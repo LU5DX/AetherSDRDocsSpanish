@@ -115,6 +115,8 @@ markdown_extensions:
   - pymdownx.keys
 
 extra:
+  version:
+    provider: mike
   analytics:
     provider: google
     property: G-Z8CG1BYC2F
