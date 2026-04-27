@@ -1,38 +1,38 @@
-# Cambiar perfiles de TX (por ejemplo, SSB, Digital)
+# Cambiar perfiles de TX (p. ej., SSB, Digital)
 
-Los perfiles de TX almacenan ajustes de transmisión como la ecualización del micrófono, la compresión y el procesamiento de audio específico por modo. Cambiar de perfil permite pasar rápidamente entre configuraciones — por ejemplo, de un perfil de voz SSB a un perfil para modos digitales — sin ajustar cada parámetro manualmente.
+Use el selector de perfil de TX para cargar un perfil de transmisión con nombre desde el radio. Los perfiles almacenan configuraciones del micrófono, valores del ecualizador y otros parámetros de transmisión, lo que le permite cambiar rápidamente entre modos como SSB y Digital.
 
 ## Antes de comenzar
 
 - AetherSDR debe estar conectado al radio. El applet TX Controls requiere una conexión activa con el radio.
-- Los perfiles de TX deben existir previamente en el radio. Para crear o editar perfiles, use `Profiles > Profile Manager...`.
+- Debe existir al menos un perfil de transmisión en el radio. Cree o administre perfiles mediante `Profiles > Profile Manager...`.
 
 ## Pasos
 
-1. Haga clic en el botón **TX** del panel lateral derecho para abrir el applet TX Controls.
-2. Localice el menú desplegable **TX Profile** cerca de la parte superior del applet, debajo de los controles deslizantes RF Power y Tune Pwr.
-3. Haga clic en el menú desplegable **TX Profile** y seleccione el nombre del perfil que desea cargar (por ejemplo, "SSB" o "Digital").
+1. Haga clic en el botón de bandeja **TX** en la barra lateral derecha para abrir el applet TX Controls.
+2. Localice el menú desplegable **TX Profile** cerca del centro del applet.
+3. Haga clic en el menú desplegable y seleccione el nombre del perfil que desea cargar (por ejemplo, "SSB" o "Digital").
 
-El radio carga el perfil seleccionado de inmediato. No se requiere confirmación adicional.
+El radio carga el perfil seleccionado de inmediato. No se requiere ningún paso de confirmación.
 
 ## Qué hace cada control
 
-| Control | Tipo | Comportamiento | Valor predeterminado |
-|---|---|---|---|
-| **TX Profile** | Menú desplegable | Carga el perfil de transmisión seleccionado en el radio. La lista se obtiene de los perfiles almacenados en el radio. | Ninguno (se llena al conectar) |
+| Control | Tipo | Comportamiento | Valor predeterminado | Valores válidos |
+|---|---|---|---|---|
+| **TX Profile** | Menú desplegable | Selecciona y carga un perfil de transmisión desde el radio. La lista es proporcionada por el radio. | — | Obtenidos de la lista de perfiles del radio |
 
 ## Consejos
 
-- También puede cambiar de perfil desde la barra de menú. Abra `Profiles` y haga clic en cualquier nombre de perfil de la lista que aparece debajo del separador. El perfil activo se indica con una marca de verificación.
-- El contenido de los perfiles (ecualización, compresión, etc.) se almacena en el radio, no en AetherSDR. Use `Profiles > Profile Manager...` para administrarlos.
+- También puede cargar un perfil desde la barra de menús sin abrir el applet TX Controls. Vaya a `Profiles` y haga clic en el nombre del perfil en la lista con casillas de verificación debajo del separador.
+- Para crear, editar o eliminar perfiles, vaya a `Profiles > Profile Manager...`.
 
 ## Solución de problemas
 
-- **El menú desplegable TX Profile está vacío** — No hay perfiles de transmisión almacenados en el radio. Abra `Profiles > Profile Manager...` para crear uno.
-- **El menú desplegable TX Profile no responde** — AetherSDR no está conectado al radio. El applet TX Controls requiere una conexión activa. Verifique su conexión mediante `Settings > Connect to Radio...`.
+- **El menú desplegable TX Profile está vacío** — No existen perfiles de transmisión en el radio. Abra `Profiles > Profile Manager...` para crear uno.
+- **El menú desplegable TX Profile no responde** — AetherSDR no está conectado al radio. Conéctese primero mediante `Settings > Connect to Radio...`.
 
 ## Relacionados
 
 - [Descripción general de TX Controls](overview.md)
-- [Ajustar la potencia de salida de RF](set-rf-output-power.md)
-- [Realice su primer QSO con AetherSDR](../../getting-started/tutorials/first-qso.md)
+- [Establecer la potencia de salida de RF](set-rf-output-power.md)
+- [Ejecutar una prueba de dos tonos](run-a-two-tone-tune.md)

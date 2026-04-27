@@ -1,34 +1,47 @@
-# Seleccionar una fuente de micrófono (MIC, BAL, LINE, ACC, PC)
+# Seleccionar la fuente de micrófono (MIC, BAL, LINE, ACC, PC)
 
-Seleccione qué entrada de micrófono física o virtual utiliza el FLEX-8600 para la transmisión. La fuente correcta depende de cómo esté conectado su micrófono o dispositivo de audio a la radio.
+Seleccione qué entrada física o virtual utiliza el radio como fuente de micrófono para las transmisiones de voz. La elección determina de dónde toma el FLEX-8600 el audio de TX: el conector de micrófono del panel frontal, la entrada balanceada, la entrada de línea, el puerto accesorio o el sistema de audio del PC.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600.
-- El slice activo debe estar en un modo de voz (USB, LSB, AM, FM) para que el subpanel Phone sea visible en el applet Phone/CW.
+- AetherSDR debe estar conectado a un radio FLEX-8600.
+- El slice activo debe estar en un modo de voz (USB, LSB, AM, FM, etc.). El applet Phone/CW muestra el subpanel Phone automáticamente en los modos de voz.
 
 ## Pasos
 
-1. Localice el botón de bandeja **P/CW** en la barra lateral derecha y confirme que el applet Phone/CW está visible. Si no lo está, haga clic en el botón de bandeja **P/CW** para mostrarlo.
-2. En el subpanel Phone, busque el cuadro combinado **Mic source** en el lado izquierdo de la fila de ganancia de micrófono.
-3. Haga clic en **Mic source** y seleccione una de las opciones disponibles: **MIC**, **BAL**, **LINE**, **ACC** o **PC**.
+1. Haga clic en el botón de bandeja `P/CW` en la barra lateral derecha para abrir el applet Phone/CW.
+2. Localice el menú desplegable **Mic source** en el subpanel Phone.
+3. Haga clic en **Mic source** y seleccione una de las fuentes disponibles: `MIC`, `BAL`, `LINE`, `ACC` o `PC`.
 
-La selección surte efecto de inmediato. La radio cambia su entrada de audio de transmisión a la fuente elegida.
+La selección surte efecto inmediatamente en el radio.
 
 ## Qué hace cada control
 
-| Control | Descripción | Predeterminado | Valores válidos | Clave de configuración |
+| Control | Descripción | Valor predeterminado | Valores válidos | Clave de configuración |
 |---|---|---|---|---|
-| **Mic source** | Selecciona la fuente de entrada de micrófono enviada a la radio. | — | MIC, BAL, LINE, ACC, PC | — |
-| **Mic gain** | Ajusta el nivel de entrada para la fuente seleccionada (0–100). Cuando se selecciona **PC**, el valor se almacena en el lado del cliente porque la radio siempre reporta `mic_level=0` para esa fuente. | 50 | 0–100 | `PcMicGain` (solo fuente PC) |
+| **Mic source** | Selecciona la fuente de entrada de micrófono enviada al radio. | — | `MIC`, `BAL`, `LINE`, `ACC`, `PC` | — |
+| **Mic gain** | Ajusta el nivel de entrada del micrófono. Cuando la fuente es `PC`, el valor se almacena en el lado del cliente porque el radio siempre reporta un nivel de 0 para las fuentes PC. | 50 | 0–100 | `PcMicGain` |
+
+**Descripción de las fuentes:**
+
+- **MIC** — Conector de micrófono del panel frontal.
+- **BAL** — Entrada de micrófono balanceada.
+- **LINE** — Entrada de nivel de línea.
+- **ACC** — Entrada de micrófono por el puerto accesorio.
+- **PC** — Sistema de audio del computador. El radio no reporta el nivel de micrófono para esta fuente; AetherSDR almacena el valor de ganancia localmente en `PcMicGain`.
 
 ## Consejos
 
-- Cuando selecciona **PC**, la radio no reporta un nivel de micrófono a AetherSDR. AetherSDR almacena el valor de **Mic gain** localmente usando la configuración `PcMicGain` y lo restaura en la próxima sesión.
-- El cuadro combinado **Mic source** se rellena a partir de la lista de entradas disponibles de la radio. Si el firmware de su radio expone entradas adicionales, estas aparecerán junto a las cinco opciones estándar.
+- Al usar `PC` como fuente, el medidor **Level** del applet se suprime cuando no se está transmitiendo. Transmita brevemente para confirmar que el audio está pasando.
+- Para mezclar el puerto accesorio junto con su fuente principal, active el botón de alternar **+ACC** después de seleccionar la fuente principal.
 
-## Relacionados
+## Solución de problemas
 
-- [Ajustar la ganancia del micrófono y habilitar la mezcla de accesorio](adjust-mic-gain-and-enable-the-accessory-mix.md)
+- **El menú desplegable Mic source no muestra selección o se restablece** — La lista se llena a partir de las entradas reportadas por el radio. Si el menú está vacío, verifique que la conexión con el radio esté activa (`Settings > Connect to Radio...`).
+- **El medidor de nivel no indica nada cuando la fuente es PC** — Esto es normal. El radio reporta `mic_level=0` para las fuentes PC; la ganancia es gestionada por `PcMicGain` en el lado del cliente.
+
+## Temas relacionados
+
+- [Ajustar la ganancia del micrófono y habilitar la mezcla del accesorio](adjust-mic-gain-and-enable-the-accessory-mix.md)
 - [Seleccionar un perfil de micrófono para un micrófono específico](select-a-mic-profile-for-a-specific-microphone.md)
 - [Habilitar el procesador de voz en nivel NOR, DX o DX+](enable-speech-processor-at-nor-dx-or-dx-level.md)

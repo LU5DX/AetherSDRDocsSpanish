@@ -1,36 +1,46 @@
-# Sintonizar el radio a una memoria almacenada
+# Sintonizar la radio en una memoria almacenada
 
-Abra el diálogo Memory Channels para encontrar una frecuencia almacenada y enviarla directamente al slice receptor activo.
+Abra el diálogo Memory Channels para buscar una frecuencia almacenada y enviarla directamente al slice receptor activo.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. El diálogo Memory Channels requiere una conexión de radio activa.
-- Al menos una memoria debe estar almacenada previamente. Consulte [Agregar una memoria en la frecuencia actual](add-a-memory-at-current-frequency.md) si no tiene ninguna.
+- AetherSDR debe estar conectado a una radio FLEX-8600. El diálogo Memory Channels requiere una conexión de radio activa.
+- Debe haber al menos una memoria almacenada. Consulte [Agregar una memoria en la frecuencia actual](add-a-memory-at-current-frequency.md) si no tiene ninguna.
 
 ## Pasos
 
 1. Haga clic en `Settings > Memory...` para abrir el diálogo Memory Channels.
-2. Opcional: escriba un nombre en el campo **Search:** para reducir la lista, o seleccione un grupo en el cuadro combinado **Profile:** para filtrar por perfil.
-3. Haga clic en la fila de la tabla de memorias que contiene la frecuencia a la que desea sintonizar. La fila se resalta y el contador de selección en la parte inferior derecha se actualiza para mostrar `1 selected`.
-4. Haga clic en **Tune**.
+2. Ubique la memoria que desea. Use el campo `Search:` para filtrar por nombre, o use el selector `Profile:` para reducir la lista por perfil.
+3. Haga clic en la fila correspondiente en la tabla de memorias para seleccionarla.
+4. Haga clic en `Tune`.
 
-El slice activo se sintoniza inmediatamente a la frecuencia, el modo y la configuración de filtro almacenados en esa memoria.
+El slice activo se sintoniza en la frecuencia, el modo y los ajustes de filtro almacenados en esa memoria.
+
+**Atajo:** Haga doble clic en cualquier fila de la tabla de memorias para sintonizar de inmediato sin necesidad de hacer clic en `Tune`.
+
+## Función de cada control
+
+| Control | Comportamiento |
+|---|---|
+| `Search:` | Filtra la tabla de memorias para mostrar solo las filas cuyo nombre coincide con el texto ingresado. Presione Enter o borre el campo para restablecer el filtro. |
+| `Profile:` | Filtra la tabla para mostrar únicamente las memorias pertenecientes al perfil global seleccionado. |
+| Tabla de memorias | Muestra todas las memorias almacenadas. Las columnas incluyen Group, Owner, Frequency, Name, Mode, Step, FM TX Offset Dir, Repeater Offset, Tone Mode, Tone Value, Squelch, Squelch Level, RX Filter Low, RX Filter High, RTTY Mark, RTTY Shift, DIGL Offset y DIGU Offset. Haga clic en el encabezado de una columna para ordenar por esa columna. |
+| `Tune` | Sintoniza el slice activo en la memoria seleccionada. Requiere que haya exactamente una fila seleccionada. |
 
 ## Consejos
 
-- Al hacer doble clic en cualquier fila de la tabla de memorias, el slice activo se sintoniza a esa memoria sin necesidad de hacer clic en **Tune**.
-- Si necesita sintonizar una memoria que se encuentra dentro de una lista larga, use el campo **Search:** para filtrar por nombre primero. La tabla se actualiza mientras escribe. Presione Enter después de escribir para sintonizar directamente la fila resaltada en ese momento.
-- En Linux y Windows, Ctrl+clic selecciona o deselecciona filas individuales sin borrar el resto de la selección. Solo la primera fila seleccionada se utiliza al hacer clic en **Tune** o al hacer doble clic.
+- Si no puede ver la memoria que desea, verifique si `Profile:` está configurado con un filtro que la excluye. Configure `Profile:` para mostrar todas las entradas.
+- En Linux y Windows, mantenga presionado Ctrl y haga clic para seleccionar filas individuales sin deseleccionar las demás. En macOS, use Command-clic. Solo se utiliza la primera memoria seleccionada cuando hace clic en `Tune`.
 
 ## Solución de problemas
 
-- **Tune no hace nada** — Confirme que el radio está conectado. El diálogo requiere una conexión de radio activa. Verifique que haya exactamente una fila seleccionada en la tabla.
-- **La memoria que busca no es visible** — Es posible que haya un filtro activo. Borre el campo **Search:** usando su botón de limpieza y restablezca **Profile:** a su valor predeterminado (sin filtro) para mostrar todas las memorias.
+- **`Tune` no tiene efecto o está deshabilitado** — Confirme que haya una sola fila seleccionada en la tabla de memorias y que AetherSDR esté conectado a la radio.
+- **La memoria que desea no aparece en la tabla** — Es posible que el filtro `Search:` o `Profile:` la esté ocultando. Borre el campo `Search:` y configure `Profile:` para mostrar todas las entradas.
 
 ## Relacionados
 
-- [Descripción general de Memory Channels](overview.md)
 - [Agregar una memoria en la frecuencia actual](add-a-memory-at-current-frequency.md)
+- [Recuperar una memoria de repetidora FM y restaurar el desplazamiento y el tono CTCSS](recall-an-fm-repeater-memory-and-restore-offset-and-ctcss-tone.md)
 - [Buscar memorias por nombre](search-memories-by-name.md)
 - [Filtrar memorias por perfil](filter-memories-by-profile.md)
-- [Editar el nombre, modo u offset de una memoria en línea](edit-a-memory-s-name-mode-or-offset-inline.md)
+- [Descripción general de Memory Channels](overview.md)

@@ -1,60 +1,62 @@
 # Inicio automático de servidores CAT con AetherSDR
 
-Configure AetherSDR para iniciar sus servidores TCP CAT y/o puertos serie PTY automáticamente cada vez que la aplicación se inicie, de modo que el software externo de registro y concursos esté listo sin intervención manual.
+Configure AetherSDR para iniciar los servidores TCP de rigctld y/o los puertos serie virtuales PTY automáticamente cada vez que se inicie la aplicación, de modo que el software externo de registro y concursos esté listo sin intervención manual.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600. El control CAT requiere una conexión de radio.
-- Decida si necesita servidores TCP (para software como N1MM, Log4OM o WSJT-X), puertos serie PTY (solo Linux/macOS), o ambos.
-- Confirme el puerto TCP base que desea usar. El valor predeterminado es `4532`. Consulte [Cambiar el puerto TCP base](change-the-base-tcp-port.md) si necesita un valor diferente.
+- AetherSDR debe estar conectado a una radio FLEX-8600 para que los servidores CAT puedan operar. La configuración de inicio automático se guarda de todas formas, pero los servidores solo se activan una vez que se establece la conexión con la radio.
+- Decida si necesita TCP, PTY (solo Linux/macOS) o ambos. TCP funciona en todas las plataformas; PTY es para aplicaciones que esperan una ruta de dispositivo serie como `/tmp/AetherSDR-CAT-A`.
 
 ## Pasos
 
-### Inicio automático de servidores TCP
+### Habilitar el inicio automático para los servidores TCP
 
-1. Haga clic en `Settings > Autostart rigctld with AetherSDR`.
+1. Abra `Settings > Autostart rigctld with AetherSDR`.
+2. Haga clic en el elemento para colocar una marca de verificación junto a él.
 
-   Aparece una marca de verificación junto al elemento. En el próximo inicio, AetherSDR arrancará automáticamente los cuatro servidores TCP rigctld en los puertos `Base` hasta `Base+3`.
+AetherSDR iniciará ahora los cuatro servidores TCP de rigctld automáticamente en el próximo lanzamiento. Se utiliza el puerto base almacenado en `CatTcpPort` (predeterminado `4532`); los canales se vinculan a puerto, puerto+1, puerto+2 y puerto+3.
 
-2. Para verificar que los servidores iniciaron, haga clic en el botón de bandeja **CAT** en la barra lateral derecha para abrir el applet de control CAT. Cada fila de canal (A, B, C, D) debe mostrar un puerto y un recuento de clientes en lugar de `(stopped)`.
+### Habilitar el inicio automático para los puertos serie virtuales PTY
 
-### Inicio automático de puertos serie PTY (solo Linux/macOS)
+1. Abra `Settings > Autostart CAT with AetherSDR`.
+2. Haga clic en el elemento para colocar una marca de verificación junto a él.
 
-1. Haga clic en `Settings > Autostart CAT with AetherSDR`.
+AetherSDR creará ahora los enlaces simbólicos PTY en `/tmp/AetherSDR-CAT-A` hasta `/tmp/AetherSDR-CAT-D` automáticamente en el próximo lanzamiento.
 
-   Aparece una marca de verificación junto al elemento. En el próximo inicio, AetherSDR creará automáticamente enlaces simbólicos PTY en `/tmp/AetherSDR-CAT-A` hasta `/tmp/AetherSDR-CAT-D`.
+### Verificar la sesión actual sin reiniciar
 
-2. Para verificar, abra el applet de control CAT mediante el botón de bandeja **CAT**. La columna de ruta PTY en cada fila de canal mostrará la ruta del enlace simbólico activo cuando esté en ejecución.
+Si desea que los servidores se ejecuten de inmediato en la sesión actual:
 
-### Desactivar el inicio automático
+1. Haga clic en el botón `CAT` de la barra lateral derecha para abrir el applet CAT Control.
+2. Haga clic en `Enable TCP` para iniciar los servidores TCP ahora.
+3. Haga clic en `Enable TTY` para iniciar los enlaces simbólicos PTY ahora (solo Linux/macOS).
 
-1. Haga clic en el mismo elemento de menú nuevamente (`Settings > Autostart rigctld with AetherSDR` o `Settings > Autostart CAT with AetherSDR`).
-
-   Se elimina la marca de verificación. Los servidores o puertos PTY ya no se iniciarán al arrancar.
+Las filas de canales (A, B, C, D) se actualizarán de `(stopped)` a `:<port> (0 clients)` a medida que cada servidor se active.
 
 ## Qué hace cada control
 
-| Control | Valor predeterminado | Rango válido | Clave persistida | Comportamiento |
-|---|---|---|---|---|
-| `Settings > Autostart rigctld with AetherSDR` | Desactivado | Activado / Desactivado | `AutoStartRigctld` | Cuando está marcado, inicia los cuatro servidores TCP rigctld al arrancar. |
-| `Settings > Autostart CAT with AetherSDR` | Desactivado | Activado / Desactivado | `AutoStartCAT` | Cuando está marcado, crea enlaces simbólicos PTY al arrancar (Linux/macOS). |
-| Base (en el applet de control CAT) | `4532` | 1024–65535 | `CatTcpPort` | Puerto TCP base. Los canales se vinculan a `Base`, `Base+1`, `Base+2`, `Base+3`. Los valores fuera de rango revierten a `4532`. |
+| Control | Tipo | Predeterminado | Rango válido | Clave persistente | Comportamiento |
+|---|---|---|---|---|---|
+| `Enable TCP` | Botón de alternancia | Off | — | — | Inicia o detiene los cuatro servidores TCP de rigctld desde Base hasta Base+3. También guarda el puerto base actual en `CatTcpPort`. |
+| `Enable TTY` | Botón de alternancia | Off | — | — | Inicia o detiene los cuatro enlaces simbólicos PTY en `/tmp/AetherSDR-CAT-A` hasta `/tmp/AetherSDR-CAT-D`. |
+| `Base` | Campo de texto | `4532` | 1024–65535 | `CatTcpPort` | Establece el puerto TCP base. Los valores fuera de rango vuelven a `4532`. Si los servidores TCP ya están en ejecución, se reinician en el nuevo puerto de inmediato. |
+| Filas de canales A/B/C/D | Indicador | `(stopped)` | — | — | Muestra la insignia del canal, el estado TCP (puerto y cantidad de clientes) y la ruta PTY para cada uno de los cuatro canales. |
 
 ## Consejos
 
-- El inicio automático únicamente levanta los servidores; no abre el panel del applet de control CAT. El applet permanece oculto hasta que haga clic en el botón de bandeja **CAT**.
-- Si cambia el puerto base en el campo `Base` mientras los servidores TCP están en ejecución, estos se reinician automáticamente en los nuevos puertos. No es necesario desactivar y volver a activar `Enable TCP`.
-- La configuración de inicio automático TCP (`AutoStartRigctld`) y la configuración de inicio automático PTY (`AutoStartCAT`) son independientes. Puede activar una, ambas o ninguna.
+- El botón de alternancia `Enable TCP` en el applet refleja la configuración `AutoStartRigctld`. El botón de alternancia `Enable TTY` refleja la configuración `AutoStartCAT`. Al activar cualquiera de los botones en el applet, se actualiza también la preferencia de inicio automático, por lo que puede usar los botones del applet en lugar del menú Settings si lo prefiere.
+- Si cambia el puerto `Base` después de habilitar el inicio automático, el nuevo puerto se guarda en `CatTcpPort` y los servidores en ejecución se reinician en la nueva base de inmediato. El valor guardado también se utiliza en el próximo inicio automático.
 
 ## Solución de problemas
 
-- **Las filas de canal siguen mostrando `(stopped)` después del inicio con el arranque automático activado** — El inicio automático requiere una conexión de radio antes de que los servidores puedan vincularse. Si AetherSDR se inició pero aún no se ha conectado a la radio, los servidores no arrancarán. Conéctese a la radio y luego active `Enable TCP` manualmente en el applet de control CAT.
-- **Las rutas PTY no aparecen en Windows** — La creación de puertos serie PTY es una función de Linux/macOS. El elemento `Settings > Autostart CAT with AetherSDR` no tiene efecto en Windows.
-- **El enlace de puerto falla al iniciar** — Es posible que otra aplicación ya esté usando el puerto `4532` (o el puerto base que configuró). Cambie el puerto base en el campo `Base` del applet de control CAT y reinicie.
+- **Los servidores no se inician tras el lanzamiento aunque el inicio automático esté habilitado** — La radio debe estar conectada antes de que los servidores se activen. Confirme el estado de la conexión en la barra de título y vuelva a intentarlo una vez conectado.
+- **Los enlaces simbólicos PTY no aparecen** — El inicio automático `Enable TTY` solo funciona en Linux y macOS. En Windows, `Enable TTY` no tiene efecto.
+- **Puerto ya en uso** — Si otra aplicación ocupa un puerto en el rango Base–Base+3, el servidor correspondiente fallará silenciosamente. Cambie el valor de `Base` en el applet CAT Control a un rango de puertos libre y vuelva a habilitar TCP.
 
-## Relacionados
+## Relacionado
 
-- [Activar CAT TCP para que N1MM, Log4OM y WSJT-X puedan controlar la radio](enable-cat-tcp-so-n1mm-log4om-wsjt-x-can-control-the-radio.md)
-- [Activar CAT PTY para que aplicaciones de Linux/macOS puedan abrir un puerto CAT de estilo serie](enable-cat-pty-so-linux-macos-apps-can-open-a-serial-style-cat-port.md)
+- [Descripción general de CAT Control](overview.md)
+- [Habilitar CAT TCP para que N1MM, Log4OM, WSJT-X puedan controlar la radio](enable-cat-tcp-so-n1mm-log4om-wsjt-x-can-control-the-radio.md)
+- [Habilitar CAT PTY para que aplicaciones de Linux/macOS puedan abrir un puerto CAT de tipo serie](enable-cat-pty-so-linux-macos-apps-can-open-a-serial-style-cat-port.md)
 - [Cambiar el puerto TCP base](change-the-base-tcp-port.md)
 - [Verificar cuántos clientes externos están conectados a cada canal](../../getting-started/setup/check-how-many-external-clients-are-connected-to-each-channel.md)

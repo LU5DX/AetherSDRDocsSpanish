@@ -1,39 +1,35 @@
-# Eliminar uno o más canales de memoria
+# Eliminar uno o varios canales de memoria
 
-Use esta página para eliminar uno o más canales de memoria almacenados en su radio. Los canales eliminados se borran de forma permanente; no existe función de deshacer.
+Elimine los canales de memoria almacenados que ya no necesite. AetherSDR solicita confirmación antes de eliminar, por lo que ningún canal se pierde accidentalmente.
 
 ## Antes de comenzar
 
-- El radio debe estar conectado. El diálogo Memory Channels requiere una conexión activa con el radio.
-- Si desea hacer una copia de seguridad antes de eliminar, exporte sus memorias primero. Consulte [Exportar memorias para respaldo o compartir](export-memories-for-backup-or-sharing.md).
+- AetherSDR debe estar conectado al radio. La función Memory Channels requiere una conexión activa con el radio.
+- Identifique los canales que desea eliminar. Use Search: o Profile: para reducir la lista primero si es necesario.
 
 ## Pasos
 
-1. Abra `Settings > Memory...` para abrir el diálogo Memory Channels.
-2. Seleccione la memoria o las memorias que desea eliminar:
+1. Abra `Settings > Memory...` para abrir el cuadro de diálogo Memory Channels.
+2. Seleccione el canal o los canales que desea eliminar:
    - Haga clic en una fila individual para seleccionarla.
-   - Haga Shift-click para seleccionar un rango contiguo.
-   - Haga Ctrl-click (o Command-click en macOS) para agregar o quitar filas individuales de la selección.
-   - Haga clic en `Select All` para seleccionar todas las filas que se muestran actualmente en la tabla.
-3. Verifique el indicador de cantidad de selección en la parte inferior derecha del diálogo para confirmar que el número correcto de filas está seleccionado (se muestra como *N* selected).
-4. Haga clic en `Remove`.
-5. Confirme la eliminación cuando aparezca el mensaje de confirmación.
+   - Haga Shift-click en una segunda fila para seleccionar un rango contiguo.
+   - En Linux y Windows, haga Ctrl-click en filas individuales para agregarlas o quitarlas de la selección. En macOS, use Command-click.
+   - Haga clic en Select All para seleccionar todas las filas que se muestran en ese momento en la tabla.
+3. Confirme su selección verificando el indicador de cantidad de elementos seleccionados en la esquina inferior derecha del cuadro de diálogo (mostrado como `<N> selected`).
+4. Haga clic en Remove.
+5. Confirme la eliminación en el cuadro de diálogo de confirmación que aparece.
 
-Las memorias seleccionadas se eliminan del radio y desaparecen de la tabla.
+Los canales de memoria seleccionados se eliminan de forma permanente del radio.
 
 ## Consejos
 
-- Use el campo `Search:` o el cuadro combinado `Profile:` para filtrar la tabla antes de seleccionar, de modo que pueda aislar un grupo específico de memorias y usar `Select All` sin afectar las demás. Consulte [Buscar memorias por nombre](search-memories-by-name.md) y [Filtrar memorias por perfil](filter-memories-by-profile.md).
-- La indicación de selección en la parte inferior de la tabla señala: en Linux y Windows, Ctrl-click agrega o quita filas; en macOS, Command-click hace lo mismo.
+- Si tiene una lista de memoria extensa, use el campo Search: o el cuadro combinado Profile: para filtrar la tabla antes de usar Select All. Esto le permite seleccionar y eliminar rápidamente un subconjunto de canales sin tener que elegir cada fila manualmente.
+- La eliminación no se puede deshacer desde AetherSDR. Exporte sus canales de memoria antes de una eliminación masiva si es posible que los necesite más adelante.
 
-## Solución de problemas
+## Relacionados
 
-- **El botón Remove no tiene efecto** — No hay filas seleccionadas. Haga clic en al menos una fila de la tabla de memorias y luego haga clic en `Remove`.
-- **Las memorias reaparecen después de eliminarlas** — Es posible que el radio no haya confirmado el comando de eliminación. Verifique que la conexión con el radio esté activa e intente de nuevo.
-
-## Relacionado
-
-- [Exportar memorias para respaldo o compartir](export-memories-for-backup-or-sharing.md)
-- [Buscar memorias por nombre](search-memories-by-name.md)
-- [Filtrar memorias por perfil](filter-memories-by-profile.md)
-- [Agregar una memoria en la frecuencia actual](add-a-memory-at-current-frequency.md)
+- [Exportar canales de memoria para respaldo o compartir](export-memories-for-backup-or-sharing.md)
+- [Buscar canales de memoria por nombre](search-memories-by-name.md)
+- [Filtrar canales de memoria por perfil](filter-memories-by-profile.md)
+- [Importar canales de memoria desde un archivo CSV/JSON](import-memories-from-a-csv-json-file.md)
+- [Descripción general de Memory Channels](overview.md)

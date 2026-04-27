@@ -1,33 +1,31 @@
 # Confirmar visualmente cuando TX (MOX) está activo
 
-El applet Aetherial Audio Chain muestra un indicador rojo parpadeante en el extremo TX cada vez que su slice está transmitiendo activamente. Esto le permite confirmar de un vistazo que MOX está activo sin apartar la vista de la cadena.
+El applet Aetherial Audio Chain muestra un indicador rojo pulsante en el extremo TX cada vez que su slice está transmitiendo (MOX activo). Esto le permite confirmar de un vistazo que su radio está en el aire sin apartar la vista de su cadena de audio.
 
 ## Antes de comenzar
 
-- El applet Aetherial Audio Chain debe estar visible. Si no lo está, haga clic en el botón de bandeja `PUDU` en la barra lateral derecha para habilitar el contenedor.
-- La cadena TX debe estar visible. Haga clic en TX en el encabezado del applet si actualmente está seleccionado RX.
-- Su radio debe estar conectada y un slice debe estar activo.
+- El applet Aetherial Audio Chain debe estar visible. Si no lo está, haga clic en el botón de bandeja etiquetado como `PUDU` en la barra lateral derecha para abrir el contenedor Aetherial Audio.
+- Haga clic en `TX` en el encabezado del applet para que la cadena TX sea la vista activa.
 
 ## Pasos
 
-1. Abra el applet Aetherial Audio Chain haciendo clic en el botón de bandeja `PUDU` en la barra lateral derecha.
-2. Haga clic en `TX` en el encabezado del applet para mostrar la cadena TX. El botón TX se vuelve ámbar cuando está seleccionado.
-3. Active el transmisor mediante su método habitual (PTT, MOX o atajo de teclado).
-4. Observe el indicador del extremo TX al final de la tira de la cadena TX. Parpadea en rojo mientras su slice está transmitiendo.
-5. Suelte el transmisor. El parpadeo rojo se detiene y el indicador vuelve a su estado inactivo.
+1. Haga clic en el botón de bandeja `TX` en el encabezado del applet para mostrar la cadena DSP de TX.
+2. Active el radio (PTT, VOX o MOX).
+3. Observe el indicador del extremo TX al final de la tira de la cadena TX.
+
+El indicador del extremo TX pulsa en rojo mientras su slice está transmitiendo. Al desactivar la transmisión, el indicador vuelve a su estado inactivo (sin pulso).
 
 ## Qué hace cada control
 
-| Control | Tipo | Comportamiento | Valor predeterminado |
+| Etiqueta | Tipo | Comportamiento | Configuración persistida |
 |---|---|---|---|
-| `TX` | Botón de alternancia | Muestra y edita la cadena DSP de TX. Color ámbar cuando está seleccionado. La última pestaña activa persiste mediante `PooDooAudioActiveTab`. | Activado |
-| `RX` | Botón de alternancia | Muestra y edita la cadena DSP de RX. Oculta el indicador del extremo TX. La última pestaña activa persiste mediante `PooDooAudioActiveTab`. | Desactivado |
-| Indicador del extremo TX | Indicador | Parpadea en rojo mientras el slice activo está transmitiendo (MOX activado). Vuelve al estado inactivo cuando finaliza la transmisión. | Inactivo |
+| `TX` | Botón de alternancia | Muestra la cadena DSP de TX. Predeterminado: activado. Forma un par exclusivo con `RX`; aparece en color ámbar cuando está seleccionado. | `PooDooAudioActiveTab` = `TX` |
+| Indicador del extremo TX | Indicador | Pulsa en rojo mientras el radio está transmitiendo en el slice activo (controlado por el estado MOX). Inactivo cuando no se está transmitiendo. | — |
 
 ## Consejos
 
-- El indicador del extremo TX solo es visible cuando se muestra la cadena `TX`. Cambiar a `RX` lo oculta. Si necesita supervisar el estado de TX mientras edita la configuración de RX, vuelva primero a `TX`.
-- El parpadeo rojo es activado únicamente por el estado de transmisión de su propio slice. Los demás operadores en una sesión multiFLEX no lo activan.
+- El indicador del extremo TX solo está presente en el modo TX. Cambie a `TX` usando el botón `TX` en el encabezado del applet si ve la cadena RX en su lugar.
+- El pulso rojo es controlado por el estado MOX del radio, por lo que refleja el estado real en el aire independientemente de cómo se haya activado la transmisión (PTT por hardware, MOX por software, VOX).
 
 ## Relacionado
 

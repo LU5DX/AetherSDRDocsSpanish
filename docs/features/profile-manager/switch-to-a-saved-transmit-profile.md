@@ -1,42 +1,45 @@
 # Cambiar a un perfil de transmisión guardado
 
-Use esta página para aplicar un perfil de transmisión guardado anteriormente al radio. Cargar un perfil de transmisión restaura los ajustes de TX almacenados bajo el nombre de ese perfil.
+Cargue un perfil de transmisión guardado previamente en el radio. Esto aplica un conjunto almacenado de parámetros de TX en un solo paso, reemplazando la configuración de transmisión actual.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. Profile Manager requiere una conexión activa con el radio.
-- Debe existir al menos un perfil de transmisión en el radio. Si la lista de perfiles está vacía, consulte [Guardar el estado actual del radio como un nuevo perfil global](save-the-current-radio-state-as-a-new-global-profile.md) para saber cómo crear y guardar perfiles.
+- AetherSDR debe estar conectado al radio. El Profile Manager requiere una conexión activa con el radio.
+- Debe existir al menos un perfil de transmisión en el radio. Si la lista de perfiles está vacía, guarde un perfil primero.
 
 ## Pasos
 
 1. Haga clic en `Profiles > Profile Manager...` para abrir el diálogo Profile Manager.
-2. Haga clic en la pestaña `Transmit (tab)`.
-3. En la lista de perfiles, haga clic en el perfil que desea cargar. El perfil activo aparece resaltado.
-4. Haga clic en `Load`.
+2. Haga clic en la pestaña **Transmit (tab)** para cambiar a la lista de perfiles de transmisión.
+3. Haga clic en el perfil que desea cargar en la **Profile list**. El perfil activo aparece resaltado.
+4. Haga clic en **Load**.
 
-Alternativamente, haga doble clic en el nombre de un perfil de la lista para cargarlo inmediatamente sin necesidad de hacer clic en `Load`.
-
-5. Haga clic en `Close` cuando termine.
+Como alternativa, haga doble clic en cualquier entrada de la **Profile list** para cargarlo sin necesidad de hacer clic en **Load**.
 
 ## Qué hace cada control
 
-| Control | Tipo | Comportamiento | Ajuste persistente |
+| Control | Tipo | Comportamiento | Clave de configuración |
 |---|---|---|---|
-| `Transmit (tab)` | Pestaña | Muestra todos los perfiles de transmisión almacenados en el radio. | — |
-| Lista de perfiles | Lista | Muestra todos los perfiles de transmisión; el perfil actualmente activo aparece resaltado. Haga clic en un nombre para seleccionarlo. | — |
-| Nombre de perfil | Campo de texto | Se rellena automáticamente al seleccionar un perfil de la lista. | — |
-| `Load` | Botón | Envía el perfil seleccionado al radio, reemplazando los ajustes de TX actuales. Se habilita solo cuando hay un perfil seleccionado. | — |
-| `Save` | Botón | Guarda el estado de TX actual del radio bajo el nombre indicado en el campo de nombre de perfil. | — |
-| `Delete` | Botón | Elimina el perfil seleccionado tras confirmación. Se habilita solo cuando hay un perfil seleccionado. | — |
-| `Close` | Botón | Cierra el diálogo Profile Manager. | — |
+| **Transmit (tab)** | Pestaña | Cambia el diálogo a la vista de perfiles de transmisión. | — |
+| **Profile list** | Lista | Muestra todos los perfiles de transmisión almacenados en el radio. El perfil activo aparece resaltado. | — |
+| **Profile name** | Campo de texto | Se rellena automáticamente al seleccionar un elemento de la lista. Se utiliza al guardar; no es necesario para cargar. | — |
+| **Load** | Botón | Envía el perfil seleccionado al radio, reemplazando la configuración de TX actual. Solo se activa cuando hay un perfil seleccionado. | — |
+| **Save** | Botón | Guarda el estado de TX actual del radio con el nombre indicado en **Profile name**. | — |
+| **Delete** | Botón | Elimina el perfil seleccionado tras confirmación. Solo se activa cuando hay un perfil seleccionado. | — |
+| **Auto-save profile changes** | Casilla de verificación | Cuando está marcada, los cambios en la configuración de TX se escriben automáticamente en el perfil activo. | `AutoSaveTransmitProfile` |
 
-## Sugerencias
+## Consejos
 
-- Al seleccionar un perfil en la lista, el campo de nombre de perfil se rellena automáticamente con el nombre de ese perfil. Si luego hace clic en `Save`, el radio sobreescribe ese perfil con el estado de TX actual.
-- Para que los cambios de TX se escriban automáticamente en el perfil activo después de cargarlo, habilite `Auto-save profile changes` en la pestaña `Auto-Save (tab)`. Esto se controla mediante el ajuste `AutoSaveTransmitProfile`.
+- Al seleccionar un perfil en la lista, el campo **Profile name** se rellena con el nombre de ese perfil. Si luego hace clic en **Save**, el estado de TX actual sobreescribe ese perfil con el mismo nombre.
+- Si desea que los cambios de TX persistan en el perfil activo sin tener que hacer clic manualmente en **Save** cada vez, active **Auto-save profile changes** en la pestaña **Auto-Save (tab)**.
 
-## Relacionado
+## Solución de problemas
+
+- **Load aparece en gris** — No hay ningún perfil seleccionado en la **Profile list**. Haga clic en el nombre de un perfil para seleccionarlo y luego haga clic en **Load**.
+- **La Profile list está vacía** — Aún no existen perfiles de transmisión en el radio. Use **Save** para crear uno primero.
+
+## Relacionados
 
 - [Activar el guardado automático para que los ajustes de TX siempre persistan](turn-on-auto-save-so-tx-tweaks-always-persist.md)
-- [Descripción general de Profile Manager](overview.md)
-- [Renombrar o eliminar un perfil de micrófono](rename-or-delete-a-microphone-profile.md)
+- [Descripción general del Profile Manager](overview.md)
+- [Guardar el estado actual del radio como un nuevo perfil global](save-the-current-radio-state-as-a-new-global-profile.md)

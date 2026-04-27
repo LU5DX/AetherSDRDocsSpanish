@@ -1,37 +1,37 @@
-# Monitorear la velocidad del ventilador principal de refrigeración
+# Monitorear la Velocidad del Ventilador Principal de Enfriamiento
 
-El applet Meters incluye un indicador "Main Fan" que muestra en tiempo real la velocidad del ventilador principal de refrigeración del FLEX-8600. Úselo para confirmar que el ventilador está en funcionamiento y para detectar velocidades anormalmente altas que puedan indicar estrés térmico.
+Use el applet Meters para observar en tiempo real la velocidad del ventilador principal de enfriamiento del FLEX-8600. Esto le permite confirmar que el ventilador está en funcionamiento y detectar velocidades inusualmente altas que puedan indicar estrés térmico.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a la radio. El applet Meters requiere una conexión activa con la radio.
-- El panel de applets debe estar visible. Si no lo está, habilítelo mediante `View > Applet Panel`.
+- AetherSDR debe estar conectado al equipo. El applet Meters requiere una conexión activa con el equipo.
+- El panel de applets debe estar visible. Si está oculto, actívelo mediante `View > Applet Panel`.
 
 ## Pasos
 
-1. Haga clic en el botón de bandeja **MTR** en la barra lateral derecha para abrir el applet Meters.
-2. Observe el indicador **Main Fan** bajo el encabezado de sección "Radio Hardware".
-3. Lea la velocidad actual del ventilador en la barra horizontal. El rango del indicador es de 0–3000 rpm. La barra se vuelve roja por encima de 2500 rpm.
+1. Localice el botón **MTR** en la barra lateral derecha del panel de applets.
+2. Haga clic en **MTR** para abrir o cerrar el applet Meters.
+3. Lea el indicador **Main Fan** bajo el encabezado de sección **Radio Hardware**.
 
 ## Qué hace cada control
 
-| Control | Descripción | Rango válido | Línea roja |
+| Indicador | Qué muestra | Rango válido | Zona roja |
 |---|---|---|---|
-| Main Fan | Muestra la velocidad del ventilador principal de refrigeración de la radio. | 0–3000 rpm | > 2500 rpm (la barra se vuelve roja) |
-| PA Temp | Muestra la temperatura del PA. | 0–120 °C | > 70 °C |
-| +13.8V | Muestra el voltaje de alimentación de CC. | 10.0–16.0 V | > 15 V |
+| **Main Fan** | Velocidad actual del ventilador de enfriamiento en rpm, leída desde el medidor MAINFAN del equipo | 0–3000 rpm | Por encima de 2500 rpm |
+
+La barra del indicador es de color cian en el rango de operación normal y se torna roja por encima de 2500 rpm.
 
 ## Consejos
 
-- El indicador Main Fan se actualiza con cierta demora: la primera lectura puede aparecer un momento después de abrir el applet, una vez que la radio reporta el valor del medidor.
-- La barra se llena en cian, pasa por una zona amarilla y se vuelve roja a partir de 2500 rpm. Lecturas sostenidas en rojo durante transmisiones prolongadas pueden indicar ventilación insuficiente alrededor de la radio.
+- El indicador **Main Fan** se actualiza a medida que el equipo reporta nuevos valores de medición. Puede haber un breve retraso tras abrir el applet por primera vez, mientras se resuelve el índice del medidor.
+- El indicador utiliza animación suavizada para los cambios de valor, por lo que las fluctuaciones rápidas se mostrarán como un barrido suave en lugar de un salto instantáneo.
 
 ## Solución de problemas
 
-- **El indicador Main Fan no muestra movimiento** — El índice del medidor se resuelve después de establecer la conexión con la radio. Si el indicador permanece en blanco, desconéctese y vuelva a conectarse a la radio, luego reabra el applet Meters.
+- **El indicador Main Fan no muestra movimiento al abrir el applet** — El índice del medidor de ventilador se resuelve de forma diferida en la primera actualización. Espere unos segundos para que el equipo emita una lectura del medidor. Si el indicador permanece en cero, verifique que la conexión con el equipo esté activa mediante `Settings > Connect to Radio...`.
 
 ## Relacionados
 
 - [Descripción general de Meters](overview.md)
-- [Vigilar la temperatura del PA durante transmisiones prolongadas](watch-pa-temperature-during-long-overs.md)
-- [Verificar el voltaje de alimentación de CC de la radio](check-the-radio-s-dc-supply-voltage.md)
+- [Observar la temperatura del PA durante transmisiones prolongadas](watch-pa-temperature-during-long-overs.md)
+- [Verificar el voltaje de alimentación DC del equipo](check-the-radio-s-dc-supply-voltage.md)

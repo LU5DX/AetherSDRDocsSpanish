@@ -1,42 +1,42 @@
 # Recuperar una memoria del ATU
 
-La función de memoria del ATU permite que el radio recupere una solución de sintonía almacenada previamente para la frecuencia actual, omitiendo una re-sintonía completa. Úsela cuando regrese a una banda o frecuencia que haya sintonizado antes y desee que el sintonizador aplique la coincidencia almacenada de inmediato.
+Use la recuperación de memoria del ATU para aplicar una solución de sintonizador previamente almacenada para la banda o frecuencia actual, omitiendo un ciclo completo de sintonización.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. El applet TX Controls requiere una conexión de radio activa.
-- El ATU interno debe haber completado previamente una sintonía exitosa en o cerca de la frecuencia objetivo, para que exista una memoria almacenada.
-- El botón de bandeja TX debe estar habilitado para que el applet TX Controls sea visible en el Panel de Applets.
+- AetherSDR debe estar conectado al radio. El applet TX Controls requiere una conexión activa al radio.
+- El ATU interno del radio debe tener almacenada al menos una memoria de un ciclo de sintonización anterior. Si no existe ninguna memoria para la frecuencia actual, recuperarla no tendrá ningún efecto.
+- MEM está deshabilitado cuando el TGXL se encuentra en modo OPERATE.
 
 ## Pasos
 
-1. Abra el applet TX Controls. Haga clic en el botón de bandeja **TX** en la barra lateral derecha si el applet no está visible.
+1. Abra el applet TX Controls. Si no está visible, haga clic en el botón de bandeja **TX** en la barra lateral derecha.
 2. Haga clic en **MEM** para activar la recuperación de memoria del ATU.
-3. Verifique el indicador **Mem**. Se ilumina en verde cuando el ATU está utilizando activamente una memoria almacenada para la frecuencia actual.
-
-Para desactivar la recuperación de memoria, haga clic en **MEM** nuevamente. El indicador **Mem** vuelve a estar apagado.
+3. Confirme que el indicador **Mem** se ilumina en verde. Un indicador **Mem** en verde confirma que el ATU está usando activamente una memoria almacenada.
+4. Para dejar de usar la memoria almacenada, haga clic en **MEM** nuevamente. El indicador **Mem** vuelve a su estado apagado.
 
 ## Qué hace cada control
 
-| Control | Tipo | Comportamiento | Valor predeterminado |
+| Control | Tipo | Comportamiento | Predeterminado |
 |---|---|---|---|
-| **MEM** | Botón de alternancia | Activa o desactiva la recuperación de memoria del ATU. Deshabilitado cuando el TGXL está en modo OPERATE. | Desactivado |
-| **Mem** | Indicador | Se ilumina en verde cuando el ATU utiliza una memoria almacenada. Apagado cuando la recuperación de memoria está desactivada o no aplica ninguna memoria. | Apagado |
-| **Success** | Indicador | Se ilumina en verde cuando el estado del ATU es Successful u OK. | Apagado |
-| **Byp** | Indicador | Se ilumina en naranja cuando el ATU está en Bypass o ManualBypass. | Apagado |
+| MEM | Botón de alternancia | Activa o desactiva la recuperación de memoria del ATU. Cuando está activo, el radio aplica una solución de sintonizador almacenada en lugar de ejecutar un nuevo ciclo de sintonización. Deshabilitado cuando el TGXL está en modo OPERATE. | Desactivado |
+| Mem | Indicador | Se ilumina en verde cuando el ATU está usando una memoria. Apagado cuando la recuperación de memoria está desactivada o no hay ninguna memoria en uso. | Apagado |
+| Success | Indicador | Se ilumina en verde cuando el estado del ATU es Successful u OK. | Apagado |
+| Byp | Indicador | Se ilumina en naranja cuando el ATU está en Bypass o ManualBypass. | Apagado |
 
 ## Consejos
 
-- Si **Mem** no se ilumina después de habilitar **MEM**, no existe ninguna memoria almacenada para la frecuencia actual. Ejecute primero el ATU con el botón **ATU** y luego habilite **MEM** la próxima vez que visite esa frecuencia.
-- **MEM** y **ATU** están ambos deshabilitados cuando el TGXL está en modo OPERATE. Si alguno de los botones aparece en gris, verifique el modo de su TGXL.
+- Si **Byp** se ilumina en naranja después de habilitar **MEM**, el ATU ha vuelto al modo bypass. Ejecute un nuevo ciclo de sintonización con **ATU** para generar una nueva memoria para la frecuencia actual.
+- El indicador **Mem** y el indicador **Success** pueden estar iluminados al mismo tiempo: **Mem** confirma que hay una memoria en uso, mientras que **Success** confirma que la solución almacenada es válida.
 
 ## Solución de problemas
 
-- **El botón MEM aparece en gris** — El TGXL está en modo OPERATE. La recuperación de memoria del ATU no está disponible en este modo. Cambie el TGXL fuera del modo OPERATE para volver a habilitar el control.
-- **El indicador Mem permanece apagado después de habilitar MEM** — No existe ninguna memoria del ATU para la frecuencia actual. Ejecute una sintonía completa del ATU con **ATU** y luego active **MEM**.
+- **El botón MEM aparece atenuado y no se puede hacer clic** — El TGXL está en modo OPERATE. La recuperación de memoria no se puede alternar en este modo. Verifique el modo de operación del TGXL antes de continuar.
+- **El indicador Mem permanece apagado después de hacer clic en MEM** — No existe ninguna memoria del ATU almacenada para la frecuencia actual. Ejecute primero un ciclo completo de sintonización del ATU con **ATU** y luego intente **MEM** nuevamente.
+- **Byp se ilumina en naranja en lugar de que Mem se ponga verde** — El ATU ha entrado en bypass porque no se encontró ninguna memoria utilizable. Use **ATU** para sintonizar y almacenar una nueva solución.
 
-## Temas relacionados
+## Relacionado
 
 - [Ejecutar el ATU interno](run-the-internal-atu.md)
-- [Iniciar una portadora de sintonía para verificar la ROE](start-a-tune-carrier-to-check-swr.md)
+- [Iniciar una portadora de sintonización para verificar la ROE](start-a-tune-carrier-to-check-swr.md)
 - [Descripción general de TX Controls](overview.md)

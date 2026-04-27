@@ -1,31 +1,32 @@
 # Buscar memorias por nombre
 
-Use el campo Search del diálogo Memory Channels para filtrar la tabla de memorias y mostrar solo las entradas cuyo nombre coincida con lo que escriba. Esto resulta útil cuando tiene una gran cantidad de frecuencias almacenadas y desea localizar una en particular rápidamente.
+Use el campo Search en Memory Channels para reducir la tabla a las memorias cuyos nombres coincidan con lo que escriba. Esto es útil cuando tiene un gran número de frecuencias almacenadas y desea encontrar una específica rápidamente.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. El diálogo Memory Channels requiere una conexión de radio activa.
-- Abra el diálogo Memory Channels mediante `Settings > Memory...`.
+- AetherSDR debe estar conectado al radio. Memory Channels requiere una conexión de radio activa.
+- Abra Memory Channels mediante `Settings > Memory...`.
 
 ## Pasos
 
 1. Abra `Settings > Memory...`.
-2. Haga clic en el campo **Search:** ubicado en la parte superior del diálogo.
-3. Escriba parte o todo el nombre de la memoria que desea encontrar. La tabla se filtra a medida que escribe.
-4. Para borrar la búsqueda y mostrar todas las memorias, haga clic en el botón de borrado dentro del campo **Search:**.
+2. Haga clic en el campo **Search:** en la parte superior del diálogo.
+3. Escriba cualquier parte del nombre de la memoria. La tabla se filtra mientras escribe — no es necesario presionar Enter para ver los resultados.
+4. Para saltar a la fila actual y activarla, presione Enter.
+5. Para borrar el filtro y mostrar todas las memorias, haga clic en el botón de borrado dentro del campo **Search:**.
 
 ## Qué hace cada control
 
 | Control | Comportamiento | Notas |
 |---|---|---|
-| **Search:** | Filtra la tabla de memorias para mostrar las filas cuyo nombre coincida con el texto ingresado. | Tiene un botón de borrado. Presione Enter para activar la fila resaltada actualmente. |
+| **Search:** | Filtra la tabla de memorias por nombre de memoria. | Tiene un botón de borrado. Presionar Enter activa la fila actual. |
+| Tabla de memorias | Muestra solo las memorias cuyos nombres coinciden con el texto de búsqueda. | Combínela con **Profile:** para reducir aún más los resultados. |
 
 ## Consejos
 
-- No es necesario presionar Enter para filtrar: la tabla se actualiza con cada carácter que escriba.
-- Presionar Enter después de escribir confirma y activa (sintoniza) la fila seleccionada actualmente en los resultados filtrados.
-- El campo **Search:** puede enfocarse rápidamente mediante el atajo de teclado de búsqueda (`Ctrl+F` en Linux y Windows, `Cmd+F` en macOS) sin necesidad de usar el mouse.
-- Use el cuadro combinado **Profile:** junto al campo de búsqueda para restringir los resultados a un perfil específico antes de buscar.
+- El filtro se actualiza con cada pulsación de tecla, por lo que puede dejar de escribir en cuanto la lista sea lo suficientemente corta para encontrar su entrada.
+- Después de filtrar, use Shift-click o Ctrl-click (Command-click en macOS) para seleccionar varias filas de los resultados filtrados.
+- Para buscar y sintonizar de inmediato, escriba suficiente parte del nombre para aislar una sola fila, confirme que esté resaltada y luego presione Enter.
 
 ## Relacionados
 

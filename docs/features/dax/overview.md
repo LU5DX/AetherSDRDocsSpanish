@@ -1,46 +1,46 @@
 # Descripción general de DAX Audio
 
-El applet DAX (Digital Audio eXchange) actúa como puente de audio entre el FLEX-8600 y otros programas en su computadora — por ejemplo, programas de modos digitales como WSJT-X o fldigi. Proporciona controles deslizantes de ganancia RX y medidores por canal para los canales DAX 1–4, un único control deslizante de ganancia TX con su medidor, e indicadores de asignación de slice (rebanada de espectro) que muestran qué slice está enrutado a cada canal.
+El applet DAX (Digital Audio eXchange) proporciona un puente de audio por software entre su FLEX-8600 y otras aplicaciones que se ejecutan en su computadora, como programas de modos digitales y de registro de QSO. Ofrece control de ganancia de RX por canal y medición para cuatro flujos de recepción, más un único flujo de TX.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600. El applet DAX requiere una conexión activa con la radio.
-- El applet DAX está oculto de forma predeterminada. Haga clic en el botón **DAX** de la barra lateral derecha para mostrarlo.
+- AetherSDR debe estar conectado a una radio FLEX-8600 antes de que el applet DAX sea funcional.
+- El applet DAX está oculto de forma predeterminada. Haga clic en el botón **DAX** de la bandeja en la barra lateral derecha para mostrarlo.
 
 ## Cómo funciona
 
-Al hacer clic en **Enable**, AetherSDR inicia el puente de audio DAX y guarda su elección en `AutoStartDAX`. El puente expone hasta cuatro flujos de audio RX (uno por asignación de slice) y un flujo de audio TX al sistema operativo del equipo.
+El applet DAX conecta el audio entre la radio y el subsistema de audio del sistema operativo. Cuando hace clic en **Enable**, AetherSDR inicia el puente de audio DAX, haciendo que el audio del slice (canal de recepción independiente) de la radio esté disponible como dispositivos de audio virtuales que otras aplicaciones pueden seleccionar como entrada o salida.
 
-Cada canal RX (DAX 1–4) dispone de un medidor combinado con control deslizante de ganancia. El medidor muestra el nivel RMS suavizado del audio entrante después del fader — el nivel mostrado refleja la ganancia multiplicada por la señal bruta, de modo que arrastrar el control ofrece retroalimentación visual inmediata. El canal TX funciona de la misma manera para el audio saliente.
+El applet muestra cuatro canales RX (DAX 1–4) y un canal TX. Cada canal RX puede asignarse a un slice de la radio; la asignación se muestra en el indicador de estado junto a cada canal. El canal TX lleva el audio desde su computadora al transmisor de la radio e indica qué slice tiene actualmente los privilegios de TX.
 
-Los indicadores de asignación de slice junto a cada canal muestran qué slice (A–H) está enrutado en ese momento. Si no hay ningún slice asignado, el indicador muestra —. El indicador TX muestra qué slice tiene actualmente los privilegios de transmisión; no es editable por el usuario desde aquí.
+Cada canal cuenta con un medidor y control deslizante de ganancia combinados (un MeterSlider). La barra de fondo muestra el nivel de audio en tiempo real después del fader — el nivel RMS suavizado multiplicado por la ganancia actual — de modo que la barra refleja el nivel de salida real. Un control deslizable permite ajustar la ganancia. Los cambios de ganancia se guardan de inmediato.
 
-Para iniciar DAX automáticamente cada vez que se inicia AetherSDR, utilice `Settings > Autostart DAX with AetherSDR`.
+También puede configurar DAX para que se inicie automáticamente cada vez que AetherSDR se abra mediante `Settings > Autostart DAX with AetherSDR`.
 
 ## Qué hace cada control
 
-| Control | Función | Valor predeterminado | Rango | Clave de configuración |
+| Control | Descripción | Predeterminado | Rango válido | Clave de configuración |
 |---|---|---|---|---|
-| **Enable** | Inicia o detiene el puente de audio DAX. Interruptor principal para todos los flujos RX y TX. | Off | On / Off | `AutoStartDAX` |
-| Ganancia+medidor **DAX 1** | Establece la ganancia RX y muestra el nivel de audio del canal DAX 1. | 0.5 | 0.0–1.0 | `DaxRxGain1` |
-| Ganancia+medidor **DAX 2** | Establece la ganancia RX y muestra el nivel de audio del canal DAX 2. | 0.5 | 0.0–1.0 | `DaxRxGain2` |
-| Ganancia+medidor **DAX 3** | Establece la ganancia RX y muestra el nivel de audio del canal DAX 3. | 0.5 | 0.0–1.0 | `DaxRxGain3` |
-| Ganancia+medidor **DAX 4** | Establece la ganancia RX y muestra el nivel de audio del canal DAX 4. | 0.5 | 0.0–1.0 | `DaxRxGain4` |
-| Ganancia+medidor **TX** | Establece la ganancia TX y muestra el nivel de audio del flujo DAX TX. | 0.5 | 0.0–1.0 | `DaxTxGain` |
-| Indicador de asignación de slice (por canal RX) | Muestra qué slice (p. ej., Slice A) está enrutado a este canal DAX, o — si no hay ninguno asignado. | — | — o Slice A–H | — |
-| Indicador de asignación TX | Muestra qué slice tiene actualmente los privilegios de TX y gestiona el flujo DAX TX. | — | — o Slice A–H | — |
+| **Enable** | Interruptor principal. Inicia o detiene el puente de audio DAX. | Off | On / Off | `AutoStartDAX` |
+| Ganancia+medidor **DAX 1** | Medidor de nivel y control deslizante de ganancia combinados para el canal RX 1 de DAX. Arrastre el control para ajustar la ganancia. | 0.5 | 0.0–1.0 | `DaxRxGain1` |
+| Ganancia+medidor **DAX 2** | Medidor de nivel y control deslizante de ganancia combinados para el canal RX 2 de DAX. | 0.5 | 0.0–1.0 | `DaxRxGain2` |
+| Ganancia+medidor **DAX 3** | Medidor de nivel y control deslizante de ganancia combinados para el canal RX 3 de DAX. | 0.5 | 0.0–1.0 | `DaxRxGain3` |
+| Ganancia+medidor **DAX 4** | Medidor de nivel y control deslizante de ganancia combinados para el canal RX 4 de DAX. | 0.5 | 0.0–1.0 | `DaxRxGain4` |
+| Ganancia+medidor **TX** | Medidor de nivel y control deslizante de ganancia combinados para el flujo TX de DAX. | 0.5 | 0.0–1.0 | `DaxTxGain` |
+| Estado de asignación de slice (RX, por canal) | Indicador de solo lectura que muestra qué slice está enrutado a cada canal RX de DAX. Muestra `—` cuando no está asignado, o `Slice A` a `Slice H` cuando está asignado. | — | `—` o `Slice A`–`Slice H` | — |
+| Estado de asignación TX | Indicador de solo lectura que muestra qué slice tiene actualmente los privilegios de TX y alimenta el flujo TX de DAX. Muestra `—` cuando no hay ningún slice de TX activo. | — | `—` o `Slice A`–`Slice H` | — |
 
 ## Consejos
 
-- Los valores de ganancia y medidor se guardan inmediatamente al arrastrar un control deslizante. Persisten entre reinicios.
-- La dinámica del medidor utiliza un ataque rápido y una caída lenta, lo que coincide con el comportamiento de los medidores en el resto de AetherSDR.
+- Los ajustes de ganancia de todos los canales se guardan de inmediato en cada evento de arrastre — no es necesario hacer clic en un botón de guardar.
+- Para que el puente DAX se inicie cada vez que AetherSDR se abra, use `Settings > Autostart DAX with AetherSDR` en lugar de hacer clic en **Enable** manualmente en cada sesión.
 
 ## Temas relacionados
 
-- [Habilitar DAX para enrutar audio de slice a WSJT-X / FLDigi / otro software digital](enable-dax-to-route-slice-audio-to-wsjt-x-fldigi-other-digital-software.md)
-- [Ajustar la ganancia DAX RX por canal](set-dax-rx-gain-per-channel.md)
-- [Ajustar la ganancia DAX TX](set-dax-tx-gain.md)
-- [Inicio automático de DAX al arrancar](autostart-dax-on-launch.md)
-- [Ver qué slice está usando cada canal DAX](see-which-slice-is-currently-using-each-dax-channel.md)
-- [Identificar cuál es el slice de TX](identify-which-slice-is-the-tx-slice.md)
+- [Habilitar DAX para enrutar el audio del slice a WSJT-X / FLDigi / otro software de modos digitales](enable-dax-to-route-slice-audio-to-wsjt-x-fldigi-other-digital-software.md)
+- [Inicio automático de DAX al abrir la aplicación](autostart-dax-on-launch.md)
+- [Ajustar la ganancia RX de DAX por canal](set-dax-rx-gain-per-channel.md)
+- [Ajustar la ganancia TX de DAX](set-dax-tx-gain.md)
+- [Ver qué slice está utilizando cada canal DAX](see-which-slice-is-currently-using-each-dax-channel.md)
+- [Identificar qué slice es el slice de TX](identify-which-slice-is-the-tx-slice.md)
 - [Configuración de modos digitales (FT8, WSJT-X, fldigi)](../../operating/digital-modes/digital-modes-setup.md)

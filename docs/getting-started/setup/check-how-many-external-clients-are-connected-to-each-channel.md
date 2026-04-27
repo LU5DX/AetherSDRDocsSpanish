@@ -1,45 +1,52 @@
 # Verificar cuántos clientes externos están conectados a cada canal
 
-El applet CAT Control muestra un recuento de clientes en tiempo real para cada uno de los cuatro canales TCP de rigctld. Use esto para confirmar que el software de registro o de concurso se ha conectado correctamente al canal adecuado.
+El applet CAT Control muestra el recuento de clientes en tiempo real para cada uno de los cuatro canales TCP de rigctld (A–D). Use esto para confirmar que su software de registro o de concurso se ha conectado correctamente al canal adecuado.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. El applet CAT requiere una conexión de radio activa.
-- Los servidores TCP deben estar en ejecución. Haga clic en "Enable TCP" en el applet CAT si aún no lo ha hecho. Consulte [Habilitar CAT TCP para que N1MM, Log4OM, WSJT-X puedan controlar el radio](../../features/cat-control/enable-cat-tcp-so-n1mm-log4om-wsjt-x-can-control-the-radio.md).
+- El radio debe estar conectado. El applet CAT Control requiere una conexión de radio activa.
+- Enable TCP debe estar activo. Si los servidores no están en ejecución, todos los canales muestran `(stopped)` y ningún cliente puede conectarse. Consulte [Habilitar CAT TCP para que N1MM, Log4OM, WSJT-X puedan controlar el radio](../../features/cat-control/enable-cat-tcp-so-n1mm-log4om-wsjt-x-can-control-the-radio.md).
 
 ## Pasos
 
-1. Haga clic en el botón CAT del panel lateral derecho para abrir el applet CAT Control.
-2. Observe las cuatro filas de canales etiquetadas **A**, **B**, **C** y **D**.
-3. Lea el campo de estado TCP junto a cada identificador de canal:
-   - `(stopped)` — el servidor TCP de ese canal no está en ejecución.
-   - `:<port> (0 clients)` — el servidor está escuchando pero ningún software externo está conectado.
-   - `:<port> (1 client)` — un cliente externo está conectado.
-   - `:<port> (N clients)` — N clientes están conectados.
+1. Haga clic en el botón de bandeja **CAT** en la barra lateral derecha para abrir el applet CAT Control.
+2. Lea la etiqueta de estado TCP en la fila de cada canal (A, B, C, D).
 
-El estado se actualiza automáticamente cada vez que un cliente se conecta o desconecta. No se necesita actualización manual.
+Cada fila muestra uno de los siguientes estados:
+
+| Indicación | Significado |
+|---|---|
+| `(stopped)` | El servidor TCP de ese canal no está en ejecución. |
+| `:<port> (0 clients)` | El servidor está en ejecución; ningún cliente externo está conectado. |
+| `:<port> (1 client)` | Un cliente externo está conectado en ese puerto. |
+| `:<port> (N clients)` | N clientes externos están conectados en ese puerto. |
+
+El puerto que se muestra es el puerto base para el canal A, base+1 para B, base+2 para C y base+3 para D. El puerto base predeterminado es `4532` (persistido como `CatTcpPort`).
 
 ## Qué hace cada control
 
-| Control | Tipo | Valor predeterminado | Notas |
-|---|---|---|---|
-| Filas de canales (A / B / C / D) | Indicador | `(stopped)` | Cada fila muestra un identificador de canal con código de color, el estado TCP y el recuento de clientes, y la ruta PTY. El color del campo de estado cambia para coincidir con el color del slice cuando uno o más clientes están conectados. |
-| Enable TCP | Botón de alternancia | Desactivado | Inicia o detiene los cuatro servidores TCP de rigctld. Los puertos se asignan en Base, Base+1, Base+2, Base+3. |
-| Base | Campo de texto | `4532` | Puerto TCP base. Rango válido: 1024–65535. Los valores fuera de este rango vuelven automáticamente a `4532`. Se almacena como `CatTcpPort`. |
+| Control | Valor predeterminado | Rango válido | Clave persistida | Comportamiento |
+|---|---|---|---|---|
+| **Enable TCP** | Desactivado | Activado / Desactivado | — | Inicia o detiene los cuatro servidores TCP de rigctld. También guarda el puerto base actual en `CatTcpPort`. |
+| **Enable TTY** | Desactivado | Activado / Desactivado | — | Inicia o detiene los cuatro enlaces simbólicos PTY en `/tmp/AetherSDR-CAT-A` hasta `/tmp/AetherSDR-CAT-D`. |
+| **Base** | `4532` | 1024–65535 | `CatTcpPort` | Establece el puerto TCP base. Los canales se vinculan a base, base+1, base+2, base+3. Los valores fuera del rango válido vuelven a `4532`. Si los servidores están en ejecución, se reinician en los nuevos puertos de inmediato. |
+| Filas de canales A/B/C/D | `(stopped)` | — | — | Cada fila muestra la insignia de color del slice (canal de recepción), el estado TCP con el recuento de clientes y la ruta PTY. Se actualiza en tiempo real cuando los clientes se conectan o desconectan. |
 
 ## Consejos
 
-- El color de la etiqueta de estado TCP cambia al color del slice cuando al menos un cliente está activo, lo que facilita identificar los canales activos de un vistazo.
-- Los canales A a D corresponden a los slices 0 al 3. Asegúrese de que su software externo apunte al puerto correcto para el slice que debe controlar.
+- La etiqueta de estado TCP cambia de color cuando hay un cliente conectado: adopta el color del slice de ese canal, lo que facilita identificar de un vistazo qué canales están en uso.
+- Si cambia el valor en **Base** mientras los servidores están en ejecución, los cuatro servidores se reinician automáticamente en los nuevos puertos. Los clientes conectados serán desconectados y deberán reconectarse.
 
 ## Solución de problemas
 
-- **Todas las filas muestran `(stopped)` aunque Enable TCP esté activado** — Es posible que el puerto base esté en uso por otra aplicación. Cambie el valor en el campo Base a un puerto libre en el rango 1024–65535 y presione Enter. Los servidores se reiniciarán automáticamente.
-- **El recuento de clientes no aumenta después de conectar software externo** — Confirme que el software apunta al número de puerto correcto para el canal deseado (Base para A, Base+1 para B, Base+2 para C, Base+3 para D). Verifique que Enable TCP esté activo (el botón aparece resaltado en verde cuando está activado).
+- **Todas las filas muestran `(stopped)` aunque Enable TCP esté activo** — Es posible que se haya perdido la conexión del radio. Verifique que AetherSDR esté conectado al FLEX-8600 y luego desactive y vuelva a activar **Enable TCP**.
+- **El recuento de clientes permanece en 0 después de iniciar el software de registro** — Confirme que el software apunta al puerto correcto. El canal A usa el puerto base (`4532` de forma predeterminada), B usa base+1, y así sucesivamente. Verifique el valor en el campo **Base** y compárelo con el puerto configurado en su software.
+- **El servidor no logra iniciarse en el puerto seleccionado** — Es posible que otra aplicación ya esté escuchando en ese puerto. Cambie el valor de **Base** a un rango de puertos libre y haga clic en **Enable TCP** nuevamente.
 
-## Relacionados
+## Temas relacionados
 
 - [Habilitar CAT TCP para que N1MM, Log4OM, WSJT-X puedan controlar el radio](../../features/cat-control/enable-cat-tcp-so-n1mm-log4om-wsjt-x-can-control-the-radio.md)
 - [Cambiar el puerto TCP base](../../features/cat-control/change-the-base-tcp-port.md)
 - [Iniciar automáticamente los servidores CAT con AetherSDR](../../features/cat-control/autostart-cat-servers-with-aethersdr.md)
+- [Habilitar CAT PTY para que las aplicaciones de Linux/macOS puedan abrir un puerto CAT de estilo serie](../../features/cat-control/enable-cat-pty-so-linux-macos-apps-can-open-a-serial-style-cat-port.md)
 - [Ver cuántos clientes TCI están conectados](see-how-many-tci-clients-are-connected.md)

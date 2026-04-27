@@ -1,53 +1,58 @@
 # Abrir el editor sin marco para agregar, eliminar y ajustar bandas en cualquier lado
 
-El editor sin marco es donde se agregan, eliminan y ajustan las bandas de EQ individuales para la cadena TX o RX. Los mosaicos del applet muestran la curva resultante en modo de solo lectura; toda la edición ocurre en esta ventana flotante.
+El editor sin marco es donde se realiza todo el trabajo activo de ecualización: agregar y eliminar bandas, arrastrarlas a nuevas frecuencias y ganancias, ajustar la Q, cambiar tipos de filtro y seleccionar una familia de filtros. Los mosaicos del applet son solo de visualización; esta ventana flotante es la superficie de edición.
 
 ## Antes de comenzar
 
-- El contenedor principal Aetherial Audio (TXDSP) debe ser visible en el panel de applets.
-- La etapa de EQ del lado que desea editar (TX o RX) debe estar habilitada. Si aún no lo está, consulte [Omitir la etapa de EQ desde la cadena](bypass-the-eq-stage-from-the-chain.md).
+- El contenedor principal de Aetherial Audio (TXDSP) debe estar visible en el panel del applet.
+- La etapa de ecualización TX o RX que desea editar debe existir en el widget CHAIN. Si la etapa aún no está en la cadena, agréguela allí primero.
 
 ## Pasos
 
-1. Localice el widget CHAIN dentro del contenedor Aetherial Audio (TXDSP).
-2. Haga doble clic en la etapa de EQ del lado que desea editar — la etapa TX para abrir "Aetherial Parametric EQ — TX", o la etapa RX para abrir "Aetherial Parametric EQ — RX".
-3. El editor sin marco se abre con su tamaño predeterminado (900 × 520 px). La barra de título muestra qué ruta está activa.
-4. Para **agregar una banda**, haga clic en una ranura vacía en la fila de iconos ubicada en la parte superior del área del lienzo.
-5. Para **eliminar una banda**, selecciónela en la fila de iconos o haciendo clic en su controlador en el lienzo, y luego use el control de eliminación en esa fila.
-6. Para **ajustar una banda**:
-   - Arrastre un nodo de pico o de shelving en el lienzo horizontalmente para ajustar la frecuencia, verticalmente para ajustar la ganancia.
-   - Mantenga presionado Shift y arrastre para ajustar el Q.
-   - Arrastre un nodo HP o LP horizontalmente para ajustar la frecuencia; arrastre verticalmente para ajustar el Q.
-   - Haga clic en el icono de una banda para cambiar cíclicamente su tipo de filtro.
-7. Para cambiar la familia de filtros utilizada en el cálculo en cascada HP/LP, seleccione una opción del menú desplegable en la franja superior derecha del editor: **Butterworth**, **Chebyshev**, **Bessel** o **Elliptic**.
-8. Para cambiar a la otra ruta sin cerrar el editor, haga doble clic en la etapa de EQ opuesta en el widget CHAIN. El título y el contenido del editor se actualizan para reflejar la nueva ruta.
-9. Cierre el editor haciendo clic en el botón de cierre de la barra de título del editor. La configuración de las bandas se guarda automáticamente en `ClientEqTxBands` o `ClientEqRxBands`.
+1. Localice el widget CHAIN para el lado que desea editar (TX o RX).
+2. Haga doble clic en la etapa de EQ en el widget CHAIN para ese lado.
+   - Hacer doble clic en la etapa de EQ de TX abre el editor con el título **Aetherial Parametric EQ — TX**.
+   - Hacer doble clic en la etapa de EQ de RX abre el editor con el título **Aetherial Parametric EQ — RX**.
+3. La ventana del editor sin marco aparece con su tamaño predeterminado (900 × 520 px). Su barra de título indica qué lado está activo.
+4. Para **agregar una banda**, utilice la fila de iconos en la parte superior del área del lienzo. Haga clic en el icono del tipo de banda correspondiente para insertar una banda en una posición predeterminada.
+5. Para **eliminar una banda**, selecciónela en el lienzo o en la fila de parámetros y utilice el control de eliminación en la fila de iconos.
+6. Para **ajustar una banda**, arrástrela directamente sobre el lienzo:
+   - Para bandas de pico y shelf: arrastre para ajustar la frecuencia y la ganancia simultáneamente.
+   - Para bandas HP/LP: arrastre para ajustar la frecuencia y la Q.
+   - Mantenga presionado **Shift** mientras arrastra para ajustar únicamente la Q.
+   - Haga clic en el icono de una banda para recorrer los tipos de filtro disponibles.
+7. Para cambiar la **familia de filtros** aplicada al cálculo en cascada HP/LP, abra el menú desplegable en la franja superior y seleccione una de las siguientes opciones: **Butterworth**, **Chebyshev**, **Bessel** o **Elliptic**.
+8. Para congelar la traza de pico del analizador mientras ajusta, haga clic en **Peak Hold**. Haga clic nuevamente para reanudar la caída normal.
+9. Para descartar todas las ediciones y volver a los valores predeterminados, haga clic en **Reset**. Esto restaura el número de bandas y los parámetros predeterminados, y restablece la familia de filtros a Butterworth. El restablecimiento se guarda de inmediato.
+10. Para cerrar el editor, utilice el botón de cierre en la barra de título sin marco del editor. Los mosaicos del applet continúan mostrando la curva sumada para sus respectivos lados.
 
 ## Qué hace cada control
 
-| Control | Descripción | Notas |
-|---|---|---|
-| Lienzo | Pantalla interactiva de respuesta en frecuencia. Arrastre los nodos de banda para ajustar. | Objetivo de edición; el mosaico del applet es solo de visualización. |
-| Fila de iconos | Un icono por banda. Haga clic para seleccionar o cambiar cíclicamente el tipo de filtro. | Se reconstruye al agregar o eliminar bandas. |
-| Fila de parámetros | Lectura numérica e ingreso de valores para la frecuencia, ganancia y Q de la banda seleccionada. | Se actualiza en tiempo real durante los arrastres en el lienzo. |
-| Menú desplegable de familia de filtros | Define el cálculo en cascada HP/LP para la ruta activa. Opciones: **Butterworth**, **Chebyshev**, **Bessel**, **Elliptic**. Predeterminado: Butterworth. | Se aplica solo a los tipos de banda HP y LP; los picos y shelves usan topología fija de segundo orden. |
-| Fader de salida | Control deslizante vertical y medidor en el borde derecho. Establece la ganancia de salida maestra para la ruta activa. | Ajusta `setMasterGain` para el EQ vinculado; el valor se guarda al cambiar. |
-| Barra de título | Muestra "Aetherial Parametric EQ — TX" o "— RX". Arrastre para mover la ventana. | Una instancia de editor compartida; el título cambia cuando se cambia la ruta. |
+| Control | Función | Valor predeterminado | Clave de persistencia |
+|---|---|---|---|
+| Lienzo (arrastrar — pico/shelf) | Ajusta la frecuencia y la ganancia de la banda seleccionada | Valores predeterminados por banda | `ClientEqRxBands` / `ClientEqTxBands` |
+| Lienzo (arrastrar — HP/LP) | Ajusta la frecuencia y la Q de la banda seleccionada | Valores predeterminados por banda | `ClientEqRxBands` / `ClientEqTxBands` |
+| Lienzo (Shift + arrastrar) | Ajusta únicamente la Q de la banda seleccionada | — | `ClientEqRxBands` / `ClientEqTxBands` |
+| Icono de banda (clic) | Recorre los tipos de filtro disponibles para la banda seleccionada | — | `ClientEqRxBands` / `ClientEqTxBands` |
+| Menú desplegable de familia de filtros | Establece la topología matemática para las cascadas HP/LP: Butterworth (banda de paso maximalmente plana), Chebyshev (transición más pronunciada, rizado de 1 dB en la banda de paso), Bessel (fase lineal, caída más suave), Elliptic (transición más pronunciada, rizado en ambas bandas) | Butterworth | `ClientEqRxBands` / `ClientEqTxBands` |
+| Peak Hold | Congela la traza de pico por bin del analizador en el nivel máximo observado | Desactivado (sin marcar) | — |
+| Reset | Restaura todas las bandas a sus valores predeterminados, restablece el número de bandas al valor predeterminado, establece la familia de filtros en Butterworth y guarda de inmediato | — | `ClientEqRxBands` / `ClientEqTxBands` |
 
 ## Consejos
 
-- El editor reutiliza una única instancia de ventana para ambas rutas. La etiqueta de la barra de título es el indicador confiable del lado que está editando en ese momento.
-- El analizador FFT en tiempo real dentro del editor funciona a 25 Hz mientras el editor está abierto y se detiene automáticamente al cerrarlo.
-- Las indicaciones de interacción impresas en la parte superior del editor ("Drag peak/shelf = freq + gain · drag HP/LP = freq + Q · Shift + drag for Q · click icon to cycle type") resumen los gestos del lienzo.
+- El editor es una única ventana compartida que se reutiliza para ambos lados. Si lo abre en el lado TX mientras ya muestra el lado RX, el título y el contenido cambian a TX. No es posible tener los editores de TX y RX abiertos simultáneamente.
+- Los cambios se guardan de inmediato a través del motor de audio. Cerrar el editor no descarta el trabajo no guardado.
+- El bypass no se controla desde el interior del editor. Para habilitar o poner en bypass una etapa de EQ, utilice el gesto de clic simple del widget CHAIN sobre esa etapa.
 
 ## Solución de problemas
 
-- **El doble clic en la etapa de EQ no hace nada** — La etapa de EQ puede estar omitida o el contenedor Aetherial Audio puede no haberse cargado completamente. Verifique que la etapa esté habilitada mediante el widget CHAIN y vuelva a intentarlo.
-- **Los cambios en las bandas no se escuchan** — Verifique que `ClientEqRxEnabled` o `ClientEqTxEnabled` esté activado para la ruta correspondiente. Una etapa omitida pasa el audio sin modificaciones independientemente de la configuración de las bandas.
+- **Hacer doble clic en la etapa de EQ no tiene efecto** — es posible que la etapa no esté completamente inicializada si no hay una conexión de radio activa. Conéctese a un FLEX-8600 e inténtelo de nuevo.
+- **El botón Peak Hold permanece encendido después de dejar de usarlo** — haga clic en **Peak Hold** nuevamente para desmarcarlo y reanudar la caída normal del analizador.
 
-## Relacionados
+## Temas relacionados
 
-- [Omitir la etapa de EQ desde la cadena](bypass-the-eq-stage-from-the-chain.md)
-- [Inspeccionar la curva de EQ TX y el espectro en tiempo real](inspect-the-tx-eq-curve-and-live-spectrum.md)
-- [Inspeccionar la curva de EQ RX y el espectro en tiempo real](inspect-the-rx-eq-curve-and-live-spectrum.md)
-- [Verificar que la curva sumada coincida con el objetivo previsto](verify-the-summed-curve-matches-your-mental-target.md)
+- [Descripción general de Aetherial Parametric EQ (TX / RX)](overview.md)
+- [Poner en bypass la etapa de EQ desde la cadena](bypass-the-eq-stage-from-the-chain.md)
+- [Inspeccionar la curva de EQ de TX y el espectro en vivo](inspect-the-tx-eq-curve-and-live-spectrum.md)
+- [Inspeccionar la curva de EQ de RX y el espectro en vivo](inspect-the-rx-eq-curve-and-live-spectrum.md)
+- [Verificar que la curva sumada coincida con el objetivo deseado](verify-the-summed-curve-matches-your-mental-target.md)

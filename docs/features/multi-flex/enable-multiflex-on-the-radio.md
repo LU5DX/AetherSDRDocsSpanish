@@ -1,37 +1,34 @@
-# Habilitar multiFLEX en el radio
+# Habilitar multiFLEX en la radio
 
-multiFLEX permite que varias estaciones compartan un único FLEX-8600 de forma simultánea. Esta página explica cómo habilitar o deshabilitar multiFLEX desde AetherSDR.
+Use el multiFLEX Dashboard para activar o desactivar multiFLEX en el FLEX-8600 conectado. Habilitar multiFLEX permite que varias estaciones cliente compartan la radio simultáneamente.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. El multiFLEX Dashboard no está disponible sin una conexión activa al radio.
-- Se requiere acceso de operador al FLEX-8600. Habilitar multiFLEX es una configuración global del radio que afecta a todas las estaciones conectadas.
+- AetherSDR debe estar conectado a una radio FLEX-8600. El multiFLEX Dashboard requiere una conexión de radio activa.
 
 ## Pasos
 
 1. Haga clic en `Settings > multiFLEX...` para abrir el multiFLEX Dashboard.
-2. En la parte superior del diálogo, localice el botón de habilitación/deshabilitación. Cuando multiFLEX está desactivado, el botón muestra "Disabled". Cuando está activado, muestra "Enabled".
-3. Haga clic en el botón para activar o desactivar multiFLEX. La etiqueta y el color del botón se actualizan de inmediato para reflejar el nuevo estado.
-4. Haga clic en `Close` para cerrar el diálogo.
+2. Haga clic en el botón de alternancia ubicado en el centro del cuadro de diálogo. Cuando multiFLEX está deshabilitado, el botón muestra **Disabled**. Cuando está habilitado, muestra **Enabled**.
+3. Haga clic en **Close** para cerrar el cuadro de diálogo.
 
 ## Qué hace cada control
 
-| Control | Descripción |
+| Control | Comportamiento |
 |---|---|
-| Botón Enable / Disable | Activa o desactiva multiFLEX en el radio. Muestra "Enabled" (verde) cuando está activo y "Disabled" (rojo) cuando está inactivo. |
-| Tabla Stations | Lista todos los clientes multiFLEX conectados en ese momento. Columnas: LOCAL PTT, STATION, TX ANT, TX FREQ (MHz). |
-| Enable (PTT) | Activa o desactiva la autoridad PTT local para esta estación. Aparece únicamente cuando hay más de una estación conectada y esta estación no tiene el PTT en ese momento. |
-| Close | Cierra el multiFLEX Dashboard. |
+| Botón **Enabled** / **Disabled** | Activa o desactiva multiFLEX en la radio. La etiqueta y el color del botón reflejan el estado actual: **Enabled** (verde) o **Disabled** (rojo). |
+| Tabla Stations | Lista todos los clientes multiFLEX conectados actualmente a la radio. Columnas: LOCAL PTT, STATION, TX ANT, TX FREQ (MHz). |
+| **Enable** (PTT) | Alterna la autoridad PTT local para esta estación. Solo se muestra cuando hay más de un cliente conectado y esta estación no tiene el PTT en ese momento. |
+| **Close** | Cierra el cuadro de diálogo del multiFLEX Dashboard. |
 
 ## Consejos
 
-- Cuando solo hay una estación conectada, los controles de PTT están ocultos. Aparecen automáticamente en cuanto se conecta una segunda estación.
-- Su propia estación aparece resaltada en la tabla Stations para que pueda identificarla entre los demás clientes conectados.
-- Al hacer clic en el botón de habilitación/deshabilitación, el cambio surte efecto de inmediato en el radio. No es necesario desconectarse y volver a conectarse.
+- La entrada de su estación en la tabla Stations aparece resaltada en azul. Las demás estaciones conectadas se muestran en el color predeterminado.
+- Cuando solo hay un cliente conectado, los controles de LOCAL PTT se ocultan automáticamente.
 
-## Temas relacionados
+## Relacionado
 
 - [Descripción general del multiFLEX Dashboard](overview.md)
-- [Otorgar o revocar el PTT local](grant-or-revoke-local-ptt.md)
-- [Verificar la antena y la frecuencia de cada estación TX](check-which-antenna-and-frequency-each-tx-station-is-using.md)
+- [Conceder o revocar el PTT local](grant-or-revoke-local-ptt.md)
+- [Verificar qué antena y frecuencia usa cada estación TX](check-which-antenna-and-frequency-each-tx-station-is-using.md)
 - [Ver todas las estaciones conectadas a este FLEX](../../getting-started/setup/see-all-stations-connected-to-this-flex.md)

@@ -1,33 +1,32 @@
 # Bloquear el slice para evitar la sintonización accidental
 
-Use el control de bloqueo de sintonía en el applet RX Controls para congelar la frecuencia de un slice (receptor independiente) de modo que los clics, el desplazamiento con la rueda del ratón y los comandos de sintonización no puedan resintonizarlo.
+La función de bloqueo de sintonía evita que un slice (receptor virtual) responda a cambios de frecuencia. Úsela cuando desee monitorear una frecuencia fija sin riesgo de mover el VFO al hacer clic en el panadapter o al girar la rueda del ratón.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. El applet RX Controls requiere una conexión activa con el radio.
-- Identifique qué slice desea bloquear. Si tiene más de un slice activo, selecciónelo primero mediante la fila de pestañas de slice (A..H).
+- AetherSDR debe estar conectado al radio. El applet RX Controls requiere una conexión activa al radio.
+- El applet RX Controls debe estar visible. Si no lo está, haga clic en el botón RX del panel lateral derecho para mostrarlo.
 
 ## Pasos
 
-1. Abra el applet RX Controls. Si no está visible, haga clic en el botón de bandeja **RX** en la barra lateral derecha.
-2. Si hay varios slices en uso, haga clic en la pestaña con la letra correspondiente (A hasta H) del slice que desea bloquear.
-3. Localice el botón **🔓** en la fila de encabezado, inmediatamente a la derecha del indicador del slice.
-4. Haga clic en **🔓**. El ícono cambia a **🔒** y se torna azul. El slice queda bloqueado y comenzará a ignorar los cambios de frecuencia.
-5. Para desbloquear, haga clic en **🔒**. El ícono vuelve a **🔓** y el slice acepta la sintonización nuevamente.
+1. En el applet RX Controls, identifique la fila de encabezado que contiene el indicador del slice, el botón de bloqueo y los selectores de antena.
+2. Si tiene más de un slice, haga clic en la pestaña correspondiente (de A a H) para seleccionar el slice que desea bloquear.
+3. Haga clic en el botón 🔓 en la fila de encabezado. El ícono cambia a 🔒 y se vuelve azul, confirmando que el slice está bloqueado.
+4. Para desbloquear, haga clic en 🔒 nuevamente. El ícono regresa a 🔓 y el slice vuelve a responder a los cambios de frecuencia.
 
 ## Qué hace cada control
 
 | Control | Valor predeterminado | Comportamiento |
 |---|---|---|
-| **🔓 / 🔒** | 🔓 (desbloqueado) | Activa o desactiva el bloqueo de sintonía en el slice activo. Cuando está bloqueado (🔒), el slice ignora los cambios de frecuencia de cualquier origen. Cuando está desbloqueado (🔓), la sintonización normal se reanuda. |
+| 🔓 / 🔒 | 🔓 (desbloqueado) | Activa o desactiva el bloqueo de sintonía en el slice activo. Cuando está bloqueado (🔒), el slice ignora todos los cambios de frecuencia. Haga clic nuevamente para desbloquear. |
 
 ## Consejos
 
-- El estado de bloqueo se aplica únicamente al slice en el que se establece. Los demás slices no se ven afectados.
-- El indicador con la letra del slice (A, B, C, etc.) y el botón de bloqueo se encuentran ambos en la fila de encabezado. Confirme que el indicador muestre la letra correcta antes de bloquear.
+- El estado de bloqueo se aplica por slice. Puede bloquear el slice A mientras el slice B permanece libre para sintonizar.
+- El botón de bloqueo siempre es visible en la fila de encabezado, independientemente del modo actual.
 
-## Temas relacionados
+## Relacionado
 
-- [Cambiar entre múltiples slices mediante la fila de pestañas A..H](switch-between-multiple-slices-using-the-a-h-tab-row.md)
-- [Sintonizar el radio a una frecuencia (escribir MHz en el indicador)](tune-the-radio-to-a-frequency-type-mhz-in-the-readout.md)
+- [Cambiar entre múltiples slices usando la fila de pestañas A..H](switch-between-multiple-slices-using-the-a-h-tab-row.md)
+- [Sintonizar el radio a una frecuencia (escriba MHz en el indicador)](tune-the-radio-to-a-frequency-type-mhz-in-the-readout.md)
 - [Entender los slices y los VFOs](../../getting-started/concepts/understanding-slices.md)

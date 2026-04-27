@@ -1,43 +1,46 @@
 # Activar el procesador de voz en nivel NOR, DX o DX+
 
-Use el applet Phone/CW para activar el procesador de voz y seleccionar cuánta compresión aplica el FLEX-8600 al audio transmitido. NOR es el procesamiento normal, DX añade más compresión y DX+ aplica el máximo.
+Active el procesador de voz integrado del FLEX-8600 y elija con qué intensidad comprime el audio transmitido. NOR aplica una compresión moderada; DX y DX+ aumentan el procesamiento para contactos con señales más débiles.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a la radio. El applet Phone/CW solo está activo cuando se ha establecido una conexión con la radio.
-- El slice activo debe estar en un modo de voz (SSB, AM, FM). El panel Phone no se muestra cuando el slice está en modo CW.
+- AetherSDR debe estar conectado al radio.
+- El slice (canal de recepción) activo debe estar en un modo de voz (USB, LSB, AM, etc.). El applet Phone/CW muestra los controles de Phone solo cuando el slice activo no está en modo CW.
+- Abra el applet Phone/CW haciendo clic en el botón **P/CW** de la bandeja en la barra lateral derecha, si no está visible todavía.
 
 ## Pasos
 
-1. Haga clic en el botón de bandeja **P/CW** en la barra lateral derecha para abrir el applet Phone/CW si aún no está visible.
-2. Haga clic en **PROC** para activar el procesador de voz. El botón se ilumina en verde cuando está activo.
-3. Arrastre el control deslizante **NOR/DX/DX+** hasta la posición que corresponda al nivel de compresión deseado:
-   - Posición 0 (izquierda): NOR — procesamiento normal
-   - Posición 1 (centro): DX — compresión aumentada
-   - Posición 2 (derecha): DX+ — compresión máxima
-4. Observe el medidor **Compression** para confirmar la cantidad de compresión que se está aplicando. El medidor se llena de derecha a izquierda y cubre de −25 a 0 dB.
+1. En el applet Phone/CW, haga clic en **PROC** para activar el procesador de voz. El botón se ilumina en verde cuando está activo.
+2. Arrastre el control deslizante **NOR/DX/DX+** al nivel de compresión deseado:
+   - Posición 0 — **NOR** (normal, menor compresión)
+   - Posición 1 — **DX**
+   - Posición 2 — **DX+** (mayor compresión)
+3. Observe el indicador **Compression**. El relleno invertido muestra cuántos dB de compresión se están aplicando (rango: −25 a 0 dB). Mantenga la lectura fuera del extremo izquierdo para evitar un procesamiento excesivo.
+4. Observe el indicador **Level** para confirmar que la entrada del micrófono está llegando al procesador. El rango es −40 a +10 dBFS; el medidor se pone en rojo por encima de 0 dBFS.
+5. Para desactivar el procesador, haga clic en **PROC** nuevamente. El botón vuelve a su estado apagado.
 
 ## Qué hace cada control
 
-| Control | Tipo | Valor predeterminado | Rango válido | Clave persistente |
+| Control | Tipo | Valor predeterminado | Rango | Clave persistida |
 |---|---|---|---|---|
-| **PROC** | Botón de alternancia | Off | On / Off | — |
-| **NOR/DX/DX+** | Deslizador | 0 (NOR) | 0 (NOR), 1 (DX), 2 (DX+) | — |
-| **Compression** | Medidor (solo lectura) | — | −25 a 0 dB (relleno invertido) | — |
-| **Level** | Medidor (solo lectura) | — | −40 a +10 dBFS (rojo por encima de 0) | — |
+| **PROC** | Botón de alternancia | Apagado | Activado / Apagado | — |
+| **NOR/DX/DX+** | Control deslizante | 0 (NOR) | 0 = NOR, 1 = DX, 2 = DX+ | — |
+| **Level** | Medidor | — | −40 a +10 dBFS (rojo por encima de 0) | — |
+| **Compression** | Medidor | — | −25 a 0 dB (relleno invertido) | — |
 
 ## Consejos
 
-- El medidor **Compression** muestra la compresión en tiempo real únicamente durante la transmisión. Úselo para verificar que el procesador está actuando y para evitar una compresión excesiva.
-- El medidor **Level** muestra el nivel de pico del micrófono en dBFS. Ajuste la ganancia del micrófono antes de modificar el nivel del procesador, de modo que este reciba una señal consistente.
-- La posición del deslizador **NOR/DX/DX+** se envía a la radio independientemente de si **PROC** está activado, por lo que puede preseleccionar el nivel antes de activar el procesador.
+- Ajuste la ganancia del micrófono antes de activar el procesador. Una lectura de **Level** adecuada antes de activar **PROC** le proporciona al procesador una señal útil con la que trabajar. Consulte [Ajustar la ganancia del micrófono y activar la mezcla de accesorio](adjust-mic-gain-and-enable-the-accessory-mix.md).
+- Comience en **NOR** y pase a **DX** o **DX+** solo si los informes de señal lo justifican. Un procesamiento intenso en señales fuertes suena distorsionado en la estación receptora.
+- El indicador **Compression** muestra 0 dB (sin relleno) cuando **PROC** está apagado o no hay audio presente.
 
 ## Solución de problemas
 
-- **El botón PROC es visible pero el medidor Compression nunca se mueve** — confirme que el slice activo no está en modo CW; el panel Phone cambia automáticamente al panel CW cuando se selecciona un modo CW, ocultando los controles del procesador.
-- **El medidor Compression indica 0 dB con PROC activado** — el procesador está activo pero no recibe ninguna señal de entrada. Verifique la selección de **Mic source** y el deslizador **Mic gain**. Si la fuente es PC, tenga en cuenta que la radio siempre reporta nivel de micrófono 0 para la fuente PC; la ganancia se mantiene en el lado del cliente mediante `PcMicGain`.
+- **El botón PROC no está visible** — El applet está mostrando el panel CW. El panel Phone, incluido **PROC**, aparece solo cuando el slice activo está en un modo de voz, no en CW.
+- **El indicador Compression muestra 0 dB con PROC activado** — El radio no está recibiendo audio de la fuente de micrófono seleccionada. Verifique el indicador **Level** y la configuración de **Mic source**. Si **Mic source** es **PC**, el radio siempre informa el nivel de micrófono como 0; utilice en su lugar el indicador **Level** del applet.
+- **El control deslizante NOR/DX/DX+ regresa a su posición** — El control deslizante tiene tres posiciones válidas (0, 1, 2). Al arrastrar entre los puntos de encaje, se detiene en el entero más cercano; este es el comportamiento esperado.
 
-## Relacionados
+## Relacionado
 
 - [Ajustar la ganancia del micrófono y activar la mezcla de accesorio](adjust-mic-gain-and-enable-the-accessory-mix.md)
 - [Seleccionar una fuente de micrófono (MIC, BAL, LINE, ACC, PC)](pick-a-mic-source-mic-bal-line-acc-pc.md)

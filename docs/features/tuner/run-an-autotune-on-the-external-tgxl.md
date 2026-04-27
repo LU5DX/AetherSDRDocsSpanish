@@ -1,46 +1,48 @@
-# Ejecutar un Ajuste Automático en el TGXL Externo
+# Ejecutar un ajuste automático en el TGXL externo
 
-Esta página explica cómo iniciar un ciclo de ajuste automático en un 4O3A Tuner Genius XL conectado a su FLEX-8600. Use el ajuste automático para encontrar la mejor combinación de relés C1/L/C2 para su frecuencia y antena actuales.
+Esta página explica cómo iniciar un ciclo de sintonización automática en un 4O3A Tuner Genius XL conectado. Use el ajuste automático para encontrar la mejor combinación de relés C1/L/C2 para su frecuencia y antena actuales.
 
 ## Antes de comenzar
 
-- AetherSDR debe detectar el Tuner Genius XL. El botón TUN en la barra lateral derecha aparece únicamente cuando hay un TGXL presente.
-- El radio debe estar conectado. El applet Tuner no está disponible sin una conexión activa al radio.
-- Establezca su frecuencia de operación antes de ajustar. El TGXL se ajusta a la frecuencia de transmisión actual.
-- Asegúrese de que el sintonizador no esté en STANDBY. El botón OPERATE debe mostrar "OPERATE" (verde) para que el ajuste automático sea efectivo.
+- AetherSDR debe haber detectado un Tuner Genius XL. El botón TUN en la bandeja del panel lateral derecho aparece únicamente cuando hay un TGXL presente.
+- La radio debe estar conectada. El applet del sintonizador requiere una conexión de radio activa.
+- El TGXL debe estar en estado OPERATE (el botón muestra "OPERATE" en verde). El ajuste automático no producirá un resultado útil si el sintonizador se encuentra en BYPASS o STANDBY.
 
 ## Pasos
 
-1. Haga clic en el botón **TUN** de la barra lateral derecha para abrir el applet Tuner.
-2. Confirme que el botón OPERATE muestre "OPERATE" (verde). Si muestra "BYPASS" o "STANDBY", haga clic en él hasta que regrese a "OPERATE".
-3. Haga clic en **TUNE**.
-4. El botón se pone rojo y muestra "TUNING..." mientras el ciclo de ajuste se ejecuta.
-5. Cuando el ciclo termina, el botón muestra brevemente "SWR x.xx" — el valor de ROE estabilizado tras el ajuste — durante aproximadamente 2.5 segundos y luego regresa a "TUNE".
+1. Haga clic en el botón TUN de la bandeja del panel lateral derecho para abrir el applet del sintonizador.
+2. Confirme que el botón OPERATE muestra "OPERATE" (verde). Si muestra "BYPASS" o "STANDBY", haga clic en él hasta que aparezca "OPERATE".
+3. Haga clic en TUNE.
+4. Espere mientras el botón se pone rojo y muestra "TUNING...". No transmita manualmente durante este tiempo.
+5. Cuando la sintonización finalice, el botón muestra brevemente el resultado — por ejemplo, "SWR 1.42" — durante aproximadamente 2.5 segundos y luego vuelve a "TUNE".
+6. Compruebe el indicador de SWR para confirmar el valor final de SWR estabilizado.
 
 ## Qué hace cada control
 
 | Control | Descripción | Rango válido |
 |---|---|---|
-| **TUNE** | Inicia el ciclo de ajuste automático. Se pone rojo y muestra "TUNING..." durante el ajuste; destella el resultado final de ROE durante 2.5 s al terminar. | — |
-| **Fwd Pwr** | Muestra la potencia hacia adelante reportada por el TGXL durante el pulso de ajuste. | 0–200 W (barefoot), 0–600 W (Aurora), 0–2000 W (con PGXL) |
-| **SWR** | Muestra la ROE reportada por el TGXL en tiempo real. | 1.0–3.0 (rojo por encima de 2.5) |
-| **C1** | Muestra la posición del banco de relés C1 después del ajuste. | 0–255 |
-| **L** | Muestra la posición del banco de relés L después del ajuste. | 0–255 |
-| **C2** | Muestra la posición del banco de relés C2 después del ajuste. | 0–255 |
+| TUNE | Inicia el ciclo de sintonización automática. Se pone rojo y muestra "TUNING..." mientras está activo. Muestra el SWR posterior a la sintonización durante 2.5 segundos al completarse y luego regresa a "TUNE". | — |
+| OPERATE | Cambia el estado del sintonizador: OPERATE (verde) → BYPASS (naranja) → STANDBY → OPERATE. Debe estar en OPERATE para una sintonización con resultado válido. | — |
+| Fwd Pwr | Muestra la potencia hacia adelante reportada por el TGXL durante la sintonización. La escala depende de su configuración: 0–200 W sin amplificador, 0–600 W Aurora, 0–2000 W con PGXL. | 0–2000 W |
+| SWR | Muestra el SWR reportado por el TGXL. El indicador se pone rojo por encima de 2.5. | 1.0–3.0 |
+| C1 | Muestra la posición del banco de relés C1 una vez completada la sintonización. | 0–255 |
+| L | Muestra la posición del banco de relés L una vez completada la sintonización. | 0–255 |
+| C2 | Muestra la posición del banco de relés C2 una vez completada la sintonización. | 0–255 |
 
 ## Consejos
 
-- El valor de ROE que destella en el botón TUNE después de un ciclo es la lectura estabilizada capturada hasta 400 ms después de que el TGXL reporta que el ajuste ha concluido. Esto le da al sintonizador tiempo para reportar su valor final en lugar de una lectura tomada en medio del barrido.
-- Observe las barras de relés C1, L y C2 para confirmar que el TGXL ha cambiado a una nueva red después del ajuste. Si las tres permanecen en 0, es posible que el sintonizador no haya actuado.
+- El SWR que aparece en el botón TUNE tras la sintonización refleja un valor estabilizado capturado hasta 400 ms después de que finaliza el ciclo de sintonización. Este es el valor final reportado por el TGXL, no una lectura tomada durante el barrido.
+- Si necesita leer el SWR posterior a la sintonización una vez que hayan transcurrido los 2.5 segundos del destello, observe el indicador de SWR directamente.
 
 ## Solución de problemas
 
-- **El botón TUN no es visible** — El TGXL no ha sido detectado. Verifique la conexión física entre el FLEX-8600 y el TGXL, y confirme que el firmware del radio sea la versión 4.1.5.
-- **El botón TUNE regresa a "TUNE" inmediatamente sin destellar un resultado de ROE** — El ciclo de ajuste se completó, pero no llegó ninguna lectura válida de ROE desde el TGXL. Verifique la conexión del TGXL y que el sintonizador esté en OPERATE, no en BYPASS o STANDBY.
-- **El botón muestra "TUNING..." pero nunca termina** — El TGXL no reportó el fin del ajuste. Verifique la continuidad de RF — una antena abierta o en cortocircuito puede hacer que el sintonizador agote el tiempo de espera.
+- **El botón TUN de la bandeja no aparece** — AetherSDR no ha detectado un TGXL. Verifique que el sintonizador esté encendido y que se esté comunicando con la radio o directamente con AetherSDR.
+- **El botón TUNE vuelve a "TUNE" inmediatamente sin mostrar un resultado de SWR** — Es posible que el sintonizador no haya estado en estado OPERATE, o que el ciclo de sintonización haya finalizado sin devolver datos de SWR válidos. Confirme que el botón OPERATE muestre "OPERATE" (verde) antes de hacer clic en TUNE.
+- **El indicador de SWR se muestra en rojo (por encima de 2.5) tras la sintonización** — El sintonizador no pudo encontrar una adaptación satisfactoria. Revise las conexiones de antena y confirme que se encuentra dentro de una banda que la antena cubre.
 
-## Relacionados
+## Relacionado
 
+- [Leer el SWR inmediatamente después de una sintonización](read-swr-immediately-after-a-tune.md)
 - [Poner el sintonizador en OPERATE, BYPASS o STANDBY](put-the-tuner-in-operate-bypass-or-standby.md)
-- [Leer la ROE inmediatamente después de un ajuste](read-swr-immediately-after-a-tune.md)
 - [Ajuste fino de los relés C1/L/C2 con la rueda del ratón](fine-tune-the-c1-l-c2-relays-with-the-mousewheel.md)
+- [Descripción general del sintonizador](overview.md)

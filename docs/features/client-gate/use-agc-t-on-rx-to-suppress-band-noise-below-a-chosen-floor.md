@@ -1,59 +1,55 @@
 # Usar AGC-T en RX para suprimir el ruido de banda por debajo de un umbral elegido
 
-El applet Aetherial AGC-T aplica un expansor descendente del lado del cliente al audio recibido, atenuando las señales que caen por debajo de un umbral establecido. Úselo para reducir el ruido de banda persistente o el siseo que se encuentra por debajo del audio que desea escuchar.
+El applet Aetherial AGC-T (RX) aplica un expansor descendente del lado del cliente al audio recibido. Úselo para reducir el ruido de banda persistente, QRM o silbidos entre señales, atenuando el audio que cae por debajo de un nivel que usted defina.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar en ejecución. No se requiere una conexión de radio para configurar los controles, pero es necesario que haya audio fluyendo para ver cómo responden los medidores en tiempo real.
-- El subcontenedor "Aetherial AGC-T" debe ser visible en el Panel de Applets. Permanece oculto hasta que la etapa Gate se habilita en el lado RX mediante el widget CHAIN o el editor flotante.
+- El applet Aetherial AGC-T (RX) permanece oculto hasta que la etapa Gate esté habilitada en el lado RX. Habilítela primero mediante el widget CHAIN o el editor flotante Gate para el lado RX.
+- El applet se encuentra dentro del contenedor padre Aetherial Audio (TXDSP) en el Panel de Applets. Abra el Panel de Applets si no está visible: `View > Applet Panel`.
 
 ## Pasos
 
-1. Habilite la etapa Gate en el lado RX: haga un solo clic en la etapa Gate del widget CHAIN en el lado RX, o abra el editor flotante titulado "Aetherial Gate — RX" haciendo doble clic en la etapa Gate del widget CHAIN.
-2. Localice el subcontenedor "Aetherial AGC-T" dentro del contenedor principal Aetherial Audio (TXDSP) en el Panel de Applets.
-3. Observe la curva de transferencia y el indicador de entrada (ball) mientras recibe. Cuando el indicador se encuentra por debajo del punto de inflexión (knee), la puerta está atenuando.
-4. Gire el control Thresh para establecer el nivel por debajo del cual comienza la atenuación. Comience cerca del nivel de ruido de banda — un punto de partida típico es alrededor de −40.0 dB — y auméntelo hasta que el ruido de banda se reduzca pero las señales deseadas abran la puerta con limpieza.
-5. Gire el control Ratio para controlar con qué agresividad se cortan las señales por debajo del umbral. Los valores más bajos (cercanos a 1.0) producen una expansión descendente suave; los valores más altos producen un corte más abrupto.
-6. Gire el control Floor para establecer qué tan profunda puede llegar la atenuación. El valor predeterminado de −15.0 dB evita el silencio completo y al mismo tiempo reduce el ruido de manera útil.
-7. Gire el control Attack para establecer con qué rapidez se abre la puerta cuando una señal supera el umbral. Los valores más rápidos permiten que los flancos de subida pasen con limpieza.
-8. Gire el control Release para establecer con qué rapidez se cierra la puerta después de que una señal cae. Los valores más lentos evitan un corte brusco en las colas de la señal.
-9. Observe la barra Gain-reduction. El relleno ámbar muestra la profundidad de atenuación actual. Procure que el relleno sea estable durante el ruido de banda y que descienda casi a vacío cuando llega una señal.
+1. En el Panel de Applets, localice el subcontenedor **Aetherial AGC-T** dentro del contenedor padre Aetherial Audio (TXDSP).
+2. Habilite la etapa Gate para el lado RX usando el widget CHAIN (haga clic una vez en la etapa Gate) o haga doble clic en la etapa Gate del widget CHAIN para abrir el editor flotante **Aetherial Gate — RX**.
+3. Observe la **curva de transferencia** (Transfer curve): la bola en movimiento indica el nivel de audio entrante en tiempo real. Note dónde se ubica la bola durante el ruido de banda y durante una señal.
+4. Gire el control **Thresh** para establecer el nivel por debajo del cual la puerta comienza a atenuar. Ajústelo justo por encima del piso de ruido y por debajo de la señal más débil que desee escuchar. Valor predeterminado: -40.0 dB; rango: -80.0 a 0.0 dB. Este valor se guarda como `ClientGateRxThresholdDb`.
+5. Gire el control **Ratio** para controlar con qué agresividad se corta el audio por debajo del umbral. En 2.0:1 (predeterminado), la puerta actúa como un expansor suave; en 10.0:1, el corte es muy pronunciado. Rango: 1.0 a 10.0. Se guarda como `ClientGateRxRatio`.
+6. Gire el control **Floor** para establecer la atenuación máxima que puede aplicar la puerta. El valor predeterminado de -15.0 dB deja un ruido residual tenue en lugar de cortar hasta el silencio. Rango: -80.0 a 0.0 dB. Se guarda como `ClientGateRxFloorDb`.
+7. Gire el control **Release** para controlar con qué rapidez se cierra la puerta después de que una señal cae por debajo del umbral. Valor predeterminado: 100 ms; rango: 5 a 2000 ms. Se guarda como `ClientGateRxReleaseMs`. Un Release más largo suena más natural; uno más corto cierra con mayor precisión entre señales.
+8. Observe la **barra de reducción de ganancia** (Gain-reduction bar) mientras haya ruido de banda sin señal presente. La franja ámbar se llena desde la derecha cuando se aplica reducción de ganancia. La marca en -15 dB indica la posición predeterminada de Floor. Ajuste Thresh y Floor hasta que la barra permanezca llena durante el ruido y se vacíe con rapidez cuando aparezca una señal.
 
 ## Qué hace cada control
 
-| Control | Valor predeterminado | Rango válido | Ajuste persistente |
-|---|---|---|---|
-| Thresh | −40.0 dB | −80.0 a 0.0 dB | `ClientGateRxThresholdDb` |
-| Ratio | 2.0 | 1.0 a 10.0 | `ClientGateRxRatio` |
-| Attack | 0.5 ms | 0.1 a 100.0 ms | `ClientGateRxAttackMs` |
-| Release | 100 ms | 5 a 2000 ms | `ClientGateRxReleaseMs` |
-| Floor | −15.0 dB | −80.0 a 0.0 dB | `ClientGateRxFloorDb` |
-| Curva de transferencia | — | — | — |
-| Barra Gain-reduction | — | 0 a 40 dB GR | — |
+| Control | Predeterminado | Rango válido | Clave persistida | Comportamiento |
+|---|---|---|---|---|
+| Thresh | -40.0 dB | -80.0 a 0.0 dB | `ClientGateRxThresholdDb` | Nivel por debajo del cual comienza la atenuación. Valores más bajos permiten que pase más señal antes de que actúe la puerta. |
+| Ratio | 2.0 | 1.0 a 10.0 | `ClientGateRxRatio` | Relación de expansión por debajo del umbral. Valores más altos producen un corte más pronunciado tipo puerta; valores más bajos generan una pendiente más suave. Se muestra como X.X:1. |
+| Release | 100 ms | 5 a 2000 ms | `ClientGateRxReleaseMs` | Velocidad con la que se cierra la puerta después de que la entrada cae por debajo del umbral. Usa mapeo exponencial. |
+| Floor | -15.0 dB | -80.0 a 0.0 dB | `ClientGateRxFloorDb` | Atenuación máxima que puede aplicar la puerta. Evita el silencio completo durante el ruido. |
+| Transfer curve | — | — | — | Representa la curva estática del expansor. Una bola en tiempo real muestra el nivel de entrada actual en relación con el umbral. |
+| Gain-reduction bar | — | 0 a 40 dB GR | — | La franja ámbar que se llena desde la derecha indica la profundidad de atenuación actual. La marca en -15 dB señala el Floor predeterminado. |
 
-**Curva de transferencia** — representa la relación estática entrada-salida del expansor. Un indicador de entrada en tiempo real se mueve a lo largo de la curva para mostrar si la puerta está actualmente abierta o cerrada.
-
-**Barra Gain-reduction** — franja ámbar horizontal, rellena desde la derecha. La escala llega hasta 40 dB. Una marca en −15 dB indica la posición predeterminada de Floor.
+> **Nota:** La fuente confirma que el applet también cuenta con un control **Return** (predeterminado 2.0 dB, rango 0.0 a 20.0 dB) y un control **Release** en la interfaz construida. El catálogo incluye Attack (`ClientGateRxAttackMs`, predeterminado 0.5 ms, rango 0.1 a 100.0 ms) como un valor persistido independiente; es ajustable en el editor flotante **Aetherial Gate — RX** si no está presente en el mosaico del applet.
 
 ## Consejos
 
-- Los controles del mosaico del applet y el editor flotante "Aetherial Gate — RX" permanecen sincronizados. Los cambios realizados en cualquiera de las dos ubicaciones surten efecto de inmediato y se guardan automáticamente.
-- Si las señales deseadas están siendo cortadas, disminuya Thresh o acorte Attack para que la puerta responda más rápidamente al audio ascendente.
-- Si el ruido de banda se filtra entre señales, aumente Thresh o reduzca Floor para permitir una atenuación más profunda.
-- La marca de −15 dB en la barra Gain-reduction es una referencia útil: si el relleno ámbar supera regularmente esa marca, el ruido de banda puede ser más fuerte de lo que el ajuste de Floor puede suprimir por completo.
+- Comience con Thresh en -40.0 dB y auméntelo lentamente hasta que la barra de reducción de ganancia se llene de forma sólida durante el ruido de banda, pero se abra con claridad cuando aparezca una señal.
+- Ajuste Floor en -15.0 dB inicialmente. Redúzcalo (más negativo) solo si el ruido residual sigue siendo molesto. Evite valores de Floor muy bajos, ya que pueden hacer que el audio suene antinatural entre señales.
+- Los cambios realizados en el editor flotante **Aetherial Gate — RX** y en el mosaico del applet permanecen sincronizados: el mosaico consulta el motor aproximadamente cada 33 ms y actualiza sus controles en consecuencia.
+- El AGC-T opera completamente del lado del cliente y no requiere conexión con la radio para configurarse.
 
 ## Solución de problemas
 
-- **El subcontenedor "Aetherial AGC-T" no es visible** — la etapa Gate en el lado RX no ha sido habilitada. Habilítela mediante el widget CHAIN o el editor flotante "Aetherial Gate — RX".
-- **La barra Gain-reduction no muestra movimiento durante el ruido de banda** — Thresh está ajustado por debajo del nivel de ruido. Aumente Thresh hasta que el relleno ámbar aparezca durante los períodos de solo ruido.
-- **Las señales se cortan o se interrumpen prematuramente** — Attack es demasiado lento o Thresh es demasiado alto. Reduzca Thresh ligeramente, o disminuya Attack para abrir la puerta más rápido cuando llega una señal.
-- **El audio suena entrecortado entre palabras** — Release es demasiado corto. Aumente Release para que la puerta se cierre de forma más gradual después de que una señal cae.
+- **El applet Aetherial AGC-T no es visible en el Panel de Applets** — La etapa Gate en el lado RX no ha sido habilitada. Habilítela mediante el widget CHAIN para el lado RX. El applet permanece oculto hasta que la etapa esté activa.
+- **La barra de reducción de ganancia no muestra actividad incluso durante el ruido de banda** — Thresh está ajustado demasiado bajo. El piso de ruido no está alcanzando el umbral. Suba Thresh hacia 0 dB hasta que la barra muestre relleno ámbar durante el ruido.
+- **Las señales están siendo cortadas junto con el ruido** — Thresh está ajustado demasiado alto. Baje Thresh para que solo el piso de ruido active la atenuación y las señales deseadas abran la puerta.
+- **La puerta suena abrupta o entrecortada entre señales** — Aumente el valor de Release para permitir que la puerta se cierre de forma más gradual después de cada señal.
 
-## Temas relacionados
+## Relacionados
 
 - [Descripción general de Aetherial TX Gate / Aetherial AGC-T (RX)](overview.md)
 - [Omitir la puerta desde la cadena](bypass-the-gate-from-the-chain.md)
-- [Elegir el comportamiento de puerta vs. expansor suave mediante Ratio](choose-gate-vs-soft-expander-behaviour-via-ratio.md)
-- [Ajustar Floor para evitar silencios artificiales entre palabras](set-floor-to-avoid-unnatural-silence-between-words.md)
-- [Ajustar Attack y Release para una apertura y cierre naturales](tune-attack-release-for-natural-open-close.md)
-- [Observar la reducción de ganancia en tiempo real sin hablar](watch-live-gr-while-not-speaking.md)
+- [Elegir comportamiento de puerta o expansor suave mediante el ratio](choose-gate-vs-soft-expander-behaviour-via-ratio.md)
+- [Ajustar Floor para evitar el silencio antinatural entre palabras](set-floor-to-avoid-unnatural-silence-between-words.md)
+- [Ajustar attack/release para apertura y cierre naturales](tune-attack-release-for-natural-open-close.md)
+- [Observar la reducción de ganancia en tiempo real sin transmitir](watch-live-gr-while-not-speaking.md)

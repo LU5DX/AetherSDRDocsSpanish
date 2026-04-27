@@ -1,37 +1,37 @@
-# Vea de un vistazo si el audio de PC, el reductor de ruido y la salida de audio están activos (indicadores de estado RX)
+# Ver de un vistazo si el audio de PC, el reductor de ruido y la salida de audio están activos (indicadores de estado RX)
 
-La vista de la cadena RX incluye tres indicadores de estado no interactivos — RADIO, DSP y SPEAK — que muestran de un vistazo si la ruta de audio entrante está completamente activa. Úselos para confirmar que PC Audio está en funcionamiento, que hay un reductor de ruido activado y que la salida de audio no está silenciada, sin necesidad de abrir ningún diálogo de configuración.
+La vista de la cadena RX en el applet Aetherial Audio Chain incluye tres indicadores de estado no interactivos — RADIO, DSP y SPEAK — que muestran el estado en tiempo real de la ruta de recepción de señal sin necesidad de abrir ningún cuadro de diálogo.
 
 ## Antes de comenzar
 
-- El applet Aetherial Audio Chain debe estar visible. Si no lo está, haga clic en el botón PUDU de la bandeja en la barra lateral derecha para mostrarlo.
-- Debe estar viendo la cadena RX. Los tres indicadores de estado solo son visibles en modo RX.
+- El applet Aetherial Audio Chain debe estar visible. Si no lo está, haga clic en el botón de bandeja etiquetado `PUDU` en la barra lateral derecha para habilitarlo.
+- Debe estar visualizando la cadena RX. Los indicadores de estado solo son visibles cuando RX es la pestaña activa.
 
 ## Pasos
 
-1. Haga clic en el botón PUDU de la bandeja en la barra lateral derecha para abrir el contenedor Aetherial Audio si aún no está visible.
-2. Haga clic en **RX** en el encabezado del applet. La tira de la cadena RX reemplaza la tira TX y los tres indicadores de estado aparecen en los extremos de la cadena.
-3. Lea los tres indicadores:
-   - **RADIO** — se ilumina en verde cuando PC Audio (la transmisión SSB estándar) está habilitado en la radio.
-   - **DSP** — muestra el nombre abreviado del reductor de ruido activo (por ejemplo, `NR2`, `NR4` o `BNR`). Muestra `DSP` cuando no hay ningún reductor de ruido activado.
+1. Haga clic en el botón de bandeja `PUDU` en la barra lateral derecha si el applet Aetherial Audio Chain no está visible.
+2. En el encabezado del applet, haga clic en **RX**. La tira de la cadena RX reemplaza a la tira de la cadena TX, y los tres indicadores de estado aparecen a ambos lados de las etapas de procesamiento.
+3. Lea los tres indicadores de izquierda a derecha:
+   - **RADIO** — se ilumina en verde cuando el audio de PC (la transmisión SSB estándar) está habilitado en la radio.
+   - **DSP** — refleja cuál reductor de ruido del lado del cliente está activo en ese momento. La etiqueta rota al nombre abreviado del módulo activo (por ejemplo, `NR2`, `NR4` o `BNR`). Cuando ningún reductor de ruido está activado, la etiqueta del indicador vuelve a mostrar `DSP`.
    - **SPEAK** — se ilumina en verde cuando la salida de audio de AetherSDR no está silenciada.
+
+No se requiere ninguna acción adicional. Los indicadores se actualizan automáticamente a medida que cambian las condiciones.
 
 ## Qué hace cada control
 
-| Indicador | Tipo | Visible | Comportamiento | Ajuste persistente |
-|-----------|------|---------|----------------|--------------------|
-| RADIO | Indicador | Solo en modo RX | Se ilumina en verde cuando PC Audio está habilitado | — |
-| DSP | Indicador | Solo en modo RX | La etiqueta rota al nombre abreviado del reductor de ruido activo (p. ej., `NR2`, `NR4`, `BNR`); vuelve a `DSP` cuando ninguno está activo | — |
-| SPEAK | Indicador | Solo en modo RX | Se ilumina en verde cuando la salida de audio de AetherSDR no está silenciada | — |
+| Indicador | Tipo | Comportamiento | Visible |
+|-----------|------|----------------|---------|
+| **RADIO** | Indicador | Se ilumina en verde cuando el audio de PC está habilitado. | Solo en modo RX |
+| **DSP** | Indicador | La etiqueta rota al nombre abreviado del reductor de ruido activo (`NR2`, `NR4`, `BNR`); muestra `DSP` cuando ninguno está activo. Se ilumina en verde cuando hay un reductor de ruido activado. | Solo en modo RX |
+| **SPEAK** | Indicador | Se ilumina en verde cuando la salida de audio de AetherSDR no está silenciada. | Solo en modo RX |
 
-Ninguno de los tres indicadores es interactivo. No es posible hacer clic en ellos para cambiar su estado.
+Ninguno de los tres indicadores es interactivo. El clic simple, el doble clic y el arrastre no tienen ningún efecto sobre ellos.
 
 ## Consejos
 
-- Si RADIO no está iluminado, PC Audio no está habilitado en el lado de la radio. Verifique la configuración de audio de su slice.
-- Si DSP muestra `DSP` en lugar del nombre de un módulo, no hay ningún reductor de ruido del lado del cliente activo en este momento. Abra `Settings > AetherDSP Settings...` para configurar uno.
-- Si SPEAK no está iluminado, la salida de audio de AetherSDR está silenciada. Reactive la salida de audio para restaurar el audio recibido.
-- El ajuste `PooDooAudioActiveTab` conserva cuál cadena se mostró por última vez. Si AetherSDR se reabre en el lado TX, haga clic en **RX** una vez para volver a los indicadores de estado.
+- La última pestaña activa (TX o RX) se restaura en el siguiente inicio mediante la configuración guardada `PooDooAudioActiveTab`. Si desea que los indicadores de estado RX estén visibles de forma predeterminada, deje la pestaña **RX** seleccionada al cerrar AetherSDR.
+- El cambio de la etiqueta del indicador **DSP** a un nombre específico (como `NR2`) es la forma más rápida de confirmar que un reductor de ruido está realmente activado, sin necesidad de abrir `Settings > AetherDSP Settings...`.
 
 ## Relacionados
 

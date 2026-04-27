@@ -1,43 +1,66 @@
 # Descripción general de los canales de memoria
 
-El diálogo Memory Channels permite almacenar, organizar y recuperar frecuencias de radio junto con sus ajustes de modo y filtro asociados. Úselo para crear una lista de canales personal, sintonizar rápidamente frecuencias guardadas y compartir o respaldar sus memorias mediante importación y exportación.
+El diálogo de canales de memoria le permite almacenar, organizar y recuperar frecuencias de radio junto con sus parámetros de operación asociados. Úselo para crear una biblioteca de repetidoras, frecuencias de red, puntos DX o cualquier frecuencia a la que sintonice regularmente.
 
 ## Antes de comenzar
 
-- Se requiere una conexión de radio. El diálogo no se poblará sin una conexión activa al FLEX-8600.
-- Abra el diálogo mediante `Settings > Memory...`.
+- AetherSDR debe estar conectado a una radio FLEX-8600. El diálogo requiere una conexión de radio activa.
 
 ## Cómo funciona
 
-AetherSDR almacena las memorias en la radio. Cada memoria contiene una frecuencia y un conjunto de parámetros operativos. Al abrir `Settings > Memory...`, el diálogo obtiene la lista de memorias actual de la radio y la muestra en una tabla. Los cambios que realice —agregar, editar o eliminar memorias— se envían a la radio de inmediato.
+Abra el diálogo con `Settings > Memory...`. El diálogo muestra todas las memorias almacenadas en la radio en una tabla desplazable. Desde aquí puede agregar nuevas memorias, editar las existentes, sintonizar una frecuencia almacenada o administrar su lista de memorias de forma masiva.
 
-La tabla admite selecciones múltiples simultáneas. Use Shift-clic para seleccionar un rango y Ctrl-clic (Command-clic en macOS) para agregar o quitar filas individuales. Al hacer doble clic en cualquier fila, se sintoniza el slice activo a esa memoria directamente, sin necesidad de presionar Tune.
+**Filtrado y búsqueda**
 
-Puede reducir la lista usando el campo Search, el filtro Profile, o haciendo clic en el encabezado de una columna para ordenar. Estos filtros solo afectan lo que se muestra; no modifican las memorias almacenadas.
+La parte superior del diálogo ofrece dos filtros que funcionan en conjunto. El campo Search: reduce la tabla a las filas cuyo nombre coincide con el texto que escribe; presione Enter o use el botón de borrado para restablecerlo. El cuadro combinado Profile: filtra por el perfil global activo en ese momento. Ambos filtros se aplican de forma simultánea.
 
-## Qué hace cada control
+**La tabla de memorias**
 
-| Control | Función |
+Cada fila representa una memoria almacenada. Las columnas son:
+
+| Columna | Qué almacena |
 |---|---|
-| **Search:** | Filtra la tabla para mostrar solo las memorias cuyo nombre coincide con el texto ingresado. Presione Enter para confirmar, o use el botón de borrado para restablecer. |
-| **Profile:** | Filtra la tabla para mostrar solo las memorias pertenecientes al perfil global seleccionado. |
-| **Memory table** | Muestra todas las memorias almacenadas. Columnas: Group, Owner, Frequency, Name, Mode, Step, FM TX Offset Dir, Repeater Offset, Tone Mode, Tone Value, Squelch, Squelch Level, RX Filter Low, RX Filter High, RTTY Mark, RTTY Shift, DIGL Offset, DIGU Offset. Admite selección extendida (múltiples filas) y edición en línea. |
-| **Add** | Crea una nueva memoria usando la frecuencia y los ajustes actuales del VFO. |
-| **Edit** | Activa el modo de edición en línea en la fila de memoria seleccionada, lo que permite cambiar cualquier campo directamente en la tabla. |
-| **Tune** | Sintoniza el slice activo a la frecuencia y el modo de la memoria seleccionada. |
-| **Select All** | Selecciona todas las filas de la tabla. |
-| **Import...** | Importa memorias desde un archivo hacia la radio. |
-| **Export...** | Exporta las memorias seleccionadas a un archivo para respaldo o para compartir. |
-| **Remove** | Elimina las memorias seleccionadas después de solicitar confirmación. |
-| **Selection count** | Muestra el número de filas actualmente seleccionadas como `<N> selected`. |
+| Group | Nombre del grupo organizativo |
+| Owner | Etiqueta de propietario |
+| Frequency | Frecuencia almacenada en MHz |
+| Name | Etiqueta de la memoria |
+| Mode | Modo de operación (p. ej., USB, FM, CW) |
+| Step | Paso de sintonía |
+| FM TX Offset Dir | Dirección del desplazamiento de la repetidora FM |
+| Repeater Offset | Desplazamiento de la repetidora en MHz |
+| Tone Mode | Modo de tono CTCSS/DCS |
+| Tone Value | Frecuencia o código de tono |
+| Squelch | Squelch habilitado/deshabilitado |
+| Squelch Level | Nivel de umbral del squelch |
+| RX Filter Low | Borde inferior del filtro de recepción en Hz |
+| RX Filter High | Borde superior del filtro de recepción en Hz |
+| RTTY Mark | Frecuencia de marca RTTY |
+| RTTY Shift | Desplazamiento RTTY |
+| DIGL Offset | Desplazamiento de banda lateral inferior digital |
+| DIGU Offset | Desplazamiento de banda lateral superior digital |
+
+Haga clic en el encabezado de una columna para ordenar por esa columna. Haga clic de nuevo para invertir el orden. Se pueden seleccionar varias filas usando Shift-clic para un rango o Ctrl-clic (Command-clic en macOS) para agregar o quitar filas individuales. Al hacer doble clic en una fila, se sintoniza el slice activo a esa memoria de inmediato.
+
+**Botones**
+
+| Botón | Qué hace |
+|---|---|
+| Add | Crea una nueva memoria en la frecuencia VFO actual. |
+| Edit | Activa el modo de edición en línea en la fila de memoria seleccionada. |
+| Tune | Sintoniza el slice activo a la memoria seleccionada. |
+| Select All | Selecciona todas las filas de la tabla. |
+| Import... | Importa memorias desde un archivo. |
+| Export... | Exporta las memorias seleccionadas a un archivo. |
+| Remove | Elimina las memorias seleccionadas tras pedir confirmación. |
+
+El indicador de cantidad de selección en la parte inferior derecha de la fila de botones muestra cuántas filas están seleccionadas en ese momento.
 
 ## Consejos
 
-- Al hacer doble clic en una fila de la tabla de memorias, se sintoniza el slice activo de inmediato, sin necesidad de presionar Tune.
-- Es posible ordenar la tabla haciendo clic en los encabezados de columna. Haga clic en el mismo encabezado nuevamente para invertir el orden.
-- El campo Search actualiza la tabla mientras escribe, por lo que no es necesario presionar Enter para filtrar; Enter activa la fila actualmente resaltada.
+- El campo Search: tiene un botón de borrado en el lado derecho; haga clic en él para eliminar el filtro sin borrar la selección de Profile:.
+- Ordenar y filtrar no elimina ni reordena las memorias en la radio; solo cambia lo que es visible en la tabla.
 
-## Temas relacionados
+## Relacionado
 
 - [Agregar una memoria en la frecuencia actual](add-a-memory-at-current-frequency.md)
 - [Editar el nombre, modo u offset de una memoria en línea](edit-a-memory-s-name-mode-or-offset-inline.md)
@@ -46,5 +69,6 @@ Puede reducir la lista usando el campo Search, el filtro Profile, o haciendo cli
 - [Buscar memorias por nombre](search-memories-by-name.md)
 - [Filtrar memorias por perfil](filter-memories-by-profile.md)
 - [Importar memorias desde un archivo CSV/JSON](import-memories-from-a-csv-json-file.md)
-- [Exportar memorias para respaldo o para compartir](export-memories-for-backup-or-sharing.md)
+- [Exportar memorias para respaldo o compartir](export-memories-for-backup-or-sharing.md)
 - [Ordenar la tabla de memorias por encabezado de columna](sort-memory-table-by-column-header.md)
+- [Recuperar una memoria de repetidora FM y restaurar el offset y el tono CTCSS](recall-an-fm-repeater-memory-and-restore-offset-and-ctcss-tone.md)

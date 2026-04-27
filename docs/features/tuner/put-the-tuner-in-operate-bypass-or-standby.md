@@ -1,40 +1,44 @@
 # Poner el sintonizador en OPERATE, BYPASS o STANDBY
 
-Use el botón OPERATE en el applet Tuner para alternar el 4O3A Tuner Genius XL entre sus tres estados de relé: OPERATE, BYPASS y STANDBY.
+Use el botón OPERATE en el applet del sintonizador para hacer avanzar el 4O3A Tuner Genius XL por sus tres estados de relé: OPERATE, BYPASS y STANDBY.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a la radio. El applet Tuner permanece oculto hasta que se detecte un Tuner Genius XL.
-- El botón TUN en la bandeja del panel lateral derecho debe estar disponible, lo que confirma que el TGXL ha sido detectado.
+- AetherSDR debe estar conectado al radio. El applet del sintonizador permanece oculto hasta que se detecta un Tuner Genius XL.
+- El botón TUN del panel lateral derecho debe estar disponible, lo que indica que el TGXL ha sido detectado.
 
 ## Pasos
 
-1. Haga clic en el botón TUN de la bandeja del panel lateral derecho para abrir el applet Tuner.
-2. Localice el botón OPERATE en la parte inferior derecha del applet.
-3. Haga clic en OPERATE para avanzar al siguiente estado. Cada clic avanza un paso: OPERATE → BYPASS → STANDBY → OPERATE.
+1. Haga clic en el botón TUN del panel lateral derecho para abrir el applet del sintonizador.
+2. Localice el botón OPERATE en la zona inferior derecha del applet.
+3. Haga clic en OPERATE para avanzar al siguiente estado. Cada clic avanza un paso:
+   - OPERATE → BYPASS
+   - BYPASS → STANDBY
+   - STANDBY → OPERATE
 
 ## Qué hace cada control
 
-| Etiqueta del botón | Color | Significado |
+| Botón | Color cuando está activo | Significado |
 |---|---|---|
-| OPERATE | Verde | La red del sintonizador está en circuito y realizando ajuste activo. |
-| BYPASS | Naranja | El relé del sintonizador está puenteado; la RF pasa sin ajuste. |
-| STANDBY | Predeterminado (azul grisáceo) | El sintonizador está en espera; la red de relés no está en circuito ni puenteada activamente. |
+| OPERATE | Verde | Los relés del sintonizador están en el circuito y activos. |
+| BYPASS | Naranja | El sintonizador está energizado, pero la red de adaptación está puenteada. |
+| STANDBY | Predeterminado (azul grisáceo) | El sintonizador no está en funcionamiento. |
 
 La etiqueta y el color del botón se actualizan de inmediato cuando el TGXL confirma el cambio de estado.
 
 ## Consejos
 
-- El botón siempre muestra el estado **actual**, no el estado que está por seleccionar. Una etiqueta OPERATE en verde significa que el sintonizador ya está en OPERATE; al hacer clic pasará a BYPASS.
-- Si acaba de ejecutar un autotune, el sintonizador entra en OPERATE automáticamente. No es necesario hacer clic en OPERATE después de un ciclo de ajuste exitoso.
+- El botón siempre muestra el estado **actual**, no el siguiente. Una etiqueta OPERATE en verde significa que el sintonizador ya está en OPERATE.
+- Al hacer clic una vez desde STANDBY, el sintonizador vuelve a OPERATE y se restaura el color verde. No es necesario pasar por BYPASS para regresar a OPERATE.
 
 ## Solución de problemas
 
-- **El botón TUN de la bandeja no es visible** — El TGXL no ha sido detectado. Verifique la conexión entre la radio y el sintonizador, y confirme que el sintonizador está encendido.
-- **La etiqueta del botón no cambia al hacer clic** — La radio no ha confirmado el cambio de estado. Verifique que la conexión con la radio esté activa mediante `Settings > Connect to Radio...` e intente de nuevo.
+- **El botón TUN no es visible** — El applet del sintonizador permanece oculto hasta que se detecta un Tuner Genius XL en la red. Verifique que el TGXL esté encendido y conectado. Consulte [Descripción general del sintonizador](overview.md).
+- **La etiqueta del botón no cambia después de hacer clic** — La etiqueta se actualiza únicamente cuando el TGXL confirma el nuevo estado. Si la etiqueta no cambia, verifique la conexión entre AetherSDR y el TGXL.
 
 ## Relacionados
 
-- [Ejecutar un autotune en el TGXL externo](run-an-autotune-on-the-external-tgxl.md)
-- [Leer la ROE inmediatamente después de un ajuste](read-swr-immediately-after-a-tune.md)
 - [Descripción general del sintonizador](overview.md)
+- [Ejecutar un autosintonizado en el TGXL externo](run-an-autotune-on-the-external-tgxl.md)
+- [Leer el ROE inmediatamente después de un sintonizado](read-swr-immediately-after-a-tune.md)
+- [Ajuste fino de los relés C1/L/C2 con la rueda del ratón](fine-tune-the-c1-l-c2-relays-with-the-mousewheel.md)

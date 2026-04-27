@@ -1,111 +1,62 @@
 # Descripción general de la cadena de audio Aetherial
 
-La cadena de audio Aetherial es el pipeline DSP del lado del cliente de AetherSDR. Permite moldear tanto el audio transmitido como el recibido mediante una secuencia de etapas de procesamiento que puede reordenar, omitir individualmente o desactivar todas a la vez, sin modificar la configuración DSP propia del radio.
+El applet Aetherial Audio Chain le ofrece una vista visual e interactiva del procesamiento de señal DSP del lado del cliente en AetherSDR. Úselo para monitorear, omitir, reordenar y editar las etapas que dan forma al audio transmitido y recibido antes de que llegue al radio o a sus altavoces.
 
 ## Antes de comenzar
 
-- Abra el contenedor de audio Aetherial haciendo clic en el botón de bandeja PUDU en el panel derecho de applets. El applet de cadena siempre es visible como la sección superior de ese contenedor cuando está habilitado.
-- No se requiere una conexión de radio para configurar la cadena, pero el procesamiento de audio solo tiene efecto cuando hay audio fluyendo.
+- El contenedor Aetherial Audio debe estar visible. Haga clic en el botón de bandeja etiquetado "PUDU" en la barra lateral derecha para alternarlo. El applet de la cadena aparece como la sección superior de ese contenedor.
+- No se requiere conexión a un radio para ver o editar las cadenas.
 
 ## Cómo funciona
 
-El applet presenta dos cadenas de procesamiento independientes — TX y RX — en una tira horizontal de bloques de etapas (tiles). Use los botones de alternancia TX y RX para cambiar cuál cadena se muestra y edita. Solo una cadena es visible a la vez; ambas conservan su propio orden de etapas, estados de omisión y configuraciones del editor de forma independiente.
+El applet presenta dos cadenas DSP independientes — TX y RX — como una tira horizontal de bloques de etapa. Solo se muestra una cadena a la vez. Use los botones TX y RX para alternar entre ellas.
 
-### Cadena TX
+**La cadena TX** procesa el audio en la ruta de transmisión a través de estas etapas en orden: EQ, COMP, GATE, DESS, TUBE, PUDU, VERB.
 
-La cadena TX se ejecuta de izquierda a derecha a través de hasta siete etapas:
+**La cadena RX** procesa el audio recibido a través de: EQ, GATE, COMP, TUBE, PUDU. La tira RX está delimitada por tres bloques de estado no interactivos — RADIO, DSP y SPEAK — que muestran de un vistazo si la ruta de recepción está activa de extremo a extremo.
 
-| Etapa | Descripción |
-|---|---|
-| EQ | Ecualizador paramétrico aplicado al audio saliente |
-| COMP | Compresor |
-| GATE | Puerta de ruido |
-| DESS | Desibilador |
-| TUBE | Saturación de tubo |
-| PUDU | Procesamiento de voz PooDoo™ |
-| VERB | Reverberación |
+Cada bloque de etapa admite tres interacciones:
 
-### Cadena RX
-
-La cadena RX se ejecuta a través de hasta cinco etapas controlables por el usuario, flanqueadas por tres tiles de estado de solo lectura:
-
-| Etapa / Tile | Descripción |
-|---|---|
-| Tile de estado RADIO | Indica si PC Audio (la transmisión SSB estándar) está habilitado |
-| EQ | Ecualizador de recepción |
-| GATE | Puerta AGC-T |
-| COMP | Compresor AGC-C |
-| TUBE | Tubo dinámico |
-| PUDU | Procesamiento de recepción PooDoo™ |
-| Tile de estado DSP | Refleja el reductor de ruido activo (p. ej., NR2, NR4, BNR); muestra DSP cuando ninguno está activo |
-| Tile de estado SPEAK | Indica si la salida de audio de AetherSDR no está silenciada |
-
-Los tiles RADIO, DSP y SPEAK son indicadores no interactivos. Aparecen solo cuando se muestra la cadena RX.
-
-### Interacción con las etapas
-
-Cada tile de etapa admite tres interacciones, resumidas en la línea de ayuda debajo de la cadena:
-
-- **Clic simple** — activa o desactiva la omisión solo de esa etapa.
+- **Clic simple** — activa o desactiva la omisión (bypass) solo para esa etapa.
 - **Doble clic** — abre el editor flotante sin marco de la etapa.
-- **Arrastrar** — reordena la cadena. Una barra vertical de color cian entre los tiles indica dónde se colocará la etapa antes de soltar. TX y RX usan tipos de arrastre separados, por lo que una etapa TX no puede caer accidentalmente en la cadena RX.
+- **Arrastrar** — reordena la etapa dentro de su cadena. Una barra vertical de color cian indica dónde quedará la etapa antes de soltarla. Las cadenas TX y RX se ordenan de forma independiente; arrastrar en una cadena no tiene efecto en la otra.
 
-### BYPASS global
+Una indicación estática debajo de la cadena dice: *Click to bypass · Double click to edit · Drag to reorder*.
 
-BYPASS desactiva todas las etapas de la cadena actualmente visible a la vez. Al marcar BYPASS, AetherSDR guarda un instantáneo de las etapas que estaban habilitadas y las desactiva todas. Desmarcar BYPASS reactiva exactamente esas etapas. Las etapas que se alterne manualmente mientras BYPASS está marcado no se incluyen en el instantáneo. TX y RX mantienen instantáneos de bypass independientes; el estado mostrado refleja el lado que esté visible en ese momento.
-
-### Monitor TX post-PUDU
-
-Dos pequeños botones de icono a la derecha de los botones de alternancia TX/RX permiten grabar y reproducir una captura breve del audio de transmisión tal como sale de la etapa PUDU:
-
-- El botón **⏺** (Record) captura hasta 30 segundos de audio TX post-PUDU. Haga clic de nuevo para detener antes; la reproducción comienza automáticamente. Pulsa en rojo mientras graba. Solo está habilitado cuando la entrada de micrófono está configurada en PC y DAX está desactivado, y la reproducción no está en curso.
-- El botón **▶** (Play) reproduce la última captura. Haga clic de nuevo para cancelar. Pulsa en verde mientras reproduce. Solo está habilitado una vez que existe una grabación y la grabación no está activa.
-
-Ambos botones están ocultos cuando se muestra la cadena RX.
-
-### Indicador de actividad TX
-
-Mientras transmite (MOX activo), la tira de la cadena TX pulsa en rojo para confirmar la ruta de transmisión en vivo.
+El orden de la cadena y los estados individuales de cada etapa se guardan de forma independiente para TX y RX mediante `ClientCompTxChainStages` y `ClientCompRxChainStages`. La pestaña activa al último uso (TX o RX) se guarda mediante `PooDooAudioActiveTab`. La visibilidad del contenedor se guarda mediante `Applet_TXDSP`.
 
 ## Qué hace cada control
 
-| Control | Tipo | Predeterminado | Configuración persistida | Notas |
+| Control | Tipo | Valor predeterminado | Comportamiento | Clave de configuración |
 |---|---|---|---|---|
-| TX | Botón de alternancia | Marcado | `PooDooAudioActiveTab` | Muestra y edita la cadena TX. Resaltado ámbar cuando está seleccionado. La última pestaña activa persiste como `TX` o `RX`. |
-| RX | Botón de alternancia | Desmarcado | `PooDooAudioActiveTab` | Muestra y edita la cadena RX, incluidos los tiles de estado RADIO / DSP / SPEAK. |
-| BYPASS | Botón de alternancia | Desmarcado | — | Guarda un instantáneo y desactiva todas las etapas habilitadas en la cadena activa. Desmarcar para restaurarlas. Los instantáneos de TX y RX son independientes. |
-| ⏺ (Record) | Botón de alternancia | Desmarcado | — | Graba hasta 30 s de audio TX post-PUDU. Haga clic de nuevo para detener. Pulsa en rojo mientras está activo. Solo TX. |
-| ▶ (Play) | Botón de alternancia | Desmarcado | — | Reproduce el audio capturado. Haga clic de nuevo para cancelar. Pulsa en verde mientras está activo. Solo TX. |
-| Tiles de etapas de cadena TX / RX | Manejadores de arrastre | — | `ClientCompTxChainStages` / `ClientCompRxChainStages` | Clic simple para omitir, doble clic para editar, arrastrar para reordenar. |
-| Tile de estado RADIO | Indicador | — | — | Se pone verde cuando PC Audio está habilitado. Solo en modo RX. |
-| Tile de estado DSP | Indicador | — | — | Muestra el nombre corto del reductor de ruido activo (p. ej., NR2, NR4, BNR), o DSP cuando ninguno está activo. Solo en modo RX. |
-| Tile de estado SPEAK | Indicador | — | — | Se pone verde cuando la salida de audio de AetherSDR no está silenciada. Solo en modo RX. |
-
-La configuración `Applet_TXDSP` controla si el contenedor de audio Aetherial (que aloja este applet) se muestra en absoluto.
+| TX | Botón de alternancia | Activado | Muestra y activa la cadena TX para edición. Se muestra en ámbar cuando está seleccionado. | `PooDooAudioActiveTab` |
+| RX | Botón de alternancia | Desactivado | Muestra y activa la cadena RX para edición. Se muestra en ámbar cuando está seleccionado. | `PooDooAudioActiveTab` |
+| BYPASS | Botón de alternancia | Desactivado | Activado: toma una instantánea de las etapas habilitadas en el lado activo y las deshabilita todas. Desactivado: vuelve a habilitar solo las etapas que estaban activas antes. TX y RX mantienen instantáneas separadas. | — |
+| Grabar (⏺) | Botón de alternancia | Desactivado | Captura hasta 30 s de audio TX posterior a PUDU. Haga clic de nuevo para detener; la reproducción comienza automáticamente. Parpadea en rojo durante la grabación. Solo visible en modo TX. Se habilita cuando la fuente MIC es PC, DAX está desactivado y no hay reproducción en curso. | — |
+| Reproducir (▶) | Botón de alternancia | Desactivado | Reproduce el audio PUDU capturado. Haga clic de nuevo para cancelar. Parpadea en verde durante la reproducción. Solo visible en modo TX. Se habilita una vez que existe una grabación y no hay grabación activa. | — |
+| Bloque de etapa de cadena TX | Controlador de arrastre | — | Un clic omite la etapa; doble clic abre su editor; arrastrar reordena la cadena TX. | — |
+| Bloque de etapa de cadena RX | Controlador de arrastre | — | Un clic omite la etapa; doble clic abre su editor; arrastrar reordena la cadena RX. | — |
+| Bloque de estado RADIO | Indicador | — | Se pone en verde cuando PC Audio está habilitado. Solo visible en modo RX. | — |
+| Bloque de estado DSP | Indicador | — | Refleja el reductor de ruido del lado del cliente activo (p. ej., NR2, NR4, BNR). Muestra "DSP" de forma genérica cuando ninguno está activo. Solo visible en modo RX. | — |
+| Bloque de estado SPEAK | Indicador | — | Se pone en verde cuando la salida de audio de AetherSDR está sin silencio. Solo visible en modo RX. | — |
 
 ## Consejos
 
-- Los órdenes de las cadenas TX y RX se guardan de forma independiente. Reordenar una cadena no afecta a la otra.
-- Puede arrastrar las etapas al orden que desee en cualquiera de las cadenas. El indicador de inserción cian muestra el punto de inserción exacto antes de soltar.
-- La grabadora post-PUDU es útil para verificar cómo suena su cadena de procesamiento sin necesitar una segunda estación. Asegúrese de que la fuente de micrófono esté configurada en PC y que DAX esté desactivado antes de grabar, o el botón Record permanecerá deshabilitado.
-- BYPASS es por cadena. Marcar BYPASS mientras se visualiza TX no afecta el estado de bypass de la cadena RX.
-
-## Solución de problemas
-
-- **El botón ⏺ (Record) está atenuado** — La entrada de micrófono no está configurada en PC, DAX está habilitado o la reproducción está en curso. Verifique la configuración de entrada de audio y asegúrese de que DAX esté desactivado antes de intentar grabar.
-- **Arrastrar una etapa TX no la coloca sobre la tira RX** — Esto es por diseño. Las dos cadenas usan tipos de arrastre incompatibles para evitar caídas accidentales entre cadenas.
-- **BYPASS está marcado pero algunas etapas siguen omitidas después de desmarcarlo** — Las etapas que alternó manualmente mientras BYPASS estaba activo no forman parte del instantáneo y no se restaurarán automáticamente. Reactívelas individualmente.
+- El botón BYPASS conserva una instantánea de qué etapas estaban habilitadas. Si activa o desactiva manualmente etapas individuales mientras BYPASS está activado, esos cambios manuales se conservan fuera de la instantánea y no se restaurarán automáticamente al desactivar BYPASS.
+- El indicador de extremo TX parpadea en rojo mientras está transmitiendo (MOX activo), lo que confirma en tiempo real que la cadena TX está procesando audio.
+- Cambiar de TX a RX y viceversa no afecta los estados de etapa ni la instantánea de BYPASS de ninguna de las cadenas. Cada lado es completamente independiente.
+- La información de herramienta del botón Grabar dice: "Record up to 30 s of post-PooDoo™ TX audio (MIC must be set to PC and DAX off)." Si el botón aparece atenuado, verifique primero la configuración de la fuente MIC y el estado de DAX.
 
 ## Relacionados
 
-- [Cambiar entre editar las cadenas TX y RX](switch-between-editing-the-tx-and-rx-chains.md)
+- [Alternar entre la edición de las cadenas TX y RX](switch-between-editing-the-tx-and-rx-chains.md)
 - [Omitir todas las etapas TX a la vez](bypass-every-tx-stage-at-once.md)
 - [Omitir todas las etapas RX a la vez](bypass-every-rx-stage-at-once.md)
-- [Reactivar una etapa específica después de un bypass global](re-enable-a-specific-stage-after-a-global-bypass.md)
-- [Reordenar la cadena DSP de TX](reorder-the-tx-dsp-chain.md)
-- [Reordenar la cadena DSP de RX (independiente del orden de TX)](reorder-the-rx-dsp-chain-independent-of-tx-order.md)
+- [Volver a habilitar una etapa específica después de un bypass global](re-enable-a-specific-stage-after-a-global-bypass.md)
+- [Reordenar la cadena DSP TX](reorder-the-tx-dsp-chain.md)
+- [Reordenar la cadena DSP RX (independientemente del orden TX)](reorder-the-rx-dsp-chain-independent-of-tx-order.md)
 - [Abrir el editor flotante sin marco de una etapa desde la cadena](open-a-stage-s-frameless-floating-editor-from-the-chain.md)
-- [Grabar hasta 30 segundos de audio TX post-PUDU](record-up-to-30-seconds-of-post-pudu-tx-audio.md)
+- [Grabar hasta 30 segundos de audio TX posterior a PUDU](record-up-to-30-seconds-of-post-pudu-tx-audio.md)
 - [Reproducir el audio PUDU capturado](play-back-the-captured-pudu-audio.md)
-- [Ver de un vistazo si PC Audio, el reductor de ruido y la salida de audio están activos (tiles de estado RX)](see-at-a-glance-whether-pc-audio-the-noise-reducer-and-audio-output-are-live-rx-status-tiles.md)
-- [Confirmar visualmente cuando TX (MOX) está en vivo](visually-confirm-when-tx-mox-is-live.md)
+- [Ver de un vistazo si PC Audio, el reductor de ruido y la salida de audio están activos (bloques de estado RX)](see-at-a-glance-whether-pc-audio-the-noise-reducer-and-audio-output-are-live-rx-status-tiles.md)
+- [Confirmar visualmente cuando TX (MOX) está activo](visually-confirm-when-tx-mox-is-live.md)

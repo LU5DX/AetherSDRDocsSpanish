@@ -1,60 +1,67 @@
 # Descripción general de Aetherial TX Gate / Aetherial AGC-T (RX)
 
-AetherSDR incluye un expansor descendente y una puerta de ruido del lado del cliente que funcionan de forma independiente en las rutas de audio de transmisión y recepción. Úselo para suprimir el ruido de fondo entre palabras en TX, o para reducir el ruido de banda por debajo de un nivel mínimo elegido en RX.
+AetherSDR incluye un expansor descendente y puerta de ruido del lado del cliente que opera de forma independiente en las rutas de audio de transmisión y recepción. Úselo para suprimir el ruido de fondo entre palabras en TX, o para reducir el ruido de banda por debajo de un nivel mínimo elegido en RX.
 
 ## Antes de comenzar
 
-- La etapa Gate debe habilitarse mediante el widget CHAIN o el editor flotante en el lado correspondiente antes de que el applet sea visible.
-- No se requiere conexión a una radio para configurar los ajustes de la puerta.
+- La etapa Gate debe habilitarse mediante el widget CHAIN o el editor flotante del lado correspondiente antes de que el applet sea visible.
+- AetherSDR no necesita estar conectado a un radio para ajustar los controles de la puerta, pero el audio debe estar en funcionamiento para que los indicadores en tiempo real sean significativos.
 
 ## Cómo funciona
 
-AetherSDR instancia dos copias completamente independientes del procesador de puerta:
+AetherSDR instancia dos copias completamente independientes del applet de puerta:
 
-- **Aetherial TX Gate** — opera en la ruta de audio de transmisión. Atenúa el audio que cae por debajo del umbral establecido, reduciendo el ruido ambiente y los sonidos de respiración entre transmisiones.
-- **Aetherial AGC-T** — opera en la ruta de audio de recepción. Atenúa el audio recibido por debajo del umbral, reduciendo el ruido continuo de banda entre señales.
+- **Aetherial TX Gate** — actúa sobre el audio de transmisión saliente. Se encuentra en el contenedor principal Aetherial Audio (TXDSP).
+- **Aetherial AGC-T** — actúa sobre el audio de recepción entrante. Se encuentra en el mismo contenedor principal como un subcontenedor separado.
 
-Ambas copias aparecen como subcontenedores dentro del contenedor padre Aetherial Audio (TXDSP). Comparten el mismo conjunto de controles e indicadores, pero almacenan sus parámetros de forma independiente.
+Ambas copias comparten controles e indicadores idénticos. Los ajustes de cada lado se almacenan de forma independiente. Los cambios realizados en el mosaico del applet acoplado y los cambios realizados en el editor flotante permanecen sincronizados; el applet consulta el motor aproximadamente cada 33 ms y actualiza las posiciones de los mandos y la barra de reducción de ganancia para reflejar el lado activo.
 
-### Flujo de la señal
+### Flujo de señal
 
-La puerta es un expansor descendente. Cuando el nivel de entrada cae por debajo de Thresh, la puerta comienza a atenuar la señal. La cantidad de atenuación depende de Ratio y está limitada por Floor — la puerta nunca corta más profundo que el valor de Floor, lo que evita un silencio muerto poco natural. Attack y Release controlan la rapidez con que la puerta se abre y cierra en respuesta a los cambios de nivel.
+La puerta es un **expansor descendente**. Cuando el nivel de entrada cae por debajo del punto Thresh, la puerta atenúa la señal. La cantidad de atenuación depende de Ratio, y el corte máximo permitido se establece con Floor. Attack controla la rapidez con que la puerta se abre cuando la señal sube por encima de Thresh; Release controla la rapidez con que se cierra cuando la señal vuelve a caer por debajo de él.
 
-Con valores altos de Ratio (aproximándose a 10:1), la puerta se comporta como un corte abrupto; con valores bajos de Ratio (cerca de 1:1), actúa como un expansor descendente suave. La mayoría de los usuarios configuran Ratio entre 2:1 y 4:1 para obtener resultados de sonido natural.
+Ajustar Ratio a un valor bajo (cerca de 1.0:1) produce un efecto suave de expansor gradual que reduce el nivel progresivamente. Ajustar Ratio a un valor alto (cerca de 10.0:1) produce una puerta dura que corta de forma agresiva.
 
-### Retroalimentación visual
+### Abrir el applet
 
-Cada mosaico de applet proporciona dos indicadores en tiempo real:
-
-- **Curva de transferencia** — un gráfico estático de la función de transferencia entrada-salida del expansor, con una bola en movimiento que muestra el nivel de entrada actual. La posición de la bola indica si la puerta está actualmente abierta (bola por encima de la línea de umbral) o cerrada (bola por debajo de la línea de umbral).
-- **Barra de reducción de ganancia** — una franja ámbar horizontal que se llena desde la derecha. La escala va de 0 a 40 dB de reducción de ganancia. Una marca en −15 dB indica el valor predeterminado de Floor. Una barra vacía significa que no se está aplicando atenuación.
-
-Los mandos del mosaico de applet y del editor flotante (que se abre haciendo doble clic en la etapa GATE en el widget CHAIN) se mantienen sincronizados automáticamente.
+Haga doble clic en la etapa GATE en el widget CHAIN del lado TX o RX para abrir el editor sin marco correspondiente, titulado **Aetherial Gate — TX** o **Aetherial Gate — RX**. Las barras de título de los subcontenedores acoplados de **Aetherial TX Gate** y **Aetherial AGC-T** pueden recibir clic derecho para flotar, desprender u ocultar el mosaico.
 
 ## Qué hace cada control
 
-| Control | Valor predeterminado | Rango válido | Ajuste persistido (TX / RX) | Descripción |
-|---|---|---|---|---|
-| Thresh | −40.0 dB | −80.0 a 0.0 dB | `ClientGateTxThresholdDb` / `ClientGateRxThresholdDb` | Nivel por debajo del cual la puerta comienza a atenuar. Configúrelo justo por encima del piso de ruido que desea suprimir. |
-| Ratio | 2.0 | 1.0 a 10.0 | `ClientGateTxRatio` / `ClientGateRxRatio` | Relación de expansión, mostrada como X.X:1. Valores más altos producen un corte más abrupto, similar a una puerta; valores más bajos producen una expansión descendente suave. |
-| Attack | 0.5 ms | 0.1 a 100.0 ms | `ClientGateTxAttackMs` / `ClientGateRxAttackMs` | Rapidez con que la puerta se abre cuando la entrada sube por encima de Thresh. Valores más cortos abren más rápido. |
-| Release | 100 ms | 5 a 2000 ms | `ClientGateTxReleaseMs` / `ClientGateRxReleaseMs` | Rapidez con que la puerta se cierra después de que la entrada cae por debajo de Thresh. Valores más largos producen una cola más natural. |
-| Floor | −15.0 dB | −80.0 a 0.0 dB | `ClientGateTxFloorDb` / `ClientGateRxFloorDb` | Atenuación máxima que la puerta puede aplicar. Evita que la puerta produzca silencio total. |
+Los controles que se enumeran a continuación aparecen de forma idéntica en los applets de TX y RX. Las claves de ajuste mostradas corresponden al lado TX; el lado RX utiliza las claves equivalentes `ClientGateRx*`.
 
-El estado habilitado/deshabilitado de cada lado se persiste por separado: `ClientGateTxEnabled` (TX) y `ClientGateRxEnabled` (RX).
+| Control | Tipo | Valor predeterminado | Rango válido | Clave de ajuste TX | Comportamiento |
+|---|---|---|---|---|---|
+| Curva de transferencia | Indicador | — | — | — | Traza la curva de transferencia estática del expansor. Una bola en tiempo real marca el nivel de entrada actual e indica si la puerta está abierta o cerrada. |
+| Barra de reducción de ganancia | Medidor | — | 0 a 40 dB GR | — | Franja ámbar horizontal, rellena desde la derecha. La escala llega hasta 40 dB. Una marca en −15 dB señala el nivel mínimo predeterminado del expansor suave. |
+| Thresh | Mando | −40.0 dB | −80.0 a 0.0 dB | `ClientGateTxThresholdDb` | Nivel por debajo del cual la puerta comienza a atenuar. |
+| Ratio | Mando | 2.0:1 | 1.0 a 10.0 | `ClientGateTxRatio` | Valores más altos producen un corte de puerta más duro; valores más bajos actúan como expansor descendente suave. |
+| Return | Mando | 2.0 dB | 0.0 a 20.0 dB | — | Histéresis por encima de Thresh en la que la puerta vuelve a abrirse. |
+| Release | Mando | 100 ms | 5 a 2000 ms | `ClientGateTxReleaseMs` | Rapidez con que la puerta se cierra después de que la entrada cae por debajo del umbral. |
+| Floor | Mando | −15.0 dB | −80.0 a 0.0 dB | `ClientGateTxFloorDb` | Atenuación máxima que la puerta puede aplicar. |
+
+El estado habilitado/omitido de cada lado se guarda en `ClientGateTxEnabled` (TX) y `ClientGateRxEnabled` (RX).
 
 ## Consejos
 
-- Observe la barra de reducción de ganancia mientras no habla en TX. Si la barra no muestra ningún movimiento, es posible que Thresh esté configurado por debajo del piso de ruido y la puerta no se esté activando. Si nunca se vacía mientras habla, Thresh está demasiado alto.
-- Los cambios realizados en los mandos del mosaico de applet y en el editor flotante se reflejan en ambas vistas dentro de un ciclo del medidor (aproximadamente 33 ms).
-- Haga clic derecho en la barra de título del subcontenedor "Aetherial TX Gate" o "Aetherial AGC-T" para flotar, extraer u ocultar el mosaico sin deshabilitar el procesador de puerta.
+- Observe la barra de reducción de ganancia mientras no habla (TX) o durante un momento de solo ruido de banda (RX). Si la barra no se llena, Thresh está ajustado por debajo del piso de ruido y la puerta no se está activando. Consulte [Observar la RG en tiempo real mientras no habla](watch-live-gr-while-not-speaking.md).
+- La marca de −15 dB en la barra de reducción de ganancia señala el valor predeterminado de Floor. Si la barra se llena completamente más allá de esa marca, Floor está ajustado por debajo de −15 dB o Ratio es lo suficientemente alto como para superar ese valor.
+- Los cambios en cualquier mando tienen efecto inmediato y se guardan automáticamente. No se necesita ningún botón Apply.
 
-## Temas relacionados
+## Solución de problemas
 
-- [Configurar el umbral de TX justo por encima del piso de ruido ambiente](set-tx-threshold-just-above-room-noise-floor.md)
+- **El applet no es visible** — La etapa Gate no ha sido habilitada en ese lado. Habilítela mediante el widget CHAIN o el editor flotante del lado TX o RX.
+- **La puerta no atenúa el ruido entre palabras** — Es posible que Thresh esté ajustado demasiado bajo, por debajo del piso de ruido ambiental. Suba Thresh hasta que la barra de reducción de ganancia muestre movimiento durante el silencio. Consulte [Ajustar el umbral TX justo por encima del piso de ruido ambiental](set-tx-threshold-just-above-room-noise-floor.md).
+- **La puerta corta el inicio del habla** — Attack es demasiado lento en relación con el inicio de su voz, o Thresh está demasiado alto. Baje Thresh ligeramente o reduzca Attack. Consulte [Ajustar attack / release para una apertura/cierre natural](tune-attack-release-for-natural-open-close.md).
+- **Silencio antinatural entre palabras** — Floor está ajustado demasiado profundo. Suba Floor hacia 0 dB para que algo de audio residual pase durante los períodos de cierre. Consulte [Ajustar Floor para evitar silencio antinatural entre palabras](set-floor-to-avoid-unnatural-silence-between-words.md).
+- **Las posiciones de los mandos en el mosaico no coinciden con el editor flotante** — El mosaico se sincroniza cada ~33 ms. Si aparecen desincronizados inmediatamente después de abrir el editor, espere un ciclo de actualización o mueva un mando para forzar la sincronización.
+
+## Relacionados
+
+- [Ajustar el umbral TX justo por encima del piso de ruido ambiental](set-tx-threshold-just-above-room-noise-floor.md)
 - [Usar AGC-T en RX para suprimir el ruido de banda por debajo de un nivel mínimo elegido](use-agc-t-on-rx-to-suppress-band-noise-below-a-chosen-floor.md)
-- [Elegir entre comportamiento de puerta o expansor suave mediante el ratio](choose-gate-vs-soft-expander-behaviour-via-ratio.md)
-- [Ajustar attack y release para una apertura/cierre natural](tune-attack-release-for-natural-open-close.md)
-- [Configurar Floor para evitar silencio antinatural entre palabras](set-floor-to-avoid-unnatural-silence-between-words.md)
-- [Observar la reducción de ganancia en tiempo real mientras no habla](watch-live-gr-while-not-speaking.md)
+- [Elegir comportamiento de puerta o expansor suave mediante el ratio](choose-gate-vs-soft-expander-behaviour-via-ratio.md)
+- [Ajustar attack / release para una apertura/cierre natural](tune-attack-release-for-natural-open-close.md)
+- [Ajustar Floor para evitar silencio antinatural entre palabras](set-floor-to-avoid-unnatural-silence-between-words.md)
+- [Observar la RG en tiempo real mientras no habla](watch-live-gr-while-not-speaking.md)
 - [Omitir la puerta desde la cadena](bypass-the-gate-from-the-chain.md)

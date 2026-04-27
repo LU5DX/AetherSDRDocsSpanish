@@ -1,45 +1,44 @@
-# Inspeccionar la curva de EQ de TX y el espectro en tiempo real
+# Inspeccionar la curva de EQ de TX y el espectro en vivo
 
-El tile "Aetherial TX EQ" en el panel de applets muestra la curva de respuesta de EQ sumada y una superposición de analizador FFT en tiempo real para la ruta de audio de TX. Use esta vista para monitorear su ecualización de transmisión de un vistazo sin abrir el editor completo.
+El applet "Aetherial TX EQ" muestra la curva de respuesta de EQ sumada y una superposición del analizador FFT en tiempo real para la ruta de audio de TX. Use esta vista para monitorear cómo se está moldeando su señal de transmisión sin necesidad de abrir el editor completo.
 
 ## Antes de comenzar
 
-- El sub-contenedor "Aetherial TX EQ" permanece oculto hasta que la etapa de EQ de TX esté habilitada. Habilítela primero mediante el widget CHAIN o el editor flotante ("Aetherial Parametric EQ — TX").
-- El tile "Aetherial TX EQ" se encuentra dentro del contenedor principal Aetherial Audio (TXDSP) en el panel de applets. Confirme que ese contenedor esté visible antes de continuar.
+- El sub-contenedor "Aetherial TX EQ" permanece oculto hasta que la etapa TX EQ esté habilitada. Habilítela desde el widget CHAIN o desde el editor flotante ("Aetherial Parametric EQ — TX") antes de esperar que el applet aparezca.
+- El applet se encuentra dentro del contenedor principal Aetherial Audio (TXDSP) en el panel de applets. Si el panel de applets no está visible, verifique `View > Applet Panel`.
 
 ## Pasos
 
-1. Localice el contenedor principal **Aetherial Audio (TXDSP)** en el panel de applets.
-2. Expándalo para revelar el sub-contenedor **Aetherial TX EQ**.
-3. Observe el área del analizador / curva — la pantalla de 110 px de alto que muestra la cuadrícula de frecuencias, la curva de respuesta de EQ sumada y la superposición de analizador FFT en tiempo real para la ruta de TX.
-4. Transmita audio (o active la radio) para llevar la superposición del analizador en tiempo real del estado inactivo al estado activo.
-5. Observe la curva de respuesta de EQ sumada, que refleja la respuesta en frecuencia acumulada de todas las bandas de TX habilitadas (`ClientEqTxBands`).
+1. Localice el contenedor principal Aetherial Audio (TXDSP) en el panel de applets.
+2. Encuentre el sub-contenedor "Aetherial TX EQ" dentro de él.
+3. Observe el área del analizador / curva — la pantalla de 110 px de altura que muestra la cuadrícula, la curva de respuesta de EQ sumada y la superposición del analizador FFT en tiempo real para la ruta de TX.
+4. Observe la línea de respuesta de EQ sumada, que refleja la respuesta en frecuencia acumulada de todas las bandas de TX habilitadas.
+5. Observe la superposición del analizador en tiempo real, que muestra el FFT en tiempo real del audio que pasa por la ruta de TX. La superposición está inactiva cuando no hay audio presente y en funcionamiento cuando el audio fluye por la ruta de TX.
 
 ## Qué hace cada control
 
-| Control | Comportamiento | Clave de configuración |
+| Control | Descripción | Editable en el applet |
 |---|---|---|
-| Área del analizador / curva | Muestra la cuadrícula de frecuencias, la curva de respuesta de EQ sumada y una superposición de analizador FFT en tiempo real bloqueada a la ruta de audio de TX. Solo lectura en este tile. | — |
-| Respuesta de EQ sumada | Muestra la respuesta en frecuencia combinada de todas las bandas de TX habilitadas. Aparece plana cuando no hay bandas activas o todas están en bypass. | `ClientEqTxBands` |
-| Superposición del analizador en tiempo real | FFT en tiempo real del audio que pasa por la ruta de TX. Se ejecuta mientras hay audio presente; inactiva cuando no fluye audio. | — |
+| Área del analizador / curva | Muestra la cuadrícula, la curva de respuesta de EQ sumada y la superposición del analizador FFT en tiempo real para la ruta de TX. | No — solo lectura |
+| Respuesta de EQ sumada | Muestra la respuesta en frecuencia acumulada de todas las bandas de TX habilitadas. Aparece plana cuando ninguna banda está moldeando la señal. | No |
+| Superposición del analizador en vivo | FFT en tiempo real del audio en la ruta de TX. Inactiva cuando no hay audio presente; en funcionamiento cuando el audio fluye. | No |
 
-El estado habilitado del EQ de TX se persiste en `ClientEqTxEnabled`.
+Para editar bandas se requiere el editor flotante. Consulte [Abrir el editor sin marco para agregar / eliminar / ajustar bandas en cualquier lado](open-the-frameless-editor-to-add-remove-tune-bands-on-either-side.md).
 
 ## Consejos
 
-- El tile es de solo lectura. Para agregar, eliminar o ajustar bandas, haga doble clic en la etapa de EQ de TX en el widget CHAIN para abrir el editor flotante titulado "Aetherial Parametric EQ — TX".
-- Haga clic derecho en la barra de título del sub-contenedor "Aetherial TX EQ" para flotar, extraer u ocultar el tile de forma independiente al resto del panel de applets.
-- Si el área de la curva aparece en blanco o el tile no es visible, es posible que la etapa de EQ de TX aún esté deshabilitada. Verifique `ClientEqTxEnabled` habilitando la etapa desde el widget CHAIN.
+- El applet es solo de visualización. Toda la edición de bandas — agregar, eliminar y ajustar — se realiza en el editor flotante "Aetherial Parametric EQ — TX", que se abre haciendo doble clic en la etapa TX EQ del widget CHAIN.
+- Para flotar, extraer u ocultar el sub-contenedor "Aetherial TX EQ", haga clic derecho en su barra de título.
 
 ## Solución de problemas
 
-- **El sub-contenedor "Aetherial TX EQ" no es visible** — El tile permanece oculto hasta que la etapa de EQ de TX esté habilitada. Habilite la etapa mediante el widget CHAIN o el editor flotante; luego el sub-contenedor aparecerá dentro de Aetherial Audio (TXDSP).
-- **La superposición del analizador en tiempo real permanece inactiva durante la transmisión** — Confirme que el audio esté llegando realmente a la ruta del DSP de TX. Si no hay ningún motor de audio conectado al applet, el FFT no tiene muestras para mostrar.
+- **El sub-contenedor "Aetherial TX EQ" no está visible** — El applet permanece oculto hasta que la etapa TX EQ esté habilitada. Habilítela desde el widget CHAIN o desde el editor flotante. Consulte [Omitir la etapa de EQ desde la cadena](bypass-the-eq-stage-from-the-chain.md).
+- **La superposición del analizador en vivo aparece inactiva** — No hay audio pasando por la ruta de TX. Debe haber audio de transmisión presente para que la superposición FFT funcione.
 
 ## Relacionados
 
 - [Descripción general de Aetherial Parametric EQ (TX / RX)](overview.md)
-- [Inspeccionar la curva de EQ de RX y el espectro en tiempo real](inspect-the-rx-eq-curve-and-live-spectrum.md)
-- [Poner en bypass la etapa de EQ desde la cadena](bypass-the-eq-stage-from-the-chain.md)
+- [Inspeccionar la curva de EQ de RX y el espectro en vivo](inspect-the-rx-eq-curve-and-live-spectrum.md)
+- [Omitir la etapa de EQ desde la cadena](bypass-the-eq-stage-from-the-chain.md)
 - [Abrir el editor sin marco para agregar / eliminar / ajustar bandas en cualquier lado](open-the-frameless-editor-to-add-remove-tune-bands-on-either-side.md)
-- [Verificar que la curva sumada coincida con su objetivo mental](verify-the-summed-curve-matches-your-mental-target.md)
+- [Verificar que la curva sumada coincida con el objetivo deseado](verify-the-summed-curve-matches-your-mental-target.md)

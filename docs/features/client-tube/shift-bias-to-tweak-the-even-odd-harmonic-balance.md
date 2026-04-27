@@ -1,42 +1,41 @@
-# Ajustar el balance de armónicos pares e impares con Bias
+# Ajustar el Bias para equilibrar los armónicos pares e impares
 
-El control Bias desplaza el punto de operación en la curva de transferencia del tubo, modificando la proporción de armónicos pares e impares en la señal saturada. Úselo para pasar de un carácter simétrico con predominio de armónicos impares hacia uno más cálido con armónicos pares, o a cualquier punto intermedio.
+El mando Bias desplaza el punto de operación en la curva de transferencia del tubo, modificando la proporción entre armónicos pares e impares en la señal saturada. Úselo para moverse entre un carácter más cálido y redondeado o uno más áspero y asimétrico.
 
-## Antes de comenzar
+## Antes de empezar
 
-- La etapa Tube debe estar habilitada en el lado que desea ajustar (TX o RX). Consulte [Omitir el tubo desde cualquiera de las cadenas](bypass-the-tube-from-either-chain.md) si la etapa está actualmente bypaseada.
-- El applet debe estar visible. Si no lo está, abra el contenedor principal Aetherial Audio (TXDSP) y localice el subcontenedor "Aetherial Mic-PreAmp" (TX) o "Aetherial Dynamic Tube" (RX).
+- La etapa Tube debe estar habilitada en el lado que desea ajustar (TX o RX). Consulte [Omitir el tubo en cualquiera de las cadenas](bypass-the-tube-from-either-chain.md).
+- El applet es visible dentro del contenedor principal Aetherial Audio (TXDSP) — "Aetherial Mic-PreAmp" para TX, "Aetherial Dynamic Tube" para RX.
+- Aplicar algo de Drive (Drive > 0.0 dB) hace que los cambios de armónicos producidos por Bias sean audibles. Consulte [Ajustar Drive hasta que la curva comience a curvarse (calidez TX o modelado de tono RX)](dial-drive-until-the-curve-starts-to-bend-tx-warmth-or-rx-tone-shaping.md).
 
 ## Pasos
 
-1. Localice la fila de cinco controles en la parte inferior del applet: Drive, Tone, Bias, Output, Mix.
-2. Encuentre el control denominado **Bias** — el tercero en la fila.
-3. Gire el control **Bias** hasta el valor deseado. La etiqueta debajo del control muestra el valor actual como porcentaje (por ejemplo, `50 %`).
-4. Observe la curva de transferencia ubicada sobre la fila de controles. El punto de operación de la curva se desplaza al girar el control, visualizando el cambio en el balance de armónicos.
-5. La bola de entrada en tiempo real sobre la curva de transferencia se mueve de manera continua, indicando dónde se encuentra el nivel de entrada actual en la nueva curva.
+1. Localice el subcontenedor "Aetherial Mic-PreAmp" (TX) o "Aetherial Dynamic Tube" (RX) dentro del contenedor principal Aetherial Audio (TXDSP), o haga doble clic en la etapa TUBE del widget CHAIN para abrir el editor flotante titulado "Aetherial Tube — TX" o "Aetherial Tube — RX".
+2. Localice el mando **Bias** en la fila de cinco mandos (Drive, Tone, Bias, Output, Mix).
+3. Gire el mando Bias. La etiqueta se actualiza en tiempo real y muestra el valor actual como porcentaje (por ejemplo, `50 %`).
+4. Observe la curva de transferencia: al aumentar Bias, la curva se desplaza asimétricamente, incrementando los armónicos pares con respecto a los impares.
+5. Detenga el ajuste en el valor que proporcione el equilibrio de armónicos deseado. La configuración se guarda automáticamente.
 
-Para abrir el editor flotante ampliado y obtener un control más fino, haga doble clic en la etapa TUBE del widget CHAIN en el lado correspondiente. El editor se titula "Aetherial Tube — TX" o "Aetherial Tube — RX". El control Bias también está disponible allí, y tanto el applet como el editor permanecen sincronizados.
+## Qué hace cada control
 
-## Función de cada control
-
-| Control | Valor por defecto | Rango válido | Ajuste persistente |
+| Control | Valor predeterminado | Rango válido | Clave de configuración persistida |
 |---|---|---|---|
 | Bias (TX) | 0 % | 0 % a 100 % (interno: 0.0 a 1.0) | `ClientTubeTxBiasAmount` |
 | Bias (RX) | 0 % | 0 % a 100 % (interno: 0.0 a 1.0) | `ClientTubeRxBiasAmount` |
 
-En 0 % el punto de operación está centrado, produciendo un carácter con predominio de armónicos impares. Al aumentar Bias, el punto de operación se desplaza fuera del centro, introduciendo armónicos pares. La curva de transferencia en el applet refleja visualmente este desplazamiento.
+Las instancias de TX y RX son completamente independientes. Ajustar Bias en un lado no afecta al otro.
 
 ## Consejos
 
-- Bias interactúa con Drive. Valores más altos de Drive introducen más señal en la curva, por lo que el efecto de un ajuste determinado de Bias se vuelve más pronunciado. Ajuste Drive primero y luego afine Bias.
-- Los controles del applet y los del editor flotante comparten el mismo estado y se sincronizan en aproximadamente 33 ms tras cualquier cambio realizado en cualquiera de las dos ubicaciones.
-- Los cambios se guardan inmediatamente en `ClientTubeTxBiasAmount` o `ClientTubeRxBiasAmount` después de cada movimiento del control.
+- La pantalla de la curva de transferencia y su punto de entrada en tiempo real se actualizan al girar Bias, de modo que puede ver el desplazamiento del punto de operación sin necesidad de transmitir ni recibir una señal.
+- Los cambios realizados en el editor flotante y en el applet acoplado permanecen sincronizados. Un temporizador de 30 Hz mantiene ambas vistas actualizadas, por lo que puede ajustar desde cualquiera de las dos ubicaciones.
+- Con Bias al 0 % el tubo opera simétricamente, favoreciendo los armónicos impares. Aumentar Bias introduce asimetría e incrementa los armónicos pares. El carácter audible cambia de forma más notable cuando Drive se encuentra varios dB por encima de su valor predeterminado.
 
-## Temas relacionados
+## Relacionados
 
 - [Descripción general de Aetherial Mic-PreAmp (TX) / Aetherial Dynamic Tube (RX)](overview.md)
-- [Ajustar Drive hasta que la curva comience a curvarse (calidez en TX o modelado de tono en RX)](dial-drive-until-the-curve-starts-to-bend-tx-warmth-or-rx-tone-shaping.md)
+- [Ajustar Drive hasta que la curva comience a curvarse (calidez TX o modelado de tono RX)](dial-drive-until-the-curve-starts-to-bend-tx-warmth-or-rx-tone-shaping.md)
 - [Aclarar u oscurecer la señal saturada con Tone](brighten-or-darken-the-saturated-signal-with-tone.md)
 - [Compensar cambios de nivel con Output](compensate-level-changes-with-output.md)
-- [Mezclar la saturación en paralelo con Mix](parallel-blend-saturation-with-mix.md)
-- [Omitir el tubo desde cualquiera de las cadenas](bypass-the-tube-from-either-chain.md)
+- [Mezcla en paralelo de la saturación con Mix](parallel-blend-saturation-with-mix.md)
+- [Omitir el tubo en cualquiera de las cadenas](bypass-the-tube-from-either-chain.md)

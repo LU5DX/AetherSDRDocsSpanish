@@ -1,43 +1,54 @@
-# Habilitar CAT PTY para que las aplicaciones de Linux/macOS puedan abrir un puerto CAT de estilo serie
+# Habilitar CAT PTY para que las aplicaciones de Linux/macOS puedan abrir un puerto CAT de tipo serial
 
-La función CAT PTY crea cuatro enlaces simbólicos de puerto serie virtual bajo `/tmp/` que el software de registro y de concursos en Linux y macOS puede abrir como si fueran puertos serie físicos. Úsela cuando su aplicación espere una ruta de dispositivo serie en lugar de una conexión TCP.
+CAT PTY crea cuatro enlaces simbólicos de puerto serie virtual que los programas de registro y concurso pueden abrir como si fueran dispositivos seriales físicos. Use esta función en Linux o macOS cuando su aplicación externa espere una ruta de puerto serie en lugar de una conexión TCP.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. El applet CAT Control requiere una conexión de radio activa.
-- Los enlaces simbólicos PTY solo se crean en Linux y macOS. Esta función no está disponible en Windows.
-- El botón CAT del área de notificación debe ser visible en la barra lateral derecha. Si no es visible, consulte [Descripción general de CAT Control](overview.md).
+- AetherSDR debe estar conectado al radio. El applet CAT Control requiere una conexión activa con el radio.
+- La función PTY está disponible únicamente en Linux y macOS.
+- Abra el applet CAT Control haciendo clic en el botón **CAT** de la barra lateral derecha. El applet está oculto de forma predeterminada.
 
 ## Pasos
 
 1. Haga clic en el botón **CAT** de la barra lateral derecha para abrir el applet CAT Control.
-2. Haga clic en **Enable TTY** para iniciar los servidores PTY.
-3. Revise las filas de cada canal. Cuando cada PTY esté en ejecución, la columna de ruta se actualiza desde `/tmp/AetherSDR-CAT-A` (o B, C, D) a la ruta del enlace simbólico activo asignada por el sistema.
-4. En su aplicación de registro o de concursos, configure el puerto serie con la ruta que se muestra en la fila del canal correspondiente — por ejemplo `/tmp/AetherSDR-CAT-A` para el canal A.
+2. Haga clic en **Enable TTY**.
+
+   El botón se vuelve verde cuando está activo. AetherSDR crea cuatro enlaces simbólicos:
+
+   ```
+   /tmp/AetherSDR-CAT-A
+   /tmp/AetherSDR-CAT-B
+   /tmp/AetherSDR-CAT-C
+   /tmp/AetherSDR-CAT-D
+   ```
+
+3. En su aplicación externa, establezca la ruta del puerto serie al enlace simbólico del canal que desea controlar — por ejemplo, `/tmp/AetherSDR-CAT-A` para el canal A.
+4. Cada fila de canal en el applet se actualiza para mostrar la ruta PTY activa una vez que el enlace simbólico está en funcionamiento.
 
 ## Qué hace cada control
 
-| Control | Tipo | Predeterminado | Rango | Clave persistida | Comportamiento |
-|---|---|---|---|---|---|
-| **Enable TTY** | Botón de alternancia | Off | On / Off | — | Inicia o detiene los cuatro enlaces simbólicos PTY bajo `/tmp/AetherSDR-CAT-A` hasta `/tmp/AetherSDR-CAT-D`. |
-| **Base** | Campo de texto | `4532` | 1024–65535 | `CatTcpPort` | Puerto TCP base usado por los servidores TCP. No afecta las rutas PTY. Los valores fuera de rango vuelven automáticamente a `4532`. |
-| Filas A / B / C / D | Indicador | `(stopped)` | — | — | Cada fila muestra una insignia de canal con código de color, el estado del servidor TCP y la ruta del enlace simbólico PTY actual. |
+| Control | Valor predeterminado | Rango válido | Clave persistida | Comportamiento |
+|---|---|---|---|---|
+| **Enable TTY** | Apagado | Encendido / Apagado | — | Inicia o detiene los cuatro enlaces simbólicos PTY en `/tmp/AetherSDR-CAT-A` hasta `/tmp/AetherSDR-CAT-D`. |
+| **Enable TCP** | Apagado | Encendido / Apagado | — | Inicia o detiene los cuatro servidores TCP rigctld. Al cambiar el estado también se guarda el puerto base en `CatTcpPort`. |
+| **Base** | `4532` | 1024–65535 | `CatTcpPort` | Puerto TCP base para los servidores TCP. Los valores fuera del rango válido vuelven automáticamente a `4532`. No afecta las rutas PTY. |
+| Filas de canales A/B/C/D | `(detenido)` | — | — | Cada fila muestra una insignia de canal con código de color, el estado del servidor TCP y la ruta del enlace simbólico PTY para ese canal. |
 
 ## Consejos
 
-- Cada uno de los cuatro canales (A–D) se corresponde con un slice de radio. Abra la ruta del canal que corresponda al slice que desea controlar.
-- Puede ejecutar **Enable TTY** y **Enable TCP** al mismo tiempo. Funcionan de manera independiente.
-- Para iniciar los servidores PTY automáticamente cada vez que AetherSDR se inicie, use `Settings > Autostart CAT with AetherSDR`.
+- Cada canal (A, B, C, D) corresponde a un slice de radio. Apunte su programa de registro al enlace simbólico que corresponde al slice que desea controlar.
+- Para que AetherSDR inicie los enlaces simbólicos PTY automáticamente al arrancar, habilite `Settings > Autostart CAT with AetherSDR`.
+- Puede ejecutar **Enable TTY** y **Enable TCP** de forma independiente. Habilitar uno no requiere habilitar el otro.
 
 ## Solución de problemas
 
-- **La ruta PTY no aparece o permanece en gris después de hacer clic en Enable TTY** — confirme que el radio esté conectado. El applet CAT Control requiere una conexión de radio activa antes de que los servidores PTY puedan iniciarse.
-- **La ruta del enlace simbólico que se muestra no es `/tmp/AetherSDR-CAT-A`** — es posible que el sistema haya asignado una ruta de dispositivo esclavo diferente. Use la ruta exacta que se muestra en la fila del canal, no un valor fijo.
-- **Enable TTY no tiene efecto en Windows** — los enlaces simbólicos PTY son una función de Linux/macOS. Use **Enable TCP** y una utilidad de puente TCP a serie en su lugar.
+- **Enable TTY no tiene efecto o los enlaces simbólicos no aparecen** — La compatibilidad con PTY requiere Linux o macOS. La función no está disponible en Windows.
+- **La aplicación externa no puede abrir el puerto** — Confirme que la aplicación esté usando la ruta completa, por ejemplo `/tmp/AetherSDR-CAT-A`. Verifique que **Enable TTY** siga activo (el botón debe estar verde) y que AetherSDR permanezca conectado al radio.
+- **La ruta del enlace simbólico mostrada en la fila no coincide con `/tmp/AetherSDR-CAT-A`** — La ruta mostrada se actualiza a la ruta real del dispositivo PTY una vez que el enlace simbólico está en funcionamiento. Use la ruta que se muestre en la fila del canal, no el marcador de posición.
 
-## Relacionados
+## Relacionado
 
-- [Descripción general de CAT Control](overview.md)
 - [Habilitar CAT TCP para que N1MM, Log4OM, WSJT-X puedan controlar el radio](enable-cat-tcp-so-n1mm-log4om-wsjt-x-can-control-the-radio.md)
 - [Iniciar automáticamente los servidores CAT con AetherSDR](autostart-cat-servers-with-aethersdr.md)
-- [Cambiar el puerto TCP base](change-the-base-tcp-port.md)
+- [Descripción general de CAT Control](overview.md)
+- [Verificar cuántos clientes externos están conectados a cada canal](../../getting-started/setup/check-how-many-external-clients-are-connected-to-each-channel.md)

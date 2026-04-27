@@ -1,44 +1,46 @@
 # Descripción general de los medidores
 
-El applet de medidores muestra telemetría de hardware en tiempo real del FLEX-8600 conectado: temperatura del amplificador de potencia (PA), tensión de alimentación de CC y velocidad del ventilador de refrigeración principal. Úselo para vigilar el estado térmico y eléctrico del radio durante la operación.
+El applet Meters muestra telemetría de hardware en tiempo real desde el FLEX-8600 conectado: temperatura del amplificador de potencia (PA), tensión de alimentación de CC y velocidad del ventilador principal de refrigeración. Utilícelo para supervisar el estado del radio durante la operación sin salir de la ventana principal de AetherSDR.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a un radio FLEX-8600. El applet no muestra datos sin una conexión de radio activa.
-- El panel del applet debe estar visible. Si está oculto, actívelo con `View > Applet Panel`.
+- AetherSDR debe estar conectado a un radio FLEX-8600. El applet requiere una conexión de radio activa.
+- El panel del applet debe estar visible. Si está oculto, actívelo mediante `View > Applet Panel`.
 
 ## Cómo funciona
 
-El applet de medidores está oculto de forma predeterminada. Haga clic en el botón de bandeja **MTR** en la barra lateral derecha para mostrarlo u ocultarlo.
+El applet Meters está oculto de forma predeterminada. Ábralo o ciérrelo alternadamente usando el botón de bandeja **MTR** en la barra lateral derecha.
 
-Una vez abierto, el applet muestra tres barras indicadoras horizontales bajo el encabezado de sección **Radio Hardware**. Cada barra se llena de izquierda a derecha y cambia de color a medida que la lectura asciende por las zonas normal, de precaución y de advertencia. La barra es cian en el rango normal, amarilla en la zona de precaución y roja cuando la lectura supera el umbral.
+Una vez abierto, el applet muestra una sección "Radio Hardware" que contiene tres barras indicadoras horizontales. Cada barra se llena de izquierda a derecha y cambia de color a medida que el valor avanza por las zonas de advertencia y alarma:
 
-Los valores de las barras se suavizan con animación balística: la barra sigue los cambios rápidos con un breve movimiento de asentamiento en lugar de saltar instantáneamente. Esto reproduce la sensación de un medidor físico de aguja.
+- La barra es de color **verde** por debajo del umbral amarillo.
+- La barra se vuelve **amarillo-ámbar** entre los umbrales amarillo y rojo.
+- La barra se vuelve **roja** por encima del umbral rojo.
 
-La temperatura del PA y la tensión de alimentación se entregan como telemetría en caché desde el radio. La velocidad del ventilador se resuelve por separado una vez que el radio informa su lista de medidores; la barra del ventilador puede mostrar cero brevemente al momento de la conexión hasta que esa consulta se complete.
+Las etiquetas de escala a lo largo de la parte superior de cada barra están coloreadas para coincidir con la zona en la que se encuentran. Los valores se suavizan con animación balística para que los cambios rápidos no provoquen saltos bruscos.
 
-La corriente del PA no se muestra. El hardware de la serie FLEX-8000 reporta la corriente del PA en una escala de 10 A, lo que se satura bajo la demanda máxima del PA y produce una lectura engañosa.
+La temperatura del PA y la tensión de alimentación se reportan directamente desde el flujo de telemetría de hardware del radio. La velocidad del ventilador principal se resuelve por nombre de medidor cuando el radio la publica por primera vez y se actualiza a medida que llegan las lecturas.
 
 ## Qué hace cada control
 
-| Barra | Qué muestra | Rango normal | Rojo por encima de | Unidad |
-|---|---|---|---|---|
-| **PA Temp** | Temperatura del amplificador de potencia | 0–70 °C | 70 °C | °C |
-| **+13.8V** | Tensión de alimentación de CC | 10.0–15.0 V | 15 V | V |
-| **Main Fan** | Velocidad del ventilador de refrigeración principal | 0–2500 rpm | 2500 rpm | rpm |
+| Indicador | Qué muestra | Rango válido | Rojo por encima de |
+|---|---|---|---|
+| **PA Temp** | Temperatura del amplificador de potencia | 0–120 °C | 70 °C |
+| **+13.8V** | Tensión de alimentación de CC | 10.0–16.0 V | 15 V |
+| **Main Fan** | Velocidad del ventilador principal de refrigeración | 0–3000 rpm | 2500 rpm |
 
-Valores de fondo de escala: PA Temp 120 °C, +13.8V 16.0 V, Main Fan 3000 rpm.
+Ninguno de los indicadores tiene configuraciones persistentes ni controles ajustables por el usuario. No hay claves de `AppSettings` asociadas a este applet.
 
-Ninguna de las barras tiene configuraciones persistentes ni controles ajustables por el usuario. Son indicadores de solo lectura de los valores reportados por el radio.
+**Nota:** La corriente del PA no se muestra. En el hardware de la serie FLEX-8000, el medidor de corriente del PA tiene un límite de 10 A, lo que provoca que la lectura se sature bajo una extracción completa del PA, haciéndola poco confiable.
 
 ## Consejos
 
-- Observe **PA Temp** durante transmisiones prolongadas u operación en concursos. Una lectura consistentemente por encima de 70 °C justifica prestar atención a la ventilación alrededor del radio.
-- Una lectura de **+13.8V** por encima de 15 V o por debajo de aproximadamente 12 V sugiere un problema de fuente de alimentación que conviene investigar antes de continuar la operación.
-- Lecturas de **Main Fan** por encima de 2500 rpm indican que el radio está trabajando con alta carga térmica; verifique el flujo de aire y la temperatura ambiente.
+- Una lectura de PA Temp que regularmente alcanza la zona roja (por encima de 70 °C) durante transmisiones prolongadas puede indicar una ventilación insuficiente alrededor del radio.
+- El umbral rojo del indicador +13.8V es 15 V. Las lecturas consistentemente por encima de ese valor sugieren un problema de regulación de la fuente de alimentación que vale la pena investigar.
+- La velocidad de Main Fan mostrará cero hasta que el radio publique el medidor MAINFAN. Esto es normal durante los primeros segundos tras la conexión.
 
 ## Relacionados
 
-- [Vigilar la temperatura del PA durante transmisiones prolongadas](watch-pa-temperature-during-long-overs.md)
+- [Supervisar la temperatura del PA durante transmisiones largas](watch-pa-temperature-during-long-overs.md)
 - [Verificar la tensión de alimentación de CC del radio](check-the-radio-s-dc-supply-voltage.md)
-- [Monitorear la velocidad del ventilador de refrigeración principal](monitor-the-main-cooling-fan-speed.md)
+- [Monitorear la velocidad del ventilador principal de refrigeración](monitor-the-main-cooling-fan-speed.md)

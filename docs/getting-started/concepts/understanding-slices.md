@@ -1,59 +1,67 @@
-# Comprensión de los slices y los VFOs
+# Comprensión de los Slices y los VFO
 
-Un slice es un canal de recepción (y opcionalmente de transmisión) independiente dentro de un único panadapter. Cada slice tiene su propia frecuencia de VFO, modo, filtro y ruta de audio. Comprender cómo se relacionan los slices con los VFOs le ayuda a gestionar múltiples señales simultáneas en el FLEX-8600.
+En AetherSDR, un slice (receptor independiente) es un receptor autónomo dentro de un panadapter. Cada slice tiene su propia frecuencia de VFO, modo, filtro y ajustes de audio. El FLEX-8600 admite hasta ocho slices simultáneos (etiquetados de A a H), lo que permite monitorear múltiples frecuencias a la vez dentro del mismo panadapter o en panadapters diferentes.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600.
-- El applet RX Controls debe estar visible. Actívelo con el botón RX de la barra lateral derecha.
+- AetherSDR debe estar conectado a una radio FLEX-8600. Los slices solo existen cuando hay una conexión de radio activa.
+- El applet RX Controls debe estar visible. Si no lo está, haga clic en el botón de bandeja **RX** en la barra lateral derecha.
 
 ## Cómo funcionan los slices
 
-El FLEX-8600 admite hasta ocho slices simultáneos, etiquetados de A a H. Cada slice es un receptor independiente con su propio:
+Cada slice es un canal de recepción completamente independiente. Cuenta con:
 
-- **Frecuencia de VFO** — mostrada en la etiqueta Frequency del applet RX Controls.
-- **Modo** — configurado con el selector Mode (USB, LSB, CW, AM, SAM, FM, NFM, DFM, DIGU, DIGL, RTTY).
-- **Banda de paso del filtro** — mostrada en el indicador de ancho de filtro (por ejemplo, `2.7K`) y ajustable mediante el widget Filter passband o los preajustes Filter width.
-- **Ruta de audio** — controles independientes de ganancia AF, panorama L/R y squelch.
-- **CAG** — modo de CAG y umbral de CAG independientes por slice.
+- Una **frecuencia de VFO** — la frecuencia central de sintonía para ese slice, mostrada en el **Frequency label** del applet RX Controls.
+- Un **modo** — USB, LSB, CW, AM, SAM, FM, NFM, DFM, DIGU, DIGL o RTTY — configurado con el **Mode combo**.
+- Un **pasabanda de filtro** — ajustable mediante preajustes de ancho de filtro o arrastrando el **Filter passband widget**.
+- Sus propios ajustes de **AF gain**, **AGC**, **squelch**, **RIT** y **XIT**.
+- Antenas de RX y TX asignadas.
 
-Los slices dentro de un panadapter comparten el mismo rango de FFT, por lo que todos los slices visibles sintonizarán la misma porción del espectro. Es posible ver todos los marcadores de slice activos simultáneamente en la pantalla Spectrum / waterfall.
+Un slice siempre está vinculado a un panadapter. El panadapter muestra el espectro FFT del segmento de banda del slice, y el marcador de VFO del slice aparece como una línea sobre ese espectro.
 
-## El slice de TX
+## Los slices y el panadapter
 
-Solo un slice transmite a la vez. Ese slice es el slice de TX. El botón TX (badge) del applet RX Controls designa el slice actual como slice de TX. La etiqueta Frequency del slice de TX determina la frecuencia de transmisión.
+La pantalla **Spectrum / waterfall** del panadapter muestra la posición actual del VFO del slice. Hacer clic o arrastrar sobre el espectro sintoniza el slice activo. La barra de título del panadapter indica qué slice está vinculado a él (por ejemplo, **Slice A**).
 
-## Selección y cambio de slices
+En el modo multi-slice, cada panadapter puede contener uno o más marcadores de slice. Hacer clic en el espectro de un panadapter diferente activa ese panadapter y su slice asociado.
 
-El applet RX Controls muestra una fila de pestañas de slice etiquetadas de A a H (la fila se oculta cuando solo hay un slice activo). Haga clic en una pestaña para vincular el applet a ese slice. El badge Slice se actualiza para reflejar la letra del slice actualmente vinculado.
+## Cambio entre slices
 
-En el panadapter, cada slice aparece como un marcador independiente en el Spectrum / waterfall. Al hacer clic en el espectro se activa el panadapter; en modo multislice, hacer clic cerca de un marcador de slice sintoniza o selecciona ese slice.
+El applet RX Controls muestra una fila de pestañas etiquetadas de **A** a **H** (hasta el número máximo de slices de la radio). Haga clic en una pestaña para vincular el applet RX Controls a ese slice. El indicador **Slice badge** del applet se actualiza para mostrar la letra del slice activo, con un color según la identidad del slice.
+
+La fila de pestañas se oculta cuando solo hay un slice en uso.
+
+## El slice TX
+
+Solo un slice transmite a la vez. El slice que está transmitiendo actualmente es el slice TX. Para convertir un slice en el slice TX, haga clic en su botón **TX (badge)** en el applet RX Controls. Esto enruta la transmisión a través de la frecuencia, el modo y la antena TX de ese slice.
 
 ## RIT y XIT
 
-El RIT (Sintonización Incremental de Recepción) desplaza la frecuencia de recepción sin mover el VFO. Actívelo con el botón de alternancia RIT y ajuste el desplazamiento mediante el spinbox RIT offset (pasos de 10 Hz). Haga clic en RIT 0 para poner el desplazamiento a cero.
+El RIT (Receive Incremental Tuning) desplaza la frecuencia de recepción sin mover el VFO. Actívelo con el botón **RIT**; ajústelo con el spinbox **RIT offset** (pasos de 10 Hz); restablézcalo con **RIT 0**.
 
-El XIT (Sintonización Incremental de Transmisión) desplaza la frecuencia de transmisión sin modificar la frecuencia de recepción. Actívelo con el botón de alternancia XIT y ajústelo con el spinbox XIT offset (pasos de 10 Hz). Haga clic en XIT 0 para poner el desplazamiento a cero.
+El XIT (Transmit Incremental Tuning) desplaza la frecuencia de transmisión sin cambiar la frecuencia de recepción. Actívelo con el botón **XIT**; ajústelo con el spinbox **XIT offset** (pasos de 10 Hz); restablézcalo con **XIT 0**.
 
-Tanto el RIT como el XIT tienen el valor predeterminado de `+0 Hz`.
+Ambos son independientes por slice.
 
 ## Bloqueo de un slice
 
-El alternador 🔓 / 🔒 del applet RX Controls bloquea la frecuencia del slice. Un slice bloqueado ignora los cambios de frecuencia producidos al hacer clic en el panadapter o mediante comandos CAT externos. El icono alterna entre candado abierto y cerrado para indicar el estado actual.
+Para evitar una resintonización accidental, haga clic en el botón 🔓 del applet RX Controls. El ícono cambia a 🔒 y el slice ignora los cambios de frecuencia hasta que se desbloquee.
 
 ## Consejos
 
-- La etiqueta Frequency muestra la frecuencia del VFO con separación por puntos. Haga clic en ella para activar el modo de edición, escriba una frecuencia en MHz y presione Enter para sintonizar y recentrar el panadapter. Presione Escape para cancelar y restaurar la frecuencia anterior.
-- Si tiene el RIT activo y la estación suena en frecuencia pero aparece descentrada, ponga el RIT a cero con RIT 0 y vuelva a sintonizar.
-- Haga doble clic en el deslizador de panorama L / R para restablecerlo al centro (50).
+- El **Frequency label** muestra la frecuencia del VFO con agrupación por puntos (por ejemplo, `14.225.000`). Haga clic en él para entrar en el modo de edición, escriba una frecuencia en MHz y presione Enter para sintonizar y recentrar el panadapter.
+- El spinbox **STEP** controla cuánto se mueve el VFO por cada clic de la rueda de desplazamiento o por cada pulsación de los botones **<** / **>**. Los tamaños de paso son por modo — por ejemplo, los pasos de SSB son 1, 10, 50, 100, 500, 1000, 2000 o 3000 Hz; los pasos de CW son 1, 5, 10, 50, 100, 200 o 400 Hz.
+- El tamaño de paso predeterminado es 100 Hz (índice 2 en la lista por modo).
+- Presionar Escape en el campo de edición de frecuencia cancela la entrada, restaura la frecuencia anterior y cierra el editor.
 
 ## Relacionados
 
+- [Descripción general de RX Controls](../../features/rx/overview.md)
 - [Cambiar entre múltiples slices usando la fila de pestañas A..H](../../features/rx/switch-between-multiple-slices-using-the-a-h-tab-row.md)
 - [Sintonizar la radio a una frecuencia (escribir MHz en el indicador)](../../features/rx/tune-the-radio-to-a-frequency-type-mhz-in-the-readout.md)
-- [Cambiar el modo (USB, LSB, CW, AM, FM, etc.)](../../features/rx/change-mode-usb-lsb-cw-am-fm-etc.md)
 - [Bloquear el slice para evitar una resintonización accidental](../../features/rx/lock-the-slice-to-prevent-accidental-retuning.md)
 - [Usar el RIT para desplazar la frecuencia de recepción ante una estación con deriva](../../features/rx/use-rit-to-offset-the-receive-frequency-for-a-drifting-station.md)
-- [Usar el XIT para desplazar la frecuencia de transmisión sin modificar la recepción](../../features/rx/use-xit-to-offset-the-transmit-frequency-without-changing-rx.md)
-- [Hacer clic en el espectro para activar un panadapter (modo multislice)](../../features/panadapter/click-the-spectrum-to-activate-a-panadapter-multi-slice-mode.md)
-- [Descripción general de RX Controls](../../features/rx/overview.md)
+- [Usar el XIT para desplazar la frecuencia de transmisión sin cambiar el RX](../../features/rx/use-xit-to-offset-the-transmit-frequency-without-changing-rx.md)
+- [Hacer clic en el espectro para activar un panadapter (modo multi-slice)](../../features/panadapter/click-the-spectrum-to-activate-a-panadapter-multi-slice-mode.md)
+- [Descripción general del panadapter](../../features/panadapter/overview.md)
+- [Hacer su primer QSO con AetherSDR](../tutorials/first-qso.md)

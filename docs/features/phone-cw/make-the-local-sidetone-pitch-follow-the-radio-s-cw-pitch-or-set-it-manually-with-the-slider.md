@@ -1,54 +1,46 @@
 # Hacer que el tono local de escucha CW siga el tono CW del radio, o ajustarlo manualmente con el deslizador
 
-El generador local de tono de escucha (sidetone) en AetherSDR puede derivar su tono automáticamente del ajuste de tono CW del radio, o puede anularlo con una frecuencia fija mediante el deslizador de tono. Use esta página para cambiar entre los dos modos y ajustar el tono deseado.
+Controle si el tono local de escucha CW del lado del cliente utiliza automáticamente el tono CW actual del radio, o si suena a una frecuencia fija que usted elige con un deslizador. Esto es útil cuando desea que el tono local de escucha permanezca sincronizado con el tono de decodificación del radio, o cuando prefiere un tono específico independientemente de la configuración del radio.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio.
-- El slice activo debe estar en un modo CW — el applet Phone/CW solo muestra los controles CW cuando CW está activo.
-- Local STn debe estar habilitado. Si no lo está, habilítelo primero (consulte [Habilitar el tono local de escucha CW de baja latencia (Local STn) para trabajo con paleta / manipulador recto / CWX](enable-the-low-latency-local-cw-sidetone-local-stn-for-fast-paddle-straight-key-cwx-work.md)).
+- El slice activo debe estar en un modo CW para que el subpanel CW sea visible en el applet Phone/CW.
+- Local STn debe estar habilitado. Si no lo está, haga clic en Local STn en el applet Phone/CW para activarlo. Consulte [Habilitar el tono local de escucha CW de baja latencia (Local STn) para trabajo con paddle rápido / manipulador directo / CWX](enable-the-low-latency-local-cw-sidetone-local-stn-for-fast-paddle-straight-key-cwx-work.md).
 
 ## Pasos
 
-### Para hacer que el tono siga el tono CW del radio (opción predeterminada)
+### Para hacer que el tono siga el tono CW del radio
 
 1. Abra el applet Phone/CW haciendo clic en el botón de bandeja **P/CW** en la barra lateral derecha.
-2. Localice el botón **Follow (local pitch)** en el subpanel de CW.
-3. Haga clic en **Follow (local pitch)** para que quede marcado (activo). El tono local de escucha seguirá automáticamente el ajuste **Pitch < / >** del radio.
-
-El deslizador **Local sidetone pitch** queda deshabilitado mientras **Follow (local pitch)** está activado.
+2. Confirme que **Follow (local pitch)** esté marcado (encendido). Este es el estado predeterminado.
+3. No se requiere ninguna acción adicional. El tono local de escucha ahora sigue el valor establecido en el control giratorio **Pitch < / >**.
 
 ### Para ajustar el tono manualmente
 
 1. Abra el applet Phone/CW haciendo clic en el botón de bandeja **P/CW** en la barra lateral derecha.
-2. Haga clic en **Follow (local pitch)** para desmarcarlo. El deslizador **Local sidetone pitch** quedará habilitado.
-3. Arrastre el deslizador **Local sidetone pitch** hasta la frecuencia deseada. El rango de valores es 100–2000 Hz; el valor predeterminado es 600 Hz.
+2. Haga clic en **Follow (local pitch)** para desactivarlo. El deslizador **Local sidetone pitch** quedará habilitado.
+3. Arrastre el deslizador **Local sidetone pitch** hasta la frecuencia deseada. El rango válido es de 100–2000 Hz; el valor predeterminado es 600 Hz.
 
 ## Qué hace cada control
 
-| Control | Predeterminado | Rango válido | Ajuste persistido |
-|---|---|---|---|
-| **Follow (local pitch)** | Activado | Activado / Desactivado | `CwLocalSidetonePitchFollow` |
-| **Local sidetone pitch** | 600 Hz | 100–2000 Hz | `CwLocalSidetonePitchHz` |
-
-**Follow (local pitch):** Cuando está activado, el tono local de escucha refleja el tono CW del radio (ajustado mediante **Pitch < / >**). Cuando está desactivado, entra en efecto el deslizador manual **Local sidetone pitch**.
-
-**Local sidetone pitch:** Establece la frecuencia del tono local de escucha en Hz. Solo está activo cuando **Follow (local pitch)** está desactivado. El generador subyacente limita internamente los valores al rango 100–4000 Hz, pero el deslizador expone 100–2000 Hz.
+| Control | Valor predeterminado | Rango válido | Clave persistida | Comportamiento |
+|---|---|---|---|---|
+| **Follow (local pitch)** | Activado | Activado / Desactivado | `CwLocalSidetonePitchFollow` | Cuando está activado, el tono local de escucha sigue el tono CW del radio. Cuando está desactivado, se habilita el deslizador manual. |
+| **Local sidetone pitch** | 600 Hz | 100–2000 Hz | `CwLocalSidetonePitchHz` | Establece la frecuencia del tono local de escucha en Hz. Solo es ajustable cuando Follow (local pitch) está desactivado. |
 
 ## Consejos
 
-- El tono CW del radio se ajusta con el control giratorio **Pitch < / >** en el mismo subpanel de CW (rango 100–6000 Hz, paso 10 Hz). Cuando **Follow (local pitch)** está activado, el tono local de escucha sigue ese valor automáticamente — no es necesario actualizar el deslizador de tono por separado.
-- El tono local de escucha funciona con una latencia aproximada de 10 ms, independientemente del monitor del radio alimentado por DAX. El ajuste de tono aquí no afecta al tono de escucha del radio, solo al generador en el lado del cliente.
+- El tono CW del radio se ajusta con el control giratorio **Pitch < / >**, que avanza en incrementos de 10 Hz en el rango de 100–6000 Hz. Si usa Follow (local pitch), el tono local de escucha reflejará los cambios en ese control giratorio de forma inmediata.
+- El generador de tono local de escucha limita internamente su tono a 100–4000 Hz, por lo que los valores superiores a 4000 Hz establecidos mediante el tono del radio serán limitados cuando Follow esté activado.
 
 ## Solución de problemas
 
-- **El deslizador Local sidetone pitch aparece en gris** — **Follow (local pitch)** está activado. Haga clic en **Follow (local pitch)** para desmarcarlo antes de ajustar el deslizador.
-- **El tono local de escucha no cambia cuando cambia el tono CW del radio** — **Follow (local pitch)** está desactivado. Haga clic en **Follow (local pitch)** para habilitar el seguimiento automático.
-- **No se escucha ningún tono local de escucha** — **Local STn** está desactivado. Habilítelo; consulte [Habilitar el tono local de escucha CW de baja latencia (Local STn) para trabajo con paleta / manipulador recto / CWX](enable-the-low-latency-local-cw-sidetone-local-stn-for-fast-paddle-straight-key-cwx-work.md).
+- **El deslizador Local sidetone pitch aparece en gris y no se puede mover** — Follow (local pitch) está activado. Haga clic en **Follow (local pitch)** para desactivarlo y habilitar el deslizador.
+- **El tono no cambia al mover el control giratorio Pitch < / > del radio** — Es posible que Follow (local pitch) esté desactivado. Haga clic en **Follow (local pitch)** para activarlo.
 
-## Relacionados
+## Temas relacionados
 
-- [Cambiar el tono CW / frecuencia del tono de escucha](change-cw-pitch-sidetone-frequency.md)
-- [Habilitar el tono local de escucha CW de baja latencia (Local STn) para trabajo con paleta / manipulador recto / CWX](enable-the-low-latency-local-cw-sidetone-local-stn-for-fast-paddle-straight-key-cwx-work.md)
+- [Habilitar el tono local de escucha CW de baja latencia (Local STn) para trabajo con paddle rápido / manipulador directo / CWX](enable-the-low-latency-local-cw-sidetone-local-stn-for-fast-paddle-straight-key-cwx-work.md)
 - [Ajustar el volumen del tono local de escucha de forma independiente al monitor del radio](set-the-local-sidetone-volume-independently-of-the-radio-monitor.md)
+- [Cambiar la frecuencia del tono CW / tono de escucha](change-cw-pitch-sidetone-frequency.md)
 - [Escuchar un monitor de tono de escucha en TX](listen-to-a-tx-sidetone-monitor.md)

@@ -1,41 +1,41 @@
 # Reproducir el audio PUDU capturado
 
-Esta página explica cómo reproducir el audio que grabó con el monitor TX posterior al PUDU. Utilice esta función para escuchar cómo suena su señal TX después de que la cadena DSP completa del lado del cliente la haya procesado.
+Esta página explica cómo reproducir el audio que ya grabó con el monitor TX post-PUDU. Utilice esta función para escuchar exactamente cómo suena su señal transmitida después de que la cadena completa de DSP TX la ha procesado.
 
 ## Antes de comenzar
 
-- Debe tener al menos una grabación ya capturada. El botón Play está desactivado hasta que exista una grabación.
-- El applet Aetherial Audio Chain debe estar visible. Si no lo está, haga clic en el botón "PUDU" de la bandeja en la barra lateral derecha para mostrarlo.
-- Asegúrese de no estar grabando en este momento. El botón Play está desactivado mientras la grabación está activa.
-- La cadena TX debe estar visible. El botón Play se oculta cuando la cadena RX está activa.
+- Debe existir una grabación previa. El botón Play (▶) solo se habilita cuando existe una grabación.
+- La grabación no debe estar activa en ese momento. El botón Play (▶) está deshabilitado mientras el botón Record (⏺) esté activado.
+- El contenedor Aetherial Audio (TXDSP) debe estar visible. Si no lo está, haga clic en el botón de bandeja etiquetado como `PUDU` en la barra lateral derecha para mostrarlo.
+- La cadena TX debe ser la vista activa. El botón Play (▶) está oculto en modo RX.
 
 ## Pasos
 
-1. Si la cadena RX está visible en este momento, haga clic en **TX** para cambiar a la cadena TX.
-2. Localice el botón **Play (símbolo de triángulo)** en la fila de encabezado, a la derecha del botón **Record (símbolo de círculo)**.
-3. Haga clic en **Play (símbolo de triángulo)** para iniciar la reproducción. El botón parpadea en verde mientras el audio se está reproduciendo.
-4. Para detener la reproducción antes de que finalice, haga clic en **Play (símbolo de triángulo)** nuevamente.
+1. En la fila de encabezado del ClientChainApplet, confirme que el botón **TX** está seleccionado. Si no lo está, haga clic en **TX**.
+2. Haga clic en el botón **Play (▶)**.
+   - El botón parpadea en verde mientras la reproducción está en curso.
+3. Para detener la reproducción antes de que finalice, haga clic en el botón **Play (▶)** nuevamente.
 
 ## Qué hace cada control
 
 | Control | Comportamiento | Notas |
 |---|---|---|
-| **Play (símbolo de triángulo)** | Inicia la reproducción del audio PUDU capturado. Haga clic nuevamente para cancelar. | Activado solo cuando existe una grabación y la grabación no está activa. Parpadea en verde durante la reproducción. Se oculta cuando la cadena RX está visible. |
-| **Record (símbolo de círculo)** | Desactivado durante la reproducción. | Se reactiva automáticamente cuando la reproducción finaliza. |
+| **Play (▶)** | Inicia la reproducción del audio PUDU capturado; haga clic nuevamente para cancelar. | Oculto en modo RX. Se habilita solo cuando existe una grabación y la grabación no está activa. Parpadea en verde durante la reproducción. |
+| **Record (⏺)** | Deshabilitado durante la reproducción. | Se rehabilita automáticamente cuando finaliza la reproducción. |
 
 ## Consejos
 
-- La reproducción comienza inmediatamente al hacer clic en **Play (símbolo de triángulo)**; no hay ningún paso de confirmación.
-- Si desea realizar una nueva grabación primero, espere a que la reproducción finalice o cancélela, y luego use **Record (símbolo de círculo)**.
-- El parpadeo verde del botón **Play (símbolo de triángulo)** alterna entre brillante y tenue cada 500 ms mientras la reproducción está en curso, lo que proporciona una indicación visual clara de que el audio está en progreso.
+- El botón Play (▶) permanece habilitado mientras la reproducción está en curso, de modo que puede cancelarla en cualquier momento haciendo clic en él nuevamente.
+- Si desea una nueva grabación antes de escuchar, haga clic en **Record (⏺)** para capturar hasta 30 segundos de audio TX post-PUDU. La reproducción comienza automáticamente cuando la grabación se detiene.
+- El botón Play (▶) está oculto siempre que la pestaña **RX** esté activa. Vuelva a **TX** para acceder a él.
 
-## Solución de problemas
+## Resolución de problemas
 
-- **Play (símbolo de triángulo) aparece en gris** — Aún no se ha realizado ninguna grabación, o la grabación está activa en este momento. Complete o detenga la grabación primero.
-- **Play (símbolo de triángulo) no está visible** — La cadena RX está visible en este momento. Haga clic en **TX** para cambiar a la cadena TX; los botones de reproducción y grabación solo aparecen en el modo TX.
+- **Play (▶) aparece en gris** — Aún no existe ninguna grabación, o la grabación está en curso actualmente. Realice primero una grabación con **Record (⏺)**, o espere a que finalice la grabación actual.
+- **Play (▶) no es visible** — La pestaña **RX** está activa. Haga clic en **TX** para cambiar a la vista de la cadena TX.
 
-## Temas relacionados
+## Relacionados
 
-- [Grabar hasta 30 segundos de audio TX posterior al PUDU](record-up-to-30-seconds-of-post-pudu-tx-audio.md)
+- [Grabar hasta 30 segundos de audio TX post-PUDU](record-up-to-30-seconds-of-post-pudu-tx-audio.md)
 - [Alternar entre la edición de las cadenas TX y RX](switch-between-editing-the-tx-and-rx-chains.md)
 - [Descripción general de Aetherial Audio Chain](overview.md)

@@ -1,57 +1,52 @@
 # Seleccionar un ajuste preestablecido de ancho de filtro para el modo actual
 
-Los ajustes preestablecidos de ancho de filtro permiten aplicar un ancho de banda estándar al slice activo con un solo clic, o guardar su propio ancho preferido como ajuste preestablecido. Los preestablecidos son específicos del modo actual.
+Use los botones de ajuste preestablecido de ancho de filtro en el applet RX Controls para aplicar rápidamente un ancho de paso estándar para el modo activo. Los ajustes preestablecidos se guardan por modo en `FilterPresets`.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. El applet RX Controls requiere una conexión activa con el radio.
-- El slice que desea ajustar debe estar seleccionado. Si tiene múltiples slices, use las pestañas de slice (A..H) en la parte superior del applet RX Controls para seleccionar el correcto.
-- Los ajustes preestablecidos de ancho de filtro no están disponibles en los modos FM, NFM ni DFM. Cambie a un modo diferente si los botones de preestablecidos no son visibles.
+- AetherSDR debe estar conectado al equipo. El applet RX Controls requiere una conexión activa con el equipo.
+- Seleccione el slice que desea ajustar usando las pestañas de slice (A..H) si hay más de un slice activo.
+- Establezca primero el modo del slice. Los valores preestablecidos varían según el modo, y los ajustes preestablecidos no se muestran para los modos FM, NFM ni DFM.
 
 ## Pasos
 
-### Aplicar un preestablecido
-
-1. Abra el applet RX Controls. Si no está visible, haga clic en el botón **RX** de la bandeja en la barra lateral derecha.
-2. Si usa múltiples slices, haga clic en la pestaña de slice correcta (A..H) para vincular el applet a ese slice.
-3. En la fila de preestablecidos de filtro, haga clic en el botón que muestra el ancho deseado. El indicador de ancho de filtro actual (p. ej., **2.7K**) se actualiza de inmediato.
-
-### Guardar un preestablecido personalizado
-
-1. Establezca la banda de paso del filtro al ancho que desea guardar arrastrando los bordes inferior/superior del widget de banda de paso del filtro.
-2. Haga clic derecho en cualquier botón de preestablecido de ancho de filtro.
-3. Seleccione la opción para guardar el ancho actual en esa posición de preestablecido. La etiqueta del botón se actualiza para reflejar el nuevo valor. El valor personalizado se conserva en `FilterPresets`.
+1. Abra el applet RX Controls. Si no está visible, haga clic en el botón RX del panel lateral derecho.
+2. Si la fila de pestañas de slice está visible, haga clic en la pestaña (A hasta H) correspondiente al slice que desea ajustar.
+3. Confirme que el modo mostrado en el combo Mode sea el correcto. Los ajustes preestablecidos de filtro cambian cuando el modo cambia.
+4. Haga clic en cualquiera de los botones de ajuste preestablecido de ancho de filtro para aplicar ese ancho de banda de inmediato. El ancho de filtro actual mostrado en la etiqueta de ancho de filtro (por ejemplo, `2.7K`) se actualiza para reflejar el ajuste preestablecido aplicado.
+5. Para guardar el paso de banda de filtro actual como ajuste preestablecido, haga clic derecho en cualquier botón de ajuste preestablecido de ancho de filtro y elija guardar el ancho actual. El valor se almacena en `FilterPresets`.
 
 ## Qué hace cada control
 
-| Control | Comportamiento | Preestablecidos predeterminados por modo | Clave de configuración |
+| Control | Comportamiento | Ajustes preestablecidos predeterminados por modo | Clave persistente |
 |---|---|---|---|
-| Preestablecidos de ancho de filtro | Haga clic para aplicar ese ancho al filtro del slice. Haga clic derecho para sobrescribir el preestablecido con el ancho de filtro actual. Oculto en los modos FM/NFM/DFM. Los preestablecidos son por modo. | Ver tabla a continuación | `FilterPresets` |
-| Indicador de ancho de filtro (**2.7K**) | Visualización de solo lectura que muestra el ancho de banda del filtro actual en kHz o Hz. Se actualiza cuando se aplica un preestablecido o se arrastran los bordes de la banda de paso. | — | — |
-| Widget de banda de paso del filtro | Arrastre el borde inferior o superior para establecer un ancho de filtro personalizado. | — | — |
+| Ajustes preestablecidos de ancho de filtro | Haga clic para aplicar un ancho de banda preestablecido al slice actual. Haga clic derecho para guardar el ancho de filtro actual como ajuste preestablecido. Oculto en los modos FM, NFM y DFM. | Vea la tabla a continuación | `FilterPresets` |
+| Etiqueta de ancho de filtro | Indicador de solo lectura que muestra el ancho de banda de filtro actual (por ejemplo, `2.7K`, `500`, `6.0K`). Se actualiza cuando se aplica un ajuste preestablecido o cuando se arrastran los bordes del paso de banda. | — | — |
+| Widget de paso de banda del filtro | Arrastre el borde inferior o superior para establecer un paso de banda personalizado. Use los ajustes preestablecidos para anchos estándar. | — | — |
 
-**Valores de preestablecidos predeterminados por modo:**
+**Valores preestablecidos predeterminados por modo:**
 
-| Modo | Anchos de preestablecido |
+| Modo | Anchos preestablecidos (Hz) |
 |---|---|
-| USB, LSB | 1800 / 2100 / 2400 / 2700 / 2900 / 3300 Hz |
-| AM, SAM | 5600 / 6000 / 8000 / 10000 / 12000 / 14000 Hz |
-| CW | 50 / 100 / 250 / 400 Hz |
-| DIGU, DIGL | 100 / 300 / 600 / 1000 / 1500 / 2000 Hz |
-| RTTY | 250 / 300 / 350 / 400 / 500 / 1000 Hz |
-| FM, NFM, DFM | Sin preestablecidos (botones ocultos) |
+| USB, LSB | 1800, 2100, 2400, 2700, 2900, 3300 |
+| AM, SAM | 5600, 6000, 8000, 10000, 12000, 14000 |
+| CW | 50, 100, 250, 400 |
+| DIGU, DIGL | 100, 300, 600, 1000, 1500, 2000 |
+| RTTY | 250, 300, 350, 400, 500, 1000 |
+| FM, NFM, DFM | Sin ajustes preestablecidos (botones ocultos) |
 
 ## Consejos
 
-- Al cambiar de modo (p. ej., de USB a CW), los botones de preestablecidos se actualizan con los anchos del nuevo modo. Los preestablecidos personalizados que haya guardado se almacenan por modo en `FilterPresets`.
-- Para un control fino más allá de lo que ofrecen los preestablecidos, arrastre directamente los bordes del widget de banda de paso del filtro. Luego haga clic derecho en un botón de preestablecido para guardar ese ancho para uso futuro.
+- Si necesita un ancho que no coincida con ningún ajuste preestablecido, arrastre los bordes del widget de paso de banda del filtro para establecer un valor arbitrario y, luego, haga clic derecho en un botón de ajuste preestablecido para guardar ese ancho para uso futuro.
+- Los ajustes preestablecidos son por modo. Al cambiar de modo, el filtro se reconfigura y se muestran los botones de ajuste preestablecido para el nuevo modo.
 
 ## Solución de problemas
 
-- **Los botones de preestablecidos no son visibles** — El slice activo está en modo FM, NFM o DFM. Los preestablecidos de filtro no están disponibles para los modos de la familia FM. Cambie a un modo diferente para ver los botones de preestablecidos.
+- **Los botones de ajuste preestablecido no son visibles** — El modo activo es FM, NFM o DFM. Estos modos no exponen ajustes preestablecidos de filtro. Cambie el modo usando el combo Mode a un modo que admita ajustes preestablecidos (por ejemplo, USB o CW).
+- **El clic derecho en un botón de ajuste preestablecido no produce ningún efecto visible** — Confirme que el slice está conectado al equipo. El applet RX requiere una conexión activa con el equipo para guardar los valores preestablecidos.
 
-## Relacionado
+## Relacionados
 
-- [Cambiar modo (USB, LSB, CW, AM, FM, etc.)](change-mode-usb-lsb-cw-am-fm-etc.md)
-- [Cambiar entre múltiples slices usando la fila de pestañas A..H](switch-between-multiple-slices-using-the-a-h-tab-row.md)
+- [Cambiar el modo (USB, LSB, CW, AM, FM, etc.)](change-mode-usb-lsb-cw-am-fm-etc.md)
 - [Descripción general de RX Controls](overview.md)
+- [Cambiar entre múltiples slices usando la fila de pestañas A..H](switch-between-multiple-slices-using-the-a-h-tab-row.md)

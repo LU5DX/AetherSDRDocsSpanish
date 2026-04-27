@@ -1,42 +1,41 @@
-# Ajustar la potencia de salida de RF
+# Configurar la potencia de salida de RF
 
-Use el applet TX Controls para ajustar la potencia que el radio transmite durante la emisión. Establecer un nivel adecuado protege los transistores finales, cumple con las condiciones de su licencia y mantiene su señal limpia.
+Use el control deslizante **RF Power** del applet TX Controls para establecer el nivel de potencia de transmisión enviado a su antena. Ajustarlo antes de transmitir evita saturar su amplificador o superar los límites de potencia de la banda.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. El applet TX Controls requiere una conexión de radio activa.
-- Abra el applet TX Controls si no está visible: haga clic en el botón **TX** del panel lateral derecho.
+- AetherSDR debe estar conectado a una radio FLEX-8600. Si no lo está, vaya a `Settings > Connect to Radio...`.
+- El applet TX Controls debe estar visible. Si no lo está, haga clic en el botón **TX** de la bandeja en la barra lateral derecha para mostrarlo.
 
 ## Pasos
 
-1. Localice el control deslizante **RF Power** en el applet TX Controls.
-2. Arrastre el control hacia la izquierda para reducir la potencia o hacia la derecha para aumentarla. El valor numérico a la derecha del control se actualiza de inmediato.
-3. Lea la salida actual en el medidor **RF Pwr** sobre los controles deslizantes para confirmar que el radio entrega la potencia esperada durante la transmisión.
+1. Localice el control deslizante **RF Power** en el applet TX Controls. Aparece debajo del medidor **SWR**.
+2. Arrastre el control deslizante hacia la izquierda o la derecha para establecer el nivel de potencia deseado. La lectura numérica a la derecha del control se actualiza de inmediato.
+3. Confirme que el valor mostrado en la lectura es el que desea. El medidor **RF Pwr** reflejará la potencia directa real una vez que transmita.
 
 ## Qué hace cada control
 
-| Control | Tipo | Valor predeterminado | Rango | Comportamiento |
-|---|---|---|---|---|
-| **RF Power** | Control deslizante | 100 | 0–100 | Establece el nivel de potencia de RF de transmisión enviado al radio. La etiqueta numérica a la derecha muestra el valor actual. |
-| **RF Pwr** | Medidor | — | 0–120 W (sin amplificador); 0–600 W (Aurora 500 W) | Muestra la potencia directa real en la salida del excitador. La escala cambia automáticamente según el modelo de radio conectado. Indica en rojo por encima de 100 W (sin amplificador) o 500 W (Aurora). |
-| **SWR** | Medidor | — | 1.0–3.0 | Muestra la relación de onda estacionaria en el excitador. Indica en rojo por encima de 2.5. |
+| Control | Descripción | Predeterminado | Rango válido |
+|---|---|---|---|
+| Control deslizante **RF Power** | Establece el nivel de potencia de RF de transmisión enviado a la radio. | 100 | 0–100 |
+| Medidor **RF Pwr** | Muestra la potencia directa real en la salida del excitador. | — | 0–120 W (sin amplificador externo); 0–600 W (Aurora 500 W); rojo por encima de 100 W / 500 W |
+| Medidor **SWR** | Muestra la relación de onda estacionaria en el excitador. | — | 1.0–3.0; rojo por encima de 2.5 |
 
 ## Consejos
 
-- El medidor **RF Pwr** solo se mueve mientras el radio está transmitiendo (MOX activado, TUNE activo o PTT presionado). Ajuste el control deslizante antes de transmitir y luego verifique la lectura en el aire.
-- Los límites de potencia por banda pueden configurarse por separado. Consulte `Settings > TX Band Settings...` para establecer la potencia máxima de TX, la potencia de ajuste y las opciones de inhibición para cada banda.
-- El control deslizante **Tune Pwr** controla la potencia utilizada únicamente durante un ciclo de ajuste y no afecta la potencia de transmisión normal. Consulte [Ajustar la potencia del portador de ajuste](set-tune-carrier-power.md).
+- La escala del medidor **RF Pwr** cambia automáticamente según el modelo de su radio. En un FLEX-8600 estándar, la zona roja comienza por encima de 100 W.
+- Puede establecer límites de potencia por banda de forma independiente a este control deslizante. Vaya a `Settings > TX Band Settings...` para configurar la potencia, la potencia de ajuste y los ajustes de inhibición para cada banda.
+- El control deslizante **RF Power** controla el nivel de salida del excitador, no el de un amplificador externo. Si está usando un amplificador externo, ajuste este control al nivel de excitación que su amplificador requiera.
 
-## Resolución de problemas
+## Solución de problemas
 
-- **El medidor RF Pwr permanece en cero durante la transmisión** — Verifique que la antena esté conectada y que la ROS esté dentro del rango. Una ROS extremadamente alta puede hacer que el radio reduzca la potencia a casi cero.
-- **El control deslizante RF Power se mueve pero la salida no cambia** — Confirme que el radio esté conectado (el applet TX Controls requiere una conexión activa). Si el control regresa a su posición anterior, el radio puede estar rechazando el comando; verifique la configuración de banda del radio o el estado de inhibición de TX.
-- **La escala de RF Pwr muestra 0–600 W inesperadamente** — Esto es normal si se detecta un módulo Aurora 500 W. El umbral rojo se desplaza a 500 W en esa escala.
+- **El medidor RF Pwr muestra 0 W durante la transmisión** — Confirme que la radio esté realmente activada. Verifique que MOX esté activo (el botón **MOX** está en rojo) o que su línea PTT esté activada. Verifique también que el control deslizante **RF Power** no esté en 0.
+- **El control deslizante se mueve pero la potencia directa no cambia** — Es posible que la conexión con la radio se haya interrumpido. Compruebe el estado de la conexión y vuelva a conectarse mediante `Settings > Connect to Radio...` si es necesario.
 
 ## Relacionados
 
 - [Descripción general de TX Controls](overview.md)
-- [Ajustar la potencia del portador de ajuste](set-tune-carrier-power.md)
-- [Iniciar un portador de ajuste para verificar la ROS](start-a-tune-carrier-to-check-swr.md)
-- [Usar el ATU interno](run-the-internal-atu.md)
+- [Configurar la potencia del portador de ajuste](set-tune-carrier-power.md)
+- [Iniciar un portador de ajuste para verificar el SWR](start-a-tune-carrier-to-check-swr.md)
+- [Activar o desactivar MOX para accionar manualmente el transmisor](toggle-mox-to-manually-key-the-transmitter.md)
 - [Cambiar perfiles de TX (p. ej., SSB, Digital)](switch-tx-profiles-e-g-ssb-digital.md)

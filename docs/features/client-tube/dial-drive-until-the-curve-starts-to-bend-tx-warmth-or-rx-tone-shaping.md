@@ -1,43 +1,59 @@
-# Gire Drive hasta que la curva empiece a curvarse (calidez en TX o modelado de tono en RX)
+# Gire Drive hasta que la curva comience a curvarse (calidez en TX o moldeado de tono en RX)
 
-Use el potenciómetro Drive para introducir más señal en la etapa de tubo hasta que la curva de transferencia se curve visiblemente, añadiendo riqueza armónica al audio de TX o modelando el tono del audio recibido.
+Use el potenciómetro Drive para empujar la señal hacia la etapa de tubo y producir saturación armónica. Observar cómo la curva de transferencia se curva al aumentar Drive le indica exactamente cuándo y cuánta saturación se está produciendo.
 
 ## Antes de comenzar
 
-- La etapa de tubo debe estar habilitada en el lado que desea ajustar (TX o RX). Si todavía no está activa, habilítela desde el widget CHAIN. Consulte [Omitir el tubo desde cualquier cadena](bypass-the-tube-from-either-chain.md).
-- Abra el applet: el applet de tubo TX aparece en el subcontenedor "Aetherial Mic-PreAmp" dentro del contenedor principal Aetherial Audio (TXDSP); el applet de tubo RX aparece en el subcontenedor "Aetherial Dynamic Tube". Haga doble clic en la etapa TUBE del widget CHAIN para abrir el editor flotante correspondiente ("Aetherial Tube — TX" o "Aetherial Tube — RX") si prefiere una vista más amplia.
+- La etapa de tubo debe estar habilitada en el lado que desea moldear (TX o RX). Habilítela mediante el widget CHAIN o abriendo el editor flotante para ese lado.
+- El subcontenedor "Aetherial Mic-PreAmp" (TX) o "Aetherial Dynamic Tube" (RX) debe ser visible dentro del contenedor principal Aetherial Audio (TXDSP) en el panel de applets.
 
 ## Pasos
 
-1. Localice el potenciómetro **Drive** en la fila de cinco controles (Drive, Tone, Bias, Output, Mix).
-2. Observe la pantalla **Transfer curve** sobre la fila de potenciómetros. Con el valor predeterminado de 0.0 dB, la curva es casi recta.
-3. Gire **Drive** en sentido horario. La etiqueta del potenciómetro se actualiza como `X.X dB`. Aumente Drive hasta que vea que la curva de transferencia empieza a curvarse en su parte superior e inferior — aquí es donde comienza la saturación.
-4. Observe el **Live input ball** (el punto que se desplaza sobre la curva de transferencia). Al aumentar Drive, el punto se adentra más en la región curvada durante los picos de señal elevados, mostrando con qué intensidad se está llevando el tubo al límite.
-5. Deje de aumentar Drive cuando el grado de curvatura se adapte al efecto deseado. Una curvatura moderada (aproximadamente 6–12 dB de Drive) produce una calidez sutil; valores más altos de Drive producen una saturación más evidente.
-6. Si la señal procesada suena más fuerte o más suave que la señal sin procesar, gire el potenciómetro **Output** para compensar. Consulte [Compensar cambios de nivel con Output](compensate-level-changes-with-output.md).
-7. La configuración se guarda automáticamente. El valor del potenciómetro se almacena como `ClientTubeTxDriveDb` (TX) o `ClientTubeRxDriveDb` (RX).
+1. Localice el subcontenedor correcto en el panel de applets: "Aetherial Mic-PreAmp" para el moldeado de señal TX, o "Aetherial Dynamic Tube" para el moldeado de tono RX.
+2. Observe la pantalla de la curva de transferencia en la parte superior del applet. Con Drive en 0.0 dB, la curva es una línea diagonal recta — sin saturación.
+3. Gire el potenciómetro Drive en sentido horario. Observe la curva de transferencia: los hombros comienzan a comprimirse y curvarse a medida que Drive aumenta. La bola de entrada en tiempo real se mueve a lo largo de la curva y muestra qué parte de la curva está alcanzando el nivel de señal actual.
+4. Deje de aumentar Drive cuando la curva muestre la cantidad de curvatura deseada. La calidez sutil aparece con una curvatura leve; la saturación más intensa se obtiene llevando Drive más hacia 24.0 dB.
+5. Si la salida saturada es notablemente más fuerte o más débil que la señal seca, ajuste el potenciómetro Output para compensar.
 
 ## Qué hace cada control
 
-| Control | Valor predeterminado | Rango válido | Clave almacenada (TX / RX) | Comportamiento |
-|---|---|---|---|---|
-| Drive | 0.0 dB | 0.0 a 24.0 dB | `ClientTubeTxDriveDb` / `ClientTubeRxDriveDb` | Introduce más señal en la etapa de tubo; valores más altos curvan más la curva de transferencia. |
-| Transfer curve | — | — | — | Muestra la curva de transferencia del tubo. Se curva visiblemente al modificar Drive, Bias o el modelo. |
-| Live input ball | — | — | — | Punto que se desplaza a lo largo de la curva de transferencia según el nivel de entrada actual, mostrando el régimen de saturación activo. |
+| Control | Valor predeterminado | Rango válido | Clave persistente (TX / RX) |
+|---|---|---|---|
+| Drive | 0.0 dB | 0.0 – 24.0 dB | `ClientTubeTxDriveDb` / `ClientTubeRxDriveDb` |
+| Tone | 0.00 | −1.0 – 1.0 | `ClientTubeTxTone` / `ClientTubeRxTone` |
+| Bias | 0 % | 0 – 100 % | `ClientTubeTxBiasAmount` / `ClientTubeRxBiasAmount` |
+| Output | 0.0 dB | −24.0 – 12.0 dB | `ClientTubeTxOutputGainDb` / `ClientTubeRxOutputGainDb` |
+| Mix | 100 % | 0 – 100 % | `ClientTubeTxDryWet` / `ClientTubeRxDryWet` |
+
+**Curva de transferencia** — Indicador. Dibuja la curva de transferencia del tubo en tiempo real. La forma cambia al ajustar Drive, Bias y la selección de modelo. La bola de entrada en tiempo real recorre la curva al nivel de señal actual, mostrando el régimen de saturación activo. Sin clave persistente.
+
+**Drive** — Empuja más señal hacia la etapa de tubo. Los valores más altos hacen que la curva de transferencia se curve con mayor intensidad, produciendo un contenido armónico más fuerte.
+
+**Tone** — Los valores negativos oscurecen la señal saturada; los valores positivos la aclaran.
+
+**Bias** — Desplaza el punto de operación en la curva de transferencia, cambiando el equilibrio entre armónicos pares e impares.
+
+**Output** — Ganancia de compensación o recorte posterior al tubo. Úselo para igualar el nivel saturado con el nivel seco.
+
+**Mix** — Mezcla seca/húmeda. Al 100 % solo pasa la señal saturada. Reducir Mix mezcla la señal seca original para lograr saturación en paralelo.
 
 ## Consejos
 
-- Comience con Drive en 0.0 dB y auméntelo lentamente. La primera curvatura apreciable en la curva de transferencia suele ser el punto de operación con sonido más musical.
-- Los potenciómetros del applet y los del editor flotante permanecen sincronizados. Los cambios realizados en una vista se reflejan en la otra en aproximadamente 33 ms.
-- Si desea solo un toque de saturación en lugar de un procesamiento completo, ajuste **Mix** por debajo del 100 % para mezclar de nuevo la señal sin procesar. Consulte [Mezcla paralela de saturación con Mix](parallel-blend-saturation-with-mix.md).
-- Tras ajustar Drive, use **Tone** para aclarar u oscurecer el resultado sin modificar la cantidad de saturación. Consulte [Aclarar u oscurecer la señal saturada con Tone](brighten-or-darken-the-saturated-signal-with-tone.md).
-- Use **Bias** para desplazar el punto de operación en la curva y cambiar el carácter armónico de la saturación. Consulte [Ajustar Bias para modificar el balance de armónicos pares e impares](shift-bias-to-tweak-the-even-odd-harmonic-balance.md).
+- Comience con Drive en 0.0 dB y auméntelo lentamente. La curva de transferencia es la guía visual más directa para saber cuánta saturación está agregando.
+- Los lados TX y RX son completamente independientes. Los ajustes al tubo TX no afectan al tubo RX y viceversa.
+- El editor flotante (abierto haciendo doble clic en la etapa TUBE en el widget CHAIN) y los potenciómetros del applet acoplado permanecen sincronizados — los cambios en uno se reflejan en el otro en aproximadamente 30 ms.
+- Si desea escuchar el efecto sin confirmarlo, reduzca Mix hacia 0 % para volver a la señal seca manteniendo la configuración de Drive en su lugar.
 
-## Temas relacionados
+## Solución de problemas
+
+- **La curva de transferencia no se curva al aumentar Drive** — Es posible que la etapa de tubo no esté habilitada para ese lado. Habilítela mediante el widget CHAIN. El applet permanece oculto hasta que la etapa esté activa.
+- **Los potenciómetros del applet no coinciden con el editor flotante** — El applet se sincroniza desde el motor mediante un temporizador de sondeo. Espere un momento; deberían alinearse en aproximadamente 30 ms. Si permanecen desincronizados, es posible que el motor de audio no esté conectado — verifique que la conexión con la radio esté activa.
+
+## Relacionado
 
 - [Descripción general de Aetherial Mic-PreAmp (TX) / Aetherial Dynamic Tube (RX)](overview.md)
-- [Omitir el tubo desde cualquier cadena](bypass-the-tube-from-either-chain.md)
-- [Ajustar Bias para modificar el balance de armónicos pares e impares](shift-bias-to-tweak-the-even-odd-harmonic-balance.md)
-- [Aclarar u oscurecer la señal saturada con Tone](brighten-or-darken-the-saturated-signal-with-tone.md)
-- [Compensar cambios de nivel con Output](compensate-level-changes-with-output.md)
-- [Mezcla paralela de saturación con Mix](parallel-blend-saturation-with-mix.md)
+- [Desplace Bias para ajustar el equilibrio de armónicos pares e impares](shift-bias-to-tweak-the-even-odd-harmonic-balance.md)
+- [Aclare u oscurezca la señal saturada con Tone](brighten-or-darken-the-saturated-signal-with-tone.md)
+- [Compense los cambios de nivel con Output](compensate-level-changes-with-output.md)
+- [Mezcle la saturación en paralelo con Mix](parallel-blend-saturation-with-mix.md)
+- [Omita el tubo desde cualquiera de las cadenas](bypass-the-tube-from-either-chain.md)

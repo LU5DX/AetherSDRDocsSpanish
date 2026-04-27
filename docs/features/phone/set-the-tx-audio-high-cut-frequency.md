@@ -1,34 +1,36 @@
-# Establecer la frecuencia de corte alto de audio TX
+# Establecer la frecuencia de corte superior del audio TX
 
-Use el applet Phone para subir o bajar el límite superior de la banda de paso de audio TX. Reducir el corte alto elimina el silbido de alta frecuencia; ampliarlo mejora la fidelidad de audio en los modos que lo permiten.
+Use el applet Phone para subir o bajar el límite superior de la banda de paso del audio TX. Reducir el corte superior disminuye el ancho de banda transmitido; subirlo permite pasar más contenido de audio de alta frecuencia.
 
 ## Antes de comenzar
 
-- Conéctese a una radio FLEX-8600. El applet Phone requiere una conexión de radio activa.
-- Asegúrese de que el panel del applet esté visible. Si no lo está, haga clic en el botón PHNE de la bandeja en la barra lateral derecha, o vaya a `View > Applet Panel`.
+- AetherSDR debe estar conectado al radio. El applet Phone requiere una conexión activa al radio.
+- El radio debe estar en un modo de voz (SSB, AM o similar) para que los cambios en el filtro TX tengan efecto audible.
 
 ## Pasos
 
-1. Haga clic en el botón **PHNE** de la bandeja en la barra lateral derecha para abrir el applet Phone.
-2. Localice la sección **High Cut** en el área de filtro TX en la parte inferior del applet.
-3. Haga clic en **>** para aumentar la frecuencia de corte alto en 50 Hz, o haga clic en **<** para disminuirla en 50 Hz.
-   - Alternativamente, coloque el cursor sobre el valor de frecuencia y gire la rueda del ratón para ajustar en los mismos incrementos de 50 Hz.
-4. Lea el valor actual en la pantalla numérica entre los botones **<** y **>**.
+1. Si el applet Phone no está visible, haga clic en el botón de bandeja **PHNE** en la barra lateral derecha para mostrarlo.
+2. Localice la columna **High Cut** en el lado derecho de la sección de filtro TX, debajo de la fila DEXP.
+3. Haga clic en **>** para aumentar la frecuencia de corte superior en 50 Hz, o haga clic en **<** para disminuirla en 50 Hz. También puede desplazar la rueda del ratón sobre la pantalla de valor para avanzar en cualquier dirección.
+4. Lea el valor actual en la pantalla numérica ubicada entre los botones **<** y **>**.
 
 ## Qué hace cada control
 
-| Control | Valor predeterminado | Rango válido | Notas |
+| Control | Descripción | Valor predeterminado | Rango válido |
 |---|---|---|---|
-| **High Cut `<`** | — | Disminuye en pasos de 50 Hz | No puede bajar de (corte bajo + 50) Hz |
-| **High Cut `>`** | — | Aumenta en pasos de 50 Hz | El límite superior es 10000 Hz |
-| Pantalla de valor High Cut | 3300 Hz | (corte bajo + 50) a 10000, paso de 50 Hz | Pantalla numérica de solo lectura; también acepta la rueda del ratón |
+| **High Cut `<`** | Disminuye la frecuencia de corte superior del filtro TX en un paso. | — | — |
+| **High Cut `>`** | Aumenta la frecuencia de corte superior del filtro TX en un paso. | — | — |
+| Pantalla de valor High Cut | Muestra la frecuencia de corte superior actual en Hz. | 3300 Hz | (corte inferior + 50) a 10000 Hz, en pasos de 50 Hz |
+
+La frecuencia de corte superior no puede establecerse por debajo de la frecuencia de corte inferior actual más 50 Hz. Por ejemplo, si el corte inferior está en 100 Hz, el valor mínimo del corte superior es 150 Hz.
 
 ## Consejos
 
-- El límite inferior del corte alto es siempre 50 Hz por encima del valor actual del corte bajo. Si el corte alto no puede bajar más, disminuya primero el corte bajo.
-- Para voz SSB estándar, un corte alto de 2800–3000 Hz reduce las interferencias en los canales adyacentes y mantiene la voz inteligible.
+- Cada clic en **<** o **>** mueve la frecuencia exactamente 50 Hz. Para cambios mayores, mantenga presionado el botón del ratón o use la rueda de desplazamiento con movimiento rápido.
+- Una banda de paso SSB típica utiliza un corte inferior de 50 Hz y un corte superior de 3300 Hz. Reducir el corte superior a alrededor de 2700–2800 Hz puede mejorar la inteligibilidad en condiciones de ruido al eliminar el siseo de alta frecuencia.
+- La configuración de corte superior no es guardada por la configuración local de AetherSDR — se envía directamente al radio y se almacena en el perfil activo del radio.
 
-## Relacionado
+## Temas relacionados
 
-- [Establecer la frecuencia de corte bajo de audio TX](set-the-tx-audio-low-cut-frequency.md)
+- [Establecer la frecuencia de corte inferior del audio TX](set-the-tx-audio-low-cut-frequency.md)
 - [Descripción general de Phone](overview.md)

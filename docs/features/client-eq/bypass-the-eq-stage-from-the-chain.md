@@ -1,37 +1,39 @@
-# Omitir la etapa de EQ en la cadena
+# Omitir la etapa de EQ de la cadena
 
-Use esta página para omitir el EQ paramétrico del lado del cliente en la ruta TX o RX sin eliminar su configuración de bandas. Omitir es útil para comparaciones A/B o para deshabilitar temporalmente el EQ mientras mantiene su curva intacta.
+Esta página explica cómo omitir el EQ paramétrico del lado del cliente para la ruta de audio TX o RX. Al omitirlo, se elimina el EQ de la cadena de señal sin borrar la configuración de bandas.
 
 ## Antes de comenzar
 
-- El contenedor principal Aetherial Audio (TXDSP) debe estar visible en el panel de applets.
-- La etapa de EQ que desea omitir ya debe estar habilitada y presente en el widget CHAIN; si no aparece ninguna etapa de EQ (TX ni RX) en la cadena, consulte [Descripción general del EQ paramétrico Aetherial (TX / RX)](overview.md).
+- AetherSDR debe estar abierto. No se requiere conexión a una radio para omitir el EQ.
+- La etapa de EQ ya debe estar presente en el widget CHAIN para la ruta que desea omitir (TX o RX).
 
 ## Pasos
 
-1. Ubique el widget CHAIN para la ruta que desea omitir: TX o RX.
-2. Haga clic una sola vez en el mosaico de la etapa de EQ en el widget CHAIN para esa ruta.
+1. Localice el widget CHAIN para la ruta que desea omitir: ya sea la cadena TX o la cadena RX.
+2. Haga clic una vez en la etapa de EQ en el widget CHAIN para esa ruta.
 
-   Al hacer clic en la etapa de EQ se activa o desactiva el modo de omisión en esa ruta. Cuando la omisión está activa, la etapa queda excluida de la cadena de procesamiento. Su configuración de bandas (`ClientEqTxBands` o `ClientEqRxBands`) se conserva y la etapa puede volver a habilitarse haciendo clic de nuevo.
+La etapa de EQ queda omitida para esa ruta. El ajuste `ClientEqTxEnabled` o `ClientEqRxEnabled` se actualiza de inmediato y se conserva entre reinicios.
 
-3. Repita el procedimiento para la otra ruta si es necesario: los estados de omisión de TX y RX son independientes.
+Para volver a activar el EQ, haga clic una vez más en la etapa de EQ en el widget CHAIN.
 
 ## Qué hace cada control
 
-| Control | Ruta | Ajuste persistido | Efecto al omitir |
+| Control | Ruta | Clave persistida | Comportamiento |
 |---|---|---|---|
-| Mosaico de etapa de EQ (TX) en el widget CHAIN | TX | `ClientEqTxEnabled` | Elimina el EQ de TX de la cadena de audio; las bandas de TX se conservan. |
-| Mosaico de etapa de EQ (RX) en el widget CHAIN | RX | `ClientEqRxEnabled` | Elimina el EQ de RX de la cadena de audio; las bandas de RX se conservan. |
+| Etapa de EQ (cadena TX) | TX | `ClientEqTxEnabled` | Un clic activa o desactiva la omisión del EQ de TX. Omitido = EQ eliminado de la cadena de señal; las bandas y los ajustes se conservan. |
+| Etapa de EQ (cadena RX) | RX | `ClientEqRxEnabled` | Un clic activa o desactiva la omisión del EQ de RX. Omitido = EQ eliminado de la cadena de señal; las bandas y los ajustes se conservan. |
+
+Los datos de banda se almacenan por separado en `ClientEqTxBands` y `ClientEqRxBands` y no se ven afectados por la omisión.
 
 ## Consejos
 
-- Los sub-applets "Aetherial TX EQ" y "Aetherial RX EQ" se ocultan cuando la etapa de EQ correspondiente está deshabilitada. Si el applet desaparece después de activar la omisión, este comportamiento es el esperado.
-- La configuración de bandas almacenada en `ClientEqTxBands` y `ClientEqRxBands` no se ve afectada al activar o desactivar la omisión. Al volver a habilitar la etapa, su curva se restaura exactamente.
-- Para comparar su curva de EQ con una respuesta plana, haga clic rápidamente en el mosaico de la etapa para activar y desactivar la omisión.
+- El estado de omisión es por ruta. Omitir el EQ de TX no afecta el EQ de RX, y viceversa.
+- Los mosaicos de los applets "Aetherial TX EQ" y "Aetherial RX EQ" se ocultan cuando su etapa de EQ correspondiente no está habilitada. Si un mosaico desaparece después de omitir, este es el comportamiento esperado.
+- El editor flotante ("Aetherial Parametric EQ — TX" o "— RX") aún puede abrirse con doble clic en la etapa del widget CHAIN aunque esté omitido, por lo que puede continuar editando bandas sin volver a activar el EQ.
 
 ## Relacionados
 
-- [Descripción general del EQ paramétrico Aetherial (TX / RX)](overview.md)
-- [Abrir el editor sin marco para agregar, eliminar o ajustar bandas en cualquiera de los lados](open-the-frameless-editor-to-add-remove-tune-bands-on-either-side.md)
-- [Inspeccionar la curva de EQ de TX y el espectro en vivo](inspect-the-tx-eq-curve-and-live-spectrum.md)
-- [Inspeccionar la curva de EQ de RX y el espectro en vivo](inspect-the-rx-eq-curve-and-live-spectrum.md)
+- [Descripción general del Aetherial Parametric EQ (TX / RX)](overview.md)
+- [Abrir el editor sin marco para agregar, eliminar o ajustar bandas en ambas rutas](open-the-frameless-editor-to-add-remove-tune-bands-on-either-side.md)
+- [Inspeccionar la curva del EQ de TX y el espectro en tiempo real](inspect-the-tx-eq-curve-and-live-spectrum.md)
+- [Inspeccionar la curva del EQ de RX y el espectro en tiempo real](inspect-the-rx-eq-curve-and-live-spectrum.md)

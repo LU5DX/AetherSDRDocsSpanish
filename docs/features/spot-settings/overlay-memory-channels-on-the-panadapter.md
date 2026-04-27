@@ -1,55 +1,55 @@
 # Superponer canales de memoria en el panadapter
 
-Los canales de memoria almacenados en su FLEX-8600 pueden mostrarse como superposiciones similares a spots directamente en el panadapter. Esto le permite ver las frecuencias guardadas en contexto mientras explora la banda.
+Los canales de memoria almacenados en su FLEX-8600 pueden mostrarse como marcadores similares a spots en el panadapter, lo que facilita ver las frecuencias guardadas en contexto con las señales en vivo. Esta página explica cómo activar esa superposición y ajustarla junto con otras configuraciones de spots.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar en ejecución. No se requiere conexión a una radio para configurar este ajuste.
-- Abra el diálogo **Spot Settings** haciendo clic derecho en el área de superposición de spots del panadapter para acceder al menú contextual.
+- AetherSDR debe estar en ejecución. No se requiere conexión con la radio para cambiar estas configuraciones.
+- Abra el cuadro de diálogo Spot Settings haciendo clic derecho en el panadapter y seleccionando la opción de superposición de spots en el menú contextual.
 
 ## Pasos
 
-1. Haga clic derecho en la superposición de spots del panadapter para abrir el menú contextual y, a continuación, seleccione la opción que abre **Spot Settings**.
-2. Localice la fila **Memories:** en el diálogo.
-3. Haga clic en el botón de alternancia junto a **Memories:**. Cambiará de **Disabled** a **Enabled**.
-4. Cierre el diálogo. Los canales de memoria aparecerán ahora como superposiciones en el panadapter.
-
-Para ocultar las superposiciones de memoria, haga clic nuevamente en el botón **Memories:** para que muestre **Disabled**.
+1. Haga clic derecho en cualquier lugar del panadapter para abrir el menú contextual y, a continuación, abra el cuadro de diálogo Spot Settings.
+2. Ubique la fila **Memories:**.
+3. Haga clic en el botón de alternancia junto a **Memories:**. Su valor predeterminado es "Disabled". Haga clic una vez para cambiarlo a "Enabled".
+4. Los canales de memoria aparecen ahora como superposiciones en el panadapter. Haga clic en el botón de alternancia nuevamente para volver a "Disabled" si desea ocultarlos.
 
 ## Qué hace cada control
 
-| Control | Valor predeterminado | Comportamiento | Clave de ajuste |
+| Control | Función | Valor predeterminado | Clave de configuración |
 |---|---|---|---|
-| Alternancia **Memories:** | Disabled | Activa o desactiva las superposiciones de canales de memoria en el panadapter. | `IsMemoriesShownOnPanadapter` |
-| Alternancia **Spots:** | Enabled | Control maestro para la visualización de todos los spots y superposiciones de memoria. Si está en **Disabled**, las superposiciones de memoria no aparecerán independientemente del ajuste de **Memories:**. | `IsSpotsEnabled` |
-| Control deslizante **Levels:** | 3 | Número de filas de apilamiento vertical utilizadas para las superposiciones. Rango: 1–10. | `SpotsStackLevels` |
-| Control deslizante **Position:** | 50 | Posición vertical de las superposiciones en el panadapter. Rango: 0–100. | `SpotsPosition` |
-| Control deslizante **Font Size:** | 16 | Tamaño del texto para las etiquetas de superposición. Rango: 8–32. | `SpotsFontSize` |
-| Control deslizante **Spot Lifetime:** | 30 min | Tiempo que permanecen los spots antes de desvanecerse. Escala no lineal: 10–55 seg, luego 5–55 min, luego 1–24 hr. | `SpotsLifetime` |
-| Alternancia **Override Colors:** | Disabled | Fuerza un único color de texto para todas las superposiciones. | `IsSpotsOverrideColorsEnabled` |
-| Selector de color de texto del spot | #FFFF00 | Abre un selector de color para elegir el color de texto de sustitución. Activo solo cuando **Override Colors:** está en **Enabled**. | `SpotsOverrideColor` |
-| Alternancia **Override Background: Enabled** | Enabled | Dibuja un fondo detrás del texto de las superposiciones. | `IsSpotsOverrideBackgroundColorsEnabled` |
-| Alternancia **Override Background: Auto** | Enabled | Selecciona automáticamente un color de fondo para garantizar el contraste. | `IsSpotsOverrideToAutoBackgroundColorEnabled` |
-| Selector de color de fondo del spot | #000000 | Abre un selector de color para elegir el color de fondo de forma manual. | `SpotsOverrideBgColor` |
-| Control deslizante **Background Opacity:** | 48 | Alfa (transparencia) del fondo de la superposición. Rango: 0–100. | `SpotsOverrideBgOpacity` |
-| **Clear All Spots** | — | Elimina todos los spots actuales del panadapter de inmediato. No afecta los canales de memoria almacenados en la radio. | — |
+| Alternancia **Spots:** | Activación/desactivación general de todas las superposiciones de spots y memoria. Las memorias no aparecerán si está desactivada. | Enabled | `IsSpotsEnabled` |
+| Alternancia **Memories:** | Muestra u oculta los marcadores de canales de memoria en el panadapter. | Disabled | `IsMemoriesShownOnPanadapter` |
+| Control deslizante **Levels:** | Número de filas de apilamiento vertical usadas cuando los spots o las memorias se superponen. Rango: 1–10. | 3 | `SpotsStackLevels` |
+| Control deslizante **Position:** | Posición vertical de la banda de superposición en el panadapter, como porcentaje desde la parte superior. Rango: 0–100. | 50 | `SpotsPosition` |
+| Control deslizante **Font Size:** | Tamaño del texto para las etiquetas de spots y memorias. Rango: 8–32. | 16 | `SpotsFontSize` |
+| Control deslizante **Spot Lifetime:** | Tiempo que permanecen los spots antes de desvanecerse. Escala no lineal: 10–55 segundos, luego 5–55 minutos, luego 1–24 horas. | 30 min | `SpotsLifetime` |
+| Alternancia **Override Colors:** | Fuerza un único color de texto para todos los spots y memorias en lugar de los colores asignados por la fuente. | Disabled | `IsSpotsOverrideColorsEnabled` |
+| Selector de color de texto de spots | Abre un selector de color para elegir el color de texto de la superposición. Predeterminado: `#FFFF00`. | `#FFFF00` | `SpotsOverrideColor` |
+| Alternancia **Override Background: Enabled** | Dibuja un fondo de color detrás del texto de spots y memorias. | Enabled | `IsSpotsOverrideBackgroundColorsEnabled` |
+| Alternancia **Override Background: Auto** | Selecciona automáticamente un color de fondo para mayor contraste en lugar de usar el color manual. | Enabled | `IsSpotsOverrideToAutoBackgroundColorEnabled` |
+| Selector de color de fondo de spots | Abre un selector de color para el color de fondo manual. Predeterminado: `#000000`. | `#000000` | `SpotsOverrideBgColor` |
+| Control deslizante **Background Opacity:** | Establece la transparencia del fondo de los spots. Rango: 0–100. | 48 | `SpotsOverrideBgOpacity` |
+| **Clear All Spots** | Elimina todos los spots del panadapter de inmediato. No afecta a las memorias. | — | — |
 
 ## Consejos
 
-- Las superposiciones de memoria comparten los mismos ajustes de posición, tamaño de fuente, apilamiento y color que los spots de DX. Ajuste **Levels:** y **Position:** para evitar superposiciones si tiene muchos canales de memoria en una banda.
-- Si no aparecen superposiciones después de activar **Memories:**, confirme que **Spots:** también esté en **Enabled**. El botón **Spots:** es el interruptor maestro para toda la visualización de superposiciones.
+- Las superposiciones de memoria comparten las mismas configuraciones de posición, fuente, apilamiento y color que los spots de DX. Ajuste **Levels:** y **Position:** para evitar que los marcadores de memoria obstruyan los picos de señal.
+- Si los marcadores de memoria no son visibles después de activar **Memories:**, confirme que el alternancia **Spots:** también esté establecido en "Enabled". El alternancia principal de Spots controla la representación de todas las superposiciones.
+- La alternancia **Override Background: Auto** está activa de manera predeterminada y selecciona automáticamente colores de fondo con contraste adecuado. Desactívela solo si desea establecer un color de fondo específico con el selector de color de fondo.
 
-## Resolución de problemas
+## Solución de problemas
 
-- **Memories: está en Enabled pero no aparece nada en el panadapter** — Verifique que **Spots:** también esté en **Enabled**. Las superposiciones no se mostrarán si el control maestro **Spots:** está en **Disabled**.
-- **Las superposiciones de memoria aparecen pero son ilegibles** — Aumente **Font Size:** o active **Override Background: Enabled** para que el texto tenga un fondo de contraste.
+- **Memories: muestra "Enabled" pero no aparecen marcadores en el panadapter** — Verifique que el alternancia **Spots:** esté establecido en "Enabled". El alternancia principal de spots debe estar activado para que cualquier superposición, incluidas las memorias, se represente.
+- **Los marcadores de memoria se superponen y son difíciles de leer** — Aumente el valor del control deslizante **Levels:** para dar al motor de representación más filas de apilamiento, o ajuste **Position:** para mover la superposición a un área menos concurrida del panadapter.
 
-## Relacionados
+## Temas relacionados
 
+- [Descripción general de Spot Settings](overview.md)
 - [Activar o desactivar los spots](turn-spots-on-or-off.md)
 - [Cambiar la densidad y la posición vertical de los spots](change-spot-density-and-vertical-position.md)
 - [Agrandar o reducir la fuente de los spots](enlarge-or-shrink-the-spot-font.md)
+- [Acortar o alargar el tiempo de vida de los spots](shorten-or-lengthen-spot-lifetime.md)
 - [Forzar un único color de texto para los spots](force-a-single-spot-text-color.md)
 - [Elegir un color de fondo personalizado para los spots](pick-a-custom-background-color-for-spots.md)
 - [Ajustar la opacidad del fondo de los spots](adjust-spot-background-opacity.md)
-- [Acortar o alargar la vida útil de los spots](shorten-or-lengthen-spot-lifetime.md)

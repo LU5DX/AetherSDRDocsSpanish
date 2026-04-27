@@ -1,48 +1,48 @@
-# Elegir Opus o audio sin comprimir para SmartLink
+# Seleccionar Opus o audio sin comprimir para SmartLink
 
-Elija cómo comprime AetherSDR el audio en una conexión SmartLink o LAN. Seleccionar el códec adecuado reduce el ancho de banda en enlaces lentos o con alta latencia, o preserva la calidad de audio completa en redes locales rápidas.
+Seleccione el códec de audio que AetherSDR utiliza en conexiones SmartLink o LAN. Opus reduce el ancho de banda a costa de una pequeña cantidad de compresión; el PCM sin comprimir preserva la fidelidad total cuando el ancho de banda lo permite. Auto deja que el radio elija.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. La pestaña **Audio** no es accesible sin una conexión activa.
+- AetherSDR debe estar conectado al radio. La pestaña Audio no es accesible sin una conexión activa.
 - Abra `Settings > Radio Setup...` y haga clic en la pestaña **Audio**.
 
 ## Pasos
 
 1. Abra `Settings > Radio Setup...`.
 2. Haga clic en la pestaña **Audio**.
-3. Localice el control **Audio Compression (SmartLink):**.
-4. Haga clic en el botón para avanzar al modo deseado: **Auto**, **Uncompressed** u **Opus**.
-5. Cierre el diálogo. La configuración se guarda inmediatamente en `AudioCompression`.
+3. En **Audio Compression (SmartLink):**, haga clic en **Auto**, **Uncompressed** u **Opus** para seleccionar el códec.
+   - **Auto** — el radio negocia el códec automáticamente (valor predeterminado).
+   - **Uncompressed** — envía audio PCM sin procesar; utiliza más ancho de banda.
+   - **Opus** — envía audio codificado con Opus; menor ancho de banda, leve compresión.
+4. Cierre el cuadro de diálogo. La configuración surte efecto de inmediato y se guarda.
 
 ## Qué hace cada control
 
-| Control | Valor predeterminado | Valores válidos | Clave de configuración | Comportamiento |
-|---|---|---|---|---|
-| **Audio Compression (SmartLink):** | Auto | Auto / Uncompressed / Opus | `AudioCompression` | Selecciona el códec de audio utilizado a través de SmartLink o LAN. Auto permite que el radio negocie el códec. Uncompressed envía audio sin procesar. Opus aplica compresión con pérdida para reducir el ancho de banda. |
-| **Audio Boost:** | — | On / Off | `AudioBoost` | Habilita ganancia adicional en la ruta de audio del cliente. |
-| **Audio Buffer:** | — | 50–1000 ms | `AudioBuffer` | Aumenta el búfer del lado del cliente para absorber la fluctuación en conexiones VPN o SmartLink. |
-| **Recording: Radio Side / Client Side** | — | Radio Side / Client Side | `RecordMode` | Elige si las grabaciones se capturan en el radio o en el PC cliente. |
-| **Save to:** | — | Ruta de carpeta | `RecordDir` | Establece la carpeta donde se guardan las grabaciones. |
-| **Auto-record on TX** | — | Checked / Unchecked | `AutoRecordTx` | Inicia automáticamente la grabación cada vez que el radio transmite. |
-| **Idle timeout:** | — | Segundos | `RecordIdleTimeout` | Detiene una grabación después de este número de segundos de silencio. |
+| Control | Predeterminado | Valores válidos | Clave de configuración |
+|---|---|---|---|
+| **Audio Compression (SmartLink):** Auto / Uncompressed / Opus | Auto | Auto, Uncompressed, Opus | `AudioCompression` |
+| **Audio Boost:** | — | Enabled / Disabled | `AudioBoost` |
+| **Audio Buffer:** | — | 50–1000 ms | `AudioBuffer` |
+| **Recording:** Radio Side / Client Side | — | Radio Side, Client Side | `RecordMode` |
+| **Save to:** | — | Ruta de carpeta | `RecordDir` |
+| **Auto-record on TX** | — | Checked / Unchecked | `AutoRecordTx` |
+| **Idle timeout:** | — | segundos | `RecordIdleTimeout` |
 
 ## Consejos
 
-- Use **Opus** al conectarse a través de Internet o una VPN donde el ancho de banda es limitado. Opus reduce significativamente la tasa de datos de audio en comparación con el audio sin comprimir.
-- Use **Uncompressed** en una red local rápida cuando la fidelidad de audio es la prioridad y el ancho de banda no es una preocupación.
-- **Auto** es adecuado para la mayoría de los usuarios y permite que el firmware del radio elija el códec según el tipo de conexión.
-- Si el audio se interrumpe o se corta en una conexión remota, aumente **Audio Buffer:** antes de cambiar el códec. El rango válido es 50–1000 ms.
+- En una LAN local rápida, **Uncompressed** evita cualquier artefacto del códec y es la mejor opción para escucha crítica o decodificación de modos digitales.
+- En un enlace lento o congestionado (VPN, SmartLink celular), **Opus** reduce los cortes de audio. Combínelo con un valor mayor de **Audio Buffer:** (50–1000 ms) para absorber el jitter.
+- Si el audio suena delgado o bajo en SmartLink, pruebe activar **Audio Boost:** junto con Opus.
 
 ## Solución de problemas
 
-- **El control Audio Compression aparece deshabilitado o la pestaña Audio no aparece** — El radio no está conectado. Conéctese al radio primero y luego vuelva a abrir `Settings > Radio Setup...`.
-- **El audio está entrecortado después de cambiar a Uncompressed** — El enlace no tiene suficiente ancho de banda para el audio sin comprimir. Cambie a **Opus** o aumente **Audio Buffer:**.
-- **Opus está seleccionado pero la calidad de audio es deficiente** — Aumente **Audio Buffer:** para compensar la fluctuación, o verifique la ruta de red en busca de pérdida de paquetes.
+- **Los botones de Audio Compression aparecen atenuados o no están visibles** — la pestaña Audio solo se construye después de hacer clic en ella, y únicamente cuando hay un radio conectado. Verifique la conexión y haga clic en la pestaña Audio nuevamente.
+- **La calidad de audio es deficiente incluso con Uncompressed seleccionado** — verifique el ancho de banda y la latencia de la red. Considere aumentar **Audio Buffer:** para reducir los cortes por falta de datos. Consulte [Activar el aumento de audio o ampliar el búfer de audio para operación remota](turn-on-audio-boost-or-enlarge-the-audio-buffer-for-remote-operation.md).
 
-## Temas relacionados
+## Relacionados
 
-- [Activar el refuerzo de audio o ampliar el búfer de audio para operación remota](turn-on-audio-boost-or-enlarge-the-audio-buffer-for-remote-operation.md)
+- [Activar el aumento de audio o ampliar el búfer de audio para operación remota](turn-on-audio-boost-or-enlarge-the-audio-buffer-for-remote-operation.md)
 - [Elegir los dispositivos de audio de entrada/salida del PC](choose-pc-input-output-audio-devices.md)
-- [Habilitar la grabación automática al transmitir y elegir una carpeta de destino](enable-auto-record-on-tx-and-pick-a-save-folder.md)
+- [Activar la grabación automática en TX y seleccionar una carpeta de destino](enable-auto-record-on-tx-and-pick-a-save-folder.md)
 - [Cambiar el MTU de red para configuraciones VPN/remotas](change-network-mtu-for-vpn-remote-setups.md)

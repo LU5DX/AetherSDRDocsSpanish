@@ -1,40 +1,36 @@
-# Forzar un color de texto único para todos los spots
+# Forzar un único color de texto para todos los spots
 
-De forma predeterminada, AetherSDR colorea cada spot de DX según su fuente o modo. Esta página explica cómo anular ese comportamiento y mostrar el texto de todos los spots en un color de su elección.
+Anule los colores asignados por su fuente de cluster DX a cada spot y muestre todas las etiquetas de spots en un único color de su elección. Resulta útil cuando los colores predeterminados contrastan mal con el tema del panadapter o son difíciles de leer.
 
 ## Antes de comenzar
 
-- Los spots deben estar habilitados. Si el botón "Spots:" muestra "Disabled", consulte [Activar o desactivar los spots](turn-spots-on-or-off.md) primero.
-- Abra el diálogo Spot Settings haciendo clic derecho sobre la superposición de spots en el panadapter.
+- Los spots deben estar habilitados. Si el interruptor `IsSpotsEnabled` muestra "Disabled", habilítelo primero — consulte [Activar o desactivar los spots](turn-spots-on-or-off.md).
+- Abra el diálogo Spot Settings haciendo clic derecho sobre la capa de spots en el panadapter.
 
 ## Pasos
 
-1. En el diálogo Spot Settings, localice la fila "Override Colors:".
-2. Haga clic en el botón de alternancia hasta que muestre "Enabled". Esto activa `IsSpotsOverrideColorsEnabled` y fuerza el texto de todos los spots a un único color.
-3. Haga clic en el pequeño botón de muestra de color ubicado inmediatamente a la derecha del botón "Enabled". Se abre un diálogo selector de color.
-4. Seleccione el color que desea y confirme. La muestra se actualiza para reflejar su elección, y el texto de todos los spots en el panadapter cambia de inmediato.
+1. En el diálogo Spot Settings, localice la fila **Override Colors:**.
+2. Haga clic en el botón de interruptor hasta que muestre **Enabled**. Este valor se guarda como `IsSpotsOverrideColorsEnabled`.
+3. Haga clic en el botón de muestra de color (swatch) ubicado inmediatamente a la derecha de **Enabled**. Se abre un diálogo de selección de color.
+4. Seleccione el color que desea aplicar a todas las etiquetas de texto de spots y haga clic en **OK**.
+5. La muestra se actualiza para mostrar el color elegido. Todos los spots en el panadapter se renderizan inmediatamente con ese color. El valor elegido se guarda como `SpotsOverrideColor`.
+
+Para volver a los colores individuales por spot, haga clic nuevamente en el interruptor **Override Colors:** hasta que muestre **Disabled**.
 
 ## Qué hace cada control
 
-| Control | Qué hace | Valor predeterminado | Clave de configuración |
+| Control | Valor predeterminado | Clave guardada | Comportamiento |
 |---|---|---|---|
-| Botón "Override Colors:" | Habilita o deshabilita la anulación de color único para el texto de todos los spots. | Disabled | `IsSpotsOverrideColorsEnabled` |
-| Selector de color del texto de spots | Abre el diálogo selector de color para elegir el color de texto de anulación. | `#FFFF00` | `SpotsOverrideColor` |
+| Interruptor **Override Colors:** | Disabled | `IsSpotsOverrideColorsEnabled` | Cuando está en Enabled, fuerza que el texto de todos los spots se muestre en un único color en lugar de los colores asignados por la fuente. |
+| Selector de color del texto de spots (botón swatch) | `#FFFF00` | `SpotsOverrideColor` | Abre el diálogo de selección de color. El color seleccionado se aplica a todas las etiquetas de spots cuando Override Colors está en Enabled. |
 
 ## Consejos
 
-- El color elegido se guarda de inmediato. No existe un botón Save separado.
-- Si desea alto contraste, elija un color que contraste con el fondo de su panadapter. El amarillo (`#FFFF00`) es el valor predeterminado porque se lee con claridad sobre fondos oscuros.
-- La anulación se aplica a todos los spots independientemente de su fuente (clúster de DX, RBN, WSJTX, etc.).
+- El selector de color solo tiene efecto mientras **Override Colors:** muestre **Enabled**. Puede preseleccionar un color con el interruptor aún en Disabled; se aplicará la próxima vez que habilite la anulación.
+- Si el texto de los spots sigue siendo difícil de leer después de establecer el color, ajuste el contraste del fondo mediante los controles **Override Background:** — consulte [Elegir un color de fondo personalizado para los spots](pick-a-custom-background-color-for-spots.md) y [Ajustar la opacidad del fondo de los spots](adjust-spot-background-opacity.md).
 
-## Solución de problemas
-
-- **El botón muestra "Enabled" pero los colores de los spots no han cambiado** — Confirme que "Spots:" esté configurado en "Enabled" en el mismo diálogo. Si los spots están deshabilitados, la anulación no tiene efecto visible.
-- **El selector de color se cierra sin cambiar la muestra** — Cerró el diálogo sin confirmar un color. Haga clic en el botón de muestra nuevamente y seleccione un color antes de cerrar.
-
-## Relacionado
+## Temas relacionados
 
 - [Activar o desactivar los spots](turn-spots-on-or-off.md)
 - [Elegir un color de fondo personalizado para los spots](pick-a-custom-background-color-for-spots.md)
 - [Ajustar la opacidad del fondo de los spots](adjust-spot-background-opacity.md)
-- [Aumentar o reducir el tamaño de la fuente de los spots](enlarge-or-shrink-the-spot-font.md)

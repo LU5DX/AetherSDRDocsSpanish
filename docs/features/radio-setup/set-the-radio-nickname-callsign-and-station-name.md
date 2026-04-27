@@ -1,38 +1,39 @@
-# Configurar el apodo, indicativo y nombre de estación del radio
+# Establecer el apodo, indicativo y nombre de estación del equipo
 
-Use esta página para asignar un apodo legible, un indicativo y un nombre de estación a su FLEX-8600. Estos valores identifican el radio y este cliente ante otras estaciones multiFLEX en la red.
+Establezca un apodo legible, su indicativo y un nombre de estación en el FLEX-8600 conectado. Estos valores identifican el equipo y este cliente ante otras estaciones multiFLEX en la red.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. La pestaña Radio (tab) en Radio Setup requiere una conexión activa con el radio.
+- AetherSDR debe estar conectado al equipo. Los controles de la pestaña Radio no están disponibles sin una conexión activa.
 
 ## Pasos
 
 1. Abra `Settings > Radio Setup...`.
-2. Haga clic en la pestaña **Radio** si no está seleccionada.
-3. En el grupo **Radio Identification**, localice el campo **Nickname** y escriba el nombre que desea asignarle al radio.
-4. Presione Tab o haga clic fuera del campo. AetherSDR envía el nuevo apodo al radio de inmediato.
-5. Localice el campo **Callsign** y escriba su indicativo.
-6. Presione Tab o haga clic fuera del campo. AetherSDR envía el indicativo al radio de inmediato.
-7. Localice el campo **Station Name** y escriba el nombre para este cliente de estación. Si lo deja en blanco, AetherSDR utiliza el nombre de host del sistema operativo por defecto.
-8. Presione Tab o haga clic fuera del campo. AetherSDR guarda el valor localmente y lo envía al radio.
-9. Haga clic en **Close** cuando termine.
+2. Haga clic en la pestaña **Radio**.
+3. En el grupo **Radio Identification**, localice el campo **Nickname**. Escriba el apodo que desea asignar al equipo.
+4. Presione Tab o haga clic fuera del campo para confirmar. AetherSDR envía el nuevo nombre al equipo de inmediato.
+5. En el campo **Callsign**, escriba el indicativo de su estación.
+6. Presione Tab o haga clic fuera del campo para confirmar.
+7. En el campo **Station Name**, escriba el nombre que identifica este cliente ante otras estaciones multiFLEX.
+8. Presione Tab o haga clic fuera del campo para confirmar.
+9. Haga clic en **Close** para cerrar el cuadro de diálogo.
 
 ## Qué hace cada control
 
-| Control | Descripción | Valor predeterminado | Clave persistente |
+| Control | Descripción | Valor predeterminado | Clave de configuración |
 |---|---|---|---|
-| **Nickname** | Etiqueta descriptiva para el radio, enviada al radio como `radio name`. | Nombre existente del radio | — (almacenado en el radio) |
-| **Callsign** | Indicativo de la estación, enviado al radio como `radio callsign`. | Indicativo existente del radio | — (almacenado en el radio) |
-| **Station Name** | Identifica este cliente AetherSDR ante otras estaciones multiFLEX. Se envía como `client station`. | Nombre de host del SO | `StationName` |
+| **Nickname** | Etiqueta descriptiva para el equipo. Se envía al equipo como nombre del radio. | Nombre reportado por el equipo | — |
+| **Callsign** | Indicativo de su estación, almacenado en el equipo. | _(en blanco)_ | — |
+| **Station Name** | Identifica este cliente de AetherSDR ante otras estaciones multiFLEX. | Nombre de host del sistema operativo | `StationName` |
 
 ## Consejos
 
-- **Nickname** y **Callsign** se almacenan en el propio radio, por lo que persisten cuando diferentes computadoras cliente se conectan al mismo radio.
-- **Station Name** se almacena localmente en la configuración de AetherSDR (`StationName`) y también se anuncia al radio cada vez que lo edita. Otros clientes multiFLEX ven este nombre para distinguir qué estación es cuál.
-- Los cambios surten efecto en cuanto sale de cada campo — no existe un botón Save independiente para estos tres campos.
+- Si **Nickname** se deja en blanco, AetherSDR rellena automáticamente el campo con el nombre reportado por el equipo en la red.
+- **Station Name** utiliza de forma predeterminada el nombre de host del sistema operativo cuando no se ha guardado ningún valor. Para restaurar el valor predeterminado, borre el campo y presione Tab; luego vuelva a ingresar el nombre de host manualmente si es necesario.
+- Los cambios en **Nickname** y **Callsign** se envían al equipo en el momento en que abandona cada campo. No se requiere ningún paso adicional de guardado o aplicación.
+- **Station Name** se guarda localmente en la configuración de AetherSDR y también se envía al equipo como identificador de estación cliente para multiFLEX.
 
 ## Relacionado
 
-- [Verificar número de serie, versión de hardware, región y opciones del radio](check-radio-serial-hardware-version-region-and-options.md)
+- [Verificar número de serie, versión de hardware, región y opciones del equipo](check-radio-serial-hardware-version-region-and-options.md)
 - [Descripción general de Radio Setup](overview.md)

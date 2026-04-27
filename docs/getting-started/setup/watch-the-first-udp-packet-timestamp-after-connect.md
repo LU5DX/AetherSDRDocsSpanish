@@ -1,47 +1,44 @@
-# Observar la marca de tiempo del primer paquete UDP tras la conexión
+# Verificar la marca de tiempo del primer paquete UDP tras la conexión
 
-El indicador **First UDP Packet** en Network Diagnostics muestra si AetherSDR ha recibido algún dato UDP del radio desde que se estableció la conexión actual. Úselo para confirmar que la ruta de datos UDP está abierta — si falta el primer paquete, los datos de audio, FFT y waterfall no pueden fluir, aunque el canal de comandos TCP esté activo.
+Use el diálogo Network Diagnostics para confirmar que el flujo de datos UDP del radio ha llegado a su equipo después de conectarse. El indicador **First UDP Packet** le indica si ha llegado algún tráfico UDP desde que comenzó la sesión actual.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar en ejecución. No es necesario que el radio esté conectado; el diálogo se abre independientemente.
-- Para que el indicador muestre un resultado significativo, conéctese primero a un radio — consulte [Conectarse a un radio en la LAN local](connect-to-a-local-lan-radio.md).
+- AetherSDR debe estar en ejecución. El diálogo puede abrirse tanto si hay un radio conectado como si no, pero **First UDP Packet** solo tiene sentido después de un intento de conexión.
+- Debe haber iniciado previamente una conexión a un radio FLEX-8600.
 
 ## Pasos
 
 1. Haga clic en `Settings > Network...`.
-2. Se abre el diálogo **Network Diagnostics**.
-3. Localice el grupo **Network Status** en la zona superior izquierda del diálogo.
-4. Lea la fila **First UDP Packet**.
-   - **Yes** — ha llegado al menos un paquete UDP del radio desde la conexión.
-   - **No** — no se ha recibido ningún paquete UDP en la conexión actual.
-5. Haga clic en **Close** para cerrar el diálogo.
+2. En el diálogo **Network Diagnostics**, localice el grupo **Network Status**.
+3. Lea el indicador **First UDP Packet**. Muestra `Yes` si se ha recibido al menos un paquete UDP desde la conexión, o `No` si aún no ha llegado ninguno.
+4. Haga clic en `Close` para cerrar el diálogo.
 
 ## Qué hace cada control
 
 | Indicador | Significado |
 |---|---|
-| **First UDP Packet** | Muestra **Yes** o **No**. Se reinicia cada vez que se establece una nueva conexión. Indica si se ha recibido algún paquete UDP del radio en la sesión actual. |
-| **Status** | Estado general del enlace de la conexión. |
-| **Local UDP** | El punto de enlace UDP local en el que AetherSDR está escuchando. Si está vacío o es inesperado, el tráfico UDP no puede llegar en absoluto. |
-| **Target Radio IP** | Dirección IP del radio conectado. Muestra `Not connected` cuando no hay ningún radio conectado. |
+| **First UDP Packet** | Muestra `Yes` o `No`. Se actualiza una vez por segundo. Indica si se ha recibido algún paquete UDP del radio en la sesión actual. |
+| **Status** | Estado general del enlace. |
+| **Local UDP** | El punto de enlace UDP local en el que AetherSDR está escuchando. Útil para confirmar que el puerto correcto está asociado. |
+| **Target Radio IP** | Dirección IP del radio conectado. |
 
 ## Consejos
 
-- El indicador se actualiza una vez por segundo. Espere unos segundos después de conectarse antes de concluir que no llega tráfico UDP.
-- Si **First UDP Packet** permanece en **No** mientras **Status** muestra un estado conectado, verifique **Local UDP** para confirmar que hay un puerto enlazado. La causa más frecuente es un cortafuegos que bloquea el puerto UDP.
-- **First UDP Packet** se reinicia a **No** en cada nueva conexión. Desconéctese y vuelva a conectarse para repetir la prueba después de cambiar la configuración de red.
+- El diálogo actualiza todos los indicadores una vez por segundo. Si **First UDP Packet** permanece en `No` varios segundos después de conectarse, el tráfico UDP no está llegando al equipo — revise las reglas del cortafuegos, el enrutamiento y que el punto de enlace UDP local mostrado en **Local UDP** sea accesible desde el radio.
+- En un enlace VPN o enrutado, TCP puede conectarse correctamente mientras que UDP está bloqueado por separado. Que **First UDP Packet** muestre `No` mientras **Status** muestra un estado conectado es un indicador fiable de esta situación.
+- **First UDP Packet** se restablece en cada nueva conexión. Desconéctese y vuelva a conectarse si desea verificar nuevamente la entrega de paquetes tras cambiar la configuración de red.
 
 ## Solución de problemas
 
-- **First UDP Packet muestra "No" después de varios segundos conectado** — La ruta de comandos TCP está activa pero el UDP está bloqueado. Verifique que su cortafuegos permita UDP entrante desde la IP del radio. Revise **Local UDP** para confirmar que AetherSDR ha enlazado un puerto. En una red enrutada o VPN, confirme que la ruta es simétrica — consulte [Conectarse por IP a través de una VPN o red enrutada](connect-by-ip-across-a-vpn-or-routed-network.md).
-- **First UDP Packet muestra "Yes" pero el audio no se escucha** — El UDP está llegando; el problema está en una capa posterior a la de red. Revise **RX Buffer Now**, **Underruns (total / last sec)** y **Audio Arrival Gap** en el grupo **Audio Playback** — consulte [Diagnosticar interrupciones de audio y jitter](../../troubleshooting/networkdiagnostics/diagnose-audio-underruns-and-jitter.md).
+- **First UDP Packet permanece en "No" tras la conexión** — UDP no está llegando al punto de enlace local. Verifique que ningún cortafuegos esté bloqueando UDP en el puerto indicado en **Local UDP**, y que el radio pueda enrutar de vuelta a la IP de su equipo. En una conexión VPN, confirme que la VPN permite el paso de UDP en ambas direcciones.
+- **First UDP Packet muestra "Yes" pero el audio no se escucha** — UDP está llegando, pero un problema diferente afecta la reproducción. Revise el grupo **Audio Playback** en busca de interrupciones del búfer (underruns) o problemas de búfer, y consulte la página de diagnóstico de audio.
 
 ## Relacionado
 
 - [Descripción general de Network Diagnostics](../../features/network-diagnostics/overview.md)
 - [Verificar la IP del radio y la dirección de enlace local](../../features/network-diagnostics/verify-the-radio-s-ip-and-local-bind-address.md)
-- [Conectarse por IP a través de una VPN o red enrutada](connect-by-ip-across-a-vpn-or-routed-network.md)
-- [Conectarse a un radio en la LAN local](connect-to-a-local-lan-radio.md)
-- [Diagnosticar interrupciones de audio y jitter](../../troubleshooting/networkdiagnostics/diagnose-audio-underruns-and-jitter.md)
 - [Medir RTT y pérdida de paquetes durante problemas de audio](../../features/network-diagnostics/measure-rtt-and-packet-drops-during-audio-problems.md)
+- [Diagnosticar interrupciones de audio y jitter](../../troubleshooting/networkdiagnostics/diagnose-audio-underruns-and-jitter.md)
+- [Conectarse por IP a través de una VPN o red enrutada](connect-by-ip-across-a-vpn-or-routed-network.md)
+- [Seleccionar la interfaz de red local para una conexión manual](pick-the-local-network-interface-used-for-a-manual-connection.md)

@@ -1,35 +1,37 @@
 # Establecer el límite de atenuación de DeepFilterNet3 para señales fuertes o débiles
 
-Ajuste la agresividad con la que DeepFilterNet3 (DFNR) suprime el ruido. Un límite más bajo preserva más el carácter de la señal en señales ya fuertes; los 100 dB completos son apropiados cuando se necesita la máxima eliminación de ruido.
+`DfnrAttenLimit` controla la agresividad con la que DeepFilterNet3 suprime el ruido. Al reducirlo se conserva más la señal original en señales fuertes; al aumentarlo se maximiza la eliminación de ruido en señales débiles o ruidosas.
 
 ## Antes de comenzar
 
-- AetherDSP Settings puede abrirse sin una conexión de radio.
-- DFNR debe estar activo en un slice receptor para que los cambios tengan efecto audible.
+- AetherSDR debe estar en ejecución. No se requiere conexión a una radio para ajustar los parámetros de DSP.
+- DeepFilterNet3 (DFNR) debe estar seleccionado como motor de reducción de ruido activo.
 
 ## Pasos
 
 1. Haga clic en `Settings > AetherDSP Settings...`.
 2. Haga clic en la pestaña **DFNR**.
-3. Arrastre el control deslizante **Attenuation Limit** hasta el valor deseado.
-
-El nuevo valor surte efecto de inmediato; no se requiere confirmación. El ajuste se guarda automáticamente como `DfnrAttenLimit`.
+3. Arrastre el control deslizante **Attenuation Limit** hasta el valor deseado (0–100 dB).
+4. Cierre el cuadro de diálogo. El ajuste surte efecto de inmediato.
 
 ## Qué hace cada control
 
 | Control | Valor predeterminado | Rango válido | Clave de ajuste | Comportamiento |
 |---|---|---|---|---|
-| Attenuation Limit | 100 | 0–100 dB | `DfnrAttenLimit` | Establece la atenuación de ruido máxima aplicada por DeepFilterNet3. 0 dB es paso total sin filtro; 100 dB es supresión máxima. |
-| Post-Filter Beta | 0.00 | 0.00–0.30 | `DfnrPostFilterBeta` | Aplica un filtro posterior adicional sobre DFNR para mayor supresión. |
+| **Attenuation Limit** | 100 | 0–100 dB | `DfnrAttenLimit` | Establece la atenuación de ruido máxima aplicada por DeepFilterNet3. En 0 el motor pasa el audio sin modificaciones; en 100 aplica la atenuación completa. |
+| **Post-Filter Beta** | 0.00 | 0.00–0.30 | `DfnrPostFilterBeta` | Aplica un filtro adicional posterior sobre el límite de atenuación para una supresión extra. |
 
 ## Consejos
 
-- Establezca **Attenuation Limit** en un valor más bajo (por ejemplo, 20–40 dB) cuando la señal entrante ya sea fuerte y desee evitar el procesamiento excesivo que puede hacer que la voz suene antinatural.
-- Establezca **Attenuation Limit** en un valor más alto (por ejemplo, 80–100 dB) cuando el piso de ruido sea alto y la señal sea débil.
-- Combine un **Attenuation Limit** moderado con un **Post-Filter Beta** distinto de cero si persiste ruido residual después de aumentar el límite. Consulte [Configurar el post-filter beta de DFNR para mayor supresión](configure-dfnr-post-filter-beta-for-extra-suppression.md).
+- Para señales fuertes y limpias donde preservar la fidelidad es importante, reduzca **Attenuation Limit** hacia 0 para limitar cuánto puede alterar el audio el motor.
+- Para señales débiles o con degradación severa por ruido, establezca **Attenuation Limit** en 100 y combínelo con un valor distinto de cero en **Post-Filter Beta** para obtener la supresión más agresiva.
+
+## Solución de problemas
+
+- **El audio no parece verse afectado después de mover el control deslizante** — Confirme que se encuentra en la pestaña **DFNR** y que DeepFilterNet3 es el motor de reducción de ruido activo. Otros motores (NR2, NR4, MNR) tienen controles independientes y no se ven afectados por `DfnrAttenLimit`.
 
 ## Relacionados
 
-- [Configurar el post-filter beta de DFNR para mayor supresión](configure-dfnr-post-filter-beta-for-extra-suppression.md)
+- [Configurar el post-filter beta de DFNR para supresión adicional](configure-dfnr-post-filter-beta-for-extra-suppression.md)
 - [Cómo elegir la reducción de ruido adecuada: NR2, NR4, DFNR, MNR](../../operating/dsp/noise-reduction-overview.md)
-- [Ajustar la cantidad de reducción de NR4 en dB](adjust-nr4-reduction-amount-in-db.md)
+- [Descripción general de AetherDSP Settings](overview.md)

@@ -1,37 +1,42 @@
-# Leer la ROS inmediatamente después de sintonizar
+# Leer el SWR Inmediatamente Después de un Ajuste
 
-Después de hacer clic en TUNE, el applet Tuner captura la ROS final estabilizada del 4O3A Tuner Genius XL y la muestra brevemente en el botón TUNE para que pueda confirmar la concordancia sin mirar el medidor de ROS.
+Cuando finaliza un ajuste automático, el botón TUNE muestra brevemente el SWR final estabilizado para que pueda confirmar la coincidencia sin necesidad de consultar el medidor de SWR.
 
 ## Antes de comenzar
 
-- AetherSDR debe haber detectado un Tuner Genius XL. El botón TUN en la bandeja del panel derecho aparece únicamente cuando el TGXL está presente.
-- El applet Tuner debe estar abierto. Haga clic en el botón TUN de la bandeja para abrirlo si aún no está visible.
-- El sintonizador debe estar en estado OPERATE (el botón OPERATE se muestra en verde). Consulte [Poner el sintonizador en OPERATE, BYPASS o STANDBY](put-the-tuner-in-operate-bypass-or-standby.md).
+- Un sintonizador 4O3A Tuner Genius XL debe estar conectado y detectado. El botón TUN en la bandeja aparece en la barra lateral derecha únicamente cuando hay un TGXL presente.
+- El applet Tuner debe estar abierto. Haga clic en el botón TUN de la bandeja para abrirlo.
+- El sintonizador debe encontrarse en estado OPERATE (el botón OPERATE aparece en verde).
 
 ## Pasos
 
-1. Haga clic en TUNE. El botón se vuelve rojo y su etiqueta cambia a `TUNING...`.
-2. Espere. Cuando el ciclo de sintonía automática finaliza, la etiqueta del botón cambia a `SWR x.xx`, donde `x.xx` es la ROS estabilizada reportada por el TGXL.
-3. Lea el valor de ROS directamente en el botón TUNE. El valor se muestra durante 2.5 segundos y luego el botón regresa a `TUNE`.
+1. Haga clic en TUNE.
+2. Espere. El botón se torna rojo y muestra "TUNING..." mientras se ejecuta el barrido de ajuste automático.
+3. Cuando el ajuste finaliza, el botón recupera su estilo normal y muestra brevemente "TUNING..." durante hasta 400 ms mientras AetherSDR captura el valor final de SWR estabilizado desde el TGXL.
+4. El botón muestra entonces el resultado como "SWR x.xx" — por ejemplo, "SWR 1.34". Lea este valor directamente desde el botón.
+5. Transcurridos 2.5 segundos, la etiqueta del botón vuelve a "TUNE".
+
+Si no alcanza a ver el destello, el medidor de SWR continúa mostrando el valor de SWR en tiempo real reportado por el TGXL después del ajuste.
 
 ## Qué hace cada control
 
 | Control | Tipo | Comportamiento | Rango válido |
-|---------|------|----------------|--------------|
-| TUNE | Botón | Inicia la sintonía automática. La etiqueta avanza: `TUNE` → `TUNING...` → `SWR x.xx` (parpadea durante 2.5 s) → `TUNE`. | — |
-| SWR | Medidor | Muestra la ROS reportada por el TGXL en tiempo real durante toda la sesión. Rojo por encima de 2.5. | 1.0–3.0 |
+|---|---|---|---|
+| TUNE | Botón | Inicia el ajuste automático. Se torna rojo y muestra "TUNING..." durante el barrido. Destella "SWR x.xx" durante 2.5 s al finalizar. Luego regresa a "TUNE". | — |
+| SWR | Medidor | Muestra continuamente el SWR en tiempo real reportado por el TGXL. Se torna rojo por encima de 2.5. | 1.0–3.0 |
 
 ## Consejos
 
-- El valor `SWR x.xx` en el botón TUNE refleja la lectura estabilizada posterior a la sintonía, no una muestra tomada a mitad del barrido. AetherSDR espera 400 ms después de que termina el ciclo de sintonía antes de fijar el valor, dándole tiempo al TGXL para reportar su ROS final estabilizada por TCP.
-- Si no alcanza a ver el destello de 2.5 segundos, el medidor de ROS muestra la ROS en vivo en todo momento.
+- La ventana de captura de 400 ms después de tuning=0 existe porque el valor final de SWR estabilizado del TGXL suele llegar por TCP ligeramente después de la señal de ajuste completado. El valor mostrado en el botón refleja esta lectura estabilizada, no una muestra tomada durante el barrido.
+- Si la ventana de captura expira antes de que llegue una lectura de SWR válida, AetherSDR recurre al último valor de SWR en tiempo real del medidor.
 
-## Solución de problemas
+## Resolución de problemas
 
-- **El botón TUNE regresa a `TUNE` sin mostrar un valor de ROS** — Es posible que el ciclo de sintonía se haya interrumpido antes de que llegara una lectura de ROS válida. Haga clic en TUNE nuevamente para ejecutar una nueva sintonía automática.
-- **El botón TUN de la bandeja no es visible** — AetherSDR no ha detectado un Tuner Genius XL. Verifique la conexión del TGXL y que el firmware del equipo sea la versión 4.1.5.
+- **El botón TUNE regresa a "TUNE" sin mostrar un valor de SWR** — La transición de estado de ajuste no estuvo precedida por un ajuste activo (por ejemplo, el estado del modelo cambió externamente). Haga clic en TUNE nuevamente para ejecutar un ajuste automático nuevo.
+- **El medidor de SWR indica valores superiores a 2.5 (rojo) después del ajuste** — El sintonizador no pudo encontrar una coincidencia satisfactoria en la banda y antena actuales. Verifique la conexión de la antena e inténtelo de nuevo, o revise las posiciones de los relés C1, L y C2.
 
 ## Relacionados
 
-- [Ejecutar una sintonía automática en el TGXL externo](run-an-autotune-on-the-external-tgxl.md)
+- [Ejecutar un ajuste automático en el TGXL externo](run-an-autotune-on-the-external-tgxl.md)
 - [Poner el sintonizador en OPERATE, BYPASS o STANDBY](put-the-tuner-in-operate-bypass-or-standby.md)
+- [Ajustar finamente los relés C1/L/C2 con la rueda del ratón](fine-tune-the-c1-l-c2-relays-with-the-mousewheel.md)

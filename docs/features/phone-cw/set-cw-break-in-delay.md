@@ -1,39 +1,35 @@
-# Configurar el retardo de break-in en CW
+# Configurar el retardo de break-in de CW
 
-Configure cuánto tiempo espera el radio después de la última pulsación de tecla antes de volver a recepción. Un retardo mayor evita conmutaciones bruscas de RX durante el envío rápido; un retardo menor (o QSK completo) minimiza el tiempo muerto de recepción.
+El retardo de break-in de CW controla cuánto tiempo espera el radio después de la última pulsación de tecla antes de volver a recibir. Ajustar este valor evita una conmutación QSK entrecortada y, al mismo tiempo, permite un regreso rápido a RX entre palabras o caracteres.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a un radio FLEX-8600.
-- El slice activo debe estar en un modo CW. El applet Phone/CW cambia automáticamente a su subpanel de CW cuando se selecciona el modo CW; el control deslizante Delay solo es visible en ese subpanel.
+- AetherSDR debe estar conectado al radio. El applet Phone/CW muestra los controles únicamente cuando hay una conexión de radio activa.
+- El slice activo debe estar en un modo CW. El sub-panel de CW reemplaza automáticamente al sub-panel de Phone cuando se selecciona CW en el slice activo.
 
 ## Pasos
 
-1. Si el applet Phone/CW no está visible, haga clic en el botón de bandeja **P/CW** en la barra lateral derecha para abrirlo.
-2. Confirme que el subpanel de CW esté mostrándose. Si ve controles de micrófono y procesador en su lugar, el slice activo no está en modo CW — cambie primero el modo del slice.
-3. Localice el control deslizante **Delay** en el subpanel de CW.
-4. Arrastre el control deslizante **Delay** hacia la izquierda para reducir el retardo o hacia la derecha para aumentarlo. El valor se actualiza en el radio en tiempo real.
-5. Para usar break-in completo (QSK) sin retardo, haga clic en **Breakin** para activarlo. Cuando **Breakin** está activo, el radio conmuta a recepción inmediatamente después de cada elemento.
+1. Localice el botón de bandeja **P/CW** en la barra lateral derecha y confirme que el applet sea visible. Si no lo es, haga clic en el botón de bandeja **P/CW** para mostrarlo.
+2. Confirme que el sub-panel de CW esté visible. Si en cambio se muestran los controles de Phone, cambie el slice activo a un modo CW mediante el selector de modo en el área principal del VFO.
+3. Localice el control deslizante **Delay (CW)** en el sub-panel de CW.
+4. Arrastre el control deslizante **Delay (CW)** hacia la izquierda para disminuir el retardo o hacia la derecha para aumentarlo. El valor se aplica al radio de inmediato.
 
 ## Qué hace cada control
 
-| Control | Tipo | Valor predeterminado | Rango válido | Configuración persistente |
+| Control | Descripción | Rango válido | Valor predeterminado | Clave de ajuste |
 |---|---|---|---|---|
-| **Delay** | Control deslizante | — | 0–2000 ms, paso 10 | ninguna |
-| **Breakin** | Botón de alternancia | — | On / Off | ninguna |
-
-**Delay** — Establece el retardo de break-in en CW en milisegundos. A 0 ms el radio intenta volver a recepción lo más rápido posible entre elementos. A 2000 ms el radio mantiene la transmisión durante dos segundos completos después del último evento de tecla.
-
-**Breakin** — Habilita la operación QSK completa. Cuando está activado, el radio conmuta entre transmisión y recepción dentro de cada intervalo entre elementos.
+| Delay (CW) | Establece el retardo de break-in de CW. El radio regresa a recepción este número de milisegundos después del último elemento emitido. | 0–2000 ms (paso 10) | — | — |
+| Breakin | Activa o desactiva el break-in completo (QSK). Cuando está habilitado, el radio conmuta a recepción entre cada elemento. El control deslizante **Delay (CW)** sigue teniendo efecto cuando **Breakin** está desactivado. | On / Off | — | — |
 
 ## Consejos
 
-- Delay y Breakin funcionan en conjunto. Si **Breakin** está desactivado, el valor de **Delay** determina el tiempo de retención. Si **Breakin** está activado, el radio ignora el retardo y opera en QSK completo.
-- Si el ruido de conmutación de relés o la secuenciación del amplificador son una preocupación, establezca un retardo mayor en lugar de habilitar **Breakin**.
+- Un retardo de 0 ms con **Breakin** habilitado proporciona operación QSK completa. Aumente el retardo para reducir el desgaste del relé durante el envío rápido.
+- El control deslizante **Delay (CW)** avanza en incrementos de 10 ms. Para un ajuste fino, haga clic en la pista del control deslizante y use las teclas de flecha (si los atajos de teclado están habilitados en `View > Keyboard Shortcuts`).
 
 ## Relacionado
 
-- [Configurar la velocidad de tecleo en CW en PPM](set-cw-keying-speed-in-wpm.md)
 - [Habilitar el tecleo con paleta iámbica](enable-iambic-paddle-keying.md)
+- [Configurar la velocidad de tecleo CW en WPM](set-cw-keying-speed-in-wpm.md)
 - [Cambiar el tono de CW / frecuencia de sidetone](change-cw-pitch-sidetone-frequency.md)
-- [Habilitar el sidetone local de baja latencia (Local STn) para trabajo rápido con paleta, manipulador recto o CWX](enable-the-low-latency-local-cw-sidetone-local-stn-for-fast-paddle-straight-key-cwx-work.md)
+- [Habilitar el sidetone de CW local de baja latencia (Local STn) para trabajo con paleta, manipulador recto o CWX](enable-the-low-latency-local-cw-sidetone-local-stn-for-fast-paddle-straight-key-cwx-work.md)
+- [Escuchar un monitor de sidetone de TX](listen-to-a-tx-sidetone-monitor.md)

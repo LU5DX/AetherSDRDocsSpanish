@@ -1,29 +1,38 @@
 # Agregar una memoria en la frecuencia actual
 
-Abra el diálogo Memory Channels y guarde la frecuencia del VFO activo como una nueva entrada de canal de memoria.
+Abra el diálogo Memory Channels y guarde la frecuencia del VFO activo como una nueva entrada de canal de memoria. Use esto para marcar una frecuencia a la que desee volver más adelante.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. El diálogo Memory Channels requiere una conexión activa con el radio.
-- Sintonice el slice activo en la frecuencia que desea almacenar antes de abrir el diálogo.
+- Conéctese a una radio FLEX-8600. El diálogo Memory Channels requiere una conexión de radio activa.
+- Sintonice el slice activo en la frecuencia que desea almacenar.
 
 ## Pasos
 
 1. Haga clic en `Settings > Memory...` para abrir el diálogo Memory Channels.
 2. Haga clic en `Add`.
 
-Aparece una nueva fila en la tabla de memorias con la frecuencia actual del VFO. La memoria se crea inmediatamente en el radio.
+Aparece una nueva fila en la tabla de memorias con la frecuencia actual del VFO. La memoria se guarda inmediatamente en la radio.
 
-3. Para renombrar o ajustar la nueva entrada, seleccione su fila y haga clic en `Edit`, luego modifique los campos directamente.
+3. Para asignarle un nombre a la memoria o ajustar otros campos, seleccione la nueva fila y haga clic en `Edit`, luego modifique los campos directamente. Consulte [Editar el nombre, modo u offset de una memoria en línea](edit-a-memory-s-name-mode-or-offset-inline.md).
+
+## Qué hace cada control
+
+| Control | Descripción |
+|---|---|
+| `Add` | Crea una nueva fila de memoria en la frecuencia actual del VFO. |
+| `Edit` | Activa el modo de edición en línea en la fila seleccionada para que pueda actualizar campos como Name, Group, Mode o valores de offset. |
+| Memory table | Muestra todas las memorias almacenadas. Las columnas incluyen Group, Owner, Frequency, Name, Mode, Step, FM TX Offset Dir, Repeater Offset, Tone Mode, Tone Value, Squelch, Squelch Level, RX Filter Low, RX Filter High, RTTY Mark, RTTY Shift, DIGL Offset y DIGU Offset. |
 
 ## Consejos
 
-- Hacer doble clic en cualquier fila de la tabla de memorias sintoniza el slice activo en esa memoria. Si desea verificar que la frecuencia fue capturada correctamente, haga doble clic en la nueva fila inmediatamente después de agregarla.
-- Para encontrar la nueva entrada rápidamente, escriba parte de su nombre o frecuencia en el campo `Search:`. La tabla se filtra a medida que escribe.
+- Hacer doble clic en una fila de la tabla de memorias sintoniza el slice activo directamente en esa memoria.
+- Para encontrar la memoria que acaba de agregar, use el campo `Search:` para filtrar por nombre, o ordene la columna Frequency haciendo clic en el encabezado de la columna.
 
-## Relacionados
+## Relacionado
 
-- [Editar el nombre, modo u offset de una memoria directamente](edit-a-memory-s-name-mode-or-offset-inline.md)
-- [Sintonizar el radio en una memoria almacenada](tune-the-radio-to-a-stored-memory.md)
+- [Editar el nombre, modo u offset de una memoria en línea](edit-a-memory-s-name-mode-or-offset-inline.md)
+- [Sintonizar la radio en una memoria almacenada](tune-the-radio-to-a-stored-memory.md)
+- [Buscar memorias por nombre](search-memories-by-name.md)
 - [Eliminar una o más memorias](delete-one-or-more-memories.md)
 - [Descripción general de Memory Channels](overview.md)

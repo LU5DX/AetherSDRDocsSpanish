@@ -1,36 +1,41 @@
-# Verificar la IP del radio y la dirección de enlace local
+# Verificar la dirección IP del radio y la dirección de enlace local
 
-Use el diálogo **Network Diagnostics** para confirmar qué dirección IP está apuntando AetherSDR en el radio y qué interfaz de red local está utilizando para la conexión.
+Use esta página para confirmar a qué dirección IP se ha conectado AetherSDR en su FLEX-8600 y qué interfaz de red local está utilizando para esa conexión.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar en ejecución. El diálogo puede abrirse tanto si hay un radio conectado como si no.
+- AetherSDR debe estar en ejecución. El cuadro de diálogo no requiere una conexión activa con el radio, pero los campos mostrarán valores significativos solo después de que se haya realizado un intento de conexión.
 
 ## Pasos
 
 1. Haga clic en `Settings > Network...`.
-2. En el diálogo **Network Diagnostics**, localice el grupo **Network Status**.
-3. Lea **Target Radio IP**. Muestra la dirección IP del radio conectado. Si no hay ningún radio conectado, muestra `Not connected`.
-4. Lea **Selected Source**. Muestra la NIC local o la ruta de enlace que AetherSDR está utilizando para la conexión.
-5. Opcionalmente, lea **Local TCP** y **Local UDP** para ver los extremos locales exactos de cada protocolo.
-6. Haga clic en `Close` cuando termine.
+2. En el cuadro de diálogo **Network Diagnostics**, localice el grupo **Network Status** en la parte superior izquierda.
+3. Lea **Target Radio IP** — muestra la dirección IP del radio al que se conectó AetherSDR. Si no se ha realizado ninguna conexión, el campo muestra `Not connected`.
+4. Lea **Selected Source** — muestra la interfaz de red local o la ruta de enlace que AetherSDR utilizó para alcanzar el radio.
+5. Lea **Local TCP** y **Local UDP** para ver los puntos de conexión locales exactos de cada protocolo.
+6. Haga clic en Close cuando termine.
 
 ## Qué hace cada control
 
 | Indicador | Significado |
 |---|---|
-| **Status** | Estado general del enlace. |
-| **Target Radio IP** | Dirección IP del radio conectado. Muestra `Not connected` cuando no hay ningún radio presente. |
-| **Selected Source** | NIC local o ruta de enlace utilizada para la conexión. |
-| **Local TCP** | Extremo TCP local para la conexión con el radio. |
-| **Local UDP** | Extremo UDP local para la conexión con el radio. |
+| **Status** | Estado general del enlace de la conexión actual. |
+| **Target Radio IP** | Dirección IP del radio conectado. Muestra `Not connected` si no hay ninguna conexión activa. |
+| **Selected Source** | NIC local o ruta de enlace utilizada para alcanzar el radio. |
+| **Local TCP** | Punto de conexión TCP local (dirección y puerto). |
+| **Local UDP** | Punto de conexión UDP local (dirección y puerto). |
 
 ## Consejos
 
-- No es necesario tener una conexión activa con el radio para abrir el diálogo. **Target Radio IP** mostrará `Not connected` en lugar de una dirección cuando el radio esté desconectado, lo que puede confirmar por sí mismo que no se ha establecido ninguna conexión.
-- **Selected Source** es la ruta de enlace elegida en el momento de la conexión. Si AetherSDR está enrutando el tráfico a través de una interfaz inesperada, compruebe este valor antes de buscar el problema en otro lugar.
+- El cuadro de diálogo actualiza todos los valores una vez por segundo. Si acaba de conectarse, espere un momento para que los campos se rellenen.
+- **Selected Source** es útil cuando el equipo tiene múltiples interfaces de red. Confirme que muestra la interfaz en la misma subred que el radio, y no una VPN o un adaptador secundario.
 
-## Relacionados
+## Solución de problemas
+
+- **Target Radio IP muestra `Not connected`** — No hay ninguna conexión activa con el radio. Use `Settings > Connect to Radio...` para descubrir y conectarse a su FLEX-8600, luego vuelva a abrir el cuadro de diálogo.
+- **Selected Source muestra una interfaz inesperada** — Su sistema operativo enrutó la conexión a través de una NIC diferente a la prevista. Revise su tabla de enrutamiento o deshabilite las interfaces de red que no utilice, luego vuelva a conectarse.
+
+## Relacionado
 
 - [Descripción general de Network Diagnostics](overview.md)
 - [Medir RTT y pérdida de paquetes durante problemas de audio](measure-rtt-and-packet-drops-during-audio-problems.md)

@@ -1,59 +1,53 @@
 # Ejecutar una prueba de dos tonos
 
-Una prueba de dos tonos le permite activar el transmisor a un nivel de potencia controlado para verificar la linealidad, ajustar la excitación o comprobar el SWR antes de operar. Para ello, establezca un nivel de potencia de sintonía y active la portadora de sintonía mediante TUNE o MOX desde el applet TX Controls.
+Una prueba de dos tonos permite verificar la linealidad del transmisor y los niveles de excitación activando el radio manualmente con MOX, mientras se monitorean la potencia directa y el ROS. Utilice este procedimiento cuando el equipo esté en modo SSB y desee verificar la salida sin transmitir audio.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. Use `Settings > Connect to Radio...` si aún no está conectado.
-- El applet TX Controls debe estar visible. Si no lo está, haga clic en el botón TX tray en la barra lateral derecha.
-- Confirme que opera dentro de una frecuencia y un nivel de potencia permitidos por su licencia y las regulaciones locales.
-- Notifique a otros en la frecuencia antes de transmitir.
+- AetherSDR está conectado al FLEX-8600 (el indicador del radio muestra conexión activa).
+- El applet TX Controls está visible. Si no lo está, haga clic en el botón TX tray en la barra lateral derecha.
+- El transceptor está configurado en modo SSB y se encuentra en una frecuencia libre.
+- Una fuente de audio de dos tonos (generador externo o software) está lista para alimentar la entrada de micrófono o línea del radio.
 
 ## Pasos
 
-1. En el applet TX Controls, localice el control deslizante **Tune Pwr**.
-2. Ajuste **Tune Pwr** al nivel de potencia de portadora deseado. El valor predeterminado es 10; el rango válido es 0–100.
-3. Confirme que el control deslizante **RF Power** está en el nivel que desea para la operación a plena potencia (predeterminado 100, rango 0–100). Esto no afecta la potencia de la portadora de sintonía, pero verificarlo ahora evita sorpresas después de sintonizar.
-4. Observe el indicador **SWR** (rango 1.0–3.0; rojo por encima de 2.5) y el indicador **RF Pwr** (rango 0–120 W sin amplificador externo, rojo por encima de 100 W) — ambos se actualizan en tiempo real durante la transmisión.
-5. Haga clic en **TUNE**. La etiqueta del botón cambia a **TUNING...** con fondo rojo mientras la portadora está activa.
-6. Observe los indicadores **RF Pwr** y **SWR**. Cuando haya obtenido las lecturas que necesita, haga clic en **TUNE** nuevamente para detener. El botón regresa a **TUNE**.
+1. En el applet TX Controls, ajuste el control deslizante **Tune Pwr** al nivel de potencia que desea usar para la prueba. El valor predeterminado es 10; el rango válido es 0–100.
+2. Ajuste el control deslizante **RF Power** al nivel de salida deseado. El valor predeterminado es 100; el rango válido es 0–100.
+3. Si desea utilizar un perfil de transmisión específico (por ejemplo, un perfil SSB limpio sin procesamiento), selecciónelo en el menú desplegable **TX Profile**.
+4. Inicie la señal de audio de dos tonos desde su fuente externa para que alimente la entrada del radio.
+5. Haga clic en **MOX**. El botón se pone en rojo y el radio comienza a transmitir.
+6. Observe el medidor **RF Pwr** (0–120 W, rojo por encima de 100 W) y el medidor **SWR** (1.0–3.0, rojo por encima de 2.5). Ajuste el control deslizante **RF Power** mientras transmite para alcanzar la potencia de salida deseada.
+7. Cuando la prueba haya concluido, haga clic nuevamente en **MOX** para dejar de transmitir. El botón vuelve a su estado apagado.
+8. Detenga la fuente de audio de dos tonos.
 
-De forma alternativa, para activar el transmisor de manera continua a plena potencia RF para una prueba de dos tonos o IMD usando audio externo:
+## Función de cada control
 
-1. Ajuste **RF Power** al nivel de excitación deseado.
-2. Haga clic en **MOX**. El botón se pone rojo mientras el transmisor está activado.
-3. Aplique su fuente de audio de dos tonos a través de la entrada de audio del radio.
-4. Haga clic en **MOX** nuevamente para volver a recepción. El botón regresa a su estado apagado.
-
-## Qué hace cada control
-
-| Control | Tipo | Predeterminado | Rango | Comportamiento |
+| Control | Tipo | Predeterminado | Rango válido | Comportamiento |
 |---|---|---|---|---|
-| **RF Pwr** | Indicador | — | 0–120 W (sin amplificador externo); rojo por encima de 100 W | Muestra la potencia directa en la salida del excitador. |
-| **SWR** | Indicador | — | 1.0–3.0; rojo por encima de 2.5 | Muestra la relación de onda estacionaria en el excitador. |
-| **RF Power** | Deslizador | 100 | 0–100 | Establece el nivel de potencia RF de transmisión. |
-| **Tune Pwr** | Deslizador | 10 | 0–100 | Establece el nivel de potencia de la portadora de sintonía. |
-| **TUNE** | Botón | — | TUNE / TUNING... | Inicia o detiene la portadora de sintonía. La etiqueta cambia a **TUNING...** con fondo rojo mientras está activo. |
-| **MOX** | Botón de alternancia | Off | Off (azul) / On (rojo) | Activa el transmisor manualmente. El botón se pone rojo durante la transmisión. |
+| RF Power | Deslizador | 100 | 0–100 | Establece el nivel de potencia de RF en transmisión. |
+| Tune Pwr | Deslizador | 10 | 0–100 | Establece el nivel de potencia de la portadora de sintonía (no se usa durante MOX, pero configúrelo antes de cambiar de modo). |
+| TX Profile | Menú desplegable | — | Cargado desde el radio | Carga el perfil de transmisión seleccionado. |
+| MOX | Botón de alternancia | Off | Off / On (rojo) | Activa el transmisor manualmente. El botón se pone en rojo mientras TX está activo. |
+| RF Pwr | Medidor | — | 0–120 W; rojo > 100 W | Muestra la potencia directa en la salida del excitador. |
+| SWR | Medidor | — | 1.0–3.0; rojo > 2.5 | Muestra la relación de ondas estacionarias en el excitador. |
 
 ## Consejos
 
-- Mantenga **Tune Pwr** bajo (10 o menos) cuando use la portadora de sintonía para la operación del sintonizador de antena, a fin de proteger el amplificador final.
-- Si necesita ejecutar el ATU interno antes de la prueba de dos tonos, haga clic en **ATU** primero. Consulte [Ejecutar el ATU interno](run-the-internal-atu.md).
-- El indicador **SWR** se pone rojo por encima de 2.5. Si el SWR es alto durante la portadora de sintonía, detenga la transmisión y verifique su sistema de antena antes de aumentar la potencia.
+- Mantenga el ROS por debajo de 2.5 durante la prueba. El medidor SWR se pone en rojo por encima de 2.5 como advertencia visual.
+- Seleccione un perfil TX con el procesamiento de micrófono desactivado antes de ejecutar una prueba de dos tonos. El procesamiento puede distorsionar la envolvente de los dos tonos y producir lecturas de IMD engañosas.
+- Si dispone de memorias del ATU, considere recuperar una memoria conocida como válida antes de activar el transmisor para asegurarse de que la antena esté adaptada. Consulte [Recuperar una memoria del ATU](recall-an-atu-memory.md).
 
-## Solución de problemas
+## Resolución de problemas
 
-- **El botón TUNE no hace nada** — Confirme que el radio está conectado. El applet TX Controls requiere una conexión de radio activa.
-- **El indicador RF Pwr marca cero durante TUNING...** — Verifique que **Tune Pwr** esté por encima de 0. Si el deslizador está en 0, no se transmite ninguna portadora.
-- **SWR indica un valor alto de inmediato** — La antena o el cable de alimentación pueden tener una falla. Reduzca **Tune Pwr**, corrija el problema de la antena y vuelva a intentarlo.
-- **MOX activa pero no se transmite audio** — Verifique que su fuente de audio de dos tonos esté enrutada a la entrada de audio correcta del radio. El enrutamiento de audio está fuera del applet TX Controls; consulte la configuración de audio de su sistema.
+- **MOX activa el transmisor pero RF Pwr indica cero** — Es posible que la fuente de audio de dos tonos no esté llegando a la entrada del radio, o que el modo no sea SSB. Verifique el enrutamiento de audio y la selección de modo antes de volver a transmitir.
+- **El SWR se pone en rojo inmediatamente al presionar MOX** — La antena no está adaptada. Haga clic en MOX para dejar de transmitir, luego use el ATU o revise la línea de alimentación antes de continuar. Consulte [Ejecutar el ATU interno](run-the-internal-atu.md).
+- **El medidor RF Pwr llega al límite máximo** — El control deslizante RF Power está configurado demasiado alto para la antena y el amplificador conectados. Haga clic en MOX para dejar de transmitir y luego reduzca el control deslizante RF Power antes de volver a transmitir.
 
-## Relacionado
+## Temas relacionados
 
-- [Iniciar una portadora de sintonía para verificar el SWR](start-a-tune-carrier-to-check-swr.md)
-- [Ejecutar el ATU interno](run-the-internal-atu.md)
-- [Establecer la potencia de salida RF](set-rf-output-power.md)
+- [Establecer la potencia de salida de RF](set-rf-output-power.md)
 - [Establecer la potencia de la portadora de sintonía](set-tune-carrier-power.md)
 - [Alternar MOX para activar el transmisor manualmente](toggle-mox-to-manually-key-the-transmitter.md)
-- [Habilitar APD para linealizar el transmisor](enable-apd-to-linearise-the-transmitter.md)
+- [Cambiar perfiles TX (p. ej., SSB, Digital)](switch-tx-profiles-e-g-ssb-digital.md)
+- [Ejecutar el ATU interno](run-the-internal-atu.md)
+- [Recuperar una memoria del ATU](recall-an-atu-memory.md)

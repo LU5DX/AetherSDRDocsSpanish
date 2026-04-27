@@ -1,37 +1,37 @@
 # Revisar la lista de perfiles globales activos
 
-Abra el Profile Manager para ver todos los perfiles globales almacenados en la radio e identificar cuál está activo en este momento.
+El Profile Manager muestra todos los perfiles globales almacenados en el radio y resalta el que está en uso actualmente. Use esta función cuando desee confirmar qué perfiles existen o identificar el activo antes de cargarlo o eliminarlo.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a la radio. El Profile Manager requiere una conexión activa con la radio.
+- AetherSDR debe estar conectado al radio. El Profile Manager requiere una conexión activa con el radio.
 
 ## Pasos
 
 1. Haga clic en `Profiles > Profile Manager...` para abrir el diálogo Profile Manager.
 2. Haga clic en la pestaña **Global (tab)** si no está seleccionada todavía.
-3. Lea la **Profile list**. Aquí aparecen todos los perfiles globales almacenados en la radio. El perfil activo en ese momento aparece resaltado.
+3. Revise la **Profile list**. El perfil activo aparece resaltado.
 
-## Qué hace cada control
+## Función de cada control
 
 | Control | Tipo | Comportamiento |
 |---|---|---|
-| **Global (tab)** | Pestaña | Muestra los perfiles globales. El perfil activo aparece resaltado en la **Profile list**. |
-| **Profile list** | Lista | Muestra todos los perfiles globales de la radio. El perfil activo queda preseleccionado cuando se abre el diálogo. |
-| **Profile name** | Campo de texto | Se completa automáticamente al seleccionar un perfil en la lista. Se usa al guardar. |
-| **Load** | Botón | Carga el perfil seleccionado en la radio. Se activa únicamente cuando hay un perfil seleccionado. |
-| **Save** | Botón | Guarda el estado actual de la radio con el nombre escrito en **Profile name**. |
-| **Delete** | Botón | Elimina el perfil seleccionado tras pedir confirmación. Se activa únicamente cuando hay un perfil seleccionado. |
+| **Global (tab)** | Pestaña | Muestra la lista de perfiles globales del radio conectado. |
+| **Profile list** | Lista | Muestra todos los perfiles globales almacenados en el radio. El perfil activo actualmente aparece resaltado. |
+| **Profile name** | Campo de texto | Se rellena automáticamente al seleccionar un perfil de la lista. Se usa al guardar. |
+| **Load** | Botón | Carga el perfil seleccionado en el radio. Se habilita únicamente cuando hay un perfil seleccionado. |
+| **Save** | Botón | Guarda el estado actual del radio con el nombre indicado en **Profile name**. |
+| **Delete** | Botón | Elimina el perfil seleccionado tras una confirmación. Se habilita únicamente cuando hay un perfil seleccionado. |
 | **Close** | Botón | Cierra el diálogo. |
 
-## Sugerencias
+## Consejos
 
-- La **Profile list** se actualiza automáticamente si la radio notifica un cambio mientras el diálogo está abierto. No es necesario volver a abrir el diálogo para ver los nuevos perfiles.
-- Al hacer clic en un perfil de la **Profile list**, el campo **Profile name** se completa con el nombre de ese perfil y se activan los botones **Load** y **Delete**.
-- El perfil activo también puede cargarse directamente desde el menú `Profiles` sin abrir el Profile Manager. Por debajo del separador de ese menú, la radio muestra una lista marcable de perfiles globales; el que está activo en ese momento aparece marcado.
+- La **Profile list** se actualiza automáticamente si el radio envía una nueva lista de perfiles mientras el diálogo está abierto. No es necesario cerrar y volver a abrir el diálogo para ver los cambios.
+- El perfil activo aparece resaltado en la lista. Si ningún elemento aparece resaltado, no hay ningún perfil global cargado actualmente en el radio.
+- El menú `Profiles` también muestra una lista dinámica con casillas de verificación de los perfiles globales debajo del separador. Puede identificar el perfil activo de un vistazo sin necesidad de abrir el Profile Manager.
 
 ## Temas relacionados
 
 - [Descripción general del Profile Manager](overview.md)
-- [Guardar el estado actual de la radio como un nuevo perfil global](save-the-current-radio-state-as-a-new-global-profile.md)
+- [Guardar el estado actual del radio como un nuevo perfil global](save-the-current-radio-state-as-a-new-global-profile.md)
 - [Cambiar a un perfil de transmisión guardado](switch-to-a-saved-transmit-profile.md)

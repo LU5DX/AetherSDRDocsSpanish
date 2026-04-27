@@ -1,91 +1,64 @@
 # Descripción general del Ecualizador Paramétrico Aetherial (TX / RX)
 
-El Ecualizador Paramétrico Aetherial es un ecualizador paramétrico del lado del cliente que procesa el audio de forma independiente en las rutas de transmisión y recepción. Úselo para dar forma a su señal transmitida o a su audio recibido sin modificar ningún ajuste de DSP del equipo de radio.
+El Ecualizador Paramétrico Aetherial proporciona ecualización paramétrica del lado del cliente para las rutas de audio de transmisión y recepción. Úselo para dar forma al audio del micrófono en TX, o para adaptar el sonido del audio recibido antes de que llegue a sus parlantes o auriculares, sin modificar ningún procesamiento del lado del radio.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar en ejecución. No se requiere conexión a un equipo de radio para la configuración, pero el analizador FFT en tiempo real solo muestra señal cuando hay audio circulando.
-- Los paneles del EQ ("Aetherial TX EQ" y "Aetherial RX EQ") permanecen ocultos hasta que la etapa de EQ correspondiente se habilite desde el widget CHAIN o desde el editor flotante. Habilite primero la etapa de EQ si no ve los paneles.
+- AetherSDR debe estar en ejecución. No se requiere una conexión de radio para configurar el EQ, pero sí es necesaria para que la superposición del analizador FFT en vivo muestre audio real.
+- Los tiles del applet de EQ están ocultos hasta que la etapa de EQ correspondiente se habilite mediante el widget CHAIN o el editor flotante. Si no ve "Aetherial TX EQ" o "Aetherial RX EQ" en el contenedor principal Aetherial Audio (TXDSP), habilite primero la etapa de EQ.
 
 ## Cómo funciona
 
-AetherSDR instancia dos copias independientes del EQ: una vinculada permanentemente a la ruta TX ("Aetherial TX EQ") y otra vinculada permanentemente a la ruta RX ("Aetherial RX EQ"). Cada una reside dentro del contenedor padre Aetherial Audio (TXDSP). No existe un selector dentro del panel para cambiar entre rutas — cada panel queda bloqueado a su lado desde el momento de su creación.
+AetherSDR instancia dos tiles de EQ independientes dentro del contenedor principal Aetherial Audio (TXDSP):
 
-**Paneles applet (vista acoplada)**
+- **Aetherial TX EQ** — procesa el audio únicamente en la ruta de transmisión.
+- **Aetherial RX EQ** — procesa el audio únicamente en la ruta de recepción.
 
-Cada panel contiene un único área de analizador y curva de solo lectura. El panel muestra la respuesta de EQ combinada de su ruta y una superposición del analizador FFT en tiempo real. No es posible editar bandas directamente en el panel; toda la edición de bandas se realiza en el editor flotante.
+Cada tile está fijo a su ruta. No existe un selector RX/TX dentro del tile. El tile muestra una vista compacta de la curva de respuesta de EQ sumada y una superposición del analizador FFT en vivo para esa ruta. La edición —agregar, eliminar y ajustar bandas— ocurre en una ventana flotante separada llamada el editor **Aetherial Parametric EQ**, que se abre desde el widget CHAIN. La barra de título del editor muestra "Aetherial Parametric EQ — TX" o "Aetherial Parametric EQ — RX" según el lado desde el que lo haya abierto. Se reutiliza una única instancia compartida del editor para ambos lados; el título cambia al cambiar de lado.
 
-**Editor flotante**
+### Tile del applet
 
-Al hacer doble clic en la etapa de EQ en el widget CHAIN se abre el editor flotante sin marco, titulado "Aetherial Parametric EQ — TX" o "Aetherial Parametric EQ — RX" según el lado que haya abierto. Se reutiliza una única ventana de editor para ambos lados; su título se actualiza para reflejar la ruta activa.
+Cada tile contiene un área de control:
 
-El editor flotante contiene:
-
-- Una barra de ayuda de interacción en la parte superior que describe los gestos de arrastre.
-- Un selector de familia de filtros (véase la tabla a continuación).
-- Una fila de iconos, un lienzo editable y una fila de parámetros para agregar, eliminar y ajustar bandas.
-- Un fader de salida a la derecha con un medidor de nivel y lectura en dB.
-
-El analizador FFT del editor se ejecuta a 25 Hz mientras el editor está visible y se detiene cuando se cierra.
-
-**Bypass**
-
-El bypass de una etapa de EQ se realiza desde el widget CHAIN, no desde el interior del panel ni desde el editor flotante.
-
-## Qué hace cada control
-
-### Controles del panel applet
-
-| Control | Descripción | Ajuste persistido |
-|---|---|---|
-| Área de analizador / curva | Visualización de solo lectura, 110 px de alto. Muestra la curva de respuesta de EQ combinada y una superposición del analizador FFT en tiempo real para la ruta de este panel. | — |
-
-### Controles del editor flotante
-
-| Control | Valor predeterminado | Valores válidos | Ajuste persistido |
-|---|---|---|---|
-| Familia de filtros | Butterworth | Butterworth, Chebyshev, Bessel, Elliptic | `ClientEqTxBands` / `ClientEqRxBands` (guardado junto con los datos de banda) |
-| Fader de salida | — | Ganancia lineal, mostrada en dB | `ClientEqTxBands` / `ClientEqRxBands` |
-| EQ RX habilitado | — | Activo / en bypass | `ClientEqRxEnabled` |
-| EQ TX habilitado | — | Activo / en bypass | `ClientEqTxEnabled` |
-| Definiciones de banda (RX) | — | Agregadas/eliminadas de forma interactiva en el lienzo | `ClientEqRxBands` |
-| Definiciones de banda (TX) | — | Agregadas/eliminadas de forma interactiva en el lienzo | `ClientEqTxBands` |
-
-**Opciones de familia de filtros**
-
-| Opción | Comportamiento |
+| Elemento | Descripción |
 |---|---|
-| Butterworth | Banda de paso máximamente plana |
-| Chebyshev | Transición más pronunciada, rizado de 1 dB en la banda de paso |
-| Bessel | Fase lineal, caída más suave |
-| Elliptic | Transición más pronunciada, rizado en ambas bandas |
+| Área del analizador / curva | Vista de 110 px de alto que muestra la curva de respuesta de EQ sumada para todas las bandas habilitadas en esa ruta, con una superposición del analizador FFT en vivo. Esta área es solo de visualización en el tile del applet. |
 
-El selector de familia de filtros se aplica al cálculo en cascada de HP/LP. Los filtros de shelving y peak utilizan su topología nativa de segundo orden independientemente de este ajuste.
+La **respuesta de EQ sumada** muestra la respuesta en frecuencia acumulada de todas las bandas habilitadas. Cuando ninguna banda tiene refuerzo ni corte, la curva es plana. La **superposición del analizador en vivo** muestra la FFT en tiempo real del audio que pasa por esa ruta; permanece inactiva cuando no hay audio y se activa cuando hay audio presente.
 
-**Indicador de respuesta de EQ combinada**
+### Editor flotante
 
-Muestra la respuesta en frecuencia acumulada de todas las bandas habilitadas para la ruta del panel. Se muestra plana cuando no hay bandas activas o cuando todas las bandas tienen una ganancia de 0 dB, y con forma cuando las bandas contribuyen a la respuesta.
+Al hacer doble clic en la etapa de EQ en el widget CHAIN se abre el editor flotante para ese lado. El editor proporciona:
 
-**Superposición del analizador en tiempo real**
+| Control | Descripción |
+|---|---|
+| Área del analizador / curva (lienzo) | Lienzo interactivo donde se arrastran los manejadores de banda para establecer la frecuencia y la ganancia. Arrastre los manejadores de pico/shelving para ajustar frecuencia y ganancia. Arrastre los manejadores HP/LP para ajustar frecuencia y Q. Mantenga presionado Shift mientras arrastra para ajustar Q en cualquier tipo de banda. Haga clic en el ícono de una banda para ciclar entre los tipos de filtro. |
+| Peak Hold | Botón seleccionable. Cuando está activado, la traza de pico por bin del analizador deja de decaer, de modo que el nivel más alto visto en cada frecuencia permanece visible. Desactívelo para reanudar el decaimiento normal. |
+| Selector de familia de filtros | Selecciona la familia de filtros aplicada a la matemática de cascada HP/LP. Opciones: Butterworth (banda de paso máximamente plana), Chebyshev (transición más pronunciada, rizado de 1 dB en la banda de paso), Bessel (fase lineal, rolloff más suave), Elliptic (transición más pronunciada, rizado en ambas bandas). Valor predeterminado: Butterworth. Los shelves y picos utilizan su topología nativa de segundo orden independientemente de esta configuración. |
+| Reset | Devuelve todas las bandas a sus valores predeterminados, restaura el número de bandas predeterminado y restablece la familia de filtros a Butterworth. Se guarda de inmediato. |
+| Fader de salida | Medidor vertical, deslizador y lectura en dB en el lado derecho del editor. Controla el nivel de salida de la etapa de EQ. |
 
-Muestra una FFT en tiempo real del audio que circula por la ruta del panel. Inactivo cuando no hay audio circulando; activo cuando hay audio presente.
+El bypass se gestiona desde el widget CHAIN, no desde el interior del editor. Consulte [Omitir la etapa de EQ desde la cadena](bypass-the-eq-stage-from-the-chain.md).
+
+### Configuraciones guardadas
+
+| Clave de configuración | Qué almacena |
+|---|---|
+| `ClientEqRxEnabled` | Si la etapa de EQ de RX está habilitada. |
+| `ClientEqTxEnabled` | Si la etapa de EQ de TX está habilitada. |
+| `ClientEqRxBands` | Parámetros de banda para el EQ de RX. |
+| `ClientEqTxBands` | Parámetros de banda para el EQ de TX. |
 
 ## Consejos
 
-- Haga clic derecho en la barra de título del subcontenedor "Aetherial TX EQ" o "Aetherial RX EQ" para flotar, extraer u ocultar el panel.
-- En el lienzo del editor flotante: arrastre una banda peak o de shelving para ajustar la frecuencia y la ganancia; mantenga presionada la tecla Shift mientras arrastra para ajustar el Q. Arrastre una banda HP o LP para ajustar la frecuencia y el Q. Haga clic en el ícono de una banda para ciclar entre los tipos de filtro.
-- El fader de salida del editor flotante controla la ganancia maestra de esa ruta de EQ después de que todas las bandas se han combinado.
+- Los tiles del applet están ocultos de forma predeterminada. Si desea una referencia visual persistente de su curva de EQ durante la operación, habilite la etapa de EQ mediante el widget CHAIN para que el tile quede visible en el contenedor Aetherial Audio (TXDSP).
+- El editor flotante es compartido entre TX y RX. Abrirlo desde el tile de la cadena TX y luego abrirlo desde el tile de la cadena RX cambia el editor al lado RX; su configuración de TX no se ve afectada.
+- Haga clic derecho en la barra de título del subcontenedor "Aetherial TX EQ" o "Aetherial RX EQ" para flotar, extraer u ocultar el tile.
 
-## Solución de problemas
+## Relacionado
 
-- **El panel "Aetherial TX EQ" o "Aetherial RX EQ" no es visible** — El panel permanece oculto hasta que la etapa de EQ correspondiente esté habilitada. Habilite la etapa desde el widget CHAIN o desde el editor flotante.
-- **El analizador FFT en tiempo real no muestra nada** — El audio debe estar circulando por la ruta para que el analizador muestre señal. Confirme que el equipo de radio esté conectado y que el enrutamiento de audio esté activo para esa ruta.
-- **El título del editor flotante no corresponde al lado que desea editar** — El editor es compartido entre ambas rutas. Abra el editor haciendo doble clic en la etapa de EQ correcta (TX o RX) en el widget CHAIN para cambiarlo a ese lado.
-
-## Relacionados
-
-- [Bypass de la etapa de EQ desde la cadena](bypass-the-eq-stage-from-the-chain.md)
-- [Inspeccionar la curva de EQ TX y el espectro en tiempo real](inspect-the-tx-eq-curve-and-live-spectrum.md)
-- [Inspeccionar la curva de EQ RX y el espectro en tiempo real](inspect-the-rx-eq-curve-and-live-spectrum.md)
+- [Inspeccionar la curva de EQ de TX y el espectro en vivo](inspect-the-tx-eq-curve-and-live-spectrum.md)
+- [Inspeccionar la curva de EQ de RX y el espectro en vivo](inspect-the-rx-eq-curve-and-live-spectrum.md)
 - [Abrir el editor sin marco para agregar, eliminar y ajustar bandas en cualquier lado](open-the-frameless-editor-to-add-remove-tune-bands-on-either-side.md)
-- [Verificar que la curva combinada coincida con su objetivo](verify-the-summed-curve-matches-your-mental-target.md)
+- [Omitir la etapa de EQ desde la cadena](bypass-the-eq-stage-from-the-chain.md)
+- [Verificar que la curva sumada coincida con el objetivo deseado](verify-the-summed-curve-matches-your-mental-target.md)

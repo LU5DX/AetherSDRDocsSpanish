@@ -1,52 +1,47 @@
 # Habilitar CAT TCP para que N1MM, Log4OM, WSJT-X puedan controlar el radio
 
-El applet CAT Control ejecuta hasta cuatro servidores TCP compatibles con rigctld, uno por canal de slice (A–D), para que el software externo de registro y competencias pueda controlar el radio mediante una conexión de red. Use esta página para iniciar esos servidores y apuntar su software al puerto correcto.
+El applet CAT Control ejecuta hasta cuatro servidores TCP compatibles con rigctld, uno por canal de slice (A–D), para que el software externo de registro y competencia pueda controlar el radio a través de un socket de red. Use esta página para iniciar esos servidores y apuntar su software de registro al puerto correcto.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. El applet CAT Control requiere una conexión de radio activa.
-- Conozca qué puerto TCP espera su software de registro. El puerto base predeterminado es `4532`.
-- Si otra aplicación ya está escuchando en el puerto 4532 (por ejemplo, una instancia independiente de rigctld), elija un puerto base diferente antes de habilitar.
+- AetherSDR debe estar conectado al radio. El applet CAT requiere una conexión de radio activa.
+- Decida qué puerto base utilizar. El valor predeterminado es `4532`. Los canales A, B, C y D se enlazan al puerto base, base+1, base+2 y base+3 respectivamente.
+- Asegúrese de que ninguna otra aplicación (incluida una instancia independiente de rigctld) esté escuchando en esos puertos.
 
 ## Pasos
 
-1. Haga clic en el botón **CAT** de la barra lateral derecha para abrir el applet CAT Control. El applet está oculto de manera predeterminada.
-2. Verifique el campo **Base**. El valor predeterminado es `4532`. Si necesita un puerto diferente, haga clic en el campo, escriba un nuevo valor (1024–65535) y presione Enter. El valor se guarda en `CatTcpPort`. Si ingresa un valor fuera de rango, regresará automáticamente a `4532`.
-3. Haga clic en **Enable TCP**. El botón se ilumina en verde cuando está activo. Los cuatro servidores TCP de rigctld se inician de inmediato y se enlazan a Base, Base+1, Base+2 y Base+3.
-4. Confirme que las filas de canales se actualicen. Cada fila (A, B, C, D) muestra un estado como `:4532 (0 clients)` cuando el servidor está en ejecución y esperando una conexión.
-5. En su software de registro o de competencias (N1MM, Log4OM, WSJT-X o similar), configure la interfaz CAT como **Hamlib NET rigctl** y establezca el host en `localhost` y el puerto en el puerto de canal que desea controlar:
-   - Canal A: puerto base (predeterminado `4532`)
-   - Canal B: Base+1 (predeterminado `4533`)
-   - Canal C: Base+2 (predeterminado `4534`)
-   - Canal D: Base+3 (predeterminado `4535`)
-6. Conéctese desde el software externo. La fila del canal correspondiente se actualiza para mostrar el número de clientes, por ejemplo `:4532 (1 client)`.
+1. Haga clic en el botón de bandeja **CAT** en la barra lateral derecha para abrir el applet CAT Control. El applet está oculto de forma predeterminada.
+2. Verifique el valor en el campo **Base**. El valor predeterminado es `4532`. Cámbielo si es necesario (rango válido: 1024–65535). Presione Enter o haga clic fuera del campo para confirmar; los valores fuera del rango vuelven automáticamente a `4532`.
+3. Haga clic en **Enable TCP**. El botón se resalta en verde cuando está activo.
+4. Verifique las filas de canales. Cada fila etiquetada A, B, C o D debe actualizarse de `(stopped)` a `:<puerto> (0 clients)` una vez que los servidores estén escuchando.
+5. En su software de registro o competencia (N1MM, Log4OM, WSJT-X o similar), configure la conexión CAT como **rigctld (net)** e ingrese `localhost` (o la dirección IP de la máquina con AetherSDR) y el puerto del canal que desea controlar — por ejemplo, `4532` para el canal A o `4533` para el canal B.
+6. Cuando el software externo se conecte, la fila del canal se actualiza a `:<puerto> (1 client)`.
 
 ## Qué hace cada control
 
-| Control | Tipo | Predeterminado | Rango válido | Clave persistida | Comportamiento |
-|---|---|---|---|---|---|
-| **Enable TCP** | Botón de alternancia | Apagado | Encendido / Apagado | — | Inicia o detiene los cuatro servidores TCP de rigctld en Base hasta Base+3. También guarda el puerto base actual en `CatTcpPort`. |
-| **Enable TTY** | Botón de alternancia | Apagado | Encendido / Apagado | — | Inicia o detiene los enlaces simbólicos PTY en `/tmp/AetherSDR-CAT-A` hasta `/tmp/AetherSDR-CAT-D`. No es necesario para software basado en TCP. |
-| **Base** | Campo de texto | `4532` | 1024–65535 | `CatTcpPort` | Establece el puerto TCP base. Los canales se enlazan a Base, Base+1, Base+2 y Base+3. Si los servidores están en ejecución cuando cambia este valor, se reinician en los nuevos puertos automáticamente. |
-| **Filas A / B / C / D** | Indicador | `(stopped)` | — | — | Muestra el estado del servidor y el número de clientes conectados para cada canal. Muestra `(stopped)` cuando el servidor está apagado, o `:<port> (N clients)` cuando está en ejecución. |
+| Control | Predeterminado | Rango válido | Clave persistida | Comportamiento |
+|---|---|---|---|---|
+| **Enable TCP** | Desactivado | Activado / Desactivado | — | Inicia o detiene los cuatro servidores TCP rigctld. También escribe el puerto base actual en `CatTcpPort`. |
+| **Base** | `4532` | 1024–65535 | `CatTcpPort` | Establece el puerto TCP base. El canal A usa este puerto; B, C y D usan base+1, base+2, base+3. Si los servidores ya están en ejecución, se reinician en los nuevos puertos de forma inmediata. |
+| **Enable TTY** | Desactivado | Activado / Desactivado | — | Inicia o detiene los enlaces simbólicos PTY (`/tmp/AetherSDR-CAT-A` hasta `D`) para acceso de estilo serie. No es necesario para software basado en TCP. |
+| Filas de canales (A–D) | `(stopped)` | — | — | Muestra el estado TCP de cada canal y la cantidad de clientes conectados. El color del indicador coincide con el color del slice. |
 
 ## Consejos
 
-- Cada canal corresponde a un slice. Si solo usa un slice, únicamente el canal A necesita un cliente conectado.
-- Si cambia el puerto **Base** mientras **Enable TCP** ya está activo, los servidores se reinician automáticamente en los nuevos puertos. No es necesario desactivar y volver a activar **Enable TCP**.
-- Para iniciar los servidores TCP automáticamente cada vez que se inicie AetherSDR, use `Settings > Autostart rigctld with AetherSDR`.
+- Si solo usa un programa de registro a la vez, el canal A en el puerto `4532` es suficiente. Los canales B–D existen para ejecutar varios programas simultáneamente contra diferentes slices.
+- Para que los servidores TCP se inicien automáticamente cada vez que se inicia AetherSDR, use `Settings > Autostart rigctld with AetherSDR`.
+- Cambiar el valor de **Base** mientras **Enable TCP** está activo reinicia todos los servidores en ejecución en los nuevos puertos de forma inmediata. Actualice la configuración de puerto de su software de registro antes de volver a conectar.
 
 ## Solución de problemas
 
-- **La fila del canal permanece en `(stopped)` después de hacer clic en Enable TCP** — Es posible que otro proceso ya esté escuchando en ese puerto. Haga clic en **Enable TCP** para detener los servidores, cambie **Base** a un puerto no utilizado y luego haga clic en **Enable TCP** nuevamente.
-- **El software externo se conecta pero no puede controlar el radio** — Confirme que AetherSDR esté conectado al FLEX-8600. El applet CAT Control requiere una conexión de radio activa. Verifique el estado de la conexión y reconéctese si es necesario.
-- **El campo de puerto regresa a 4532 después de escribir un valor** — El valor ingresado estaba fuera del rango válido de 1024–65535. Ingrese un valor dentro de ese rango.
+- **La fila del canal permanece en `(stopped)` después de hacer clic en Enable TCP** — Es probable que otro proceso ya esté escuchando en ese puerto. Elija un puerto base diferente o detenga la aplicación en conflicto.
+- **El software de registro muestra "connection refused"** — Confirme que **Enable TCP** esté activado (el botón está en verde) y que esté usando el número de puerto correcto para el canal. Si AetherSDR está en una máquina remota, use la dirección IP de esa máquina en lugar de `localhost`.
+- **El contador de clientes no aumenta** — El software se conectó pero se desconectó de inmediato. Verifique que su software de registro esté configurado en modo **rigctld** (red) y no en un modo serie directo o Hamlib que espera un protocolo diferente.
 
 ## Relacionados
 
 - [Descripción general de CAT Control](overview.md)
 - [Cambiar el puerto TCP base](change-the-base-tcp-port.md)
 - [Iniciar automáticamente los servidores CAT con AetherSDR](autostart-cat-servers-with-aethersdr.md)
-- [Habilitar CAT PTY para que las aplicaciones de Linux/macOS puedan abrir un puerto CAT estilo serie](enable-cat-pty-so-linux-macos-apps-can-open-a-serial-style-cat-port.md)
-- [Verificar cuántos clientes externos están conectados a cada canal](../../getting-started/setup/check-how-many-external-clients-are-connected-to-each-channel.md)
+- [Habilitar CAT PTY para que las aplicaciones de Linux/macOS puedan abrir un puerto CAT de estilo serie](enable-cat-pty-so-linux-macos-apps-can-open-a-serial-style-cat-port.md)
 - [Configuración de modos digitales (FT8, WSJT-X, fldigi)](../../operating/digital-modes/digital-modes-setup.md)
