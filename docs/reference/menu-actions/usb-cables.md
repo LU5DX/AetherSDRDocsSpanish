@@ -5,7 +5,7 @@
 ## Antes de comenzar
 
 - AetherSDR debe estar conectado a una radio FLEX-8600.
-- Los cables USB que desee asignar deben estar ya conectados a la radio y reconocidos por ella.
+- Cualquier cable USB que desee asignar debe estar ya conectado a la radio y reconocido por ella.
 
 ## Pasos
 
@@ -14,7 +14,7 @@
 3. Configure las asignaciones de cables USB para CAT y audio según sea necesario.
 4. Cierre el diálogo cuando termine.
 
-## Relacionados
+## Temas relacionados
 
 - [Primeros pasos](getting-started.md)
 - [Habilitar inicio automático para CAT con AetherSDR](enable-autostart-for-cat-with-aethersdr.md)

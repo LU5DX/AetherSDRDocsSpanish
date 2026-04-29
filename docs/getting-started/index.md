@@ -4,4 +4,4 @@ title: Primeros pasos
 
 # Primeros pasos
 
-Instalá AetherSDR, conectate al radio y aprendé los conceptos centrales (slices, panadapters, el panel de applets) antes de meterte en la referencia detallada de cada funcionalidad.
+Instale AetherSDR, conéctese a su radio y familiarícese con los conceptos fundamentales (slices, panadapters y el panel de applets) antes de consultar la referencia detallada de cada función.

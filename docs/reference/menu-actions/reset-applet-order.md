@@ -1,6 +1,6 @@
 # Restablecer el orden de los applets
 
-`View > Reset Applet Order` restaura el panel de applets a su orden predeterminado. Use esta opción si ha reorganizado los applets y desea volver a la disposición original.
+`View > Reset Applet Order` restaura el panel de applets a su orden predeterminado. Use esta opción si ha reorganizado los applets y desea volver al diseño original.
 
 ## Antes de comenzar
 
@@ -11,10 +11,10 @@
 1. Haga clic en `View` en la barra de menú.
 2. Haga clic en `Reset Applet Order`.
 
-El panel de applets regresa inmediatamente a su orden predeterminado. No aparece ningún cuadro de confirmación.
+El panel de applets vuelve inmediatamente a su orden predeterminado. No aparece ningún diálogo de confirmación.
 
-## Temas relacionados
+## Relacionados
 
 - [Activar el panel de applets](enable-applet-panel.md)
 - [Activar el panel de applets emergente](enable-pop-out-applet-panel.md)
-- [Descripción del panel de applets de AetherSDR](../../getting-started/concepts/understanding-applets.md)
+- [Descripción general del panel de applets de AetherSDR](../../getting-started/concepts/understanding-applets.md)

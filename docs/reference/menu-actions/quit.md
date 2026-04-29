@@ -1,6 +1,6 @@
 # Salir
 
-Cierra AetherSDR. Use este elemento del menú cuando haya terminado de operar y desee cerrar la aplicación de forma ordenada.
+Cierra AetherSDR. Use este elemento del menú cuando haya terminado de operar y desee cerrar la aplicación de forma correcta.
 
 ## Antes de comenzar
 
@@ -12,6 +12,6 @@ Cierra AetherSDR. Use este elemento del menú cuando haya terminado de operar y 
 
 Alternativamente, presione **Ctrl+Q**.
 
-## Relacionado
+## Relacionados
 
 - [Primeros pasos](getting-started.md)

@@ -1,6 +1,6 @@
-# Habilitar sintonización con un solo clic
+# Activar la sintonización con un solo clic
 
-Esta página explica cómo habilitar la sintonización con un solo clic en el panadapter. De forma predeterminada, AetherSDR requiere un doble clic para resintonizar; habilitar esta opción lo reduce a un solo clic.
+Esta página explica cómo activar la sintonización con un solo clic en el panadapter. De forma predeterminada, AetherSDR requiere un doble clic para resintonizar; activar esta opción lo reduce a un solo clic.
 
 ## Antes de comenzar
 
@@ -9,10 +9,10 @@ Esta página explica cómo habilitar la sintonización con un solo clic en el pa
 
 ## Pasos
 
-1. Haga clic en `View` en la barra de menú.
+1. Haga clic en `View` en la barra de menús.
 2. Haga clic en `Single-Click to Tune`.
 
-Aparece una marca de verificación junto al elemento cuando está habilitado. Haga clic de nuevo para volver al comportamiento de doble clic.
+Aparece una marca de verificación junto al elemento cuando está activado. Haga clic de nuevo para volver al comportamiento de doble clic.
 
 ## Qué hace cada control
 
@@ -22,9 +22,9 @@ Aparece una marca de verificación junto al elemento cuando está habilitado. Ha
 
 ## Consejos
 
-- Si nota que resintoniza accidentalmente mientras lee el panadapter, deshabilite esta opción para restaurar el requisito de doble clic.
+- Si nota que resintoniza accidentalmente mientras lee la pantalla del panadapter, desactive esta opción para restaurar el requisito de doble clic.
 
-## Relacionado
+## Relacionados
 
-- [Habilitar panorámica que sigue al VFO](enable-pan-follows-vfo.md)
-- [Configurar plan de banda](configure-band-plan.md)
+- [Activar Pan Follows VFO](enable-pan-follows-vfo.md)
+- [Configurar el plan de banda](configure-band-plan.md)

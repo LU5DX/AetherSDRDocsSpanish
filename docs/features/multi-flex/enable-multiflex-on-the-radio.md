@@ -9,8 +9,8 @@ Use el multiFLEX Dashboard para activar o desactivar multiFLEX en el FLEX-8600 c
 ## Pasos
 
 1. Haga clic en `Settings > multiFLEX...` para abrir el multiFLEX Dashboard.
-2. Haga clic en el botón de alternancia ubicado en el centro del cuadro de diálogo. Cuando multiFLEX está deshabilitado, el botón muestra **Disabled**. Cuando está habilitado, muestra **Enabled**.
-3. Haga clic en **Close** para cerrar el cuadro de diálogo.
+2. Haga clic en el botón de alternancia ubicado en el centro del diálogo. Cuando multiFLEX está deshabilitado, el botón muestra **Disabled**. Cuando está habilitado, muestra **Enabled**.
+3. Haga clic en **Close** para cerrar el diálogo.
 
 ## Qué hace cada control
 
@@ -18,17 +18,17 @@ Use el multiFLEX Dashboard para activar o desactivar multiFLEX en el FLEX-8600 c
 |---|---|
 | Botón **Enabled** / **Disabled** | Activa o desactiva multiFLEX en la radio. La etiqueta y el color del botón reflejan el estado actual: **Enabled** (verde) o **Disabled** (rojo). |
 | Tabla Stations | Lista todos los clientes multiFLEX conectados actualmente a la radio. Columnas: LOCAL PTT, STATION, TX ANT, TX FREQ (MHz). |
-| **Enable** (PTT) | Alterna la autoridad PTT local para esta estación. Solo se muestra cuando hay más de un cliente conectado y esta estación no tiene el PTT en ese momento. |
-| **Close** | Cierra el cuadro de diálogo del multiFLEX Dashboard. |
+| **Enable** (PTT) | Alterna la autoridad PTT local para esta estación. Solo se muestra cuando hay más de un cliente conectado y esta estación no tiene PTT en ese momento. |
+| **Close** | Cierra el diálogo del multiFLEX Dashboard. |
 
 ## Consejos
 
-- La entrada de su estación en la tabla Stations aparece resaltada en azul. Las demás estaciones conectadas se muestran en el color predeterminado.
+- La entrada de su estación en la tabla Stations aparece resaltada en azul. Las demás estaciones conectadas se muestran con el color predeterminado.
 - Cuando solo hay un cliente conectado, los controles de LOCAL PTT se ocultan automáticamente.
 
 ## Relacionado
 
 - [Descripción general del multiFLEX Dashboard](overview.md)
-- [Conceder o revocar el PTT local](grant-or-revoke-local-ptt.md)
-- [Verificar qué antena y frecuencia usa cada estación TX](check-which-antenna-and-frequency-each-tx-station-is-using.md)
+- [Otorgar o revocar PTT local](grant-or-revoke-local-ptt.md)
+- [Verificar qué antena y frecuencia utiliza cada estación TX](check-which-antenna-and-frequency-each-tx-station-is-using.md)
 - [Ver todas las estaciones conectadas a este FLEX](../../getting-started/setup/see-all-stations-connected-to-this-flex.md)

@@ -1,6 +1,6 @@
 # Abrir el flujo de actualización para una versión más reciente
 
-Cuando hay una versión más reciente de AetherSDR disponible, el cuadro de diálogo What's New muestra un botón "Upgrade" que abre la página de descarga en su navegador. Esta página explica cómo llegar a ese botón.
+Cuando hay una versión más reciente de AetherSDR disponible, el cuadro de diálogo What's New muestra un botón "Upgrade" que abre la página de descarga en su navegador. Esta página explica cómo acceder a ese botón.
 
 ## Antes de comenzar
 
@@ -20,14 +20,14 @@ AetherSDR abre la página de versiones de AetherSDR en su navegador web predeter
 | Control | Tipo | Comportamiento | Configuración persistida |
 |---|---|---|---|
 | Visor de notas de versión | Vista HTML desplazable | Muestra las entradas de versión entre la última versión vista y la versión actual. Muestra como máximo 5 versiones recientes. | — |
-| `Upgrade` | Botón | Visible solo cuando hay una actualización disponible. Abre la página de descarga y cierra el cuadro de diálogo. | — |
+| `Upgrade` | Botón | Visible únicamente cuando hay una actualización disponible. Abre la página de descarga y cierra el cuadro de diálogo. | — |
 | `Got it — 73!` | Botón | Cierra el cuadro de diálogo y marca la versión actual como vista. | `LastSeenVersion` |
 | `Skip this version` | Botón | Suprime el recordatorio de versión para esta versión y la marca como vista. | `LastSeenVersion` |
-| Hint | Indicador | Línea de pie corta con orientación. | — |
+| Hint | Indicador | Línea de pie de página breve con orientación. | — |
 
 ## Consejos
 
-- Si cierra el cuadro de diálogo con `Got it — 73!` en lugar de `Upgrade`, AetherSDR registra la versión actual en `LastSeenVersion` y no volverá a solicitarle esta versión. Aún puede regresar al cuadro de diálogo mediante `Help > What's New...`.
+- Si cierra el cuadro de diálogo con `Got it — 73!` en lugar de `Upgrade`, AetherSDR registra la versión actual en `LastSeenVersion` y no volverá a notificarle sobre esta versión. Puede regresar al cuadro de diálogo en cualquier momento mediante `Help > What's New...`.
 - Si hace clic en `Skip this version`, `LastSeenVersion` se establece en la versión actual y se suprime el aviso para esta versión, pero la página de descarga no se abre.
 
 ## Relacionados

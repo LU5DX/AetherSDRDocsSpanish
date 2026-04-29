@@ -1,12 +1,12 @@
-# Configurar la velocidad de transmisión CW en PPM
+# Configurar la velocidad de manipulación CW en PPM
 
-Use el control deslizante Speed en el applet Phone/CW para establecer la velocidad a la que el radio transmite CW, medida en palabras por minuto. Esto controla el keyer interno del radio y afecta las transmisiones con paddle, llave recta y CWX.
+Use el control deslizante Speed en el applet Phone/CW para establecer la velocidad a la que el radio manipula en CW, medida en palabras por minuto (PPM). Esto controla el manipulador interno del radio y afecta las transmisiones con paleta, llave recta y CWX.
 
 ## Antes de comenzar
 
 - AetherSDR debe estar conectado a un radio FLEX-8600.
 - El slice activo debe estar en un modo CW. El applet Phone/CW muestra el subpanel CW únicamente cuando el slice activo está en modo CW; de lo contrario, se muestra el panel Phone.
-- Abra el applet Phone/CW haciendo clic en el botón de bandeja P/CW en la barra lateral derecha, o confirme que ya está visible.
+- Abra el applet Phone/CW haciendo clic en el botón P/CW de la bandeja en la barra lateral derecha, o confirme que ya está visible.
 
 ## Pasos
 
@@ -18,16 +18,15 @@ Use el control deslizante Speed en el applet Phone/CW para establecer la velocid
 
 | Control | Descripción | Valor predeterminado | Rango válido | Clave de configuración |
 |---|---|---|---|---|
-| Speed (CW) | Establece la velocidad de transmisión CW enviada al keyer interno del radio. | — | 5–100 WPM | — |
+| Speed (CW) | Establece la velocidad de manipulación CW enviada al manipulador interno del radio. | — | 5–100 WPM | — |
 
 ## Consejos
 
-- El control deslizante Speed (CW) opera la velocidad del keyer del radio. Los cambios surten efecto de inmediato y se aplican al paddle, la llave recta y cualquier transmisión de texto CWX.
-- Si utiliza el sidetone local de baja latencia (Local STn), su tono y la velocidad del keyer del radio funcionan de forma independiente: ajustar la velocidad aquí no afecta el tono del sidetone.
+- El control deslizante Speed (CW) opera la velocidad del manipulador del radio. Los cambios surten efecto de inmediato y se aplican a la paleta, la llave recta y cualquier transmisión de texto CWX.
+- El botón **Sidetone** y el control deslizante **Sidetone volume** controlan de manera sincronizada tanto el monitor alimentado por DAX del radio como el sidetone de baja latencia del lado del cliente. Ajustar la velocidad no afecta el tono del sidetone; el tono siempre sigue automáticamente la configuración `cw_pitch` del radio.
 
 ## Relacionados
 
 - [Configurar el retardo de break-in CW](set-cw-break-in-delay.md)
-- [Habilitar el tecleo con paddle iámbico](enable-iambic-paddle-keying.md)
+- [Habilitar la manipulación con paleta iámbica](enable-iambic-paddle-keying.md)
 - [Cambiar el tono CW / frecuencia del sidetone](change-cw-pitch-sidetone-frequency.md)
-- [Habilitar el sidetone CW local de baja latencia (Local STn) para uso rápido con paddle, llave recta o CWX](enable-the-low-latency-local-cw-sidetone-local-stn-for-fast-paddle-straight-key-cwx-work.md)

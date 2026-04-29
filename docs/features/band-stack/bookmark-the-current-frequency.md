@@ -1,6 +1,6 @@
-# Guardar la frecuencia actual como marcador
+# Marcar la frecuencia actual como favorita
 
-Guarde la frecuencia del slice activo en el panel Band Stack para volver a ella con un solo clic.
+Guarde la frecuencia del slice activo en el panel Band Stack para poder volver a ella con un solo clic.
 
 ## Antes de comenzar
 
@@ -9,32 +9,32 @@ Guarde la frecuencia del slice activo en el panel Band Stack para volver a ella 
 
 ## Pasos
 
-1. Localice el panel Band Stack — la franja vertical estrecha de botones de colores ubicada junto al panadapter.
+1. Ubique el panel Band Stack — la franja vertical estrecha de botones de colores que se encuentra junto al panadapter.
 2. Haga clic en `+` en la parte inferior del panel Band Stack.
 
-El nuevo marcador aparece inmediatamente como un botón codificado por color que muestra la frecuencia en MHz. El color del botón refleja el segmento del plan de banda correspondiente a esa frecuencia. Los marcadores se guardan automáticamente en `BandStack_<serial>`, donde `<serial>` es el número de serie de su radio.
+El nuevo marcador aparece inmediatamente como un botón con código de color que muestra la frecuencia en MHz. El color del botón refleja el segmento del plan de banda correspondiente a esa frecuencia. Los marcadores se guardan automáticamente en `BandStack_<serial>`, donde `<serial>` es el número de serie de su radio.
 
 ## Qué hace cada control
 
 | Control | Comportamiento | Notas |
 |---|---|---|
-| `+` | Agrega un marcador en la frecuencia actual del slice activo. | Un solo clic; no muestra diálogo de confirmación. |
-| Botones de marcador | Haga clic para recuperar la frecuencia almacenada; haga clic derecho para eliminar. | El color coincide con el segmento del plan de banda. |
+| `+` | Agrega un marcador en la frecuencia actual del slice activo. | Un solo clic; no hay diálogo de confirmación. |
+| Botones de marcador | Haga clic para recuperar la frecuencia almacenada; clic derecho para eliminar. | El color coincide con el segmento del plan de banda. |
 | ⚙ (botón de engranaje) | Abre el menú de opciones del Band Stack. | Consulte las opciones a continuación. |
-| Botón × | Elimina todos los marcadores. | Información emergente: "Clear all bookmarks". |
+| Botón × | Borra todos los marcadores. | Tooltip: "Clear all bookmarks". |
 
 ### Opciones del menú de engranaje
 
 | Opción | Valores | Comportamiento |
 |---|---|---|
 | Group by band | On / Off | Organiza los marcadores bajo encabezados de banda en lugar de por orden de inserción. |
-| Auto-expiry | Off, 5 min, 15 min, 30 min, 60 min | Elimina automáticamente los marcadores más antiguos que la duración seleccionada. |
-| Auto-save dwell | Off, 10 sec, 30 sec, 60 sec | Guarda automáticamente como marcador una frecuencia cuando el slice permanece en ella durante el tiempo elegido. |
+| Auto-expiry | Off, 5 min, 15 min, 30 min, 60 min | Elimina automáticamente los marcadores con una antigüedad mayor a la seleccionada. |
+| Auto-save dwell | Off, 10 sec, 30 sec, 60 sec | Marca automáticamente una frecuencia después de que el slice permanece en ella durante la duración elegida. |
 
 ## Consejos
 
-- Combine **Auto-save dwell** con **Auto-expiry** para mantener un historial rotativo con autopoda de las frecuencias visitadas recientemente, sin necesidad de crear marcadores manualmente.
-- Pase el cursor sobre un botón de marcador para ver la frecuencia completa en MHz, el modo y la antena RX almacenados en él.
+- Combine **Auto-save dwell** con **Auto-expiry** para mantener un historial rotativo de frecuencias visitadas recientemente que se depura solo, sin necesidad de marcar manualmente.
+- Pase el cursor sobre un botón de marcador para ver la frecuencia completa en MHz, el modo y la antena RX almacenados con él.
 
 ## Relacionado
 

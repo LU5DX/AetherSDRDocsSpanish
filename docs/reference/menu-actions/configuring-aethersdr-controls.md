@@ -8,17 +8,17 @@ Esta página describe la función del elemento de menú `Help > Configuring Aeth
 
 ## Pasos
 
-1. Haga clic en `Help` en la barra de menú.
+1. Haga clic en `Help` en la barra de menús.
 2. Haga clic en `Configuring AetherSDR Controls...`.
 
 Se abre la guía, que describe cómo personalizar el panel de applets, configurar los atajos de teclado y establecer las asignaciones del controlador MIDI.
 
-## Temas relacionados
+## Relacionados
 
 - [Descripción del panel de applets de AetherSDR](../../getting-started/concepts/understanding-applets.md)
 - [Activar el panel de applets](enable-applet-panel.md)
 - [Activar atajos de teclado](enable-keyboard-shortcuts.md)
 - [Restablecer el orden de los applets](reset-applet-order.md)
-- [Activar el panel de applets en ventana flotante](enable-pop-out-applet-panel.md)
+- [Activar el panel de applets emergente](enable-pop-out-applet-panel.md)
 - [Cables USB](usb-cables.md)
 - [FlexControl](flexcontrol.md)

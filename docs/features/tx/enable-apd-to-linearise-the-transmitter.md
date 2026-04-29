@@ -1,6 +1,6 @@
-# Habilitar APD para linealizar el transmisor
+# Habilitar APD para Linealizar el Transmisor
 
-APD (Adaptive Pre-Distortion, predistorsión adaptativa) reduce la no linealidad del transmisor aplicando un ecualizador de corrección a la señal antes de que llegue al amplificador de potencia. Actívelo para mejorar la pureza espectral, especialmente en SSB y modos digitales.
+APD (Adaptive Pre-Distortion, predistorsión adaptativa) reduce la no linealidad del transmisor aplicando un ecualizador de corrección a la señal antes de que llegue al PA. Habilítelo para mejorar la pureza espectral, especialmente en SSB y modos digitales.
 
 ## Antes de comenzar
 
@@ -23,18 +23,18 @@ APD (Adaptive Pre-Distortion, predistorsión adaptativa) reduce la no linealidad
 |---------|------|----------------|----------------|
 | APD | Botón de alternancia | Habilita o deshabilita la predistorsión adaptativa en el radio. Verde cuando está activo, apagado cuando está inactivo. | Off |
 | Active | Indicador | Se ilumina en verde cuando APD está activo y el ecualizador se aplica a la señal. | Dim |
-| Cal | Indicador | Se ilumina en verde cuando APD está activo y el radio aún está calibrando. | Dim |
+| Cal | Indicador | Se ilumina en verde cuando APD está activo y el radio aún se está calibrando. | Dim |
 | Avail | Indicador | Se ilumina en verde cuando APD está activo y hay un resultado de calibración disponible pero aún no aplicado. | Dim |
 
 La progresión normal después de habilitar APD es: Cal → Avail → Active.
 
 ## Consejos
 
-- La calibración de APD se realiza automáticamente tras habilitarlo. No es necesario transmitir manualmente para activarla; espere a que los indicadores avancen por la secuencia Cal → Avail → Active.
-- Si deshabilita y vuelve a habilitar APD, la secuencia de calibración se reinicia desde Cal.
+- La calibración de APD se realiza automáticamente después de habilitarlo. No es necesario transmitir manualmente para iniciarla; espere a que los indicadores avancen por la secuencia Cal → Avail → Active.
+- Si deshabilita y vuelve a habilitar APD, la secuencia de calibración reinicia desde Cal.
 
-## Temas relacionados
+## Relacionado
 
 - [Descripción general de TX Controls](overview.md)
-- [Ejecutar una prueba de dos tonos](run-a-two-tone-tune.md)
-- [Ajustar la potencia de salida RF](set-rf-output-power.md)
+- [Ejecutar un ajuste de dos tonos](run-a-two-tone-tune.md)
+- [Ajustar la potencia de salida de RF](set-rf-output-power.md)

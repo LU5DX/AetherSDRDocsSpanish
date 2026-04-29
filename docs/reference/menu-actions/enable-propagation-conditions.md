@@ -1,6 +1,6 @@
-# Activar las condiciones de propagación
+# Activar Condiciones de Propagación
 
-`View > Propagation Conditions` es un elemento de menú con casilla de verificación que activa o desactiva una superposición de pronóstico ionosférico en tiempo real sobre sus panadapters (visores de banda panorámica). Actívelo para consultar los datos actuales de condiciones de banda sin abandonar la pantalla principal.
+`View > Propagation Conditions` es un elemento de menú con marca de verificación que activa o desactiva una superposición de pronóstico ionosférico en tiempo real sobre sus panadapters (visualizadores panorámicos). Actívelo para ver los datos actuales de condiciones de banda sin salir de la pantalla principal.
 
 ## Antes de comenzar
 
@@ -9,13 +9,13 @@
 
 ## Pasos
 
-1. Haga clic en `View` en la barra de menús.
-2. Haga clic en `Propagation Conditions` para activar o desactivar la opción.
+1. Haga clic en `View` en la barra de menú.
+2. Haga clic en `Propagation Conditions` para activar o desactivar la marca de verificación.
 
-Cuando está activada, la superposición del pronóstico de propagación aparece sobre sus panadapters. Haga clic en el elemento nuevamente para eliminar la superposición.
+Cuando está activado, la superposición del pronóstico de propagación aparece sobre sus panadapters. Haga clic en el elemento nuevamente para eliminar la superposición.
 
 ## Relacionados
 
 - [Primeros pasos](getting-started.md)
 - [Configurar el plan de banda](configure-band-plan.md)
-- [Activar panadapter sigue al VFO](enable-pan-follows-vfo.md)
+- [Activar Pan sigue al VFO](enable-pan-follows-vfo.md)

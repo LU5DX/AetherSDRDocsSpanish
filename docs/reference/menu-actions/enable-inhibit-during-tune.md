@@ -10,8 +10,8 @@ Use `Settings > Inhibit during TUNE` para seleccionar qué salidas de TX suprime
 ## Pasos
 
 1. Haga clic en `Settings` en la barra de menú.
-2. Pase el cursor sobre `Inhibit during TUNE` para abrir el submenú.
-3. Haga clic en cualquier combinación de las siguientes casillas de verificación para habilitar la inhibición en esas salidas durante la sintonización:
+2. Coloque el cursor sobre `Inhibit during TUNE` para abrir el submenú.
+3. Haga clic en cualquier combinación de las siguientes casillas de verificación para habilitar el inhibit en esas salidas durante la sintonización:
    - `None`
    - `ACC TX`
    - `TX1`
@@ -22,8 +22,8 @@ Use `Settings > Inhibit during TUNE` para seleccionar qué salidas de TX suprime
 
 ## Qué hace cada control
 
-| Casilla | Efecto al activarla |
-|---------|---------------------|
+| Casilla | Efecto al activarse |
+|----------|---------------------|
 | `None` | Ninguna salida de TX es suprimida durante la sintonización. |
 | `ACC TX` | Suprime la salida ACC TX durante la sintonización. |
 | `TX1` | Suprime la salida TX1 durante la sintonización. |
@@ -32,8 +32,8 @@ Use `Settings > Inhibit during TUNE` para seleccionar qué salidas de TX suprime
 
 ## Consejos
 
-- Puede activar varias salidas simultáneamente. Por ejemplo, activar `TX1` y `TX2` inhibe ambos puertos mientras `TX3` permanece activo.
-- Los ajustes de inhibición por banda están disponibles en `Settings > TX Band Settings...`, lo que proporciona un control más preciso sobre el comportamiento de la inhibición por banda.
+- Es posible marcar varias salidas simultáneamente. Por ejemplo, marcar `TX1` y `TX2` inhibe ambos puertos mientras `TX3` permanece activo.
+- Los ajustes de inhibit por banda están disponibles en `Settings > TX Band Settings...`, lo que proporciona un control más preciso del comportamiento del inhibit según la banda.
 
 ## Relacionado
 
