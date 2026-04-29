@@ -1,10 +1,10 @@
-# Editar el nombre, modo u offset de una memoria en línea
+# Editar en línea el nombre, modo u offset de una memoria
 
 Use esta página para cambiar el nombre, el modo, el offset del repetidor u otro campo de una memoria almacenada sin salir del diálogo Memory Channels.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. El diálogo Memory Channels requiere una conexión activa con el radio.
+- AetherSDR debe estar conectado al radio. El diálogo Memory Channels requiere una conexión de radio activa.
 - Debe existir al menos una memoria en la tabla. Para crear una, consulte [Agregar una memoria en la frecuencia actual](add-a-memory-at-current-frequency.md).
 
 ## Pasos
@@ -22,14 +22,14 @@ Use esta página para cambiar el nombre, el modo, el offset del repetidor u otro
 | Control | Columna(s) afectada(s) | Notas |
 |---|---|---|
 | Tabla de memorias | Las 18 columnas | Columnas: Group, Owner, Frequency, Name, Mode, Step, FM TX Offset Dir, Repeater Offset, Tone Mode, Tone Value, Squelch, Squelch Level, RX Filter Low, RX Filter High, RTTY Mark, RTTY Shift, DIGL Offset, DIGU Offset. El modo de edición en línea se activa mediante el botón **Edit** o el teclado. |
-| **Edit** | — | Activa el modo de edición en línea en la fila actualmente seleccionada. |
+| **Edit** | — | Activa el modo de edición en línea en la fila seleccionada actualmente. |
 
 ## Consejos
 
-- También puede activar el modo de edición en línea usando el teclado después de seleccionar una fila, sin necesidad de hacer clic en **Edit**.
-- Hacer doble clic en una fila sintoniza el slice activo a esa memoria en lugar de abrirla para edición. Use el botón **Edit** cuando desee cambiar valores, no sintonizar.
+- También puede activar el modo de edición en línea usando el teclado después de seleccionar una fila, sin hacer clic en **Edit**.
+- Hacer doble clic en una fila sintoniza el slice activo a esa memoria en lugar de abrirla para editarla. Use el botón **Edit** cuando desee cambiar valores, no sintonizar.
 - Use el campo **Search:** para filtrar la tabla por nombre de memoria antes de seleccionar una fila; esto es útil cuando la lista es larga. Consulte [Buscar memorias por nombre](search-memories-by-name.md).
-- Para limitar la tabla a un grupo específico antes de editar, use el combo **Profile:**. Consulte [Filtrar memorias por perfil](filter-memories-by-profile.md).
+- Para limitar la tabla a un grupo específico antes de editar, use el cuadro combinado **Profile:**. Consulte [Filtrar memorias por perfil](filter-memories-by-profile.md).
 
 ## Solución de problemas
 

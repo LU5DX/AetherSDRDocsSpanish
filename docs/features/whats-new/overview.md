@@ -1,19 +1,19 @@
-# Novedades — descripción general de AetherSDR
+# Novedades — Descripción general de AetherSDR
 
-El diálogo What's New muestra las notas de versión de AetherSDR que usted aún no ha visto. Aparece automáticamente tras una actualización y también está disponible bajo demanda desde el menú Help.
+El diálogo What's New muestra las notas de versión de AetherSDR que usted aún no ha visto. Aparece automáticamente después de una actualización y también está disponible bajo demanda desde el menú Help.
 
 ## Cómo funciona
 
-Al iniciar AetherSDR, el programa compara la versión actual con el valor almacenado en `LastSeenVersion`. Si la versión actual es más reciente, el diálogo se abre automáticamente y muestra las notas de versión de cada versión comprendida entre la última vista y la actual, con un límite de las cinco versiones más recientes. En una instalación nueva, donde `LastSeenVersion` no tiene ningún valor almacenado, el diálogo muestra únicamente las notas de la versión actual y le da la bienvenida con un encabezado de bienvenida en lugar de un encabezado de cambio de versión.
+Al iniciarse AetherSDR, el programa compara la versión actual con el valor almacenado en `LastSeenVersion`. Si la versión actual es más reciente, el diálogo se abre automáticamente y muestra las notas de versión de cada versión comprendida entre la última vista y la actual, con un límite de las cinco versiones más recientes. En una primera instalación, cuando `LastSeenVersion` no tiene ningún valor almacenado, el diálogo muestra únicamente las notas de la versión actual y lo saluda con un encabezado de bienvenida en lugar de un encabezado de cambio de versión.
 
 Al abrir el diálogo mediante `Help > What's New...`, se muestran todas las entradas de la versión actual independientemente del contenido de `LastSeenVersion`.
 
-Las entradas de versión se presentan como HTML con estilos en un navegador desplazable. Cada entrada puede incluir un número de versión, una fecha de lanzamiento, un titular breve y una lista de cambios individuales. Los cambios están codificados por color según su categoría:
+Las entradas de versión se muestran como HTML con estilos en un navegador desplazable. Cada entrada puede incluir un número de versión, una fecha de lanzamiento, un titular breve y una lista de cambios individuales. Los cambios están codificados por color según su categoría:
 
 | Categoría | Color indicador |
 |---|---|
 | Feature | Azul |
-| Bug Fix | Rojo anaranjado |
+| Bug Fix | Rojo-anaranjado |
 | Improvement | Verde |
 | Infrastructure | Gris |
 
@@ -31,12 +31,12 @@ Los botones `Upgrade` y `Skip this version` aparecen únicamente cuando AetherSD
 
 ## Consejos
 
-- Para volver a leer las notas de versión en cualquier momento sin activar un aviso de actualización, use `Help > What's New...`. Esta ruta siempre muestra las notas de la versión actual.
-- El pie de página Hint apunta al botón de bombilla en la barra de título para enviar informes de errores o sugerencias de nuevas funciones.
+- Para volver a leer las notas de versión en cualquier momento sin activar un aviso de actualización, use `Help > What's New...`. Esta ruta muestra siempre las notas de la versión actual.
+- El pie de página Hint señala el botón de bombilla en la barra de título para enviar informes de errores o ideas de nuevas funciones.
 
-## Relacionado
+## Relacionados
 
-- [Leer los cambios introducidos en la nueva versión](read-what-changed-in-the-new-version.md)
-- [Volver a leer las notas de versión más tarde desde el menú Help](re-read-release-notes-later-via-help-menu.md)
+- [Leer qué cambió en la nueva versión](read-what-changed-in-the-new-version.md)
+- [Volver a leer las notas de versión más tarde mediante el menú Help](re-read-release-notes-later-via-help-menu.md)
 - [Abrir el flujo de actualización para una versión más reciente](open-the-upgrade-flow-for-a-newer-build.md)
 - [Omitir las notas de versión de la versión actual](skip-the-current-version-s-release-notes.md)

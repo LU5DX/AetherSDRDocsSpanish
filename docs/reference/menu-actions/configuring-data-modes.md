@@ -16,8 +16,8 @@ La guía de configuración de modos de datos se abre.
 
 ## Relacionados
 
-- [Habilitar inicio automático de DAX con AetherSDR](enable-autostart-for-dax-with-aethersdr.md)
-- [Habilitar inicio automático de TCI con AetherSDR](enable-autostart-for-tci-with-aethersdr.md)
-- [Habilitar inicio automático de CAT con AetherSDR](enable-autostart-for-cat-with-aethersdr.md)
-- [Habilitar inicio automático de rigctld con AetherSDR](enable-autostart-for-rigctld-with-aethersdr.md)
+- [Habilitar el inicio automático de DAX con AetherSDR](enable-autostart-for-dax-with-aethersdr.md)
+- [Habilitar el inicio automático de TCI con AetherSDR](enable-autostart-for-tci-with-aethersdr.md)
+- [Habilitar el inicio automático de CAT con AetherSDR](enable-autostart-for-cat-with-aethersdr.md)
+- [Habilitar el inicio automático de rigctld con AetherSDR](enable-autostart-for-rigctld-with-aethersdr.md)
 - [Primeros pasos](getting-started.md)

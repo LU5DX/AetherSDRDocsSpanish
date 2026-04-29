@@ -28,7 +28,7 @@ Todos los controles de NR4 vuelven a los valores indicados en la tabla a continu
 
 ### Valores predeterminados de NR2 restaurados por Reset Defaults
 
-| Control | Predeterminado | Rango válido | Clave de ajuste |
+| Control | Predeterminado | Rango válido | Clave de configuración |
 |---|---|---|---|
 | Gain Method | Gamma | Linear \| Log \| Gamma \| Trained | `NR2GainMethod` |
 | NPE Method | OSMS | OSMS \| MMSE \| NSTAT | `NR2NpeMethod` |
@@ -39,7 +39,7 @@ Todos los controles de NR4 vuelven a los valores indicados en la tabla a continu
 
 ### Valores predeterminados de NR4 restaurados por Reset Defaults
 
-| Control | Predeterminado | Rango válido | Clave de ajuste |
+| Control | Predeterminado | Rango válido | Clave de configuración |
 |---|---|---|---|
 | Noise Estimation Method | SPP-MMSE | SPP-MMSE \| Brandt \| Martin | `NR4NoiseEstimationMethod` |
 | Adaptive Noise Estimation | Habilitado | — | `NR4AdaptiveNoise` |
@@ -51,7 +51,7 @@ Todos los controles de NR4 vuelven a los valores indicados en la tabla a continu
 
 ## Consejos
 
-- **Reset Defaults** afecta únicamente la pestaña donde se hace clic. Restablecer NR2 no modifica los ajustes de NR4, y viceversa.
+- **Reset Defaults** afecta únicamente la pestaña en la que se hace clic. Restablecer NR2 no modifica la configuración de NR4, y viceversa.
 - Los cambios surten efecto de inmediato. Si NR2 o NR4 está activo en un slice de recepción en ese momento, escuchará cómo el motor vuelve a su comportamiento predeterminado en cuanto haga clic en **Reset Defaults**.
 
 ## Relacionados
@@ -62,5 +62,5 @@ Todos los controles de NR4 vuelven a los valores indicados en la tabla a continu
 - [Cambiar el estimador de potencia de ruido de NR2 (OSMS/MMSE/NSTAT)](change-nr2-noise-power-estimator-osms-mmse-nstat.md)
 - [Ajustar la cantidad de reducción de NR4 en dB](adjust-nr4-reduction-amount-in-db.md)
 - [Habilitar o deshabilitar la estimación de ruido adaptativa de NR4](enable-or-disable-nr4-adaptive-noise-estimation.md)
-- [Ajustar la profundidad de enmascaramiento y la fuerza de supresión de NR4](tune-nr4-masking-depth-and-suppression-strength.md)
-- [Elegir la reducción de ruido adecuada: NR2, NR4, DFNR, MNR](../../operating/dsp/noise-reduction-overview.md)
+- [Ajustar la profundidad de enmascaramiento y la intensidad de supresión de NR4](tune-nr4-masking-depth-and-suppression-strength.md)
+- [Cómo elegir la reducción de ruido adecuada: NR2, NR4, DFNR, MNR](../../operating/dsp/noise-reduction-overview.md)

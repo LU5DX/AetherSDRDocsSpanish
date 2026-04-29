@@ -1,6 +1,6 @@
 ---
 template: home.html
-title: Manual de usuario de AetherSDR
+title: Manual de Usuario de AetherSDR
 hide:
   - navigation
   - toc

@@ -9,33 +9,33 @@ El applet PooDoo Audio Chain muestra las etapas de procesamiento DSP de TX o la 
 ## Pasos
 
 1. Localice la fila de encabezado en la parte superior del applet PooDoo Audio Chain. Contiene dos botones de modo: TX y RX.
-2. Haga clic en TX para mostrar la cadena DSP de TX interactiva (etapas EQ, Compressor, Gate, De-Ess, Tube, PUDU, Reverb). TX está seleccionado de forma predeterminada y se muestra en ámbar cuando está activo.
+2. Haga clic en TX para mostrar la cadena DSP de TX interactiva (etapas EQ, Compressor, Gate, De-Ess, Tube, PUDU, Reverb). TX está seleccionado de forma predeterminada y se muestra en color ámbar cuando está activo.
 3. Haga clic en RX para cambiar a la vista de cadena RX. La tira de etapas TX se oculta y se reemplaza con el texto "Client RX chain — coming in a future phase". El botón BYPASS no tiene efecto en este modo.
 4. Haga clic en TX nuevamente en cualquier momento para volver a la cadena TX editable.
 
-AetherSDR guarda automáticamente la última pestaña seleccionada. La próxima vez que abra el applet, restaura el modo que estaba activo cuando lo cerró.
+AetherSDR guarda automáticamente la última pestaña seleccionada. La próxima vez que abra el applet, restaurará el modo que estaba activo cuando lo cerró.
 
 ## Qué hace cada control
 
 | Control | Tipo | Valor predeterminado | Comportamiento | Clave de configuración |
 |---|---|---|---|---|
-| TX | Botón de alternancia | Activado | Muestra y habilita la edición de la cadena DSP de TX. Se muestra en ámbar cuando está seleccionado. | — |
+| TX | Botón de alternancia | Activado | Muestra y permite editar la cadena DSP de TX. Se muestra en color ámbar cuando está seleccionado. | — |
 | RX | Botón de alternancia | Desactivado | Cambia a la vista de marcador de posición de la cadena RX. BYPASS no tiene efecto en este modo. | — |
-| BYPASS | Botón de alternancia | Desactivado | Activado: toma una instantánea de las etapas TX habilitadas en ese momento y las deshabilita todas. Desactivado: restaura únicamente las etapas que estaban habilitadas antes. No tiene efecto cuando RX está activo. | — |
+| BYPASS | Botón de alternancia | Desactivado | Activado: toma una instantánea de las etapas TX habilitadas actualmente y las deshabilita todas. Desactivado: restaura solo las etapas que estaban habilitadas antes. No tiene efecto cuando RX está activo. | — |
 
-El orden de las etapas de la cadena y el estado habilitado para la cadena TX se guardan en `ClientCompTxChainStages`. La visibilidad del contenedor se guarda en `Applet_TXDSP`.
+El orden de las etapas y el estado habilitado de la cadena TX se guardan bajo `ClientCompTxChainStages`. La visibilidad del contenedor se guarda bajo `Applet_TXDSP`.
 
 ## Consejos
 
-- TX y RX son mutuamente excluyentes. Al hacer clic en uno se deselecciona automáticamente el otro; no es posible no tener ninguno seleccionado.
-- La sugerencia de interacción "Click to bypass · Double click to edit · Drag to reorder" solo se muestra cuando TX es el modo activo.
+- TX y RX son mutuamente excluyentes. Al hacer clic en uno se deselecciona automáticamente el otro; no es posible que ninguno esté seleccionado.
+- La indicación de interacción "Click to bypass · Double click to edit · Drag to reorder" solo se muestra cuando TX es el modo activo.
 
 ## Solución de problemas
 
-- **El botón de bandeja PUDU no está visible** — abra el panel de applets mediante `View > Applet Panel` y luego busque el botón de bandeja PUDU en la barra lateral derecha.
-- **Hacer clic en BYPASS en modo RX no tiene efecto** — esto es esperado. BYPASS solo actúa sobre las etapas de la cadena TX y no tiene efecto cuando RX está seleccionado.
+- **El botón de bandeja PUDU no está visible** — abra el panel de applets mediante `View > Applet Panel` y busque el botón de bandeja PUDU en la barra lateral derecha.
+- **Hacer clic en BYPASS en el modo RX no tiene efecto** — esto es el comportamiento esperado. BYPASS solo actúa sobre las etapas de la cadena TX y no tiene efecto cuando RX está seleccionado.
 
-## Relacionado
+## Relacionados
 
 - [Descripción general de PooDoo Audio Chain](overview.md)
 - [Omitir todas las etapas TX a la vez](bypass-every-tx-stage-at-once.md)

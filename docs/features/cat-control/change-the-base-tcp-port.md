@@ -4,14 +4,14 @@ El applet CAT Control ejecuta hasta cuatro servidores TCP compatibles con rigctl
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. El applet CAT requiere una conexión activa con el radio.
+- AetherSDR debe estar conectado al radio. El applet CAT requiere una conexión de radio activa.
 - Abra el applet CAT Control haciendo clic en el botón CAT de la bandeja en la barra lateral derecha, si no está visible todavía.
 
 ## Pasos
 
 1. En el applet CAT Control, localice la etiqueta `Base:` y su campo de texto en la parte inferior del applet.
-2. Haga clic en el campo `Base:` e introduzca el nuevo número de puerto. Rango válido: 1024–65535. Valor predeterminado: `4532`.
-3. Presione Enter o Tab para confirmar. Si el valor está fuera del rango válido, el campo vuelve automáticamente a `4532`.
+2. Haga clic en el campo `Base:` y escriba el nuevo número de puerto. Rango válido: 1024–65535. Valor predeterminado: `4532`.
+3. Presione Enter o Tab para confirmar. Si el valor está fuera del rango válido, vuelve automáticamente a `4532`.
 4. El nuevo puerto base se guarda inmediatamente en `CatTcpPort`.
 5. Si `Enable TCP` está activo en ese momento, los cuatro servidores se reinician automáticamente en los nuevos puertos (base, base+1, base+2, base+3). No se requiere ninguna acción adicional.
 
@@ -19,9 +19,9 @@ El applet CAT Control ejecuta hasta cuatro servidores TCP compatibles con rigctl
 
 | Control | Tipo | Predeterminado | Rango válido | Clave persistida | Comportamiento |
 |---|---|---|---|---|---|
-| `Base:` | Campo de texto | `4532` | 1024–65535 | `CatTcpPort` | Establece el puerto TCP base. Los canales A, B, C y D se enlazan a base, base+1, base+2 y base+3. Los valores fuera de rango vuelven a `4532`. Si `Enable TCP` está activo, los servidores se reinician con el nuevo puerto de inmediato. |
-| `Enable TCP` | Botón de alternancia | Desactivado | — | — | Inicia o detiene los cuatro servidores TCP rigctld. También guarda el puerto base actual en `CatTcpPort` al alternarse. |
-| Filas A/B/C/D | Indicador | `(stopped)` | — | — | Muestra el estado TCP por canal como `:<puerto> (N clients)` cuando el servidor está en ejecución, o `(stopped)` cuando no lo está. |
+| `Base:` | Campo de texto | `4532` | 1024–65535 | `CatTcpPort` | Establece el puerto TCP base. Los canales A, B, C, D se vinculan a base, base+1, base+2, base+3. Los valores fuera de rango vuelven a `4532`. Si `Enable TCP` está activo, los servidores se reinician con el nuevo puerto de inmediato. |
+| `Enable TCP` | Botón de alternancia | Desactivado | — | — | Inicia o detiene los cuatro servidores TCP rigctld. También persiste el puerto base actual en `CatTcpPort` al alternarse. |
+| Filas A/B/C/D | Indicador | `(stopped)` | — | — | Muestra el estado TCP por canal como `:<puerto> (N clients)` cuando un servidor está en ejecución, o `(stopped)` cuando no lo está. |
 
 ## Consejos
 
@@ -30,11 +30,11 @@ El applet CAT Control ejecuta hasta cuatro servidores TCP compatibles con rigctl
 
 ## Solución de problemas
 
-- **Los servidores no se reinician después de cambiar el puerto** — Confirme que presionó Enter o Tab para terminar de editar el campo `Base:`. Hacer clic en otro lugar sin confirmar la edición puede no aplicar el cambio.
-- **El campo de puerto vuelve a 4532** — El valor introducido estaba fuera del rango 1024–65535. Introduzca un valor dentro de ese rango.
-- **El servidor no logra iniciarse en el nuevo puerto** — Es posible que otra aplicación ya esté utilizando ese puerto o uno de los tres puertos consecutivos. Elija un puerto base diferente.
+- **Los servidores no se reinician después de cambiar el puerto** — Confirme que presionó Enter o Tab para finalizar la edición del campo `Base:`. Hacer clic fuera del campo sin confirmar la edición puede no aplicar el cambio.
+- **El campo de puerto vuelve a 4532** — El valor ingresado estaba fuera del rango 1024–65535. Ingrese un valor dentro de ese rango.
+- **El servidor no logra iniciarse en el nuevo puerto** — Es posible que otra aplicación ya esté usando ese puerto o uno de los tres puertos consecutivos. Elija un puerto base diferente.
 
-## Relacionado
+## Relacionados
 
 - [Habilitar CAT TCP para que N1MM, Log4OM, WSJT-X puedan controlar el radio](enable-cat-tcp-so-n1mm-log4om-wsjt-x-can-control-the-radio.md)
 - [Iniciar automáticamente los servidores CAT con AetherSDR](autostart-cat-servers-with-aethersdr.md)

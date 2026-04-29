@@ -1,7 +1,7 @@
 ---
-title: Funcionalidades
+title: Características
 ---
 
-# Funcionalidades
+# Características
 
-Referencia de cada applet, diálogo y panel de AetherSDR. Usá la barra lateral para navegar un área específica, o repasá las páginas de cada sección para tener un panorama de cada grupo de funcionalidades.
+Referencia de cada applet, diálogo y panel en AetherSDR. Use la barra lateral para explorar un área específica, o revise las páginas del capítulo para obtener una descripción general de cada grupo de características.

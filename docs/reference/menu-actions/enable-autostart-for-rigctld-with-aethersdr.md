@@ -27,8 +27,8 @@ El elemento de menú se activa o desactiva cada vez que hace clic en él. Una ma
 
 ## Solución de problemas
 
-- **rigctld no se inicia al arrancar** — Confirme que rigctld está instalado y disponible en el PATH de su sistema. Si no se puede encontrar el ejecutable, AetherSDR no podrá iniciarlo independientemente de esta configuración.
-- **El software externo no puede conectarse a rigctld** — Verifique que el puerto en el que escucha rigctld no esté bloqueado por un cortafuegos y coincida con el puerto configurado en su software externo. Consulte la documentación de rigctld para la configuración del puerto.
+- **rigctld no inicia al abrir la aplicación** — Confirme que rigctld está instalado y disponible en el PATH de su sistema. Si no se encuentra el ejecutable, AetherSDR no puede iniciarlo independientemente de esta configuración.
+- **El software externo no puede conectarse a rigctld** — Verifique que el puerto en el que escucha rigctld no esté bloqueado por un firewall y coincida con el puerto configurado en su software externo. Consulte la documentación de rigctld para la configuración del puerto.
 
 ## Relacionados
 

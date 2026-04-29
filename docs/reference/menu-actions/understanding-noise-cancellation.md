@@ -1,6 +1,6 @@
 # Comprensión de la cancelación de ruido
 
-Esta página describe cómo abrir la guía de cancelación de ruido integrada en AetherSDR, que explica los algoritmos de reducción de ruido NR2, NR4, DFNR y MNR disponibles en el FLEX-8600.
+Esta página describe cómo abrir la guía integrada de cancelación de ruido en AetherSDR, la cual explica los algoritmos de reducción de ruido NR2, NR4, DFNR y MNR disponibles en el FLEX-8600.
 
 ## Antes de comenzar
 
@@ -13,7 +13,7 @@ Esta página describe cómo abrir la guía de cancelación de ruido integrada en
 
 La guía se abre y cubre los modos de reducción de ruido NR2, NR4, DFNR y MNR.
 
-## Relacionado
+## Relacionados
 
 - [Ayuda de AetherSDR](aethersdr-help.md)
 - [Configuración de los controles de AetherSDR](configuring-aethersdr-controls.md)

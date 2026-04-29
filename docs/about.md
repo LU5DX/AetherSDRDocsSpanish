@@ -5,23 +5,23 @@ description: Cómo se construye la documentación de AetherSDR, el pipeline de I
 
 # Acerca de esta documentación
 
-## Creada para una aplicación seria
+## Construida para una aplicación seria
 
 AetherSDR no es un proyecto de fin de semana. Está desarrollado con **C++20 y Qt6** desde el primer día — la mejor tecnología disponible para una aplicación que exige rendimiento DSP en tiempo real, baja latencia y comportamiento nativo multiplataforma en Linux, macOS y Windows. Ese nivel de ingeniería merece una documentación a la altura.
 
-La documentación es un componente de primera clase en cualquier proyecto de software — no algo que se añade al final. Una buena documentación reduce la fricción para los nuevos usuarios, ayuda a los operadores con experiencia a aprovechar al máximo cada función y disminuye la barrera de entrada a un hobby que ya tiene una curva de aprendizaje suficientemente pronunciada.
+La documentación es un componente de primera clase en cualquier proyecto de software, no algo secundario. Una buena documentación reduce la fricción para los nuevos usuarios, ayuda a los operadores experimentados a aprovechar al máximo cada función y reduce la barrera de entrada a un pasatiempo que ya tiene una curva de aprendizaje bastante pronunciada.
 
 ---
 
-## Un pipeline de documentación impulsado por IA
+## Un pipeline de documentación basado en IA
 
 Este manual no se escribe a mano página por página. Es generado por un pipeline personalizado que construí para mantener el ritmo con las versiones de AetherSDR:
 
-1. **Ingesta de fuentes** — con cada nueva versión, el pipeline extrae el código fuente C++ de AetherSDR directamente del repositorio.
-2. **Análisis con IA** — un modelo de lenguaje de gran escala analiza cada objeto visible para el usuario expuesto por la aplicación: ventanas, controles, menús, ajustes y comportamientos.
-3. **Salida de alta calidad** — el modelo produce documentación estructurada y precisa en inglés natural, describiendo qué hace cada función, cómo usarla y las opciones de configuración relevantes.
+1. **Ingesta de fuentes** — con cada nueva versión, el pipeline extrae directamente el código fuente C++ de AetherSDR desde el repositorio.
+2. **Análisis con IA** — un modelo de lenguaje de gran escala analiza cada objeto visible para el usuario expuesto por la aplicación: ventanas, controles, menús, configuraciones y comportamientos.
+3. **Salida de alta calidad** — el modelo produce documentación estructurada y precisa en inglés natural, que describe qué hace cada función, cómo usarla y las opciones de configuración relevantes.
 
-El resultado es un manual vivo que evoluciona con el software — no un documento estático que queda obsoleto dos versiones después.
+El resultado es un manual vivo que evoluciona con el software, no un documento estático que queda obsoleto dos versiones después.
 
 ---
 
@@ -29,27 +29,27 @@ El resultado es un manual vivo que evoluciona con el software — no un document
 
 Cada página de este sitio incluye a **Athena**, una asistente de IA que puede abrir en cualquier momento haciendo clic en el botón de chat en la esquina inferior derecha.
 
-Athena funciona con **RAG — Retrieval-Augmented Generation** (generación aumentada por recuperación). Esto es lo que significa en términos simples:
+Athena funciona con **RAG — Retrieval-Augmented Generation** (Generación aumentada por recuperación). Esto es lo que significa en términos simples:
 
-> En lugar de basarse únicamente en lo que un modelo de lenguaje aprendió durante su entrenamiento, RAG primero *recupera* los pasajes más relevantes de una base de conocimiento real — en este caso, la documentación actual — y luego *genera* una respuesta fundamentada en ese contenido.
+> En lugar de basarse únicamente en lo que un modelo de lenguaje aprendió durante su entrenamiento, RAG primero *recupera* los fragmentos más relevantes de una base de conocimiento real — en este caso, la documentación oficial — y luego *genera* una respuesta fundamentada en ese contenido.
 
 Esto significa que Athena no inventa funciones que no existen ni describe comportamientos de una versión diferente del software. Sus respuestas están ancladas a la documentación actual de AetherSDR, con enlaces a las fuentes para que pueda verificar todo lo que dice.
 
-En detalle técnico:
+Bajo el capó:
 
 - **Base de datos vectorial** — los fragmentos de documentación se vectorizan y almacenan para búsqueda semántica rápida
 - **Embeddings de Voyage AI** — embeddings de texto de última generación para mayor precisión en la recuperación
 - **Claude (Anthropic)** — el modelo de lenguaje que sintetiza el contexto recuperado en respuestas claras
-- **Backend FastAPI** — desplegado en Railway para respuestas confiables y de baja latencia
+- **Backend FastAPI** — desplegado en Railway para respuestas fiables y de baja latencia
 - **Modo avanzado** — active ⚙️ para buscar también en el código fuente de AetherSDR, no solo en la documentación
 
-Athena mejora continuamente. Con cada iteración se incorporan nueva documentación, mejor ajuste de recuperación y prompts más inteligentes.
+Athena mejora continuamente. Con cada iteración se incorpora nueva documentación, mejor ajuste de la recuperación y prompts más inteligentes.
 
 ---
 
-## Código abierto, donde es posible
+## Código abierto, en la medida de lo posible
 
-Este proyecto se apoya en código abierto en cada capa:
+Este proyecto se apoya en el código abierto en cada capa:
 
 | Componente | Tecnología |
 |---|---|
@@ -77,14 +77,14 @@ Si esta documentación le resulta útil — si le ahorró una hora de búsqueda 
 ## Apoye el proyecto
 
 !!! tip "Cada contribución ayuda"
-    Incluso una pequeña contribución compensa los costos de la API y la infraestructura, y motiva mejoras continuas tanto en la documentación como en el asistente.
+    Incluso una pequeña contribución compensa los costos de la API y los gastos de infraestructura, y motiva la mejora continua tanto de la documentación como del asistente.
 
 <div style="text-align:center; margin: 2rem 0;">
   <a href="https://ko-fi.com/lu5dx" class="md-button md-button--primary" target="_blank" rel="noopener" style="margin: 0.5rem;">
     ☕ Invíteme un café
   </a>
   <a href="https://paypal.me/lu5dx599" class="md-button md-button--primary" target="_blank" rel="noopener" style="margin: 0.5rem;">
-    💙 Donar por PayPal
+    💙 Donar vía PayPal
   </a>
   <a href="https://github.com/LU5DX" class="md-button" target="_blank" rel="noopener" style="margin: 0.5rem;">
     ⭐ Destacar en GitHub

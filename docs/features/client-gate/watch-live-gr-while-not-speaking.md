@@ -1,48 +1,58 @@
 # Ver la reducción de ganancia en vivo sin hablar
 
-El medidor de reducción de ganancia (GR) y la curva de transferencia se actualizan en tiempo real incluso cuando no está transmitiendo. Observarlos mientras el ambiente está en silencio le indica qué tan profundo está cortando el gate en cada momento, de modo que pueda evaluar si los ajustes de umbral y piso son apropiados antes de activar el transmisor.
+El medidor de reducción de ganancia y la curva de transferencia se actualizan en tiempo real incluso cuando no está transmitiendo. Observarlos mientras el ambiente está en silencio le indica qué tan profunda es la corte del gate en cada momento, para que pueda evaluar si los ajustes de umbral y piso son apropiados antes de activar el transmisor.
 
 ## Antes de comenzar
 
-- La etapa Gate debe estar habilitada en el lado que desea observar. Consulte [Omitir el gate de la cadena](bypass-the-gate-from-the-chain.md) si el applet no es visible.
-- El subcontenedor "Aetherial TX Gate" o "Aetherial AGC-T" debe estar abierto dentro del contenedor principal Aetherial Audio (TXDSP).
+- La etapa Gate debe estar habilitada en el lado que desea observar. Consulte [Desactivar el gate desde la cadena](bypass-the-gate-from-the-chain.md) si el applet no es visible.
+- El sub-contenedor "Aetherial TX Gate" o "Aetherial AGC-T" debe estar abierto dentro del contenedor principal Aetherial Audio (TXDSP).
 
 ## Pasos
 
-1. Abra el panel de applets si aún no está visible: `View > Applet Panel`.
-2. Localice el subcontenedor "Aetherial TX Gate" (lado TX) o el subcontenedor "Aetherial AGC-T" (lado RX).
+1. Abra el panel de applets si aún no es visible: `View > Applet Panel`.
+2. Localice el sub-contenedor "Aetherial TX Gate" (lado TX) o el sub-contenedor "Aetherial AGC-T" (lado RX).
 3. Permanezca en silencio — no hable ni active el radio.
-4. Observe la barra de reducción de ganancia de color ámbar. Mientras la entrada permanezca por debajo del nivel Thresh, la barra se llena desde la derecha, mostrando la profundidad de atenuación que se está aplicando.
-5. Observe la bola de entrada en la curva de transferencia. La bola se sitúa en la región inferior izquierda de la curva cuando el gate está cerrado (entrada por debajo del umbral) y se desplaza hacia arriba y a la derecha cuando el gate se abre.
+4. Observe la barra ámbar de reducción de ganancia. Mientras la entrada se mantenga por debajo del nivel Thresh, la barra se llena desde la derecha, mostrando la profundidad de atenuación que se está aplicando.
+5. Observe la bola de entrada en la curva de transferencia. La bola se sitúa en la región inferior izquierda de la curva cuando el gate está cerrado (entrada por debajo del umbral) y se desplaza hacia arriba y hacia la derecha cuando el gate se abre.
 6. Note hasta dónde se llena la barra. Si alcanza o supera la marca de -15 dB, el gate está aplicando al menos 15 dB de atenuación — el valor predeterminado de Floor.
 
 ## Qué hace cada control
 
-| Control | Tipo | Valor predeterminado | Rango válido | Clave persistida (TX / RX) |
-|---|---|---|---|---|
-| Transfer curve | Indicador | — | — | — |
-| Input ball | Indicador | — | Por debajo / por encima del umbral | — |
-| Gain-reduction bar | Medidor | — | 0 a 40 dB GR | — |
-| Thresh | Mando | -40.0 dB | -80.0 a 0.0 dB | `ClientGateTxThresholdDb` / `ClientGateRxThresholdDb` |
-| Ratio | Mando | 2.0 | 1.0 a 10.0 | `ClientGateTxRatio` / `ClientGateRxRatio` |
-| Attack | Mando | 0.5 ms | 0.1 a 100.0 ms | `ClientGateTxAttackMs` / `ClientGateRxAttackMs` |
-| Release | Mando | 100 ms | 5 a 2000 ms | `ClientGateTxReleaseMs` / `ClientGateRxReleaseMs` |
-| Floor | Mando | -15.0 dB | -80.0 a 0.0 dB | `ClientGateTxFloorDb` / `ClientGateRxFloorDb` |
+| Control                | Tipo                                                                                                                                                                                                                                                    | Valor predeterminado                                                                                                                                                                                                                                                                      |
+|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Transfer curve         | Indicador                                                                                                                                                                                                                                               | —                                                                                                                                                                                                                                                                                         |
+| Input ball             | Indicador                                                                                                                                                                                                                                               | —                                                                                                                                                                                                                                                                                         |
+| Hysteresis band        | Indicador                                                                                                                                                                                                                                               | —                                                                                                                                                                                                                                                                                         |
+| Gain-reduction bar     | Medidor                                                                                                                                                                                                                                                 | —                                                                                                                                                                                                                                                                                         |
+| Thresh                 | Perilla                                                                                                                                                                                                                                                 | -40.0 dB                                                                                                                                                                                                                                                                                  |
+| Ratio                  | Perilla                                                                                                                                                                                                                                                 | 2.0                                                                                                                                                                                                                                                                                       |
+| Return                 | Perilla                                                                                                                                                                                                                                                 | 2.0 dB                                                                                                                                                                                                                                                                                    |
+| Release                | Perilla                                                                                                                                                                                                                                                 | 100 ms                                                                                                                                                                                                                                                                                    |
+| Floor                  | Perilla                                                                                                                                                                                                                                                 | -15.0 dB                                                                                                                                                                                                                                                                                  |
+| Flip (Expander / Gate) | Sin marcar = expansor descendente (suave, basado en ratio). Marcado = Gate (corte duro). Ajusta ratio y floor a pares preestablecidos al conmutar; las demás perillas permanecen en su posición. La etiqueta se actualiza en vivo entre 'Expander' y 'Gate'. | Control exclusivo del editor (floating ClientGateEditor). Color: sin marcar = verde (Expander), marcado = ámbar (Gate). Tooltip: 'Flip between downward Expander (gentle) and Gate (hard) modes. Snaps ratio + floor to preset pairs; other knobs stay where you left them.'              |
+| Peek (lookahead)       | Establece un retardo de pre-lectura para que el gate pueda abrirse fraccionalmente antes de que llegue un transitorio, evitando el recorte de los bordes de ataque. 'Off' deshabilita la línea de retardo por completo.                                  | Control exclusivo del editor. Los valores más altos aumentan la latencia en la ruta TX. Los valores de 1 y 1.5 ms coinciden con las opciones preestablecidas de Ableton; los de 3 y 5 ms se añaden para transitorios muy rápidos.                                                          |
+| Attack                 | Mapeo exponencial (0.1 * 1000^n). Establece la rapidez con que el gate se abre cuando la entrada supera el nivel Thresh.                                                                                                                                | Control exclusivo del editor. Etiqueta 'X.XX ms' por debajo de 10 ms, 'X.X ms' por encima.                                                                                                                                                                                               |
+| Hold                   | Mapeo lineal (n * 500). Una vez que la entrada cae por debajo de Thresh − Return, el gate permanece abierto durante este tiempo antes de comenzar a cerrarse, evitando el parpadeo en material rítmico.                                                 | Control exclusivo del editor. Etiqueta 'X.X ms'.                                                                                                                                                                                                                                          |
 
-**Gain-reduction bar:** Franja ámbar horizontal, rellena desde la derecha. La escala llega hasta 40 dB. Una marca en -15 dB señala el valor predeterminado de Floor. Vacía significa sin atenuación; relleno completo hacia la derecha significa que el gate está cortando a la profundidad máxima definida por Floor.
+**Barra de reducción de ganancia:** Franja ámbar horizontal, rellena desde la derecha. La escala llega hasta 40 dB. Una marca en -15 dB señala el valor predeterminado de Floor. Vacía significa sin atenuación; relleno completo hacia la derecha significa que el gate está cortando a la profundidad máxima establecida por Floor.
 
-**Transfer curve / Input ball:** La curva estática muestra la relación entrada-salida del expansor. La bola en vivo rastrea el nivel de entrada actual, desplazándose por debajo o por encima del punto de quiebre del umbral en tiempo real.
+**Curva de transferencia / Bola de entrada:** La curva estática muestra la relación entrada-salida del expansor. La bola en vivo sigue el nivel de entrada actual, desplazándose por debajo o por encima de la rodilla del umbral en tiempo real.
+
+**Banda de histéresis:** Una banda vertical de color cian suave dibujada sobre la curva de transferencia entre (Thresh − Return) y Thresh. Hace visible la zona de adherencia del gate: el gate se abre cuando la entrada sube por encima de Thresh y no se cierra hasta que la entrada cae por debajo de Thresh − Return. La banda desaparece cuando Return se ajusta a 0.
+
+**Perilla Return:** Establece el ancho de la zona muerta de histéresis en dB. Aumentar Return evita que el gate oscile cuando la entrada ronda cerca del umbral. La etiqueta se muestra en el formato X.XX dB.
 
 ## Consejos
 
-- El medidor se actualiza aproximadamente cada 33 ms, por lo que la barra sigue la reducción de ganancia con suficiente detalle para detectar eventos de ruido breves.
-- Los cambios realizados en los mandos del editor flotante de Gate se reflejan en el applet dentro del mismo ciclo de sondeo de 33 ms, de modo que puede dejar el applet visible como medidor en vivo mientras ajusta en el editor.
-- Una barra que nunca se vacía por completo mientras está en silencio indica que el gate siempre está atenuando — la entrada nunca supera el nivel Thresh aunque deje de hablar. Este es el comportamiento normal y esperado de un noise gate en reposo.
+- El medidor se actualiza aproximadamente cada 33 ms, por lo que la barra sigue la reducción de ganancia con suficiente precisión para capturar eventos de ruido breves.
+- Los cambios realizados en las perillas del editor flotante de Gate se reflejan en el applet dentro del mismo ciclo de sondeo de 33 ms, por lo que puede dejar el applet visible como medidor en vivo mientras ajusta en el editor.
+- Una barra que nunca se vacía completamente mientras está en silencio indica que el gate siempre está atenuando — la entrada nunca supera el nivel Thresh incluso cuando deja de hablar. Este es el comportamiento normal y esperado de un gate de ruido en reposo.
+- Si el gate oscila — se abre y se cierra rápidamente mientras habla cerca del umbral — aumente Return para ampliar la zona muerta de histéresis. La banda cian en la curva de transferencia se hace más ancha a medida que lo hace, proporcionando una indicación visual de cuánta zona muerta está en efecto.
 
 ## Relacionados
 
-- [Ajustar el umbral TX justo por encima del piso de ruido ambiental](set-tx-threshold-just-above-room-noise-floor.md)
-- [Ajustar Floor para evitar el silencio antinatural entre palabras](set-floor-to-avoid-unnatural-silence-between-words.md)
+- [Ajustar el umbral TX justo por encima del ruido de fondo del ambiente](set-tx-threshold-just-above-room-noise-floor.md)
+- [Ajustar Floor para evitar silencios artificiales entre palabras](set-floor-to-avoid-unnatural-silence-between-words.md)
 - [Elegir comportamiento de gate o expansor suave mediante el ratio](choose-gate-vs-soft-expander-behaviour-via-ratio.md)
-- [Ajustar attack / release para una apertura y cierre naturales](tune-attack-release-for-natural-open-close.md)
-- [Omitir el gate de la cadena](bypass-the-gate-from-the-chain.md)
+- [Ajustar Return y Release para una apertura y cierre naturales](tune-attack-release-for-natural-open-close.md)
+- [Desactivar el gate desde la cadena](bypass-the-gate-from-the-chain.md)

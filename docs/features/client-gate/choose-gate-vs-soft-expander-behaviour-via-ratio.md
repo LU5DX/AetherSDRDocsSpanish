@@ -1,47 +1,54 @@
-# Elegir el comportamiento de puerta o expansor suave mediante el ratio
+# Elegir el comportamiento de puerta o expansor suave mediante la relación
 
-El control **Ratio** determina con qué agresividad la puerta atenúa el audio por debajo del umbral. Un valor de ratio bajo produce un expansor descendente suave que reduce gradualmente el audio de bajo nivel; un valor alto produce una puerta dura que lo corta bruscamente. Elegir el ratio adecuado permite adaptar el carácter de la puerta a su situación de ruido y estilo de operación.
+El control **Ratio** determina con qué agresividad la puerta atenúa el audio por debajo del umbral. Un valor bajo produce un expansor descendente suave que reduce gradualmente el audio silencioso; un valor alto produce una puerta dura que lo corta bruscamente. Elegir la relación adecuada permite adaptar el carácter de la puerta a su situación de ruido y estilo de operación.
 
 ## Antes de comenzar
 
 - La etapa de puerta debe estar habilitada en el lado que desea ajustar (TX o RX). Si el applet no es visible, habilite la puerta mediante el widget CHAIN o haga doble clic en la etapa GATE para abrir el editor flotante.
-- Abra el subcontenedor **Aetherial TX Gate** (TX) o el subcontenedor **Aetherial AGC-T** (RX) dentro del contenedor padre Aetherial Audio (TXDSP) en el panel de applets.
+- Abra el subcontenedor **Aetherial TX Gate** (TX) o el subcontenedor **Aetherial AGC-T** (RX) dentro del contenedor principal Aetherial Audio (TXDSP) en el panel de applets (Applet Panel).
 
 ## Pasos
 
-1. Localice el control **Ratio** en la fila de cinco controles en la parte inferior del applet.
-2. Para establecer el comportamiento de expansor suave, gire **Ratio** hacia un valor bajo (por ejemplo, 2.0:1). El audio por debajo del umbral se reduce gradualmente.
-3. Para establecer el comportamiento de puerta dura, gire **Ratio** hacia un valor alto (por ejemplo, 8.0:1 o superior). El audio por debajo del umbral se corta bruscamente.
-4. Observe la barra de reducción de ganancia mientras el audio pasa. Un ajuste de expansor suave produce un relleno ámbar más somero y gradual; un ajuste de puerta dura produce un relleno profundo y abrupto cuando la puerta se cierra.
-5. Si el corte de la puerta dura es demasiado severo entre palabras, ajuste **Floor** para limitar la atenuación máxima. Consulte [Establecer Floor para evitar silencios artificiales entre palabras](set-floor-to-avoid-unnatural-silence-between-words.md).
+1. Localice el control **Ratio** en la fila de cinco mandos en la parte inferior del applet.
+2. Para configurar el comportamiento de expansor suave, gire **Ratio** hacia un valor bajo (por ejemplo, 2.0:1). El audio por debajo del umbral se reduce de forma gradual.
+3. Para configurar el comportamiento de puerta dura, gire **Ratio** hacia un valor alto (por ejemplo, 8.0:1 o superior). El audio por debajo del umbral se corta bruscamente.
+4. Observe la barra de reducción de ganancia mientras el audio pasa por la cadena. Un ajuste de expansor suave produce un relleno ámbar más tenue y gradual; un ajuste de puerta dura produce un relleno intenso y abrupto cuando la puerta se cierra.
+5. Si el corte de la puerta dura es demasiado severo entre palabras, ajuste **Floor** para limitar la atenuación máxima. Consulte [Configurar Floor para evitar silencios artificiales entre palabras](set-floor-to-avoid-unnatural-silence-between-words.md).
 
 ## Qué hace cada control
 
-| Control | Valor predeterminado | Rango válido | Clave persistida (TX / RX) | Comportamiento |
-|---|---|---|---|---|
-| **Ratio** | 2.0 | 1.0 a 10.0 | `ClientGateTxRatio` / `ClientGateRxRatio` | Se muestra como X.X:1. Valores bajos expanden suavemente; valores altos aplican puerta dura. |
-| **Thresh** | -40.0 dB | -80.0 a 0.0 dB | `ClientGateTxThresholdDb` / `ClientGateRxThresholdDb` | Nivel por debajo del cual comienza la atenuación. |
-| **Floor** | -15.0 dB | -80.0 a 0.0 dB | `ClientGateTxFloorDb` / `ClientGateRxFloorDb` | Atenuación máxima que la puerta puede aplicar, independientemente del ratio. |
-| **Barra de reducción de ganancia** | — | 0 a 40 dB GR | — | Franja ámbar, rellena desde la derecha. La marca en -15 dB indica el valor predeterminado de Floor. |
-| Curva de transferencia | — | — | — | Muestra la curva de transferencia estática con una bola en vivo en el nivel de entrada actual. |
+| Control                | Valor predeterminado                                                                                                                                                                                                                   | Rango válido                                                                                                                                                                                                                                                                          |
+|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Ratio**              | 2.0                                                                                                                                                                                                                                    | 1.0 a 10.0                                                                                                                                                                                                                                                                            |
+| **Thresh**             | -40.0 dB                                                                                                                                                                                                                               | -80.0 a 0.0 dB                                                                                                                                                                                                                                                                        |
+| **Return**             | 2.0 dB                                                                                                                                                                                                                                 | 0.0 a 20.0 dB                                                                                                                                                                                                                                                                         |
+| **Floor**              | -15.0 dB                                                                                                                                                                                                                               | -80.0 a 0.0 dB                                                                                                                                                                                                                                                                        |
+| **Barra de reducción de ganancia** | —                                                                                                                                                                                                                          | 0 a 40 dB GR                                                                                                                                                                                                                                                                          |
+| Curva de transferencia | —                                                                                                                                                                                                                                      | —                                                                                                                                                                                                                                                                                     |
+| Flip (Expander / Gate) | Sin marcar = expansor descendente (suave, basado en relación). Marcado = Gate (corte duro). Al conmutar, ajusta automáticamente Ratio y Floor a pares preestablecidos; los demás controles permanecen en su posición. La etiqueta cambia en tiempo real entre 'Expander' y 'Gate'. | Control exclusivo del editor (floating ClientGateEditor). Color: sin marcar = verde (Expander), marcado = ámbar (Gate). Tooltip: 'Flip between downward Expander (gentle) and Gate (hard) modes. Snaps ratio + floor to preset pairs; other knobs stay where you left them.' |
+| Peek (lookahead)       | Establece un retardo de prelectura para que la puerta pueda abrirse un instante antes de que llegue un transitorio, evitando que se recorten los flancos de ataque. 'Off' deshabilita completamente la línea de retardo.               | Control exclusivo del editor. Los valores más altos aumentan la latencia en la ruta TX. Los valores 1 y 1.5 ms coinciden con las opciones preestablecidas de Ableton; se añadieron 3 y 5 ms para transitorios muy rápidos.                                                             |
+| Attack                 | Mapeo exponencial (0.1 * 1000^n). Determina con qué rapidez se abre la puerta una vez que la entrada supera Thresh.                                                                                                                    | Control exclusivo del editor. Etiqueta 'X.XX ms' por debajo de 10 ms, 'X.X ms' por encima.                                                                                                                                                                                            |
+| Hold                   | Mapeo lineal (n * 500). Tras caer la entrada por debajo de Thresh − Return, la puerta permanece abierta durante este tiempo antes de comenzar a cerrarse, evitando el parpadeo en material rítmico.                                    | Control exclusivo del editor. Etiqueta 'X.X ms'.                                                                                                                                                                                                                                     |
 
 ## Consejos
 
-- Un ratio de 2.0:1 (el predeterminado) es un punto de partida conservador adecuado para la mayoría de los usos en TX. Auméntelo solo si el ruido de bajo nivel sigue siendo audible cuando no está hablando.
-- Con valores de ratio superiores a aproximadamente 8.0:1, la puerta se comporta casi como un interruptor de encendido/apagado. Combínelo con un **Thresh** cuidadosamente ajustado para evitar recortar el flanco inicial de las palabras.
-- La curva de transferencia se actualiza en tiempo real al mover **Ratio**. Use la bola de entrada en vivo para confirmar que la forma de la curva coincide con su intención antes de transmitir.
-- Los cambios en **Ratio** surten efecto de inmediato y se guardan automáticamente. No se requiere ningún botón Apply ni Save.
+- Una relación de 2.0:1 (el valor predeterminado) es un punto de partida conservador adecuado para la mayoría de los usos en TX. Auméntela solo si el ruido de nivel bajo sigue siendo audible cuando no está hablando.
+- Con relaciones superiores a aproximadamente 8.0:1, la puerta se comporta casi como un interruptor de encendido/apagado. Combínela con un **Thresh** cuidadosamente ajustado para evitar que se recorten los flancos iniciales de las palabras.
+- Use el control **Return** para eliminar el parpadeo de la puerta. Si la puerta se abre y cierra rápidamente cuando hace una pausa al hablar, aumente **Return** para que la puerta permanezca abierta hasta que el nivel de entrada caiga claramente por debajo del umbral. La banda cian en la curva de transferencia se ensancha al aumentar **Return**, mostrando directamente la zona de histéresis.
+- La curva de transferencia se actualiza en tiempo real al mover **Ratio** o **Return**. Use el indicador de entrada en tiempo real para confirmar que la forma de la curva y la banda de histéresis corresponden a su intención antes de transmitir.
+- Los cambios en cualquier control se aplican de inmediato y se guardan automáticamente. No se requiere ningún botón Apply ni Save.
 
-## Solución de problemas
+## Resolución de problemas
 
-- **El control Ratio no tiene efecto en el sonido** — Confirme que la etapa de puerta está habilitada. Una puerta en bypass pasa el audio sin modificaciones, independientemente de los ajustes de los controles. Consulte [Poner la puerta en bypass desde la cadena](bypass-the-gate-from-the-chain.md).
-- **El ratio de puerta dura corta demasiado y genera silencios artificiales** — Reduzca **Floor** hacia 0 dB para disminuir la atenuación máxima, o reduzca **Ratio** hacia el rango de expansor suave.
-- **El ratio de expansor suave no suprime suficientemente el ruido** — Aumente **Ratio** o reduzca **Thresh** para que la atenuación comience con un nivel de entrada más alto.
+- **El control Ratio no tiene efecto en el sonido** — Confirme que la etapa de puerta está habilitada. Una puerta en bypass deja pasar el audio sin modificarlo, independientemente de la posición de los controles. Consulte [Poner la puerta en bypass desde la cadena](bypass-the-gate-from-the-chain.md).
+- **La relación de puerta dura corta demasiado y crea silencios artificiales** — Reduzca **Floor** hacia 0 dB para disminuir la atenuación máxima, o reduzca **Ratio** hacia el rango de expansor suave.
+- **La relación de expansor suave no suprime suficientemente el ruido** — Aumente **Ratio** o reduzca **Thresh** para que la atenuación comience con un nivel de entrada más alto.
+- **La puerta parpadea o tiembla en el umbral** — Aumente **Return** para que la puerta permanezca abierta hasta que la señal caiga más por debajo del umbral. Observe cómo la banda de histéresis cian en la curva de transferencia se ensancha al hacerlo.
 
-## Relacionados
+## Relacionado
 
 - [Descripción general de Aetherial TX Gate / Aetherial AGC-T (RX)](overview.md)
-- [Establecer el umbral TX justo por encima del nivel de ruido ambiental](set-tx-threshold-just-above-room-noise-floor.md)
-- [Establecer Floor para evitar silencios artificiales entre palabras](set-floor-to-avoid-unnatural-silence-between-words.md)
-- [Ajustar ataque y caída para una apertura y cierre naturales](tune-attack-release-for-natural-open-close.md)
-- [Observar la reducción de ganancia en vivo mientras no se transmite](watch-live-gr-while-not-speaking.md)
+- [Configurar el umbral TX justo por encima del piso de ruido ambiental](set-tx-threshold-just-above-room-noise-floor.md)
+- [Configurar Floor para evitar silencios artificiales entre palabras](set-floor-to-avoid-unnatural-silence-between-words.md)
+- [Ajustar la liberación para un cierre natural de la puerta](tune-release-for-natural-gate-close.md)
+- [Observar la reducción de ganancia en tiempo real sin hablar](watch-live-gr-while-not-speaking.md)

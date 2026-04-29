@@ -1,6 +1,6 @@
 # Activar el indicador de estado parpadeante
 
-`View > Blink Status Indicator` es un elemento de menú con casilla de verificación que controla si el indicador de estado de la barra de título parpadea para señalar el latido del radio. Desactivarlo mantiene el indicador estático si el parpadeo resulta molesto.
+`View > Blink Status Indicator` es un elemento de menú con marca de verificación que controla si el indicador de estado de la barra de título parpadea para señalar el latido del radio. Desactivarlo mantiene el indicador estático si el parpadeo resulta molesto.
 
 ## Antes de comenzar
 
@@ -10,7 +10,7 @@
 ## Pasos
 
 1. Haga clic en `View` en la barra de menús.
-2. Haga clic en `Blink Status Indicator` para activar o desactivar la opción.
+2. Haga clic en `Blink Status Indicator` para activarlo o desactivarlo.
    - Una marca de verificación junto al elemento indica que el parpadeo está activado.
    - Sin marca de verificación, el indicador permanece estático.
 
@@ -22,5 +22,5 @@
 
 ## Relacionados
 
-- [Activar ventana sin bordes](enable-frameless-window.md)
+- [Activar ventana sin marco](enable-frameless-window.md)
 - [Activar modo mínimo](enable-minimal-mode.md)

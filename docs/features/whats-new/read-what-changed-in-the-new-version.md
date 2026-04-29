@@ -1,16 +1,16 @@
-# Leer los cambios de la nueva versión
+# Consulte los cambios de la nueva versión
 
-El diálogo What's New muestra las notas de versión que usted aún no ha visto. Aparece automáticamente tras una actualización y también está disponible en cualquier momento desde el menú Help.
+El diálogo What's New muestra las notas de versión que usted aún no ha visto. Aparece automáticamente después de una actualización y también está disponible en cualquier momento desde el menú Help.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar instalado y en ejecución. No se requiere conexión a la radio.
+- AetherSDR debe estar instalado y en ejecución. No se requiere conexión a un radio.
 
 ## Pasos
 
 1. Haga clic en `Help > What's New...`.
 2. Lea las notas de versión en el **Release notes browser** desplazable.
-3. Haga clic en `Got it — 73!` para cerrar el diálogo. AetherSDR registra la versión actual en `LastSeenVersion` para que el diálogo no vuelva a aparecer para esta versión.
+3. Haga clic en `Got it — 73!` para cerrar el diálogo. AetherSDR registra la versión actual en `LastSeenVersion` para que el diálogo no vuelva a aparecer en esta versión.
 
 ## Función de cada control
 
@@ -20,16 +20,16 @@ El diálogo What's New muestra las notas de versión que usted aún no ha visto.
 | `Got it — 73!` | Cierra el diálogo y marca la versión actual como vista en `LastSeenVersion`. |
 | `Upgrade` | Visible solo cuando hay una versión más reciente disponible. Abre la página de descarga y cierra el diálogo. |
 | `Skip this version` | Visible solo cuando hay una versión más reciente disponible. Escribe la versión actual en `LastSeenVersion` y cierra el diálogo sin actualizar. |
-| Hint | Línea de pie con orientación breve. Solo lectura. |
+| Hint | Línea de pie de página con orientación breve. Solo lectura. |
 
 ## Consejos
 
 - En la primera instalación, el diálogo muestra únicamente las notas de la versión actual. En actualizaciones posteriores, muestra todas las versiones publicadas desde la última versión vista, hasta un máximo de cinco.
 - Si no hay cambios nuevos disponibles, el navegador muestra "No new changes to report."
-- Para releer las notas en cualquier momento, use `Help > What's New...`. Esta ruta siempre muestra las notas completas de la versión actual independientemente del valor de `LastSeenVersion`.
+- Para volver a leer las notas en cualquier momento, use `Help > What's New...`. Esta ruta siempre muestra las notas completas de la versión actual, independientemente del valor de `LastSeenVersion`.
 
-## Relacionados
+## Temas relacionados
 
-- [Releer las notas de versión más tarde desde el menú Help](re-read-release-notes-later-via-help-menu.md)
+- [Volver a leer las notas de versión desde el menú Help](re-read-release-notes-later-via-help-menu.md)
 - [Omitir las notas de versión de la versión actual](skip-the-current-version-s-release-notes.md)
 - [Abrir el flujo de actualización para una versión más reciente](open-the-upgrade-flow-for-a-newer-build.md)

@@ -1,10 +1,10 @@
-# Activar Atajos de Teclado
+# Habilitar atajos de teclado
 
-Active o desactive el procesamiento de atajos de teclado. Cuando está activado, los atajos de teclado — como el uso de las teclas de flecha para ajustar controles deslizantes — están disponibles en toda la aplicación.
+Active o desactive el procesamiento de atajos de teclado. Cuando está habilitado, los atajos de teclado — como el uso de las teclas de flecha para ajustar controles deslizantes — están activos en toda la aplicación.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar en ejecución y conectado a una radio.
+- AetherSDR debe estar en ejecución y conectado a un radio.
 
 ## Pasos
 
@@ -13,9 +13,9 @@ Active o desactive el procesamiento de atajos de teclado. Cuando está activado,
 
 ## Qué hace cada control
 
-| Control | Descripción | Valor predeterminado |
+| Control | Descripción | Predeterminado |
 |---|---|---|
-| `Keyboard Shortcuts` | Elemento de menú con casilla de verificación. Cuando está marcado, el procesamiento de atajos de teclado está activo (p. ej., las teclas de flecha en los controles deslizantes). Cuando no está marcado, los atajos se suprimen. | Ver consejos |
+| `Keyboard Shortcuts` | Elemento de menú con casilla de verificación. Cuando está marcado, el procesamiento de atajos de teclado está activo (por ejemplo, las teclas de flecha en los controles deslizantes). Cuando no está marcado, los atajos se suprimen. | Ver consejos |
 
 ## Consejos
 
@@ -24,4 +24,4 @@ Active o desactive el procesamiento de atajos de teclado. Cuando está activado,
 
 ## Relacionado
 
-- [Configuración de controles de AetherSDR](configuring-aethersdr-controls.md)
+- [Configuración de los controles de AetherSDR](configuring-aethersdr-controls.md)
