@@ -1,41 +1,41 @@
-# Configurar la potencia de salida de RF
+# Establecer la potencia de salida RF
 
-Use el control deslizante RF Power del applet TX Controls para establecer el nivel de potencia de transmisión enviado a su antena. Ajústelo antes de transmitir para evitar sobrecargar su amplificador o superar los límites de potencia de la banda.
+Use el regulador RF Power en el applet TX Controls para establecer el nivel de potencia de transmisión que se envía a su antena. Ajustar esto antes de transmitir evita sobrecarga del amplificador o el incumplimiento de los límites de potencia de la banda.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600. Si no lo está, vaya a `Settings > Connect to Radio...`.
-- El applet TX Controls debe estar visible. Si no lo está, haga clic en el botón **TX** de la bandeja en la barra lateral derecha para mostrarlo.
+- AetherSDR debe estar conectado a una radio FLEX-8600. Si no es así, vaya a `Settings > Connect to Radio...`.
+- El applet TX Controls debe ser visible. Si no lo es, haga clic en el botón **TX** en la bandeja de la derecha para mostrarlo.
 
 ## Pasos
 
-1. Localice el control deslizante **RF Power** en el applet TX Controls. Aparece debajo del medidor **SWR**.
-2. Arrastre el control deslizante hacia la izquierda o la derecha para establecer el nivel de potencia deseado. El valor numérico a la derecha del control se actualiza de inmediato.
-3. Confirme que el valor mostrado es el que desea. El medidor **RF Pwr** reflejará la potencia directa real una vez que transmita.
+1. Localice el regulador **RF Power** en el applet TX Controls. Aparece debajo del indicador **SWR**.
+2. Arrastre el regulador hacia la izquierda o derecha para establecer su nivel de potencia deseado. La lectura numérica a la derecha del regulador se actualiza inmediatamente.
+3. Confirme que el valor mostrado en la lectura sea el que desea. El indicador **RF Pwr** reflejará la potencia directa real una vez que transmita.
 
 ## Qué hace cada control
 
-| Control | Descripción | Valor predeterminado | Rango válido |
-|---|---|---|---|
-| Control deslizante **RF Power** | Establece el nivel de potencia de RF de transmisión enviado a la radio. | 100 | 0–100 |
-| Medidor **RF Pwr** | Muestra la potencia directa real en la salida del excitador. | — | 0–120 W (sin amplificador externo); 0–600 W (Aurora 500 W); rojo por encima de 100 W / 500 W |
-| Medidor **SWR** | Muestra la relación de onda estacionaria en el excitador. | — | 1.0–3.0; rojo por encima de 2.5 |
+| Control             | Descripción                                          | Por defecto |
+|---------------------|------------------------------------------------------|---------|
+| Regulador **RF Power** | Establece el nivel de potencia RF de transmisión que se envía a la radio.  | 100     |
+| Indicador **RF Pwr**    | Muestra la potencia directa real a la salida del excitador. | —       |
+| Indicador **SWR**       | Muestra la relación de ondas estacionarias en el excitador.         | —       |
 
 ## Consejos
 
-- La escala del medidor **RF Pwr** cambia automáticamente según el modelo de radio. En un FLEX-8600 estándar, la zona roja comienza por encima de 100 W.
-- Puede establecer límites de potencia por banda de forma independiente a este control deslizante. Vaya a `Settings > TX Band Settings...` para configurar la potencia, la potencia de ajuste y los parámetros de inhibición para cada banda.
-- El control deslizante **RF Power** controla el nivel de salida del excitador, no un amplificador externo. Si utiliza un amplificador externo, ajuste este control al nivel de excitación que su amplificador requiere.
+- La escala del indicador **RF Pwr** cambia automáticamente según su modelo de radio. En una FLEX-8600 estándar, la zona roja comienza por encima de 100 W.
+- Puede establecer límites de potencia por banda independientemente de este regulador. Vaya a `Settings > TX Band Settings...` para configurar la potencia, potencia de sintonización e inhibición para cada banda.
+- El regulador **RF Power** controla el nivel de salida del excitador, no un amplificador separado. Si está usando un amplificador externo, establezca este regulador al nivel de excitación que su amplificador espera.
 
 ## Solución de problemas
 
-- **El medidor RF Pwr muestra 0 W durante la transmisión** — Confirme que la radio esté realmente activada. Verifique que MOX esté activo (el botón **MOX** aparece en rojo) o que su línea PTT esté activada. Compruebe también que el control deslizante **RF Power** no esté en 0.
-- **El control deslizante se mueve pero la potencia directa no cambia** — Es posible que la conexión con la radio se haya interrumpido. Verifique el estado de la conexión y reconéctese mediante `Settings > Connect to Radio...` si es necesario.
+- **El indicador RF Pwr muestra 0 W durante la transmisión** — Confirme que la radio esté realmente activada. Compruebe que MOX esté activo (el botón **MOX** es rojo) o que su línea PTT esté asertada. También verifique que el regulador **RF Power** no esté ajustado a 0.
+- **El regulador se mueve pero la potencia directa no cambia** — La conexión de radio puede haberse perdido. Compruebe el estado de la conexión y reconecte a través de `Settings > Connect to Radio...` si es necesario.
 
-## Relacionado
+## Temas relacionados
 
 - [Descripción general de TX Controls](overview.md)
-- [Configurar la potencia del portador de ajuste](set-tune-carrier-power.md)
-- [Iniciar un portador de ajuste para verificar el SWR](start-a-tune-carrier-to-check-swr.md)
-- [Activar MOX para accionar manualmente el transmisor](toggle-mox-to-manually-key-the-transmitter.md)
-- [Cambiar perfiles de TX (p. ej., SSB, Digital)](switch-tx-profiles-e-g-ssb-digital.md)
+- [Establecer la potencia de portadora de sintonización](set-tune-carrier-power.md)
+- [Iniciar una portadora de sintonización para verificar SWR](start-a-tune-carrier-to-check-swr.md)
+- [Activar MOX para activar manualmente el transmisor](toggle-mox-to-manually-key-the-transmitter.md)
+- [Cambiar perfiles TX (por ejemplo, SSB, Digital)](switch-tx-profiles-e-g-ssb-digital.md)
