@@ -1,33 +1,33 @@
-# Ajustar el tiempo de retención del VOX
+# Ajustar tiempo de retardo VOX
 
-El tiempo de retención del VOX controla cuánto tiempo permanece el radio en transmisión después de que su voz cae por debajo del umbral de activación del VOX. Ajustarlo evita cortes intermitentes al final de las palabras y, a su vez, evita silencio excesivo antes de regresar a recepción.
+El tiempo de retardo VOX controla cuánto tiempo la radio permanece en transmisión después de que tu voz cae por debajo del umbral de disparo VOX. Ajustarlo evita cortes entrecortados en la transmisión al final de las palabras, a la vez que se evita aire muerto excesivo antes de volver a recepción.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. El applet Phone requiere una conexión activa con el radio.
-- El VOX debe estar habilitado. Si el VOX no está activo, habilítelo primero — consulte [Habilitar VOX y ajustar el umbral de activación](enable-vox-and-set-trigger-threshold.md).
+- AetherSDR debe estar conectado a la radio. El applet Phone requiere una conexión de radio activa.
+- VOX debe estar habilitado. Si VOX aún no está activado, habilítalo primero — consulta [Enable VOX and set trigger threshold](enable-vox-and-set-trigger-threshold.md).
 
 ## Pasos
 
-1. Abra el applet Phone haciendo clic en el botón de bandeja **PHNE** en la barra lateral derecha. Si el panel del applet está oculto, haga clic en el borde del panel o use `View > Applet Panel` para mostrarlo.
-2. Ubique la fila **Delay:**, directamente debajo de la fila del nivel de VOX.
-3. Arrastre el control deslizante **Delay** hacia la izquierda para reducir el tiempo de retención o hacia la derecha para aumentarlo. El valor numérico a la derecha del control se actualiza mientras arrastra.
+1. Abre el applet Phone haciendo clic en el botón de bandeja **PHNE** en la barra lateral derecha. Si el panel del applet está oculto, haz clic en el borde del panel o usa `View > Applet Panel` para mostrarlo.
+2. Localiza la fila **Delay:**, directamente debajo de la fila de nivel VOX.
+3. Arrastra el regulador **Delay** hacia la izquierda para acortar el tiempo de retardo o hacia la derecha para alargarlo. El valor numérico a la derecha del regulador se actualiza mientras lo arrastras.
 
 ## Qué hace cada control
 
-| Control | Descripción | Rango válido | Valor predeterminado |
-|---|---|---|---|
-| Control deslizante **Delay** | Establece el tiempo de retención del VOX: cuánto tiempo permanece el radio en transmisión después de que termina el habla antes de regresar a recepción. | 0–100 | — |
+| Control          | Descripción                                                                                                    | Rango válido |
+|------------------|----------------------------------------------------------------------------------------------------------------|-------------|
+| Regulador **Delay** | Establece el tiempo de retardo VOX — cuánto tiempo la radio permanece en transmisión después de que la voz termina antes de volver a recepción. | 0–100       |
 
-No se guarda ninguna clave de configuración para el control deslizante Delay; el valor se envía directamente al radio.
+No se persiste ninguna clave de configuración para el regulador Delay; el valor se envía directamente a la radio.
 
 ## Consejos
 
-- Un valor de Delay demasiado bajo provoca que el transmisor se corte entre palabras. Aumente el valor hasta que los cortes al final desaparezcan.
-- Un valor de Delay demasiado alto mantiene el transmisor activo mucho después de que usted termina de hablar, bloqueando a otras estaciones. Reduzca el valor hasta que la retención sea apenas suficiente para cubrir las pausas normales.
-- El umbral del nivel de VOX y el Delay interactúan: un nivel de VOX más sensible (más bajo) puede requerir un Delay más corto, y viceversa.
+- Un valor Delay demasiado bajo causa que el transmisor se encienda y apague entre palabras. Aumenta el valor hasta que dejen de ocurrir cortes en la cola.
+- Un valor Delay demasiado alto mantiene el transmisor activado mucho después de que termines de hablar, bloqueando otras estaciones. Reduce el valor hasta que el retardo sea apenas lo suficiente para cubrir pausas normales.
+- El umbral de nivel VOX y Delay interactúan: un nivel VOX más sensible (más bajo) puede requerir un Delay más corto, y viceversa.
 
-## Relacionados
+## Relacionado
 
-- [Habilitar VOX y ajustar el umbral de activación](enable-vox-and-set-trigger-threshold.md)
-- [Descripción general de Phone](overview.md)
+- [Enable VOX and set trigger threshold](enable-vox-and-set-trigger-threshold.md)
+- [Phone overview](overview.md)

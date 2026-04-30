@@ -1,53 +1,58 @@
-# Cambiar el tono de CW / frecuencia del sidetone
+# Cambiar la frecuencia de pitch/sidetone en CW
 
-El control de tono de CW establece la frecuencia del tono utilizada para la monitorización del sidetone y la decodificación de CW. En la versión v0.9.2.1, los controles de sidetone local independientes (botón Local STn, control deslizante de volumen local, botón Follow pitch y control deslizante de tono local) han sido eliminados. El botón **Sidetone** y el control deslizante **Sidetone volume** ahora controlan de forma sincronizada tanto el monitor del radio alimentado por DAX como el generador de sidetone de baja latencia del lado del cliente. El tono y el paneo siguen siempre automáticamente los parámetros `cw_pitch` y `mon_pan_cw` del radio.
+El control de pitch en CW establece la frecuencia de tono utilizada para monitoreo de sidetone y decodificación CW. En v0.9.2.1, se han eliminado los controles de sidetone local separados (botón Local STn, deslizador de volumen local, botón Follow pitch y deslizador de pitch local). El único toggle **Sidetone** y el deslizador **Sidetone volume** ahora controlan tanto el monitor alimentado por DAX de la radio como el generador de sidetone de baja latencia del lado del cliente de forma sincronizada. El pitch y el pan siempre siguen automáticamente los parámetros `cw_pitch` y `mon_pan_cw` de la radio.
 
 ## Antes de comenzar
 
-- Conéctese a un radio FLEX-8600. El applet Phone/CW requiere una conexión de radio activa.
-- Establezca el slice activo en un modo CW. El subpanel de CW solo es visible cuando el slice activo está en modo CW; de lo contrario, se muestra el subpanel de Phone.
-- Abra el applet Phone/CW haciendo clic en el botón de bandeja **P/CW** en la barra lateral derecha, si no está visible todavía.
+- Conéctese a una radio FLEX-8600. El applet Phone/CW requiere una conexión activa a la radio.
+- Establezca el slice activo en un modo CW. El sub-panel CW solo es visible cuando el slice activo está en modo CW; de lo contrario, se muestra el sub-panel Phone.
+- Abra el applet Phone/CW haciendo clic en el botón **P/CW** en la bandeja derecha si aún no está visible.
 
 ## Pasos
 
-### Cambiar el tono de CW del radio
+### Cambiar el pitch CW de la radio
 
-1. Localice **Pitch < / >** en el subpanel de CW. Es un spinbox con dos botones de flecha.
-2. Haga clic en **<** para disminuir el tono en 10 Hz, o en **>** para aumentarlo en 10 Hz.
-3. El nuevo tono se envía al radio inmediatamente. Rango válido: 100–6000 Hz, paso de 10 Hz. Valor predeterminado: 600 Hz.
+1. Ubique **Pitch < / >** en el sub-panel CW. Es un spinbox con dos botones de flecha.
+2. Haga clic en **<** para disminuir el pitch en 10 Hz, o en **>** para aumentarlo en 10 Hz.
+3. El nuevo pitch se envía a la radio inmediatamente. Rango válido: 100–6000 Hz, paso 10 Hz. Valor predeterminado: 600 Hz.
 
-El generador de sidetone del lado del cliente siempre sigue este valor de tono automáticamente. No existe un control de tono local independiente.
+El generador de sidetone del lado del cliente siempre sigue este valor de pitch automáticamente. No hay un control de pitch local separado.
 
-### Activar o desactivar el sidetone
+### Habilitar o deshabilitar el sidetone
 
-1. Haga clic en **Sidetone** en el subpanel de CW para activarlo o desactivarlo.
-2. Tanto el monitor del radio alimentado por DAX como el generador de sidetone de baja latencia del lado del cliente se activan o desactivan juntos mediante este único botón.
+1. Haga clic en **Sidetone** en el sub-panel CW para activarlo o desactivarlo.
+2. Tanto el monitor alimentado por DAX de la radio como el generador de sidetone de baja latencia del lado del cliente se habilitan o deshabilitan juntos mediante este único botón.
+
+En Windows, la secuencia de sidetone ahora se inicia inmediatamente al conectarse (v0.9.3, #2105).
 
 ### Ajustar el volumen del sidetone
 
-1. Mueva el control deslizante **Sidetone volume** al nivel deseado. Rango válido: 0–100.
-2. El control deslizante establece simultáneamente el volumen del monitor del radio (`mon_gain_cw`) y el volumen del generador de sidetone del lado del cliente.
+1. Mueva el deslizador **Sidetone volume** al nivel deseado. Rango válido: 0–100.
+2. El deslizador establece simultáneamente el volumen del monitor de la radio (`mon_gain_cw`) y el volumen del generador de sidetone del lado del cliente.
 
 ## Qué hace cada control
 
-| Control | Predeterminado | Rango válido | Clave persistida | Comportamiento |
-|---|---|---|---|---|
-| **Pitch < / >** | 600 Hz | 100–6000 Hz (paso 10) | — | Ajusta el tono de sidetone/decodificación de CW del radio en pasos de 10 Hz por clic; se envía al FLEX-8600. El tono del sidetone del lado del cliente siempre sigue este valor automáticamente. |
-| **Sidetone** | — | On / Off | — | Activa o desactiva de forma sincronizada tanto el monitor de sidetone del radio alimentado por DAX como el generador de sidetone de baja latencia del lado del cliente. |
-| **Sidetone volume** | — | 0–100 | — | Establece simultáneamente el volumen del monitor del radio (`mon_gain_cw`) y el volumen del generador de sidetone del lado del cliente. |
-| **L / R pan (CW)** | 50 | 0–100 | — | Establece el paneo estéreo del monitor de CW en el radio y aplica paneo de potencia constante al generador de sidetone del lado del cliente. Sigue `mon_pan_cw` automáticamente. Doble clic recentra en 50 (centro). |
+| Control             | Predeterminado | Rango válido           |
+|---------------------|---------|-----------------------|
+| **Pitch < / >**     | 600 Hz  | 100–6000 Hz (paso 10) |
+| **Sidetone**        | —       | On / Off              |
+| **Sidetone volume** | —       | 0–100                 |
+| **L / R pan (CW)**  | 50      | 0–100                 |
 
 ## Consejos
 
-- El control **Pitch < / >** afecta tanto al sidetone audible en el radio como a la frecuencia utilizada por el decodificador de CW. Ajústelo según su preferencia personal de tono. El sidetone del lado del cliente siempre lo sigue automáticamente.
-- Dado que el tono y el paneo siguen los parámetros del radio automáticamente, solo necesita ajustar **Pitch < / >** y **L / R pan (CW)** en un único lugar: tanto el monitor del radio como el generador local se actualizan juntos.
-- El generador de sidetone del lado del cliente opera con una latencia de aproximadamente 10 ms y funciona con paleta, manipulador recto y transmisiones generadas por CWX. Si no escucha ningún sidetone, verifique que **Sidetone** esté activado.
+- El control **Pitch < / >** afecta tanto al sidetone audible en la radio como a la frecuencia utilizada por el decodificador CW. Ajústelo para que coincida con su preferencia de pitch personal. El sidetone del lado del cliente siempre lo sigue automáticamente.
+- Dado que el pitch y el pan siguen los parámetros de la radio automáticamente, solo necesita ajustar **Pitch < / >** y **L / R pan (CW)** en un solo lugar — tanto el monitor de la radio como el generador local se actualizan juntos.
+- El generador de sidetone del lado del cliente opera con una latencia aproximada de 10 ms y funciona con transmisiones generadas por paddle, straight key y CWX. Si no escucha sidetone en absoluto, verifique que **Sidetone** esté habilitado.
+- Cuando **Mic source** está configurado en **PC**, el medidor **Level** refleja metering del lado del cliente y permanece activo independientemente del parámetro met_in_rx de la radio.
 
 ## Solución de problemas
 
-- **No se escucha ningún sidetone** — Confirme que **Sidetone** está activado y que **Sidetone volume** es mayor que cero. Tanto el monitor del radio como el generador del lado del cliente son controlados por estos dos controles.
-- **El cambio de tono no tiene efecto** — Confirme que el slice activo está en un modo CW. El subpanel de CW y su control de tono solo están activos en modos CW.
-- **El subpanel de CW no es visible** — El slice activo no está en modo CW. Cambie el slice a CW; el applet cambia automáticamente.
+- **No se escucha sidetone** — Confirme que **Sidetone** está habilitado y **Sidetone volume** está por encima de cero. Estos dos controles regulan tanto el monitor de la radio como el generador del lado del cliente.
+- **El sidetone no se inicia al conectarse (Windows)** — Esto se resolvió en v0.9.3 (#2105). Asegúrese de ejecutar v0.9.3 o superior.
+- **El medidor Level no aparece al conectarse** — Si **Mic source** está configurado en **PC**, el medidor debería aparecer inmediatamente al conectarse a partir de v0.9.3 (#2086). Para otras fuentes de micrófono, el medidor se suprime cuando met_in_rx está desactivado y la radio no está transmitiendo.
+- **El cambio de pitch no tiene efecto** — Confirme que el slice activo está en un modo CW. El sub-panel CW y su control de pitch solo están activos en modos CW.
+- **El sub-panel CW no es visible** — El slice activo no está en un modo CW. Cambie el slice a CW; el applet se cambia automáticamente.
 
 ## Relacionado
 

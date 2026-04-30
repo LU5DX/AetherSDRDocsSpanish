@@ -1,38 +1,38 @@
-# Cambiar perfiles de TX (p. ej., SSB, Digital)
+# Cambiar perfiles TX (p. ej. SSB, Digital)
 
-Use el selector de perfil de TX para cargar un perfil de transmisión con nombre desde el radio. Los perfiles almacenan ajustes de micrófono, valores de ecualizador y otros parámetros de transmisión, lo que permite cambiar rápidamente entre modos como SSB y Digital.
+Use el selector de perfil TX para cargar un perfil de transmisión nombrado desde la radio. Los perfiles almacenan configuraciones de micrófono, valores del ecualizador y otros parámetros de transmisión, permitiéndole cambiar rápidamente entre modos como SSB y Digital.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. El applet TX Controls requiere una conexión activa con el radio.
-- Debe existir al menos un perfil de transmisión en el radio. Cree o administre perfiles desde `Profiles > Profile Manager...`.
+- AetherSDR debe estar conectado a la radio. El applet TX Controls requiere una conexión de radio activa.
+- Al menos un perfil de transmisión debe existir ya en la radio. Cree o administre perfiles a través de `Profiles > Profile Manager...`.
 
 ## Pasos
 
-1. Haga clic en el botón de bandeja **TX** en la barra lateral derecha para abrir el applet TX Controls.
-2. Localice el menú desplegable **TX Profile** cerca de la parte central del applet.
-3. Haga clic en el menú desplegable y seleccione el nombre del perfil que desea cargar (por ejemplo, "SSB" o "Digital").
+1. Haga clic en el botón **TX** en la bandeja de la barra lateral derecha para abrir el applet TX Controls.
+2. Localice el desplegable **TX Profile** cerca del medio del applet.
+3. Haga clic en el desplegable y seleccione el nombre del perfil que desea cargar (por ejemplo, "SSB" o "Digital").
 
-El radio carga el perfil seleccionado de inmediato. No se requiere ningún paso de confirmación.
+La radio carga el perfil seleccionado inmediatamente. No se requiere un paso de confirmación.
 
 ## Qué hace cada control
 
-| Control | Tipo | Comportamiento | Predeterminado | Valores válidos |
-|---|---|---|---|---|
-| **TX Profile** | Menú desplegable | Selecciona y carga un perfil de transmisión desde el radio. La lista es proporcionada por el radio. | — | Proviene de la lista de perfiles del radio |
+| Control        | Tipo      | Comportamiento                                                                                 |
+|----------------|-----------|------------------------------------------------------------------------------------------------|
+| **TX Profile** | Desplegable | Selecciona y carga un perfil de transmisión desde la radio. La lista es poblada por la radio. |
 
 ## Consejos
 
-- También puede cargar un perfil desde la barra de menú sin abrir el applet TX Controls. Vaya a `Profiles` y haga clic en el nombre del perfil en la lista con casillas de verificación debajo del separador.
+- También puede cargar un perfil desde la barra de menú sin abrir el applet TX Controls. Vaya a `Profiles` y haga clic en el nombre del perfil en la lista verificable debajo del separador.
 - Para crear, editar o eliminar perfiles, vaya a `Profiles > Profile Manager...`.
 
 ## Solución de problemas
 
-- **El menú desplegable TX Profile está vacío** — No existen perfiles de transmisión en el radio. Abra `Profiles > Profile Manager...` para crear uno.
-- **El menú desplegable TX Profile no responde** — AetherSDR no está conectado al radio. Conéctese primero desde `Settings > Connect to Radio...`.
+- **El desplegable TX Profile está vacío** — No existen perfiles de transmisión en la radio. Abra `Profiles > Profile Manager...` para crear uno.
+- **El desplegable TX Profile no responde** — AetherSDR no está conectado a la radio. Conéctese primero a través de `Settings > Connect to Radio...`.
 
 ## Relacionado
 
 - [Descripción general de TX Controls](overview.md)
-- [Configurar la potencia de salida de RF](set-rf-output-power.md)
-- [Ejecutar una prueba de dos tonos](run-a-two-tone-tune.md)
+- [Establecer potencia de salida RF](set-rf-output-power.md)
+- [Ejecutar una sintonización de dos tonos](run-a-two-tone-tune.md)

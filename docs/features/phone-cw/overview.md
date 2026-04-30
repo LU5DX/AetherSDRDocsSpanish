@@ -1,66 +1,71 @@
 # Descripción general de Phone/CW
 
-El applet Phone/CW es un panel de transmisión con reconocimiento de modo que proporciona controles de micrófono, procesador y monitor en modos de voz, y cambia automáticamente a los controles de CW cuando el slice activo está en un modo CW. Ábralo para ajustar el audio de transmisión o configurar los parámetros de manipulación.
+El applet Phone/CW es un panel de transmisión consciente del modo que proporciona controles de micrófono, procesador y monitor en modos de voz, e intercambia automáticamente a controles de CW cuando el slice activo está en un modo CW. Ábralo para ajustar el audio de transmisión o establecer parámetros de tecleo.
 
 ## Cómo funciona
 
-El applet siempre está presente en el Panel de Applets de la barra lateral derecha. Actívelo con el botón de bandeja **P/CW**. Contiene dos subpaneles gestionados mediante un diseño apilado:
+El applet siempre está presente en el Applet Panel en la barra lateral derecha. Actívelo o desactívelo usando el botón de bandeja **P/CW**. Contiene dos subpaneles administrados por un diseño apilado:
 
 - **Subpanel Phone** — visible cuando el slice activo está en un modo de voz (SSB, AM, FM y similares).
 - **Subpanel CW** — visible cuando el slice activo está en un modo CW.
 
-AetherSDR cambia entre subpaneles automáticamente al cambiar el modo del slice. No es necesario cambiarlos manualmente.
+AetherSDR cambia entre subpaneles automáticamente cuando modifica el modo del slice. Usted no los cambia manualmente.
 
 ### Subpanel Phone
 
-| Control | Tipo | Qué hace | Valor predeterminado | Rango / Opciones | Clave de configuración |
-|---|---|---|---|---|---|
-| Level | Medidor | Muestra el nivel de pico de entrada del micrófono en dBFS. Indica -150 cuando el medidor está inactivo y no se está transmitiendo. | — | -40 a +10 dBFS (rojo por encima de 0) | — |
-| Compression | Medidor | Muestra la cantidad de compresión de voz en dB (relleno invertido: mayor compresión rellena hacia la izquierda). | — | -25 a 0 dB | — |
-| Mic profile | Lista desplegable | Carga el perfil de procesamiento de micrófono indicado desde la lista de perfiles del equipo. | — | Poblado desde el equipo | — |
-| Mic source | Lista desplegable | Selecciona la fuente de entrada del micrófono. | — | MIC, BAL, LINE, ACC, PC | — |
-| Mic gain | Control deslizante | Ajusta el nivel de entrada del micrófono. Cuando la fuente es PC, el valor se mantiene en el lado del cliente porque el equipo siempre reporta nivel 0 para fuentes PC. | 50 | 0–100 | `PcMicGain` |
-| +ACC | Botón de activación | Habilita la mezcla de entrada de micrófono accesorio. | — | On / Off | — |
-| PROC | Botón de activación | Activa o desactiva el procesador de voz. | — | On / Off | — |
-| NOR/DX/DX+ | Control deslizante | Establece el nivel del procesador de voz. Tres posiciones: NOR (0), DX (1), DX+ (2). | NOR (0) | 0, 1, 2 | — |
-| DAX | Botón de activación | Habilita DAX como fuente de audio de TX. | — | On / Off | — |
-| MON | Botón de activación | Habilita el monitor de TX en banda lateral. | — | On / Off | — |
-| Monitor volume | Control deslizante | Establece el volumen del monitor de banda lateral. | — | 0–100 | — |
+| Control        | Tipo          | Qué hace                                                                                                                                                                                                                             |
+|----------------|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Level          | Medidor       | Muestra el nivel máximo de entrada del micrófono en dBFS. Se suprime a -150 cuando met_in_rx está desactivado y no está transmitiendo. Excepción: cuando la fuente de micrófono es PC, el medidor usa medición del lado del cliente y no se suprime por met_in_rx (#2086). |
+| Compression    | Medidor       | Muestra la cantidad de compresión de voz en dB (relleno invertido — mayor compresión rellena hacia la izquierda).                                                                                                                                                   |
+| Mic profile    | Cuadro combinado     | Carga el perfil de procesamiento de micrófono nombrado de la lista de perfiles de la radio.                                                                                                                                                                    |
+| Mic source     | Cuadro combinado     | Selecciona la fuente de entrada de micrófono.                                                                                                                                                                                                     |
+| Mic gain       | Deslizador        | Ajusta el nivel de entrada del micrófono. Cuando la fuente es PC, el valor se mantiene del lado del cliente porque la radio siempre reporta nivel 0 para fuentes PC.                                                                                                       |
+| +ACC           | Botón de alternancia | Habilita la mezcla de entrada del micrófono accesorio.                                                                                                                                                                                                     |
+| PROC           | Botón de alternancia | Alterna el procesador de voz.                                                                                                                                                                                            |
+| NOR/DX/DX+     | Deslizador        | Establece el nivel del procesador de voz. Tres posiciones: NOR (0), DX (1), DX+ (2).                                                                                                                                             |
+| DAX            | Botón de alternancia | Habilita DAX como fuente de audio TX.                                                                                                                                                                                                      |
+| MON            | Botón de alternancia | Habilita el monitor TX de banda lateral.                                                                                                                                                                                                         |
+| Monitor volume | Deslizador        | Establece el volumen del monitor de banda lateral.                                                                                                                                                                                                        |
 
 ### Subpanel CW
 
-| Control | Tipo | Qué hace | Valor predeterminado | Rango / Opciones | Clave de configuración |
+| Control | Tipo | Qué hace | Predeterminado | Rango / Opciones | Clave de configuración |
 |---|---|---|---|---|---|
-| ALC | Medidor | Muestra la lectura del control automático de nivel. Rojo por encima de 80. | — | 0–100 | — |
-| Delay | Control deslizante | Establece el retardo de break-in de CW en milisegundos. | — | 0–2000 ms (paso 10) | — |
-| Speed | Control deslizante | Establece la velocidad de manipulación CW. | — | 5–100 WPM | — |
-| Breakin | Botón de activación | Activa o desactiva el break-in completo (QSK). | — | On / Off | — |
-| Iambic | Botón de activación | Activa o desactiva el manipulador de paleta iámbica. | — | On / Off | — |
-| Pitch < / > | Cuadro de número | Ajusta el tono de sidetone y decodificación de CW en pasos de 10 Hz. | 600 Hz | 100–6000 Hz (paso 10) | — |
-| Sidetone | Botón de activación | Activa o desactiva simultáneamente el monitor de sidetone CW del equipo (alimentado por DAX) y el generador de sidetone CW de baja latencia del lado del cliente. | — | On / Off | — |
-| Sidetone volume | Control deslizante | Establece simultáneamente el volumen del monitor CW del equipo (mon_gain_cw) y el volumen del generador de sidetone del lado del cliente. | — | 0–100 | — |
-| L / R pan (CW) | Control deslizante | Posición de paneo del monitor CW. Aplica paneo de potencia constante tanto al monitor del equipo como al generador de sidetone local. Haga doble clic para centrar. | 50 | 0–100 | — |
+| ALC | Medidor | Muestra la lectura del control de nivel automático. Rojo arriba de 80. | — | 0–100 | — |
+| Delay | Deslizador | Establece el retardo de ruptura de CW en milisegundos. | — | 0–2000 ms (paso 10) | — |
+| Speed | Deslizador | Establece la velocidad de tecleo de CW. | — | 5–100 WPM | — |
+| Breakin | Botón de alternancia | Alterna la ruptura completa (QSK). | — | Activado / Desactivado | — |
+| Iambic | Botón de alternancia | Alterna el teclador de paleta iámbico. | — | Activado / Desactivado | — |
+| Pitch < / > | Cuadro de ajuste | Incrementa el tono lateral y la frecuencia de decodificación de CW en pasos de 10 Hz. | 600 Hz | 100–6000 Hz (paso 10) | — |
+| Sidetone | Botón de alternancia | Alterna el monitor lateral de CW de la radio (alimentado por DAX) y el generador lateral de CW de baja latencia del lado del cliente en sincronización. En Windows, la transmisión lateral ahora se inicia inmediatamente al conectar (#2105). | — | Activado / Desactivado | — |
+| Sidetone volume | Deslizador | Establece el volumen del monitor lateral de la radio (mon_gain_cw) y el volumen del generador lateral del lado del cliente en sincronización. | — | 0–100 | — |
+| L / R pan (CW) | Deslizador | Posición de panorámica del monitor CW. Aplica panorámica de potencia constante tanto al monitor de la radio como al generador lateral local. Haga doble clic para recentrar. | 50 | 0–100 | — |
 
-### Comportamiento del sidetone (v0.9.1+)
+### Comportamiento de sidetone (v0.9.1+)
 
-El botón de activación **Sidetone** y el control deslizante **Sidetone volume** controlan simultáneamente el monitor alimentado por DAX del equipo y el generador de sidetone CW de baja latencia del lado del cliente (CwSidetoneGenerator, aproximadamente 10 ms de latencia). No existe un botón de activación ni un control de volumen independiente para el sidetone local. El tono y el paneo siempre siguen automáticamente los ajustes `cw_pitch` y `mon_pan_cw` del equipo — no se requiere ni está disponible ningún ajuste manual.
+El botón de alternancia **Sidetone** y el deslizador **Sidetone volume** controlan tanto el monitor alimentado por DAX de la radio como el generador lateral de CW de baja latencia del lado del cliente (CwSidetoneGenerator, aproximadamente 10 ms de latencia) en sincronización. No hay un botón de alternancia de sidetone local separado ni un deslizador de volumen. El tono y la panorámica siempre siguen automáticamente los parámetros `cw_pitch` y `mon_pan_cw` de la radio — no se requiere ni está disponible ningún ajuste manual.
 
-El sidetone local es adecuado para transmisiones con paleta, llave recta y generadas por CWX, donde la latencia de ida y vuelta por red haría inutilizable el monitor alimentado por DAX del equipo a velocidades más altas.
+El sidetone local es adecuado para transmisiones generadas por paleta, llave recta y CWX donde la latencia de ida y vuelta de la red haría que el monitor alimentado por DAX de la radio fuera inutilizable a velocidades más altas.
+
+### Comportamiento de VOX y acceso directo de teclado (v0.9.3)
+
+Cuando VOX se alterna mediante un acceso directo de teclado, el panel Phone ahora se actualiza inmediatamente para reflejar el nuevo estado de VOX (#2084). En versiones anteriores el panel no se actualizaba hasta que ocurría otro evento de interfaz de usuario.
 
 ## Consejos
 
-- El valor de `PcMicGain` se almacena únicamente en el lado del cliente. Si cambia la fuente de micrófono desde PC y vuelve a ella, AetherSDR restaura el valor guardado en lugar de leerlo del equipo.
-- Como el tono y el paneo siempre siguen los ajustes del equipo automáticamente, ajuste el tono de CW con el cuadro de número **Pitch < / >** y el paneo con el control deslizante **L / R pan (CW)** — tanto el monitor del equipo como el sidetone local se actualizan juntos.
-- El botón de activación **Sidetone** habilita o deshabilita el sidetone local al mismo tiempo que el monitor del equipo. No es posible habilitar uno independientemente del otro.
+- El valor `PcMicGain` se almacena solo del lado del cliente. Si cambia la fuente del micrófono desde PC y vuelve atrás, AetherSDR restaura el valor guardado en lugar de leer desde la radio.
+- Cuando la fuente del micrófono es PC, el medidor Level usa medición del lado del cliente y aparece inmediatamente al conectar, independientemente de la configuración met_in_rx.
+- Como el tono y la panorámica siempre siguen automáticamente los parámetros de la radio, ajuste el tono de CW usando el cuadro de ajuste **Pitch < / >** y la panorámica usando el deslizador **L / R pan (CW)** — tanto el monitor de la radio como el sidetone local se actualizan juntos.
+- El botón de alternancia **Sidetone** habilita o deshabilita el sidetone local al mismo tiempo que el monitor de la radio. No puede habilitar uno independientemente del otro.
 
-## Relacionados
+## Relacionado
 
-- [Seleccionar una fuente de micrófono (MIC, BAL, LINE, ACC, PC)](pick-a-mic-source-mic-bal-line-acc-pc.md)
-- [Ajustar la ganancia del micrófono y habilitar la mezcla de accesorio](adjust-mic-gain-and-enable-the-accessory-mix.md)
-- [Seleccionar un perfil de micrófono para un micrófono específico](select-a-mic-profile-for-a-specific-microphone.md)
-- [Habilitar el procesador de voz en nivel NOR, DX o DX+](enable-speech-processor-at-nor-dx-or-dx-level.md)
-- [Escuchar un monitor de sidetone de TX](listen-to-a-tx-sidetone-monitor.md)
-- [Establecer la velocidad de manipulación CW en WPM](set-cw-keying-speed-in-wpm.md)
-- [Establecer el retardo de break-in de CW](set-cw-break-in-delay.md)
-- [Habilitar la manipulación con paleta iámbica](enable-iambic-paddle-keying.md)
-- [Cambiar el tono de CW / frecuencia de sidetone](change-cw-pitch-sidetone-frequency.md)
+- [Seleccione una fuente de micrófono (MIC, BAL, LINE, ACC, PC)](pick-a-mic-source-mic-bal-line-acc-pc.md)
+- [Ajuste la ganancia del micrófono y habilite la mezcla de accesorios](adjust-mic-gain-and-enable-the-accessory-mix.md)
+- [Seleccione un perfil de micrófono para un micrófono específico](select-a-mic-profile-for-a-specific-microphone.md)
+- [Habilite el procesador de voz en nivel NOR, DX o DX+](enable-speech-processor-at-nor-dx-or-dx-level.md)
+- [Escuche un monitor lateral de TX](listen-to-a-tx-sidetone-monitor.md)
+- [Establezca la velocidad de tecleo de CW en WPM](set-cw-keying-speed-in-wpm.md)
+- [Establezca el retardo de ruptura de CW](set-cw-break-in-delay.md)
+- [Habilite el tecleo de paleta iámbico](enable-iambic-paddle-keying.md)
+- [Cambie el tono de CW / frecuencia lateral](change-cw-pitch-sidetone-frequency.md)

@@ -1,45 +1,57 @@
-# Usar XIT para desplazar la frecuencia de transmisión sin cambiar la recepción
+# Use XIT to offset the transmit frequency without changing RX
 
-XIT (Transmit Incremental Tuning) permite desplazar la frecuencia de transmisión una cantidad fija de hercios mientras la frecuencia de recepción permanece en el VFO. Esto resulta útil al trabajar en split, para compensar un desplazamiento de TX solicitado por la otra estación, o para ajustarse a la frecuencia de una red sin resintonizar el panadapter.
+XIT (Transmit Incremental Tuning) le permite desplazar su frecuencia de transmisión un número fijo de hertz mientras su frecuencia de recepción permanece en el VFO. Esto es útil cuando trabaja en split, compensando un desplazamiento de TX solicitado por la otra estación, o igualando una frecuencia de red sin reajustar el panadapter.
 
-## Antes de comenzar
+## Before you start
 
-- AetherSDR debe estar conectado al radio. Los controles XIT solo están activos cuando hay una conexión de radio establecida.
-- Abra el applet RX Controls. Si no está visible, haga clic en el botón RX del panel lateral derecho.
-- Seleccione el slice que desea ajustar mediante las pestañas de slice (A..H) en la parte superior del applet.
+- AetherSDR must be connected to the radio. XIT controls are only active when a radio connection is present.
+- Open the RX Controls applet. If it is not visible, click the RX tray button on the right sidebar.
+- Select the slice you want to adjust using the slice tabs (A..H) at the top of the applet.
 
 ## Pasos
 
 1. En el applet RX Controls, desplácese hacia abajo hasta la sección RIT/XIT.
-2. Haga clic en XIT para activar el Transmit Incremental Tuning. El botón se ilumina cuando está activo.
-3. Ajuste el desplazamiento XIT mediante uno de estos métodos:
-   - Haga clic en los botones **<** o **>** situados a los lados del spinbox de desplazamiento XIT para avanzar en incrementos de 10 Hz.
-   - Coloque el cursor sobre el spinbox de desplazamiento XIT y gire la rueda del ratón para avanzar en incrementos de 10 Hz.
-4. Para regresar el desplazamiento de TX a cero sin desactivar XIT, haga clic en XIT 0.
-5. Para desactivar XIT, haga clic en XIT nuevamente de modo que el botón deje de estar iluminado.
+2. Haga clic en XIT para activar Transmit Incremental Tuning. El botón se ilumina cuando está activo.
+3. Ajuste el desplazamiento XIT usando uno de estos métodos:
+   - Haga clic en los botones **<** o **>** que flanquean el spinbox de desplazamiento XIT para avanzar en incrementos de 10 Hz.
+   - Pase el mouse sobre el spinbox de desplazamiento XIT y desplácese con la rueda del mouse para avanzar en incrementos de 10 Hz.
+4. Para devolver el desplazamiento de TX a cero sin desactivar XIT, haga clic en XIT 0.
+5. Para desactivar XIT, haga clic nuevamente en XIT para que el botón ya no esté iluminado.
 
-## Qué hace cada control
+## What each control does
 
-| Control | Función | Valor predeterminado | Paso / Rango |
-|---|---|---|---|
-| XIT | Activa o desactiva el Transmit Incremental Tuning. | Off | — |
-| Desplazamiento XIT | Establece el desplazamiento de frecuencia de TX en hercios. Se ajusta con los botones **<** / **>** o la rueda del ratón. | +0 Hz | 10 Hz por paso |
-| XIT 0 | Restablece el desplazamiento XIT a +0 Hz sin desactivar XIT. | — | — |
+| Control    | What it does                                                                                   | Default |
+|------------|------------------------------------------------------------------------------------------------|---------|
+| XIT        | Toggles Transmit Incremental Tuning on or off.                                                 | Off     |
+| XIT offset | Sets the TX frequency offset in hertz. Adjusted with the **<** / **>** buttons or mouse wheel. | +0 Hz   |
+| XIT 0      | Resets the XIT offset to +0 Hz without turning XIT off.                                        | —       |
 
-## Sugerencias
+## Consejos
 
-- RIT y XIT son independientes. Puede usar ambos simultáneamente: RIT desplaza la frecuencia de recepción, XIT desplaza la frecuencia de transmisión, y la lectura del VFO permanece sin cambios.
-- Si necesita que el desplazamiento de TX persista durante una sesión, configure el desplazamiento XIT antes de transmitir; permanece establecido hasta que haga clic en XIT 0 o desactive XIT.
-- Para poner el desplazamiento a cero rápidamente antes de una transmisión, haga clic en XIT 0 en lugar de desactivar y volver a activar XIT.
+- RIT y XIT son independientes. Puede ejecutar ambos simultáneamente: RIT desplaza su frecuencia de recepción, XIT desplaza su frecuencia de transmisión, y la lectura del VFO permanece sin cambios.
+- Si necesita que el desplazamiento de TX persista durante una sesión, establezca el desplazamiento XIT antes de transmitir; permanecerá establecido hasta que haga clic en XIT 0 o desactive XIT.
+- Para poner a cero el desplazamiento rápidamente antes de una transmisión, haga clic en XIT 0 en lugar de desactivar y reactivar XIT.
 
 ## Solución de problemas
 
-- **Los controles XIT aparecen atenuados** — El radio no está conectado. Use `Settings > Connect to Radio...` para establecer la conexión y vuelva a intentarlo.
-- **La frecuencia de TX no se desplaza como se espera** — Confirme que el slice correcto está seleccionado mediante las pestañas de slice (A..H). XIT actúa únicamente sobre el slice vinculado en ese momento.
+- **Los controles XIT están deshabilitados** — La radio no está conectada. Use `Settings > Connect to Radio...` para establecer una conexión, luego intente de nuevo.
+- **La frecuencia de TX no se desplaza como se esperaba** — Confirme que la slice correcta está seleccionada usando las tabs de slice (A..H). XIT actúa solo sobre la slice actualmente vinculada.
 
-## Temas relacionados
+## Slice tab and badge colors (v0.9.3)
 
-- [Usar RIT para desplazar la frecuencia de recepción cuando una estación deriva](use-rit-to-offset-the-receive-frequency-for-a-drifting-station.md)
-- [Sintonizar el radio a una frecuencia (escribir MHz en la lectura)](tune-the-radio-to-a-frequency-type-mhz-in-the-readout.md)
-- [Cambiar entre múltiples slices usando la fila de pestañas A..H](switch-between-multiple-slices-using-the-a-h-tab-row.md)
-- [Descripción general de RX Controls](overview.md)
+Starting in v0.9.3, the slice tab buttons (A..H) and the slice badge in the top-left of the applet are colored by the SliceColorManager. Each slice has its own color that persists across sessions. The same color is reflected in the VFO widgets and meter strips for that slice. Colors are not configurable from within the RX Controls applet itself; they are managed centrally by SliceColorManager and apply consistently across all widgets that reference a given slice.
+
+## NT mode behavior
+
+The NT mode is treated as a digital mode by the RX Controls applet. Specifically:
+
+- NT follows the same filter width presets and step sizes as DIGU and DIGL.
+- The filter width label calculates bandwidth the same way as DIGU (using the high-edge value).
+- The SQL button and squelch level slider are disabled when NT is active, because audio is routed via DAX and squelch is not meaningful. If squelch was on when you switched to NT, it is turned off automatically and the previous state is saved for restoration when you leave NT mode.
+
+## Relacionado
+
+- [Use RIT to offset the receive frequency for a drifting station](use-rit-to-offset-the-receive-frequency-for-a-drifting-station.md)
+- [Tune the radio to a frequency (type MHz in the readout)](tune-the-radio-to-a-frequency-type-mhz-in-the-readout.md)
+- [Switch between multiple slices using the A..H tab row](switch-between-multiple-slices-using-the-a-h-tab-row.md)
+- [RX Controls overview](overview.md)

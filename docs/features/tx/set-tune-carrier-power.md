@@ -1,32 +1,32 @@
-# Configurar la potencia del portador de ajuste
+# Establecer la potencia de portadora de sintonización
 
-El control deslizante "Tune Pwr" establece el nivel de potencia del portador continuo que se transmite al presionar TUNE. Mantenerlo bajo protege los transistores finales y el sistema de antena durante el ajuste del ATU o las verificaciones de ROS.
+El regulador "Tune Pwr" establece el nivel de potencia de la portadora continua transmitida cuando presiona TUNE. Mantener este valor bajo protege sus finales y sistema de antena durante la sintonización del ATU o las pruebas de ROS.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. El applet TX no está disponible sin una conexión activa al radio.
-- Abra el applet TX Controls: haga clic en el botón TX del panel lateral derecho si el applet no está visible.
+- AetherSDR debe estar conectado a la radio. El applet TX no está disponible sin una conexión de radio activa.
+- Abra el applet TX Controls: haga clic en el botón TX tray en la barra lateral derecha si el applet aún no es visible.
 
 ## Pasos
 
-1. Localice el control deslizante "Tune Pwr:" en el applet TX Controls.
-2. Arrastre el control hacia la izquierda para disminuir o hacia la derecha para aumentar el nivel de potencia del portador de ajuste. El valor numérico a la derecha del control se actualiza inmediatamente.
-3. Suelte el control. El nuevo valor se envía al radio.
+1. Localice el regulador "Tune Pwr:" en el applet TX Controls.
+2. Arrastre el regulador hacia la izquierda para disminuir o hacia la derecha para aumentar el nivel de potencia de la portadora de sintonización. El valor numérico a la derecha del regulador se actualiza inmediatamente.
+3. Suelte el regulador. El nuevo valor se envía a la radio.
 
 ## Qué hace cada control
 
-| Control | Descripción | Valor predeterminado | Rango válido |
-|---|---|---|---|
-| Tune Pwr | Establece el nivel de potencia del portador de ajuste en vatios. | 10 | 0–100 |
+| Control  | Descripción                                        | Predeterminado |
+|----------|----------------------------------------------------|---------|
+| Tune Pwr | Establece el nivel de potencia de la portadora de sintonización en vatios. | 10      |
 
 ## Consejos
 
-- Configure "Tune Pwr" al nivel mínimo que permita al ATU encontrar una concordancia. Muchos operadores usan entre 10 y 20 W para el ajuste del ATU.
-- El ajuste de "Tune Pwr" es independiente de "RF Power", que controla la potencia de transmisión normal. Modificar uno no afecta al otro.
-- Puede establecer valores predeterminados de potencia de ajuste por banda en `Settings > TX Band Settings...`.
+- Establezca "Tune Pwr" en el nivel mínimo que permita a su ATU encontrar una coincidencia. Muchos operadores utilizan 10–20 W para la sintonización del ATU.
+- La configuración "Tune Pwr" es independiente de "RF Power", que controla la potencia normal de transmisión. Ajustar una no afecta a la otra.
+- Puede establecer valores predeterminados de potencia de sintonización por banda en `Settings > TX Band Settings...`.
 
-## Relacionados
+## Relacionado
 
-- [Iniciar un portador de ajuste para verificar el ROS](start-a-tune-carrier-to-check-swr.md)
+- [Iniciar una portadora de sintonización para verificar el ROS](start-a-tune-carrier-to-check-swr.md)
 - [Ejecutar el ATU interno](run-the-internal-atu.md)
-- [Configurar la potencia de salida de RF](set-rf-output-power.md)
+- [Establecer la potencia de salida RF](set-rf-output-power.md)
