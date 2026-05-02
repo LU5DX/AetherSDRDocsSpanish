@@ -1,10 +1,10 @@
 ---
-title: Changelog
+title: Histórico de cambios
 ---
 
-# Registro de cambios
+# Histórico de cambios
 
-Lista cronológica de cambios en la documentación, organizada por versión de AetherSDR.
+Lista cronológica de cambios en la documentación, organizada por release de AetherSDR.
 
 - [v0.9.5.1](v0.9.5.1.md)
 - [v0.9.4](v0.9.4.md)
