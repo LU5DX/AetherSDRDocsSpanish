@@ -1,6 +1,6 @@
-# Lea una lista en lenguaje natural de posibles problemas de slice
+# Leer una lista en lenguaje sencillo de problemas detectados en un slice
 
-El diálogo Slice Troubleshooting analiza su slice actual, panadapter, transverter, canal DAX, dispositivo de audio, estado DSP del cliente y estado de vinculación del dispositivo de control (MIDI), y presenta un resumen en lenguaje natural de los problemas detectados. Úselo cuando sospeche un problema de configuración —como audio faltante, silenciamiento atascado, antena faltante, transverter inválido o flujo de audio remoto roto— y quiera un diagnóstico rápido sin leer datos sin procesar.
+El diálogo Slice Troubleshooting analiza el slice actual, el panadapter, el transverter, el canal DAX, el dispositivo de audio, el estado DSP del cliente y el estado de asignación del dispositivo de control (MIDI), y presenta un resumen en lenguaje sencillo de los problemas detectados. Utilícelo cuando sospeche un problema de configuración — como ausencia de audio, un silenciamiento bloqueado, una antena faltante, un transverter inválido o una transmisión de audio remoto interrumpida — y desee un diagnóstico rápido sin tener que leer datos brutos.
 
 ## Antes de comenzar
 
@@ -10,43 +10,43 @@ El diálogo Slice Troubleshooting analiza su slice actual, panadapter, transvert
 
 1. Haga clic en `Help > Slice Troubleshooting...`.
 2. Haga clic en la pestaña **Issue Summary** si no está ya seleccionada.
-3. Lea la lista de viñetas de problemas detectados.
+3. Lea la lista de problemas detectados.
 4. Si ha cambiado recientemente la configuración del slice y desea que la lista refleje el estado actual, haga clic en **Refresh Snapshot**.
 
 ## Qué hace cada control
 
-| Control              | Tipo   | Comportamiento                                                                                                                                                                                                        |
-|----------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Issue Summary**    | Pestaña | Muestra una lista de viñetas en lenguaje natural de problemas detectados, incluyendo enrutamiento de audio, DSP, estado del dispositivo de control (MIDI) y problemas de propiedad de múltiples clientes.                 |
-| **JSON**             | Pestaña | Muestra la instantánea JSON completa (versión de esquema 3) de slices, canales DAX, dispositivos de audio, DSP del cliente, dispositivos de control y configuración de banda TX.                                        |
-| **Refresh Snapshot** | Botón  | Relee el estado del slice en la instantánea. Haga clic después de cambiar la configuración del slice.                                                                                                                  |
-| **Copy Summary**     | Botón  | Copia el texto del resumen de problemas al portapapeles.                                                                                                                                                               |
-| **Copy JSON**        | Botón  | Copia la instantánea JSON completa al portapapeles.                                                                                                                                                                    |
-| **Export JSON...**   | Botón  | Guarda la instantánea JSON completa en un archivo.                                                                                                                                                                     |
-| **Close**            | Botón  | Cierra el diálogo.                                                                                                                                                                                                    |
+| Control              | Tipo   | Comportamiento                                                                                                                                                                                                              |
+|----------------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Issue Summary**    | Pestaña | Muestra una lista en lenguaje sencillo de los problemas detectados, incluyendo enrutamiento de audio, DSP, estado del dispositivo de control (MIDI) y problemas de propiedad entre múltiples clientes.                      |
+| **JSON**             | Pestaña | Muestra el snapshot JSON completo (versión de esquema 3) de slices, canales DAX, dispositivos de audio, DSP del cliente, dispositivos de control y configuración de banda TX.                                               |
+| **Refresh Snapshot** | Botón  | Vuelve a leer el estado del slice en el snapshot. Haga clic aquí después de cambiar la configuración del slice.                                                                                                              |
+| **Copy Summary**     | Botón  | Copia el texto del resumen de problemas al portapapeles.                                                                                                                                                                    |
+| **Copy JSON**        | Botón  | Copia el snapshot JSON completo al portapapeles.                                                                                                                                                                            |
+| **Export JSON...**   | Botón  | Guarda el snapshot JSON completo en un archivo.                                                                                                                                                                             |
+| **Close**            | Botón  | Cierra el diálogo.                                                                                                                                                                                                          |
 
 La etiqueta de estado debajo de los botones confirma el resultado de la última acción de copia o exportación (por ejemplo, `Copied to clipboard`).
 
-## Lo que reporta Issue Summary
+## Qué reporta el Issue Summary
 
-La lista de viñetas Issue Summary cubre las siguientes áreas:
+La lista del Issue Summary cubre las siguientes áreas:
 
-- **Audio outputs** — ganancia de auriculares y silenciamiento, silenciamiento del altavoz frontal.
-- **Remote audio RX** — ID de flujo, si el flujo es esperado, si la creación está pendiente, si se ha visto un paquete de estado, si este cliente posee el flujo y la configuración de compresión. Una línea de nota de enrutamiento separada explica cualquier condición de enrutamiento inusual detectada para el flujo de RX de audio remoto.
-- **Oscillator** — configuración actual, estado de bloqueo, referencia externa y presencia de TCXO.
-- **Radio stream route** — el ID de flujo de audio remoto RX utilizado por la ruta RX actual, junto con las banderas esperado, create-pending, remove-requested, status-seen y owned-by-us para ese flujo.
-- **TX input route** — selección de entrada, sub-selecciones de micrófono y DAX, ganancia de micrófono de PC, ID de flujo TX, modo DAX TX y ruta de radio DAX.
+- **Salidas de audio** — ganancia y silenciamiento de auriculares, silenciamiento del altavoz frontal.
+- **Audio remoto RX** — ID de transmisión, si la transmisión es esperada, si la creación está pendiente, si se ha recibido un paquete de estado, si este cliente es propietario de la transmisión y la configuración de compresión. Una línea de nota de enrutamiento separada explica cualquier condición de enrutamiento inusual detectada para la transmisión de audio remoto RX.
+- **Oscilador** — configuración actual, estado de bloqueo, referencia externa y presencia de TCXO.
+- **Ruta de transmisión de radio** — el ID de transmisión de audio remoto RX utilizado por la ruta RX actual, junto con los indicadores de esperado, creación pendiente, eliminación solicitada, estado visto y en propiedad de este cliente para esa transmisión.
+- **Ruta de entrada TX** — selección de entrada, subselecciones de micrófono y DAX, ganancia del micrófono de PC, ID de transmisión TX, modo DAX TX y ruta de radio DAX.
 
-## Consejos
+## Sugerencias
 
-- Haga clic en **Refresh Snapshot** después de realizar cambios en slice, antena, DAX o enrutamiento de audio antes de compartir o releer el resumen. La instantánea no se actualiza automáticamente.
-- Si un flujo de audio remoto RX se enumera como pendiente o no es propiedad de este cliente, haga clic en **Refresh Snapshot** después de algunos segundos para verificar si el flujo se ha establecido.
-- Si necesita enviar los detalles al soporte, use **Copy Summary** para pegar la lista en lenguaje natural en un correo electrónico o publicación de foro, o use **Export JSON...** para adjuntar la instantánea completa como archivo.
+- Haga clic en **Refresh Snapshot** después de realizar cualquier cambio en el slice, la antena, DAX o el enrutamiento de audio antes de compartir o volver a leer el resumen. El snapshot no se actualiza automáticamente.
+- Si una transmisión de audio remoto RX aparece como pendiente o no es propiedad de este cliente, haga clic en **Refresh Snapshot** después de unos segundos para verificar si la transmisión se ha establecido.
+- Si necesita enviar los detalles al soporte técnico, use **Copy Summary** para pegar la lista en lenguaje sencillo en un correo electrónico o publicación en un foro, o use **Export JSON...** para adjuntar el snapshot completo como archivo.
 
-## Relacionado
+## Relacionados
 
-- [Slice Troubleshooting overview](overview.md)
-- [Actualizar la instantánea después de cambiar el estado del slice](refresh-the-snapshot-after-changing-slice-state.md)
-- [Capturar una instantánea de slice para soporte](capture-a-slice-snapshot-for-support.md)
-- [Exportar la instantánea a un archivo para adjuntar a un informe de error](export-the-snapshot-to-a-file-to-attach-to-a-bug-report.md)
-- [Inspeccionar RF/IF, desplazamiento y banderas de validez de cada transverter para diagnóstico XVTR](inspect-each-transverter-s-rf-if-offset-and-validity-flags-for-xvtr-diagnosis.md)
+- [Descripción general de Slice Troubleshooting](overview.md)
+- [Actualizar el snapshot después de cambiar el estado del slice](refresh-the-snapshot-after-changing-slice-state.md)
+- [Capturar un snapshot del slice para soporte técnico](capture-a-slice-snapshot-for-support.md)
+- [Exportar el snapshot a un archivo para adjuntar a un informe de error](export-the-snapshot-to-a-file-to-attach-to-a-bug-report.md)
+- [Inspeccionar los indicadores de RF/IF, desplazamiento y validez de cada transverter para el diagnóstico XVTR](inspect-each-transverter-s-rf-if-offset-and-validity-flags-for-xvtr-diagnosis.md)

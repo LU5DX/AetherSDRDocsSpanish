@@ -1,33 +1,33 @@
-# Establecer la velocidad de transmisión CW en PPM
+# Ajustar la velocidad de tecleo CW en PPM
 
-Use el regulador Speed en el applet Phone/CW para ajustar la velocidad a la que la radio transmite CW, medida en palabras por minuto. Esto controla el keyer interno de la radio y afecta las transmisiones por paleta, manipulador recto y CWX.
+Use el control deslizante Speed en el applet Phone/CW para ajustar la velocidad a la que la radio transmite CW, medida en palabras por minuto (PPM). Esto controla el manipulador interno de la radio y afecta las transmisiones con paleta, llave recta y CWX.
 
 ## Antes de comenzar
 
 - AetherSDR debe estar conectado a una radio FLEX-8600.
-- El slice activo debe estar en un modo CW. El applet Phone/CW muestra el subpanel CW solo cuando el slice activo está en modo CW; en caso contrario, se muestra el panel Phone.
-- Abra el applet Phone/CW haciendo clic en el botón P/CW en la barra lateral derecha, o confirme que ya está visible.
+- El slice activo debe estar en un modo CW. El applet Phone/CW muestra el subpanel CW únicamente cuando el slice activo está en modo CW; de lo contrario, se muestra el panel Phone.
+- Abra el applet Phone/CW haciendo clic en el botón P/CW de la barra lateral derecha, o confirme que ya está visible.
 
 ## Pasos
 
 1. Verifique que el slice activo esté en un modo CW. El applet cambia automáticamente al subpanel CW cuando el modo CW está activo.
-2. Localice el regulador **Speed (CW)** en el subpanel CW.
-3. Arrastre el regulador **Speed (CW)** hacia la izquierda para disminuir PPM o hacia la derecha para aumentar PPM. El rango válido es 5–100 PPM.
+2. Localice el control deslizante **Speed (CW)** en el subpanel CW.
+3. Arrastre el control deslizante **Speed (CW)** hacia la izquierda para disminuir las PPM o hacia la derecha para aumentarlas. El rango válido es de 5–100 PPM.
 
 ## Qué hace cada control
 
-| Control    | Descripción                                              | Predeterminado |
-|------------|----------------------------------------------------------|---------|
-| Speed (CW) | Establece la velocidad de transmisión CW enviada al keyer interno de la radio. | —       |
+| Control    | Descripción                                                                 | Valor predeterminado |
+|------------|-----------------------------------------------------------------------------|----------------------|
+| Speed (CW) | Establece la velocidad de tecleo CW enviada al manipulador interno de la radio. | —                    |
 
-## Consejos
+## Sugerencias
 
-- El regulador Speed (CW) controla la velocidad del keyer de la radio. Los cambios toman efecto inmediatamente y se aplican a la paleta, manipulador recto y cualquier transmisión de texto CWX.
-- El interruptor **Sidetone** y el regulador **Sidetone volume** controlan tanto el monitor alimentado por DAX de la radio como el sidetone de baja latencia del lado del cliente de manera sincronizada. Ajustar la velocidad no afecta el tono del sidetone; el tono siempre sigue automáticamente la configuración `cw_pitch` de la radio.
-- El medidor **Level** aparece inmediatamente al conectarse cuando la fuente de micrófono está configurada en PC. Cuando la fuente de micrófono es PC, el medidor utiliza mediciones del lado del cliente y no se suprime con la configuración `met_in_rx`, incluso cuando no se está transmitiendo.
+- El control deslizante Speed (CW) opera la velocidad del manipulador de la radio. Los cambios surten efecto de inmediato y se aplican a la paleta, la llave recta y cualquier transmisión de texto CWX.
+- El botón **Sidetone** y el control deslizante **Sidetone volume** controlan de forma sincronizada tanto el monitor de la radio alimentado por DAX como el sidetone de baja latencia del lado del cliente. Ajustar la velocidad no afecta el tono del sidetone; el tono siempre sigue automáticamente la configuración `cw_pitch` de la radio.
+- El indicador **Level** aparece inmediatamente al conectarse cuando la fuente de micrófono está configurada como PC. Cuando la fuente de micrófono es PC, el indicador utiliza medición del lado del cliente y no es suprimido por la configuración `met_in_rx`, incluso cuando no se está transmitiendo.
 
-## Relacionado
+## Relacionados
 
-- [Establecer el retardo de break-in CW](set-cw-break-in-delay.md)
-- [Habilitar la transmisión con paleta iámbica](enable-iambic-paddle-keying.md)
+- [Ajustar el retardo de break-in CW](set-cw-break-in-delay.md)
+- [Habilitar el tecleo con paleta iámbica](enable-iambic-paddle-keying.md)
 - [Cambiar el tono CW / frecuencia del sidetone](change-cw-pitch-sidetone-frequency.md)

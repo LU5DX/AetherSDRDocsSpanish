@@ -1,32 +1,53 @@
-# Establecer la potencia de portadora de sintonización
+# Ajustar la potencia del portador de ajuste
 
-El regulador "Tune Pwr" establece el nivel de potencia de la portadora continua transmitida cuando presiona TUNE. Mantener este valor bajo protege sus finales y sistema de antena durante la sintonización del ATU o las pruebas de ROS.
+El control deslizante "Tune Pwr" establece el nivel de potencia del portador continuo que se transmite al presionar TUNE. Mantenerlo bajo protege los transistores finales y el sistema de antena durante el ajuste del ATU o las verificaciones de ROE.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a la radio. El applet TX no está disponible sin una conexión de radio activa.
-- Abra el applet TX Controls: haga clic en el botón TX tray en la barra lateral derecha si el applet aún no es visible.
+- AetherSDR debe estar conectado al radio. El applet TX no está disponible sin una conexión de radio activa.
+- Abra el applet TX Controls: haga clic en el botón TX del área de notificación en la barra lateral derecha si el applet no está visible.
 
 ## Pasos
 
-1. Localice el regulador "Tune Pwr:" en el applet TX Controls.
-2. Arrastre el regulador hacia la izquierda para disminuir o hacia la derecha para aumentar el nivel de potencia de la portadora de sintonización. El valor numérico a la derecha del regulador se actualiza inmediatamente.
-3. Suelte el regulador. El nuevo valor se envía a la radio.
+1. Localice el control deslizante "Tune Pwr:" en el applet TX Controls.
+2. Arrastre el control hacia la izquierda para disminuir o hacia la derecha para aumentar el nivel de potencia del portador de ajuste. El valor numérico a la derecha del control se actualiza de inmediato.
+3. Suelte el control. El nuevo valor se envía al radio.
 
-## Qué hace cada control
+## Función de cada control
 
-| Control  | Descripción                                        | Predeterminado |
-|----------|----------------------------------------------------|---------|
-| Tune Pwr | Establece el nivel de potencia de la portadora de sintonización en vatios. | 10      |
+| Control  | Descripción                                                  | Valor predeterminado |
+|----------|--------------------------------------------------------------|----------------------|
+| Tune Pwr | Establece el nivel de potencia del portador de ajuste en W. | 10                   |
 
 ## Consejos
 
-- Establezca "Tune Pwr" en el nivel mínimo que permita a su ATU encontrar una coincidencia. Muchos operadores utilizan 10–20 W para la sintonización del ATU.
-- La configuración "Tune Pwr" es independiente de "RF Power", que controla la potencia normal de transmisión. Ajustar una no afecta a la otra.
-- Puede establecer valores predeterminados de potencia de sintonización por banda en `Settings > TX Band Settings...`.
+- Ajuste "Tune Pwr" al nivel mínimo que permita al ATU encontrar una concordancia. Muchos operadores usan entre 10 y 20 W para el ajuste del ATU.
+- El ajuste de "Tune Pwr" es independiente de "RF Power", que controla la potencia de transmisión normal. Modificar uno no afecta al otro.
+- Puede establecer valores predeterminados de potencia de ajuste por banda en `Settings > TX Band Settings...`.
 
-## Relacionado
+## Comportamiento del botón ATU
 
-- [Iniciar una portadora de sintonización para verificar el ROS](start-a-tune-carrier-to-check-swr.md)
-- [Ejecutar el ATU interno](run-the-internal-atu.md)
-- [Establecer la potencia de salida RF](set-rf-output-power.md)
+A partir de la v0.9.5.1, el botón ATU alterna entre iniciar un ciclo de ajuste y puentear el sintonizador, reflejando el comportamiento por frecuencia de SmartSDR.
+
+La acción exacta al hacer clic en ATU depende del estado actual del sintonizador y de la frecuencia de transmisión:
+
+| Situación | Qué hace el clic en ATU |
+|---|---|
+| No existe un ajuste exitoso para la frecuencia actual | Inicia un nuevo ciclo de ajuste del ATU. |
+| El ATU reporta una concordancia exitosa y la frecuencia de transmisión no ha cambiado desde ese ajuste | Pone el ATU en modo puente (bypass). |
+| El ATU reporta una concordancia exitosa pero la frecuencia de transmisión ha cambiado desde ese ajuste | Inicia un nuevo ciclo de ajuste del ATU. |
+| El ATU ya está en modo puente (bypass) | Inicia un nuevo ciclo de ajuste del ATU. |
+
+En la práctica esto significa:
+
+1. Haga clic en ATU en una frecuencia nueva. El radio ejecuta un ciclo de ajuste. El indicador Success se ilumina en verde cuando se encuentra una concordancia.
+2. Haga clic en ATU nuevamente sin cambiar la frecuencia. El sintonizador entra en modo puente. El indicador Byp se ilumina en naranja y el indicador Success se apaga.
+3. Cambie la frecuencia y haga clic en ATU. El radio ejecuta un nuevo ciclo de ajuste independientemente del resultado anterior.
+
+El botón ATU y el botón MEM quedan deshabilitados cuando TGXL está en modo OPERATE.
+
+## Temas relacionados
+
+- [Iniciar un portador de ajuste para verificar la ROE](start-a-tune-carrier-to-check-swr.md)
+- [Usar el ATU interno](run-the-internal-atu.md)
+- [Ajustar la potencia de salida de RF](set-rf-output-power.md)

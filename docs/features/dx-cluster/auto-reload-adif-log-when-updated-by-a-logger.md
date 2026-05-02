@@ -1,11 +1,11 @@
-# Recargar automáticamente el registro ADIF cuando lo actualiza un programa de logging
+# Recarga automática del registro ADIF cuando lo actualiza un programa de log
 
-Cuando la coloración DXCC está habilitada, AetherSDR lee su registro ADIF una sola vez al iniciar. Habilitar la recarga automática indica a AetherSDR que relea el archivo cada vez que su software de logging lo actualice, de modo que la coloración de trabajado/confirmado/necesario en el panadapter se mantenga actualizada sin intervención manual.
+Cuando el coloreado DXCC está habilitado, AetherSDR lee su registro ADIF una vez al inicio. Habilitar la recarga automática indica a AetherSDR que vuelva a leer el archivo cada vez que su programa de log lo actualice, de modo que el coloreado de trabajados/confirmados/necesarios en el panadapter se mantenga al día sin intervención manual.
 
 ## Antes de comenzar
 
-- La coloración DXCC debe estar habilitada y un archivo de registro ADIF ya debe estar cargado. Consulte [Habilitar coloración DXCC desde un registro ADIF](enable-dxcc-coloring-from-an-adif-log.md).
-- Su software de logging debe escribir las actualizaciones en la misma ruta de archivo ADIF almacenada en `DxccAdifPath`.
+- El coloreado DXCC debe estar habilitado y un archivo de registro ADIF debe estar ya cargado. Consulte [Habilitar el coloreado DXCC desde un registro ADIF](enable-dxcc-coloring-from-an-adif-log.md).
+- Su programa de log debe escribir las actualizaciones en la misma ruta de archivo ADIF almacenada en `DxccAdifPath`.
 
 ## Pasos
 
@@ -15,73 +15,75 @@ Cuando la coloración DXCC está habilitada, AetherSDR lee su registro ADIF una 
 4. Confirme que `Log File (ADIF):` muestra la ruta de archivo correcta.
 5. Haga clic en `Auto-Reload Log:` para habilitarlo.
 
-AetherSDR ahora supervisa el archivo en `DxccAdifPath` para detectar cambios. Cada vez que su programa de logging escribe un nuevo QSO, AetherSDR relee el archivo y actualiza la coloración de los spots en el panadapter.
+AetherSDR ahora vigila el archivo en `DxccAdifPath` en busca de cambios. Cada vez que su programa de log escribe un nuevo QSO, AetherSDR vuelve a leer el archivo y actualiza el coloreado de spots en el panadapter.
 
 ## Qué hace cada control
 
 | Control | Descripción | Clave de configuración |
 |---|---|---|
-| `DXCC Coloring` | Interruptor maestro para colorear spots por estado trabajado/confirmado/necesario. La recarga automática no tiene efecto cuando está desactivado. | `DxccColoringEnabled` |
-| `Log File (ADIF):` | Abre un selector de archivos para elegir el registro ADIF. La ruta elegida se persiste. | `DxccAdifPath` |
-| `Auto-Reload Log:` | Interruptor. Cuando está habilitado, AetherSDR supervisa el archivo para detectar cambios y lo recarga automáticamente. | `DxccAutoReload` |
-| `Enable FreeDV Reporter reporting when RADE is active` | Habilita el reporte de estación al mapa público FreeDV Reporter (qso.freedv.org) siempre que el módem RADE esté activo. Requiere un indicativo y cuadrícula válidos; si alguno de los campos está vacío o se resuelve como vacío, la casilla se niega a habilitarse y muestra una advertencia. | `FreeDvAutoReport` |
-| `Callsign: (FreeDV Reporter)` | Indicativo a reportar al mapa FreeDV Reporter. Solo lectura cuando `Use radio` está marcado. Cuando `Use radio` está marcado, el campo se mantiene sincronizado automáticamente si el indicativo se cambia en Radio Setup. | `FreeDvMyCallsign` |
-| `Use radio (callsign)` | Completa previamente el campo de indicativo desde el indicativo configurado del radio y bloquea el campo como solo lectura. Habilitado de forma predeterminada. | `FreeDvUseRadioCallsign` |
-| `Grid Square: (FreeDV Reporter)` | Cuadrícula Maidenhead a reportar (hasta seis caracteres). Solo lectura cuando `Use GPS` está marcado. | `FreeDvMyGrid` |
-| `Use GPS (grid)` | Completa previamente el campo de cuadrícula desde el módulo GPS del radio y bloquea el campo como solo lectura. Solo se muestra en modelos de radio que tienen hardware GPS. | `FreeDvUseGpsGrid` |
-| `Station Msg: (FreeDV Reporter)` | Mensaje de texto libre opcional que aparece junto al indicativo en el mapa público FreeDV Reporter. | `FreeDvMyMessage` |
+| `DXCC Coloring` | Interruptor principal para colorear spots según el estado trabajado/confirmado/necesario. La recarga automática no tiene efecto cuando está desactivado. | `DxccColoringEnabled` |
+| `Log File (ADIF):` | Abre un selector de archivos para elegir el registro ADIF. La ruta seleccionada se conserva. | `DxccAdifPath` |
+| `Auto-Reload Log:` | Interruptor. Cuando está habilitado, AetherSDR vigila el archivo en busca de cambios y lo recarga automáticamente. | `DxccAutoReload` |
+| `Enable FreeDV Reporter reporting when RADE is active` | Habilita el reporte de la estación al mapa público de FreeDV Reporter (qso.freedv.org) cuando el módem RADE está activo. Requiere un indicativo y un localizador de cuadrícula válidos; si alguno de los campos está vacío o se resuelve como vacío, la casilla se niega a habilitarse y muestra una advertencia. | `FreeDvAutoReport` |
+| `Callsign: (FreeDV Reporter)` | Indicativo para reportar al mapa de FreeDV Reporter. Solo lectura cuando `Use radio` está marcado. Cuando `Use radio` está marcado, el campo se sincroniza automáticamente si el indicativo cambia en Radio Setup. | `FreeDvMyCallsign` |
+| `Use radio (callsign)` | Rellena el campo de indicativo con el indicativo configurado en el equipo y bloquea el campo como solo lectura. Habilitado por defecto. | `FreeDvUseRadioCallsign` |
+| `Grid Square: (FreeDV Reporter)` | Localizador Maidenhead a reportar (hasta seis caracteres). Solo lectura cuando `Use GPS` está marcado. | `FreeDvMyGrid` |
+| `Use GPS (grid)` | Rellena el campo de cuadrícula con los datos del módulo GPS del equipo y bloquea el campo como solo lectura. Solo se muestra en modelos de equipo que disponen de hardware GPS. | `FreeDvUseGpsGrid` |
+| `Station Msg: (FreeDV Reporter)` | Mensaje de texto libre opcional que aparece junto al indicativo en el mapa público de FreeDV Reporter. | `FreeDvMyMessage` |
+| `Auto Mode:` | Interruptor. Cuando está habilitado, selecciona automáticamente la densidad de spots según el nivel de zoom del panadapter. Habilitado por defecto a partir de la versión v0.9.5.1. | `SpotAutoSwitchMode` |
 
-## Reporte FreeDV Reporter
+## Reporte a FreeDV Reporter
 
-El grupo **Station Reporting** dentro de la pestaña `FreeDV` permite que AetherSDR transmita la actividad de su estación al mapa público FreeDV Reporter en qso.freedv.org siempre que el módem RADE esté activo.
+El grupo **Station Reporting** dentro de la pestaña `FreeDV` permite a AetherSDR transmitir la actividad de su estación al mapa público de FreeDV Reporter en qso.freedv.org cuando el módem RADE está activo.
 
 ### Requisitos
 
 - La compilación debe incluir soporte WebSocket (`HAVE_WEBSOCKETS`). En Windows, también se requiere `HAVE_RADE`.
-- Tanto un indicativo como una cuadrícula deben resolverse a valores no vacíos antes de que la casilla `Enable FreeDV Reporter reporting when RADE is active` pueda activarse.
+- Tanto el indicativo como el localizador de cuadrícula deben resolverse como valores no vacíos antes de poder activar la casilla `Enable FreeDV Reporter reporting when RADE is active`.
 
 ### Cómo se resuelven el indicativo y la cuadrícula
 
-Cuando habilita el reporte, AetherSDR resuelve el indicativo y la cuadrícula en el siguiente orden:
+Al habilitar el reporte, AetherSDR resuelve el indicativo y la cuadrícula en el siguiente orden:
 
 **Indicativo**
-1. Si `Use radio` está marcado y el radio tiene un indicativo configurado, se utiliza ese indicativo.
-2. De lo contrario, se utiliza el valor escrito en `Callsign:`.
+1. Si `Use radio` está marcado y el equipo tiene un indicativo configurado, se usa ese indicativo.
+2. En caso contrario, se usa el valor escrito en `Callsign:`.
 
-**Cuadrícula**
-1. Si `Use GPS` está marcado, el radio tiene hardware GPS y hay una cuadrícula derivada de GPS disponible, se utiliza esa cuadrícula.
-2. De lo contrario, se utiliza el valor escrito en `Grid Square:`.
+**Localizador de cuadrícula**
+1. Si `Use GPS` está marcado, el equipo dispone de hardware GPS y hay una cuadrícula derivada del GPS disponible, se usa esa cuadrícula.
+2. En caso contrario, se usa el valor escrito en `Grid Square:`.
 
-Si alguno de los valores está vacío después de la resolución, aparece un diálogo de advertencia y la casilla se revierte a desmarcada. Esto evita que valores en blanco o de marcador de posición (como `N0CALL` o `AA00`) se transmitan al mapa público compartido.
+Si alguno de los valores queda vacío tras la resolución, aparece un diálogo de advertencia y la casilla vuelve a estar desmarcada. Esto evita que valores en blanco o de marcador de posición (como `N0CALL` o `AA00`) se transmitan al mapa público compartido.
 
 ### Configurar el reporte
 
 1. Abra `Settings > SpotHub...`.
 2. Haga clic en la pestaña `FreeDV`.
 3. En el grupo **Station Reporting**, confirme que el campo de indicativo muestra el indicativo correcto.
-   - Si `Use radio` está marcado, el campo se completa desde el indicativo configurado del radio y es solo lectura. Desmarque `Use radio` para ingresar un indicativo manualmente.
-4. Confirme que el campo de cuadrícula muestra un localizador Maidenhead válido.
-   - Si `Use GPS` está marcado (visible solo en radios con hardware GPS), el campo se completa desde el módulo GPS y es solo lectura. Desmarque `Use GPS` para ingresar una cuadrícula manualmente.
-5. Opcionalmente, ingrese un mensaje corto en `Station Msg:`. Este texto aparece junto a su indicativo en el mapa público.
+   - Si `Use radio` está marcado, el campo se rellena con el indicativo configurado en el equipo y es de solo lectura. Desmarque `Use radio` para introducir un indicativo manualmente.
+4. Confirme que el campo de localizador de cuadrícula muestra un localizador Maidenhead válido.
+   - Si `Use GPS` está marcado (visible solo en equipos con hardware GPS), el campo se rellena con los datos del módulo GPS y es de solo lectura. Desmarque `Use GPS` para introducir una cuadrícula manualmente.
+5. Opcionalmente, introduzca un mensaje breve en `Station Msg:`. Este texto aparece junto a su indicativo en el mapa público.
 6. Marque `Enable FreeDV Reporter reporting when RADE is active`.
-   - Si el indicativo o la cuadrícula están vacíos, aparece una advertencia y la casilla permanece desmarcada. Complete el campo faltante e intente de nuevo.
+   - Si el indicativo o la cuadrícula están vacíos, aparece una advertencia y la casilla permanece desmarcada. Rellene el campo que falta e inténtelo de nuevo.
 
-AetherSDR guarda la configuración en `FreeDvAutoReport` y comienza a reportar a qso.freedv.org siempre que el módem RADE esté activo.
+AetherSDR guarda la configuración en `FreeDvAutoReport` y comienza a reportar a qso.freedv.org cada vez que el módem RADE está activo.
 
 ## Consejos
 
-- Si su programa de logging escribe un archivo temporal y luego lo renombra en su lugar, el observador de archivos puede no detectar cada guardado. Dirija su programa de logging para escribir directamente en el archivo en la ruta almacenada en `DxccAdifPath` para una detección confiable.
-- Para archivos ADIF grandes, AetherSDR lee solo las últimas 500 líneas en cada recarga para evitar bloquear la interfaz de usuario.
-- Si cambia el indicativo del radio en Radio Setup mientras `Use radio` está marcado, el campo `Callsign:` en la sección FreeDV Reporter se actualiza automáticamente.
+- Si su programa de log escribe en un archivo temporal y luego lo renombra en su lugar, es posible que el monitor de archivos no detecte cada guardado. Configure su programa de log para que escriba directamente en el archivo de la ruta almacenada en `DxccAdifPath` para una detección fiable.
+- Para archivos ADIF de gran tamaño, AetherSDR lee solo las últimas 500 líneas en cada recarga para evitar bloquear la interfaz.
+- Si cambia el indicativo del equipo en Radio Setup mientras `Use radio` está marcado, el campo `Callsign:` en la sección de FreeDV Reporter se actualiza automáticamente.
+- `Auto Mode:` está habilitado por defecto en la versión v0.9.5.1. Si la densidad de spots en el panadapter cambia inesperadamente al hacer zoom, compruebe si `Auto Mode:` está activado y desactívelo para usar una densidad fija en su lugar.
 
 ## Solución de problemas
 
-- **Los colores de los spots no se actualizan después de registrar un nuevo QSO** — Verifique que `Auto-Reload Log:` esté habilitado y que `DXCC Coloring` también esté habilitado. Confirme que su programa de logging escribe exactamente en la misma ruta de archivo que se muestra junto a `Log File (ADIF):`. Si la ruta ha cambiado, haga clic en `Log File (ADIF):` para volver a seleccionar el archivo.
-- **El indicador de estadísticas DXCC muestra 0 QSOs** — El archivo ADIF puede no ser legible o puede estar vacío. Abra el archivo en un editor de texto para confirmar que contiene registros ADIF válidos, luego recargue AetherSDR o vuelva a seleccionar el archivo usando `Log File (ADIF):`.
-- **La casilla FreeDV Reporter se revierte a desmarcada inmediatamente** — Falta un indicativo o cuadrícula, o está vacío. Complete ambos campos (o habilite `Use radio` / `Use GPS` para que el radio proporcione los valores) y luego marque la casilla nuevamente.
-- **Los controles de FreeDV Reporter no son visibles** — La compilación no incluye soporte WebSocket. En Windows, el soporte RADE también puede estar ausente. Comuníquese con su proveedor de compilación o reconstruya con `HAVE_WEBSOCKETS` (y `HAVE_RADE` en Windows) habilitados.
+- **Los colores de los spots no se actualizan tras registrar un nuevo QSO** — Verifique que `Auto-Reload Log:` está habilitado y que `DXCC Coloring` también está habilitado. Compruebe que su programa de log está escribiendo exactamente en la misma ruta de archivo que se muestra junto a `Log File (ADIF):`. Si la ruta ha cambiado, haga clic en `Log File (ADIF):` para volver a seleccionar el archivo.
+- **El indicador de estadísticas DXCC muestra 0 QSOs** — Es posible que el archivo ADIF no sea legible o esté vacío. Abra el archivo en un editor de texto para confirmar que contiene registros ADIF válidos y, a continuación, recargue AetherSDR o vuelva a seleccionar el archivo con `Log File (ADIF):`.
+- **La casilla de FreeDV Reporter vuelve a desmarcarse inmediatamente** — Falta un indicativo o un localizador de cuadrícula, o están vacíos. Rellene ambos campos (o habilite `Use radio` / `Use GPS` para que el equipo suministre los valores) y marque la casilla de nuevo.
+- **Los controles de FreeDV Reporter no son visibles** — La compilación no incluye soporte WebSocket. En Windows, es posible que el soporte RADE también esté ausente. Contacte con su proveedor de compilación o recompile con `HAVE_WEBSOCKETS` (y `HAVE_RADE` en Windows) habilitados.
 
-## Relacionado
+## Relacionados
 
-- [Habilitar coloración DXCC desde un registro ADIF](enable-dxcc-coloring-from-an-adif-log.md)
+- [Habilitar el coloreado DXCC desde un registro ADIF](enable-dxcc-coloring-from-an-adif-log.md)
 - [Descripción general de SpotHub](overview.md)
