@@ -1,44 +1,44 @@
-# Exportar la snapshot a un archivo para adjuntar a un informe de fallo
+# Exportar la instantánea a un archivo para adjuntar a un informe de errores
 
-Utilice esta página para guardar la snapshot JSON del diálogo Slice Troubleshooting en un archivo en disco, de modo que pueda adjuntarlo a una solicitud de soporte o informe de fallo.
+Use esta página para guardar la instantánea JSON del diálogo Slice Troubleshooting en un archivo en disco y así adjuntarla a una solicitud de soporte o informe de errores.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio. El diálogo Slice Troubleshooting requiere una conexión activa con la radio.
-- Abra el diálogo Slice Troubleshooting mediante `Help > Slice Troubleshooting...` si no está ya abierto.
+- AetherSDR debe estar conectado a una radio. El diálogo Slice Troubleshooting requiere una conexión de radio activa.
+- Abra el diálogo Slice Troubleshooting mediante `Help > Slice Troubleshooting...` si aún no está abierto.
 
 ## Pasos
 
 1. Abra el diálogo Slice Troubleshooting: `Help > Slice Troubleshooting...`
-2. Haga clic en `Refresh Snapshot` para asegurar que la snapshot refleje el estado actual de la slice.
+2. Haga clic en `Refresh Snapshot` para asegurarse de que la instantánea refleja el estado actual del slice.
 3. Haga clic en `Export JSON...`.
-4. En el diálogo de guardado de archivo que aparece, elija una carpeta de destino y nombre de archivo, luego confirme el guardado.
-5. Compruebe la etiqueta de estado en la parte inferior del diálogo para confirmar que la exportación fue exitosa.
-6. Adjunte el archivo guardado a su informe de fallo o ticket de soporte.
+4. En el diálogo de guardar archivo que aparece, elija una carpeta de destino y un nombre de archivo, luego confirme el guardado.
+5. Revise la etiqueta de estado en la parte inferior del diálogo para confirmar que la exportación fue exitosa.
+6. Adjunte el archivo guardado a su informe de errores o ticket de soporte.
 
 ## Consejos
 
-- Si ha realizado cambios en la configuración de la slice desde que abrió el diálogo, haga clic en `Refresh Snapshot` nuevamente antes de exportar para capturar el estado más reciente.
-- Si solo necesita pegar la snapshot en un formulario web o correo electrónico en lugar de adjuntar un archivo, use `Copy JSON` en lugar de `Export JSON...`.
+- Si realizó cambios en la configuración del slice desde que abrió el diálogo, haga clic en `Refresh Snapshot` nuevamente antes de exportar para capturar el estado más reciente.
+- Si solo necesita pegar la instantánea en un formulario web o correo electrónico en lugar de adjuntar un archivo, use `Copy JSON` en vez de `Export JSON...`.
 
-## Lo que incluye el Resumen de problemas
+## Qué incluye el resumen de problemas
 
-La pestaña **Issue Summary** muestra una lista con viñetas en lenguaje natural de los problemas detectados. A partir de v0.9.4, el resumen incluye dos entradas adicionales de RX de audio remoto:
+La pestaña **Issue Summary** muestra una lista con viñetas en lenguaje simple de los problemas detectados. A partir de la v0.9.4, el resumen incluye dos entradas adicionales de audio RX remoto:
 
-- **Remote audio RX** — reporta el ID de stream, si se espera un stream, si la creación está pendiente, si se ha visto un mensaje de estado, si el stream es propiedad de este cliente, y la configuración de compresión en uso.
-- **Remote audio route note** — una nota de enrutamiento de texto libre que puede indicar por qué un stream de RX de audio remoto no está funcionando como se esperaba.
+- **Remote audio RX** — informa el ID de flujo, si se espera un flujo, si la creación está pendiente, si se ha recibido un mensaje de estado, si el flujo pertenece a este cliente y la configuración de compresión en uso.
+- **Remote audio route note** — una nota de enrutamiento en texto libre que puede indicar por qué un flujo de audio RX remoto no funciona como se espera.
 
-Cada sección de ruta de audio de slice también incluye ahora una línea **Radio stream route** que reporta el ID de stream de RX de audio remoto junto con sus indicadores expected, create-pending, remove-requested, status-seen y owned-by-us. Revise estas líneas primero al diagnosticar problemas de RX de audio remoto antes de contactar al soporte.
+Cada sección de ruta de audio de slice ahora también incluye una línea **Radio stream route** que informa el ID del flujo de audio RX remoto junto con sus indicadores de esperado, creación pendiente, eliminación solicitada, estado recibido y propiedad del cliente. Revise estas líneas primero al diagnosticar problemas de audio RX remoto antes de contactar al soporte.
 
 ## Solución de problemas
 
-- **La etiqueta de estado no muestra confirmación después de hacer clic en `Export JSON...`** — Es posible que haya cancelado el diálogo de guardado de archivo sin elegir una ubicación. Haga clic en `Export JSON...` nuevamente y confirme el guardado.
-- **`Export JSON...` no está disponible** — El diálogo requiere una conexión activa con la radio. Verifique que AetherSDR esté conectado a la radio antes de abrir el diálogo.
-- **Los campos de RX de audio remoto muestran todos placeholders** — AetherSDR aún no ha recibido un mensaje de estado de la radio para ese stream. Haga clic en `Refresh Snapshot` después de dar a la radio un momento para enviar el estado del stream, luego compruebe la pestaña **Issue Summary** nuevamente.
+- **La etiqueta de estado no muestra confirmación después de hacer clic en `Export JSON...`** — Es posible que haya cancelado el diálogo de guardar archivo sin elegir una ubicación. Haga clic en `Export JSON...` nuevamente y confirme el guardado.
+- **`Export JSON...` no está disponible** — El diálogo requiere una conexión de radio activa. Verifique que AetherSDR esté conectado a la radio antes de abrir el diálogo.
+- **Los campos de audio RX remoto muestran todos marcadores de posición** — AetherSDR aún no ha recibido un mensaje de estado de la radio para ese flujo. Haga clic en `Refresh Snapshot` después de que la radio haya tenido un momento para enviar el estado del flujo, luego revise nuevamente la pestaña **Issue Summary**.
 
-## Relacionado
+## Relacionados
 
-- [Capturar una snapshot de slice para soporte](capture-a-slice-snapshot-for-support.md)
-- [Copiar la snapshot JSON completa al portapapeles](copy-the-full-json-snapshot-to-the-clipboard.md)
-- [Actualizar la snapshot después de cambiar el estado de la slice](refresh-the-snapshot-after-changing-slice-state.md)
-- [Leer una lista en lenguaje natural de problemas sospechosos de la slice](read-a-plain-language-list-of-suspected-slice-problems.md)
+- [Capturar una instantánea del slice para soporte](capture-a-slice-snapshot-for-support.md)
+- [Copiar la instantánea JSON completa al portapapeles](copy-the-full-json-snapshot-to-the-clipboard.md)
+- [Actualizar la instantánea después de cambiar el estado del slice](refresh-the-snapshot-after-changing-slice-state.md)
+- [Leer una lista en lenguaje simple de problemas detectados en el slice](read-a-plain-language-list-of-suspected-slice-problems.md)
