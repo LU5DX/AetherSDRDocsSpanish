@@ -1,9 +1,26 @@
 ---
-title: Acerca de esta documentación
+title: Apoya la documentación
 description: Cómo se construye la documentación de AetherSDR, el pipeline de IA detrás de ella y cómo puede apoyar el proyecto.
 ---
 
-# Acerca de esta documentación
+# Apoya la documentación
+
+!!! tip "Cada contribución ayuda"
+    Si esta documentación le ahorró tiempo — o le ayudó a poner su radio en el aire más rápido — su apoyo mantiene el pipeline funcionando y el asistente mejorando.
+
+<div style="text-align:center; margin: 1.5rem 0;">
+  <a href="https://ko-fi.com/lu5dx" class="md-button" target="_blank" rel="noopener" style="margin: 0.3rem; font-size: 0.82rem;">
+    ☕ Invítame un café
+  </a>
+  <a href="https://paypal.me/lu5dx599" class="md-button" target="_blank" rel="noopener" style="margin: 0.3rem; font-size: 0.82rem;">
+    💙 Donar via PayPal
+  </a>
+  <a href="https://github.com/LU5DX" class="md-button" target="_blank" rel="noopener" style="margin: 0.3rem; font-size: 0.82rem;">
+    ⭐ Estrella en GitHub
+  </a>
+</div>
+
+---
 
 ## Construida para una aplicación seria
 
@@ -71,25 +88,6 @@ GitHub Pages aloja la documentación de forma gratuita. Todo lo demás, no:
 - **Despliegue en Railway** — backend siempre activo para el asistente
 
 Si esta documentación le resulta útil — si le ahorró una hora de búsqueda en foros, o le ayudó a poner su radio en el aire más rápido — su apoyo contribuye genuinamente a mantener este sistema en funcionamiento y a mejorarlo con el tiempo.
-
----
-
-## Apoye el proyecto
-
-!!! tip "Cada contribución ayuda"
-    Incluso una pequeña contribución compensa los costos de la API y los gastos de infraestructura, y motiva la mejora continua tanto de la documentación como del asistente.
-
-<div style="text-align:center; margin: 2rem 0;">
-  <a href="https://ko-fi.com/lu5dx" class="md-button md-button--primary" target="_blank" rel="noopener" style="margin: 0.5rem;">
-    ☕ Invíteme un café
-  </a>
-  <a href="https://paypal.me/lu5dx599" class="md-button md-button--primary" target="_blank" rel="noopener" style="margin: 0.5rem;">
-    💙 Donar vía PayPal
-  </a>
-  <a href="https://github.com/LU5DX" class="md-button" target="_blank" rel="noopener" style="margin: 0.5rem;">
-    ⭐ Destacar en GitHub
-  </a>
-</div>
 
 ---
 
