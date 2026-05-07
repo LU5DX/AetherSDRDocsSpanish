@@ -1,44 +1,133 @@
-# Cambiar el método de ganancia de NR2 entre Linear, Log, Gamma y Trained
+# Configuración de AetherDSP
 
-El método de ganancia de NR2 controla cómo el motor mapea su estimación de ruido a una curva de reducción real. Alternar entre Linear, Log, Gamma y Trained permite equilibrar entre una supresión de ruido agresiva y una voz con sonido natural.
+El cuadro de diálogo de Configuración de AetherDSP ajusta los parámetros avanzados de los motores de reducción de ruido del lado del cliente de AetherSDR (NR2, NR4, MNR, DFNR, RN2, BNR), permitiendo al operador afinar el equilibrio entre la supresión de ruido y la fidelidad del habla. Los seis módulos DSP se seleccionan mediante una fila de conmutadores en la parte superior; al hacer clic en un conmutador también se activa o se desvía ese motor.
 
-## Antes de comenzar
+## Abrir el cuadro de diálogo
 
-- AetherSDR debe estar en ejecución. No se requiere conexión a una radio para cambiar esta configuración.
-- NR2 debe estar activo en el slice que desea afectar. Este diálogo configura los parámetros del motor NR2; la habilitación de NR2 en un slice se realiza desde la interfaz principal.
+1. Haga clic en **Settings > AetherDSP Settings...**.
+2. El cuadro de diálogo se abre como una ventana sin marco con una barra de título personalizada.
 
-## Pasos
+El cuadro de diálogo se puede mover haciendo clic y arrastrando la barra de título. Haga doble clic en la barra de título para alternar entre maximizar y restaurar. Cambie el tamaño haciendo clic y arrastrando cualquier borde o esquina (zona de redimensionamiento de 6 píxeles).
 
-1. Haga clic en `Settings > AetherDSP Settings...`.
-2. Haga clic en la pestaña **NR2**.
-3. En el grupo **Gain Method**, haga clic en uno de los cuatro botones de opción: **Linear**, **Log**, **Gamma** o **Trained**.
+## Controles del cuadro de diálogo
 
-La selección surte efecto de inmediato y se guarda en `NR2GainMethod`.
+La barra de título contiene tres botones de control de ventana:
 
-## Qué hace cada control
+| Botón | Acción |
+|--------|--------|
+| **— (Minimizar)** | Minimiza el cuadro de diálogo. |
+| **□ (Maximizar)** | Maximiza o restaura el cuadro de diálogo. |
+| **× (Cerrar)** | Cierra el cuadro de diálogo. |
 
-| Control | Tipo | Predeterminado | Valores válidos | Clave de configuración | Comportamiento |
-|---|---|---|---|---|---|
-| **Gain Method** | Botones de opción | Gamma | Linear, Log, Gamma, Trained | `NR2GainMethod` | Selecciona el mapeo de curva de ganancia utilizado por NR2. Se almacena como entero 0–3 en el orden mostrado. |
+Un glifo de agarre (⋮⋮) aparece en el lado izquierdo de la barra de título como referencia visual.
 
-### Descripciones de los métodos de ganancia
+## Pestañas de selección del motor DSP
 
-- **Linear** — Utiliza una escala de amplitud de audio lineal para el cálculo de la ganancia.
+Haga clic en cualquiera de las seis pestañas (NR2, NR4, MNR, DFNR, RN2, BNR) para seleccionar la página de ese motor. Al hacer clic en una pestaña también se activa o se desvía el motor correspondiente.
+
+### Disponibilidad de pestañas
+
+- **MNR** — Atenuado en compilaciones para Windows/Linux. El motor MNR no tiene un backend en esas plataformas.
+- **BNR** — Atenuado en compilaciones sin el SDK de NVIDIA Broadcast.
+- **RN2** — Puramente informativo; sin parámetros ajustables.
+
+## Pestaña NR2
+
+NR2 proporciona reducción de ruido musical. Selecciónelo haciendo clic en el conmutador **NR2**.
+
+### Controles de NR2
+
+| Control | Tipo | Valor predeterminado | Rango | Clave de configuración |
+|---------|------|---------|-------|-------------|
+| **Gain Method** | Botones de opción | Gamma | Linear, Log, Gamma, Trained | `NR2GainMethod` (almacenado como entero 0-3) |
+| **NPE Method** | Botones de opción | OSMS | OSMS, MMSE, NSTAT | `NR2NpeMethod` (almacenado como entero 0-2) |
+| **AE Filter (eliminación de artefactos)** | Casilla de verificación | Verdadero | - | `NR2AeFilter` |
+| **Reduction:** | Deslizador | 1.50 | 0.50-2.00 | `NR2GainMax` (almacenado como valor*100) |
+| **Smoothing:** | Deslizador | 0.85 | 0.50-0.98 | `NR2GainSmooth` |
+| **Threshold:** | Deslizador | 0.20 | 0.05-0.50 | `NR2Qspp` |
+| **Reset Defaults (icono ↺)** | Botón pulsador | - | - | - |
+
+### Descripciones de Gain Method
+
+- **Linear** — Utiliza una escala de amplitud de audio lineal para el cálculo de ganancia.
 - **Log** — Utiliza una escala de amplitud logarítmica, que comprime el rango dinámico.
-- **Gamma** — Modela la ganancia con una distribución gamma que coincide con los patrones típicos de amplitud de voz. Este es el valor predeterminado.
-- **Trained** — Aplica un modelo de reducción de ruido entrenado con muestras reales de voz y ruido.
+- **Gamma** — Modela la ganancia en una distribución gamma que coincide con los patrones típicos de amplitud del habla. Este es el valor predeterminado.
+- **Trained** — Aplica un modelo de reducción de ruido entrenado con muestras reales de habla y ruido.
+
+### Descripciones de NPE Method
+
+- **OSMS** — Suavizado óptimo y estadísticas mínimas.
+- **MMSE** — Estimación de error cuadrático medio mínimo.
+- **NSTAT** — Estimador basado en estadísticas de ruido.
+
+### Reset Defaults (NR2)
+
+Restaura la pestaña NR2 a Gamma/OSMS/AE activado, Reduction 1.50, Smoothing 0.85, Threshold 0.20.
+
+## Pestaña NR4
+
+NR4 proporciona reducción de ruido basada en libspecbleach. Selecciónelo haciendo clic en el conmutador **NR4**.
+
+### Controles de NR4
+
+| Control | Tipo | Valor predeterminado | Rango | Clave de configuración |
+|---------|------|---------|-------|-------------|
+| **Noise Estimation:** | Botones de opción | MMSE | MMSE, Brandt, Martin | `NR4NoiseEstimationMethod` (almacenado como entero 0-2) |
+| **Adaptive Noise Estimation** | Casilla de verificación | Verdadero | - | `NR4AdaptiveNoise` |
+| **Reduction (dB):** | Deslizador | 10.0 | 0.0-40.0 | `NR4ReductionAmount` (almacenado como valor*10) |
+| **Smoothing (%):** | Deslizador | 0 | 0-100 | `NR4SmoothingFactor` |
+| **Whitening (%):** | Deslizador | 0 | 0-100 | `NR4WhiteningFactor` |
+| **Masking Depth:** | Deslizador | 0.50 | 0.00-1.00 | `NR4MaskingDepth` |
+| **Suppression:** | Deslizador | 0.50 | 0.00-1.00 | `NR4SuppressionStrength` |
+| **Reset Defaults (icono ↺)** | Botón pulsador | - | - | - |
+
+### Reset Defaults (NR4)
+
+Restaura la pestaña NR4 a MMSE/adaptativo activado, Reduction 10 dB, Smoothing 0, Whitening 0, Masking Depth 0.50, Suppression 0.50.
+
+## Pestaña MNR (solo macOS)
+
+MNR proporciona reducción de ruido MMSE-Wiener de macOS con suavizado de ganancia asimétrico. Haga clic en el conmutador **MNR** para acceder a sus controles.
+
+**Nota:** El conmutador MNR está atenuado en compilaciones para Windows/Linux.
+
+### Controles de MNR
+
+| Control | Tipo | Valor predeterminado | Rango | Clave de configuración |
+|---------|------|---------|-------|-------------|
+| **Enable MNR (solo macOS)** | Casilla de verificación | - | - | `MnrEnabled` (estado inicial leído en vivo de AudioEngine) |
+| **Strength** | Deslizador | 100 | 0-100 | `MnrStrength` (persistido como normalizado 0.00-1.00) |
+
+## Pestaña DFNR
+
+DFNR proporciona reducción de ruido DeepFilterNet3. Selecciónelo haciendo clic en el conmutador **DFNR**.
+
+### Controles de DFNR
+
+| Control | Tipo | Valor predeterminado | Rango | Clave de configuración |
+|---------|------|---------|-------|-------------|
+| **Attenuation Limit** | Deslizador | 100 | 0-100 dB | `DfnrAttenLimit` (0 = paso directo, 100 = máximo) |
+| **Post-Filter Beta** | Deslizador | 0.00 | 0.00-0.30 | `DfnrPostFilterBeta` (almacenado como valor*100) |
+
+## Pestaña RN2
+
+RN2 utiliza el motor RNNoise. Esta pestaña es puramente informativa y no tiene parámetros ajustables.
+
+## Pestaña BNR
+
+BNR utiliza el SDK de NVIDIA Broadcast. El control de intensidad está disponible desde el menú superpuesto. El conmutador BNR está atenuado en compilaciones sin el SDK de NVIDIA Broadcast.
 
 ## Consejos
 
-- **Gamma** es el valor predeterminado y funciona bien para la mayoría de los contactos de voz en SSB. Comience aquí si no está seguro.
-- **Trained** puede producir una voz con sonido más natural en señales para las que fue entrenado, pero los resultados varían según el tipo de señal.
-- **Log** reduce el rango dinámico de la curva de ganancia, lo que puede ayudar con pisos de ruido muy irregulares.
-- Después de cambiar el método de ganancia, ajuste **Reduction Depth:** (predeterminado 1.50, rango 0.50–2.00) y **Voice Threshold:** (predeterminado 0.20, rango 0.05–0.50) para adaptarlos a las características de la nueva curva. Consulte [Ajustar la profundidad de reducción y el umbral de voz de NR2](tune-nr2-reduction-depth-and-voice-threshold.md).
-- Haga clic en **Reset Defaults** en la pestaña NR2 para restaurar el método de ganancia a Gamma junto con todos los demás parámetros de NR2 a sus valores predeterminados.
+- **NR2** — El método de ganancia **Gamma** con NPE **OSMS** es el valor predeterminado y funciona bien para la mayoría de los contactos de voz en SSB. Comience aquí si no está seguro.
+- **NR4** — La estimación de ruido **MMSE** con estimación de ruido adaptativa habilitada proporciona un buen rendimiento base.
+- **DFNR** — Attenuation Limit en 100 proporciona la máxima supresión. Los valores más bajos permiten que pase más ruido.
+- **MNR** (solo macOS) — Strength en 100 proporciona la máxima agresividad. Reduzca para obtener un audio con un sonido más natural.
+- Después de cambiar el método de ganancia o el método NPE, reajuste los deslizadores de reducción, suavizado y umbral para que coincidan con las nuevas características.
+- Cada pestaña tiene su propio botón **Reset Defaults** para restaurar los parámetros de ese motor a la configuración de fábrica.
 
 ## Relacionados
 
-- [Cambiar el estimador de potencia de ruido de NR2 (OSMS/MMSE/NSTAT)](change-nr2-noise-power-estimator-osms-mmse-nstat.md)
-- [Ajustar la profundidad de reducción y el umbral de voz de NR2](tune-nr2-reduction-depth-and-voice-threshold.md)
-- [Restablecer los parámetros de NR2 o NR4 a sus valores predeterminados](reset-nr2-or-nr4-parameters-to-defaults.md)
-- [Elegir la reducción de ruido adecuada: NR2, NR4, DFNR, MNR](../../operating/dsp/noise-reduction-overview.md)
+- [Cómo elegir la reducción de ruido adecuada: NR2, NR4, DFNR, MNR](../../operating/dsp/noise-reduction-overview.md)
+- [Habilitar NR2 en una slice](enable-nr2-on-a-slice.md)
+- [Habilitar NR4 en una slice](enable-nr4-on-a-slice.md)

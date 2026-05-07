@@ -1,31 +1,31 @@
-# Descripción general del diseño del panadapter
+# Resumen de la Disposición del Panadapter
 
-La función de diseño del panadapter (Panadapter Layout) controla cuántos panadapters se muestran y cómo se organizan en pantalla. Úsela para adaptarse a su estilo de operación, desde una vista única de ancho completo hasta una cuadrícula de ocho panadapters.
+La función de Disposición del Panadapter controla cuántos panadapters se muestran y cómo se organizan en la pantalla. Úsela para adaptarla a su estilo de operación, desde una vista única de ancho completo hasta una cuadrícula de ocho panadapters.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio Flex. Los botones de diseño para configuraciones que requieren más panadapters de los que la radio admite están desactivados.
+- AetherSDR debe estar conectado a una radio Flex. Los botones de disposición para configuraciones que requieren más panadapters de los que la radio soporta están deshabilitados.
 
 ## Cómo funciona
 
-Haga clic derecho en el área del panadapter para abrir el diálogo **Panadapter Layout**. El diálogo presenta una cuadrícula de vistas previas en miniatura, cada una con una disposición etiquetada de celdas con letras (A, B, C, etc.). El diseño activo actualmente aparece resaltado con un borde de color verde azulado.
+Haga clic derecho en el área del panadapter para abrir el diálogo **Panadapter Layout**. El diálogo presenta una cuadrícula de vistas previas en miniatura, cada una mostrando una disposición etiquetada de celdas con letras (A, B, C, etc.). La disposición actualmente activa se resalta con un borde color verde azulado.
 
-Haga clic en cualquier miniatura habilitada para aplicar ese diseño de inmediato. El diálogo se cierra y AetherSDR reorganiza el área del panadapter. Haga clic en **Cancel** para cerrar el diálogo sin realizar cambios.
+Haga clic en cualquier miniatura habilitada para aplicar esa disposición de inmediato. El diálogo se cierra y AetherSDR reorganiza el área del panadapter. Haga clic en **Cancel** para cerrar el diálogo sin realizar cambios.
 
-El diseño elegido se guarda como `PanLayout`.
+La disposición elegida se conserva como `PanLayout`.
 
-Las miniaturas para configuraciones que superan el número de panadapters que admite su radio se muestran atenuadas y no pueden seleccionarse.
+Las miniaturas para configuraciones que exceden el número de panadapters que su radio soporta se muestran atenuadas y no se pueden seleccionar.
 
 ## Qué hace cada control
 
-| Control | Descripción | Diseños disponibles | Configuración guardada |
+| Control | Descripción | Disposiciones disponibles | Configuración persistida |
 |---|---|---|---|
-| Botones de diseño | Miniaturas de vista previa — haga clic en una para aplicar esa configuración. | `1`, `2v`, `2h`, `2h1`, `12h`, `3v`, `2x2`, `4v`, `3h2`, `2x3`, `4h3`, `2x4` | `PanLayout` |
-| **Cancel** | Cierra el diálogo sin cambiar el diseño actual. | — | — |
+| Botones de disposición | Mosaicos de vista previa: haga clic en uno para aplicar esa configuración. | `1`, `2v`, `2h`, `2h1`, `12h`, `3v`, `2x2`, `4v`, `3h2`, `2x3`, `4h3`, `2x4` | `PanLayout` |
+| **Cancel** | Cierra el diálogo sin cambiar la disposición actual. | — | — |
 
 Las configuraciones disponibles son:
 
-| ID de diseño | Etiqueta | Cantidad de panadapters |
+| ID de disposición | Etiqueta | Cantidad de panadapters |
 |---|---|---|
 | `1` | Single | 1 |
 | `2v` | A / B | 2 |
@@ -42,12 +42,12 @@ Las configuraciones disponibles son:
 
 ## Consejos
 
-- Cada etiqueta de miniatura muestra la cantidad de panadapters, por ejemplo "A\|B / C (3 pans)", para que pueda confirmar el número antes de hacer clic.
-- Los diseños que requieren más panadapters de los que la radio ofrece están desactivados y muestran un cursor de prohibición al pasar el puntero sobre ellos. Conéctese a una radio que admita el número deseado de panadapters para habilitarlos.
+- Cada etiqueta de miniatura muestra la cantidad de paneles, por ejemplo "A\|B / C (3 pans)", para que pueda confirmar la cantidad antes de hacer clic.
+- Las disposiciones que requieren más panadapters de los que la radio proporciona están deshabilitadas y muestran un cursor de prohibición al pasar el ratón. Conéctese a una radio que soporte la cantidad deseada de panadapters para habilitarlas.
 
 ## Relacionados
 
-- [Cambiar a un panadapter único de ancho completo](switch-to-a-single-full-width-panadapter.md)
-- [Dividir el área del panadapter en paralelo](split-panadapter-area-side-by-side.md)
-- [Organizar una cuadrícula 2x2 de panadapters](arrange-a-2x2-grid-of-panadapters.md)
-- [Previsualizar y elegir entre las 10 variantes de diseño](preview-and-pick-among-the-10-layout-variants.md)
+- [Switch to a single full-width panadapter](switch-to-a-single-full-width-panadapter.md)
+- [Split panadapter area side-by-side](split-panadapter-area-side-by-side.md)
+- [Arrange a 2x2 grid of panadapters](arrange-a-2x2-grid-of-panadapters.md)
+- [Preview and pick among the 10 layout variants](preview-and-pick-among-the-10-layout-variants.md)

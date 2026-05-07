@@ -1,43 +1,43 @@
-# Activar o desactivar las líneas verticales de spots para concursos u operación casual
+# Alternar líneas verticales de spots para operación en concurso o casual
 
-De forma predeterminada, AetherSDR traza una línea vertical desde la base del espectro hasta cada etiqueta de spot en el panadapter. Esta página explica cómo desactivar esas líneas — útil durante concursos cuando la pantalla se satura — y cómo volver a activarlas para la operación casual.
+Por defecto, AetherSDR dibuja una línea vertical desde la línea base del espectro hasta cada etiqueta de spot en el panadapter. Esta página explica cómo desactivar esas líneas — útil durante concursos cuando la pantalla se vuelve desordenada — y cómo reactivarlas para operación casual.
 
 ## Antes de comenzar
 
-- Al menos una fuente de spots (clúster DX, RBN, WSJT-X, POTA, SpotCollector o FreeDV) debe estar configurada y entregando spots; de lo contrario, el cambio no será visible.
-- La superposición maestra de spots debe estar activa (`IsSpotsEnabled` configurado en Enabled). Si los spots están desactivados, las líneas de spots no tienen efecto visible.
+- Debe tener al menos una fuente de spots configurada y activa (DX cluster, RBN, WSJT-X, POTA, SpotCollector o FreeDV), de lo contrario el efecto del cambio no será visible.
+- La superposición maestra de spots debe estar activada (`IsSpotsEnabled` establecido en Enabled). Si los spots están desactivados, las líneas de spots no tienen efecto visible.
 
 ## Pasos
 
-Hay dos formas de acceder al control de alternancia "Spot Lines:". Use la que le resulte más conveniente.
+Hay dos formas de acceder al conmutador "Spot Lines:". Use la que le resulte más conveniente.
 
 **Mediante SpotHub:**
 
 1. Haga clic en `Settings > SpotHub...`.
 2. Haga clic en la pestaña **Display**.
-3. Haga clic en **Spot Lines:** para alternarlo. El botón muestra **Enabled** (líneas visibles) o **Disabled** (líneas ocultas). El cambio surte efecto de inmediato.
+3. Haga clic en **Spot Lines:** para conmutarlo. El botón muestra **Enabled** (líneas dibujadas) o **Disabled** (líneas ocultas). El cambio surte efecto de inmediato.
 
 **Mediante Spot Settings:**
 
 1. Haga clic derecho sobre la superposición de spots del panadapter para abrir el menú contextual y seleccione la opción de configuración de spots, lo que abre la ventana **Spot Settings**.
-2. Haga clic en **Spot Lines:** para alternarlo. El botón muestra **Enabled** o **Disabled**. El cambio surte efecto de inmediato.
+2. Haga clic en **Spot Lines:** para conmutarlo. El botón muestra **Enabled** o **Disabled**. El cambio surte efecto de inmediato.
 
-## Qué hace cada control
+## Función de cada control
 
-| Control | Valor predeterminado | Clave de configuración | Comportamiento |
-|---|---|---|---|
-| **Spot Lines:** | Enabled | `IsSpotsLinesEnabled` | Cuando está en Enabled, traza una línea vertical desde la base del espectro hasta cada etiqueta de spot. Cuando está en Disabled, las etiquetas de spot aparecen sin líneas. |
+| Control         | Valor predeterminado | Clave de configuración |
+|-----------------|---------------------|------------------------|
+| **Spot Lines:** | Enabled             | `IsSpotsLinesEnabled`  |
 
 ## Consejos
 
-- Desactive **Spot Lines:** antes de una sesión de concurso. Con decenas o cientos de spots en pantalla, eliminar las líneas reduce significativamente el ruido visual.
-- Reactive **Spot Lines:** para DXing casual o exploración de banda, donde las líneas ayudan a identificar exactamente a qué señal corresponde cada etiqueta.
-- La configuración se guarda de inmediato; no hay ningún botón Save que deba presionar.
+- Desactive **Spot Lines:** antes de una sesión de concurso. Con docenas o cientos de spots en pantalla, eliminar las líneas reduce significativamente el ruido visual.
+- Re-active **Spot Lines:** para DX casual o exploración de bandas, donde las líneas ayudan a identificar exactamente a qué señal corresponde cada etiqueta.
+- La configuración se guarda de inmediato; no hay ningún botón Save que presionar.
 
 ## Relacionado
 
-- [Activar o desactivar spots](../spot-settings/turn-spots-on-or-off.md)
-- [Ajustar densidad, posición, tamaño de fuente y tiempo de vida de los spots](tune-spot-density-position-font-size-and-lifetime.md)
-- [Borrar todos los spots del panadapter](clear-all-spots-from-the-panadapter.md)
-- [Descripción general de SpotHub](overview.md)
-- [Descripción general de Spot Settings](../spot-settings/overview.md)
+- [Turn spots on or off](../spot-settings/turn-spots-on-or-off.md)
+- [Tune spot density, position, font size and lifetime](tune-spot-density-position-font-size-and-lifetime.md)
+- [Clear all spots from the panadapter](clear-all-spots-from-the-panadapter.md)
+- [SpotHub overview](overview.md)
+- [Spot Settings overview](../spot-settings/overview.md)

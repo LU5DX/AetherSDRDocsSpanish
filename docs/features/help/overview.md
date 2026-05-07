@@ -1,10 +1,10 @@
-# Descripción general de la ayuda sin conexión de AetherSDR
+# Resumen de la Ayuda sin Conexión de AetherSDR
 
-AetherSDR incluye un lector de ayuda integrado que muestra documentación Markdown empaquetada sin necesidad de conexión a internet. Úselo para leer guías de inicio, aprender sobre los modos de cancelación de ruido, configurar modos de datos y más.
+AetherSDR incluye un lector de ayuda integrado que muestra documentación en Markdown empaquetada sin necesidad de conexión a internet. Úselo para leer guías de inicio, aprender sobre los modos de cancelación de ruido, configurar modos de datos y más.
 
 ## Cómo funciona
 
-Cada tema de ayuda se abre en su propia ventana HelpDialog. La ventana es independiente de la conexión de radio — puede leer la ayuda en cualquier momento, incluso cuando no hay ninguna radio conectada.
+Cada tema de ayuda se abre en su propia ventana HelpDialog. La ventana es independiente de la conexión con la radio: puede leer la ayuda en cualquier momento, incluso cuando no hay ninguna radio conectada.
 
 Abra cualquier tema desde el menú Help:
 
@@ -21,26 +21,26 @@ Cada entrada abre una ventana separada precargada con ese tema. Puede tener vari
 
 | Control | Descripción |
 |---|---|
-| **AETHERSDR OFFLINE HELP** | Encabezado de marca que se muestra sobre el título del tema. Indicador de solo lectura. |
-| **Title** | Muestra el nombre del tema como título de la ventana. Solo lectura. |
-| **Subtitle** | Descripción de una línea: "Bundled help is available even when your station computer is offline." Solo lectura. |
-| **Find:** field | Escriba un tema o término para buscar dentro del tema actual. El borde del campo se vuelve rojo cuando no hay coincidencias. Actívelo con el atajo de teclado estándar de búsqueda o haciendo clic en el campo. |
-| **Next** | Busca la siguiente ocurrencia del término de búsqueda. Solo se habilita cuando el campo Find contiene texto. Presione Return en el campo Find para el mismo efecto. Vuelve al inicio del documento al llegar al final. |
-| **Previous** | Busca la ocurrencia anterior del término de búsqueda. Solo se habilita cuando el campo Find contiene texto. Presione Shift+Return en el campo Find para el mismo efecto. Vuelve al final cuando se alcanza el inicio. |
-| **Markdown viewer** | Renderiza el tema de ayuda cargado. Solo lectura. Los enlaces externos se abren en el navegador del sistema. |
-| **Hint / footer** | Muestra el consejo: "The Help menu keeps each guide separate so you can reopen just the topic you need." Solo lectura. |
-| **Close** | Cierra la ventana de ayuda. |
+| **AETHERSDR OFFLINE HELP** | Encabezado de marca mostrado sobre el título del tema. Indicador de solo lectura. |
+| **Título** | Muestra el nombre del tema como título de la ventana. Solo lectura. |
+| **Subtítulo** | Descripción de una línea: "La ayuda empaquetada está disponible incluso cuando su computadora no está conectada a internet". Solo lectura. |
+| **Campo Buscar:** | Escriba un asunto o término para buscar dentro del tema actual. El borde del campo se vuelve rojo cuando no hay coincidencias. Actívelo con el atajo de teclado estándar de Buscar o haciendo clic en el campo. |
+| **Siguiente** | Busca la siguiente aparición del término de búsqueda. Habilitado solo cuando el campo Buscar contiene texto. Presione Retorno en el campo Buscar para el mismo efecto. Vuelve al inicio del documento cuando se llega al final. |
+| **Anterior** | Busca la aparición anterior del término de búsqueda. Habilitado solo cuando el campo Buscar contiene texto. Presione Mayús+Retorno en el campo Buscar para el mismo efecto. Vuelve al final cuando se llega al inicio. |
+| **Visor de Markdown** | Muestra el tema de ayuda cargado. Solo lectura. Los enlaces externos se abren en su navegador del sistema. |
+| **Pista / pie de página** | Muestra el consejo: "El menú Help mantiene cada guía separada para que pueda reabrir solo el tema que necesita". Solo lectura. |
+| **Cerrar** | Cierra la ventana de ayuda. |
 
 ## Consejos
 
-- El campo Find busca únicamente en el tema abierto en ese momento. Para buscar en una guía diferente, ábrala desde el menú Help y use Find allí.
-- Si no se encuentra un término de búsqueda desde la posición de desplazamiento actual, el visor regresa automáticamente al inicio o al final y muestra "Wrapped to top" o "Wrapped to bottom" como indicador de estado junto al campo Find. Si no hay ninguna coincidencia, muestra "No matches."
-- No se guardan configuraciones asociadas al lector de ayuda. No se almacena nada al cerrarlo.
+- El campo Buscar solo busca dentro del tema actualmente abierto. Para buscar en una guía diferente, ábrala desde el menú Help y use Buscar allí.
+- Si no se encuentra un término de búsqueda desde la posición de desplazamiento actual, el visor vuelve automáticamente y muestra "Vuelto al inicio" o "Vuelto al final" como indicador de estado junto al campo Buscar. Si no hay ninguna coincidencia, muestra "Sin coincidencias".
+- No hay configuraciones persistentes asociadas con el lector de ayuda. No se guarda nada cuando lo cierra.
 
 ## Relacionados
 
 - [Abrir la guía de inicio empaquetada](open-bundled-getting-started-guide.md)
-- [Leer el documento de ayuda completo de AetherSDR](read-the-full-aethersdr-help-document.md)
-- [Conocer las diferencias entre NR2, NR4, DFNR y MNR](learn-the-differences-between-nr2-nr4-dfnr-and-mnr.md)
+- [Leer el documento completo de ayuda de AetherSDR](read-the-full-aethersdr-help-document.md)
+- [Conozca las diferencias entre NR2, NR4, DFNR y MNR](learn-the-differences-between-nr2-nr4-dfnr-and-mnr.md)
 - [Configurar modos digitales paso a paso](configure-digital-modes-step-by-step.md)
-- [Entender cómo contribuir con informes de errores y PRs](understand-how-to-contribute-bug-reports-and-prs.md)
+- [Comprenda cómo contribuir con informes de errores y PR](understand-how-to-contribute-bug-reports-and-prs.md)

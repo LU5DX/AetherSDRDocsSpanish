@@ -1,39 +1,39 @@
-# Determinar qué banda HF está abierta para trabajo diurno o nocturno
+# Decida qué banda de HF está abierta para trabajo diurno o nocturno
 
-El Panel de Propagación HF muestra un resumen de condiciones banda por banda, dividido en columnas de día y noche, lo que permite elegir la mejor banda antes de transmitir.
+El Panel de Propagación de HF muestra un resumen del estado por banda dividido en columnas de día y noche, permitiéndole elegir la mejor banda antes de transmitir.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar en ejecución. No se requiere conexión de radio para esta función.
-- El panel obtiene datos de servicios externos de propagación; se necesita conexión a internet para datos en tiempo real.
+- AetherSDR debe estar en ejecución. No se requiere una conexión de radio para esta función.
+- El panel obtiene datos de servicios externos de propagación; se necesita una conexión a internet para datos en vivo.
 
 ## Pasos
 
-1. Haga clic en `View > Propagation Conditions` para abrir el Panel de Propagación HF.
-2. Desplácese hasta la sección **HF Band Conditions** del cuadro de diálogo.
-3. Lea la condición mostrada para cada una de las cuatro filas de banda bajo las columnas **Day** y **Night**.
-4. Elija una banda cuya condición corresponda a su momento del día (día o noche en su ubicación).
+1. Haga clic en `View > Propagation Conditions` para abrir el Panel de Propagación de HF.
+2. Desplácese a la sección **HF Band Conditions** del diálogo.
+3. Lea el estado mostrado para cada una de las cuatro filas de banda bajo las columnas **Day** y **Night**.
+4. Elija una banda cuyo estado coincida con su hora actual del día (día o noche en su ubicación).
 
 ## Qué hace cada control
 
 | Control | Comportamiento |
 |---|---|
-| **HF Band Conditions** | Muestra una calificación de condición para cada una de las cuatro filas de banda HF, dividida en columnas de día y noche. |
-| Valor de condición de banda | Indica uno de tres estados: **Good**, **Fair** o **Poor**, codificados en color verde, ámbar o naranja, respectivamente. |
+| **HF Band Conditions** | Muestra una calificación de estado para cada una de las cuatro filas de banda de HF, dividida en columnas de día y noche. |
+| Valor del estado de la banda | Muestra uno de tres estados: **Good**, **Fair** o **Poor**, codificado con colores verde, ámbar o naranja respectivamente. |
 
 ## Consejos
 
-- Las tarjetas **Current Conditions** en la parte superior del cuadro de diálogo muestran los valores de SFI, SN, A-index, K-index y rayos X. Compárelos con las condiciones de banda: un SFI alto (120 o más) generalmente favorece las bandas HF superiores, mientras que un K-index alto (5 o más) indica actividad geomagnética de nivel de tormenta que degrada muchos circuitos.
-- Coloque el cursor sobre cualquier tarjeta de métrica para leer un tooltip en lenguaje sencillo que explica qué significa ese índice para la propagación HF.
-- Si el A-index está elevado (15 o más), las condiciones de banda pueden permanecer inestables aunque el K-index actual parezca tranquilo.
+- Las **Current Conditions cards** en la parte superior del diálogo muestran los valores de SFI, SN, índice A, índice K y rayos X. Compare estos con los estados de banda: un SFI alto (120 o superior) generalmente favorece las bandas altas de HF, mientras que un índice K alto (5 o superior) indica actividad geomagnética a nivel de tormenta que degrada muchas rutas.
+- Pase el cursor sobre cualquier tarjeta métrica para leer un mensaje emergente en lenguaje sencillo que explica qué significa ese índice para la propagación de HF.
+- Si el índice A está elevado (15 o superior), los estados de banda pueden permanecer inestables incluso si el índice K actual parece tranquilo.
 
 ## Solución de problemas
 
-- **Todos los valores de condición de banda aparecen en blanco o no se actualizan** — el panel no pudo recuperar datos de propagación. Verifique su conexión a internet y vuelva a abrir el cuadro de diálogo.
+- **Todos los valores de estado de banda aparecen en blanco o no se actualizan** — el panel no pudo recuperar datos de propagación. Verifique su conexión a internet y vuelva a abrir el diálogo.
 
-## Relacionados
+## Relacionado
 
-- [Descripción general del Panel de Propagación HF](overview.md)
-- [Verificar el flujo solar actual, el número de manchas solares y el K-index](check-current-solar-flux-sunspot-number-and-k-index.md)
-- [Ver el pronóstico de Kp de 3 días y el riesgo de apagón](see-the-3-day-kp-forecast-and-blackout-risk.md)
-- [Detectar aperturas esporádicas-E o auroréales en VHF](watch-for-vhf-sporadic-e-or-auroral-openings.md)
+- [HF Propagation Dashboard overview](overview.md)
+- [Check current solar flux, sunspot number and K-index](check-current-solar-flux-sunspot-number-and-k-index.md)
+- [See the 3-day Kp forecast and blackout risk](see-the-3-day-kp-forecast-and-blackout-risk.md)
+- [Watch for VHF sporadic-E or auroral openings](watch-for-vhf-sporadic-e-or-auroral-openings.md)

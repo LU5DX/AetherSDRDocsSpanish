@@ -1,48 +1,48 @@
-# Activar la ventana sin bordes
+# Habilitar Ventana Sin Marco
 
-`View > Frameless Window` activa o desactiva el estilo de ventana sin bordes personalizado para la ventana principal de AetherSDR. Cuando está activado, AetherSDR gestiona su propia barra de título, lo que proporciona una apariencia uniforme en todos los entornos de escritorio y un control preciso sobre los elementos decorativos de la ventana.
+`View > Frameless Window` activa o desactiva el estilo de ventana sin marco personalizado para la ventana principal de AetherSDR. Cuando está habilitado, AetherSDR gestiona su propia barra de título, ofreciéndole una apariencia consistente en todos los entornos de escritorio y un control preciso sobre los bordes de la ventana.
 
 ## Antes de comenzar
 
 - AetherSDR debe estar en ejecución.
-- Frameless Window está activado de forma predeterminada en la versión v0.9.0. Si actualizó desde una versión anterior, se fuerza su activación una vez de manera automática.
+- La ventana sin marco está activada de forma predeterminada en la versión 0.9.0. Si ha actualizado desde una versión anterior, se fuerza su activación automática una vez.
 
 ## Pasos
 
 1. Haga clic en `View` en la barra de menú.
 2. Haga clic en `Frameless Window`. Una marca de verificación junto al elemento indica que está activado.
 
-Como alternativa, presione `Ctrl+Shift+F` para alternar la configuración sin abrir el menú.
+Alternativamente, presione `Ctrl+Shift+F` para alternar la configuración sin abrir el menú.
 
 ## Qué hace cada control
 
-| Control | Descripción | Predeterminado | Clave persistente |
+| Control | Descripción | Valor predeterminado | Clave persistida |
 |---|---|---|---|
-| `View > Frameless Window` | Activa o desactiva `Qt::FramelessWindowHint` en la ventana principal. Cuando está activado, se eliminan las decoraciones nativas del sistema operativo y se reemplazan por la barra de título propia de AetherSDR de 20px. | Activado | `FramelessWindow` |
+| `View > Frameless Window` | Alterna `Qt::FramelessWindowHint` en la ventana principal. Cuando está activado, se eliminan las decoraciones nativas de la ventana del sistema operativo y se reemplazan por la barra de título personalizada de AetherSDR de 20 píxeles. | Activado | `FramelessWindow` |
 
-**Cuando Frameless Window está activado:**
+**Cuando la ventana sin marco está activada:**
 
-- Aparece una barra de título personalizada de 20px en la parte superior de la ventana. Arrástrela para mover la ventana.
+- Aparece una barra de título personalizada de 20 píxeles en la parte superior de la ventana. Arrástrela para mover la ventana.
 - Haga doble clic en la barra de título para maximizar o restaurar la ventana.
 - Los botones de minimizar, maximizar y cerrar aparecen en la barra de título.
-- Aparece un control de cambio de tamaño en la esquina inferior derecha de la ventana.
+- Aparece un asa de redimensionamiento en la esquina inferior derecha de la ventana.
 
-**Cuando Frameless Window está desactivado:**
+**Cuando la ventana sin marco está desactivada:**
 
-- Se restauran las decoraciones nativas del sistema operativo.
-- La barra de título personalizada y el control de cambio de tamaño de la esquina inferior derecha quedan ocultos.
+- Se restauran las decoraciones nativas de la ventana del sistema operativo.
+- La barra de título personalizada y el asa de redimensionamiento de la esquina inferior derecha quedan ocultos.
 
 ## Consejos
 
-- Si su entorno de escritorio o gestor de ventanas entra en conflicto con la barra de título personalizada de AetherSDR (por ejemplo, barras de título duplicadas o controles de ventana faltantes), desactive Frameless Window para volver a las decoraciones nativas.
+- Si su entorno de escritorio o gestor de ventanas entra en conflicto con la barra de título personalizada de AetherSDR (por ejemplo, barras de título duplicadas o controles de ventana faltantes), desactive la ventana sin marco para volver a las decoraciones nativas.
 - La configuración persiste entre reinicios mediante `FramelessWindow`.
 
 ## Solución de problemas
 
-- **Dos barras de título visibles** — Su gestor de ventanas está dibujando su propia barra de título sobre la de AetherSDR. Vaya a `View > Frameless Window` y confirme que la marca de verificación esté presente. Si el problema persiste, revise la configuración de su gestor de ventanas para la opción de anular las decoraciones del lado del cliente.
-- **La ventana no se puede mover ni redimensionar tras desactivar Frameless Window** — Es posible que la barra de título nativa aún no haya aparecido. Intente minimizar y restaurar la ventana para que el gestor de ventanas vuelva a dibujar sus decoraciones.
+- **Dos barras de título visibles** — Su gestor de ventanas está dibujando su propia barra de título sobre la de AetherSDR. Vaya a `View > Frameless Window` y confirme que la marca de verificación esté presente. Si el problema persiste, revise la configuración de su gestor de ventanas para anular las decoraciones del lado del cliente.
+- **La ventana no se puede mover ni redimensionar después de desactivar la ventana sin marco** — Es posible que la barra de título nativa aún no haya aparecido. Intente minimizar y restaurar la ventana para que el gestor de ventanas vuelva a dibujar sus decoraciones.
 
 ## Relacionados
 
-- [Configurar la escala de la interfaz](configure-ui-scale.md)
-- [Activar el modo mínimo](enable-minimal-mode.md)
+- [Configure UI Scale](configure-ui-scale.md)
+- [Enable Minimal Mode](enable-minimal-mode.md)

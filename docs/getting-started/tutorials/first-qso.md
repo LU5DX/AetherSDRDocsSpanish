@@ -1,90 +1,94 @@
 # Haga su primer QSO con AetherSDR
 
-Esta página explica cómo conectarse al FLEX-8600, sintonizar una frecuencia, verificar la antena y la potencia de salida, y establecer un contacto. Siga estos pasos en orden la primera vez que use AetherSDR.
+Esta página le guía en la conexión a su FLEX-8600, sintonización de una frecuencia, verificación de la antena y configuración de potencia, y realización de un contacto. Siga estos pasos en orden la primera vez que use AetherSDR.
 
 ## Antes de comenzar
 
-- Su FLEX-8600 está encendido y conectado a la misma LAN que su computadora, o dispone de credenciales SmartLink y un radio remoto disponible.
-- AetherSDR está instalado y en ejecución.
-- Sabe qué banda y modo desea operar (por ejemplo, 14.225 MHz USB).
-- Su micrófono o manipulador (keyer) está conectado y configurado en el radio.
+- Su FLEX-8600 está encendido y conectado a la misma LAN que su computadora, o tiene credenciales de SmartLink y una radio remota disponible.
+- AetherSDR está instalado e iniciado.
+- Sabe qué banda y modo desea usar (por ejemplo, 14.225 MHz USB).
+- Su micrófono o keyer está conectado y configurado en la radio.
 
 ## Pasos
 
-### 1. Conectarse al radio
+### 1. Conéctese a la radio
 
-1. Cuando no hay ningún radio conectado, AetherSDR muestra el panel **Connect to a Radio** en la ventana principal. Si ya lo cerró, ábralo desde `Settings > Connect to Radio...`.
+1. Cuando no hay ninguna radio conectada, AetherSDR muestra el panel **Connect to a Radio** en la ventana principal. Si ya lo cerró, ábralo mediante `Settings > Connect to Radio...`.
 2. El modo predeterminado es **Local**. Si su radio está en la misma LAN, deje esta opción seleccionada.
-3. Espere unos segundos para que la lista **Available radios** se complete mediante descubrimiento automático. Su FLEX-8600 debe aparecer por nombre.
-4. Haga clic en su radio en la lista **Available radios** para resaltarlo.
+3. Espere unos segundos para que la lista **Available radios** se complete mediante el descubrimiento automático. Su FLEX-8600 debería aparecer por su nombre.
+4. Haga clic en su radio en la lista **Available radios** para resaltarla.
 5. Haga clic en **Connect Selected Radio**.
-6. La etiqueta de estado cambia de "searching" a "connecting" y luego a "connected". La vista del panadapter principal se abre cuando la conexión se establece correctamente.
+6. La etiqueta de estado cambia de "searching" a "connecting" y luego a "connected". La vista principal del panadapter se abre cuando la conexión es exitosa.
 
-Si la lista permanece vacía, haga clic en **Retry Discovery**. Si el radio está en una subred diferente, haga clic en **Connect by IP** e ingrese la dirección IP del radio en el campo **Radio IP address**, luego haga clic en **Connect by IP (manual)**. Para un radio remoto a través de internet, haga clic en **Remote with SmartLink** e inicie sesión.
+Si la lista permanece vacía, haga clic en **Retry Discovery**. Si la radio está en una subred diferente, haga clic en **Connect by IP** e ingrese la dirección IP de la radio en el campo **Radio IP address**, luego haga clic en **Connect by IP (manual)**. El campo **Radio IP address** es un menú desplegable que también muestra hasta tres direcciones usadas anteriormente; seleccione una entrada reciente o escriba una nueva. Para una radio remota a través de internet, haga clic en **Remote with SmartLink** e inicie sesión.
 
-### 2. Seleccionar la antena correcta
+De forma predeterminada, **Connect to last radio on start up** está marcado, por lo que AetherSDR se reconectará automáticamente a la radio usada más recientemente cada vez que se inicie. Si prefiere elegir una radio manualmente en cada inicio, desmarque esta opción en el panel **Connect to a Radio**. La configuración se guarda inmediatamente cuando la cambia (`AutoConnectToLastRadio`).
 
-1. En la barra lateral derecha, haga clic en el botón de bandeja **RX** para abrir el applet RX Controls (visible de forma predeterminada).
-2. Busque el cuadro combinado de antena con etiqueta azul (antena RX, predeterminada **ANT1**). Haga clic en él y seleccione el puerto de antena al que está conectada su antena de recepción.
-3. Busque el cuadro combinado de antena con etiqueta roja (antena TX, predeterminada **ANT1**). Haga clic en él y seleccione el puerto de antena al que está conectada su antena de transmisión. Los puertos exclusivos de RX no aparecen aquí.
+### 2. Seleccione la antena correcta
 
-### 3. Establecer el modo de operación y la frecuencia
+1. En la barra lateral derecha, haga clic en el botón de la bandeja **RX** para abrir el applet de controles de RX (está visible de forma predeterminada).
+2. Busque el cuadro combinado de antena con etiqueta azul (antena RX, predeterminado **ANT1**). Haga clic en él y seleccione el puerto de antena al que está conectada su antena receptora.
+3. Busque el cuadro combinado de antena con etiqueta roja (antena TX, predeterminado **ANT1**). Haga clic en él y seleccione el puerto de antena al que está conectada su antena transmisora. Los puertos solo de RX no aparecen aquí.
 
-1. En el applet RX Controls, haga clic en **Mode combo** y seleccione su modo; por ejemplo, **USB** para fonía en banda lateral superior.
-2. Haga clic en **Frequency label** para activar el modo de edición (aparece el campo **Frequency edit**).
+### 3. Configure el modo de operación y la frecuencia
+
+1. En el applet de controles de RX, haga clic en **Mode combo** y seleccione su modo — por ejemplo, **USB** para telefonía en banda lateral superior.
+2. Haga clic en la **Frequency label** para cambiar al modo de edición (aparece el campo **Frequency edit**).
 3. Escriba su frecuencia objetivo en MHz (por ejemplo, `14.225`) y presione **Enter**. El panadapter se recentra en la nueva frecuencia. Presione **Escape** para cancelar sin cambiar la frecuencia.
-4. Elija el ancho de filtro haciendo clic en uno de los botones **Filter width presets**. Para USB, los ajustes preestablecidos disponibles son 1800, 2100, 2400, 2700, 2900 y 3300 Hz. 2700 Hz es un punto de partida habitual para SSB.
+4. Elija un ancho de filtro haciendo clic en uno de los botones **Filter width presets**. Para USB, los preajustes disponibles son 1800, 2100, 2400, 2700, 2900 y 3300 Hz. 2700 Hz es un punto de partida común para SSB.
 
-### 4. Configurar la potencia de transmisión
+### 4. Configure la potencia de transmisión
 
-1. Haga clic en el botón de bandeja **TX** en la barra lateral derecha para abrir el applet TX Controls.
-2. Arrastre el control deslizante **RF Power** hasta el nivel de potencia deseado (predeterminado **100**, rango 0–100). Observe el medidor **RF Pwr** durante una transmisión para confirmar la salida real.
-3. Verifique el medidor **SWR**. Una lectura superior a 2.5 se muestra en rojo; en ese caso, revise el sistema de antena antes de transmitir.
-4. Si desea usar primero el ATU interno, haga clic en **ATU** y espere a que el ciclo finalice. El indicador **Success** se ilumina en verde cuando se encuentra una concordancia.
+1. Haga clic en el botón de la bandeja **TX** en la barra lateral derecha para abrir el applet de controles de TX.
+2. Arrastre el control deslizante **RF Power** al nivel de potencia deseado (predeterminado **100**, rango 0–100). Observe el medidor **RF Pwr** durante una transmisión para confirmar la salida real.
+3. Revise el medidor **SWR**. Una lectura superior a 2.5 se muestra en rojo; investigue su sistema de antena antes de transmitir si es así.
+4. Si desea ejecutar primero el ATU interno, haga clic en **ATU** y espere a que finalice el ciclo. El indicador **Success** se enciende en verde cuando se encuentra una coincidencia.
 
-### 5. Verificar el audio y la ganancia
+### 5. Verifique el audio y la ganancia
 
-1. De vuelta en el applet RX Controls, confirme que el control deslizante **AF gain** está en un nivel de escucha cómodo (predeterminado **70**, rango 0–100).
-2. Confirme que el cuadro combinado **AGC mode** está configurado en **Med** (el valor predeterminado) para SSB. Ajuste a **Slow** o **Fast** si es necesario.
-3. Si no escucha audio, verifique que el botón de silencio (🔊/🔇) muestre el estado sin silencio.
+1. De vuelta en el applet de controles de RX, confirme que el control deslizante **AF gain** esté en un nivel de escucha cómodo (predeterminado **70**, rango 0–100).
+2. Confirme que el cuadro combinado **AGC mode** esté configurado en **Med** (el valor predeterminado) para SSB. Ajuste a **Slow** o **Fast** si es necesario.
+3. Si no escucha audio, verifique que la alternancia de silencio (🔊/🔇) muestre el estado sin silencio.
 
-### 6. Establecer el contacto
+### 6. Realice el contacto
 
-1. Escuche en la frecuencia. Cuando esté listo para llamar, accione su micrófono o manipulador.
-2. Para transmitir mediante activación por software, haga clic en **MOX** en el applet TX Controls. El botón se vuelve rojo mientras transmite. Haga clic en **MOX** nuevamente para volver a la recepción.
-3. Observe el medidor **RF Pwr** para confirmar la salida, y el medidor **SWR** para confirmar que la antena está acoplada.
-4. Cuando el QSO finalice, haga clic en **MOX** para asegurarse de estar en modo de recepción, o simplemente suelte el PTT de hardware.
+1. Escuche en la frecuencia. Cuando esté listo para llamar, active su micrófono o keyer.
+2. Para transmitir usando la activación por software, haga clic en **MOX** en el applet de controles de TX. El botón se vuelve rojo mientras transmite. Haga clic en **MOX** nuevamente para volver a recepción.
+3. Observe el medidor **RF Pwr** para confirmar la salida y el medidor **SWR** para confirmar que la antena está adaptada.
+4. Cuando el QSO esté completo, haga clic en **MOX** para asegurarse de estar en recepción, o simplemente suelte su PTT de hardware.
 
 ## Consejos
 
-- Si la otra estación está ligeramente fuera de frecuencia y no desea mover su VFO, active **RIT** en el applet RX Controls y use el spinbox **RIT offset** (pasos de 10 Hz) para desplazar su frecuencia de recepción sin cambiar la transmisión. Haga clic en **RIT 0** para anularlo luego.
-- Para evitar sintonizar accidentalmente en medio de un QSO, haga clic en el botón 🔓 en el applet RX Controls para bloquear el slice (receptor virtual). El icono cambia a 🔒.
-- El control deslizante **L / R pan** (predeterminado **50**, rango 0–100) permite posicionar el audio de este slice en el campo estéreo. Haga doble clic para restablecer el centro.
-- Si opera en split, use **XIT** en el applet RX Controls para desplazar su frecuencia de transmisión de forma independiente al VFO de recepción.
+- Si la otra estación está ligeramente fuera de frecuencia y no desea mover su VFO, active **RIT** en el applet de controles de RX y use el cuadro de giro **RIT offset** (pasos de 10 Hz) para desplazar su frecuencia de recepción sin cambiar la transmisión. Haga clic en **RIT 0** después para ponerlo a cero.
+- Para evitar resintonizar accidentalmente durante un QSO, haga clic en la alternancia 🔓 en el applet de controles de RX para bloquear el slice. El icono cambia a 🔒.
+- El control deslizante **L / R pan** (predeterminado **50**, rango 0–100) le permite posicionar el audio de este slice en el campo estéreo. Haga doble clic en él para restablecerlo al centro.
+- Si opera en split, use **XIT** en el applet de controles de RX para desplazar su frecuencia de transmisión de forma independiente del VFO de recepción.
+- Use los atajos de teclado **widen** y **narrow** para recorrer los preajustes de filtro por modo. El método `stepFilterWidth(direction)` recorre la lista de preajustes del modo actual, por lo que la geometría del borde del filtro siempre es correcta para el modo activo (USB, LSB, CW, AM, DIGL, etc.). Por ejemplo, presionar un atajo widen en modo CW recorre los preajustes de 50, 100, 250, 400 Hz, mientras que en USB recorre los preajustes de 1800, 2100, 2400, 2700, 2900, 3300 Hz.
 
 ## Solución de problemas
 
-- **La lista Available radios está vacía** — Haga clic en **Retry Discovery**. Verifique que el radio esté encendido y en el mismo segmento de red. Haga clic en **Open Network Diagnostics** para inspeccionar la ruta. Si el radio está en una subred diferente, utilice **Connect by IP (manual)** en su lugar.
-- **Sin audio por el altavoz** — Verifique que el botón de silencio en el applet RX Controls muestre el estado sin silencio (🔊). Compruebe que **AF gain** esté por encima de 0. Verifique la configuración del dispositivo de audio en su sistema operativo.
-- **MOX activa la transmisión, pero el medidor RF Pwr muestra cero** — Confirme que la antena TX correcta está seleccionada en el cuadro combinado de antena TX con etiqueta roja. Confirme que **RF Power** está por encima de 0 en el applet TX Controls.
-- **El medidor SWR muestra rojo (por encima de 2.5)** — No continúe transmitiendo a plena potencia. Verifique las conexiones de antena. Ejecute el **ATU** interno para encontrar una concordancia, o reduzca la potencia hasta resolver el problema.
-- **El campo Frequency edit no acepta el valor** — Asegúrese de ingresar un valor en MHz dentro del rango válido (0.001–54.000 MHz). Presione **Escape** para cancelar y restaurar la frecuencia anterior.
+- **La lista Available radios está vacía** — Haga clic en **Retry Discovery**. Verifique que la radio esté encendida y en el mismo segmento de red. Haga clic en **Open Network Diagnostics** para inspeccionar la ruta. Si la radio está en una subred diferente, use **Connect by IP (manual)** en su lugar.
+- **No hay audio del altavoz** — Verifique que la alternancia de silencio en el applet de controles de RX muestre el estado sin silencio (🔊). Verifique que **AF gain** esté por encima de 0. Verifique la configuración del dispositivo de audio en su sistema operativo.
+- **MOX se activa pero el medidor RF Pwr lee cero** — Confirme que la antena TX correcta esté seleccionada en el cuadro combinado de antena TX con etiqueta roja. Confirme que **RF Power** esté por encima de 0 en el applet de controles de TX.
+- **El medidor SWR lee en rojo (superior a 2.5)** — No continúe transmitiendo a máxima potencia. Verifique las conexiones de la antena. Ejecute el **ATU** interno para encontrar una coincidencia, o reduzca la potencia hasta que se resuelva el problema.
+- **El editor de frecuencia no acepta el valor** — Asegúrese de ingresar un valor en MHz dentro del rango válido (0.001–54.000 MHz). Presione **Escape** para cancelar y restaurar la frecuencia anterior.
+- **El menú desplegable Radio IP address muestra una dirección obsoleta** — La etiqueta de advertencia **Source warning label** aparece debajo del cuadro combinado **Advanced: Source path** cuando la NIC guardada anteriormente ya no es accesible. Seleccione una interfaz de origen válida antes de hacer clic en **Connect by IP (manual)**.
 
 ## Relacionados
 
-- [Conectarse a un radio en LAN local](../setup/connect-to-a-local-lan-radio.md)
-- [Conectarse a un radio remoto a través de SmartLink](../setup/connect-to-a-remote-radio-through-smartlink.md)
-- [Conectarse por IP a través de una VPN o red enrutada](../setup/connect-by-ip-across-a-vpn-or-routed-network.md)
-- [Reintentar el descubrimiento cuando no aparecen radios](../../features/connection/retry-discovery-when-no-radios-appear.md)
-- [Cambiar el modo (USB, LSB, CW, AM, FM, etc.)](../../features/rx/change-mode-usb-lsb-cw-am-fm-etc.md)
-- [Sintonizar el radio a una frecuencia (ingresar MHz en el indicador)](../../features/rx/tune-the-radio-to-a-frequency-type-mhz-in-the-readout.md)
-- [Seleccionar un ancho de filtro preestablecido para el modo actual](../../features/rx/pick-a-filter-width-preset-for-the-current-mode.md)
-- [Seleccionar la antena RX o TX para este slice](../../features/rx/select-the-rx-or-tx-antenna-for-this-slice.md)
-- [Configurar la potencia de salida RF](../../features/tx/set-rf-output-power.md)
-- [Iniciar una portadora de ajuste para verificar el SWR](../../features/tx/start-a-tune-carrier-to-check-swr.md)
-- [Ejecutar el ATU interno](../../features/tx/run-the-internal-atu.md)
-- [Activar MOX para accionar manualmente el transmisor](../../features/tx/toggle-mox-to-manually-key-the-transmitter.md)
-- [Usar RIT para desplazar la frecuencia de recepción ante una estación con deriva](../../features/rx/use-rit-to-offset-the-receive-frequency-for-a-drifting-station.md)
-- [Usar XIT para desplazar la frecuencia de transmisión sin cambiar la recepción](../../features/rx/use-xit-to-offset-the-transmit-frequency-without-changing-rx.md)
-- [Bloquear el slice para evitar sintonización accidental](../../features/rx/lock-the-slice-to-prevent-accidental-retuning.md)
-- [Comprensión de slices y VFOs](../concepts/understanding-slices.md)
+- [Connect to a local LAN radio](../setup/connect-to-a-local-lan-radio.md)
+- [Connect to a remote radio through SmartLink](../setup/connect-to-a-remote-radio-through-smartlink.md)
+- [Connect by IP across a VPN or routed network](../setup/connect-by-ip-across-a-vpn-or-routed-network.md)
+- [Retry discovery when no radios appear](../../features/connection/retry-discovery-when-no-radios-appear.md)
+- [Change mode (USB, LSB, CW, AM, FM, etc.)](../../features/rx/change-mode-usb-lsb-cw-am-fm-etc.md)
+- [Tune the radio to a frequency (type MHz in the readout)](../../features/rx/tune-the-radio-to-a-frequency-type-mhz-in-the-readout.md)
+- [Pick a filter width preset for the current mode](../../features/rx/pick-a-filter-width-preset-for-the-current-mode.md)
+- [Select the RX or TX antenna for this slice](../../features/rx/select-the-rx-or-tx-antenna-for-this-slice.md)
+- [Set RF output power](../../features/tx/set-rf-output-power.md)
+- [Start a tune carrier to check SWR](../../features/tx/start-a-tune-carrier-to-check-swr.md)
+- [Run the internal ATU](../../features/tx/run-the-internal-atu.md)
+- [Toggle MOX to manually key the transmitter](../../features/tx/toggle-mox-to-manually-key-the-transmitter.md)
+- [Use RIT to offset the receive frequency for a drifting station](../../features/rx/use-rit-to-offset-the-receive-frequency-for-a-drifting-station.md)
+- [Use XIT to offset the transmit frequency without changing RX](../../features/rx/use-xit-to-offset-the-transmit-frequency-without-changing-rx.md)
+- [Lock the slice to prevent accidental retuning](../../features/rx/lock-the-slice-to-prevent-accidental-retuning.md)
+- [Understanding slices and VFOs](../concepts/understanding-slices.md)

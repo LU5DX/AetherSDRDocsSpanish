@@ -1,47 +1,63 @@
-# Ajuste de Amount para una des-esibilización lo más transparente posible
+# Ajuste de Cantidad para un des-esseado más transparente
 
-El control Amount establece la atenuación máxima que aplica el des-esibilizador cuando la sibilancia supera el umbral. Ajustar el valor correcto permite dominar la aspereza sin que el audio suene procesado o con efectos de bombeo.
+El mando Amount (Cantidad) establece la atenuación máxima que aplica el des-essedor cuando los picos de sibilancia superan el umbral. Ajustar el valor correcto le permite domar la aspereza sin que su audio suene procesado o bombeado.
 
 ## Antes de comenzar
 
-- El módulo Aetherial De-Esser (DESS) debe estar habilitado en el widget CHAIN. El applet permanece oculto hasta que el módulo esté activo.
-- Abra el applet Aetherial De-Esser o el editor flotante. Para abrir el editor, haga doble clic en el módulo DESS dentro del widget CHAIN (titulado "Aetherial De-Esser — TX").
-- Configure primero Freq y Thresh para que el des-esibilizador ya esté actuando sobre la banda correcta. Consulte [Barra Freq para localizar la sibilancia máxima](sweep-freq-to-locate-peak-sibilance.md) y [Ajuste el umbral justo por debajo de los picos más altos de "S"](set-threshold-just-below-the-loudest-s-peaks.md).
+- La etapa Aetherial De-Esser (DESS) debe estar habilitada en el widget CHAIN. El applet permanece oculto hasta que la etapa esté activa.
+- Abra el applet Aetherial De-Esser a través de Aetherial Audio Channel Strip. El editor flotante (anteriormente accesible al hacer doble clic en la etapa DESS) ya no existe; todos los controles están disponibles directamente en el applet.
+- Ajuste primero Freq y Thresh para que el des-essedor ya esté disparando en la banda correcta. Consulte [Sweep Freq to locate peak sibilance](sweep-freq-to-locate-peak-sibilance.md) y [Set threshold just below the loudest 'S' peaks](set-threshold-just-below-the-loudest-s-peaks.md).
 
 ## Pasos
 
-1. Haga que alguien hable ante el micrófono — o lea en voz alta una frase con sibilantes — de modo que el des-esibilizador esté actuando activamente.
-2. Observe la barra de reducción de ganancia (Gain-reduction bar). Se rellena de derecha a izquierda en rojo suave para indicar cuánta atenuación se está aplicando. Una marca señala el punto de −6 dB.
-3. Gire el control Amount en sentido antihorario para aumentar la atenuación (valores más negativos) hasta que desaparezca la aspereza.
-4. Retroceda en sentido horario hasta que la barra de reducción de ganancia solo alcance la marca de −6 dB en los picos más altos de "S". Detenerse aquí mantiene el procesado transparente.
-5. Si la barra de reducción de ganancia se clava cerca de 24 dB o el audio suena hueco, aumente Amount hacia 0 dB en pasos pequeños hasta que el sonido natural regrese.
+1. Haga que alguien transmita por el micrófono — o lea una frase sibilante en voz alta — para que el des-essedor esté disparando activamente.
+2. Observe la barra Gain-reduction (Reducción de ganancia). Se llena de derecha a izquierda en rojo suave para mostrar cuánta atenuación se está aplicando. Una marca indica el punto de −6 dB.
+3. Gire el mando Amount en sentido antihorario para aumentar la atenuación (valores más negativos) hasta que desaparezca la aspereza.
+4. Retroceda en sentido horario hasta que la barra Gain-reduction solo alcance la marca de −6 dB en los picos de "S" más fuertes. Detenerse aquí mantiene el procesamiento transparente.
+5. Si la barra Gain-reduction está fija cerca de 24 dB o el audio suena hueco, suba Amount hacia 0 dB en pasos pequeños hasta que recupere la naturalidad.
 6. Los cambios se guardan automáticamente. El ajuste persiste como `ClientDeEssTxAmountDb`.
 
-## Qué hace cada control
+## Función de cada control
 
-| Control | Valor predeterminado | Rango válido | Clave persistida | Comportamiento |
-|---|---|---|---|---|
-| Amount | −6.0 dB | −24.0 a 0.0 dB | `ClientDeEssTxAmountDb` | Atenuación máxima aplicada a la banda de sibilancia cuando la señal supera el umbral. Más negativo = mayor reducción. 0 dB desactiva la atenuación por completo. |
-| Gain-reduction bar | — | 0 a 24 dB GR | — | Franja horizontal en rojo suave que muestra la reducción de ganancia actual en tiempo real. La escala llega hasta 24 dB; una marca señala −6 dB. Se actualiza aproximadamente 30 veces por segundo. |
+| Control            | Valor predeterminado                                                                                            | Rango válido                                                                                            |
+|--------------------|-----------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
+| Amount             | −6.0 dB                                                                                                         | −24.0 a 0.0 dB                                                                                         |
+| Barra Gain-reduction | —                                                                                                               | 0 a 24 dB GR                                                                                           |
+| Attack             | Mapeo exponencial (0.1 * 300^n). Define qué tan rápido responde el des-essedor una vez que la sibilancia cruza el umbral. | Presente en el Channel Strip StripDeEssPanel (RX y TX). El applet acoplado ClientDeEssApplet omite este mando. |
+| Release            | Mapeo exponencial (10 * 50^n). Define qué tan rápido regresa la ganancia después de que la sibilancia cae por debajo del umbral. | Presente en el Channel Strip StripDeEssPanel (RX y TX). El applet acoplado ClientDeEssApplet omite este mando. |
+
+## Instancias RX y TX
+
+El Aetherial De-Esser tiene instancias separadas para transmisión y recepción:
+
+- **Instancia TX** — Etiquetada como "Aetherial De-Esser" en el Applet Panel acoplado. Se abre desde la cadena TX en Aetherial Audio Channel Strip.
+- **Instancia RX** — Etiquetada como "Aetherial De-Esser — RX" en su barra de título. Se accede a través del lado RX de Aetherial Audio Channel Strip. Utiliza su propia ventana dedicada titulada "Aetherial De-Esser — RX".
+
+Cada instancia tiene ajustes independientes, guardados por separado. Los ajustes RX se guardan bajo `ClientDeEssRxFrequencyHz`, `ClientDeEssRxQ`, etc.
+
+## Atenuación por bypass
+
+Cuando la etapa DESS se omite mediante un solo clic en el widget CHAIN, todo el applet se renderiza con opacidad reducida (55 %). Esto coincide con el efecto de atenuación utilizado en la curva EQ y proporciona una indicación visual clara de que la etapa está inactiva. Haga clic nuevamente en el widget CHAIN para re-habilitar la etapa y restaurar la opacidad completa.
 
 ## Consejos
 
-- −6 dB (el valor predeterminado) es un buen punto de partida para la mayoría de las voces. La marca en la barra de reducción de ganancia indica este nivel, lo que facilita usarlo como referencia durante el ajuste.
-- Procure que la barra de reducción de ganancia se mueva de forma visible con los sonidos "S" y "T", pero que nunca llegue al extremo de 24 dB. Una reducción de ganancia muy elevada en ese extremo se percibe como un ceceo o un corte de audio.
-- Estrechar la banda del sidechain con Q antes de fijar definitivamente Amount reduce la atenuación colateral en la energía de voz adyacente, lo que mejora la transparencia. Consulte [Estreche o amplíe la banda del sidechain con Q](narrow-or-widen-the-sidechain-band-with-q.md).
-- Los valores de Amount siempre son negativos o cero — representan reducción, no realce.
+- −6 dB (el valor predeterminado) es un punto de partida razonable para la mayoría de las voces. La marca en la barra Gain-reduction indica este nivel, lo que facilita su uso como referencia durante el ajuste.
+- Apunte a que la barra Gain-reduction se mueva notablemente en los sonidos "S" y "T", pero nunca se fije contra el extremo de 24 dB. Una reducción de ganancia intensa en ese extremo es audible como un ceceo o una caída del volumen.
+- Reducir el ancho de la banda del sidechain con Q antes de finalizar Amount disminuye la atenuación colateral en la energía del habla cercana, lo que ayuda a la transparencia. Consulte [Narrow or widen the sidechain band with Q](narrow-or-widen-the-sidechain-band-with-q.md).
+- Los valores de Amount siempre son negativos o cero — representan reducción, no aumento.
 
-## Resolución de problemas
+## Solución de problemas
 
-- **El audio suena hueco o con ceceo en cada "S"** — Amount está demasiado bajo (demasiada atenuación). Auméntelo hacia 0 dB en pasos de 2 dB mientras habla hasta que el sonido natural regrese.
-- **La barra de reducción de ganancia nunca se mueve** — El des-esibilizador no está actuando. Compruebe que Thresh esté configurado por debajo de su nivel real de sibilancia y que el módulo DESS esté habilitado. Consulte [Ajuste el umbral justo por debajo de los picos más altos de "S"](set-threshold-just-below-the-loudest-s-peaks.md).
-- **La barra de reducción de ganancia se clava en 24 dB constantemente** — Thresh está demasiado bajo, lo que hace que el des-esibilizador actúe sobre toda la voz y no solo sobre las sibilantes. Aumente Thresh primero y luego reevalúe Amount.
+- **El audio suena hueco o cecea en cada "S"** — Amount está demasiado bajo (demasiada atenuación). Súbalo hacia 0 dB en pasos de 2 dB mientras habla hasta que recupere la naturalidad.
+- **La barra Gain-reduction nunca se mueve** — El des-essedor no está disparando. Verifique que Thresh esté configurado por debajo de su nivel real de sibilancia y que la etapa DESS esté habilitada. Consulte [Set threshold just below the loudest 'S' peaks](set-threshold-just-below-the-loudest-s-peaks.md).
+- **La barra Gain-reduction está fija constantemente en 24 dB** — Thresh está demasiado bajo, lo que hace que el des-essedor se dispare en todo el habla, no solo en la sibilancia. Suba Thresh primero, luego re-evalúe Amount.
+- **El applet aparece atenuado u oscurecido** — La etapa DESS está en bypass. Haga clic una vez en la etapa en el widget CHAIN para re-habilitarla.
 
 ## Relacionados
 
-- [Barra Freq para localizar la sibilancia máxima](sweep-freq-to-locate-peak-sibilance.md)
-- [Estreche o amplíe la banda del sidechain con Q](narrow-or-widen-the-sidechain-band-with-q.md)
-- [Ajuste el umbral justo por debajo de los picos más altos de "S"](set-threshold-just-below-the-loudest-s-peaks.md)
-- [Observe la reducción de ganancia en vivo mientras lee una frase con sibilantes](watch-live-gr-while-reading-a-sibilant-phrase.md)
-- [Desactive el des-esibilizador desde la cadena](bypass-the-de-esser-from-the-chain.md)
-- [Descripción general de Aetherial De-Esser](overview.md)
+- [Sweep Freq to locate peak sibilance](sweep-freq-to-locate-peak-sibilance.md)
+- [Narrow or widen the sidechain band with Q](narrow-or-widen-the-sidechain-band-with-q.md)
+- [Set threshold just below the loudest 'S' peaks](set-threshold-just-below-the-loudest-s-peaks.md)
+- [Watch live GR while reading a sibilant phrase](watch-live-gr-while-reading-a-sibilant-phrase.md)
+- [Bypass the de-esser from the chain](bypass-the-de-esser-from-the-chain.md)
+- [Aetherial De-Esser overview](overview.md)

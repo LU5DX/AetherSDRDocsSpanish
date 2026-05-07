@@ -1,58 +1,58 @@
-# Descripción general del mapeo de controlador MIDI
+# Resumen de asignación de controlador MIDI
 
-La función de mapeo de controlador MIDI permite asignar perillas físicas, faders y botones de un controlador MIDI a parámetros de radio en AetherSDR. Una vez guardadas las asignaciones, puede recuperarlas como perfiles con nombre y, opcionalmente, reconectar el controlador de forma automática en cada inicio.
+La función de asignación de controlador MIDI le permite vincular perillas físicas, deslizadores y botones de un controlador MIDI a parámetros de radio en AetherSDR. Una vez guardadas las asignaciones, puede recuperarlas como perfiles con nombre y, opcionalmente, reconectar el controlador automáticamente en cada inicio.
 
-## Antes de comenzar
+## Antes de empezar
 
-- El controlador MIDI debe estar conectado a la computadora antes de abrir el diálogo.
-- La compatibilidad con MIDI debe estar presente en su versión de AetherSDR. Si `Settings > MIDI Mapping...` no aparece en el menú, su versión fue compilada sin soporte MIDI.
+- Su controlador MIDI debe estar conectado a la computadora antes de abrir el diálogo.
+- El soporte MIDI debe estar presente en su compilación de AetherSDR. Si `Settings > MIDI Mapping...` no aparece en el menú, su compilación se compiló sin soporte MIDI.
 
 ## Cómo funciona
 
 Abra el diálogo en `Settings > MIDI Mapping...`. El diálogo está dividido en dos secciones: **MIDI Device** y **Parameter Bindings**.
 
-**MIDI Device** gestiona la selección del puerto y la conexión. Seleccione su controlador en el cuadro combinado Port:, haga clic en Refresh si no aparece y, a continuación, haga clic en Connect para abrir el puerto. El indicador de estado del puerto muestra "Connected" (verde) o "Disconnected" (gris). El indicador de actividad muestra el mensaje MIDI más reciente recibido — por ejemplo, `Ch 1 CC #7 = 64` — lo cual es útil para confirmar que el controlador está enviando datos.
+**MIDI Device** maneja la selección del puerto y la conexión. Seleccione su controlador en el cuadro combinado Port:, haga clic en Refresh si no aparece, luego haga clic en Connect para abrir el puerto. El indicador de estado del puerto muestra "Connected" (verde) o "Disconnected" (gris). El indicador de actividad muestra el mensaje MIDI más reciente recibido — por ejemplo, `Ch 1 CC #7 = 64` — que es útil para confirmar que su controlador está enviando datos.
 
-**Parameter Bindings** es donde se crean y administran las asignaciones entre mensajes MIDI y controles de radio. Use los cuadros combinados Category y Parameter para localizar el parámetro de destino, luego haga clic en Learn y mueva una perilla o un fader en su controlador. AetherSDR registra el mensaje MIDI entrante y agrega una fila a la tabla de asignaciones. Cada fila de la tabla puede ajustarse individualmente con las casillas Invert y Relative, o eliminarse con el botón × (eliminar fila). Haga clic en Clear All para eliminar todas las asignaciones a la vez.
+**Parameter Bindings** es donde crea y administra las asignaciones entre mensajes MIDI y controles de radio. Use los cuadros combinados Category y Parameter para localizar el parámetro objetivo, luego haga clic en Learn y mueva una perilla o deslizador en su controlador. AetherSDR registra el mensaje MIDI entrante y agrega una fila a la tabla de asignaciones. Cada fila en la tabla se puede ajustar individualmente con las casillas de verificación Invert y Relative, o eliminarse con el botón × (eliminar fila). Haga clic en Clear All para eliminar todas las asignaciones a la vez.
 
-Las asignaciones pueden guardarse y cargarse desde perfiles con nombre mediante los controles Profile:, Save y Load ubicados en la parte inferior del diálogo.
+Las asignaciones se pueden guardar en perfiles con nombre y cargar desde ellos usando los controles Profile:, Save y Load en la parte inferior del diálogo.
 
-Las asignaciones y el último puerto utilizado se guardan de forma automática. El ajuste `MidiPort` almacena el nombre del puerto seleccionado y `MidiAutoConnect` almacena si el puerto debe reabrirse al iniciar.
+Las asignaciones y el último puerto utilizado se conservan automáticamente. La configuración `MidiPort` almacena el nombre del puerto seleccionado y `MidiAutoConnect` almacena si el puerto debe reabrirse al inicio.
 
 ## Qué hace cada control
 
-| Control | Tipo | Comportamiento | Ajuste guardado |
+| Control | Tipo | Comportamiento | Configuración persistida |
 |---|---|---|---|
 | Port: | Cuadro combinado | Selecciona el dispositivo de entrada MIDI. | `MidiPort` |
-| Refresh | Botón | Vuelve a explorar los puertos MIDI disponibles. | — |
-| Connect | Botón | Abre el puerto MIDI seleccionado. Cuando el puerto está abierto, la etiqueta cambia a Disconnect. | — |
-| Port status | Indicador | Muestra si el puerto MIDI está abierto actualmente. Estados: Opened, Closed. | — |
+| Refresh | Botón | Vuelve a escanear los puertos MIDI disponibles. | — |
+| Connect | Botón | Abre el puerto MIDI seleccionado. Cuando un puerto está abierto, la etiqueta cambia a Disconnect. | — |
+| Port status | Indicador | Muestra si el puerto MIDI está actualmente abierto. Estados: Opened, Closed. | — |
 | Activity indicator | Indicador | Muestra el mensaje MIDI más reciente recibido. | — |
-| Auto-connect on startup | Casilla de verificación | Reabre el puerto MIDI guardado automáticamente cuando AetherSDR se inicia. | `MidiAutoConnect` |
-| Category | Cuadro combinado | Filtra el cuadro combinado Parameter por categoría de control (All, RX, TX, Phone/CW, EQ, Global). | — |
-| Parameter | Cuadro combinado | Selecciona el parámetro de radio de destino para una nueva asignación. | — |
-| Learn | Botón | Comienza a escuchar el siguiente mensaje MIDI entrante y lo asigna al parámetro seleccionado. Haga clic de nuevo (etiquetado Cancel Learn) para cancelar. | — |
-| Bindings table | Lista | Muestra todas las asignaciones existentes. Columnas: Parameter, MIDI Source, Channel, Invert, Relative y un botón de eliminación. | — |
-| Invert | Casilla de verificación (por fila) | Invierte la dirección del control para esa asignación. | — |
-| Relative | Casilla de verificación (por fila) | Trata el control como un encoder continuo en lugar de un valor absoluto. | — |
-| × (eliminar fila) | Botón (por fila) | Elimina esa asignación. | — |
+| Auto-connect on startup | Casilla de verificación | Vuelve a abrir automáticamente el puerto MIDI guardado cuando se inicia AetherSDR. | `MidiAutoConnect` |
+| Category | Cuadro combinado | Filtra el cuadro combinado Parameter a una categoría de control (All, RX, TX, Phone/CW, EQ, Global). | — |
+| Parameter | Cuadro combinado | Selecciona el parámetro de radio objetivo para una nueva asignación. | — |
+| Learn | Botón | Comienza a escuchar el siguiente mensaje MIDI entrante y lo vincula al parámetro seleccionado. Haga clic nuevamente (etiquetado Cancel Learn) para abortar. | — |
+| Bindings table | Lista | Muestra todas las asignaciones existentes. Columnas: Parameter, MIDI Source, Channel, Invert, Relative y un botón de eliminar. | — |
+| Invert | Casilla de verificación (por fila) | Invierte la dirección de control para esa asignación. | — |
+| Relative | Casilla de verificación (por fila) | Trata el control como un codificador sin fin en lugar de un valor absoluto. | — |
+| × (delete row) | Botón (por fila) | Elimina esa asignación. | — |
 | Clear All | Botón | Elimina todas las asignaciones. | — |
-| Profile: | Cuadro combinado | Selecciona o nombra un perfil de mapeo MIDI guardado. El campo es editable. | — |
+| Profile: | Cuadro combinado | Selecciona o nombra un perfil de asignación MIDI guardado. El campo es editable. | — |
 | Save | Botón | Guarda las asignaciones actuales con el nombre ingresado en Profile:. | — |
 | Load | Botón | Carga las asignaciones del perfil seleccionado en Profile:. | — |
 | Close | Botón | Cierra el diálogo. | — |
 
 ## Consejos
 
-- Mueva un control en su hardware MIDI mientras el indicador de actividad esté visible para confirmar que AetherSDR recibe mensajes antes de intentar agregar una asignación.
-- Si utiliza varios controladores o diferentes configuraciones físicas, guarde un perfil separado para cada uno con un nombre distinto en Profile: para poder cambiar rápidamente con Load.
+- Mueva un control en su hardware MIDI mientras el indicador de actividad esté visible para confirmar que AetherSDR está recibiendo mensajes antes de intentar agregar una asignación.
+- Si usa múltiples controladores o diferentes configuraciones físicas, guarde un perfil separado para cada uno con un nombre distinto en Profile: para poder cambiar rápidamente con Load.
 
-## Relacionados
+## Relacionado
 
-- [Conectar un controlador MIDI](../../getting-started/setup/connect-a-midi-controller.md)
-- [Conectar automáticamente el controlador MIDI al iniciar](../../getting-started/setup/auto-connect-midi-controller-on-startup.md)
-- [Registrar una nueva asignación con el modo Learn](record-a-new-binding-with-learn-mode.md)
-- [Invertir una perilla o tratarla como un encoder continuo](invert-a-knob-or-treat-it-as-an-endless-encoder.md)
-- [Eliminar una asignación](delete-a-binding.md)
-- [Guardar el mapeo actual como un perfil con nombre](save-the-current-mapping-as-a-named-profile.md)
-- [Cargar un perfil MIDI guardado anteriormente](load-a-previously-saved-midi-profile.md)
+- [Connect a MIDI controller](../../getting-started/setup/connect-a-midi-controller.md)
+- [Auto-connect MIDI controller on startup](../../getting-started/setup/auto-connect-midi-controller-on-startup.md)
+- [Record a new binding with Learn mode](record-a-new-binding-with-learn-mode.md)
+- [Invert a knob or treat it as an endless encoder](invert-a-knob-or-treat-it-as-an-endless-encoder.md)
+- [Delete a binding](delete-a-binding.md)
+- [Save the current mapping as a named profile](save-the-current-mapping-as-a-named-profile.md)
+- [Load a previously saved MIDI profile](load-a-previously-saved-midi-profile.md)

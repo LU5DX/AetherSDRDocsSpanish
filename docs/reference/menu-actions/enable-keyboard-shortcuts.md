@@ -1,27 +1,27 @@
-# Habilitar atajos de teclado
+# Habilitar Atajos de Teclado
 
-Active o desactive el procesamiento de atajos de teclado. Cuando está habilitado, los atajos de teclado — como el uso de las teclas de flecha para ajustar controles deslizantes — están activos en toda la aplicación.
+Active o desactive el procesamiento de atajos de teclado. Cuando está habilitado, los atajos de teclado — como usar las teclas de flecha para ajustar controles deslizantes — están activos en toda la aplicación.
 
-## Antes de comenzar
+## Antes de empezar
 
-- AetherSDR debe estar en ejecución y conectado a un radio.
+- AetherSDR debe estar ejecutándose y conectado a una radio.
 
 ## Pasos
 
 1. Haga clic en `View` en la barra de menú.
 2. Haga clic en `Keyboard Shortcuts` para activarlo o desactivarlo. Una marca de verificación indica que los atajos están habilitados.
 
-## Qué hace cada control
+## Función de cada control
 
-| Control | Descripción | Predeterminado |
+| Control | Descripción | Valor predeterminado |
 |---|---|---|
-| `Keyboard Shortcuts` | Elemento de menú con casilla de verificación. Cuando está marcado, el procesamiento de atajos de teclado está activo (por ejemplo, las teclas de flecha en los controles deslizantes). Cuando no está marcado, los atajos se suprimen. | Ver consejos |
+| `Keyboard Shortcuts` | Elemento de menú seleccionable. Cuando está marcado, el procesamiento de atajos de teclado está activo (p. ej., teclas de flecha en controles deslizantes). Cuando no está marcado, los atajos se suprimen. | Ver sugerencias |
 
-## Consejos
+## Sugerencias
 
-- Si las teclas de flecha u otros atajos de teclado interfieren con la entrada de texto u otras entradas, desmarque `Keyboard Shortcuts` para deshabilitar el procesamiento de atajos.
+- Si las teclas de flecha u otros atajos de teclado interfieren con la entrada de texto u otra información, desmarque `Keyboard Shortcuts` para deshabilitar el procesamiento de atajos.
 - Para cambiar qué teclas están asignadas a qué acciones, use `View > Configure Shortcuts...`.
 
 ## Relacionado
 
-- [Configuración de los controles de AetherSDR](configuring-aethersdr-controls.md)
+- [Configurar los Controles de AetherSDR](configuring-aethersdr-controls.md)

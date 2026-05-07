@@ -1,26 +1,26 @@
-# Activar el indicador de estado parpadeante
+# Habilitar el Indicador de Estado Parpadeante
 
-`View > Blink Status Indicator` es un elemento de menú con marca de verificación que controla si el indicador de estado de la barra de título parpadea para señalar el latido del radio. Desactivarlo mantiene el indicador estático si el parpadeo resulta molesto.
+`Ver > Indicador de Estado Parpadeante` es un elemento de menú seleccionable que controla si el indicador de estado en la barra de título parpadea para señalar el latido de la radio. Deshabilitarlo mantiene el indicador estático si el parpadeo resulta molesto.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar en ejecución.
-- No es necesario que haya un radio FLEX-8600 conectado para cambiar esta configuración, pero el comportamiento de parpadeo solo es visible cuando hay un latido de radio activo.
+- AetherSDR debe estar ejecutándose.
+- No es necesario que una radio FLEX-8600 esté conectada para activar o desactivar esta opción, pero el comportamiento de parpadeo solo es visible cuando un latido de radio está activo.
 
 ## Pasos
 
-1. Haga clic en `View` en la barra de menús.
-2. Haga clic en `Blink Status Indicator` para activarlo o desactivarlo.
-   - Una marca de verificación junto al elemento indica que el parpadeo está activado.
-   - Sin marca de verificación, el indicador permanece estático.
+1. Haga clic en `Ver` en la barra de menú.
+2. Haga clic en `Indicador de Estado Parpadeante` para activarlo o desactivarlo.
+   - Una marca de verificación junto al elemento significa que el parpadeo está habilitado.
+   - Sin marca de verificación significa que el indicador permanece estático.
 
-## Qué hace cada control
+## Función de cada control
 
-| Control | Valor predeterminado | Descripción |
+| Control | Predeterminado | Descripción |
 |---|---|---|
-| `Blink Status Indicator` | Activado (marcado) | Cuando está activado, el indicador de estado de la barra de título parpadea en respuesta a la señal de latido del radio. Cuando está desactivado, el indicador permanece estático. |
+| `Indicador de Estado Parpadeante` | Activado (marcado) | Cuando está habilitado, el indicador de estado en la barra de título parpadea en respuesta a la señal de latido de la radio. Cuando está deshabilitado, el indicador permanece estático. |
 
-## Relacionados
+## Relacionado
 
-- [Activar ventana sin marco](enable-frameless-window.md)
-- [Activar modo mínimo](enable-minimal-mode.md)
+- [Habilitar Ventana sin Marco](enable-frameless-window.md)
+- [Habilitar Modo Mínimo](enable-minimal-mode.md)
