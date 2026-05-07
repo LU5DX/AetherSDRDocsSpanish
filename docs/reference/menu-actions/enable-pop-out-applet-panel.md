@@ -1,31 +1,31 @@
-# Habilitar el Panel de Applets en Ventana Flotante
+# Habilitar el panel de applets emergente
 
-Use `View > Pop Out Applet Panel` para desprender el panel de applets de la ventana principal y convertirlo en una ventana flotante independiente, o para acoplarlo de nuevo a la ventana principal.
+Use `View > Pop Out Applet Panel` para separar el panel de applets de la ventana principal en su propia ventana flotante, o para acoplarlo nuevamente en la ventana principal.
 
 ## Antes de comenzar
 
-- El panel de applets debe estar visible. Si está oculto, habilítelo primero mediante `View > Applet Panel`.
+- El panel de applets debe estar visible. Si está oculto, actívalo primero mediante `View > Applet Panel`.
 
 ## Pasos
 
 1. Haga clic en `View` en la barra de menú.
 2. Haga clic en `Pop Out Applet Panel`.
-   El panel de applets se desprende en una ventana flotante independiente. Aparece una marca de verificación junto al elemento del menú cuando el panel está flotante.
-3. Para acoplar el panel de nuevo a la ventana principal, haga clic en `View > Pop Out Applet Panel` otra vez.
+   El panel de applets se separa en una ventana flotante independiente. Aparece una marca de verificación junto al elemento del menú cuando el panel está emergido.
+3. Para acoplar el panel nuevamente en la ventana principal, haga clic en `View > Pop Out Applet Panel` de nuevo.
 
 ## Qué hace cada control
 
-| Control | Descripción | Atajo | Predeterminado |
+| Control | Descripción | Método abreviado | Predeterminado |
 |---|---|---|---|
-| `Pop Out Applet Panel` | Activable. Hace flotar el panel de applets en una ventana independiente cuando está marcado; lo acopla de nuevo a la ventana principal cuando está desmarcado. | `Ctrl+Shift+S` | Acoplado (desmarcado) |
+| `Pop Out Applet Panel` | Seleccionable. Hace flotar el panel de applets en una ventana separada cuando está seleccionado; lo acopla nuevamente en la ventana principal cuando no está seleccionado. | `Ctrl+Shift+S` | Acoplado (no seleccionado) |
 
 ## Consejos
 
-- También puede alternar el estado flotante con el atajo de teclado `Ctrl+Shift+S` sin necesidad de abrir el menú.
-- Mover o redimensionar la ventana flotante no afecta el diseño de la ventana principal.
+- También puede alternar el estado emergente con el método abreviado de teclado `Ctrl+Shift+S` sin abrir el menú.
+- Mover o redimensionar la ventana flotante no afecta la disposición de la ventana principal.
 
 ## Relacionado
 
-- [Habilitar el Panel de Applets](enable-applet-panel.md)
-- [Restablecer el Orden de los Applets](reset-applet-order.md)
-- [Descripción del panel de applets de AetherSDR](../../getting-started/concepts/understanding-applets.md)
+- [Habilitar panel de applets](enable-applet-panel.md)
+- [Restablecer orden de applets](reset-applet-order.md)
+- [Comprender el panel de applets de AetherSDR](../../getting-started/concepts/understanding-applets.md)

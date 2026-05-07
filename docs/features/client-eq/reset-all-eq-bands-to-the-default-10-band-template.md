@@ -1,34 +1,38 @@
-# Restablecer todas las bandas del ecualizador a la plantilla predeterminada de 10 bandas
+# Restablecer todas las bandas EQ a la plantilla predeterminada de 10 bandas
 
-Use este procedimiento para descartar todas las ediciones de bandas del ecualizador TX o RX y devolver el ecualizador a la configuración de fábrica de 10 bandas. Esto también restablece el número de bandas y la familia de filtros a sus valores predeterminados.
+Use este procedimiento para descartar todas las modificaciones de bandas EQ en un ecualizador de TX o RX y devolverlo a la configuración de fábrica de 10 bandas. También restablece la cantidad de bandas y la familia de filtros a sus valores predeterminados.
 
 ## Antes de comenzar
 
-- El editor flotante del canal de EQ que desea restablecer (TX o RX) debe estar abierto. Consulte [Abrir el editor sin marco para agregar, eliminar o ajustar bandas en cualquier canal](open-the-frameless-editor-to-add-remove-tune-bands-on-either-side.md) si aún no está abierto.
+- El editor flotante de la ruta EQ que desea restablecer (TX o RX) debe estar abierto. Consulte [Open the frameless editor to add / remove / tune bands on either side](open-the-frameless-editor-to-add-remove-tune-bands-on-either-side.md) si aún no está abierto.
 
 ## Pasos
 
-1. En la barra de título del editor flotante, confirme que se encuentra en el canal correcto — el título de la ventana indica "Aetherial Parametric EQ — TX" o "Aetherial Parametric EQ — RX".
-2. Haga clic en Reset en la franja de encabezado del editor.
+1. En la barra de título del editor flotante, confirme que está en la ruta correcta — el título de la ventana muestra "Aetherial Parametric EQ — TX" o "Aetherial Parametric EQ — RX".
+2. Haga clic en Reset en la barra del encabezado del editor.
 
-Todas las bandas se reemplazan inmediatamente con la plantilla predeterminada de 10 bandas. El número de bandas se restaura a 10 y el combo Filter family se restablece a Butterworth. La configuración se guarda de inmediato.
+Todas las bandas se reemplazan inmediatamente con la plantilla predeterminada de 10 bandas. La cantidad de bandas se restablece a 10 y el combo Filter family se restablece a Butterworth. La configuración se guarda inmediatamente.
 
-## Qué hace cada control
+## Función de cada control
 
-| Control | Valor predeterminado | Comportamiento tras el restablecimiento |
-|---|---|---|
-| Reset | — | Reemplaza todas las bandas con la plantilla predeterminada de 10 bandas, restaura el número de bandas predeterminado y establece Filter family en Butterworth. Guarda de inmediato. |
-| Filter family | Butterworth | Se restablece a Butterworth. Se aplica solo a los tipos de filtro HP y LP; las bandas de tipo peak y shelf no se ven afectadas por este selector. Se persiste como `ClientEqTxFilterFamily` (TX) o `ClientEqRxFilterFamily` (RX). |
-| Band count | 10 | Se restaura a 10 mediante Reset. Se persiste como `ClientEqTxBandCount` (TX) o `ClientEqRxBandCount` (RX). |
+| Control                             | Valor predeterminado                                                                                                                                                                                                                                                                                                                                                           | Comportamiento después del restablecimiento                                                                                                                                                                                                              |
+|-------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Reset                               | —                                                                                                                                                                                                                                                                                                                                                                               | Reemplaza todas las bandas con la plantilla predeterminada de 10 bandas, restablece la cantidad predeterminada de bandas y establece Filter family en Butterworth. Guarda inmediatamente.                                                                  |
+| Filter family                       | Butterworth                                                                                                                                                                                                                                                                                                                                                                     | Se restablece a Butterworth. Se aplica solo a los tipos de filtro HP y LP; las bandas de pico y estante no se ven afectadas por este selector. Se persiste como `ClientEqTxFilterFamily` (TX) o `ClientEqRxFilterFamily` (RX).                               |
+| Band count                          | 10                                                                                                                                                                                                                                                                                                                                                                              | Se restablece a 10 mediante Reset. Se persiste como `ClientEqTxBandCount` (TX) o `ClientEqRxBandCount` (RX).                                                                                                                                              |
+| Smoothing                           | Aplica un promedio de potencia de octava fraccionaria a la traza del analizador solo para la visualización — no afecta el cálculo de EQ. Fracción más baja = más suavizado (1/3 es el más suavizado; 1/96 está efectivamente desactivado). Compartido entre los editores TX y RX.                                                                                                   | Información sobre herramientas: 'Suavizado de octava fraccionaria aplicado a la traza del analizador. Fracción más baja = más suavizado (1/3 = máximo, 1/96 = desactivado). Afecta solo la visualización — el cálculo de EQ no cambia.' Se encuentra en la barra del encabezado del editor (solo en el editor flotante). |
+| Fila de iconos de tipo de filtro    | Una fila de 8 iconos pintados personalizados (uno por espacio de banda) en la parte superior del área del lienzo del editor. Cada icono dibuja la forma del filtro actual (campana de pico, rampa de estante, pendiente HP/LP) en el color de la paleta de esa banda. Haga clic en un icono para recorrer los tipos de filtro para esa banda; al hacer clic también se selecciona la banda, resaltando su controlador en el lienzo y su columna en la fila de parámetros. | Se encuentra solo en el editor flotante. Los iconos se atenúan al 35 % de opacidad cuando la banda está desactivada. Implementado por ClientEqIconRow.                                                                                                   |
+| Fila de texto de parámetros         | Una fila de 8 columnas de texto (una por espacio de banda) debajo del lienzo que muestra los valores de Freq, Gain y Q de cada banda. Los valores se actualizan en vivo durante los arrastres del lienzo. Al hacer clic en una columna se selecciona esa banda. Cada columna tiene un fondo transparente para no sangrar el relleno oscuro sobre la tira del plan de bandas superior; las etiquetas están alineadas en la parte inferior dentro de la columna. | Se encuentra solo en el editor flotante. Implementado por ClientEqParamRow.                                                                                                                                                                                |
+| Guías de corte de filtro (TX / RX)  | Líneas verticales discontinuas amarillas superpuestas en el lienzo en el corte de filtro bajo/alto actual de TX (mosaico TX) o en los bordes de la banda de paso de RX (mosaico RX). Al pasar el cursor cerca de una línea, el cursor cambia a una flecha de redimensionamiento horizontal. Arrastrar una línea en el editor mueve el corte de filtro correspondiente de la radio en tiempo real. | Arrastrar las guías de corte TX emite cutoffsDragRequested(Tx, lo, hi), que MainWindow reenvía a TransmitModel. Arrastrar las guías RX escribe en el SliceModel activo. Pase 0 para un borde para suprimir esa guía.                                         |
 
 ## Consejos
 
-- Reset afecta únicamente al canal que se muestra en la ventana del editor actual. Para restablecer el otro canal, abra el otro editor y repita el procedimiento.
-- El Output Fader (ganancia maestra post-EQ, persistida como `ClientEqTxMasterGain` o `ClientEqRxMasterGain`) no se modifica con Reset. Haga doble clic en el fader para devolverlo a 0 dB de forma independiente si es necesario.
+- Reset afecta solo la ruta que se muestra en la ventana del editor actual. Para restablecer la otra ruta, abra el otro editor y repita el proceso.
+- El Output Fader (ganancia maestra posterior a EQ, persistida como `ClientEqTxMasterGain` o `ClientEqRxMasterGain`) no se modifica con Reset. Haga doble clic en el fader para devolverlo a 0 dB por separado si es necesario.
 
-## Temas relacionados
+## Relacionados
 
-- [Abrir el editor sin marco para agregar, eliminar o ajustar bandas en cualquier canal](open-the-frameless-editor-to-add-remove-tune-bands-on-either-side.md)
-- [Cambiar la familia de filtros HP/LP (Butterworth, Chebyshev, Bessel, Elliptic)](change-the-hp-lp-filter-family-butterworth-chebyshev-bessel-elliptic.md)
-- [Ajustar la ganancia de salida post-EQ con el Output Fader](adjust-post-eq-output-gain-with-the-output-fader.md)
-- [Cambiar el tipo de filtro de una banda haciendo clic en su icono en la fila de iconos](change-a-band-s-filter-type-by-clicking-its-icon-in-the-icon-row.md)
+- [Open the frameless editor to add / remove / tune bands on either side](open-the-frameless-editor-to-add-remove-tune-bands-on-either-side.md)
+- [Change the HP/LP filter family (Butterworth, Chebyshev, Bessel, Elliptic)](change-the-hp-lp-filter-family-butterworth-chebyshev-bessel-elliptic.md)
+- [Adjust post-EQ output gain with the Output Fader](adjust-post-eq-output-gain-with-the-output-fader.md)
+- [Change a band's filter type by clicking its icon in the icon row](change-a-band-s-filter-type-by-clicking-its-icon-in-the-icon-row.md)

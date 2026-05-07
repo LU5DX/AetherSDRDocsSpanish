@@ -1,22 +1,22 @@
 # Cables USB
 
-`Settings > USB Cables...` abre la pestaña USB Cables del diálogo Radio Setup, donde se asignan las conexiones de cables USB para control CAT y enrutamiento de audio.
+`Settings > USB Cables...` abre la pestaña USB Cables del cuadro de diálogo Radio Setup, donde asigna las conexiones de cables USB para el control CAT y el enrutamiento de audio.
 
 ## Antes de comenzar
 
 - AetherSDR debe estar conectado a una radio FLEX-8600.
-- Cualquier cable USB que desee asignar debe estar ya conectado a la radio y reconocido por ella.
+- Los cables USB que desee asignar ya deben estar conectados a la radio y reconocidos por ella.
 
 ## Pasos
 
 1. Haga clic en `Settings > USB Cables...`.
-2. El diálogo Radio Setup se abre con la pestaña USB Cables activa.
-3. Configure las asignaciones de cables USB para CAT y audio según sea necesario.
-4. Cierre el diálogo cuando termine.
+2. Se abre el cuadro de diálogo Radio Setup con la pestaña USB Cables activa.
+3. Configure sus asignaciones de cables USB para CAT y audio según sea necesario.
+4. Cierre el cuadro de diálogo cuando haya terminado.
 
-## Temas relacionados
+## Relacionado
 
-- [Primeros pasos](getting-started.md)
+- [Introducción](getting-started.md)
 - [Habilitar inicio automático para CAT con AetherSDR](enable-autostart-for-cat-with-aethersdr.md)
 - [Habilitar inicio automático para DAX con AetherSDR](enable-autostart-for-dax-with-aethersdr.md)
-- [Configuración de modos de datos](configuring-data-modes.md)
+- [Configurar modos de datos](configuring-data-modes.md)

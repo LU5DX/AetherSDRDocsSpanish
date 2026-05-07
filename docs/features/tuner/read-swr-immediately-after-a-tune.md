@@ -1,42 +1,42 @@
-# Leer la ROE inmediatamente después de un ajuste automático
+# Leer la ROE inmediatamente después de una sintonización
 
-Cuando un ajuste automático finaliza, el botón TUNE muestra brevemente la ROE final estabilizada para que pueda confirmar la adaptación sin necesidad de mirar el medidor de ROE.
+Una vez que finaliza la autosintonización, el botón TUNE muestra brevemente la ROE final estabilizada para que pueda confirmar la adaptación sin mirar el indicador de ROE.
 
 ## Antes de comenzar
 
-- Es necesario que haya un sintonizador 4O3A Tuner Genius XL conectado y detectado. El botón TUN en la bandeja aparece en la barra lateral derecha únicamente cuando hay un TGXL presente.
-- El applet Tuner debe estar abierto. Haga clic en el botón TUN de la bandeja para abrirlo.
-- El sintonizador debe estar en estado OPERATE (el botón OPERATE aparece en verde).
+- Debe estar conectado y detectado un Tuner Genius XL de 4O3A. El botón de la bandeja TUN aparece en la barra lateral derecha solo cuando hay un TGXL presente.
+- El applet del sintonizador debe estar abierto. Haga clic en el botón de la bandeja TUN para abrirlo.
+- El sintonizador debe estar en estado OPERATE (el botón OPERATE se muestra en verde).
 
 ## Pasos
 
 1. Haga clic en TUNE.
-2. Espere. El botón se pone rojo y muestra "TUNING..." mientras se ejecuta el barrido de ajuste automático.
-3. Cuando el ajuste finaliza, el botón recupera su estilo normal y muestra brevemente "TUNING..." durante hasta 400 ms mientras AetherSDR captura el valor final de ROE estabilizada proveniente del TGXL.
-4. A continuación, el botón muestra el resultado como "SWR x.xx" — por ejemplo, "SWR 1.34". Lea este valor directamente desde el botón.
-5. Transcurridos 2.5 segundos, la etiqueta del botón vuelve a "TUNE".
+2. Espere. El botón se vuelve rojo y muestra "TUNING..." mientras se ejecuta el barrido de autosintonización.
+3. Cuando la sintonización finaliza, el botón vuelve a su estilo normal y muestra brevemente "TUNING..." durante un máximo de 400 ms mientras AetherSDR captura el valor final de ROE estabilizada del TGXL.
+4. El botón muestra entonces el resultado como "SWR x.xx" — por ejemplo, "SWR 1.34". Lea este valor directamente del botón.
+5. Después de 2.5 segundos, la etiqueta del botón vuelve a "TUNE".
 
-Si no alcanza a ver el destello, el medidor de ROE continúa mostrando el valor de ROE reportado en vivo por el TGXL después del ajuste.
+Si pierde el destello, el indicador de ROE continúa mostrando el valor de ROE en vivo reportado por el TGXL después de la sintonización.
 
-## Qué hace cada control
+## Función de cada control
 
 | Control | Tipo | Comportamiento | Rango válido |
 |---|---|---|---|
-| TUNE | Botón | Inicia el ajuste automático. Se pone rojo y muestra "TUNING..." durante el barrido. Destella "SWR x.xx" durante 2.5 s al finalizar. Regresa a "TUNE" posteriormente. | — |
-| SWR | Medidor | Muestra continuamente la ROE reportada en vivo por el TGXL. Se pone rojo por encima de 2.5. | 1.0–3.0 |
+| TUNE | Botón | Inicia la autosintonización. Se vuelve rojo y muestra "TUNING..." durante el barrido. Muestra "SWR x.xx" durante 2.5 s al finalizar. Vuelve a "TUNE" después. | — |
+| SWR | Medidor | Muestra continuamente la ROE en vivo reportada por el TGXL. Se vuelve rojo por encima de 2.5. | 1.0–3.0 |
 
 ## Consejos
 
-- La ventana de captura de 400 ms después de tuning=0 existe porque el valor de ROE final estabilizada del TGXL suele llegar por TCP ligeramente después de la señal de ajuste completado. El valor que se muestra en el botón refleja esta lectura estabilizada, no una muestra tomada durante el barrido.
-- Si la ventana de captura expira antes de que llegue una lectura de ROE válida, AetherSDR recurre al último valor de ROE en vivo del medidor.
+- La ventana de captura de 400 ms después de tuning=0 existe porque el valor final de ROE estabilizada del TGXL a menudo llega por TCP ligeramente después de la señal de fin de sintonización. El valor mostrado en el botón refleja esta lectura estabilizada, no una muestra durante el barrido.
+- Si la ventana de captura expira antes de que llegue una lectura de ROE válida, AetherSDR recurre al último valor de ROE en vivo del indicador.
 
 ## Solución de problemas
 
-- **El botón TUNE regresa a "TUNE" sin mostrar un valor de ROE** — La transición de estado de ajuste no fue precedida por un ajuste activo (por ejemplo, el estado del modelo cambió externamente). Haga clic en TUNE nuevamente para ejecutar un ajuste automático nuevo.
-- **El medidor de ROE marca por encima de 2.5 (rojo) después del ajuste** — El sintonizador no pudo encontrar una adaptación satisfactoria en la banda y antena actuales. Verifique la conexión de la antena e inténtelo de nuevo, o revise las posiciones de los relés C1, L y C2.
+- **El botón TUNE vuelve a "TUNE" sin mostrar un valor de ROE** — La transición del estado de sintonización no fue precedida por una sintonización activa (por ejemplo, el estado del modelo cambió externamente). Haga clic en TUNE nuevamente para realizar una autosintonización nueva.
+- **El indicador de ROE marca por encima de 2.5 (rojo) después de la sintonización** — El sintonizador no pudo encontrar una adaptación satisfactoria en la banda y antena actuales. Verifique la conexión de la antena e intente nuevamente, o verifique las posiciones de los relés C1, L y C2.
 
-## Temas relacionados
+## Relacionados
 
-- [Ejecutar un ajuste automático en el TGXL externo](run-an-autotune-on-the-external-tgxl.md)
+- [Ejecutar una autosintonización en el TGXL externo](run-an-autotune-on-the-external-tgxl.md)
 - [Poner el sintonizador en OPERATE, BYPASS o STANDBY](put-the-tuner-in-operate-bypass-or-standby.md)
 - [Ajustar finamente los relés C1/L/C2 con la rueda del ratón](fine-tune-the-c1-l-c2-relays-with-the-mousewheel.md)

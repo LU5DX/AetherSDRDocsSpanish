@@ -1,10 +1,10 @@
 # Salir
 
-Cierra AetherSDR. Use este elemento del menú cuando haya terminado de operar y desee cerrar la aplicación de forma correcta.
+Cierra AetherSDR. Use este elemento de menú cuando haya terminado de operar y desee cerrar la aplicación de forma limpia.
 
 ## Antes de comenzar
 
-- Guarde o exporte los perfiles o configuraciones que desee conservar antes de salir.
+- Guarde o exporte cualquier perfil o configuración que desee conservar antes de salir.
 
 ## Pasos
 
@@ -12,6 +12,6 @@ Cierra AetherSDR. Use este elemento del menú cuando haya terminado de operar y 
 
 Alternativamente, presione **Ctrl+Q**.
 
-## Relacionados
+## Relacionado
 
 - [Primeros pasos](getting-started.md)

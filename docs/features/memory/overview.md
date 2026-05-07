@@ -1,6 +1,6 @@
-# Descripción general de los canales de memoria
+# Resumen de Canales de Memoria
 
-El diálogo Memory Channels permite almacenar, organizar y recuperar frecuencias de radio junto con sus parámetros de operación asociados. Úselo para crear una biblioteca de repetidoras, frecuencias de red, spots de DX o cualquier frecuencia a la que sintonice con regularidad.
+El diálogo Canales de Memoria le permite almacenar, organizar y recuperar frecuencias de radio junto con sus parámetros de operación asociados. Úselo para construir una biblioteca de repetidores, frecuencias de red, puntos DX o cualquier frecuencia que sintonice regularmente.
 
 ## Antes de comenzar
 
@@ -12,7 +12,7 @@ Abra el diálogo con `Settings > Memory...`. El diálogo muestra todas las memor
 
 **Filtrado y búsqueda**
 
-La parte superior del diálogo ofrece dos filtros que funcionan en conjunto. El campo Search: reduce la tabla a las filas cuyo nombre coincide con el texto que escriba; presione Enter o use el botón de borrado para reiniciarlo. El cuadro combinado Profile: filtra según el perfil global activo en ese momento. Ambos filtros se aplican simultáneamente.
+La parte superior del diálogo proporciona dos filtros que funcionan juntos. El campo Search: reduce la tabla a las filas cuyo nombre coincide con el texto que escribe; presione Enter o use el botón de borrar para restablecerlo. El cuadro combinado Profile: filtra por el perfil global actualmente activo. Ambos filtros se aplican simultáneamente.
 
 **La tabla de memorias**
 
@@ -24,51 +24,51 @@ Cada fila representa una memoria almacenada. Las columnas son:
 | Owner | Etiqueta de propietario |
 | Frequency | Frecuencia almacenada en MHz |
 | Name | Etiqueta de la memoria |
-| Mode | Modo de operación (p. ej., USB, FM, CW) |
+| Mode | Modo de operación (ej. USB, FM, CW) |
 | Step | Paso de sintonía |
-| FM TX Offset Dir | Dirección del desplazamiento de la repetidora FM |
-| Repeater Offset | Desplazamiento de la repetidora en MHz |
+| FM TX Offset Dir | Dirección de offset del repetidor FM |
+| Repeater Offset | Offset del repetidor en MHz |
 | Tone Mode | Modo de tono CTCSS/DCS |
-| Tone Value | Frecuencia o código del tono |
+| Tone Value | Frecuencia o código de tono |
 | Squelch | Silenciador activado/desactivado |
 | Squelch Level | Nivel de umbral del silenciador |
 | RX Filter Low | Borde inferior del filtro de recepción en Hz |
 | RX Filter High | Borde superior del filtro de recepción en Hz |
-| RTTY Mark | Frecuencia mark de RTTY |
-| RTTY Shift | Desplazamiento de RTTY |
-| DIGL Offset | Desplazamiento de la banda lateral inferior digital |
-| DIGU Offset | Desplazamiento de la banda lateral superior digital |
+| RTTY Mark | Frecuencia de marca RTTY |
+| RTTY Shift | Desplazamiento RTTY |
+| DIGL Offset | Offset digital de banda lateral inferior |
+| DIGU Offset | Offset digital de banda lateral superior |
 
-Haga clic en el encabezado de una columna para ordenar por esa columna. Haga clic de nuevo para invertir el orden. Se pueden seleccionar varias filas usando Shift-clic para un rango o Ctrl-clic (Command-clic en macOS) para agregar o quitar filas individuales. Al hacer doble clic en una fila, el slice activo se sintoniza inmediatamente a esa memoria.
+Haga clic en un encabezado de columna para ordenar por esa columna. Haga clic de nuevo para invertir el orden de clasificación. Se pueden seleccionar varias filas usando Mayús+clic para un rango o Ctrl+clic (Comando+clic en macOS) para agregar o eliminar filas individuales. Al hacer doble clic en una fila, se sintoniza el slice activo en esa memoria inmediatamente.
 
 **Botones**
 
 | Botón | Qué hace |
 |---|---|
-| Add | Crea una nueva memoria en la frecuencia actual del VFO. |
-| Edit | Activa el modo de edición en línea sobre la fila de memoria seleccionada. |
-| Tune | Sintoniza el slice activo a la memoria seleccionada. |
+| Add | Crea una nueva memoria en la frecuencia VFO actual. |
+| Edit | Activa el modo de edición en línea en la fila de memoria seleccionada. |
+| Tune | Sintoniza el slice activo en la memoria seleccionada. |
 | Select All | Selecciona todas las filas de la tabla. |
 | Import... | Importa memorias desde un archivo. |
 | Export... | Exporta las memorias seleccionadas a un archivo. |
-| Remove | Elimina las memorias seleccionadas tras pedir confirmación. |
+| Remove | Elimina las memorias seleccionadas después de pedir confirmación. |
 
-El indicador de conteo de selección, en la parte inferior derecha de la fila de botones, muestra cuántas filas están seleccionadas en ese momento.
+El indicador de recuento de selección en la parte inferior derecha de la fila de botones muestra cuántas filas están seleccionadas actualmente.
 
 ## Consejos
 
-- El campo Search: tiene un botón de borrado a la derecha; haga clic en él para eliminar el filtro sin limpiar la selección de Profile:.
-- Ordenar y filtrar no elimina ni reordena las memorias en la radio; solo cambia lo que es visible en la tabla.
+- El campo Search: tiene un botón de borrar en el lado derecho; haga clic en él para eliminar el filtro sin borrar la selección de Profile:.
+- La clasificación y el filtrado no eliminan ni reordenan las memorias en la radio; solo cambian lo que es visible en la tabla.
 
 ## Relacionados
 
-- [Agregar una memoria en la frecuencia actual](add-a-memory-at-current-frequency.md)
-- [Editar el nombre, modo u offset de una memoria en línea](edit-a-memory-s-name-mode-or-offset-inline.md)
-- [Sintonizar la radio a una memoria almacenada](tune-the-radio-to-a-stored-memory.md)
-- [Eliminar una o más memorias](delete-one-or-more-memories.md)
-- [Buscar memorias por nombre](search-memories-by-name.md)
-- [Filtrar memorias por perfil](filter-memories-by-profile.md)
-- [Importar memorias desde un archivo CSV/JSON](import-memories-from-a-csv-json-file.md)
-- [Exportar memorias para respaldo o compartir](export-memories-for-backup-or-sharing.md)
-- [Ordenar la tabla de memorias por encabezado de columna](sort-memory-table-by-column-header.md)
-- [Recuperar una memoria de repetidora FM y restaurar el offset y el tono CTCSS](recall-an-fm-repeater-memory-and-restore-offset-and-ctcss-tone.md)
+- [Add a memory at current frequency](add-a-memory-at-current-frequency.md)
+- [Edit a memory's name, mode or offset inline](edit-a-memory-s-name-mode-or-offset-inline.md)
+- [Tune the radio to a stored memory](tune-the-radio-to-a-stored-memory.md)
+- [Delete one or more memories](delete-one-or-more-memories.md)
+- [Search memories by name](search-memories-by-name.md)
+- [Filter memories by profile](filter-memories-by-profile.md)
+- [Import memories from a CSV/JSON file](import-memories-from-a-csv-json-file.md)
+- [Export memories for backup or sharing](export-memories-for-backup-or-sharing.md)
+- [Sort memory table by column header](sort-memory-table-by-column-header.md)
+- [Recall an FM repeater memory and restore offset and CTCSS tone](recall-an-fm-repeater-memory-and-restore-offset-and-ctcss-tone.md)

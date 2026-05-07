@@ -1,21 +1,21 @@
-# Ver cuántos clientes TCI están conectados
+# Vea cuántos clientes TCI están conectados
 
-El applet TCI Server muestra un contador de clientes en tiempo real en su indicador de estado. Úselo para confirmar que Log4OM, las herramientas SunSDR u otro cliente TCI se han conectado correctamente.
+El applet del Servidor TCI muestra un conteo de clientes en vivo en su indicador de estado. Úselo para confirmar que Log4OM, herramientas SunSDR o cualquier otro cliente TCI se haya conectado exitosamente.
 
 ## Antes de comenzar
 
 - AetherSDR debe estar conectado a una radio. El applet TCI requiere una conexión de radio activa.
-- El servidor TCI debe estar en ejecución (Enable activado). Si está detenido, el estado muestra `(stopped)` y el contador de clientes no está disponible.
+- El servidor TCI debe estar en ejecución (Enable activado). Si está detenido, el estado muestra `(stopped)` y no hay conteo de clientes disponible.
 
 ## Pasos
 
-1. Haga clic en el botón **TCI** de la barra lateral derecha para abrir el applet TCI Server.
+1. Haga clic en el botón **TCI** de la bandeja en la barra lateral derecha para abrir el applet del Servidor TCI.
 2. Lea el indicador de estado junto al campo Port.
 
 Cuando el servidor está en ejecución y al menos un cliente está conectado, el estado muestra:
 
 ```
-:<port> (N clients)
+:<puerto> (N clients)
 ```
 
 Por ejemplo, con dos clientes conectados en el puerto predeterminado:
@@ -26,31 +26,31 @@ Por ejemplo, con dos clientes conectados en el puerto predeterminado:
 
 Cuando el servidor está en ejecución pero no hay clientes conectados, el estado muestra el puerto y `(0 clients)`. Cuando el servidor está detenido, el estado muestra `(stopped)`.
 
-## Qué hace cada control
+## Función de cada control
 
-| Control            | Descripción                                                                                          | Valor predeterminado                                                                                                                                                                                                                                                                    |
-|--------------------|------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Port               | Puerto en el que escucha el servidor WebSocket TCI. Los valores fuera de rango se ajustan a `50001`. | `50001`                                                                                                                                                                                                                                                                                 |
-| Enable             | Inicia o detiene el servidor TCI.                                                                    | Off                                                                                                                                                                                                                                                                                     |
-| Server status      | Muestra `(stopped)`, `:<port> (N clients)` o `(port in use)`. Se torna rojo si falla el enlace.      | `(stopped)`                                                                                                                                                                                                                                                                             |
-| RX1–RX4 gain+meter | Control deslizante de ganancia y medidor de nivel para cada canal RX TCI.                            | 0.5                                                                                                                                                                                                                                                                                     |
-| TX gain+meter      | El control deslizante ajusta la ganancia TX TCI y emite tciTxGainChanged.                            | TciServer::setTxGain conserva TciTxGain internamente; la interfaz refleja el valor almacenado. El audio TX TCI siempre está permitido independientemente de la plataforma o la disponibilidad de DAX hospedado (evaluateDaxTxPolicy ahora permite incondicionalmente DaxTxRequestReason::TciTxAudio, v0.9.5.1, #2276). |
+| Control            | Descripción                                                                                 | Valor predeterminado                                                                                                                                                                                                                                               |
+|--------------------|---------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Port               | Puerto en el que escucha el servidor WebSocket TCI. Los valores fuera de rango se ajustan a `50001`. | `50001`                                                                                                                                                                                                                                                             |
+| Enable             | Inicia o detiene el servidor TCI.                                                             | Off                                                                                                                                                                                                                                                                 |
+| Server status      | Muestra `(stopped)`, `:<puerto> (N clients)` o `(port in use)`. Se vuelve rojo si falla la vinculación. | `(stopped)`                                                                                                                                                                                                                                                         |
+| RX1–RX4 gain+meter | Control deslizante de ganancia e indicador de nivel para cada canal RX de TCI.                | 0.5                                                                                                                                                                                                                                                                 |
+| TX gain+meter      | Los arrastres establecen la ganancia TX de TCI y emiten tciTxGainChanged.                    | TciServer::setTxGain persiste TciTxGain internamente; la interfaz refleja el valor almacenado. El audio TX de TCI siempre está permitido independientemente de la plataforma o la disponibilidad de DAX alojado (evaluateDaxTxPolicy ahora permite incondicionalmente DaxTxRequestReason::TciTxAudio, v0.9.5.1, #2276). |
 
 ## Consejos
 
-- El contador de clientes se actualiza automáticamente cada vez que un cliente se conecta o desconecta — no es necesario actualizar la pantalla.
-- Cuando hay un cliente conectado, el estado muestra `(1 client)` (singular); con dos o más muestra `(N clients)` (plural).
-- El texto del estado se torna azul cuando hay uno o más clientes conectados, lo que facilita identificarlo de un vistazo.
+- El conteo de clientes se actualiza automáticamente cuando un cliente se conecta o desconecta; no es necesario recargar.
+- Cuando hay un cliente conectado, el estado muestra `(1 client)` (singular); dos o más muestran `(N clients)` (plural).
+- El texto de estado se vuelve azul cuando uno o más clientes están conectados, lo que facilita su identificación de un vistazo.
 
 ## Solución de problemas
 
-- **El estado muestra `(port in use)`** — Otro proceso ya está vinculado al puerto configurado. Cambie el valor en el campo Port a un puerto libre en el rango 1024–65535 y presione Enter. El servidor se reinicia automáticamente si Enable está activado.
-- **El estado permanece en `(stopped)` después de hacer clic en Enable** — El enlace falló y Enable volvió a desactivarse. Verifique el valor de Port y confirme que ninguna otra aplicación esté usando ese puerto.
-- **El contador de clientes permanece en 0** — Confirme que la aplicación de terceros está configurada para conectarse al host y puerto correctos. El puerto en uso se muestra en el indicador de estado.
+- **El estado muestra `(port in use)`** — Otro proceso ya está vinculado al puerto configurado. Cambie el valor en el campo Port a un puerto no utilizado en el rango 1024–65535 y presione Enter. El servidor se reinicia automáticamente si Enable está activado.
+- **El estado permanece `(stopped)` después de hacer clic en Enable** — La vinculación falló y Enable volvió a apagarse. Verifique el valor de Port y confirme que ninguna otra aplicación esté usando ese puerto.
+- **El conteo de clientes se mantiene en 0** — Confirme que la aplicación de terceros esté configurada para conectarse al host y puerto correctos. El puerto en uso se muestra en el indicador de estado.
 
 ## Relacionados
 
-- [Habilitar el servidor TCI para clientes Log4OM / SunSDR](../../features/tci/enable-the-tci-server-for-log4om-sunsdr-clients.md)
-- [Cambiar el puerto TCI](../../features/tci/change-the-tci-port.md)
-- [Inicio automático de TCI al lanzar la aplicación](../../features/tci/autostart-tci-on-launch.md)
-- [Descripción general de TCI Server](../../features/tci/overview.md)
+- [Enable the TCI server for Log4OM / SunSDR clients](../../features/tci/enable-the-tci-server-for-log4om-sunsdr-clients.md)
+- [Change the TCI port](../../features/tci/change-the-tci-port.md)
+- [Autostart TCI on launch](../../features/tci/autostart-tci-on-launch.md)
+- [TCI Server overview](../../features/tci/overview.md)

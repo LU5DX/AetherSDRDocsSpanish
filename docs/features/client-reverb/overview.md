@@ -1,47 +1,58 @@
-# Descripción general de Aetherial FreeVerb
+# Resumen de Aetherial FreeVerb
 
-Aetherial FreeVerb añade una cola de reverberación basada en Freeverb al audio que usted transmite, dando a su voz una sensación de ambiente de sala o auditorio. Se aplica únicamente a la cadena de TX — no existe contraparte en RX.
+Aetherial FreeVerb agrega una cola de reverberación basada en Freeverb a su audio transmitido, dando a su voz una sensación de ambiente de sala o salón. Se aplica solo a la ruta de transmisión (TX); no tiene contraparte en recepción (RX).
 
 ## Antes de comenzar
 
-- El bloque Reverb debe estar habilitado en el widget CHAIN dentro del applet Aetherial Audio (TXDSP). El sub-contenedor "Aetherial FreeVerb" y sus controles permanecen ocultos hasta que el bloque esté habilitado.
-- No se requiere conexión a una radio para ajustar la configuración de reverberación.
+- La etapa de reverberación debe estar habilitada en el widget CHAIN dentro del applet Aetherial Audio (TXDSP). El subcontenedor "Aetherial FreeVerb" y sus controles permanecen ocultos hasta que la etapa esté habilitada.
+- No se requiere una conexión de radio para ajustar los parámetros de reverberación.
 
 ## Cómo funciona
 
-Aetherial FreeVerb inserta un procesador de reverberación Freeverb en la cadena de audio TX del lado del cliente, después de cualquier bloque DSP previo. Cuando el bloque VERB está activo, los cinco mandos — Size, Decay, Damp, Pre y Mix — determinan el carácter y el nivel de la cola de reverberación añadida a su voz transmitida.
+Aetherial FreeVerb inserta un procesador de reverberación Freeverb en la cadena de audio TX del lado del cliente, después de cualquier etapa DSP previa. Cuando la etapa VERB está activa, los cinco potenciómetros — Size, Decay, Damp, Pre y Mix — dan forma al carácter y nivel de la cola de reverberación añadida a su voz transmitida.
 
-Los controles aparecen en dos lugares que permanecen sincronizados a aproximadamente 30 Hz:
+Los controles aparecen en dos lugares que se mantienen sincronizados a aproximadamente 30 Hz:
 
-- **El sub-contenedor "Aetherial FreeVerb"** — una fila compacta de cinco mandos integrada dentro del contenedor principal Aetherial Audio (TXDSP) en el panel de applets.
-- **El editor flotante titulado "Aetherial FreeVerb — TX"** — una versión ampliada de los mismos controles, que se abre haciendo doble clic en el bloque VERB en el widget CHAIN. También puede hacer clic derecho en la barra de título del sub-contenedor "Aetherial FreeVerb" para flotarlo, extraerlo o ocultarlo.
+- **El subcontenedor "Aetherial FreeVerb"** — una fila compacta de cinco potenciómetros incrustada dentro del contenedor principal Aetherial Audio (TXDSP) en el panel del applet.
+- **El editor flotante titulado "Aetherial FreeVerb — TX"** — una versión más grande de los mismos controles, que se abre haciendo doble clic en la etapa VERB en el widget CHAIN. También puede hacer clic derecho en la barra de título del subcontenedor "Aetherial FreeVerb" para flotarlo, sacarlo u ocultarlo.
 
-Girar cualquier mando en cualquiera de las dos vistas actualiza inmediatamente la otra. La configuración se guarda automáticamente al modificar un mando.
+Girar cualquier potenciómetro en una vista actualiza inmediatamente la otra. La configuración se guarda automáticamente al cambiar un potenciómetro.
+
+### Visualización de reverberación en vivo
+
+El editor flotante incluye una visualización en vivo compacta (90 px de alto) que se actualiza en tiempo real mientras gira los potenciómetros. Muestra tres componentes de señal sobre un fondo de cuadrícula oscura:
+
+- **Cian** — el paquete de señal seca, con degradado desvaneciéndose hacia la derecha.
+- **Amarillo** — reflexiones de primer orden, espaciadas y amortiguadas según los valores actuales de Size y Damp.
+- **Magenta** — la cola reverberante, cuya longitud y envolvente de caída siguen los potenciómetros Decay y Damp.
+
+El potenciómetro Pre desplaza el punto donde comienzan las reflexiones y la cola en relación con la señal seca. El potenciómetro Mix escala la amplitud tanto de los componentes húmedos como del desvanecimiento del paquete seco. La visualización coincide con el diseño utilizado por el panel de reverberación lateral de la tira, por lo que las dos vistas se leen de manera coherente.
 
 ## Qué hace cada control
 
-| Mando | Valor por defecto | Rango válido | Comportamiento | Clave de ajuste |
-|-------|-------------------|--------------|----------------|-----------------|
-| Size | 50 % | 0–100 % | Define el tamaño de sala modelado. Mapeo lineal. | `ClientReverbTxSize` |
-| Decay | 1.20 s | 0.3–5.0 s | Define la longitud de la cola de reverberación. Mapeo exponencial — el mando recorre de 0.3 s a 5.0 s con mayor precisión en valores cortos. | `ClientReverbTxDecayS` |
-| Damp | 50 % | 0–100 % | Valores más altos atenúan las frecuencias agudas con mayor rapidez en la cola, produciendo una reverberación más cálida y menos brillante. Mapeo lineal. | `ClientReverbTxDamping` |
-| Pre | 20 ms | 0–100 ms | Define el pre-retardo entre la señal seca y las primeras reflexiones. Mapeo lineal. | `ClientReverbTxPreDelayMs` |
-| Mix | 15 % | 0–100 % | Define el balance seco/húmedo. 0 % es completamente seco; 100 % es completamente húmedo. Mapeo lineal. | `ClientReverbTxMix` |
+| Potenciómetro | Valor predeterminado | Rango válido | Comportamiento | Clave de configuración |
+|---------------|----------------------|---------------|----------------|-------------------------|
+| Size | 50 % | 0–100 % | Establece el tamaño simulado de la sala. Mapeo lineal. | `ClientReverbTxSize` |
+| Decay | 1.20 s | 0.3–5.0 s | Establece la longitud de la cola de reverberación. Mapeo exponencial — el potenciómetro va de 0.3 s a 5.0 s con un control más fino en valores cortos. | `ClientReverbTxDecayS` |
+| Damp | 50 % | 0–100 % | Valores más altos amortiguan las frecuencias altas más rápido en la cola, produciendo una reverberación más cálida y menos brillante. Mapeo lineal. | `ClientReverbTxDamping` |
+| Pre | 20 ms | 0–100 ms | Establece el pre-retardo entre la señal seca y las primeras reflexiones. Mapeo lineal. | `ClientReverbTxPreDelayMs` |
+| Mix | 15 % | 0–100 % | Establece el balance seco/húmedo. 0 % es completamente seco; 100 % es completamente húmedo. Mapeo lineal. | `ClientReverbTxMix` |
 
-El estado habilitado/deshabilitado del bloque se guarda como `ClientReverbTxEnabled`.
+El estado habilitado/deshabilitado de la etapa se guarda como `ClientReverbTxEnabled`.
 
 ## Consejos
 
-- Para voz, un Mix de 10–15 % es típico. El valor por defecto de 15 % es un buen punto de partida.
-- Valores altos de Decay (por encima de 3 s) pueden enturbian el habla. Comience con el valor por defecto de 1.20 s y auméntelo solo si el efecto de sala suena demasiado corto.
-- Aumentar Damp reduce el brillo de altas frecuencias en la cola, lo que puede ayudar a que la reverberación quede detrás de la voz en lugar de encima de ella.
-- El editor flotante ("Aetherial FreeVerb — TX") ofrece mandos más grandes para ajustes precisos. Su posición y tamaño se guardan automáticamente entre sesiones.
+- Para voz, un Mix del 10–15 % es típico. El valor predeterminado del 15 % es un punto de partida razonable.
+- Los valores altos de Decay (por encima de 3 s) pueden enturbiar el habla. Comience con el valor predeterminado de 1.20 s y aumente solo si el efecto de sala parece demasiado corto.
+- Aumentar Damp reduce el brillo de las frecuencias altas en la cola, lo que puede ayudar a que la reverberación se sitúe detrás del habla en lugar de superponerse a ella.
+- El editor flotante ("Aetherial FreeVerb — TX") proporciona potenciómetros más grandes y la visualización en vivo para un ajuste preciso. Su posición y tamaño se guardan automáticamente entre sesiones.
+- Use la visualización en vivo para obtener una idea aproximada de la longitud de la cola y la densidad de reflexiones antes de transmitir. La longitud de la cola magenta brinda una aproximación visual de cómo interactúan Decay y Damp.
 
 ## Relacionados
 
-- [Omitir la reverberación desde la cadena](bypass-reverb-from-the-chain.md)
-- [Ajustar un Mix sutil — 10–15 % es típico para voz](dial-in-a-subtle-mix-10-15-is-typical-for-voice.md)
-- [Ajustar el Decay a gusto sin enturbiar el habla](tune-decay-to-taste-without-muddying-speech.md)
-- [Reducir el brillo de altas frecuencias en la cola con Damp](reduce-the-high-end-sparkle-of-the-tail-with-damp.md)
-- [Establecer el tamaño de sala para sensación de sala pequeña o gran auditorio](set-room-size-for-a-small-or-large-hall-feel.md)
-- [Desfasar las reflexiones de la señal seca con Pre](offset-reflections-from-the-dry-signal-with-pre.md)
+- [Bypass reverb from the chain](bypass-reverb-from-the-chain.md)
+- [Dial in a subtle Mix — 10-15 % is typical for voice](dial-in-a-subtle-mix-10-15-is-typical-for-voice.md)
+- [Tune decay to taste without muddying speech](tune-decay-to-taste-without-muddying-speech.md)
+- [Reduce the high-end sparkle of the tail with Damp](reduce-the-high-end-sparkle-of-the-tail-with-damp.md)
+- [Set room size for a small or large-hall feel](set-room-size-for-a-small-or-large-hall-feel.md)
+- [Offset reflections from the dry signal with Pre](offset-reflections-from-the-dry-signal-with-pre.md)

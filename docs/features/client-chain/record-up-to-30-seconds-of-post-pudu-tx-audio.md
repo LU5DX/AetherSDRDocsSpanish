@@ -1,45 +1,62 @@
-# Grabar hasta 30 segundos de audio TX posterior a PUDU
+# Grabe hasta 30 segundos de audio de TX posterior a PUDU
 
-Use el grabador de monitor integrado para capturar y reproducir inmediatamente cómo suena su audio transmitido después de haber pasado por la cadena DSP TX completa, incluyendo PUDU. Esto le permite ajustar la configuración de su cadena sin necesitar una segunda estación que le informe los resultados.
+Use el grabador de monitor integrado para capturar y reproducir inmediatamente cómo suena su audio transmitido después de pasar por toda la cadena DSP de TX, incluyendo PUDU. Esto le ayuda a ajustar la configuración de su cadena sin necesidad de que otra estación le informe.
 
 ## Antes de comenzar
 
-- El contenedor Aetherial Audio (TXDSP) debe estar abierto. Si no está visible, haga clic en el botón de bandeja etiquetado **PUDU** en la barra lateral derecha.
-- La entrada de micrófono debe estar configurada en **PC** (no en una fuente de micrófono del panel frontal del radio).
-- DAX debe estar desactivado. El tooltip del botón de grabación indica: "MIC must be set to PC and DAX off."
-- La pestaña **TX** debe estar activa en el applet. Los controles de grabación están ocultos cuando se selecciona **RX**.
+- El applet Aetherial Audio Chain debe estar abierto. Si no es visible, haga clic en el botón de bandeja etiquetado como **PUDU** en la barra lateral derecha.
+- Su entrada de micrófono debe estar configurada en **PC** (no en una fuente de micrófono del panel frontal del radio).
+- DAX debe estar desactivado. La información sobre herramientas del botón de grabar dice: "MIC debe configurarse en PC y DAX desactivado".
+- La pestaña **TX** debe estar activa en el applet. Los controles de grabación están ocultos cuando **RX** está seleccionado.
 
 ## Pasos
 
-1. Haga clic en el botón de pestaña **TX** en la parte superior del applet Aetherial Audio Chain para asegurarse de que se muestra la cadena TX. El botón se vuelve ámbar al seleccionarlo.
-2. Confirme que el botón de grabación (⏺) está habilitado. Solo se habilita cuando la entrada de micrófono está lista y la reproducción no está en curso. Si aparece atenuado y no se puede hacer clic, verifique que la fuente de micrófono esté configurada en PC y que DAX esté desactivado.
-3. Haga clic en **⏺** para iniciar la grabación. El botón parpadea en rojo para indicar que la captura está activa. La grabación se detiene automáticamente después de 30 segundos, o puede detenerla antes.
-4. Para detener la grabación antes de que transcurran los 30 segundos, haga clic en **⏺** nuevamente. La reproducción comienza automáticamente una vez que la grabación se detiene.
-5. Para cancelar la reproducción antes de que finalice, haga clic en **▶** mientras parpadea en verde.
+1. Haga clic en el botón de la pestaña **TX** en la parte superior del applet Aetherial Audio Chain para asegurarse de que se muestre la cadena de TX. El botón se vuelve ámbar cuando está seleccionado.
+2. Confirme que el botón de grabar (⏺) esté habilitado. Solo se habilita cuando la entrada de micrófono está lista y la reproducción no está en curso. Si aparece atenuado y no se puede hacer clic, verifique que la fuente del micrófono esté configurada en PC y que DAX esté desactivado.
+3. Haga clic en **⏺** para comenzar a grabar. El botón parpadea en rojo para indicar que la captura está activa. La grabación se detiene automáticamente después de 30 segundos, o puede detenerla antes.
+4. Para detener la grabación antes de que hayan transcurrido 30 segundos, haga clic en **⏺** nuevamente. La reproducción comienza automáticamente una vez que la grabación se detiene.
+5. Para cancelar la reproducción antes de que termine, haga clic en **▶** mientras parpadea en verde.
 
 ## Qué hace cada control
 
-| Control | Valor predeterminado | Comportamiento |
-|---|---|---|
-| **⏺** (grabar) | Sin marcar | Captura hasta 30 s de audio TX posterior a PUDU. Haga clic nuevamente para detener; la reproducción comienza automáticamente. |
-| **▶** (reproducir) | Sin marcar | Reproduce el audio capturado. Haga clic nuevamente para cancelar. |
-| Etapa de cadena RX (EQ / AGC-T / AGC-C / TUBE / PUDU) | — | Un clic alterna el bypass de la etapa RX; doble clic abre su editor flotante sin marco en modo RX; arrastrar reordena la cadena RX. Las cinco etapas RX (EQ, AGC-T/Gate, AGC-C/Comp, Tube, PUDU) están completamente implementadas. El orden es independiente de la cadena TX. El tipo MIME distinto `application/x-aethersdr-rx-chain-stage` evita que se produzcan sueltas accidentales entre las dos tiras. |
+| Control                                                 | Predeterminado                                                                                                                                                                                                                                                                                                                                                                                | Comportamiento                                                                                                                                                                                                                                                                           |
+|---------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Botones de alternancia **TX** / **RX**                  | TX está marcado                                                                                                                                                                                                                                                                                                                                                                          | Par exclusivo; muestra y edita la cadena DSP correspondiente. La última pestaña activa persiste a través de `PooDooAudioActiveTab`.                                                                                                                                                              |
+| **BYPASS**                                              | Sin marcar                                                                                                                                                                                                                                                                                                                                                                              | Toma una instantánea de las etapas actualmente habilitadas en el lado activo y las deshabilita todas. Desmarque para reactivar solo las etapas que estaban activas antes. TX y RX mantienen instantáneas separadas propiedad del motor.                                                  |
+| **⏺** (grabar)                                          | Sin marcar                                                                                                                                                                                                                                                                                                                                                                              | Captura hasta 30 segundos de audio de TX posterior a PUDU. Haga clic nuevamente para detener; la reproducción comienza automáticamente. Oculto en modo RX.                                                                                                                               |
+| **▶** (reproducir)                                       | Sin marcar                                                                                                                                                                                                                                                                                                                                                                              | Reproduce el audio capturado. Haga clic nuevamente para cancelar. Oculto en modo RX.                                                                                                                                                                                                     |
+| Etapa de la cadena TX (EQ / COMP / GATE / DESS / TUBE / PUDU / VERB) | Un solo clic alterna la derivación de la etapa; un doble clic abre el Aetherial Audio Channel Strip; arrastrar reordena la cadena TX.                                                                                                                                                                                                                                                   | Delegado a ClientChainWidget. Texto de sugerencia: "Click to bypass · Double click to edit · Drag to reorder".                                                                                                                                                                         |
+| Etapa de la cadena RX (EQ / AGC-G / AGC-C / DESS / TUBE / EVO) | Un solo clic alterna la derivación de la etapa RX; un doble clic abre su editor flotante sin marco en modo RX; arrastrar reordena la cadena RX.                                                                                                                                                                                                                                          | Delegado a ClientRxChainWidget. Las seis etapas RX están completamente implementadas. El orden es independiente de la cadena TX.                                                                                                                                                           |
+| Mosaico de estado **RADIO**                             | Siempre visible en modo RX                                                                                                                                                                                                                                                                                                                                                              | Se vuelve verde cuando PC Audio (flujo SSB estándar) está habilitado. No interactivo.                                                                                                                                                                                                    |
+| Mosaico de estado/derivación **ADSP**                  | Sin marcar                                                                                                                                                                                                                                                                                                                                                                              | Refleja qué reductor de ruido del lado del cliente está activo actualmente. Un solo clic deriva todo el clúster NR con una instantánea en memoria; haga clic nuevamente para restaurar el estado NR anterior. Un doble clic abre el cuadro de diálogo AetherDSP Settings.              |
+| Mosaico de estado **SPEAK**                             | Siempre visible en modo RX                                                                                                                                                                                                                                                                                                                                                              | Se vuelve verde cuando la salida de audio de AetherSDR no está silenciada. No interactivo.                                                                                                                                                                                               |
 
-## Sugerencias
+## Abrir el editor DSP de TX desde la cadena
 
-- El grabador captura el audio en el punto posterior a la etapa PUDU en la cadena TX. Para escuchar el efecto de una etapa específica, active o desactive su bypass, realice una grabación y compare la reproducción.
-- No es necesario transmitir hacia un receptor: el monitor graba el audio directamente desde la salida DSP del lado del cliente.
+Hacer doble clic en cualquier mosaico de etapa de la cadena TX abre el Aetherial Audio Channel Strip — la ventana DSP de TX unificada. El channel strip proporciona acceso a todos los editores de etapas individuales a través de sus propios controles. Este gesto de doble clic es la forma estándar de abrir la configuración de audio de TX desde el applet de la cadena.
+
+## Sincronización de BYPASS de TX y RX
+
+El botón **BYPASS** en el applet Aetherial Audio Chain y el botón **BYPASS** en el Aetherial Audio Channel Strip comparten un único estado de derivación propiedad del motor para cada lado. Al presionar cualquiera de los botones, ambos se actualizan. Cuando cambia entre las pestañas **TX** y **RX**, el botón **BYPASS** refleja inmediatamente el estado actual del motor para el lado activo.
+
+## Consejos
+
+- El grabador captura el audio en el punto posterior a la etapa PUDU en la cadena TX. Para escuchar el efecto de una etapa específica, active o desactive la derivación de esa etapa, haga una grabación y compare la reproducción.
+- No necesita transmitir a un receptor — el monitor graba el audio de la salida DSP del lado del cliente directamente.
 - Si desea comparar configuraciones, detenga la grabación actual, ajuste una etapa, grabe nuevamente y reproduzca para comparar.
+- Para ajustar la configuración de etapas TX individuales, haga doble clic en cualquier mosaico de etapa en la cadena TX. Se abrirá el Aetherial Audio Channel Strip; use sus controles para editar cada etapa.
 
 ## Solución de problemas
 
-- **El botón ⏺ está atenuado y no se puede hacer clic** — La entrada de micrófono no está configurada en PC, DAX está activado o la reproducción está en curso. Desactive DAX, configure la fuente de micrófono en PC y espere a que finalice cualquier reproducción activa.
-- **Los botones ⏺ y ▶ no son visibles** — La pestaña **RX** está activa. Haga clic en **TX** para cambiar a la cadena TX; ambos botones están ocultos en el modo RX.
-- **La reproducción no comienza después de que la grabación se detiene** — No se capturó audio. Confirme que su entrada de micrófono está enviando audio a la PC durante la ventana de grabación.
+- **El botón ⏺ está atenuado y no se puede hacer clic** — La entrada de micrófono no está configurada en PC, DAX está activado o la reproducción está en curso. Desactive DAX, configure la fuente del micrófono en PC y espere a que termine cualquier reproducción activa.
+- **Los botones ⏺ y ▶ no son visibles** — La pestaña **RX** está activa. Haga clic en **TX** para cambiar a la cadena TX; ambos botones están ocultos en modo RX.
+- **La reproducción no comienza después de que la grabación se detiene** — No se capturó audio. Confirme que su entrada de micrófono esté entregando audio a la PC durante la ventana de grabación.
+- **Hacer doble clic en un mosaico de etapa TX no abre un editor flotante** — Este es un comportamiento esperado. El doble clic abre el Aetherial Audio Channel Strip. Acceda a los editores de etapas individuales desde el channel strip.
+- **El estado del botón BYPASS no coincide con lo que configuré en el channel strip** — Si acaba de conectar el motor de audio, recargue el applet o cambie a otra pestaña y vuelva a la pestaña activa para que el botón pueda releer el estado actual del motor.
 
 ## Relacionados
 
-- [Descripción general de Aetherial Audio Chain](overview.md)
-- [Reproducir el audio PUDU capturado](play-back-the-captured-pudu-audio.md)
-- [Alternar entre la edición de las cadenas TX y RX](switch-between-editing-the-tx-and-rx-chains.md)
-- [Abrir el editor flotante sin marco de una etapa desde la cadena](open-a-stage-s-frameless-floating-editor-from-the-chain.md)
+- [Aetherial Audio Chain overview](overview.md)
+- [Play back the captured PUDU audio](play-back-the-captured-pudu-audio.md)
+- [Switch between editing the TX and RX chains](switch-between-editing-the-tx-and-rx-chains.md)
+- [Open a stage's frameless floating editor from the chain](open-a-stage-s-frameless-floating-editor-from-the-chain.md)

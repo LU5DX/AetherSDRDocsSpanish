@@ -1,33 +1,33 @@
-# Reproducir una ranura almacenada del manipulador de voz digital
+# Reproducir una ranura de grabación de voz almacenada
 
-Use el panel Digital Voice Keyer para transmitir al aire una grabación almacenada. Al activar una ranura, el equipo comienza a transmitir y reproduce el audio a través del slice de transmisión seleccionado.
+Use el panel de grabador de voz digital (Digital Voice Keyer) para transmitir una grabación almacenada al aire. Al activar una ranura, se pone la radio en transmisión y se reproduce el audio a través del slice de transmisión seleccionado.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al equipo. El panel DVK requiere una conexión activa con el equipo.
-- La ranura de destino debe contener una grabación. Las ranuras que muestran "Empty" en la etiqueta de duración no se pueden reproducir.
-- El equipo debe estar en un modo de voz (SSB, AM, FM) para que el panel DVK aparezca en la ventana principal.
+- AetherSDR debe estar conectado a la radio. El panel DVK requiere una conexión activa con la radio.
+- La ranura destino debe contener una grabación. Las ranuras que muestran "Empty" en la etiqueta de duración no pueden reproducirse.
+- La radio debe estar en un modo de voz (SSB, AM, FM) para que el panel DVK aparezca en la ventana principal.
 
 ## Pasos
 
 1. Localice el panel Digital Voice Keyer en el área central de la ventana principal.
-2. Identifique la ranura que desea reproducir. Verifique que su etiqueta de duración muestre un valor de tiempo y no "Empty".
+2. Identifique la ranura que desea reproducir. Verifique que su etiqueta de duración muestre un valor de tiempo, no "Empty".
 3. Haga clic en la fila de la ranura para seleccionarla. La fila seleccionada se resalta con un borde azul.
 4. Reproduzca la ranura usando uno de estos métodos:
    - Haga clic en el botón **▶ PLAY** para reproducir la ranura seleccionada actualmente.
    - Haga clic directamente en el botón **F1** a **F8** de la ranura para seleccionarla y reproducirla en una sola acción.
    - Presione la tecla F correspondiente en su teclado (F1–F8) para seleccionar y reproducir esa ranura.
-5. La barra de progreso de la ranura aparece y avanza durante la reproducción. El indicador de estado cambia de "Idle" a "Playing". El botón de tecla F de la ranura activa se resalta.
+5. La barra de progreso de la ranura aparece y avanza durante la reproducción. El indicador de estado cambia de "Idle" a "Playing". El botón F de la ranura activa se resalta.
 6. La reproducción se detiene automáticamente cuando termina la grabación. Para detenerla antes, haga clic en **■ STOP** o presione Escape.
 
-## Qué hace cada control
+## Función de cada control
 
 | Control | Comportamiento | Valor predeterminado |
 |---|---|---|
-| Botones de ranura **F1 … F8** | Selecciona y reproduce esa ranura; si la ranura ya se está reproduciendo, hacer clic de nuevo la detiene. | — |
+| Botones de ranura **F1 … F8** | Selecciona y reproduce esa ranura; si la ranura ya se está reproduciendo, al hacer clic nuevamente la detiene. | — |
 | Etiquetas de nombre de ranura | Muestra el nombre de cada ranura. | `Recording <n>` |
 | Etiquetas de duración de ranura | Muestra la duración de la grabación o "Empty" si la ranura no tiene contenido. | `Empty` |
-| Barras de progreso de ranura | Muestra el progreso de reproducción en tiempo real. Visible solo durante la reproducción activa. | Oculta |
+| Barras de progreso de ranura | Muestra el progreso de reproducción en vivo. Visible solo durante la reproducción activa. | Oculto |
 | **▶ PLAY** | Reproduce la ranura seleccionada. No tiene efecto si la ranura está vacía. | — |
 | **■ STOP** | Detiene la reproducción en curso. | — |
 
@@ -39,13 +39,13 @@ Use el panel Digital Voice Keyer para transmitir al aire una grabación almacena
 
 ## Solución de problemas
 
-- **▶ PLAY no hace nada** — La ranura seleccionada está vacía. La etiqueta de duración mostrará "Empty". Primero grabe audio o cargue un archivo WAV en la ranura.
+- **▶ PLAY no funciona** — La ranura seleccionada está vacía. La etiqueta de duración mostrará "Empty". Grabe audio o cargue un archivo WAV en la ranura primero.
 - **La tecla F no tiene efecto** — El panel DVK debe tener el foco del teclado, o la ranura en esa posición está vacía.
 
-## Temas relacionados
+## Relacionados
 
-- [Descripción general del Digital Voice Keyer](overview.md)
-- [Vista previa de una ranura sin transmitir](preview-a-slot-without-transmitting.md)
-- [Grabar una nueva ranura DVK](record-a-new-dvk-slot.md)
-- [Detener una reproducción en curso](stop-a-playback-in-progress.md)
-- [Cargar un archivo WAV en una ranura](upload-a-wav-file-into-a-slot.md)
+- [Digital Voice Keyer overview](overview.md)
+- [Preview a slot without transmitting](preview-a-slot-without-transmitting.md)
+- [Record a new DVK slot](record-a-new-dvk-slot.md)
+- [Stop a playback in progress](stop-a-playback-in-progress.md)
+- [Upload a WAV file into a slot](upload-a-wav-file-into-a-slot.md)

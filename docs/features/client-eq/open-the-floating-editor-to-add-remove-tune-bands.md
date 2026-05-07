@@ -1,39 +1,39 @@
-# Abrir el editor flotante para agregar / eliminar / ajustar bandas
+# Abra el editor flotante para añadir, eliminar o sintonizar bandas
 
-El ClientEqEditor flotante es donde se agregan, eliminan y ajustan las bandas de EQ para las rutas de RX y TX. El applet compacto en el panel muestra el resultado; la edición siempre ocurre en esta ventana separada.
+El ClientEqEditor flotante es donde usted añade, elimina y sintoniza bandas de ecualización para las rutas RX y TX. El applet compacto en el panel muestra el resultado; la edición siempre ocurre en esta ventana separada.
 
 ## Antes de comenzar
 
-- El applet CEQ debe estar visible en el panel de applets. Permanece oculto hasta que la etapa de EQ se habilite mediante el widget CHAIN.
-- Localice el mosaico de la etapa de EQ en el widget CHAIN para la ruta que desea editar (RX o TX).
+- El applet CEQ debe estar visible en el panel de applets. Está oculto hasta que la etapa EQ se habilite a través del widget CHAIN.
+- Localice el mosaico de la etapa EQ en el widget CHAIN para la ruta que desea editar (RX o TX).
 
 ## Pasos
 
-1. Encuentre la etapa de EQ en el widget CHAIN para la ruta que desea configurar (cadena RX para recepción, cadena TX para transmisión).
-2. Haga doble clic en la etapa de EQ en el widget CHAIN.
-3. Se abre la ventana flotante ClientEqEditor. Agregue, elimine o ajuste bandas allí.
+1. Encuentre la etapa EQ en el widget CHAIN para la ruta que desea moldear (cadena RX para recepción, cadena TX para transmisión).
+2. Haga doble clic en la etapa EQ en el widget CHAIN.
+3. Se abre la ventana flotante ClientEqEditor. Añada, elimine o sintonice bandas allí.
 
 ## Qué hace cada control
 
-| Control | Tipo | Valor predeterminado | Comportamiento | Clave de configuración |
+| Control | Tipo | Predeterminado | Comportamiento | Clave de ajuste |
 |---|---|---|---|---|
-| RX | Pestaña | Seleccionada | Vincula el widget de curva a la instancia de EQ de RX. | — |
-| TX | Pestaña | No seleccionada | Vincula el widget de curva a la instancia de EQ de TX. | — |
-| Área del analizador / curva | Indicador | — | Muestra la respuesta de EQ sumada y una superposición FFT en tiempo real para la ruta seleccionada. Solo lectura; la edición requiere el editor flotante. | — |
-| Estado habilitado de RX | — | — | Indica si la etapa de EQ de RX está activa. | `ClientEqRxEnabled` |
-| Estado habilitado de TX | — | — | Indica si la etapa de EQ de TX está activa. | `ClientEqTxEnabled` |
-| Configuración de bandas de RX | — | — | Parámetros de banda almacenados para la ruta de RX. | `ClientEqRxBands` |
-| Configuración de bandas de TX | — | — | Parámetros de banda almacenados para la ruta de TX. | `ClientEqTxBands` |
+| RX | Pestaña | Marcado | Vincula el widget de curva a la instancia EQ de RX. | — |
+| TX | Pestaña | Sin marcar | Vincula el widget de curva a la instancia EQ de TX. | — |
+| Área de analizador/curva | Indicador | — | Muestra la respuesta EQ sumada y una superposición FFT en vivo para la ruta seleccionada. Solo visualización; la edición requiere el editor flotante. | — |
+| Estado habilitado de RX | — | — | Indica si la etapa EQ de RX está activa. | `ClientEqRxEnabled` |
+| Estado habilitado de TX | — | — | Indica si la etapa EQ de TX está activa. | `ClientEqTxEnabled` |
+| Configuración de bandas de RX | — | — | Parámetros de banda almacenados para la ruta RX. | `ClientEqRxBands` |
+| Configuración de bandas de TX | — | — | Parámetros de banda almacenados para la ruta TX. | `ClientEqTxBands` |
 
 ## Consejos
 
-- El área de curva tiene 110 px de alto y muestra un rango vertical de ±18 dB. Si se eliminan todas las bandas, el applet muestra "(no bands — add one in the editor)" como recordatorio de que el editor flotante es el único lugar para agregar bandas.
-- Cada ruta tiene su propio mosaico de applet. Haga doble clic en la etapa de EQ en la cadena de RX para editar las bandas de RX; haga doble clic en la de la cadena de TX para editar las bandas de TX. No existe un selector interno de RX/TX dentro del propio applet.
-- También puede hacer clic derecho en la barra de título del subcontenedor CEQ para acceder a opciones que permiten flotar, extraer u ocultar el mosaico del applet.
+- El área de curva tiene 110 px de alto y muestra un rango vertical de ±18 dB. Si se eliminan todas las bandas, el applet muestra "(sin bandas — añada una en el editor)" como recordatorio de que el editor flotante es el único lugar para añadir bandas.
+- Cada ruta tiene su propio mosaico de applet. Haga doble clic en la etapa EQ de la cadena RX para editar bandas RX; haga doble clic en la de la cadena TX para editar bandas TX. No hay un selector interno RX/TX dentro del propio applet.
+- También puede hacer clic derecho en la barra de título del subcontenedor CEQ para ver opciones de flotar, desacoplar u ocultar el mosaico del applet.
 
-## Relacionados
+## Relacionado
 
-- [Descripción general del EQ paramétrico (cliente)](overview.md)
-- [Omitir la etapa de EQ desde la cadena](bypass-the-eq-stage-from-the-chain.md)
-- [Alternar entre la visualización del EQ de RX y TX](switch-between-viewing-rx-and-tx-eq.md)
-- [Verificar que la curva sumada coincida con el objetivo deseado](verify-the-summed-curve-matches-your-mental-target.md)
+- [Descripción general del EQ paramétrico (Cliente)](overview.md)
+- [Omita la etapa EQ desde la cadena](bypass-the-eq-stage-from-the-chain.md)
+- [Cambie entre la visualización de EQ de RX y TX](switch-between-viewing-rx-and-tx-eq.md)
+- [Verifique que la curva sumada coincida con su objetivo mental](verify-the-summed-curve-matches-your-mental-target.md)

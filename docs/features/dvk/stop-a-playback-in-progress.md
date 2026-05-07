@@ -1,39 +1,39 @@
 # Detener una reproducción en curso
 
-Use esta página para detener el Digital Voice Keyer mientras un slot está reproduciéndose en el aire. Detener la reproducción interrumpe la transmisión de inmediato y devuelve el DVK al estado inactivo (Idle).
+Use esta página para detener el mando de voz digital mientras una ranura está reproduciendo al aire. Al detener la reproducción, la transmisión finaliza inmediatamente y el DVK vuelve al estado inactivo.
 
 ## Antes de comenzar
 
 - La radio debe estar conectada. El panel del DVK requiere una conexión activa con la radio.
-- Debe haber una reproducción en curso. El indicador de estado en la parte inferior del panel del DVK debe mostrar "Status: Playing".
+- Debe haber una reproducción en curso. El indicador de estado en la parte inferior del panel del DVK muestra "Status: Playing".
 
 ## Pasos
 
 1. Localice el panel del DVK en la ventana principal.
 2. Haga clic en **■ STOP**.
 
-La reproducción se detiene de inmediato. El indicador de estado regresa a "Status: Idle" y la barra de progreso del slot queda oculta.
+La reproducción se detiene de inmediato. El indicador de estado vuelve a mostrar "Status: Idle" y la barra de progreso de la ranura se oculta.
 
-**Alternativa — teclado:** Presione Escape. Si no hay ningún cambio de nombre en línea activo, Escape detiene la reproducción actual.
+**Alternativa — teclado:** Pulse Escape. Si no hay una edición en línea activa, Escape detiene la reproducción actual.
 
-**Alternativa — botón de tecla F:** Haga clic en el botón de tecla F activo del slot (por ejemplo, **F1**). Hacer clic en un botón de tecla F mientras ese slot se está reproduciendo funciona como un interruptor y detiene la reproducción.
+**Alternativa — botón de tecla F:** Haga clic en el botón de tecla F de la ranura activa (por ejemplo, **F1**). Al hacer clic en un botón de tecla F mientras esa ranura está reproduciendo, funciona como un conmutador y detiene la reproducción.
 
-## Qué hace cada control
+## Función de cada control
 
-| Control | Comportamiento durante la reproducción activa |
+| Control | Comportamiento cuando la reproducción está activa |
 |---|---|
-| **■ STOP** | Detiene la grabación, la reproducción o la vista previa, según cuál esté activa en ese momento. |
-| **Botones de slot F1 … F8** | Hacer clic en el botón del slot activo mientras se está reproduciendo detiene la reproducción. Hacer clic en el botón de un slot diferente inicia la reproducción de ese slot. |
-| Barras de progreso de los slots | Visibles y en avance durante la reproducción; ocultas cuando el DVK regresa al estado Idle. |
-| Indicador de estado | Muestra "Idle", "Recording" o "Playing". Regresa a "Idle" después de detener. |
+| **■ STOP** | Detiene la grabación, reproducción o vista previa, la que esté activa en ese momento. |
+| **Botones de ranura F1 … F8** | Hacer clic en el botón de la ranura activa mientras reproduce detiene la reproducción. Hacer clic en el botón de una ranura diferente inicia la reproducción de esa ranura. |
+| Barras de progreso de la ranura | Visibles y avanzando durante la reproducción; se ocultan cuando el DVK vuelve a inactivo. |
+| Indicador de estado | Muestra "Idle", "Recording" o "Playing". Vuelve a "Idle" después de detener. |
 
-## Sugerencias
+## Consejos
 
-- **■ STOP** también funciona para grabación y vista previa, además de la reproducción. Un solo botón cubre los tres estados activos.
-- Presionar Escape solo detiene la operación activa si no hay ningún campo de cambio de nombre de slot abierto en ese momento. Si hay un campo de texto para renombrar visible, Escape cancela el cambio de nombre en su lugar.
+- **■ STOP** funciona tanto para grabación y vista previa como para reproducción. Un solo botón cubre los tres estados activos.
+- Al pulsar Escape solo se detiene la operación activa si no hay una edición de nombre de ranura abierta. Si hay un campo de texto de edición visible, Escape cancela la edición.
 
-## Relacionados
+## Relacionado
 
-- [Reproducir un slot de voice keyer almacenado](play-a-stored-voice-keyer-slot.md)
-- [Vista previa de un slot sin transmitir](preview-a-slot-without-transmitting.md)
-- [Grabar un nuevo slot de DVK](record-a-new-dvk-slot.md)
+- [Reproducir una ranura del mando de voz almacenada](play-a-stored-voice-keyer-slot.md)
+- [Vista previa de una ranura sin transmitir](preview-a-slot-without-transmitting.md)
+- [Grabar una nueva ranura del DVK](record-a-new-dvk-slot.md)
