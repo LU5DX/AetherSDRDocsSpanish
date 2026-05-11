@@ -1,83 +1,198 @@
-# Configuración de modos digitales (FT8, WSJT-X, fldigi)
+# SpotHub
 
-Esta página explica cómo conectar WSJT-X, fldigi o software similar de modos digitales a AetherSDR para que puedan recibir audio de la radio, enviar audio para TX y controlar el VFO. Necesita dos puentes ejecutándose en AetherSDR: DAX (audio) y CAT (control de frecuencia y modo).
+La ventana **SpotHub** es el centro principal para conectarse a fuentes de spots DX — clúster DX, Reverse Beacon Network (RBN), WSJT-X, SpotCollector, POTA y FreeDV — y configurar cómo se muestran los spots en el panadapter.
 
-## Antes de empezar
+## Abrir SpotHub
 
-- AetherSDR está conectado al FLEX-8600 y al menos un slice está activo.
-- WSJT-X, fldigi o su aplicación de modos digitales elegida está instalada.
-- Usted sabe qué letra de slice (A, B, C, …) piensa usar para modos digitales.
+Haga clic en el botón **SpotHub** en la barra de herramientas, o presione `Ctrl+Shift+S`.
 
-## Pasos
+## Diseño de SpotHub
 
-### Parte 1 — Activar audio DAX
+La ventana SpotHub contiene una interfaz de pestañas con las siguientes pestañas:
 
-1. Haga clic en el botón **DAX** de la bandeja en la barra lateral derecha. Se abre el applet de audio DAX.
-2. Haga clic en **Enable**. El botón se vuelve verde. AetherSDR inicia el puente de audio DAX y persiste la configuración como `AutoStartDAX`.
-3. Observe el slice que se muestra en el indicador **Slice-assignment status** junto al canal DAX que desea usar (por ejemplo, "Slice A" junto a **DAX 1:**). Si muestra —, asigne el slice a un canal DAX en la configuración de slices de su radio antes de continuar.
-4. Opcionalmente, ajuste el control deslizante **DAX 1 gain+meter** para su canal de RX. El valor predeterminado es 0.5; el rango válido es 0.0–1.0. Esto se persiste como `DaxRxGain1` (o `DaxRxGain2`–`DaxRxGain4` para otros canales).
-5. Opcionalmente, ajuste el control deslizante **TX gain+meter**. El valor predeterminado es 0.5; el rango válido es 0.0–1.0. Se persiste como `DaxTxGain`.
-6. Para iniciar DAX automáticamente en cada inicio, vaya a `Settings > Autostart DAX with AetherSDR` y marque ese elemento.
+| Pestaña | Propósito |
+|---------|-----------|
+| **Cluster** | Conexión telnet a un clúster DX |
+| **RBN** | Reverse Beacon Network |
+| **WSJT-X** | Escucha UDP de WSJT-X |
+| **SpotCollector** | Ham Radio Deluxe SpotCollector |
+| **POTA** | Activaciones de Parks on the Air |
+| **FreeDV** | Reporte de QSO FreeDV |
+| **Spot List** | Tabla unificada y buscable de spots activos |
+| **Display** | Visualización de spots en el panadapter, Signal History y coloración DXCC |
 
-### Parte 2 — Activar control CAT
+Cada pestaña de fuente proporciona controles de conexión, una vista de consola y un selector de color de spots. Los indicadores de estado de la fuente aparecen en la parte superior de la pestaña: **Disconnected**, **Connected**, **Stopped**, **Listening** o **Polling**.
 
-1. Haga clic en el botón **CAT** de la bandeja en la barra lateral derecha. Se abre el applet de control CAT.
-2. Verifique el campo del puerto **Base**. El valor predeterminado es `4532`. Los canales A–D se vinculan a los puertos 4532, 4533, 4534, 4535. El rango válido es 1024–65535. Cambie el valor si otra aplicación ya usa el puerto 4532.
-3. Haga clic en **Enable TCP**. El botón se vuelve verde. Se inician los cuatro servidores TCP compatibles con rigctld.
-4. En Linux o macOS, haga clic en **Enable TTY** si su aplicación requiere un puerto de tipo serie. Los enlaces simbólicos PTY aparecen en `/tmp/AetherSDR-CAT-A`, `/tmp/AetherSDR-CAT-B`, `/tmp/AetherSDR-CAT-C`, `/tmp/AetherSDR-CAT-D`.
-5. Para iniciar CAT automáticamente en cada inicio, vaya a `Settings > Autostart CAT with AetherSDR` y marque ese elemento.
+## Pestaña Cluster
 
-### Parte 3 — Configurar su aplicación de modos digitales
+La pestaña Cluster se conecta a un clúster DX tradicional mediante telnet.
 
-**WSJT-X**
+| Control | Valor predeterminado | Rango | Clave de configuración | Comportamiento |
+|---------|---------------------|-------|------------------------|----------------|
+| **Server:** | (vacío) | nombre de host | `ClusterHost` | Nombre de host del clúster DX |
+| **Port:** | 23 | 1–65535 | `ClusterPort` | Puerto telnet |
+| **Callsign:** | (vacío) | indicativo | `ClusterCallsign` | Indicativo de inicio de sesión |
+| **Connect / Disconnect** | Connect | — | — | Activa/desactiva la conexión telnet |
+| **Auto-connect on startup** | off | on/off | `ClusterAutoConnect` | Se conecta automáticamente al iniciar |
+| **Cluster Console** | (solo lectura) | — | — | Tráfico telnet sin procesar |
+| **Send** | — | — | — | Envía un comando al clúster |
+| **Spot Color:** | — | color | `ClusterSpotColor` | Abre el selector de color para el texto del spot |
 
-1. En WSJT-X, abra **Settings > Radio**.
-2. Establezca **Rig** en `Hamlib NET rigctl`.
-3. Establezca **Network Server** en `localhost:4532` (o el puerto que coincida con el canal de su slice elegido).
-4. Abra **Settings > Audio** y configure los dispositivos de **Input** y **Output** en el canal DAX asignado a su slice (por ejemplo, `DAX 1`).
+## Pestaña RBN
 
-**fldigi**
+La pestaña RBN se conecta a la Reverse Beacon Network.
 
-1. En fldigi, abra **Configure > Rig Control > Hamlib**.
-2. Establezca **Device** en `Net rigctl` y **Port/Address** en `localhost:4532`.
-3. Abra **Configure > Sound Card** y seleccione el canal DAX para entrada y salida.
+| Control | Valor predeterminado | Rango | Clave de configuración | Comportamiento |
+|---------|---------------------|-------|------------------------|----------------|
+| **Server:** | (vacío) | nombre de host | `RbnHost` | Nombre de host de RBN |
+| **Port:** | 23 | 1–65535 | `RbnPort` | Puerto telnet de RBN |
+| **Callsign:** | (vacío) | indicativo | `RbnCallsign` | Indicativo de inicio de sesión |
+| **Rate Limit:** | 10 | 1–100 | `RbnRateLimit` | Límite de spots por segundo |
+| **Connect / Disconnect** | Connect | — | — | Activa/desactiva la conexión RBN |
+| **Auto-connect on startup** | off | on/off | `RbnAutoConnect` | Se inicia automáticamente |
+| **RBN Console** | (solo lectura) | — | — | Tráfico RBN sin procesar |
+| **Send** | — | — | — | Envía un comando a RBN |
+| **Spot Color:** | — | color | `RbnSpotColor` | Selector de color para spots RBN |
 
-## Qué hace cada control
+## Pestaña WSJT-X
 
-| Control | Predeterminado | Rango | Clave de configuración |
-|---|---|---|---|
-| **Enable** (DAX) | desactivado | activado/desactivado | `AutoStartDAX` |
-| **DAX 1 gain+meter** | 0.5 | 0.0–1.0 | `DaxRxGain1` |
-| **DAX 2 gain+meter** | 0.5 | 0.0–1.0 | `DaxRxGain2` |
-| **DAX 3 gain+meter** | 0.5 | 0.0–1.0 | `DaxRxGain3` |
-| **DAX 4 gain+meter** | 0.5 | 0.0–1.0 | `DaxRxGain4` |
-| **TX gain+meter** | 0.5 | 0.0–1.0 | `DaxTxGain` |
-| **Enable TCP** (CAT) | desactivado | activado/desactivado | — |
-| **Enable TTY** (CAT) | desactivado | activado/desactivado | — |
-| **Base** (puerto TCP CAT) | 4532 | 1024–65535 | `CatTcpPort` |
+La pestaña WSJT-X escucha mensajes de difusión UDP de WSJT-X. El relleno y el borde del botón **Start/Stop** se vuelven verdes cuando el listener está en ejecución.
 
-## Consejos
+| Control | Valor predeterminado | Rango | Clave de configuración | Comportamiento |
+|---------|---------------------|-------|------------------------|----------------|
+| **Address:** | 127.0.0.1 | Dirección IP | `WsjtxAddress` | Dirección de enlace UDP |
+| **Port:** | 2237 | 1–65535 | `WsjtxPort` | Puerto UDP |
+| **Start / Stop** | Stop | — | — | Inicia/detiene el listener UDP |
+| **Auto-start on startup** | off | on/off | `WsjtxAutoStart` | Inicia el listener al arrancar |
+| **CQ** | off | on/off | `WsjtxFilterCQ` | Muestra solo llamadas CQ |
+| **CQ POTA** | off | on/off | `WsjtxFilterPOTA` | Muestra llamadas CQ POTA |
+| **Calling Me** | off | on/off | `WsjtxFilterCallingMe` | Muestra solo decodificaciones dirigidas a su indicativo |
+| **CQ color** | — | color | `WsjtxColorCQ` | Selector de color para spots CQ |
+| **POTA color** | — | color | `WsjtxColorPOTA` | Selector de color para spots POTA |
+| **Calling Me color** | — | color | `WsjtxColorCallingMe` | Selector de color para spots Calling Me |
+| **Default color** | — | color | `WsjtxColorDefault` | Selector de color para spots predeterminados |
+| **WSJT-X Decodes** | (solo lectura) | — | — | Consola de transmisiones decodificadas |
+| **Spot Life:** | 60 | 10–3600 s | `WsjtxSpotLife` | Segundos que los spots permanecen en el panadapter |
 
-- Cada canal CAT (A/B/C/D) controla un slice. Si ejecuta dos programas de modos digitales simultáneamente, apunte el segundo programa al puerto 4533 y asígnelo al Slice B con un segundo canal DAX.
-- Si ingresa un valor fuera de rango en el campo **Base**, se restablece automáticamente a `4532`.
-- El indicador de estado TCP por canal en el applet CAT muestra cuántos clientes están conectados (por ejemplo, `:4532 (1 client)`). Úselo para confirmar que WSJT-X se ha conectado correctamente.
+## Pestaña SpotCollector
 
-## Solución de problemas
+Se conecta a Ham Radio Deluxe SpotCollector mediante difusión UDP.
 
-- **WSJT-X reporta "Rig not found" o conexión rechazada** — Confirme que **Enable TCP** esté activo (el botón está verde) y que el puerto en WSJT-X coincida con el valor **Base** en AetherSDR. Verifique que ningún cortafuegos esté bloqueando las conexiones de localhost.
-- **No se decodifica audio en WSJT-X / fldigi** — Confirme que **Enable** en el applet DAX esté activo. Verifique que el estado de asignación de slice junto al canal DAX que seleccionó muestre la letra de su slice y no —. Asegúrese de que el dispositivo de entrada de audio en su aplicación de modos digitales esté configurado en el canal DAX correcto.
-- **El audio de TX no llega a la radio** — Verifique que el control deslizante **TX gain+meter** no esté en 0.0. Confirme que el indicador de slice TX en el applet DAX muestre su slice activo.
-- **Los enlaces simbólicos PTY no aparecen (Linux/macOS)** — Confirme que **Enable TTY** esté activo. Las rutas `/tmp/AetherSDR-CAT-A` a `/tmp/AetherSDR-CAT-D` se crean cuando TTY está activado y la radio está conectada.
+| Control | Valor predeterminado | Rango | Clave de configuración | Comportamiento |
+|---------|---------------------|-------|------------------------|----------------|
+| **UDP Port:** | 58779 | 1–65535 | `SpotCollectorPort` | Puerto UDP para difusiones |
+| **Start / Stop** | Stop | — | — | Inicia/detiene el listener |
+| **Auto-start on startup** | off | on/off | `SpotCollectorAutoStart` | Inicia el listener al arrancar |
+| **SpotCollector Spots** | (solo lectura) | — | — | Consola de spots recibidos |
 
-## Relacionados
+## Pestaña POTA
 
-- [DAX Audio overview](../../features/dax/overview.md)
-- [Enable DAX to route slice audio to WSJT-X / FLDigi / other digital software](../../features/dax/enable-dax-to-route-slice-audio-to-wsjt-x-fldigi-other-digital-software.md)
-- [CAT Control overview](../../features/cat-control/overview.md)
-- [Enable CAT TCP so N1MM, Log4OM, WSJT-X can control the radio](../../features/cat-control/enable-cat-tcp-so-n1mm-log4om-wsjt-x-can-control-the-radio.md)
-- [Enable CAT PTY so Linux/macOS apps can open a serial-style CAT port](../../features/cat-control/enable-cat-pty-so-linux-macos-apps-can-open-a-serial-style-cat-port.md)
-- [Autostart DAX on launch](../../features/dax/autostart-dax-on-launch.md)
-- [Autostart CAT servers with AetherSDR](../../features/cat-control/autostart-cat-servers-with-aethersdr.md)
-- [Change the base TCP port](../../features/cat-control/change-the-base-tcp-port.md)
-- [Set DAX RX gain per channel](../../features/dax/set-dax-rx-gain-per-channel.md)
-- [Start WSJT-X UDP listener and filter for CQ, POTA or calls to me](../../features/dx-cluster/start-wsjt-x-udp-listener-and-filter-for-cq-pota-or-calls-to-me.md)
+Consulta api.pota.app para obtener activaciones actuales de Parks on the Air.
+
+| Control | Valor predeterminado | Rango | Clave de configuración | Comportamiento |
+|---------|---------------------|-------|------------------------|----------------|
+| **Server:** | api.pota.app (consulta HTTP) | — | — | Indicador de punto final fijo |
+| **Poll Interval:** | 60 | 10–3600 s | `PotaPollInterval` | Segundos entre consultas |
+| **Start / Stop** | Stop | — | — | Inicia/detiene la consulta |
+| **Auto-start on startup** | off | on/off | `PotaAutoStart` | Inicia la consulta al arrancar |
+| **POTA Activations** | (solo lectura) | — | — | Consola del feed de activaciones |
+| **Spot Color:** | — | color | `PotaSpotColor` | Selector de color para spots POTA |
+
+## Pestaña FreeDV
+
+Se conecta al reporte de QSO FreeDV mediante WebSocket.
+
+| Control | Valor predeterminado | Rango | Clave de configuración | Comportamiento |
+|---------|---------------------|-------|------------------------|----------------|
+| **Server:** | qso.freedv.org (WebSocket) | — | — | Indicador de punto final fijo |
+| **Start / Stop** | Stop | — | — | Conecta/desconecta WebSocket |
+| **Auto-start on startup** | off | on/off | `FreeDvAutoStart` | Inicia FreeDV al arrancar |
+| **FreeDV Spots** | (solo lectura) | — | — | Consola de actividad de FreeDV |
+| **Spot Color:** | — | color | `FreeDvSpotColor` | Selector de color para spots FreeDV |
+
+## Pestaña Spot List
+
+Una tabla unificada y buscable de todos los spots activos de todas las fuentes.
+
+| Control | Comportamiento |
+|---------|----------------|
+| **Bands:** | Casillas de verificación por banda que alternan la visibilidad en la tabla |
+| **Clear** | Vacía la lista de spots actual |
+| **Spot table** | Tabla ordenable. Haga doble clic en una fila para sintonizar. Columnas: Time, Freq, DX Call, Comment, Spotter, Band, Mode, Source |
+
+## Pestaña Display
+
+Controla cómo aparecen los spots en el panadapter. La pestaña Display presenta los controles en un diseño único con una fila de alternancia superior, una fila de deslizadores común y una sección de dos columnas para DXCC Coloring (izquierda) y Signal History (derecha).
+
+### Fila de alternancia superior
+
+| Control | Valor predeterminado | Clave de configuración | Comportamiento |
+|---------|---------------------|------------------------|----------------|
+| **Spots:** | Enabled | `IsSpotsEnabled` | Alternancia principal para la superposición de spots DX |
+| **Memories:** | Disabled | `IsMemorySpotsEnabled` | Superposición de canales de memoria en el panadapter |
+| **Auto:** | Enabled | `SpotAutoSwitchMode` | Cambia automáticamente el modo del slice al hacer clic en un spot con información de modo |
+| **Signals (Signal History)** | Disabled | `SHistoryMarkersEnabled` | Marcadores dorados para señales detectadas de ancho de voz |
+| **QRM (Signal History)** | Disabled | `SHistoryQrmEnabled` | Marcadores rojos para portadoras persistentes e interferencia |
+
+### Deslizadores comunes
+
+| Control | Valor predeterminado | Rango | Clave de configuración | Comportamiento |
+|---------|---------------------|-------|------------------------|----------------|
+| **Levels:** | 3 | 1–10 | `SpotsMaxLevel` | Filas de apilamiento vertical para spots |
+| **Position:** | 50 | 0–100 | `SpotsStartingHeightPercentage` | Posición vertical en el panadapter |
+| **Font Size:** | 16 | 8–32 | `SpotFontSize` | Tamaño del texto del spot |
+| **Spot Lifetime:** | 300 | 10 s – 24 h | `DxClusterSpotLifetimeSec` | Segundos antes de que el spot se desvanezca |
+
+### Botones Clear All y de acción
+
+| Control | Valor predeterminado | Clave de configuración | Comportamiento |
+|---------|---------------------|------------------------|----------------|
+| **Clear All** | — | — | Borra todos los spots DX, feed de memoria, marcadores de Signal History y marcadores QRM |
+| **Override Colors:** | off | `IsSpotsOverrideColorsEnabled` | Fuerza un color de texto único para todos los spots |
+| **Selector de color de texto de spot** | #FFFF00 | `SpotsOverrideColor` | Abre el diálogo de color |
+| **Override Background: Enabled** | Enabled | `IsSpotsOverrideBackgroundColorsEnabled` | Habilita el fondo de spot personalizado |
+| **Override Background: Auto** | Enabled | `IsSpotsOverrideToAutoBackgroundColorEnabled` | Selecciona automáticamente el color de fondo para contraste |
+| **Selector de color de fondo de spot** | #000000 | `SpotsOverrideBgColor` | Abre el diálogo de color |
+| **Background Opacity:** | 48 | 0–100 | `SpotsBackgroundOpacity` | Opacidad del color de fondo del spot |
+| **Spot Lines:** | Enabled | `IsSpotsLinesEnabled` | Líneas verticales desde el espectro hasta las etiquetas de los spots |
+| **Total Spots:** | — | — | Recuento en vivo de spots de todas las fuentes |
+
+### DXCC Coloring (Columna izquierda)
+
+Controles en la columna izquierda debajo del encabezado de sección **DXCC Coloring**:
+
+| Control | Valor predeterminado | Clave de configuración | Comportamiento |
+|---------|---------------------|------------------------|----------------|
+| **DXCC Colors:** | off | `IsDxccColoringEnabled` | Colorea los spots según el estado trabajado/confirmado/necesario de DXCC |
+| **Log File (ADIF):** | — | `DxccAdifFilePath` | Carga el registro ADIF para la coloración DXCC. Supervisa automáticamente el archivo para detectar cambios |
+| **Imported:** | (ningún registro cargado) | — | Muestra el recuento de QSO y el recuento de entidades |
+| **New DXCC** | — | `DxccColorNewEntity` | Selector de color para nueva entidad |
+| **New Band** | — | `DxccColorNewBand` | Selector de color para nueva banda |
+| **New Mode** | — | `DxccColorNewMode` | Selector de color para nuevo modo |
+| **Worked** | — | `DxccColorWorked` | Selector de color para entidades trabajadas |
+
+### Signal History (Columna derecha)
+
+Controles en la columna derecha debajo del encabezado de sección **Signal History**:
+
+| Control | Valor predeterminado | Rango | Clave de configuración | Comportamiento |
+|---------|---------------------|-------|------------------------|----------------|
+| **Marker Lifetime:** | 60 | 15–300 s | `SHistoryLifetimeS` | Cuánto tiempo persiste un marcador inactivo |
+| **QRM Gate:** | 6 | 3–30 s | `SHistoryQrmGateS` | Persistencia antes de clasificar como QRM |
+| **Edge Threshold:** | 3.0 | 1.0–10.0 dB | `SHistorySoftEdgeDb` | Umbral para el refinamiento de bordes |
+| **Signals color** | #FFC800 | color | `SHistoryColorSignals` | Selector de color para marcadores de señales de voz |
+| **QRM color** | #FF0000 | color | `SHistoryColorQrm` | Selector de color para marcadores QRM |
+| **Snap to Step:** | Disabled | on/off | `SHistorySnapToStep` | Redondea la sintonización al hacer clic al tamaño de paso más cercano |
+
+## Marcadores de Signal History
+
+El sistema Signal History detecta y muestra dos tipos de marcadores en el espectro:
+
+- **Marcadores de señal (dorados, #FFC800)** — Marcadores para señales detectadas de ancho de voz. Aparecen como indicadores dorados en el panadapter.
+- **Marcadores QRM (rojos, #FF0000)** — Marcadores para portadoras estrechas persistentes e interferencia de banda ancha. Aparecen como indicadores rojos.
+
+Ambos tipos de marcadores se muestran como marcadores en el waterfall del espectro. Al hacer clic en un marcador, se sintoniza el slice activo a esa frecuencia. Al hacer doble clic en un marcador, se abre el panel VFO para esa frecuencia.
+
+Las alternancias **Signals (Signal History)** y **QRM (Signal History)** en la pestaña Display comparten el mismo comportamiento que los elementos de menú **View > Signal History Markers** y **View > QRM History Markers**.
+
+Cuando **Snap to Step** está habilitado, al hacer clic en un marcador de Signal History se redondea la frecuencia de sintonización al

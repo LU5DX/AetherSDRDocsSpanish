@@ -1,19 +1,19 @@
 # Eliminar una asignación
 
-Elimine una sola asignación MIDI de la tabla de asignaciones, o borre todas las asignaciones a la vez. Utilice esta opción cuando ya no necesite una asignación de control o desee reasignar un mando físico a un parámetro diferente.
+Elimine una única asignación MIDI de la tabla de asignaciones, o borre todas las asignaciones a la vez. Utilice esta función cuando una asignación de control ya no sea necesaria o desee reasignar un mando físico a un parámetro diferente.
 
 ## Antes de comenzar
 
-- El diálogo de Asignación de Controladores MIDI debe estar abierto. Si no lo está, vaya a `Settings > MIDI Mapping...`.
+- El cuadro de diálogo MIDI Controller Mapping debe estar abierto. Si no lo está, vaya a `Settings > MIDI Mapping...`.
 - Debe tener al menos una asignación existente visible en la tabla de asignaciones.
 
 ## Pasos
 
-### Eliminar una sola asignación
+### Eliminar una única asignación
 
 1. Abra `Settings > MIDI Mapping...`.
-2. En la tabla de asignaciones, localice la fila de la asignación que desea eliminar.
-3. Haga clic en `×` en la columna del extremo derecho de esa fila.
+2. En la tabla de asignaciones, localice la fila correspondiente a la asignación que desea eliminar.
+3. Haga clic en `×` en la columna más a la derecha de esa fila.
 
 La fila se elimina de inmediato. El cambio se guarda automáticamente.
 
@@ -24,20 +24,20 @@ La fila se elimina de inmediato. El cambio se guarda automáticamente.
 
 Se eliminan todas las filas de la tabla de asignaciones. El cambio se guarda automáticamente.
 
-## Función de cada control
+## Descripción de cada control
 
 | Control           | Descripción                              | Notas |
 |-------------------|------------------------------------------|-------|
-| `×` (eliminar fila) | Elimina la asignación única de esa fila. |       |
+| `×` (eliminar fila) | Elimina la única asignación de esa fila. |       |
 | `Clear All`       | Elimina todas las asignaciones de la tabla. |       |
 
 ## Consejos
 
-- Si elimina una asignación por error, puede restaurarla cargando un perfil guardado previamente. Consulte [Cargar un perfil MIDI guardado previamente](load-a-previously-saved-midi-profile.md).
-- Antes de usar `Clear All`, considere guardar primero sus asignaciones actuales como un perfil. Consulte [Guardar la asignación actual como un perfil con nombre](save-the-current-mapping-as-a-named-profile.md).
+- Si elimina una asignación por error, puede restaurarla cargando un perfil guardado previamente. Consulte [Load a previously saved MIDI profile](load-a-previously-saved-midi-profile.md).
+- Antes de utilizar `Clear All`, considere guardar sus asignaciones actuales como un perfil primero. Consulte [Save the current mapping as a named profile](save-the-current-mapping-as-a-named-profile.md).
 
 ## Relacionados
 
-- [Registrar una nueva asignación con el modo Aprendizaje](record-a-new-binding-with-learn-mode.md)
-- [Guardar la asignación actual como un perfil con nombre](save-the-current-mapping-as-a-named-profile.md)
-- [Cargar un perfil MIDI guardado previamente](load-a-previously-saved-midi-profile.md)
+- [Record a new binding with Learn mode](record-a-new-binding-with-learn-mode.md)
+- [Save the current mapping as a named profile](save-the-current-mapping-as-a-named-profile.md)
+- [Load a previously saved MIDI profile](load-a-previously-saved-midi-profile.md)

@@ -1,86 +1,101 @@
-# Activar activaciones POTA
+# Encuesta de activaciones POTA
 
-AetherSDR puede obtener periódicamente las activaciones actuales de Parks on the Air (POTA) desde `api.pota.app` y mostrarlas como spots en su panadapter. Esto le permite encontrar operadores POTA activos sin necesidad de un navegador web separado o una fuente de cluster.
+AetherSDR puede obtener periódicamente las activaciones actuales de Parks on the Air (POTA) desde `api.pota.app` y mostrarlas como puntos en su panadapter. Esto le permite encontrar operadores POTA activos sin necesidad de un navegador web o una fuente de clúster separados.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar ejecutándose. No se requiere una conexión de radio para configurar esta función.
+- AetherSDR debe estar en ejecución. No se requiere una conexión de radio para configurar esta función.
 - El acceso HTTP saliente a `api.pota.app` no debe estar bloqueado por un cortafuegos.
 
 ## Pasos
 
-1. Haga clic en `Settings > SpotHub...` para abrir el diálogo SpotHub.
+1. Haga clic en `Settings > SpotHub...` para abrir el diálogo de SpotHub.
 2. Haga clic en la pestaña **POTA**.
-3. Revise el indicador **Server:**, que muestra `api.pota.app (HTTP polling)`. Este endpoint es fijo y no se puede cambiar.
-4. Establezca **Poll Interval:** en el número de segundos entre cada consulta. Este valor se guarda como `PotaPollInterval`.
-5. Haga clic en **Start** para comenzar la consulta. El indicador de estado cambia a **Polling** cuando está activo. Haga clic en **Stop** para detener la consulta en cualquier momento.
-6. Para cambiar el color utilizado para los spots POTA en el panadapter, haga clic en **Spot Color:**. Seleccione un color del selector. Esto se guarda como `PotaSpotColor`.
-7. Para iniciar la consulta automáticamente cada vez que AetherSDR se inicie, haga clic en **Auto-start on startup** para que esté activo. Esto se guarda como `PotaAutoStart`.
-8. Monitoree las activaciones entrantes en la consola **POTA Activations** en la misma pestaña.
+3. Revise el indicador **Server:**, que muestra `api.pota.app (HTTP polling)`. Este punto de conexión es fijo y no se puede cambiar.
+4. Establezca **Poll Interval:** en la cantidad de segundos entre cada sondeo. Este valor se persiste como `PotaPollInterval`.
+5. Haga clic en **Start** para comenzar el sondeo. El indicador de estado cambia a **Polling** cuando está activo. Haga clic en **Stop** para detener el sondeo en cualquier momento.
+6. Para cambiar el color utilizado para los puntos POTA en el panadapter, haga clic en **Spot Color:**. Seleccione un color del selector. Esto se persiste como `PotaSpotColor`.
+7. Para iniciar el sondeo automáticamente cada vez que AetherSDR se inicie, active **Auto-start on startup** para que esté habilitado. Esto se persiste como `PotaAutoStart`.
+8. Supervise las activaciones entrantes en la consola **POTA Activations** de la misma pestaña.
 
 ## Función de cada control
 
-| Control                      | Tipo           | Comportamiento                                                                                                                                                                          |
-|------------------------------|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Server:**                  | Indicador      | Muestra el endpoint de consulta fijo: `api.pota.app (HTTP polling)`. No configurable.                                                                                                  |
-| **Poll Interval:**           | Spinbox        | Segundos entre consultas a la API de POTA. Se guarda como `PotaPollInterval`.                                                                                                           |
-| **Start / Stop**             | Botón          | Inicia o detiene la consulta POTA.                                                                                                                                                     |
-| **Auto-start on startup**    | Botón de alternancia | Inicia automáticamente la consulta POTA cuando AetherSDR se inicia. Se guarda como `PotaAutoStart`.                                                                                    |
-| **POTA Activations**         | Campo de texto | Consola de solo lectura que muestra el flujo de activaciones.                                                                                                                           |
-| **Spot Color:**              | Botón          | Abre un selector de color para los spots POTA en el panadapter. Se guarda como `PotaSpotColor`.                                                                                        |
-| Total Spots:                 | Indicador      | Lectura en vivo de cuántos spots se están rastreando actualmente en todas las fuentes. Se actualiza cuando se agregan o eliminan spots. Se restablece a 0 al presionar **Clear All Spots**. |
-| **Spot Lines:**              | Botón de alternancia | Dibuja líneas verticales desde el espectro hasta cada etiqueta de spot. Activado por defecto. Desactívelo durante concursos para reducir el desorden visual. Se guarda como `IsSpotsLinesEnabled`. Nuevo en v0.9.7. |
-## Controles del Reporter FreeDV (pestaña FreeDV)
+| Control                                                       | Tipo                                                                                                                     | Comportamiento                                                                                                                                                                            |
+|---------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Server:**                                                   | Indicador                                                                                                                | Muestra el punto de conexión de sondeo fijo: `api.pota.app (HTTP polling)`. No configurable.                                                                                              |
+| **Poll Interval:**                                            | Spinbox                                                                                                                  | Segundos entre sondeos a la API de POTA. Se persiste como `PotaPollInterval`.                                                                                                             |
+| **Start / Stop**                                              | Botón pulsador                                                                                                           | Inicia o detiene el sondeo de POTA.                                                                                                                                                       |
+| **Auto-start on startup**                                     | Botón de alternancia                                                                                                     | Inicia automáticamente el sondeo de POTA cuando AetherSDR se inicia. Se persiste como `PotaAutoStart`.                                                                                    |
+| **POTA Activations**                                          | Campo de texto                                                                                                           | Consola de solo lectura que muestra el flujo de activaciones.                                                                                                                             |
+| **Spot Color:**                                               | Botón pulsador                                                                                                           | Abre un selector de color para los puntos POTA en el panadapter. Se persiste como `PotaSpotColor`.                                                                                        |
+| Total Spots:                                                  | Indicador                                                                                                                | Lectura en vivo de cuántos puntos se están rastreando actualmente en todas las fuentes. Se actualiza cuando se añaden o limpian puntos. Se restablece a 0 cuando se pulsa **Clear All Spots**. |
+| **Spot Lines:**                                               | Botón de alternancia                                                                                                     | Dibuja líneas verticales desde el espectro hasta cada etiqueta de punto. Habilitado por defecto. Deshabilitar durante concursos para reducir el desorden visual. Se persiste como `IsSpotsLinesEnabled`. Nuevo en v0.9.7. |
+| Auto:                                                         | Botón de alternancia                                                                                                     | Cambia automáticamente el modo del slice al hacer clic en un punto que incluye información de modo (p. ej., CW, FT8, RTTY). Se persiste como `SpotAutoSwitchMode`. La clave de configuración cambió de `SpotsAutoMode` en v26.5.1. |
+| Signals (Signal History)                                      | Botón de alternancia                                                                                                     | Marcadores dorados para señales detectadas de ancho de voz en el panadapter. Se persiste como `SHistoryMarkersEnabled`. Nuevo en v26.5.1 (#2426). Es la misma alternancia que View > Signal History Markers. |
+| QRM (Signal History)                                          | Botón de alternancia                                                                                                     | Marcadores rojos para portadoras persistentes e interferencia de banda ancha. Se persiste como `SHistoryQrmEnabled`. Nuevo en v26.5.1 (#2426). Es la misma alternancia que View > QRM History Markers. |
+| Clear All                                                     | Botón pulsador                                                                                                           | Limpia todos los puntos DX, el feed de memoria, los marcadores de Signal History y los marcadores de QRM del espectro.                                                                    |
+| **Levels:**                                                   | Deslizador                                                                                                               | Número de filas de apilamiento vertical para los puntos. Rango 1-10. Valor predeterminado 3. Se persiste como `SpotsMaxLevel`.                                                             |
+| **Position:**                                                 | Deslizador                                                                                                               | Posición vertical en el panadapter. Rango 0-100. Valor predeterminado 50. Se persiste como `SpotsStartingHeightPercentage`.                                                               |
+| **Font Size:**                                                | Deslizador                                                                                                               | Tamaño del texto del punto. Rango 8-32. Valor predeterminado 16. Se persiste como `SpotFontSize`.                                                                                          |
+| **Spot Lifetime:**                                            | Deslizador                                                                                                               | Segundos antes de que un punto se desvanezca. Pasos no lineales desde 10 segundos hasta 24 horas. Se persiste como `DxClusterSpotLifetimeSec`.                                            |
+| **Override Colors:**                                          | Botón de alternancia                                                                                                     | Fuerza un solo color de texto para todos los puntos. Se persiste como `IsSpotsOverrideColorsEnabled`.                                                                                      |
+| Selector de color de texto del punto                          | Botón pulsador                                                                                                           | Abre QColorDialog para elegir el color del texto del punto. Valor predeterminado #FFFF00. Se persiste como `SpotsOverrideColor`.                                                           |
+| **Override Background: Enabled**                              | Botón de alternancia                                                                                                     | Habilita un color de fondo personalizado para el punto. Se persiste como `IsSpotsOverrideBackgroundColorsEnabled`.                                                                         |
+| **Override Background: Auto**                                 | Botón de alternancia                                                                                                     | Elige automáticamente el color de fondo para el contraste. Se persiste como `IsSpotsOverrideToAutoBackgroundColorEnabled`.                                                                 |
+| Selector de color de fondo del punto                          | Botón pulsador                                                                                                           | Abre QColorDialog para el color de fondo del punto. Valor predeterminado #000000. Se persiste como `SpotsOverrideBgColor`.                                                                 |
+| **Background Opacity:**                                       | Deslizador                                                                                                               | Opacidad del color de fondo del punto. Rango 0-100. Valor predeterminado 48. Se persiste como `SpotsBackgroundOpacity`.                                                                    |
+| DXCC Coloring (sección)                                       | Indicador                                                                                                                | Encabezado de sección para los controles de coloreado DXCC en la columna izquierda debajo del divisor.                                                                                     |
+| **DXCC Colors:**                                              | Botón de alternancia                                                                                                     | Colorea los puntos según el estado de DXCC: trabajado/confirmado/necesario. Se persiste como `IsDxccColoringEnabled`. La clave de configuración cambió de `DxccColoringEnabled` en v26.5.1. |
+| **Log File (ADIF):**                                          | Botón pulsador                                                                                                           | Carga un archivo de registro ADIF para impulsar el coloreado DXCC. Vigila automáticamente el archivo en busca de cambios después de la selección. Se persiste como `DxccAdifFilePath`. La clave de configuración cambió de `DxccAdifPath` en v26.5.1. La recarga automática está siempre habilitada cuando se selecciona un archivo. |
+| **Imported:** (estadísticas DXCC)                              | Indicador                                                                                                                | Muestra el recuento de QSO y el recuento de entidades cuando se carga un registro. Formato: '<N> QSOs / <M> entities'.                                                                    |
+| Muestras de color DXCC (New DXCC / New Band / New Mode / Worked) | Botón pulsador                                                                                                           | Abre un selector de color para cada categoría de estado DXCC. Se persiste como `DxccColorNewEntity`, `DxccColorNewBand`, `DxccColorNewMode`, `DxccColorWorked`. Nuevo en v26.5.1.     |
+| Signal History (sección)                                      | Indicador                                                                                                                | Encabezado de sección para los parámetros ajustables de Signal History en la columna derecha debajo del divisor. Nuevo en v26.5.1 (#2506).                                                |
+| **Marker Lifetime:**                                          | Deslizador                                                                                                               | Cuánto tiempo persiste un marcador de Signal History inactivo antes de ser eliminado. Rango 15-300 segundos. Valor predeterminado 60 s. Se persiste como `SHistoryLifetimeS`. Nuevo en v26.5.1. |
+| **QRM Gate:**                                                 | Deslizador                                                                                                               | Cuánto tiempo debe persistir una portadora estrecha o una señal de banda ancha antes de clasificarse como QRM. Rango 3-30 segundos. Valor predeterminado 6 s. Se persiste como `SHistoryQrmGateS`. Nuevo en v26.5.1. |
+| **Edge Threshold:**                                           | Deslizador                                                                                                               | Umbral por encima del piso de ruido para el recorrido de borde de pendiente que refina el borde lateral de la portadora de S-History. Rango 1.0-10.0 dB. Valor predeterminado 3.0 dB. Se persiste como `SHistorySoftEdgeDb`. Nuevo en v26.5.1. |
+| Muestras de color de Signal History (Signals / QRM)           | Botón pulsador                                                                                                           | Abre un selector de color para los marcadores de señal de voz (dorados) y los marcadores de QRM (rojos). Valor predeterminado #FFC800 / #FF0000. Se persiste como `SHistoryColorSignals` / `SHistoryColorQrm`. Nuevo en v26.5.1. |
+| **Snap to Step:**                                             | Botón de alternancia                                                                                                     | Redondea el clic para sintonizar de S-History al múltiplo más cercano del tamaño de paso del slice activo, ocultando el pequeño desplazamiento de la portadora. Deshabilitado por defecto. Se persiste como `SHistorySnapToStep`. Nuevo en v26.5.1. |
 
-Los siguientes controles aparecen en el cuadro **Station Reporting** en la pestaña **FreeDV**. Solo están presentes en compilaciones compiladas con `HAVE_WEBSOCKETS`.
+## Controles del Reporter de FreeDV (pestaña FreeDV)
+
+Los siguientes controles aparecen en el cuadro de grupo **Station Reporting** de la pestaña **FreeDV**. Solo están presentes en compilaciones compiladas con `HAVE_WEBSOCKETS`.
 
 | Control | Tipo | Comportamiento |
 |---|---|---|
-| **Enable FreeDV Reporter reporting when RADE is active** | Casilla de verificación | Reporta su estación al mapa público FreeDV Reporter en `qso.freedv.org` siempre que el módem RADE esté activo. Si el campo de indicativo o de cuadrícula está vacío al marcar esta casilla, aparece un diálogo de advertencia y la casilla se desmarca. Se guarda como `FreeDvAutoReport`. En Windows, también requiere una compilación con `HAVE_RADE`. |
-| **Callsign:** | Campo de texto | Indicativo enviado al mapa FreeDV Reporter. Se vuelve de solo lectura cuando **Use radio** está marcado. Se guarda como `FreeDvMyCallsign`. |
-| **Use radio** | Casilla de verificación | Rellena previamente el campo **Callsign:** con el indicativo configurado en la radio y lo bloquea como solo lectura. Se actualiza automáticamente si el indicativo cambia en Radio Setup. Se guarda como `FreeDvUseRadioCallsign`. Predeterminado: activado. |
-| **Grid Square:** | Campo de texto | Cuadrícula Maidenhead enviada al mapa FreeDV Reporter. Se vuelve de solo lectura cuando **Use GPS** está marcado. Se guarda como `FreeDvMyGrid`. |
-| **Use GPS** | Casilla de verificación | Rellena previamente el campo **Grid Square:** con la cuadrícula del módulo GPS de la radio y lo bloquea como solo lectura. Solo se muestra en modelos de radio que tienen hardware GPS. Se guarda como `FreeDvUseGpsGrid`. Predeterminado: activado. |
-| **Station Msg:** | Campo de texto | Mensaje de texto libre opcional que se muestra junto a su indicativo en el mapa público FreeDV Reporter. Se guarda como `FreeDvMyMessage`. |
+| **Enable FreeDV Reporter reporting when RADE is active** | Casilla de verificación | Informa su estación al mapa público del Reporter de FreeDV en `qso.freedv.org` siempre que el módem RADE esté activo. Si el indicativo o el campo de cuadrícula están en blanco al marcar esta casilla, aparece un diálogo de advertencia y la casilla se desmarca. Se persiste como `FreeDvAutoReport`. En Windows, también requiere una compilación compilada con `HAVE_RADE`. |
+| **Callsign:** | Campo de texto | Indicativo enviado al mapa del Reporter de FreeDV. Se vuelve de solo lectura cuando **Use radio** está marcado. Se persiste como `FreeDvMyCallsign`. |
+| **Use radio** | Casilla de verificación | Rellena previamente el campo **Callsign:** con el indicativo configurado en la radio y bloquea el campo como solo lectura. Se actualiza automáticamente si el indicativo cambia en Radio Setup. Se persiste como `FreeDvUseRadioCallsign`. Valor predeterminado: habilitado. |
+| **Grid Square:** | Campo de texto | Cuadrícula Maidenhead enviada al mapa del Reporter de FreeDV. Se vuelve de solo lectura cuando **Use GPS** está marcado. Se persiste como `FreeDvMyGrid`. |
+| **Use GPS** | Casilla de verificación | Rellena previamente el campo **Grid Square:** desde el módulo GPS de la radio y bloquea el campo como solo lectura. Solo se muestra en modelos de radio que tienen hardware GPS. Se persiste como `FreeDvUseGpsGrid`. Valor predeterminado: habilitado. |
+| **Station Msg:** | Campo de texto | Mensaje de texto libre opcional que se muestra junto a su indicativo en el mapa público del Reporter de FreeDV. Se persiste como `FreeDvMyMessage`. |
 
-### Habilitar el reporte FreeDV Reporter
+### Habilitación del informe del Reporter de FreeDV
 
 Antes de habilitar **Enable FreeDV Reporter reporting when RADE is active**, AetherSDR resuelve su indicativo y cuadrícula efectivos en este orden:
 
-1. Si **Use radio** está marcado y la radio tiene un indicativo no vacío configurado, se usa ese indicativo. De lo contrario, se usa el texto ingresado en **Callsign:**.
-2. Si **Use GPS** se muestra y está marcado y el módulo GPS de la radio proporciona una cuadrícula no vacía, se usa esa cuadrícula. De lo contrario, se usa el texto ingresado en **Grid Square:**.
+1. Si **Use radio** está marcado y la radio tiene un indicativo no vacío configurado, se utiliza ese indicativo. De lo contrario, se utiliza el texto ingresado en **Callsign:**.
+2. Si **Use GPS** se muestra y está marcado y el módulo GPS de la radio proporciona una cuadrícula no vacía, se utiliza esa cuadrícula. De lo contrario, se utiliza el texto ingresado en **Grid Square:**.
 
-Si el indicativo o la cuadrícula resueltos están vacíos, AetherSDR muestra una advertencia y deja la casilla sin marcar. Complete ambos campos antes de intentarlo nuevamente.
+Si el indicativo o la cuadrícula resueltos están vacíos, AetherSDR muestra una advertencia y deja la casilla desmarcada. Complete ambos campos antes de intentarlo de nuevo.
 
-## Cambio en el valor predeterminado de Auto Mode
+## Cambio predeterminado del modo automático
 
-A partir de v0.9.5.1, la alternancia **Auto Mode:** en la pestaña **Display** tiene como valor predeterminado **Enabled**. La configuración se guarda como `SpotAutoSwitchMode`. Si anteriormente dejó esto en su valor predeterminado, ahora estará activo después de una instalación nueva. Las instalaciones existentes conservan el valor que se guardó por última vez.
+A partir de v0.9.5.1, la alternancia **Auto** en la pestaña **Display** está predeterminada como **Enabled**. La configuración se persiste como `SpotAutoSwitchMode`. Si anteriormente dejó esto en su valor predeterminado, ahora estará activo después de una instalación nueva. Las instalaciones existentes conservan el valor que se guardó por última vez.
 
-## Sintonizar un spot haciendo doble clic en la lista de spots
+## Sintonizar un punto haciendo doble clic en la lista de puntos
 
-A partir de v0.9.7, hacer doble clic en una fila de la pestaña **Spot List** sintoniza su radio a la frecuencia del spot y también envía una sugerencia de modo derivada del comentario del spot. AetherSDR cambiará el slice activo a CW, SSB o al modo digital apropiado para coincidir con el spot, en lugar de solo cambiar la frecuencia. Si el comentario del spot no contiene un token de modo reconocible, el modo del slice no se modifica.
+A partir de v0.9.7, hacer doble clic en una fila de la pestaña **Spot List** sintoniza su radio a la frecuencia del punto y también reenvía una sugerencia de modo derivada del comentario del punto. AetherSDR cambiará el slice activo a CW, SSB o al modo digital apropiado para que coincida con el punto, en lugar de solo cambiar la frecuencia. Si el comentario del punto no contiene un token de modo reconocible, el modo del slice no se modifica.
 
 ## Consejos
 
-- Los spots POTA aparecen en la pestaña unificada **Spot List** junto con spots de otras fuentes. La columna **Source** los identifica.
-- Hacer doble clic en una fila de spot POTA en Spot List sintoniza su radio a esa frecuencia y cambia el modo del slice para que coincida con el spot cuando sea posible. Consulte [Sintonizar un spot haciendo doble clic en la lista de spots](tune-to-a-spot-by-double-clicking-the-spot-list.md).
-- Si los spots no son visibles en el panadapter, confirme que la alternancia maestra **Spots:** en la pestaña **Display** esté configurada en **Enabled** (`IsSpotsEnabled`).
-- Para reducir el desorden del panadapter durante un concurso, establezca **Spot Lines:** en **Disabled** en la pestaña **Display**. Esto oculta las líneas verticales mientras mantiene visibles las etiquetas de los spots.
+- Los puntos POTA aparecen en la pestaña unificada **Spot List** junto con puntos de otras fuentes. La columna **Source** los identifica.
+- Hacer doble clic en una fila de punto POTA en la Spot List sintoniza su radio a esa frecuencia y cambia el modo del slice para que coincida con el punto cuando sea posible. Consulte [Tune to a spot by double-clicking the spot list](tune-to-a-spot-by-double-clicking-the-spot-list.md).
+- Si los puntos no son visibles en el panadapter, confirme que la alternancia maestra **Spots:** en la pestaña **Display** esté establecida en **Enabled** (`IsSpotsEnabled`).
+- Para reducir el desorden del panadapter durante un concurso, establezca **Spot Lines:** en **Disabled** en la pestaña **Display**. Esto oculta las líneas verticales mientras mantiene visibles las etiquetas de los puntos.
 
 ## Solución de problemas
 
 - **El estado permanece en Stopped después de hacer clic en Start** — La aplicación no puede alcanzar `api.pota.app`. Verifique su conexión a Internet y confirme que ningún cortafuegos o proxy esté bloqueando el HTTP saliente.
-- **No aparecen spots en el panadapter a pesar del estado Polling** — Verifique que **Spots:** en la pestaña **Display** esté **Enabled**. También compruebe que la banda actual no esté filtrada en las casillas de verificación **Bands:** de la pestaña **Spot List**.
-- **La consola POTA Activations está vacía** — Puede que no haya activaciones POTA activas en este momento, o que la consulta aún no se haya completado. Espere hasta que transcurra el siguiente intervalo de consulta.
-- **La casilla FreeDV Reporter se desmarca inmediatamente** — El campo **Callsign:** o **Grid Square:** está vacío. Ingrese un indicativo y una cuadrícula Maidenhead válidos (o active **Use radio** / **Use GPS** si la radio los proporciona), luego vuelva a marcar la casilla.
-- **Auto Mode: tiene como valor predeterminado Enabled en instalaciones nuevas** — A partir de v0.9.5.1, **Auto Mode:** tiene como valor predeterminado **Enabled**. Si prefiere que al hacer clic en un spot no se cambie automáticamente el modo del slice, establezca **Auto Mode:** en **Disabled** en la pestaña **Display** y la preferencia se guardará.
-- **Hacer doble clic en un spot cambia al modo incorrecto** — El modo se infiere del texto del comentario del spot. Si el comentario no contiene un token de modo estándar, el modo del slice no se modifica. Edite la configuración del filtro en la pestaña de origen correspondiente para mejorar la calidad del comentario, o cambie el modo manualmente después de sintonizar.
-
-## Relacionado
-
-- [Descripción general de SpotHub](overview.md)
-- [Sintonizar un spot haciendo doble clic en la lista de spots](tune-to-a-spot-by-double-clicking-the-spot-list.md)
-- [Elegir colores para cada fuente de spot](pick-colors-for-each-spot-source.md)
-- [Ajustar densidad, posición, tamaño de fuente y vida útil de los spots](tune-spot-density-position-font-size-and-lifetime.md)
-- [Borrar todos los spots del panadapter](clear-all-spots-from-the-panadapter.md)
-<!-- docmesh:llm version=v0.9.7 date=2026-05-03 -->
+- **No aparecen puntos en el panadapter a pesar del estado Polling** — Verifique que **Spots:** en la pestaña **Display** esté **Enabled**. Compruebe también que la banda actual no esté filtrada en las casillas de verificación **Bands:** de la pestaña **Spot List**.
+- **La consola POTA Activations está vacía** — Puede que no haya activaciones POTA activas en este momento, o que el sondeo aún no se haya completado. Espere hasta que transcurra el siguiente intervalo de sondeo.
+- **La casilla de verificación del Reporter de FreeDV se desmarca inmediatamente** — El campo **Callsign:** o **Grid Square:** está vacío. Introduzca un valor válido.
