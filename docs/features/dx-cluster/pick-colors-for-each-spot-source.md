@@ -1,6 +1,6 @@
-# Elija colores para cada fuente de spots
+# Elegir colores para cada fuente de spots
 
-AetherSDR puede mostrar spots de hasta seis fuentes simultáneamente. Asignar un color distintivo a cada fuente facilita distinguirlas de un vistazo en el panadapter.
+AetherSDR puede mostrar spots de hasta seis fuentes simultáneamente. Asignar un color distintivo a cada fuente facilita diferenciarlas de un vistazo en el panadapter.
 
 ## Antes de comenzar
 
@@ -48,71 +48,92 @@ WSJT-X admite cuatro colores separados, uno por categoría de decodificación.
 3. Elija un color y confirme.
 4. Se guarda en `FreeDvSpotColor`.
 
-> **Nota:** La pestaña FreeDV solo está presente si AetherSDR se compiló con soporte WebSocket.
+> **Nota:** La pestaña FreeDV solo está presente si AetherSDR se compiló con soporte para WebSocket.
 
 ### SpotCollector
 
-SpotCollector no tiene un selector de color de spot dedicado en SpotHub. Vea las opciones de la pestaña Display a continuación si necesita una anulación uniforme para todas las fuentes.
+SpotCollector no tiene un selector de color de spot dedicado en SpotHub. Consulte las opciones de la pestaña Display a continuación si necesita una anulación uniforme para todas las fuentes.
 
-## Qué controla cada control
-| Control                                                  | Pestaña                    | Configuración guardada                                                                                                                                                     |
-|----------------------------------------------------------|----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Spot Color:**                                          | Cluster                    | `ClusterSpotColor`                                                                                                                                                         |
-| **Spot Color:**                                          | RBN                        | `RbnSpotColor`                                                                                                                                                             |
-| **CQ color**                                             | WSJT-X                     | `WsjtxColorCQ`                                                                                                                                                             |
-| **POTA color**                                           | WSJT-X                     | `WsjtxColorPOTA`                                                                                                                                                           |
-| **Calling Me color**                                     | WSJT-X                     | `WsjtxColorCallingMe`                                                                                                                                                      |
-| **Default color**                                        | WSJT-X                     | `WsjtxColorDefault`                                                                                                                                                        |
-| **Spot Color:**                                          | POTA                       | `PotaSpotColor`                                                                                                                                                            |
-| **Spot Color:**                                          | FreeDV                     | `FreeDvSpotColor`                                                                                                                                                          |
-| **Enable FreeDV Reporter reporting when RADE is active** | FreeDV                     | `FreeDvAutoReport`                                                                                                                                                         |
-| **Callsign:**                                            | FreeDV — Station Reporting | `FreeDvMyCallsign`                                                                                                                                                         |
-| **Use radio (callsign)**                                 | FreeDV — Station Reporting | `FreeDvUseRadioCallsign`                                                                                                                                                   |
-| **Grid Square:**                                         | FreeDV — Station Reporting | `FreeDvMyGrid`                                                                                                                                                             |
-| **Use GPS (grid)**                                       | FreeDV — Station Reporting | `FreeDvUseGpsGrid`                                                                                                                                                         |
-| **Station Msg:**                                         | FreeDV — Station Reporting | `FreeDvMyMessage`                                                                                                                                                          |
-| **Auto Mode:**                                           | Display                    | `SpotsAutoMode` — valor predeterminado cambiado a **Enabled** en v0.9.5.1                                                                                                  |
-| **Spot Lines:**                                          | Display                    | `IsSpotsLinesEnabled` — nuevo en v0.9.7                                                                                                                                    |
-| Total spots count                                        | Barra de estado            | Lectura en vivo de cuántos spots se están rastreando actualmente en todas las fuentes. Se actualiza cuando se añaden o eliminan spots. Se reinicia a 0 al presionar **Clear All Spots**. |
+## Qué hace cada control
+| Control                                                       | Pestaña                                                                                                                  | Configuración guardada                                                                                                                                                 |
+|---------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Spot Color:**                                               | Cluster                                                                                                                  | `ClusterSpotColor`                                                                                                                                                     |
+| **Spot Color:**                                               | RBN                                                                                                                      | `RbnSpotColor`                                                                                                                                                         |
+| **CQ color**                                                  | WSJT-X                                                                                                                   | `WsjtxColorCQ`                                                                                                                                                         |
+| **POTA color**                                                | WSJT-X                                                                                                                   | `WsjtxColorPOTA`                                                                                                                                                       |
+| **Calling Me color**                                          | WSJT-X                                                                                                                   | `WsjtxColorCallingMe`                                                                                                                                                  |
+| **Default color**                                             | WSJT-X                                                                                                                   | `WsjtxColorDefault`                                                                                                                                                    |
+| **Spot Color:**                                               | POTA                                                                                                                     | `PotaSpotColor`                                                                                                                                                        |
+| **Spot Color:**                                               | FreeDV                                                                                                                   | `FreeDvSpotColor`                                                                                                                                                      |
+| **Enable FreeDV Reporter reporting when RADE is active**      | FreeDV                                                                                                                   | `FreeDvAutoReport`                                                                                                                                                     |
+| **Callsign:**                                                 | FreeDV — Station Reporting                                                                                               | `FreeDvMyCallsign`                                                                                                                                                     |
+| **Use radio (callsign)**                                      | FreeDV — Station Reporting                                                                                               | `FreeDvUseRadioCallsign`                                                                                                                                               |
+| **Grid Square:**                                              | FreeDV — Station Reporting                                                                                               | `FreeDvMyGrid`                                                                                                                                                         |
+| **Use GPS (grid)**                                            | FreeDV — Station Reporting                                                                                               | `FreeDvUseGpsGrid`                                                                                                                                                     |
+| **Station Msg:**                                              | FreeDV — Station Reporting                                                                                               | `FreeDvMyMessage`                                                                                                                                                      |
+| **Auto:**                                                     | Display                                                                                                                  | `SpotAutoSwitchMode` — clave de configuración cambiada de `SpotsAutoMode` en v26.5.1. Valor predeterminado cambiado a **Enabled** en v0.9.5.1.                          |
+| **Signals (Signal History)**                                  | Display                                                                                                                  | `SHistoryMarkersEnabled` — nuevo en v26.5.1 (#2426). El mismo interruptor que View > Signal History Markers.                                                           |
+| **QRM (Signal History)**                                      | Display                                                                                                                  | `SHistoryQrmEnabled` — nuevo en v26.5.1 (#2426). El mismo interruptor que View > QRM History Markers.                                                                 |
+| **Clear All**                                                 | Display                                                                                                                  | Borra todos los spots DX, la fuente de memoria y los marcadores de Signal History y QRM del espectro.                                                                  |
+| **Spot Lines:**                                               | Display                                                                                                                  | `IsSpotsLinesEnabled` — nuevo en v0.9.7                                                                                                                                |
+| Total spots count                                             | Barra de estado                                                                                                          | Lectura en vivo de cuántos spots se están rastreando actualmente en todas las fuentes. Se actualiza cuando se añaden o borran spots. Se reinicia a 0 al presionar **Clear All Spots**. |
+| **Spot text color picker**                                    | Display                                                                                                                  | `SpotsOverrideColor` — predeterminado `#FFFF00`                                                                                                                        |
+| **Override Background: Enabled**                              | Display                                                                                                                  | `IsSpotsOverrideBackgroundColorsEnabled`                                                                                                                               |
+| **Override Background: Auto**                                 | Display                                                                                                                  | `IsSpotsOverrideToAutoBackgroundColorEnabled`                                                                                                                          |
+| **Spot background color picker**                              | Display                                                                                                                  | `SpotsOverrideBgColor` — predeterminado `#000000`                                                                                                                      |
+| **Background Opacity:**                                       | Display                                                                                                                  | `SpotsBackgroundOpacity` — clave de configuración migrada de `SpotsOverrideBgOpacity` en v0.9.7                                                                         |
+| **Total Spots:**                                              | Display                                                                                                                  | Conteo en vivo de spots rastreados actualmente en todas las fuentes.                                                                                                   |
+| **DXCC Colors:**                                              | Display — sección DXCC Coloring                                                                                          | `IsDxccColoringEnabled` — clave de configuración cambiada de `DxccColoringEnabled` en v26.5.1.                                                                         |
+| **Log File (ADIF):**                                          | Display — sección DXCC Coloring                                                                                          | `DxccAdifFilePath` — clave de configuración cambiada de `DxccAdifPath` en v26.5.1. La recarga automática está siempre habilitada cuando se selecciona un archivo.       |
+| **Imported: (DXCC stats)**                                    | Display — sección DXCC Coloring                                                                                          | Muestra el conteo de QSO y el número de entidades cuando se carga un registro. Formato: '<N> QSOs / <M> entities'.                                                     |
+| **DXCC Color swatches** (New DXCC / New Band / New Mode / Worked) | Display — sección DXCC Coloring                                                                                       | `DxccColorNewEntity` / `DxccColorNewBand` / `DxccColorNewMode` / `DxccColorWorked` — nuevo en v26.5.1                                                                 |
+| **Marker Lifetime:**                                          | Display — sección Signal History                                                                                         | `SHistoryLifetimeS` — nuevo en v26.5.1. Predeterminado 60 s.                                                                                                           |
+| **QRM Gate:**                                                 | Display — sección Signal History                                                                                         | `SHistoryQrmGateS` — nuevo en v26.5.1. Predeterminado 6 s.                                                                                                             |
+| **Edge Threshold:**                                           | Display — sección Signal History                                                                                         | `SHistorySoftEdgeDb` — nuevo en v26.5.1. Predeterminado 3.0 dB.                                                                                                        |
+| **Signal History color swatches** (Signals / QRM)             | Display — sección Signal History                                                                                         | `SHistoryColorSignals` (oro) / `SHistoryColorQrm` (rojo) — nuevo en v26.5.1.                                                                                          |
+| **Snap to Step:**                                             | Display — sección Signal History                                                                                         | `SHistorySnapToStep` — nuevo en v26.5.1. Predeterminado Disabled.                                                                                                      |
+
 ## FreeDV Reporter — Station Reporting
 
-v0.9.3 añade un grupo **Station Reporting** dentro de la pestaña **FreeDV**. Cuando está habilitado, AetherSDR transmite la actividad de su estación al mapa público de FreeDV Reporter en qso.freedv.org siempre que el módem RADE esté activo.
+v0.9.3 añade un grupo **Station Reporting** dentro de la pestaña **FreeDV**. Cuando está habilitado, AetherSDR transmite la actividad de su estación al mapa público de FreeDV Reporter en qso.freedv.org cada vez que el módem RADE está activo.
 
-> **Nota:** Station Reporting solo está presente si AetherSDR se compiló con soporte WebSocket (`HAVE_WEBSOCKETS`). En compilaciones de Windows, adicionalmente requiere `HAVE_RADE`.
+> **Nota:** Station Reporting solo está presente si AetherSDR se compiló con soporte para WebSocket (`HAVE_WEBSOCKETS`). En las compilaciones para Windows, además requiere `HAVE_RADE`.
 
-### Habilitar la notificación
+### Habilitar el informe
 
 1. Haga clic en la pestaña **FreeDV** en SpotHub.
-2. En el grupo **Station Reporting**, complete un indicativo y un cuadrado de cuadrícula válidos (ver más abajo) antes de habilitar la casilla de verificación.
+2. En el grupo **Station Reporting**, complete un indicativo y un cuadrado de cuadrícula válidos (consulte a continuación) antes de habilitar la casilla de verificación.
 3. Marque **Enable FreeDV Reporter reporting when RADE is active**.
-   - Si el campo de indicativo o de cuadrado de cuadrícula está vacío cuando marca la casilla, aparecerá un diálogo de advertencia y la casilla se desmarcará. Complete ambos campos primero y luego vuelva a intentarlo.
+   - Si el campo de indicativo o el de cuadrado de cuadrícula está en blanco cuando marca la casilla, aparece un cuadro de diálogo de advertencia y la casilla vuelve al estado desmarcado. Complete ambos campos primero y luego intente de nuevo.
 4. La configuración se guarda en `FreeDvAutoReport`.
 
 ### Campo de indicativo
 
-- El campo **Callsign:** (`FreeDvMyCallsign`) establece el indicativo que se notifica al mapa público.
-- Cuando **Use radio** está marcado (predeterminado), el campo se rellena automáticamente desde el indicativo configurado en la radio y se bloquea como solo lectura. El campo se actualiza automáticamente si cambia el indicativo en Radio Setup.
+- El campo **Callsign:** (`FreeDvMyCallsign`) establece el indicativo que se informa al mapa público.
+- Cuando **Use radio** está marcado (predeterminado), el campo se rellena previamente con el indicativo configurado en la radio y se bloquea como solo lectura. El campo se actualiza automáticamente si cambia el indicativo en Radio Setup.
 - Desmarque **Use radio** para escribir un indicativo manualmente. El valor se guarda en `FreeDvMyCallsign` y se convierte a mayúsculas al salir.
 - **Use radio** se guarda en `FreeDvUseRadioCallsign`.
 
 ### Campo de cuadrado de cuadrícula
 
-- El campo **Grid Square:** (`FreeDvMyGrid`) establece el localizador Maidenhead que se notifica al mapa público.
-- En modelos de radio con hardware GPS, aparece una casilla **Use GPS**. Cuando está marcada (predeterminado), el campo se rellena automáticamente desde el módulo GPS de la radio y se bloquea como solo lectura.
+- El campo **Grid Square:** (`FreeDvMyGrid`) establece el localizador Maidenhead que se informa al mapa público.
+- En modelos de radio con hardware GPS, aparece una casilla de verificación **Use GPS**. Cuando está marcada (predeterminado), el campo se rellena previamente desde el módulo GPS de la radio y se bloquea como solo lectura.
 - Desmarque **Use GPS** para escribir un cuadrado de cuadrícula manualmente. El valor se guarda en `FreeDvMyGrid` y se convierte a mayúsculas al salir.
-- **Use GPS** se guarda en `FreeDvUseGpsGrid`. La casilla está oculta en modelos de radio que no tienen hardware GPS.
+- **Use GPS** se guarda en `FreeDvUseGpsGrid`. La casilla de verificación está oculta en modelos de radio que no tienen hardware GPS.
 
 ### Mensaje de estación
 
 - El campo opcional **Station Msg:** (`FreeDvMyMessage`) acepta texto libre que aparece junto a su indicativo en el mapa público de FreeDV Reporter. Déjelo en blanco si no tiene nada que añadir.
 
-## Cambio del valor predeterminado de Auto Mode en v0.9.5.1
+## Modo Automático: valor predeterminado cambiado en v0.9.5.1
 
-El interruptor **Auto Mode:** en la pestaña **Display** ahora tiene como valor predeterminado **Enabled** para instalaciones nuevas. Si está actualizando desde una versión anterior y `SpotsAutoMode` no se había establecido previamente, AetherSDR lo tratará como habilitado después de la actualización. Para deshabilitarlo, abra la pestaña **Display** y haga clic en **Auto Mode:** hasta que muestre **Disabled**.
+El interruptor **Auto:** en la pestaña **Display** ahora está predeterminado en **Enabled** para instalaciones nuevas. Si está actualizando desde una versión anterior y `SpotAutoSwitchMode` no se había configurado previamente, AetherSDR lo tratará como habilitado después de la actualización. Para deshabilitarlo, abra la pestaña **Display** y haga clic en **Auto:** hasta que muestre **Disabled**.
+
+> **Nota:** La clave de configuración cambió de `SpotsAutoMode` a `SpotAutoSwitchMode` en v26.5.1.
 
 ## Spot Lines (nuevo en v0.9.7)
 
-El interruptor **Spot Lines:** en la pestaña **Display** controla si se dibujan líneas verticales desde la línea base del espectro hasta cada etiqueta de spot en el panadapter. La configuración se guarda en `IsSpotsLinesEnabled` y tiene el valor predeterminado **Enabled**.
+El interruptor **Spot Lines:** en la pestaña **Display** controla si se dibujan líneas verticales desde la línea base del espectro hasta cada etiqueta de spot en el panadapter. La configuración se guarda en `IsSpotsLinesEnabled` y está predeterminada en **Enabled**.
 
 Para desactivar las líneas de spot:
 
@@ -122,21 +143,23 @@ Para desactivar las líneas de spot:
 
 Desactivar las líneas de spot reduce el desorden visual durante concursos o cuando la densidad de spots es alta.
 
-## Sintonización desde la lista de spots (actualizado en v0.9.7)
+## Marcadores de Signal History y QRM (nuevo en v26.5.1)
 
-Hacer doble clic en una fila de la pestaña **Spot List** sintoniza el receptor activo a la frecuencia de ese spot. A partir de v0.9.7, AetherSDR también pasa la sugerencia de modo del spot al receptor, por lo que el modo (por ejemplo, CW o SSB) cambia automáticamente para coincidir con el spot en lugar de solo cambiar la frecuencia.
+La pestaña **Display** incluye controles de Signal History para detectar y marcar señales en el panadapter:
 
-## Consejos
+- **Signals (Signal History):** Marcadores dorados para señales detectadas de ancho de voz en el panadapter. Guardado en `SHistoryMarkersEnabled`.
+- **QRM (Signal History):** Marcadores rojos para portadoras persistentes e interferencias de banda ancha. Guardado en `SHistoryQrmEnabled`.
 
-- Si todos los colores por fuente son demasiado sutiles para distinguirlos, use **Override Colors:** en la pestaña **Display** para forzar un solo color de texto en todas las fuentes, guardado en `IsSpotsOverrideColorsEnabled`.
-- La coloración por DXCC (habilitada con **DXCC Coloring** en la pestaña **Display**) puede anular los colores por fuente para indicar el estado trabajado, confirmado o necesario. Si los colores de sus spots no aparecen como se configuraron, verifique si `DxccColoringEnabled` está activo.
+Ambos interruptores reflejan los mismos controles que se encuentran en `View > Signal History Markers` y `View > QRM History Markers`.
 
-## Relacionados
+### Ajustes de Signal History
 
-- [Descripción general de SpotHub](overview.md)
-- [Iniciar el listener UDP de WSJT-X y filtrar por CQ, POTA o llamadas a mí](start-wsjt-x-udp-listener-and-filter-for-cq-pota-or-calls-to-me.md)
-- [Consultar activaciones POTA](poll-pota-activations.md)
-- [Habilitar el WebSocket del reportero de QSO FreeDV](enable-freedv-qso-reporter-websocket.md)
-- [Habilitar la coloración DXCC desde un registro ADIF](enable-dxcc-coloring-from-an-adif-log.md)
-- [Ajustar densidad, posición, tamaño de fuente y tiempo de vida de los spots](tune-spot-density-position-font-size-and-lifetime.md)
-<!-- docmesh:llm version=v0.9.7 date=2026-05-03 -->
+La sección **Signal History** debajo del divisor en la pestaña Display proporciona ajustes finos:
+
+- **Marker Lifetime:** Control deslizante (15–300 segundos, predeterminado 60 s) que controla cuánto tiempo persiste un marcador de Signal History inactivo. Guardado en `SHistoryLifetimeS`.
+- **QRM Gate:** Control deslizante (3–30 segundos, predeterminado 6 s) que controla cuánto tiempo debe persistir una portadora estrecha o una señal de banda ancha antes de ser clasificada como QRM. Guardado en `SHistoryQrmGateS`.
+- **Edge Threshold:** Control deslizante (1.0–10.0 dB, predeterminado 3.0 dB) para la caminata de borde de pendiente que refina el borde lateral de la portadora en S-History. Los valores más bajos están más cerca de la portadora pero son más sensibles al ruido. Guardado en `SHistorySoftEdgeDb`.
+- **Signal History color swatches:** Haga clic para abrir un selector de color para los marcadores de señal de voz (oro predeterminado `#FFC800`) y los marcadores de QRM (rojo predeterminado `#FF0000`). Guardado en `SHistoryColorSignals` y `SHistoryColorQrm` respectivamente.
+- **Snap to Step:** Interruptor (predeterminado Disabled) que redondea el clic-para-sintonizar de S-History al múltiplo más cercano del tamaño de paso de la franja activa, ocultando el pequeño desplazamiento de la portadora. Guardado en `SHistorySnapToStep`.
+
+## DXCC Coloring (actualizado en v26.5.1)

@@ -1,55 +1,52 @@
-# Elegir entre compuerta y expansor suave mediante la relación
+# Elección del comportamiento de compuerta frente a expansor suave mediante la relación
 
-El mando **Ratio** controla la agresividad con la que la compuerta atenúa el audio por debajo del umbral. Un valor bajo de ratio produce un expansor descendente suave que reduce el audio silencioso de forma gradual; un valor alto produce una compuerta dura que lo corta de forma abrupta. Elegir la relación adecuada le permite adaptar el carácter de la compuerta a su situación de ruido y estilo de operación.
+El mando **Ratio** controla con qué agresividad la compuerta atenúa el audio por debajo del umbral. Un valor bajo de relación produce un expansor descendente suave que reduce gradualmente el audio silencioso; un valor alto produce una compuerta dura que lo corta bruscamente. Elegir la relación adecuada permite adaptar el carácter de la compuerta a su situación de ruido y estilo de operación.
 
 ## Antes de comenzar
 
 - La etapa de compuerta debe estar habilitada en el lado que desea ajustar (TX o RX). Si el applet no está visible, habilite la compuerta mediante el widget CHAIN o haga doble clic en la etapa GATE para abrir el editor flotante.
-- Abra el subcontenedor **Aetherial TX Gate** (TX) o el subcontenedor **Aetherial AGC-T** (RX) dentro del contenedor principal Aetherial Audio (TXDSP) en el Panel de Applets.
-- Cuando una etapa de compuerta está en bypass, todo el mosaico del applet se atenúa aproximadamente al 55 % de opacidad. Esta señal visual coincide con el efecto de atenuación utilizado en la curva EQ y confirma que la etapa no está procesando audio. Vuelva a habilitar la etapa para restaurar la opacidad completa y el procesamiento activo.
+- Abra el subcontenedor **Aetherial TX Gate** (TX) o el subcontenedor **Aetherial AGC-G** (RX) dentro del contenedor principal Aetherial Audio (TXDSP) en el Panel de Applets.
+- Cuando una etapa de compuerta está desviada, todo el azulejo del applet se atenúa aproximadamente al 55 % de opacidad. Esta señal visual coincide con el efecto de atenuación usado en la curva EQ y confirma que la etapa no está procesando audio. Vuelva a habilitar la etapa para restaurar la opacidad total y el procesamiento activo.
 
 ## Pasos
 
 1. Localice el mando **Ratio** en la fila de cinco mandos en la parte inferior del applet.
-2. Para configurar un comportamiento de expansor suave, gire **Ratio** hacia un valor bajo (por ejemplo, 2.0:1). El audio por debajo del umbral se reduce gradualmente.
-3. Para configurar un comportamiento de compuerta dura, gire **Ratio** hacia un valor alto (por ejemplo, 8.0:1 o superior). El audio por debajo del umbral se corta de forma abrupta.
-4. Observe la barra de reducción de ganancia mientras el audio pasa. Una configuración de expansor suave produce un relleno ámbar más superficial y gradual; una configuración de compuerta dura produce un relleno profundo y abrupto cuando la compuerta se cierra.
+2. Para establecer un comportamiento de expansor suave, gire **Ratio** hacia un valor bajo (por ejemplo, 2.0:1). El audio por debajo del umbral se reduce gradualmente.
+3. Para establecer un comportamiento de compuerta dura, gire **Ratio** hacia un valor alto (por ejemplo, 8.0:1 o superior). El audio por debajo del umbral se corta bruscamente.
+4. Observe la barra de reducción de ganancia mientras el audio pasa. Un valor de expansor suave produce un relleno ámbar más superficial y gradual; un valor de compuerta dura produce un relleno profundo y abrupto cuando la compuerta se cierra.
 5. Si el corte de la compuerta dura es demasiado severo entre palabras, ajuste **Floor** para limitar la atenuación máxima. Consulte [Ajustar Floor para evitar silencios antinaturales entre palabras](set-floor-to-avoid-unnatural-silence-between-words.md).
 
 ## Función de cada control
 
-| Control                | Predeterminado                                                                                                                                                                                                                                                            | Rango válido                                                                                                                                                                                                                                                          |
-|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Ratio**              | 2.0                                                                                                                                                                                                                                                                       | 1.0 a 10.0                                                                                                                                                                                                                                                            |
-| **Thresh**             | -40.0 dB                                                                                                                                                                                                                                                                  | -80.0 a 0.0 dB                                                                                                                                                                                                                                                        |
-| **Return**             | 2.0 dB                                                                                                                                                                                                                                                                    | 0.0 a 20.0 dB                                                                                                                                                                                                                                                         |
-| **Floor**              | -15.0 dB                                                                                                                                                                                                                                                                  | -80.0 a 0.0 dB                                                                                                                                                                                                                                                        |
-| Barra de reducción de ganancia | —                                                                                                                                                                                                                                                                         | 0 a 40 dB GR                                                                                                                                                                                                                                                          |
-| Curva de transferencia | —                                                                                                                                                                                                                                                                         | —                                                                                                                                                                                                                                                                     |
-| Invertir (Expansor / Compuerta) | Desmarcado = expansor descendente (suave, basado en ratio). Marcado = Compuerta (corte duro). Cambia la relación y el piso a pares preestablecidos al alternar; los demás controles permanecen en su lugar. La etiqueta se actualiza en vivo entre 'Expander' y 'Gate'. | Control solo del editor (floating ClientGateEditor). Color: desmarcado = verde (Expander), marcado = ámbar (Gate). Tooltip: 'Cambia entre modo Expansor descendente (suave) y Compuerta (duro). Ajusta ratio + floor a pares preestablecidos; los demás mandos se quedan donde los dejó.' |
-| Peek (lookahead)       | Establece un retardo de pre-lectura para que la compuerta pueda abrirse fraccionalmente antes de que llegue un transitorio, evitando bordes de ataque recortados. 'Off' deshabilita completamente la línea de retardo.                                                  | Control solo del editor. Los valores más altos aumentan la latencia en la ruta de TX. 1 y 1.5 ms coinciden con las opciones preestablecidas de Ableton; se agregaron 3 y 5 ms para transitorios muy rápidos.                                                         |
-| Attack                 | Mapeo exponencial (0.1 * 1000^n). Establece la rapidez con que la compuerta se abre después de que la entrada supere Thresh.                                                                                                                                              | Control solo del editor. Etiqueta 'X.XX ms' por debajo de 10 ms, 'X.X ms' por encima.                                                                                                                                                                               |
-| Hold                   | Mapeo lineal (n * 500). Después de que la entrada caiga por debajo de Thresh − Return la compuerta permanece abierta este tiempo antes de comenzar a cerrarse, evitando el aleteo en material rítmico.                                  | Control solo del editor. Etiqueta 'X.X ms'.                                                                                                                                                                                                                          |
+| Control                | Predeterminado | Rango válido    |
+|------------------------|----------------|-----------------|
+| **Thresh**             | -40.0 dB       | -80.0 a 0.0 dB  |
+| **Ratio**              | 2.0            | 1.0 a 10.0      |
+| **Return**             | 2.0 dB         | 0.0 a 20.0 dB   |
+| **Release**            | 100 ms         | 5 a 2000 ms     |
+| **Floor**              | -15.0 dB       | -80.0 a 0.0 dB  |
+| **Barra de reducción de ganancia** | —   | 0 a 40 dB GR    |
+| Curva de transferencia | —              | —               |
 
 ## Consejos
 
 - Una relación de 2.0:1 (la predeterminada) es un punto de partida conservador adecuado para la mayoría de los usos en TX. Auméntela solo si el ruido de bajo nivel sigue siendo audible cuando no está hablando.
-- Con relaciones superiores a aproximadamente 8.0:1 la compuerta se comporta casi como un interruptor de encendido/apagado. Combínela con un **Thresh** cuidadosamente ajustado para evitar recortar el borde de ataque de las palabras.
-- Use el mando **Return** para eliminar el aleteo de la compuerta. Si la compuerta parpadea abriéndose y cerrándose rápidamente cuando hace una pausa al hablar, aumente **Return** para que la compuerta permanezca abierta hasta que el nivel de entrada caiga claramente por debajo del umbral. La banda cian en la curva de transferencia se ensancha a medida que aumenta **Return**, mostrando directamente la zona de histéresis.
-- La curva de transferencia se actualiza en tiempo real a medida que mueve **Ratio** o **Return**. Use la bola de entrada en vivo para confirmar la forma de la curva y la banda de histéresis coinciden con su intención antes de transmitir.
-- Los cambios en cualquier mando surten efecto de inmediato y se guardan automáticamente. No se requiere ningún botón Apply o Save.
+- Con relaciones superiores a aproximadamente 8.0:1, la compuerta se comporta casi como un interruptor de encendido/apagado. Combínela con un **Thresh** cuidadosamente ajustado para evitar recortar el borde inicial de las palabras.
+- Use el mando **Return** para eliminar el chasquido de la compuerta. Si la compuerta se abre y cierra rápidamente al hacer una pausa al hablar, aumente **Return** para que la compuerta permanezca abierta hasta que el nivel de entrada descienda claramente por debajo del umbral. La banda cian en la curva de transferencia se ensancha al aumentar **Return**, mostrando directamente la zona de histéresis.
+- La curva de transferencia se actualiza en tiempo real al mover **Ratio** o **Return**. Use el punto de entrada en vivo para confirmar que la forma de la curva y la banda de histéresis coinciden con su intención antes de transmitir.
+- Los cambios en cualquier mando surten efecto de inmediato y se guardan automáticamente. No se requiere ningún botón Aplicar o Guardar.
 
 ## Solución de problemas
 
-- **El mando Ratio no tiene efecto en el sonido** — Confirme que la etapa de compuerta está habilitada. Una compuerta en bypass pasa el audio sin modificar independientemente de la configuración de los mandos; el mosaico del applet aparecerá atenuado aproximadamente al 55 % de opacidad cuando esté en bypass. Consulte [Poner en bypass la compuerta desde la cadena](bypass-the-gate-from-the-chain.md).
-- **La relación de compuerta dura corta demasiado y crea silencios antinaturales** — Baje **Floor** hacia 0 dB para reducir la atenuación máxima, o reduzca **Ratio** hacia el rango de expansor suave.
-- **La relación de expansor suave no suprime suficiente ruido** — Aumente **Ratio** o baje **Thresh** para que la atenuación comience a un nivel de entrada más alto.
-- **La compuerta aletea o parpadea en el umbral** — Aumente **Return** para que la compuerta permanezca abierta hasta que la señal caiga más por debajo del umbral. Observe cómo la banda de histéresis cian en la curva de transferencia se ensancha al hacerlo.
+- **El mando Ratio no tiene efecto en el sonido** — Confirme que la etapa de compuerta esté habilitada. Una compuerta desviada pasa el audio sin modificaciones independientemente de la configuración de los mandos; el azulejo del applet aparecerá atenuado aproximadamente al 55 % de opacidad cuando esté desviado. Consulte [Desviar la compuerta desde la cadena](bypass-the-gate-from-the-chain.md).
+- **La relación de compuerta dura corta demasiado y crea silencios antinaturales** — Reduzca **Floor** hacia 0 dB para disminuir la atenuación máxima, o reduzca **Ratio** hacia el rango de expansor suave.
+- **La relación de expansor suave no suprime suficiente ruido** — Aumente **Ratio** o reduzca **Thresh** para que la atenuación comience a un nivel de entrada más alto.
+- **La compuerta chasquea o parpadea en el umbral** — Aumente **Return** para que la compuerta permanezca abierta hasta que la señal caiga más por debajo del umbral. Observe cómo la banda cian de histéresis en la curva de transferencia se ensancha al hacerlo.
 
 ## Relacionados
 
-- [Descripción general de Aetherial TX Gate / Aetherial AGC-T (RX)](overview.md)
-- [Ajustar el umbral de TX justo por encima del piso de ruido de la sala](set-tx-threshold-just-above-room-noise-floor.md)
+- [Descripción general de Aetherial TX Gate / Aetherial AGC-G (RX)](overview.md)
+- [Ajustar el umbral TX justo por encima del piso de ruido ambiente](set-tx-threshold-just-above-room-noise-floor.md)
 - [Ajustar Floor para evitar silencios antinaturales entre palabras](set-floor-to-avoid-unnatural-silence-between-words.md)
-- [Ajustar la liberación para un cierre natural de la compuerta](tune-release-for-natural-gate-close.md)
-- [Observar la GR en vivo mientras no habla](watch-live-gr-while-not-speaking.md)
+- [Ajustar Release para un cierre natural de la compuerta](tune-release-for-natural-gate-close.md)
+- [Observar GR en vivo mientras no se habla](watch-live-gr-while-not-speaking.md)

@@ -1,104 +1,171 @@
-# Cambiar la MTU de red para configuraciones VPN/remotas
+# Diálogo de Configuración de Radio
 
-El ajuste de MTU de red controla el tamaño máximo de paquete que la radio envía a través de la red. Reducirlo evita la fragmentación cuando se conecta a través de una VPN u otro túnel que reduce la MTU de ruta disponible.
+El diálogo de Configuración de Radio es la ventana maestra de configuración por radio. Contiene pestañas para información de radio, red, GPS, TX, teléfono/CW, RX, audio, filtros, XVTR, cables USB, periféricos, serie/FlexControl y temas.
 
-## Antes de comenzar
+## Abrir el diálogo
 
-- AetherSDR debe estar conectado a la radio. La pestaña Network no es accesible cuando está desconectado.
-- Conozca la MTU de su túnel VPN o ruta de red. Las MTU comunes de VPN son 1400–1450 bytes; una ruta Ethernet estándar es de 1500 bytes.
+1. Haga clic en `Settings > Radio Setup...`.
+2. El diálogo se abre con la pestaña **Radio** seleccionada.
 
-## Pasos
+## Comportamiento general del diálogo
 
-1. Abra `Settings > Radio Setup...`.
-2. Haga clic en la pestaña **Network**.
-3. Localice el cuadro de ajuste **Network MTU:**.
-4. Establezca el valor para que coincida con la MTU de su ruta de red.
-5. Haga clic en **Apply** para enviar la nueva MTU a la radio.
+- El diálogo es una ventana sin marco de forma predeterminada cuando la configuración `FramelessWindow` es `True`. Puede redimensionarlo arrastrando cualquier borde.
+- La geometría del diálogo se conserva entre sesiones.
+- Los cambios realizados en algunas pestañas se aplican inmediatamente; otros requieren hacer clic en un botón Apply o Connect.
+- Si borra un campo IP en la pestaña **Peripherals** y cierra el diálogo sin hacer clic en Connect/Disconnect, la IP manual y el puerto guardados se eliminan automáticamente y el dispositivo se desconecta.
 
-## Función de cada control
+## Radio (pestaña)
 
-| Control | Descripción | Valor predeterminado |
-|---|---|---|
-| **Network MTU:** | Tamaño del paquete saliente en bytes. Reduzca este valor cuando opere a través de una VPN o cualquier enlace con una MTU reducida. | 1450 |
-| **Apply** | Envía la configuración actual de la pestaña Network, incluido el valor de MTU, a la radio. | — |
-| TX Follows Active Slice | TX sigue al receptor activo. Excluyente con Active Slice Follows TX. Se desactiva automáticamente durante la operación en Split. | False |
-| Active Slice Follows TX | Cambia el receptor activo cuando TX se mueve externamente (p. ej., WSJT-X o CAT). Excluyente con TX Follows Active Slice. | False |
-| Deslizadores de nitidez de filtro Voice / CW / Digital | Establece la nitidez del filtro (0=menor latencia a 3=más nítido) por modo; el deslizador está deshabilitado cuando Auto está activado. Los comandos se envían como `radio filter_sharpness <mode> level=<N>`. | — |
-| Auto (Voice / CW / Digital) | Activa la selección automática del nivel de filtro para ese modo; deshabilita el deslizador manual de nitidez. Los comandos se envían como `radio filter_sharpness <mode> auto_level=1`. | — |
-| Connect / Disconnect (TGXL) | Abre/cierra la conexión TCP directa al TGXL en el puerto 9010. Guarda la IP y el puerto en `TGXL_ManualIp` y `TGXL_ManualPort` al conectar para que AetherSDR se reconecte automáticamente al iniciar. Requerido para recuperar TUNE en firmware 4.2+. Cuando está conectado, el botón TUNE envía el comando nativo `autotune` directamente al TGXL en lugar de la ruta del lado de la radio que está rota en firmware 4.2. El TGXL activa el PTT de la radio a través de su cable de interbloqueo de hardware; no se necesita activación del lado del cliente. Si el campo IP está vacío y la radio ha descubierto el TGXL, la IP descubierta se completa automáticamente. | — |
-| Connect / Disconnect (PGXL) | Abre/cierra la conexión TCP directa al Power Genius XL (puerto predeterminado 9008). Guarda la IP y el puerto en `PGXL_ManualIp` y `PGXL_ManualPort`. | — |
-| Connect / Disconnect (Antenna Genius) | Abre/cierra la conexión al Antenna Genius (puerto predeterminado 9007). Guarda la IP y el puerto en `AG_ManualIp` y `AG_ManualPort`. La fila muestra un estado Connected solo cuando el dispositivo conectado es un Antenna Genius propiamente dicho (no un ShackSwitch). | — |
-| Connect / Disconnect (ShackSwitch) | Abre/cierra la conexión a un conmutador de antena ShackSwitch a través del protocolo AG UDP/TCP en el puerto 9007. Guarda la IP en `SS_ManualIp` y el puerto en `SS_ControlPort`. ShackSwitch se detecta mediante el campo `ShackSwitch` en el beacon de difusión AG. El descubrimiento automático a través de UDP también funciona sin esta fila. La fila se oculta del estado Connected si un Antenna Genius (que no sea ShackSwitch) es el dispositivo conectado. | — |
-| ⚙ Web UI (ShackSwitch) | Abre la interfaz de configuración web local del dispositivo ShackSwitch en el navegador del sistema. Utiliza `webPort` del beacon si es mayor que 1024; de lo contrario, recurre a `SS_WebPort` o al puerto 5000. | — |
-| Select Installer... | Abre un selector de archivos que acepta `.msi` (instalador WiX de FlexRadio v4.2+), `.exe` (instalador autoextraíble más antiguo) o un archivo de firmware `.ssdr` preextraído. El preparador de firmware detecta automáticamente el formato a partir de los primeros 8 bytes (magia OLE/MSI vs. PE/COFF MZ) y extrae el `.ssdr` sin herramientas externas. La etiqueta cambió de **Browse .ssdr...** en v0.9.3. | — |
-| APD (pestaña) | Configuración del muestreador de Predistorsión Adaptativa Externa — selección por antena TX del puerto de muestra de realimentación (INTERNAL / RX_A / RX_B / XVTA / XVTB) y un botón de reinicio del ecualizador. La pestaña está oculta a menos que la radio informe `apd configurable=1`. Solo las series FLEX-8x00 con firmware SmartSDR 4.2.18+ exponen esto; las radios de la serie 6000 y anteriores a 4.2.18 mantienen la pestaña invisible. | — |
-| Combinaciones de muestreador ANT1 / ANT2 / XVTA / XVTB (APD) | Selecciona la ruta de realimentación que la radio utiliza para muestrear la RF saliente para el entrenamiento APD para esa antena TX. Elija una entrada RX/XVTR externa cuando maneje un amplificador lineal externo. Las opciones se completan en vivo desde el subobjeto `apd sampler` de la radio. Recurre a INTERNAL si la radio informa un valor no reconocido. | INTERNAL |
-| Equalizer Reset (APD) | Envía `apd reset` a la radio, borrando todos los datos de entrenamiento APD por antena para que la adaptación comience de nuevo. | — |
-| Themes (pestaña) | Pestaña de personalización de la interfaz de usuario: actualmente aloja la sección Slice Colors. | — |
-| Use Aether defaults / Custom colors (botón de opción) | Cambia el esquema de color del receptor entre la paleta integrada de AetherSDR y un conjunto personalizado completamente por receptor. Respaldado por `SliceColorManager::useCustomColors()`. | Use Aether defaults |
-| Botones de color de receptor A–H | Haga clic en cualquier botón con letra (A–H) para abrir un selector de color y asignar un color personalizado para ese receptor. Los cambios son visibles inmediatamente en los widgets VFO, superposiciones del panadapter y distintivos de canal CAT. Los botones están deshabilitados cuando está seleccionado **Use Aether defaults**. Hasta 8 receptores. | — |
-| Reset All to Defaults (Themes) | Restablece todos los colores personalizados del receptor a la paleta integrada de AetherSDR. | — |
+La pestaña Radio muestra información del radio, identificación, información de licencia y controles de actualización de firmware.
 
-## Actualización de firmware (pestaña Radio)
+| Control | Descripción |
+|---|---|
+| **Radio SN** | Número de serie del chasis (solo lectura). |
+| **Region** | Región regulatoria del radio (solo lectura). |
+| **HW Version** | Cadena de versión de hardware (solo lectura). |
+| **Remote On** | Habilita el encendido remoto / activación remota. |
+| **Options** | Muestra las opciones de radio licenciadas (solo lectura). |
+| **FlexControl** | Estado detectado del hardware FlexControl (solo lectura). |
+| **multiFLEX** | Estado habilitado de multiFLEX (solo lectura). |
+| **Model** | Modelo del radio (solo lectura). |
+| **Nickname** | Apodo del radio fácil de usar. |
+| **Callsign** | Indicativo de la estación. |
+| **Station Name** | Identifica este cliente AetherSDR ante otras estaciones multiFLEX. Por defecto usa el nombre de host del SO si está vacío. Se almacena en AppSettings como `StationName`. Se envía al radio como "cliente estación \<nombre\>". |
+| **License Info** | Muestra los detalles de la licencia del radio: suscripción, vencimiento, ID de radio y versión licenciada. |
+| **Check for Update** | Consulta si hay actualizaciones de firmware. |
+| **Select Installer...** | Abre un selector de archivos que acepta `.msi` (instalador WiX de FlexRadio v4.2+), `.exe` (instalador autoextraíble antiguo) o un archivo de firmware `.ssdr` preextraído. El preparador de firmware detecta automáticamente el formato a partir de los primeros 8 bytes y extrae el `.ssdr` sin herramientas externas. Consulte [Actualización de firmware](#actualización-de-firmware-pestaña-radio) a continuación. |
+| **Upload Firmware** | Inicia la carga de firmware con barra de progreso y estado. |
 
-En v0.9.3, el flujo de trabajo de preparación del firmware cambió. AetherSDR ya no descarga firmware automáticamente cuando se detecta una actualización. En su lugar, descargue el instalador de SmartSDR desde flexradio.com usted mismo y luego prepárelo manualmente.
+### Actualización de firmware (pestaña Radio)
 
-### Preparación de una actualización de firmware
+AetherSDR no descarga firmware automáticamente cuando se detecta una actualización. Descargue usted mismo el instalador de SmartSDR desde flexradio.com y luego prepárelo manualmente.
+
+#### Preparación de una actualización de firmware
 
 1. Abra `Settings > Radio Setup...`.
 2. Haga clic en la pestaña **Radio**.
 3. Haga clic en **Check for Update**.
-   - Si hay una actualización disponible, aparece un mensaje de estado que indica la versión disponible y le indica que descargue el instalador desde flexradio.com.
+   - Si hay una actualización disponible, un mensaje de estado le indica la versión disponible y le indica que descargue el instalador desde flexradio.com.
    - Si el firmware está actualizado, un mensaje de estado verde confirma la versión instalada.
 4. Descargue el instalador de SmartSDR desde flexradio.com. Formatos aceptados:
-   - `.msi`: instalador WiX (FlexRadio SmartSDR v4.2 y posterior)
-   - `.exe`: instalador autoextraíble más antiguo
-   - `.ssdr`: archivo de firmware preextraído
+   - `.msi` — instalador WiX (FlexRadio SmartSDR v4.2 y posteriores)
+   - `.exe` — instalador autoextraíble antiguo
+   - `.ssdr` — archivo de firmware preextraído
 5. Haga clic en **Select Installer...**.
-   - Se abre un selector de archivos filtrado para `*.msi`, `*.exe` y `*.ssdr`.
+   - Se abre un selector de archivos filtrado a `*.msi`, `*.exe` y `*.ssdr`.
    - Seleccione el archivo que descargó.
    - AetherSDR lee el archivo, detecta automáticamente su formato a partir de los primeros 8 bytes y extrae la carga útil `.ssdr` si es necesario. Una etiqueta de estado muestra el progreso.
 6. Cuando la preparación se complete y el botón de carga se active, haga clic en **Upload Firmware**.
    - Una barra de progreso rastrea la carga.
-   - No cierre el diálogo ni se desconecte de la radio mientras la carga está en curso.
+   - No cierre el diálogo ni se desconecte del radio mientras la carga está en progreso.
 
-### Mensajes de estado del firmware
+#### Mensajes de estado del firmware
 
 | Mensaje | Significado |
 |---|---|
 | Update available: v*x.y.z* | Existe una versión de firmware más reciente. Descargue el instalador desde flexradio.com, luego haga clic en **Select Installer...**. |
-| Firmware is up to date (v*x.y.z*) | No se necesita ninguna acción. |
+| Firmware is up to date (v*x.y.z*) | No se requiere acción. |
 | Preparing firmware from *filename*... | El preparador está leyendo y extrayendo el archivo seleccionado. |
-| (texto de error en rojo) | La preparación o carga falló. Verifique que el archivo sea un instalador o archivo de firmware SmartSDR válido e intente nuevamente. |
+| (texto de error en rojo) | La preparación o carga falló. Verifique que el archivo sea un instalador o archivo de firmware de SmartSDR válido e intente nuevamente. |
 
-### Notas
+#### Notas
 
-- El botón **Select Installer...** se llamaba **Browse .ssdr...** en versiones anteriores a v0.9.3.
-- La preparación se ejecuta completamente en el cliente; no se requieren herramientas externas para descomprimir los instaladores `.msi` o `.exe`.
+- El botón **Select Installer...** se etiquetaba **Browse .ssdr...** en versiones anteriores a la v0.9.3.
+- La preparación se ejecuta completamente en el cliente; no se requieren herramientas externas para desempaquetar instaladores `.msi` o `.exe`.
 
-## Calibración de frecuencia (pestaña RX)
+## Network (pestaña)
 
-En v0.9.2.1, los controles de calibración de frecuencia de la pestaña RX están disponibles independientemente de si hay un GPSDO instalado. Anteriormente, los controles **Cal Frequency (MHz):**, **Start** y **Freq Offset (ppb):** estaban ocultos cuando se detectaba un GPSDO. Ahora todos los campos de calibración se muestran siempre; una etiqueta de estado en la parte superior del grupo indica si hay un GPSDO presente (texto verde) o no (texto ámbar).
+La pestaña Network muestra la información de red del radio y permite configurar opciones de red avanzadas.
 
-### Fuente de referencia de 10 MHz
+| Control | Descripción | Predeterminado |
+|---|---|---|
+| **IP Address / Mask / MAC Address** | Direcciones de red de solo lectura. | — |
+| **Enforce Private IP Connections:** | Rechaza pares que no sean RFC1918. | — |
+| **Network MTU:** | Establece el tamaño máximo de paquete VITA-49 UDP saliente en bytes. Rango 576–9000 bytes. El valor predeterminado 1450 es seguro para la mayoría de los túneles VPN/SD-WAN. Se almacena en AppSettings como `NetworkMtu`. | 1450 |
+| **DHCP / Static** | Cambia entre modos DHCP e IP estática. | — |
+| **IP Address: / Mask: / Gateway:** | Campos de configuración de IP estática. | — |
+| **Apply** | Envía la configuración de red al radio. | — |
 
-El cuadro combinado **10 MHz Reference Source:** en la pestaña RX selecciona la referencia de oscilador utilizada por la radio. En v0.9.7, el cuadro combinado y su etiqueta de estado de bloqueo se actualizaron con los siguientes cambios de comportamiento:
+### Cambiar la MTU de red
 
-- El cuadro combinado se completa dinámicamente. Solo aparecen las fuentes compatibles con el hardware conectado. Las entradas **TCXO** y **External 10 MHz** se muestran cuando la radio informa que esas fuentes están presentes o cuando el estado del oscilador actual o activo las involucra, incluso si los indicadores de presencia de hardware aún no se han informado. **Auto** está siempre disponible.
-- La etiqueta junto al cuadro combinado ahora muestra la fuente resuelta así como el estado de bloqueo. Cuando **Auto** está seleccionado y la radio ha elegido una fuente específica, la etiqueta muestra `Auto -> <source>`. Cuando se selecciona una fuente específica y la radio está usando una diferente, la etiqueta muestra `<selected> -> <active>`. Cuando la configuración y el estado coinciden, solo se muestra la fuente activa.
-- El estado de bloqueo se agrega: `Locked` (verde) o `Unlocked` (rojo).
-- Si **External 10 MHz** está seleccionado o activo pero no se detecta ninguna referencia externa, la etiqueta agrega `(not detected)`.
-- Mientras la radio aún no ha informado el estado del oscilador, la etiqueta muestra `Waiting for oscillator status` en gris.
-- La etiqueta del cuadro combinado para la fuente externa cambió de **External** a **External 10 MHz**.
+La configuración de MTU de red controla el tamaño máximo de paquete que el radio envía a través de la red. Reducirla evita la fragmentación cuando se conecta a través de una VPN u otro túnel que reduce la MTU de ruta disponible.
 
-#### Opciones del cuadro combinado 10 MHz Reference Source
+1. Abra `Settings > Radio Setup...`.
+2. Haga clic en la pestaña **Network**.
+3. Localice el cuadro de giro **Network MTU:**.
+4. Establezca el valor para que coincida con la MTU de su ruta de red.
+5. Haga clic en **Apply** para enviar la nueva MTU al radio.
+
+## GPS (pestaña)
+
+La pestaña GPS muestra la presencia de GPS y la latitud, longitud, altitud, hora e información de satélites en vivo.
+
+| Control | Descripción |
+|---|---|
+| **GPS status** | Muestra la presencia de GPS y los datos de posición en vivo. |
+
+## TX (pestaña)
+
+La pestaña TX controla los temporizadores de TX, los enclavamientos, la potencia máxima, el modo de sintonía, la visualización en el waterfall, el seguimiento de slice/TX y la configuración de banda de TX.
+
+| Control | Descripción | Predeterminado |
+|---|---|---|
+| **TX Band Settings** | Abre el diálogo dedicado de potencia/sintonía por banda. | — |
+| **Timings (in ms)** | Temporizadores de retención/retardo de TX. | — |
+| **Interlocks - TX REQ: RCA / Accessory** | Habilita las entradas de enclavamiento RCA y Accessory. | — |
+| **Max Power:** | Establece el límite de potencia de TX a nivel de radio (0–100%). | — |
+| **Tune Mode:** | Selecciona cómo se comporta el botón de sintonía. | — |
+| **Show TX in Waterfall:** | Dibuja la señal de TX en el waterfall. | — |
+| **TX Follows Active Slice** | TX sigue la slice activa. Mutuamente excluyente con Active Slice Follows TX. Se deshabilita automáticamente durante la operación de Split. | False |
+| **Active Slice Follows TX** | Cambia la slice activa cuando TX se mueve externamente (p. ej., WSJT-X o CAT). Mutuamente excluyente con TX Follows Active Slice. | False |
+
+## Phone/CW (pestaña)
+
+La pestaña Phone/CW configura los valores predeterminados del micrófono, el manipulador CW y RTTY.
+
+| Control | Descripción | Predeterminado |
+|---|---|---|
+| **Enable/Disable the Level Meter During Receive** | Muestra el medidor de nivel de micrófono incluso en RX. | — |
+| **Iambic:** | Habilita o deshabilita el manipulador iámbico en el radio. | Enabled |
+| **Iambic Mode: A / B** | Selecciona el modo iámbico Curtis A o B tanto para el radio como para el manipulador local por software. Par mutuamente excluyente. | A |
+| **Swap:** | Intercambia dit/dah. | — |
+| **Sideband:** | Selecciona la banda lateral del tono CW (LSB o USB). | — |
+| **CWX:** | Habilita el keying de macros CWX. | — |
+| **Decode:** | Habilita la superposición de decodificación CW en el panadapter. Se almacena en AppSettings como `CwDecodeOverlay`. | True |
+| **RTTY Mark Default:** | Frecuencia predeterminada de marca RTTY. | — |
+
+## RX (pestaña)
+
+La pestaña RX proporciona calibración de desviación de frecuencia GPSDO y selección de fuente de referencia de 10 MHz. Todos los controles de calibración están siempre visibles, independientemente de si hay un GPSDO instalado. Una etiqueta de estado en la parte superior del grupo indica si hay un GPSDO presente (texto verde) o no (texto ámbar).
+
+| Control | Descripción |
+|---|---|
+| **Cal Frequency (MHz):** | Frecuencia utilizada para la calibración manual. |
+| **Start** | Inicia el barrido de calibración de frecuencia. La etiqueta del botón cambia a **Busy** mientras se ejecuta el barrido. |
+| **Freq Offset (ppb):** | Desviación de frecuencia manual en ppb. |
+| **10 MHz Reference Source:** | Selecciona la fuente de referencia del oscilador. Las opciones dependen del hardware instalado. Consulte la tabla a continuación. |
+
+### Fuente de Referencia de 10 MHz
+
+El cuadro combinado **10 MHz Reference Source:** se completa dinámicamente. Solo aparecen las fuentes compatibles con el hardware conectado. Una etiqueta junto al cuadro combinado muestra la fuente resuelta y el estado de bloqueo.
+
+#### Opciones del cuadro combinado
 
 | Opción | Cuándo se muestra |
 |---|---|
 | Auto | Siempre. |
-| TCXO | Cuando se ha recibido el estado del oscilador, o cuando la radio informa `tcxoPresent`, o cuando la configuración actual o activa es `tcxo`. |
-| GPSDO | Cuando la radio informa `gpsdoPresent`, o cuando la configuración actual o activa es `gpsdo`. |
-| External 10 MHz | Cuando se ha recibido el estado del oscilador, o cuando la radio informa `extPresent`, o cuando la configuración actual o activa es `external`. |
+| TCXO | Cuando se ha recibido el estado del oscilador, o cuando el radio informa `tcxoPresent`, o cuando la configuración actual o activa es `tcxo`. |
+| GPSDO | Cuando el radio informa `gpsdoPresent`, o cuando la configuración actual o activa es `gpsdo`. |
+| External 10 MHz | Cuando se ha recibido el estado del oscilador, o cuando el radio informa `extPresent`, o cuando la configuración actual o activa es `external`. |
+
+#### Comportamiento de la etiqueta de estado
+
+- Cuando se selecciona **Auto** y el radio ha elegido una fuente específica, la etiqueta muestra `Auto -> <fuente>`.
+- Cuando se selecciona una fuente específica y el radio está usando una diferente, la etiqueta muestra `<seleccionada> -> <activa>`.
+- Cuando la configuración y el estado coinciden, solo se muestra la fuente activa.
+- El estado de bloqueo se añade: `Locked` (verde) o `Unlocked` (rojo).
+- Si **External 10 MHz** está seleccionado o activo pero no se detecta ninguna referencia externa, la etiqueta añade `(not detected)`.
+- Mientras el radio aún no ha informado el estado del oscilador, la etiqueta muestra `Waiting for oscillator status` en gris.
 
 ### Procedimiento de calibración
 
@@ -108,14 +175,36 @@ El cuadro combinado **10 MHz Reference Source:** en la pestaña RX selecciona la
 4. Haga clic en **Start**.
    - La etiqueta del botón cambia a **Busy** y se deshabilita mientras se ejecuta el barrido de calibración.
    - Una etiqueta de estado junto al botón se actualiza a medida que avanza el barrido.
-   - La radio primero restablece el error de frecuencia a 0 ppb (`radio set freq_error_ppb=0`), luego comienza la secuencia de calibración PLL.
-5. Cuando la calibración se completa, el botón se vuelve a habilitar y la etiqueta de estado muestra el resultado.
-6. Si prefiere establecer el desplazamiento manualmente, ingrese un valor directamente en **Freq Offset (ppb):** sin hacer clic en **Start**.
+   - El radio primero restablece el error de frecuencia a 0 ppb, luego comienza la secuencia de calibración PLL.
+5. Cuando la calibración se completa, el botón se reactiva y la etiqueta de estado muestra el resultado.
+6. Si prefiere establecer la desviación manualmente, ingrese un valor directamente en **Freq Offset (ppb):** sin hacer clic en **Start**.
 
-### Mensajes de estado de calibración
+#### Mensajes de estado de calibración
 
 | Mensaje | Significado |
 |---|---|
-| Starting… | El comando de barrido se ha enviado a la radio. |
-| Busy | La calibración PLL está en curso. |
-| Enter cal frequency | El campo **Cal Frequency (MHz):** estaba
+| Starting… | El comando de barrido se ha enviado al radio. |
+| Busy | La calibración PLL está en progreso. |
+| Enter cal frequency | El campo Cal Frequency estaba vacío cuando se hizo clic en Start. |
+
+## Audio (pestaña)
+
+La pestaña Audio configura las salidas de audio del radio, compresión, dispositivos de PC, refuerzo, búfer, grabación y el contenedor NVIDIA BNR.
+
+| Control | Descripción | Predeterminado |
+|---|---|---|
+| **Line Out:** | Control deslizante de ganancia de salida de línea. | — |
+| **Mute (Line Out)** | Silencia la salida de línea. | — |
+| **Headphone:** | Control deslizante de ganancia de auriculares. | — |
+| **Mute (Headphone)** | Silencia los auriculares. | — |
+| **Front Speaker: / Mute** | Silencia el altavoz frontal (específico del modelo). | — |
+| **Audio Compression (SmartLink): Auto / Uncompressed / Opus** | Selecciona el códec de audio para SmartLink/LAN. Se almacena en AppSettings como `AudioCompression`. | Auto |
+| **Prevent system sleep while connected** | Mantiene el SO despierto mientras el radio está conectado para evitar caídas de flujos de audio/TCP/UDP durante la inactividad. Se almacena en AppSettings como `InhibitSleepWhileConnected`. | False |
+| **PC Audio Devices: Input: / Output:** | Selecciona los dispositivos de audio de entrada/salida del host. | — |
+| **Audio Boost:** | Habilita ganancia adicional en la ruta de audio del cliente. Se almacena en AppSettings como `AudioBoost`. | — |
+| **Audio Buffer:** | Aumenta el búfer de audio en milisegundos para jitter de VPN/SmartLink. Rango 50–1000 ms. Se almacena en AppSettings como `AudioBufferMs`. | 200 |
+| **Recording: Radio Side / Client Side** | Selecciona la grabación del lado del radio o del lado del cliente. Se almacena en AppSettings como `RecordingMode`. | Radio Side |
+| **Save to:** | Carpeta para grabaciones guardadas (solo del lado del cliente). Se almacena en AppSettings como `QsoRecordingDir`. Por defecto en Documentos/AetherSDR/Recordings. | — |
+| **...** | Navega para buscar la carpeta de grabaciones. | — |
+| **Auto-record on TX** | Graba automáticamente mientras transmite. Se almacena en AppSettings como `QsoRecordingAutoRecord`. | False |
+| **Idle timeout:** | Segundos de silencio

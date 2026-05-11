@@ -1,33 +1,48 @@
 # Agregar una memoria en la frecuencia actual
 
-Abra el cuadro de diálogo de Canales de Memoria y guarde la frecuencia activa del VFO como una nueva entrada de canal de memoria. Utilice esta función para marcar una frecuencia a la que desee regresar más tarde.
+Abra el cuadro de diálogo Canales de Memoria y guarde la frecuencia activa del VFO como una nueva entrada de canal de memoria. Úselo para marcar una frecuencia a la que desee regresar más tarde.
 
 ## Antes de comenzar
 
-- Conéctese a una radio FLEX-8600. El cuadro de diálogo de Canales de Memoria requiere una conexión activa con la radio.
+- Conéctese a una radio FLEX-8600. El cuadro de diálogo Canales de Memoria requiere una conexión activa con la radio.
 - Sintonice el slice activo a la frecuencia que desea almacenar.
 
 ## Pasos
 
-1. Haga clic en `Settings > Memory...` para abrir el cuadro de diálogo de Canales de Memoria.
+1. Haga clic en `Settings > Memory...` para abrir el cuadro de diálogo Canales de Memoria.
 2. Haga clic en `Add`.
 
-Aparece una nueva fila en la tabla de memoria con la frecuencia actual del VFO. La memoria se guarda de inmediato en la radio.
+Aparece una nueva fila en la tabla de memoria con la frecuencia actual del VFO. La memoria se guarda inmediatamente en la radio.
 
 3. Para asignar un nombre a la memoria o ajustar otros campos, seleccione la nueva fila y haga clic en `Edit`, luego modifique los campos en línea. Consulte [Editar el nombre, modo o desplazamiento de una memoria en línea](edit-a-memory-s-name-mode-or-offset-inline.md).
 
 ## Qué hace cada control
 
-| Control | Descripción |
-|---|---|
-| `Add` | Crea una nueva fila de memoria en la frecuencia actual del VFO. |
-| `Edit` | Activa el modo de edición en línea en la fila seleccionada para que pueda actualizar campos como Nombre, Grupo, Modo o valores de desplazamiento. |
-| Tabla de memoria | Muestra todas las memorias almacenadas. Las columnas incluyen Grupo, Propietario, Frecuencia, Nombre, Modo, Paso, Dirección de desplazamiento TX FM, Desplazamiento de repetidor, Modo de tono, Valor de tono, Squelch, Nivel de squelch, Filtro RX bajo, Filtro RX alto, Marca RTTY, Desplazamiento RTTY, Desplazamiento DIGL y Desplazamiento DIGU. |
+| Control                     | Descripción                                                                                                                                                                                                                                                                                                          | Notas                                                                                                                                                     |
+|-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Search:`                   | Filtra la tabla de memoria por nombre. Presione Enter para aplicar. Haga clic en el botón de limpiar para restablecer.                                                                                                                                                                                               | Ctrl+F enfoca este campo.                                                                                                                                 |
+| `Profile:`                  | Filtra las memorias por perfil global o de transmisión activo.                                                                                                                                                                                                                                                       | Recopila los nombres de perfil de los perfiles globales y de transmisión de RadioModel.                                                                   |
+| Tabla de memorias           | Muestra y edita filas de memoria. Ordenable haciendo clic en los encabezados de columna (Frecuencia, Nombre, Modo). Columnas: Grupo, Propietario, Frecuencia, Nombre, Modo, Paso, Dirección de desplazamiento FM TX, Desplazamiento de repetidor, Modo de tono, Valor de tono, Silenciador, Nivel de silenciador, Filtro RX bajo, Filtro RX alto, Marca RTTY, Espaciado RTTY, Desplazamiento DIGL, Desplazamiento DIGU. | Selección extendida; modo de edición en línea mediante el botón Editar o F2/Ctrl+E. Supr/Retroceso elimina las filas seleccionadas. Doble clic sintoniza. Ctrl+Shift+A selecciona todo. |
+| `Import...`                 | Importa memorias desde un archivo CSV con un cuadro de diálogo de progreso.                                                                                                                                                                                                                                          | Muestra el progreso de la importación y un resumen con las filas omitidas.                                                                                |
+| `Export...`                 | Exporta las memorias seleccionadas (o filtradas) a CSV.                                                                                                                                                                                                                                                              | Valida el CSV generado antes de guardarlo.                                                                                                                |
+| `Add`                       | Crea una nueva fila de memoria en la frecuencia actual del VFO. No hay selección por letra; siempre usa el slice activo.                                                                                                                                                                                            | Atajo Ctrl+N.                                                                                                                                             |
+| `Edit`                      | Activa el modo de edición en línea en la fila seleccionada para que pueda actualizar campos como Nombre, Grupo, Modo o valores de desplazamiento.                                                                                                                                                                     | F2 o Ctrl+E también activan la edición. Solo se habilita cuando está seleccionada exactamente una memoria.                                                |
+| `Tune`                      | Sintoniza el slice activo a la frecuencia de la memoria seleccionada.                                                                                                                                                                                                                                                | Solo se habilita cuando está seleccionada exactamente una memoria.                                                                                        |
+| `Select All`                | Selecciona todas las filas visibles (respeta los filtros de búsqueda y perfil).                                                                                                                                                                                                                                      | Atajo Ctrl+Shift+A.                                                                                                                                       |
+| `Remove`                    | Elimina las memorias seleccionadas. Muestra un cuadro de diálogo de confirmación. Para la eliminación por lotes, muestra el progreso.                                                                                                                                                                                | Las teclas Supr/Retroceso también activan la eliminación. La etiqueta del botón cambia a "Remove Selected" cuando hay más de una fila seleccionada.       |
+| Barra de título — Memory Channels | Barra de título de degradado sin marco de 18 px con el glifo de agarre a la izquierda y el título del diálogo. Añadido en v26.5.1 (#2509). Usa FramelessWindowTitleBar.                                                                                                                                            | Redimensionamiento en 8 ejes mediante FramelessResizer.                                                                                                   |
+| — (Minimizar)               | Minimiza el diálogo.                                                                                                                                                                                                                                                                                                 |                                                                                                                                                           |
+| □ (Maximizar)               | Maximiza o restaura el diálogo.                                                                                                                                                                                                                                                                                      |                                                                                                                                                           |
+| × (Cerrar)                  | Cierra el diálogo. Presione Escape para limpiar primero el campo de búsqueda, luego cierre.                                                                                                                                                                                                                          |                                                                                                                                                           |
+| Arrastrar para mover        | Haga clic y arrastre la barra de título para mover el diálogo.                                                                                                                                                                                                                                                       | Haga doble clic en la barra de título para alternar entre maximizar y restaurar.                                                                          |
+| Redimensionamiento en 8 ejes | Haga clic y arrastre cualquier borde o esquina del diálogo para redimensionarlo. El cursor cambia para indicar la dirección del redimensionamiento.                                                                                                                                                                 | Zona de impacto de redimensionamiento de 12 px mediante FramelessResizer.                                                                                 |
+| Conteo de selección         | Muestra '<N> of <M> selected'.                                                                                                                                                                                                                                                                                      |                                                                                                                                                           |
 
 ## Consejos
 
-- Al hacer doble clic en una fila de la tabla de memoria, el slice activo se sintoniza directamente a esa memoria.
-- Para encontrar la memoria que acaba de agregar, use el campo `Search:` para filtrar por nombre u ordene la columna de Frecuencia haciendo clic en el encabezado de la columna.
+- Al hacer doble clic en una fila de la tabla de memoria, el slice activo se sintoniza directamente con esa memoria.
+- Para encontrar la memoria que acaba de agregar, use el campo `Search:` para filtrar por nombre, u ordene la columna Frecuencia haciendo clic en el encabezado de la columna.
+- Los filtros de búsqueda y perfil funcionan juntos: seleccionar un perfil filtra la tabla, y escribir en el campo de búsqueda reduce aún más los resultados.
 
 ## Relacionados
 
@@ -35,4 +50,5 @@ Aparece una nueva fila en la tabla de memoria con la frecuencia actual del VFO. 
 - [Sintonizar la radio a una memoria almacenada](tune-the-radio-to-a-stored-memory.md)
 - [Buscar memorias por nombre](search-memories-by-name.md)
 - [Eliminar una o más memorias](delete-one-or-more-memories.md)
+- [Importar y exportar memorias](import-and-export-memories.md)
 - [Resumen de Canales de Memoria](overview.md)
