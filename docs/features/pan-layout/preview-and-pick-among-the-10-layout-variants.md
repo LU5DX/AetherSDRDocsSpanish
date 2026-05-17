@@ -1,30 +1,30 @@
 # Vista previa y selección entre las 10 variantes de diseño
 
-El cuadro de diálogo "Panadapter Layout" muestra vistas previas en miniatura de todas las disposiciones de panadaptadores disponibles, para que pueda compararlas de un vistazo y cambiar con un solo clic. Úselo siempre que desee modificar cuántos panadaptadores están visibles y cómo están organizados.
+El cuadro de diálogo de diseño del panadapter muestra vistas previas en miniatura de todas las disposiciones disponibles para que pueda compararlas de un vistazo y cambiar con un solo clic. Úselo siempre que desee modificar la cantidad de panadapters visibles y su disposición.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio Flex. El cuadro de diálogo requiere una conexión activa con la radio.
-- La cantidad de diseños seleccionables depende de cuántos panadaptadores admita su licencia de radio. Los diseños que requieren más panadaptadores de su máximo se muestran, pero no se pueden seleccionar.
+- AetherSDR debe estar conectado a una radio Flex. El cuadro de diálogo requiere una conexión activa a la radio.
+- La cantidad de diseños seleccionables depende del límite de slices de la radio, no de una cantidad de panadapters basada en licencia. Los diseños que requieren más panadapters de los que el límite de slices permite se muestran, pero no se pueden seleccionar. Si el límite de slices ya está al máximo cuando se solicita un diseño más grande, el cambio de diseño se cancela y aparece una advertencia en la barra de estado.
 
 ## Pasos
 
-1. Haga clic con el botón derecho en cualquier lugar del área de panadaptadores para abrir el menú contextual.
-2. Seleccione la opción de diseño de panadaptadores del menú contextual. Se abre el cuadro de diálogo "Panadapter Layout".
-3. Examine las miniaturas. Cada miniatura muestra una vista previa en miniatura de la disposición con celdas con letras (A, B, C, …) y una etiqueta como `A|B / C (3 pans)`. El diseño actualmente activo está resaltado con un borde azul.
-4. Haga clic en la miniatura del diseño que desee. El cuadro de diálogo se cierra inmediatamente y se aplica el nuevo diseño. La selección se guarda en `PanLayout`.
+1. Haga clic derecho en cualquier lugar del área del panadapter para abrir el menú contextual.
+2. Seleccione la opción de diseño del panadapter en el menú contextual. Se abre el cuadro de diálogo "Panadapter Layout".
+3. Examine las fichas en miniatura. Cada ficha muestra una vista previa en miniatura de la disposición con celdas etiquetadas (A, B, C, …) y una etiqueta como `A|B / C (3 pans)`. El diseño activo actual se resalta con un borde azul.
+4. Haga clic en la ficha en miniatura del diseño que desee. El cuadro de diálogo se cierra inmediatamente y se aplica el nuevo diseño. La selección se guarda en `PanLayout`.
 5. Para dejar el diseño sin cambios, haga clic en "Cancel".
 
-## Descripción de cada control
+## Función de cada control
 
 | Control | Descripción | Valores válidos | Clave persistida |
 |---|---|---|---|
-| Botones de diseño | Miniaturas, una por cada disposición. Haga clic en una miniatura para aplicar ese diseño y cerrar el cuadro de diálogo. Las miniaturas de diseños que exceden la cantidad de panadaptadores de su radio están deshabilitadas. | `1`, `2v`, `2h`, `2h1`, `12h`, `2x2`, `3h2`, `2x3`, `4h3`, `2x4` | `PanLayout` |
+| Botones de diseño | Fichas en miniatura, una por disposición. Haga clic en una ficha para aplicar ese diseño y cerrar el cuadro de diálogo. Las fichas de diseños que requieren más panadapters de los que el límite de slices de la radio permite se muestran deshabilitadas con un cursor de prohibición. | `1`, `2v`, `2h`, `2h1`, `12h`, `2x2`, `3h2`, `2x3`, `4h3`, `2x4` | `PanLayout` |
 | Cancel | Cierra el cuadro de diálogo sin cambiar el diseño actual. | — | — |
 
-Los 10 diseños y sus cantidades de panadaptadores son:
+Los 10 diseños y su cantidad de panadapters son:
 
-| ID de diseño | Etiqueta | Pan. |
+| ID de diseño | Etiqueta | Pans |
 |---|---|---|
 | `1` | Single | 1 |
 | `2v` | A / B | 2 |
@@ -37,10 +37,14 @@ Los 10 diseños y sus cantidades de panadaptadores son:
 | `4h3` | A\|B\|C\|D / E\|F\|G | 7 |
 | `2x4` | A\|B / C\|D / E\|F / G\|H | 8 |
 
+## Comportamiento cuando la capacidad de slices está llena
+
+Si intenta aplicar un diseño que requiere más panadapters de los que el límite de slices de la radio permite, o si el límite de slices ya está al máximo cuando se solicita un diseño más grande, el cambio de diseño se cancela. Aparece un mensaje en la barra de estado: "Slice capacity is full; cannot add another panadapter (<model> supports <N> slices)". El diseño activo actual permanece sin cambios.
+
 ## Consejos
 
-- La miniatura del diseño actualmente activo tiene un resalte distintivo para que pueda confirmar su punto de partida antes de realizar un cambio.
-- Las miniaturas deshabilitadas muestran una imagen atenuada y un cursor de prohibición. Para desbloquearlas, necesita una licencia de radio que admita una mayor cantidad de panadaptadores.
+- La ficha del diseño activo actual tiene un resalte distintivo para que pueda confirmar su punto de partida antes de realizar un cambio.
+- Las fichas deshabilitadas muestran una miniatura atenuada y un cursor de prohibición. Para desbloquearlas, necesita una radio con un límite de slices más alto.
 
 ## Relacionados
 

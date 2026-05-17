@@ -1,36 +1,62 @@
-# Configurar la ganancia de TX de DAX
+# Applet de Audio DAX (v26.5.2.1)
 
-Ajuste el control deslizante de ganancia de TX de DAX para controlar cuánto audio de su slice de transmisión se envía a través del flujo de TX de DAX al software conectado.
+El applet de Audio DAX proporciona un puente de audio RX por canal y un flujo de audio TX único para operación en modos digitales. Muestra medidores de audio en vivo y controles deslizantes de ganancia para los canales DAX 1–4 y el flujo TX, junto con indicadores de asignación de slice.
 
-## Antes de comenzar
+## Habilitación del Audio DAX
 
-- La radio debe estar conectada. El applet DAX Audio requiere una conexión de radio activa.
-- DAX debe estar habilitado. Haga clic en `Enable` en el applet DAX Audio si aún no está activo.
+1. Haga clic en el botón de bandeja `DAX` en la barra lateral derecha para abrir el applet de Audio DAX.
+2. Haga clic en `Enable` para iniciar el puente de audio DAX. La configuración persiste como `AutoStartDAX`.
+3. Una vez habilitado, todos los flujos DAX RX y TX se activan.
 
-## Pasos
+## Ajuste de ganancia RX DAX por canal
 
-1. Haga clic en el botón de la bandeja `DAX` en la barra lateral derecha para abrir el applet DAX Audio.
-2. Localice la fila `TX:` en la parte inferior del applet. El control deslizante a la derecha del indicador de estado de TX es el control de ganancia de TX.
-3. Arrastre el control del deslizante `TX gain+meter` hacia la izquierda o derecha para disminuir o aumentar la ganancia de TX. El valor se guarda inmediatamente y persiste como `DaxTxGain`.
+Ajuste la ganancia para cada canal de recepción DAX (1–4) para controlar el nivel de audio enviado al software conectado.
+
+### Pasos
+
+1. En el applet de Audio DAX, localice la fila del canal deseado (`DAX 1` hasta `DAX 4`).
+2. Arrastre el control deslizante combinado de medidor/ganancia hacia la izquierda o derecha para disminuir o aumentar la ganancia RX.
+3. El valor se guarda inmediatamente y persiste como `DaxRxGain1` hasta `DaxRxGain4`.
+
+## Ajuste de ganancia TX DAX
+
+Ajuste el control deslizante de ganancia TX DAX para controlar cuánto audio de su slice de transmisión se envía a través del flujo DAX TX al software conectado.
+
+### Pasos
+
+1. En el applet de Audio DAX, localice la fila `TX:` en la parte inferior.
+2. Arrastre el control deslizante `TX gain+meter` hacia la izquierda o derecha para disminuir o aumentar la ganancia TX.
+3. El valor se guarda inmediatamente y persiste como `DaxTxGain`.
 
 ## Función de cada control
 
-| Control | Valor predeterminado | Rango | Clave persistida |
+| Control | Predeterminado | Rango | Clave persistida |
 |---|---|---|---|
-| Deslizante `TX gain+meter` | 0.5 | 0.0 – 1.0 | `DaxTxGain` |
-| Indicador de estado TX | — | — o Slice A–H | *(ninguna)* |
+| Botón `Enable` | desactivado | activado/desactivado | `AutoStartDAX` |
+| Control deslizante `DAX 1 gain+meter` | 0.5 | 0.0 – 1.0 | `DaxRxGain1` |
+| Control deslizante `DAX 2 gain+meter` | 0.5 | 0.0 – 1.0 | `DaxRxGain2` |
+| Control deslizante `DAX 3 gain+meter` | 0.5 | 0.0 – 1.0 | `DaxRxGain3` |
+| Control deslizante `DAX 4 gain+meter` | 0.5 | 0.0 – 1.0 | `DaxRxGain4` |
+| Control deslizante `TX gain+meter` | 0.5 | 0.0 – 1.0 | `DaxTxGain` |
 
-El indicador de estado TX muestra qué slice posee actualmente los privilegios de TX. Se actualiza automáticamente a medida que cambia el slice de TX. La barra de medidor detrás del deslizante muestra el nivel de audio de TX en vivo escalado por la configuración de ganancia actual.
+## Indicadores de asignación de slice
+
+| Indicador | Estados | Significado |
+|---|---|---|
+| `DAX 1..4 assignment` | — o Slice A–H | El slice actualmente asignado a este canal DAX |
+| `TX assignment` | — o Slice A–H | El slice que actualmente tiene privilegios TX (impulsa DAX TX) |
+
+Las letras de slice en los indicadores de asignación ahora se muestran en formato de texto enriquecido, lo que proporciona una claridad visual mejorada cuando las etiquetas de slice contienen entidades HTML (problema #2606).
 
 ## Consejos
 
-- La barra del medidor refleja el nivel posterior al fader: muestra el nivel de salida real después de aplicar su configuración de ganancia. Mover el deslizante proporciona retroalimentación visual inmediata incluso antes de transmitir.
-- Una ganancia de 0.5 es el punto de partida predeterminado. Si su software de modo digital reporta audio sobremodulado o débil, ajuste desde allí en pequeños incrementos.
+- Las barras del medidor reflejan el nivel posterior al fader: muestran el nivel de salida real después de aplicar su ajuste de ganancia. Mover un control deslizante proporciona retroalimentación visual inmediata incluso antes de transmitir.
+- Una ganancia de 0.5 es el punto de partida predeterminado. Si su software de modo digital reporta audio sobremodulado o débil, ajuste desde allí en incrementos pequeños.
+- En Linux, la latencia RX de DAX se ha reducido de aproximadamente 400 ms a aproximadamente 200 ms utilizando una ruta de fuente `pw_stream` nativa de PipeWire, reemplazando el cliente PulseAudio anterior.
 
-## Relacionados
+## Relacionado
 
-- [DAX Audio overview](overview.md)
-- [Enable DAX to route slice audio to WSJT-X / FLDigi / other digital software](enable-dax-to-route-slice-audio-to-wsjt-x-fldigi-other-digital-software.md)
-- [Set DAX RX gain per channel](set-dax-rx-gain-per-channel.md)
-- [Identify which slice is the TX slice](identify-which-slice-is-the-tx-slice.md)
-- [Setting up digital modes (FT8, WSJT-X, fldigi)](../../operating/digital-modes/digital-modes-setup.md)
+- [Descripción general de Audio DAX](overview.md)
+- [Habilitar DAX para enrutar audio de slice a WSJT-X / FLDigi / otro software digital](enable-dax-to-route-slice-audio-to-wsjt-x-fldigi-other-digital-software.md)
+- [Identificar qué slice es el slice TX](identify-which-slice-is-the-tx-slice.md)
+- [Configuración de modos digitales (FT8, WSJT-X, fldigi)](../../operating/digital-modes/digital-modes-setup.md)

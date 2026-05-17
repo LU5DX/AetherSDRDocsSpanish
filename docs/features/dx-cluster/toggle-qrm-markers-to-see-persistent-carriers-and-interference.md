@@ -1,28 +1,29 @@
-# Activar marcadores de QRM para ver portadoras persistentes e interferencias
+# Alternar los marcadores QRM para ver portadoras persistentes e interferencias
 
-Active los marcadores de QRM para resaltar portadoras estrechas persistentes e interferencias de banda ancha en el panadapter, lo que facilita evitar o investigar señales que pueden ser fuentes de ruido constantes.
+Active los marcadores QRM para resaltar portadoras estrechas persistentes e interferencias de banda ancha en el panadaptador, lo que facilita evitar o investigar señales que pueden ser fuentes de ruido constantes.
 
 ## Pasos
 
 1. Abra **Settings > SpotHub...**.
 2. Haga clic en la pestaña **Display**.
-3. En la fila **QRM (Signal History)**, haga clic en el botón de alternancia para activarlo (predeterminado: Disabled). Aparecen marcadores rojos en el panadapter para las señales clasificadas como QRM.
+3. En la fila **QRM (Signal History)**, haga clic en el botón de activación para habilitarlo (valor predeterminado: Disabled). Aparecen marcadores rojos en el panadaptador para las señales clasificadas como QRM.
 
-Para desactivar los marcadores de QRM, haga clic nuevamente en el botón de alternancia.
+Para deshabilitar los marcadores QRM, haga clic nuevamente en el botón de activación.
 
 ## Qué hace cada control
 
-| Control | Clave de configuración | Predeterminado | Comportamiento |
-|---------|------------------------|----------------|----------------|
-| **QRM (Signal History)** | `SHistoryQrmEnabled` | Disabled | Alternancia maestra para los marcadores rojos de QRM en el panadapter. |
-| **QRM Gate** (control deslizante) | `SHistoryQrmGateS` | 6 s | Cuánto tiempo debe persistir una portadora estrecha o una señal de banda ancha antes de ser clasificada como QRM. Rango: 3–30 s. |
-| **Edge Threshold** (control deslizante) | `SHistorySoftEdgeDb` | 3.0 dB | Umbral por encima del piso de ruido para el recorrido del borde de pendiente que refina el borde del lado de la portadora en S-History. Rango: 1.0–10.0 dB. Un valor más bajo = más cercano a la portadora pero más sensible al ruido. |
-| **Muestra de color QRM** | `SHistoryColorQrm` | #FF0000 | Abre un selector de color para cambiar el color del marcador de QRM. |
+| Control | Clave de configuración | Valor predeterminado | Comportamiento |
+|---------|------------------------|----------------------|----------------|
+| **QRM (Signal History)** | `SHistoryQrmEnabled` | Disabled | Activación principal para los marcadores QRM rojos en el panadaptador. |
+| **QRM Gate** (control deslizante) | `SHistoryQrmGateS` | 6 s | Tiempo que una portadora estrecha o señal de banda ancha debe persistir antes de clasificarse como QRM. Rango: 3–30 s. Haga doble clic en la perilla del control deslizante para restablecer el valor predeterminado de 6 s. |
+| **Edge Threshold** (control deslizante) | `SHistorySoftEdgeDb` | 3.0 dB | Umbral sobre el piso de ruido para la caminata de borde de pendiente que refina el borde lateral de la portadora del historial de señal. Rango: 1.0–10.0 dB. Valores más bajos = más cerca de la portadora pero más sensibles al ruido. Haga doble clic en la perilla del control deslizante para restablecer el valor predeterminado de 3.0 dB. |
+| **Muestra de color QRM** | `SHistoryColorQrm` | #FF0000 | Abre un selector de color para cambiar el color del marcador QRM. |
 
 ## Consejos
 
-- Los marcadores de QRM son independientes de los marcadores de voz de Signal History (la alternancia `SHistoryMarkersEnabled`). Puede activar uno, ambos o ninguno.
-- Use el control deslizante **QRM Gate** para ignorar transmisiones breves y marcar únicamente las señales que persisten lo suficiente como para ser interferencia.
+- Los marcadores QRM son independientes de los marcadores de voz de Signal History (la activación `SHistoryMarkersEnabled`). Puede habilitar uno, ambos o ninguno.
+- Use el control deslizante **QRM Gate** para ignorar transmisiones breves y marcar solo las señales que persisten lo suficiente como para ser interferencia.
+- Haga doble clic en cualquier perilla de control deslizante en la sección Signal History para restablecerla instantáneamente a su valor predeterminado de fábrica.
 
 ## Relacionado
 
