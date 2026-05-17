@@ -1,30 +1,32 @@
 # Ajustar la ganancia RX de TCI por canal
 
-El applet del Servidor TCI proporciona un control deslizante de ganancia para cada uno de sus cuatro canales RX. Ajustarlos le permite igualar el nivel de audio que los clientes TCI (como Log4OM o las herramientas SunSDR) reciben de cada slice.
+El applet del Servidor TCI proporciona un control deslizante de ganancia para cada uno de sus cuatro canales RX. Ajustarlos le permite igualar el nivel de audio que los clientes TCI (como Log4OM o herramientas SunSDR) reciben de cada slice.
 
 ## Antes de comenzar
 
 - El radio debe estar conectado. El applet TCI requiere una conexión activa con el radio.
-- El applet del Servidor TCI debe estar visible. Si el panel del applet no se muestra, haga clic en el botón de bandeja **TCI** en la barra lateral derecha para mostrarlo.
+- El applet del Servidor TCI debe estar visible. Si el panel del applet no se muestra, haga clic en el botón **TCI** de la bandeja en la barra lateral derecha para mostrarlo.
 
 ## Pasos
 
-1. Haga clic en el botón de bandeja **TCI** en la barra lateral derecha para abrir el applet del Servidor TCI.
-2. Localice la fila **RX1**, **RX2**, **RX3** o **RX4** para el canal que desea ajustar. La etiqueta de asignación de slice junto al nombre del canal (por ejemplo, `Slice A`) muestra qué slice está manejando ese canal. Un `—` significa que no hay ningún slice asignado actualmente.
-3. Arrastre el medidor/control deslizante de esa fila hacia la izquierda o la derecha para ajustar la ganancia. El valor se guarda inmediatamente.
-4. Repita el proceso para cualquier otro canal RX que desee ajustar.
+1. Haga clic en el botón **TCI** de la bandeja en la barra lateral derecha para abrir el applet del Servidor TCI.
+2. Localice la fila **RX1**, **RX2**, **RX3** o **RX4** correspondiente al canal que desea ajustar. La etiqueta de asignación de slice junto al nombre del canal (por ejemplo, `Slice A`) indica qué slice está manejando ese canal. Un `—` significa que no hay ningún slice asignado actualmente.
+3. Arrastre el medidor/deslizante de esa fila hacia la izquierda o derecha para ajustar la ganancia. El valor se guarda inmediatamente.
+4. Repita para cualquier otro canal RX que desee ajustar.
 
-## Qué hace cada control
+## Función de cada control
 
-| Control                          | Valor predeterminado | Rango válido     |
-|----------------------------------|----------------------|------------------|
-| Medidor/deslizante de ganancia RX1 | 0.5                  | 0.0 – 1.0        |
-| Medidor/deslizante de ganancia RX2 | 0.5                  | 0.0 – 1.0        |
-| Medidor/deslizante de ganancia RX3 | 0.5                  | 0.0 – 1.0        |
-| Medidor/deslizante de ganancia RX4 | 0.5                  | 0.0 – 1.0        |
-| Etiqueta de asignación de slice  | —                    | — o `Slice <letra>` |
+| Control                          | Predet. | Rango válido       |
+|----------------------------------|---------|--------------------|
+| Medidor/deslizante de ganancia RX1 | 0.5     | 0.0 – 1.0         |
+| Medidor/deslizante de ganancia RX2 | 0.5     | 0.0 – 1.0         |
+| Medidor/deslizante de ganancia RX3 | 0.5     | 0.0 – 1.0         |
+| Medidor/deslizante de ganancia RX4 | 0.5     | 0.0 – 1.0         |
+| Etiqueta de asignación de slice   | —       | — o `Slice <letra>` |
 
-Cada medidor/deslizante también muestra un nivel RX en vivo utilizando suavizado exponencial — ataque rápido, decaimiento lento —, de modo que la barra refleje la actividad de la señal en ese canal mientras que la posición de arrastre establece la ganancia.
+Cada medidor/deslizante también muestra un nivel RX en vivo utilizando suavizado exponencial — ataque rápido, caída lenta — de modo que la barra refleja la actividad de la señal en ese canal mientras que la posición del deslizante establece la ganancia.
+
+Las etiquetas de asignación de slice ahora muestran las letras de los slices con formato de texto enriquecido (#2606). Esto permite que los indicadores externos de slice (por ejemplo, un marcador colorido o estilizado en la letra del slice) se muestren correctamente en la etiqueta de estado. El texto de la etiqueta se genera usando `SliceLabel::richText()` en lugar de una letra plana, asegurando que cualquier formato HTML incrustado en la representación del slice se conserve.
 
 ## Consejos
 

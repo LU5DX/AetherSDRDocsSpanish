@@ -1,95 +1,245 @@
-# Habilitar el WebSocket del Reporteador FreeDV QSO
+# SpotHub (anteriormente Diálogo del DX Cluster)
 
-Conecte AetherSDR al reporteador FreeDV QSO en `qso.freedv.org` para recibir puntos de actividad FreeDV en su panadaptador.
+Centro central para conectarse a fuentes de spots DX — DX cluster, Reverse Beacon Network, WSJT-X, SpotCollector, POTA y FreeDV — y configurar cómo se muestran los spots en el panadapter.
 
 ## Antes de comenzar
 
-- La fuente WebSocket de FreeDV está disponible solo en compilaciones de AetherSDR compiladas con soporte WebSocket (`HAVE_WEBSOCKETS`). Si la pestaña FreeDV no aparece en SpotHub, su compilación no la incluye.
-- Los puntos aparecen en el panadaptador solo cuando la superposición maestra de puntos está habilitada. Consulte [Ajustar densidad, posición, tamaño de fuente y duración de los puntos](tune-spot-density-position-font-size-and-lifetime.md) si los puntos no son visibles después de conectarse.
+- Las fuentes de spots que usan WebSocket (FreeDV) están disponibles solo en compilaciones compiladas con soporte WebSocket (`HAVE_WEBSOCKETS`). Si la pestaña FreeDV está ausente, su compilación no la incluye.
+- Los spots aparecen en el panadapter solo cuando la superposición maestra de spots está habilitada (vea la pestaña **Display** > conmutador **Spots:**). Si los spots no son visibles después de conectarse, verifique que ese conmutador esté activado.
+- El diálogo recuerda la geometría de su ventana entre sesiones (guardada en `DxClusterDialogGeometry`).
 
-## Pasos
+## Abriendo SpotHub
 
-1. Abra `Settings > SpotHub...`.
-2. Haga clic en la pestaña **FreeDV**.
-3. Confirme que el indicador **Server:** muestre `qso.freedv.org (WebSocket)`. Este punto final es fijo y no se puede cambiar.
-4. Haga clic en **Start**. El indicador de estado cambia a **Connected** cuando el protocolo de enlace WebSocket se completa con éxito.
-5. Opcionalmente, haga clic en **Auto-start on startup** para que la conexión se establezca automáticamente cada vez que se inicie AetherSDR.
-6. Opcionalmente, haga clic en **Spot Color:** para abrir el selector de color y asignar un color distintivo a los puntos FreeDV en el panadaptador. El color elegido se guarda en `FreeDvSpotColor`.
+1. Abra **Settings > SpotHub...**.
 
-## Reportar su estación al mapa del Reporteador FreeDV
+El diálogo se abre como una ventana sin marco y redimensionable. Arrastre cualquier borde para cambiar el tamaño.
 
-El grupo **Station Reporting** en la parte inferior de la pestaña **FreeDV** le permite transmitir su actividad al mapa público del Reporteador FreeDV en `qso.freedv.org` siempre que el módem RADE esté activo.
+## Resumen de pestañas
 
-### Requisitos antes de habilitar
+SpotHub tiene ocho pestañas, cada una correspondiente a una fuente de spots o una configuración de visualización:
 
-- Debe estar presente un indicativo válido en el campo **Callsign:** (o provenir de la radio).
-- Debe estar presente un cuadrado de cuadrícula Maidenhead válido en el campo **Grid Square:** (o provenir del GPS de la radio).
+- **Cluster** — Conexión telnet de DX cluster, consola y color de spot
+- **RBN** — Fuente telnet de Reverse Beacon Network con limitación de tasa
+- **WSJT-X** — Escucha UDP de WSJT-X con filtros y asignación de colores
+- **SpotCollector** — Escucha UDP para transmisiones de Ham Radio Deluxe SpotCollector
+- **POTA** — Consulta `api.pota.app` para activaciones actuales
+- **FreeDV** — Alimentación WebSocket de spots del reportero FreeDV QSO
+- **Spot List** — Tabla unificada y buscable de todos los spots activos
+- **Display** — Visualización de spots en el panadapter, Historial de Señales y coloración DXCC
 
-Si alguno de estos valores está en blanco cuando marca **Enable FreeDV Reporter reporting when RADE is active**, AetherSDR muestra una advertencia y deja la casilla sin marcar. Esto evita que se transmitan valores en blanco o provisionales al mapa público compartido.
+## Pestaña Cluster
 
-### Pasos de configuración
+### Configuración de conexión
+
+| Control | Tipo | Clave de configuración | Comportamiento |
+|---------|------|-------------|----------|
+| **Server:** | Campo de texto | `ClusterHost` | Nombre de host del DX cluster al que conectarse. |
+| **Port:** | Spinbox (1-65535) | `ClusterPort` | Puerto Telnet del DX cluster. |
+| **Callsign:** | Campo de texto | `ClusterCallsign` | Indicativo de inicio de sesión enviado al cluster. |
+
+### Controles de conexión
+
+1. Complete los ajustes de conexión anteriores.
+2. Haga clic en **Connect** para abrir la sesión telnet. La etiqueta del botón cambia a **Disconnect** mientras está conectado; haga clic de nuevo para cerrarla.
+3. Haga clic en **Auto-connect on startup** para que AetherSDR se conecte al iniciar. Configuración: `ClusterAutoConnect`.
+
+### Consola y comandos del cluster
+
+- **Cluster Console** — Campo de texto de solo lectura que muestra el tráfico telnet sin procesar del cluster.
+- Para enviar un comando, escriba en el campo de texto debajo de la consola y haga clic en **Send**.
+- Haga clic en **Startup Commands…** para abrir un editor de comandos que se envían automáticamente después de cada inicio de sesión. Ingrese un comando por línea — por ejemplo:
+  ```
+  SET/NAME YOUR_NAME
+  SET/QTH YOUR_QTH
+  ACCEPT/SPOT
+  ```
+  Los comandos se guardan en `DxClusterStartupCommands` y se reproducen cada vez que la conexión al cluster se restablece (no solo en el inicio de sesión inicial). Nuevo en v26.5.2.1.
+
+### Color del spot
+
+- **Spot Color:** — Abre un selector de color para los spots del cluster. Configuración: `ClusterSpotColor`.
+
+## Pestaña RBN
+
+### Configuración de conexión
+
+| Control | Tipo | Clave de configuración | Comportamiento |
+|---------|------|-------------|----------|
+| **Server:** | Campo de texto | `RbnHost` | Nombre de host telnet del RBN. |
+| **Port:** | Spinbox (1-65535) | `RbnPort` | Puerto telnet del RBN. |
+| **Callsign:** | Campo de texto | `RbnCallsign` | Indicativo de inicio de sesión para RBN. |
+| **Rate Limit:** | Spinbox | `RbnRateLimit` | Limita los spots de RBN por segundo. |
+
+### Controles de conexión
+
+1. Complete los ajustes de conexión anteriores.
+2. Haga clic en **Connect** para abrir la sesión telnet. La etiqueta del botón cambia a **Disconnect** mientras está conectado; haga clic de nuevo para cerrarla.
+3. Haga clic en **Auto-connect on startup** para que AetherSDR se conecte al iniciar. Configuración: `RbnAutoConnect`.
+
+### Consola y comandos del RBN
+
+- **RBN Console** — Campo de texto de solo lectura que muestra el tráfico sin procesar del RBN.
+- Para enviar un comando, escriba en el campo de texto debajo de la consola y haga clic en **Send**.
+- Haga clic en **Startup Commands…** para abrir un editor de comandos que se envían automáticamente después de cada inicio de sesión. Ingrese un comando por línea. Los comandos se guardan en `RbnStartupCommands` y se reproducen cada vez que la conexión al RBN se restablece. Nuevo en v26.5.2.1.
+
+### Color del spot
+
+- **Spot Color:** — Abre un selector de color para los spots del RBN. Configuración: `RbnSpotColor`.
+
+## Pestaña WSJT-X
+
+### Configuración del escucha
+
+| Control | Tipo | Clave de configuración | Comportamiento |
+|---------|------|-------------|----------|
+| **Address:** | Campo de texto | `WsjtxAddress` | Dirección de enlace UDP para mensajes de WSJT-X. |
+| **Port:** | Spinbox (1-65535) | `WsjtxPort` | Puerto UDP para WSJT-X. |
+
+### Controles de conexión
+
+1. Establezca la dirección y el puerto para que coincidan con la configuración de Reportes de WSJT-X.
+2. Haga clic en **Start** para comenzar a escuchar transmisiones UDP de WSJT-X. La etiqueta del botón cambia a **Stop** mientras escucha.
+3. Haga clic en **Auto-start on startup** para que AetherSDR comience a escuchar al iniciar. Configuración: `WsjtxAutoStart`.
+
+### Filtros
+
+Marque cualquiera de las siguientes casillas para restringir qué decodificaciones de WSJT-X aparecen:
+
+| Control | Clave de configuración | Comportamiento |
+|---------|-------------|----------|
+| **CQ** | `WsjtxFilterCQ` | Muestra solo llamadas CQ. |
+| **CQ POTA** | `WsjtxFilterPOTA` | Muestra solo llamadas CQ POTA. |
+| **Calling Me** | `WsjtxFilterCallingMe` | Muestra solo decodificaciones dirigidas a su indicativo. |
+
+### Configuración de colores
+
+Haga clic en cada muestra de color para abrir un selector de color para esa categoría:
+
+| Control | Clave de configuración | Comportamiento |
+|---------|-------------|----------|
+| **CQ color** | `WsjtxColorCQ` | Color para spots CQ. |
+| **POTA color** | `WsjtxColorPOTA` | Color para spots CQ POTA. |
+| **Calling Me color** | `WsjtxColorCallingMe` | Color para decodificaciones dirigidas a su indicativo. |
+| **Default color** | `WsjtxColorDefault` | Color para todos los demás spots de WSJT-X. |
+
+### Consola de decodificaciones y duración del spot
+
+- **WSJT-X Decodes** — Campo de texto de solo lectura que muestra las transmisiones decodificadas.
+- **Spot Life:** — Spinbox que controla cuántos segundos permanecen los spots de WSJT-X en el panadapter. Configuración: `WsjtxSpotLife`.
+
+## Pestaña SpotCollector
+
+### Configuración del escucha
+
+| Control | Tipo | Clave de configuración | Comportamiento |
+|---------|------|-------------|----------|
+| **UDP Port:** | Spinbox (1-65535) | `SpotCollectorPort` | Puerto UDP en el que SpotCollector transmite. |
+
+### Controles de conexión
+
+1. Establezca el puerto para que coincida con su puerto de transmisión de SpotCollector.
+2. Haga clic en **Start** para comenzar a escuchar. La etiqueta del botón cambia a **Stop** mientras escucha.
+3. Haga clic en **Auto-start on startup** para que AetherSDR comience a escuchar al iniciar. Configuración: `SpotCollectorAutoStart`.
+
+### Consola de spots
+
+- **SpotCollector Spots** — Campo de texto de solo lectura que muestra los spots recibidos.
+
+## Pestaña POTA
+
+### Configuración de conexión
+
+| Control | Tipo | Clave de configuración | Comportamiento |
+|---------|------|-------------|----------|
+| **Server:** | Indicador | Ninguna | Punto final fijo: `api.pota.app (HTTP polling)`. |
+| **Poll Interval:** | Spinbox | `PotaPollInterval` | Segundos entre consultas de POTA. |
+
+### Controles de conexión
+
+1. Haga clic en **Start** para comenzar a consultar activaciones actuales. La etiqueta del botón cambia a **Stop** mientras consulta.
+2. Haga clic en **Auto-start on startup** para que AetherSDR comience a consultar al iniciar. Configuración: `PotaAutoStart`.
+
+### Consola de activaciones y color
+
+- **POTA Activations** — Campo de texto de solo lectura que muestra la alimentación de activaciones.
+- **Spot Color:** — Abre un selector de color para los spots de POTA. Configuración: `PotaSpotColor`.
+
+## Pestaña FreeDV
+
+### Configuración de conexión
+
+| Control | Tipo | Clave de configuración | Comportamiento |
+|---------|------|-------------|----------|
+| **Server:** | Indicador | Ninguna | Punto final fijo: `qso.freedv.org (WebSocket)`. |
+
+### Controles de conexión
+
+1. Haga clic en **Start** para conectarse al WebSocket de FreeDV. El indicador de estado cambia a **Connected** cuando el protocolo de enlace WebSocket tiene éxito.
+2. Haga clic en **Auto-start on startup** para que AetherSDR se conecte al iniciar. Configuración: `FreeDvAutoStart`.
+
+### Consola de spots y color
+
+- **FreeDV Spots** — Campo de texto de solo lectura que muestra la actividad entrante de FreeDV.
+- **Spot Color:** — Abre un selector de color para los spots de FreeDV. Configuración: `FreeDvSpotColor`.
+
+### Reporte de Estación
+
+El grupo **Station Reporting** en la parte inferior de la pestaña FreeDV le permite transmitir su actividad al mapa público del Reportero FreeDV en `qso.freedv.org` siempre que el módem RADE esté activo.
+
+#### Requisitos antes de habilitar
+
+- Debe estar presente un indicativo válido en el campo **Callsign:** (u obtenido de la radio).
+- Debe estar presente un cuadrado de cuadrícula Maidenhead válido en el campo **Grid Square:** (u obtenido del GPS de la radio).
+
+Si alguno de los valores está en blanco cuando marca **Enable FreeDV Reporter reporting when RADE is active**, AetherSDR muestra una advertencia y deja la casilla sin marcar. Esto evita que se transmitan valores en blanco o provisionales al mapa público compartido.
+
+#### Pasos de configuración
 
 1. En el grupo **Station Reporting**, revise el campo **Callsign:**.
-   - Si **Use radio** está marcado (opción predeterminada), el campo se completa previamente con el indicativo configurado en su radio y es de solo lectura. Los cambios al indicativo de la radio en Radio Setup se reflejan automáticamente.
-   - Desmarque **Use radio** para introducir un indicativo manualmente. El valor introducido se guarda en `FreeDvMyCallsign` y se convierte a mayúsculas al guardarlo.
+   - Si **Use radio** está marcado (valor predeterminado), el campo se rellena previamente con el indicativo configurado en su radio y es de solo lectura. Los cambios al indicativo de la radio en Configuración de Radio se reflejan automáticamente.
+   - Desmarque **Use radio** para ingresar un indicativo manualmente. El valor ingresado se guarda en `FreeDvMyCallsign` y se convierte a mayúsculas al guardar.
 2. Revise el campo **Grid Square:**.
-   - Si su radio tiene hardware GPS y **Use GPS** está marcado (opción predeterminada en modelos con capacidad GPS), el campo se completa previamente con la fijación GPS de la radio y es de solo lectura. La casilla **Use GPS** está oculta en modelos de radio sin hardware GPS.
-   - Desmarque **Use GPS** (o si la casilla no está presente) para introducir un cuadrado de cuadrícula manualmente. El valor se guarda en `FreeDvMyGrid` y se convierte a mayúsculas al guardarlo.
-3. Opcionalmente, rellene **Station Msg:** con una nota breve de texto libre. Este mensaje aparece junto a su indicativo en el mapa público del Reporteador FreeDV y se guarda en `FreeDvMyMessage`.
+   - Si su radio tiene hardware GPS y **Use GPS** está marcado (valor predeterminado en modelos con capacidad GPS), el campo se rellena previamente desde la fijación GPS de la radio y es de solo lectura. La casilla **Use GPS** está oculta en modelos de radio sin hardware GPS.
+   - Desmarque **Use GPS** (o si la casilla no está presente) para ingresar un cuadrado de cuadrícula manualmente. El valor se guarda en `FreeDvMyGrid` y se convierte a mayúsculas al guardar.
+3. Opcionalmente, complete **Station Msg:** con una breve nota de texto libre. Este mensaje aparece junto a su indicativo en el mapa público del Reportero FreeDV y se guarda en `FreeDvMyMessage`.
 4. Marque **Enable FreeDV Reporter reporting when RADE is active**. AetherSDR valida el indicativo y la cuadrícula antes de aceptar el cambio, luego guarda `FreeDvAutoReport` = `True` y emite la señal de reporte habilitado.
 
-## Qué hace cada control
+#### Controles de Reporte de Estación
 
-| Control                                                       | Tipo                                                                                                                      | Comportamiento                                                                                                                                                                                                                            |
-|---------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Server:**                                                   | Indicador                                                                                                                 | Punto final fijo: `qso.freedv.org (WebSocket)`. Solo lectura.                                                                                                                                                                             |
-| **Start / Stop**                                              | Botón pulsador                                                                                                            | Conecta o desconecta el WebSocket FreeDV.                                                                                                                                                                                                 |
-| **Auto-start on startup**                                     | Botón de alternancia                                                                                                      | Inicia la conexión FreeDV automáticamente al iniciar. Se guarda en `FreeDvAutoStart`.                                                                                                                                                     |
-| **FreeDV Spots**                                              | Campo de texto                                                                                                            | Consola de solo lectura que muestra la actividad FreeDV entrante.                                                                                                                                                                          |
-| **Spot Color:**                                               | Botón pulsador                                                                                                            | Abre un selector de color para los puntos FreeDV en el panadaptador. Se guarda en `FreeDvSpotColor`.                                                                                                                                      |
-| **Enable FreeDV Reporter reporting when RADE is active**      | Casilla de verificación                                                                                                   | Habilita el reporte de estación al mapa público del Reporteador FreeDV siempre que el módem RADE esté activo. Se rechaza si el indicativo o la cuadrícula están en blanco. Se guarda en `FreeDvAutoReport`. Limitado por compilación a `HAVE_WEBSOCKETS`; en Windows también requiere `HAVE_RADE`. |
-| **Callsign:**                                                 | Campo de texto                                                                                                            | Indicativo a reportar al mapa del Reporteador FreeDV. Solo lectura cuando **Use radio** está marcado. Se guarda en `FreeDvMyCallsign`.                                                                                                    |
-| **Use radio**                                                 | Casilla de verificación                                                                                                   | Completa previamente **Callsign:** con el indicativo configurado en la radio y bloquea el campo como solo lectura. Se sincroniza automáticamente cuando el indicativo de la radio cambia. Se guarda en `FreeDvUseRadioCallsign`. Valor predeterminado: habilitado. |
-| **Grid Square:**                                              | Campo de texto                                                                                                            | Cuadrado de cuadrícula Maidenhead a reportar. Solo lectura cuando **Use GPS** está marcado. Se guarda en `FreeDvMyGrid`.                                                                                                                   |
-| **Use GPS**                                                   | Casilla de verificación                                                                                                   | Completa previamente **Grid Square:** con el módulo GPS de la radio y bloquea el campo como solo lectura. Se muestra solo en modelos de radio con hardware GPS. Se guarda en `FreeDvUseGpsGrid`. Valor predeterminado: habilitado en modelos con capacidad GPS. |
-| **Station Msg:**                                              | Campo de texto                                                                                                            | Mensaje de texto libre opcional que se muestra junto a su indicativo en el mapa público del Reporteador FreeDV. Se guarda en `FreeDvMyMessage`.                                                                                            |
-| **Spots:**                                                    | Botón de alternancia                                                                                                      | Alternancia maestra para la superposición de puntos DX en el panadaptador. Valor predeterminado: **Enabled**. Se guarda en `IsSpotsEnabled`.                                                                                              |
-| **Memories:**                                                 | Botón de alternancia                                                                                                      | Alterna la superposición de canales de memoria en el panadaptador. Valor predeterminado: **Disabled**. Se guarda en `IsMemorySpotsEnabled`.                                                                                                |
-| **Auto:**                                                     | Botón de alternancia                                                                                                      | Cambia automáticamente el modo del slice al hacer clic en un punto que incluya información de modo (p. ej., CW, FT8, RTTY). Valor predeterminado: **Enabled**. Se guarda en `SpotAutoSwitchMode`. La clave de configuración cambió de `SpotsAutoMode` en v26.5.1. |
-| **Signals (Signal History)**                                  | Botón de alternancia                                                                                                      | Marcadores dorados para señales de ancho de voz detectadas en el panadaptador. Valor predeterminado: **Disabled**. Se guarda en `SHistoryMarkersEnabled`. Nuevo en v26.5.1. La misma alternancia que `View > Signal History Markers`. |
-| **QRM (Signal History)**                                      | Botón de alternancia                                                                                                      | Marcadores rojos para portadoras persistentes e interferencia de banda ancha. Valor predeterminado: **Disabled**. Se guarda en `SHistoryQrmEnabled`. Nuevo en v26.5.1. La misma alternancia que `View > QRM History Markers`. |
-| **Clear All**                                                 | Botón pulsador                                                                                                            | Limpia todos los puntos DX, la fuente de memoria, los marcadores de Signal History y los marcadores QRM del espectro.                                                                                                                      |
-| **Levels:**                                                   | Deslizador                                                                                                                | Número de filas de apilamiento vertical para los puntos. Rango: 1-10. Valor predeterminado: 3. Se guarda en `SpotsMaxLevel`.                                                                                                              |
-| **Position:**                                                 | Deslizador                                                                                                                | Posición vertical de los puntos en el panadaptador. Rango: 0-100. Valor predeterminado: 50. Se guarda en `SpotsStartingHeightPercentage`.                                                                                                  |
-| **Font Size:**                                                | Deslizador                                                                                                                | Tamaño del texto de los puntos en puntos. Rango: 8-32. Valor predeterminado: 16. Se guarda en `SpotFontSize`.                                                                                                                             |
-| **Spot Lifetime:**                                            | Deslizador                                                                                                                | Segundos antes de que un punto se desvanezca. Rango: 10 seg – 24 horas (pasos no lineales). Se guarda en `DxClusterSpotLifetimeSec`.                                                                                                     |
-| **Override Colors:**                                          | Botón de alternancia                                                                                                      | Fuerza un solo color de texto para todos los puntos. Se guarda en `IsSpotsOverrideColorsEnabled`.                                                                                                                                          |
-| **Selector de color de texto de puntos**                      | Botón pulsador                                                                                                            | Abre QColorDialog para elegir el color del texto de los puntos. Valor predeterminado: `#FFFF00`. Se guarda en `SpotsOverrideColor`.                                                                                                        |
-| **Override Background: Enabled**                              | Botón de alternancia                                                                                                      | Habilita un color de fondo personalizado para los puntos. Valor predeterminado: **Enabled**. Se guarda en `IsSpotsOverrideBackgroundColorsEnabled`.                                                                                        |
-| **Override Background: Auto**                                 | Botón de alternancia                                                                                                      | Selecciona automáticamente el color de fondo para contraste. Valor predeterminado: **Enabled**. Se guarda en `IsSpotsOverrideToAutoBackgroundColorEnabled`.                                                                                |
-| **Selector de color de fondo de puntos**                      | Botón pulsador                                                                                                            | Abre QColorDialog para el color de fondo de los puntos. Valor predeterminado: `#000000`. Se guarda en `SpotsOverrideBgColor`.                                                                                                              |
-| **Background Opacity:**                                       | Deslizador                                                                                                                | Opacidad del color de fondo de los puntos. Rango: 0-100. Valor predeterminado: 48. Se guarda en `SpotsBackgroundOpacity`.                                                                                                                 |
-| **Spot Lines:**                                               | Botón de alternancia                                                                                                      | Dibuja líneas verticales desde el espectro hasta cada etiqueta de punto. Deshabilítelo durante concursos para reducir el desorden visual. Valor predeterminado: **Enabled**. Se guarda en `IsSpotsLinesEnabled`.                          |
-| **Total Spots:**                                              | Indicador                                                                                                                 | Conteo en vivo de los puntos actualmente rastreados en todas las fuentes.                                                                                                                                                                 |
-| **DXCC Coloring (sección)**                                   | Encabezado de sección                                                                                                     | Encabezado de sección para los controles de coloración DXCC en la columna izquierda debajo del divisor.                                                                                                                                   |
-| **DXCC Colors:**                                              | Botón de alternancia                                                                                                      | Colorea los puntos según el estado DXCC trabajado/confirmado/necesario. Se guarda en `IsDxccColoringEnabled`. La clave de configuración cambió de `DxccColoringEnabled` en v26.5.1.                                                        |
-| **Log File (ADIF):**                                          | Botón pulsador                                                                                                            | Carga un archivo de registro ADIF para impulsar la coloración DXCC. Vigila automáticamente el archivo en busca de cambios después de la selección. Se guarda en `DxccAdifFilePath`. La clave de configuración cambió de `DxccAdifPath` en v26.5.1. |
-| **Imported: (estadísticas DXCC)**                             | Indicador                                                                                                                 | Muestra el conteo de QSO y el conteo de entidades cuando se carga un registro. Formato: `<N> QSOs / <M> entities`.                                                                                                                        |
-| **Muestras de color DXCC (New DXCC / New Band / New Mode / Worked)** | Botón pulsador                                                                                                      | Abre un selector de color para cada categoría de estado DXCC. Claves guardadas: `DxccColorNewEntity`, `DxccColorNewBand`, `DxccColorNewMode`, `DxccColorWorked`. Nuevo en v26.5.1.                                                         |
-| **Signal History (sección)**                                  | Encabezado de sección                                                                                                    | Encabezado de sección para los parámetros ajustables de Signal History en la columna derecha debajo del divisor. Nuevo en v26.5.1.                                                                                                         |
-| **Marker Lifetime:**                                          | Deslizador                                                                                                                | Cuánto tiempo persiste un marcador de Signal History inactivo antes de ser eliminado. Rango: 15-300 seg. Valor predeterminado: 60. Se guarda en `SHistoryLifetimeS`. Nuevo en v26.5.1.                                                    |
-| **QRM Gate:**                                                 | Deslizador                                                                                                                | Cuánto tiempo debe persistir una portadora estrecha o señal de banda ancha antes de clasificarse como QRM. Rango: 3-30 seg. Valor predeterminado: 6. Se guarda en `SHistoryQrmGateS`. Nuevo en v26.5.1.                                      |
-| **Edge Threshold:**                                           | Deslizador                                                                                                                | Umbral por encima del piso de ruido para la caminata de borde de pendiente que refina el borde del lado de la portadora S-History. Rango: 1.0-10.0 dB. Valor predeterminado: 3.0. Se guarda en `SHistorySoftEdgeDb`. Nuevo en v26.5.1.   |
-| **Muestras de color Signal History (Signals / QRM)**          | Botón pulsador                                                                                                            | Abre un selector de color para los marcadores de señal de voz (dorados) y los marcadores QRM (rojos). Valores predeterminados: `#FFC800` / `#FF0000`. Claves guardadas: `SHistoryColorSignals`, `SHistoryColorQrm`. Nuevo en v26.5.1.   |
-| **Snap to Step:**                                             | Botón de alternancia                                                                                                      | Redondea el clic para sintonizar de S-History al múltiplo más cercano del tamaño de paso del slice activo, ocultando el pequeño desplazamiento de portadora. Valor predeterminado: **Disabled**. Se guarda en `SHistorySnapToStep`. Nuevo en v26.5.1. |
+| Control | Tipo | Comportamiento |
+|---------|------|----------|
+| **Callsign:** | Campo de texto | Indicativo a reportar. Solo lectura cuando **Use radio** está marcado. Guardado en `FreeDvMyCallsign`. |
+| **Use radio** | Casilla de verificación | Rellena previamente el indicativo desde el indicativo configurado de la radio. Guardado en `FreeDvUseRadioCallsign`. |
+| **Grid Square:** | Campo de texto | Cuadrado de cuadrícula Maidenhead a reportar. Solo lectura cuando **Use GPS** está marcado. Guardado en `FreeDvMyGrid`. |
+| **Use GPS** | Casilla de verificación | Rellena previamente la cuadrícula desde el módulo GPS de la radio. Se muestra solo en modelos con capacidad GPS. Guardado en `FreeDvUseGpsGrid`. |
+| **Station Msg:** | Campo de texto | Mensaje opcional mostrado junto a su indicativo en el mapa público. Guardado en `FreeDvMyMessage`. |
+| **Enable FreeDV Reporter reporting when RADE is active** | Casilla de verificación | Habilita el reporte al mapa público. Guardado en `FreeDvAutoReport`. |
 
-## Sintonizar un punto haciendo doble clic en la lista de puntos
+## Pestaña Spot List
 
-Al hacer doble clic en una fila de la pestaña **Spot List** se sintoniza el slice activo en la frecuencia del punto. A partir de v0.9.7, AetherSDR también reenvía el modo extraído del comentario del punto, por lo que el slice cambia al modo apropiado (por ejemplo, CW o SSB) para coincidir con el punto en lugar de solo cambiar la frecuencia.
+La tabla unificada de spots muestra todos los spots activos de cada fuente conectada.
 
-## Consejos
+### Filtrado por banda
 
-- La actividad entrante aparece en la consola **FreeDV Spots** así como en la tabla de puntos unificada en la pestaña **Spot List**.
-- Si desea que los puntos FreeDV se destaquen de los puntos del clúster DX o RBN, establezca un color único usando **Spot Color:** antes de conectarse.
-- Si **Use radio** está marcado, actualizar su indicativo en Radio Setup actualiza inmediatamente el campo **Callsign:** sin necesidad de volver a abrir SpotHub.
-- La transmisión del reporteador se activa solo mientras el módem RADE está en funcionamiento. Usted
+Una fila de casillas de verificación en la parte superior le permite mostrar u ocultar spots en bandas específicas (160m, 80m, 60m, 40m, 30m, 20m, 17m, 15m, 12m, 10m, 6m, 2m, etc.). Desmarque una banda para eliminar sus spots de la tabla.
+
+### Limpiar spots
+
+Haga clic en **Clear** para vaciar la lista de spots actual.
+
+### Tabla de spots
+
+La tabla principal se puede ordenar haciendo clic en los encabezados de las columnas. Columnas:
+
+- **Time** — Cuándo se recibió el spot
+- **Freq** — Frecuencia en MHz
+- **DX Call** — El indicativo detectado
+- **Comment** — Comentario del spot (puede incluir modo, nombre, etc.)
+- **Spotter** — Quién detectó la estación DX
+- **Band** — Banda (ej., 20m)
+- **Mode** — Modo si está incluido en el spot
+- **Source** — Qué fuente proporcionó este spot (Cluster, RBN, WSJT-X, SpotCollector, POTA, FreeDV)
+
+### Sintonizar un spot
+
+Haga doble clic en cualquier fila para sintonizar el slice activo a esa frecuencia. A partir de v0.9.7, AetherSDR también reenvía el modo extraído del comentario del spot, por lo que el slice cambia al modo apropiado (por ejemplo

@@ -4,13 +4,13 @@ Cuando solicita una disposición que necesita más panadaptadores de los que su 
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a una radio FLEX-8600. El cuadro de diálogo Panadapter Layout requiere una conexión activa a la radio.
+- AetherSDR debe estar conectado a una radio FLEX-8600. El cuadro de diálogo Panadapter Layout requiere una conexión activa con la radio.
 - Sepa cuántos slices soporta su radio. El mensaje de advertencia incluye tanto el nombre del modelo como la cantidad de slices.
 
 ## Pasos
 
 1. Haga clic derecho en el área del panadaptador para abrir el cuadro de diálogo **Panadapter Layout**.
-2. Inspeccione la cuadrícula de disposiciones. Cualquier disposición cuya cantidad de panadaptadores supere el límite de slices de la radio se muestra con un cursor prohibido y no se puede hacer clic en ella.
+2. Inspeccione la cuadrícula de disposiciones. Cualquier disposición cuyo número de panadaptadores exceda el límite de slices de la radio se muestra con un cursor prohibido y no se puede hacer clic en ella.
 3. Si hace clic en un botón de disposición que está dentro del límite pero los slices de la radio ya están todos en uso, AetherSDR cancela el cambio y muestra un mensaje en la barra de estado:
 
    ```
@@ -21,23 +21,23 @@ Cuando solicita una disposición que necesita más panadaptadores de los que su 
 4. Para continuar, primero reduzca la cantidad de slices activos en la radio, luego regrese al cuadro de diálogo **Panadapter Layout** y seleccione la disposición deseada.
 5. Para cerrar el cuadro de diálogo sin realizar ningún cambio, haga clic en **Cancel**.
 
-## Qué hace cada control
+## Función de cada control
 
 | Control | Comportamiento | Notas |
 |---|---|---|
-| Botones de disposición | Haga clic en una miniatura de vista previa para seleccionar una disposición. El cuadro de diálogo se cierra y la disposición se aplica. | Las miniaturas que requieren más panadaptadores que el límite de slices de la radio muestran un cursor prohibido y están deshabilitadas. Si los slices ya están al máximo de capacidad cuando se aplica una disposición de apariencia válida, el cambio se cancela y aparece la advertencia en la barra de estado. Se guarda como `PanLayout`. |
-| **Cancel** | Cierra el cuadro de diálogo sin cambiar la disposición actual. | No se modifican configuraciones. |
+| Botones de disposición | Haga clic en un mosaico de vista previa para seleccionar una disposición. El cuadro de diálogo se cierra y la disposición se aplica. | Los mosaicos que requieren más panadaptadores que el límite de slices de la radio muestran un cursor prohibido y están deshabilitados. Si los slices ya están al máximo de capacidad cuando se aplica una disposición de apariencia válida, el cambio se cancela y aparece la advertencia en la barra de estado. Se persiste como `PanLayout`. |
+| **Cancel** | Cierra el cuadro de diálogo sin cambiar la disposición actual. | No se modifican ajustes. |
 
 ## Consejos
 
-- Las miniaturas de disposiciones deshabilitadas le indican de un vistazo qué disposiciones están fuera del alcance de su radio. No es necesario intentarlas para descubrirlo.
-- La advertencia en la barra de estado puede aparecer incluso para disposiciones cuya miniatura no estaba visualmente deshabilitada, si otro software u otro cliente ha consumido slices desde que se abrió el cuadro de diálogo.
-- La disposición actualmente activa está resaltada con un borde distintivo en la cuadrícula, para que pueda ver siempre qué disposición está en efecto.
+- Los mosaicos de disposición deshabilitados le indican de un vistazo qué disposiciones están fuera del alcance de su radio. No necesita probarlas para averiguarlo.
+- La advertencia de la barra de estado puede aparecer incluso para disposiciones cuyo mosaico no estaba deshabilitado visualmente, si otro software u otro cliente ha consumido slices desde que se abrió el cuadro de diálogo.
+- La disposición actualmente activa se resalta con un borde distintivo en la cuadrícula, para que siempre pueda ver qué disposición está en efecto.
 
 ## Solución de problemas
 
-- **Una miniatura de disposición aparece deshabilitada aunque la radio debería soportar suficientes slices** — El cuadro de diálogo calcula la cantidad máxima de panadaptadores a partir del límite de slices informado por la radio en el momento en que se abre. Si la conexión se interrumpió o el límite aún no se había informado, es posible que algunas miniaturas aparezcan deshabilitadas incorrectamente. Cierre el cuadro de diálogo, verifique que la conexión de la radio esté activa y vuélvalo a abrir.
-- **Apareció la advertencia en la barra de estado, pero esperaba que esa disposición estuviera permitida** — Otro cliente o un slice existente en la radio puede estar consumiendo la capacidad restante. Verifique si hay slices activos en otros clientes SDR conectados a la misma radio, cierre los que no sean necesarios e intente de nuevo.
+- **Un mosaico de disposición aparece deshabilitado aunque la radio debería soportar suficientes slices** — El cuadro de diálogo calcula el número máximo de panadaptadores a partir del límite de slices informado por la radio en el momento en que se abre. Si la conexión se interrumpió o el límite aún no se informó, algunos mosaicos pueden aparecer deshabilitados incorrectamente. Cierre el cuadro de diálogo, verifique que la conexión con la radio esté activa y vuelva a abrirlo.
+- **Apareció la advertencia de la barra de estado, pero esperaba que esa disposición estuviera permitida** — Otro cliente o un slice existente en la radio puede estar consumiendo la capacidad restante. Verifique si hay slices activos en otros clientes SDR conectados a la misma radio, cierre los que no sean necesarios e intente de nuevo.
 
 ## Relacionado
 

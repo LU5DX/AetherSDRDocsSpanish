@@ -1,50 +1,72 @@
-# Ajustar el tamaño de la sala para una sensación de cabina o gran salón
+# Ajuste del tamaño de la sala para una sensación de espacio pequeño o salón grande
 
-El control Size modifica las dimensiones de la sala modelada en la reverberación Aetherial FreeVerb TX. Girarlo hacia arriba cambia la sensación desde una cabina ajustada hasta un gran salón.
+El mando Size controla las dimensiones modeladas de la sala en la reverberación Aetherial FreeVerb TX. Al girarlo, el carácter cambia de una cabina cerrada a un salón grande.
 
 ## Antes de comenzar
 
-- La etapa Reverb debe estar habilitada en el widget CHAIN. Si el subcontenedor "Aetherial FreeVerb" no está visible en el panel Aetherial Audio (TXDSP), primero active la etapa VERB.
-- No se requiere conexión de radio para ajustar los parámetros de reverberación.
+- La etapa Reverb debe estar habilitada en el widget CHAIN. Si el subcontenedor "Aetherial FreeVerb" no es visible en el panel Aetherial Audio (TXDSP), habilite primero la etapa VERB.
+- No se requiere una conexión de radio para ajustar los parámetros de reverberación.
 
 ## Pasos
 
 1. Abra los controles de reverberación usando uno de estos dos métodos:
-   - En el panel Aetherial Audio (TXDSP), localice el subcontenedor "Aetherial FreeVerb" y ajuste el control Size directamente en la fila compacta.
-   - Haga doble clic en la etapa VERB del widget CHAIN para abrir el editor flotante "Aetherial FreeVerb — TX".
-2. Gire el control Size hacia la izquierda para una sensación de sala más pequeña y ajustada; gírelo hacia la derecha para una sensación de salón más grande y espaciosa.
-3. La etiqueta del control se actualiza en tiempo real y muestra el valor actual como porcentaje (por ejemplo, `50 %`).
+   - En el panel Aetherial Audio (TXDSP), localice el subcontenedor "Aetherial FreeVerb" y ajuste el mando Size directamente en la fila compacta.
+   - Haga doble clic en la etapa VERB en el widget CHAIN para abrir el editor flotante "Aetherial FreeVerb — TX".
+2. Gire el mando Size hacia la izquierda para un carácter de sala más pequeño y cerrado; gírelo hacia la derecha para una sensación de salón más grande y espacioso.
+3. La etiqueta del mando se actualiza en tiempo real y muestra el valor actual como porcentaje (por ejemplo, `50 %`).
+4. Para escribir un valor exacto, haga clic en la etiqueta del valor debajo del mando. La etiqueta se transforma en un editor de texto en línea con un borde cian. Escriba el número deseado y presione Enter. El valor se limita al rango válido. Hacer clic en otro lugar (pérdida de foco) también confirma la edición.
 
 ## Visualización en vivo
 
-El editor "Aetherial FreeVerb — TX" incluye una visualización compacta de forma de onda (90 px de alto) que se actualiza en tiempo real a medida que ajusta cualquiera de los cinco controles. Muestra tres capas de señal superpuestas:
+El editor "Aetherial FreeVerb — TX" incluye una pantalla de forma de onda compacta (90 px de alto) que se actualiza en tiempo real mientras ajusta cualquiera de los cinco mandos. Muestra tres capas de señal superpuestas:
 
-- **Cian** — el paquete de senoidal seco. Su amplitud disminuye a medida que se aumenta Mix.
+- **Cian** — el paquete de seno seco. Su amplitud disminuye a medida que se aumenta Mix.
 - **Amarillo** — reflexiones de primer orden. El espaciado y la cantidad reflejan los ajustes de Size y Damp.
 - **Magenta** — la cola reverberante. La longitud sigue a Decay; la atenuación de altas frecuencias sigue a Damp; la posición de inicio sigue a Pre-delay.
 
-La visualización usa un fondo oscuro con una rejilla sutil. No requiere interacción; se actualiza automáticamente cada vez que cambia el valor de un control.
+La pantalla usa un fondo oscuro con una cuadrícula sutil. No se requiere interacción; se actualiza automáticamente cada vez que cambia un valor de mando.
 
-## Función de cada control
+## Qué hace cada control
 
-| Etiqueta | Predeterminado | Rango | Clave de configuración | Comportamiento |
-|----------|----------------|-------|------------------------|----------------|
-| Size | 50 % | 0 % a 100 % | `ClientReverbTxSize` | Define el tamaño de sala modelado. Mapeo lineal. |
-| Decay | 1.20 s | 0.3 a 5.0 s | `ClientReverbTxDecayS` | Define la longitud de la cola de reverberación. Mapeo exponencial. |
-| Damp | 50 % | 0 % a 100 % | `ClientReverbTxDamping` | Valores altos atenúan más rápido las frecuencias altas en la cola. Mapeo lineal. |
-| Pre | 20 ms | 0 a 100 ms | `ClientReverbTxPreDelayMs` | Retardo previo entre la señal seca y las primeras reflexiones. Mapeo lineal. |
-| Mix | 15 % | 0 % a 100 % | `ClientReverbTxMix` | Balance seco/húmedo. Mapeo lineal. |
+| Etiqueta             | Valor predeterminado | Rango   | Comportamiento | Notas |
+|----------------------|----------------------|---------|----------------|-------|
+| Size                 | 50 %                 | 0 % a 100 % | Mapeo lineal. Establece el tamaño modelado de la sala. | Etiqueta mostrada como porcentaje. |
+| Decay                | 1.20 s               | 0.3 a 5.0 s | Mapeo exponencial (0.3 * (5.0/0.3)^n, ~16.7x). Establece la longitud de la cola de reverberación. | Etiqueta 'X.XX s'. |
+| Damp                 | 50 %                 | 0 % a 100 % | Mapeo lineal. Valores más altos atenúan las frecuencias altas más rápido en la cola. | Etiqueta mostrada como porcentaje. |
+| Pre                  | 20 ms                | 0 a 100 ms | Mapeo lineal. Predelay entre la señal seca y las primeras reflexiones. | Etiqueta 'X ms'. |
+| Mix                  | 15 %                 | 0 % a 100 % | Mapeo lineal. Balance seco/húmedo. | Etiqueta mostrada como porcentaje. |
+| Visualización de reverberación | ReverbVizBox — visualización en vivo que muestra el paquete de seno seco (cian), reflexiones de primer orden (amarillo) y cola reverberante (magenta). Los cinco valores de mandos alimentan la representación para que la pantalla siga las ediciones de los mandos en tiempo real. 90 px de alto. | Siempre visible | Reemplaza el widget de curva usado por otros applets DSP. El algoritmo de representación coincide con StripReverbPanel::GridBox. | Cuadrícula de fondo con retículas en el centro como referencia espacial. |
+
+## Indicadores de visualización
+
+| Indicador | Estados | Significado |
+|-----------|---------|-------------|
+| Paquete de seno seco | Visible, cian, degradado | Señal seca visualizada como un paquete de seno. Cian, con un degradado horizontal que se desvanece hacia la derecha. |
+| Reflexiones de primer orden | Visible, pulsos amarillos | Reflexiones tempranas mostradas como ráfagas de seno amarillas que se desvanecen, espaciado y amplitud impulsados por los valores de Size y Damping. |
+| Cola reverberante | Visible, magenta, con decaimiento exponencial | Cola de reverberación dibujada como una onda seno magenta con decaimiento exponencial, longitud determinada por Decay y Damping. |
+| Cuadrícula de fondo | Siempre visible | Fondo con cuadrícula de guiones finos y retículas en el centro como referencia espacial. |
+
+## Edición de valor en línea
+
+Cada mando admite entrada numérica directa:
+
+1. Haga clic en la etiqueta del valor debajo del mando. La etiqueta se transforma en un editor de texto con fondo oscuro y borde cian.
+2. Escriba el valor deseado. El análisis con reconocimiento de configuración regional admite tanto el punto decimal como la coma (por ejemplo, `0.5` o `0,5`). Los caracteres no numéricos adicionales se eliminan automáticamente.
+3. Presione Enter para confirmar, o haga clic en otro lugar para aplicar el valor. El valor se limita al rango válido del mando.
+4. Para cancelar sin cambiar el valor, presione Escape.
+5. Mientras el editor tiene el foco, los eventos de la rueda del ratón aún ajustan el mando normalmente.
 
 ## Consejos
 
-- Size y Decay interactúan estrechamente. Un Size grande con un Decay corto suena antinatural; si aumenta Size significativamente, considere aumentar Decay para que coincida.
-- La visualización en vivo en el editor flotante ofrece retroalimentación inmediata sobre cómo interactúan Size, Decay, Damp, Pre-delay y Mix antes de transmitir.
-- Tanto el control compacto del applet como el editor flotante "Aetherial FreeVerb — TX" manejan los mismos parámetros subyacentes y se mantienen sincronizados automáticamente.
-- Haga doble clic en un control para restaurar su valor predeterminado.
+- Size y Decay interactúan estrechamente. Un Size grande con un Decay corto suena antinatural; si aumenta Size significativamente, considere aumentar Decay para igualar.
+- La visualización en vivo en el editor flotante proporciona retroalimentación inmediata sobre cómo interactúan Size, Decay, Damp, Pre-delay y Mix antes de transmitir.
+- Tanto el mando del applet compacto como el editor flotante "Aetherial FreeVerb — TX" controlan los mismos parámetros subyacentes y se mantienen sincronizados automáticamente.
+- Haga doble clic en un mando para restablecerlo a su valor predeterminado.
+- Use la edición en línea para valores numéricos precisos en lugar de depender únicamente de la rotación del mando.
 
 ## Relacionados
 
-- [Descripción general de Aetherial FreeVerb](overview.md)
-- [Ajuste la caída según su gusto sin enturbiar la voz](tune-decay-to-taste-without-muddying-speech.md)
-- [Seleccione un Mix sutil: 10-15 % es típico para voz](dial-in-a-subtle-mix-10-15-is-typical-for-voice.md)
-- [Omita la reverberación desde la cadena](bypass-reverb-from-the-chain.md)
+- [Resumen de Aetherial FreeVerb](overview.md)
+- [Ajuste el decaimiento al gusto sin enturbiar la voz](tune-decay-to-taste-without-muddying-speech.md)
+- [Marque un Mix sutil: 10-15 % es típico para voz](dial-in-a-subtle-mix-10-15-is-typical-for-voice.md)
+- [Desvíe la reverberación desde la cadena](bypass-reverb-from-the-chain.md)
