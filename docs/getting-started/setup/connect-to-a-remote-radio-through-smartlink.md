@@ -53,4 +53,4 @@ SmartLink le permite conectarse a un FLEX-8600 que se encuentra en una ubicació
 - [Connect by IP across a VPN or routed network](connect-by-ip-across-a-vpn-or-routed-network.md)
 - [Operating remotely over SmartLink](../../operating/remote/remote-operation-smartlink.md)
 - [Disconnect from the current radio](disconnect-from-the-current-radio.md)
-- [Network Diagnostics](../../tools/network-diagnostics.md)
+- Network Diagnostics

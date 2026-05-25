@@ -61,7 +61,7 @@ El mando **Clarity / Tune** utiliza mapeo logarítmico (1000 * 10^n). La pantall
 ## Relacionado
 
 - [Aetherial TX Voice Processor / Aetherial RX Poodoo overview](overview.md)
-- [Dial Drive for LF thickness](dial-drive-for-lf-thickness.md)
-- [Blend the Body enhancement with Mix](blend-the-body-enhancement-with-mix.md)
+- Dial Drive for LF thickness
+- Blend the Body enhancement with Mix
 - [Pick Aphex (Even) vs Behringer (Odd) character](pick-aphex-even-vs-behringer-odd-character.md)
-- [Add presence with Clarity Air](add-presence-with-clarity-air.md)
+- Add presence with Clarity Air

@@ -36,5 +36,5 @@ También se puede acceder al cuadro de diálogo desde el menú principal: **`Set
 
 ## Relacionados
 
-- [Radio Setup...](radio-setup-dialog.md)
-- [Inhibit during TUNE](inhibit-during-tune.md)
+- Radio Setup...
+- Inhibit during TUNE

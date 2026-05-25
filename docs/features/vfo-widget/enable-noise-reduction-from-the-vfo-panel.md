@@ -1,68 +1,113 @@
-# Habilitar la reducción de ruido desde el panel VFO
+# Panel VFO
 
-Use la pestaña DSP en el panel VFO para activar uno o más algoritmos de reducción de ruido para una slice. Cada algoritmo está diseñado para un tipo de ruido diferente; puede habilitarlos de forma independiente.
+El Panel VFO es un panel de control flotante por slice, anclado al marcador VFO en la visualización del espectro. Proporciona acceso rápido a los ajustes más usados por slice — modo, preajustes de filtro, selección de antena, ganancia de AF, paneo, silenciador, AGC, RIT/XIT, botones de reducción de ruido DSP y asignación de DAX — sin salir de la vista del espectro. Puede colapsarse a una tira compacta que solo muestra la frecuencia.
 
-## Antes de comenzar
+## Abrir el Panel VFO
 
-- AetherSDR debe estar conectado a la radio. El panel VFO requiere una conexión de radio activa.
-- El panel VFO para la slice debe estar abierto y expandido. Si está colapsado a una tira que solo muestra la frecuencia, haga clic en cualquier parte del mismo para expandirlo.
+1. Haga clic en la bandera del marcador VFO en la visualización del espectro para el slice que desea ajustar. El Panel VFO se abre anclado al marcador.
+2. El panel se abre en su estado expandido. Si está colapsado a una tira de solo frecuencia, haga clic en cualquier parte del mismo para expandirlo.
 
-## Pasos
+## Controles
 
-1. Haga clic en la bandera del marcador VFO en la pantalla del espectro para la slice que desea ajustar. El panel VFO se abre anclado al marcador.
-2. Haga clic en la pestaña **DSP** dentro del panel VFO.
-3. Haga clic en el botón del algoritmo de reducción de ruido que desea habilitar: **NR**, **NR2**, **RN2**, **NR4**, **MNR**, **DFNR**, **BNR**, **NRL**, **NRS**, **RNN**, **NRF**. El botón se resalta cuando está activo.
-4. Para deshabilitar la reducción de ruido, haga clic en el mismo botón nuevamente. El resaltado desaparece.
+El Panel VFO está organizado en pestañas. Cada pestaña contiene controles relacionados.
 
-## Qué hace cada control
+### Controles generales
 
-| Control | Valor predeterminado | Comportamiento |
-|---------|---------------------|----------------|
-| **NR** | desactivado | Habilita el algoritmo estándar de reducción de ruido para esta slice. |
-| **NR2** | desactivado | Habilita el algoritmo de reducción de ruido NR2 para esta slice. Haga clic derecho para abrir el cuadro de diálogo de configuración de AetherDSP para este algoritmo. |
-| **RN2** | desactivado | Habilita el algoritmo de reducción de ruido RN2 para esta slice. |
-| **NR4** | desactivado | Habilita el algoritmo de reducción de ruido NR4 para esta slice. Haga clic derecho para abrir el cuadro de diálogo de configuración de AetherDSP para este algoritmo. |
-| **MNR** | desactivado | Habilita el algoritmo de reducción de ruido MNR para esta slice. Haga clic derecho para abrir el cuadro de diálogo de configuración de AetherDSP para este algoritmo. |
-| **DFNR** | desactivado | Habilita el algoritmo de reducción de ruido DFNR para esta slice. Haga clic derecho para abrir el cuadro de diálogo de configuración de AetherDSP para este algoritmo. |
-| **BNR** | desactivado | Habilita el algoritmo de reducción de ruido BNR para esta slice. |
-| **NRL** | desactivado | Habilita el algoritmo de reducción de ruido NRL para esta slice. |
-| **NRS** | desactivado | Habilita la sustracción espectral para esta slice. |
-| **RNN** | desactivado | Habilita el algoritmo de reducción de ruido RNN para esta slice. |
-| **NRF** | desactivado | Habilita el filtro de ruido espectral para esta slice. |
-| Botón **ADSP** (pestaña DSP) | N/A | Abre el cuadro de diálogo de configuración de AetherDSP (NR2/NR4/DFNR/RN2/BNR/MNR del lado del cliente). Mismo punto de entrada que el menú Settings (v0.9.8). Tiene el estilo de un conmutador DSP del lado de la radio pero no es seleccionable. Al hacer clic, abre y enfoca el cuadro de diálogo de configuración de AetherDSP no modal. |
-| Botón **AetherVoice** (pestaña DSP) | N/A | Alterna la tira de canales de audio Aetherial, el conjunto unificado de DSP de TX/RX (v0.9.8). Ocupa 2 columnas en la cuadrícula DSP de 4 columnas. Coincide con los puntos de entrada existentes del menú/cadena para la tira. |
+Estos controles aparecen en el área principal del Panel VFO, sobre las pestañas.
 
-La disponibilidad de los botones depende de la serie de la radio y la compilación.
+| Control | Predeterminado | Comportamiento |
+|---------|---------|----------|
+| **Botón de antena RX** | N/A | Abre el menú de selección de antena para la antena receptora de este slice. |
+| **Botón de antena TX** | N/A | Abre el menú de selección de antena para la antena transmisora de este slice. |
+| **Visualización de frecuencia** | N/A | Muestra la frecuencia actual del slice. Haga clic una vez para comenzar la entrada directa de frecuencia; escriba MHz y presione Enter o Tab. |
+| **Etiqueta de ancho de filtro** | N/A | Muestra el ancho de banda del filtro actual. Haga clic para recorrer los botones de preajuste de filtro en la pestaña Mode. Usa `RxApplet::formatFilterWidth` como fuente única de verdad, corrigiendo un desplazamiento de 0.1 kHz que afectaba las lecturas en modos SSB/digitales (#2197, v0.9.8). |
+| **Botón de grosor del marcador** | 1 px | Cambia la línea del marcador VFO entre Off, 1 px y 3 px. Se persiste por slice (`Slice{N}_MarkerWidth`). |
+| **Botón de bordes de filtro** | mostrado | Alterna la visualización de las líneas de borde del filtro en la banda pasante del espectro. Se persiste por slice (`Slice{N}_FilterEdgesHidden`). |
+| **Alternancia de colapso** | expandido | Colapsa el Panel VFO a una tira compacta de solo frecuencia. Se persiste por slice (`SliceFlagCollapsed_{N}`). |
 
-## Control deslizante de nivel DSP
+### Pestaña Audio
 
-Cuando uno o más algoritmos DSP con nivel están activos, aparece un control deslizante de nivel compartido debajo de la cuadrícula de botones. La etiqueta del control deslizante muestra a qué algoritmo apunta actualmente: se reasigna automáticamente al algoritmo con nivel habilitado más recientemente. El valor numérico se muestra a la derecha del control deslizante.
+| Control | Predeterminado | Rango válido | Comportamiento |
+|---------|---------|-------------|----------|
+| **Deslizador de ganancia AF** | 100 | 0–100 | Establece el nivel de salida de audio para este slice. No se persiste — refleja el estado activo de la radio. |
+| **Deslizador de paneo** | 50 | 0–100 | Establece el paneo estéreo izquierdo/derecho para este slice. 50 = centro. |
+| **Botón de silencio** | apagado | — | Silencia la salida de audio para este slice sin cambiar el ajuste de ganancia AF. |
+| **Botón + deslizador de silenciador** | apagado | 0–100 | Activa el silenciador para este slice. El deslizador adyacente establece el umbral. |
+| **Combo AGC** | FAST | FAST / MED / SLOW / OFF | Establece la velocidad de ataque/liberación del AGC para este slice. |
 
-El control deslizante siempre está presente en el diseño. Cuando no hay ningún algoritmo con nivel activo (o solo RNN o APF están encendidos), la fila del control deslizante se atenúa y no responde a la entrada.
+### Pestaña DSP
 
-El estado del control deslizante se gestiona correctamente al iniciar: si un algoritmo DSP con nivel se guardó en el perfil de la radio y está activo cuando se abre el panel VFO, el control deslizante aparece inmediatamente sin necesidad de alternar manualmente el algoritmo.
+| Control | Predeterminado | Comportamiento |
+|---------|---------|----------|
+| **NR / NR2 / RN2 / NR4 / MNR / DFNR / BNR / NRL / NRS / RNN / NRF** | apagado | Activa el algoritmo de reducción de ruido correspondiente para este slice. La disponibilidad del botón depende de la serie de radio y la compilación. |
+| **Botón ADSP** | N/A | Abre el diálogo de Configuración de AetherDSP (NR2 / NR4 / DFNR / RN2 / BNR / MNR del lado del cliente). Mismo punto de entrada que el menú Settings (v0.9.8). Tiene el estilo de una activación DSP del lado de la radio, pero no es marcable. Al hacer clic, eleva y enfoca el diálogo no modal de Configuración de AetherDSP. |
+| **Botón AetherVoice** | N/A | Activa la tira de canal de audio Aetherial — el conjunto DSP unificado de TX/RX (v0.9.8). Ocupa 2 columnas en la cuadrícula DSP de 4 columnas. Coincide con los puntos de entrada de menú/cadena existentes para la tira. |
 
-| Algoritmos que exponen el control deslizante de nivel |
-|---|
-| NR, NRL, NRS, NRF |
+**Deslizador de nivel DSP:** Cuando uno o más algoritmos DSP con nivel están activos, aparece un deslizador de nivel compartido debajo de la cuadrícula de botones. La etiqueta del deslizador muestra qué algoritmo está controlando actualmente; se reasigna automáticamente al algoritmo con nivel habilitado más recientemente. El valor numérico se muestra a la derecha del deslizador. El deslizador siempre está presente en el diseño. Cuando ningún algoritmo con nivel está activo (o solo RNN, o APF están encendidos), la fila del deslizador se atenúa y no responde a la entrada.
 
-## Notas sobre el squelch
+Algoritmos que exponen el deslizador de nivel: NR, NRL, NRS, NRF.
 
-El squelch está deshabilitado (el botón y el control deslizante dejan de funcionar) cuando la slice está en los siguientes modos:
+### Pestaña Mode
+
+| Control | Predeterminado | Rango válido | Comportamiento |
+|---------|---------|-------------|----------|
+| **Combo de modo** | USB | USB / LSB / CW / CWL / AM / SAM / DIGU / DIGL / FM / NFM / DFM / RTTY | Establece el modo de demodulación para este slice. |
+| **Botones de preajuste de filtro** | N/A | N/A | Aplica un preajuste de ancho de filtro guardado. Haga clic derecho para guardar el ancho de filtro actual en esa ranura. Se persiste en `FilterPresets`. Se pueden establecer bordes lo/hi personalizados por ranura mediante clic derecho. |
+
+### Pestaña X/RIT
+
+| Control | Predeterminado | Comportamiento |
+|---------|---------|----------|
+| **Botones + etiquetas RIT / XIT** | apagado | Activa la sintonización incremental del receptor (RIT) o transmisor (XIT). La etiqueta muestra el desplazamiento actual; la rueda del ratón ajusta en pasos de 10 Hz. |
+
+### Pestaña DAX
+
+| Control | Predeterminado | Rango válido | Comportamiento |
+|---------|---------|-------------|----------|
+| **Combo de canal DAX** | Off | Off / 1–8 | Asigna un canal de audio DAX a este slice. |
+
+## Indicadores
+
+| Indicador | Estados | Significado |
+|-----------|--------|---------|
+| **Distintivo TX** | TX (rojo) / oculto | Se muestra cuando este slice es el slice transmisor activo. |
+| **Distintivo SPLIT** | SPLIT (ámbar) / oculto | Se muestra cuando TX está asignado a un slice diferente al slice receptor activo. |
+
+## Entrada de frecuencia
+
+La visualización de frecuencia admite varios formatos de entrada:
+
+- Formato MHz: `14.225`, `14.225.000`, `14225`, `14225.0`
+- Formato kHz (solo HF): `14225` (interpreta números enteros simples como kHz cuando están por debajo de 54000)
+- Formato Hz (solo HF): `14225000` (interpreta como Hz cuando está por encima de 54000)
+- Entrada explícita en MHz: cualquier entrada con un punto se trata como MHz. Si el valor supera los 54 MHz, se acepta como frecuencia de VHF/UHF incluso sin una antena XVTR.
+
+En bandas XVTR, los números enteros simples como `145` se tratan como MHz (conveniencia para banda de 3 dígitos).
+
+## Notas sobre el silenciador
+
+El silenciador se desactiva (el botón y el deslizador quedan no funcionales) cuando el slice está en los siguientes modos:
 - Modos digitales (DIGU, DIGL)
 - RTTY
 - Modos CW (CW, CWL)
 
-En modos digitales y RTTY, el squelch no tiene sentido porque el audio alimenta decodificadores externos a través de DAX. Además, el squelch puede bloquear señales FSK débiles (#2504). En modos CW, la radio bloquea el squelch activado a un nivel fijo y rechaza los cambios.
+Si el silenciador estaba activo al cambiar a uno de estos modos, se apaga automáticamente. El estado guardado se restaura al volver a un modo compatible.
 
-Si el squelch estaba activo al cambiar a uno de estos modos, se desactiva automáticamente. El estado guardado se restaura al cambiar de nuevo a un modo compatible.
+## Notas sobre el bloqueo de VFO
+
+Cuando un slice está bloqueado:
+- El botón de bloqueo muestra un icono de candado. Al hacer clic nuevamente, se desbloquea el slice.
+- Desplazarse sobre el Panel VFO colapsado o la visualización de frecuencia muestra una superposición LOCKED y bloquea los cambios de frecuencia. El evento de desplazamiento se consume, pero la frecuencia no cambia.
+- La entrada directa de frecuencia se cancela si se inicia mientras el slice está bloqueado.
+- Desbloquear el slice elimina la superposición LOCKED.
 
 ## Consejos
 
-- Pueden activarse varios botones de reducción de ruido al mismo tiempo.
-- Puede abrir el applet de AetherDSP desde `Settings > AetherDSP Settings...` para configurar los algoritmos de reducción de ruido del lado del cliente.
+- Varios botones de reducción de ruido pueden estar activos al mismo tiempo.
+- Puede abrir el applet AetherDSP desde `Settings > AetherDSP Settings...` para configurar algoritmos de reducción de ruido del lado del cliente.
+- Haga clic derecho en NR2, NR4, MNR o DFNR para abrir el diálogo de Configuración de AetherDSP para ese algoritmo.
 
 ## Relacionados
 
-- [Descripción general del panel VFO](overview.md)
-- [Habilitar el squelch desde el panel VFO](enable-squelch-from-the-vfo-panel.md)
+- [Descripción general del Panel VFO](overview.md)
+- [Activar el silenciador desde el Panel VFO](enable-squelch-from-the-vfo-panel.md)

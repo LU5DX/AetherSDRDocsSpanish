@@ -1,6 +1,6 @@
-# Ajustar la potencia de portadora AM para transmisión en AM
+# Ajustar la potencia de la portadora AM para transmisión AM
 
-Use esta página para configurar el nivel de potencia de portadora AM al transmitir en modo AM. Ajustar el nivel de portadora controla cuánta potencia emite el radio como portadora AM antes de que se aplique la modulación de audio.
+Utilice esta página para establecer el nivel de potencia de la portadora AM al transmitir en modo AM. El ajuste del nivel de portadora controla cuánta potencia emite el radio como portadora AM antes de aplicar la modulación de audio.
 
 ## Antes de comenzar
 
@@ -9,34 +9,34 @@ Use esta página para configurar el nivel de potencia de portadora AM al transmi
 
 ## Pasos
 
-1. Abra el applet Phone haciendo clic en el botón de la bandeja **PHNE** en la barra lateral derecha. Si el panel del applet no está visible, haga clic en **View > Applet Panel** para mostrarlo.
+1. Abra el applet Phone haciendo clic en el botón de bandeja **PHNE** en la barra lateral derecha. Si el panel del applet no está visible, haga clic en **View > Applet Panel** para mostrarlo.
 2. Localice la fila **AM Carrier** en la parte superior del applet Phone.
-3. Arrastre el deslizador **AM Carrier** hacia la izquierda para disminuir o hacia la derecha para aumentar el nivel de potencia de portadora. La etiqueta numérica a la derecha del deslizador se actualiza inmediatamente para mostrar el valor actual (por ejemplo, `48`).
+3. Arrastre el control deslizante **AM Carrier** hacia la izquierda para disminuir o hacia la derecha para aumentar el nivel de potencia de la portadora. La etiqueta numérica a la derecha del control deslizante se actualiza inmediatamente para mostrar el valor actual (por ejemplo, `48`). Al arrastrar, la información sobre herramientas muestra el valor como un porcentaje (por ejemplo, `48%`).
 
-## Función de cada control
+## Qué hace cada control
 
 | Control               | Descripción                                        | Rango válido |
-|-----------------------|----------------------------------------------------|--------------|
-| Deslizador **AM Carrier** | Establece el nivel de potencia de portadora AM enviado al radio. | 0–100 |
+|-----------------------|----------------------------------------------------|-------------|
+| Control deslizante **AM Carrier** | Establece el nivel de potencia de la portadora AM enviado al radio. Arrastre para ajustar; la información sobre herramientas muestra el porcentaje. | 0–100       |
 | Botón **VOX** | Activa o desactiva la transmisión por voz. | — |
-| Deslizador **VOX level** | Establece el umbral de activación de VOX. | 0–100 |
-| Deslizador **Delay** | Establece el tiempo de retención de VOX antes de volver a recepción. | 0–100 |
+| Control deslizante **VOX level** | Establece el umbral de activación de VOX. Arrastre para ajustar; la información sobre herramientas muestra el porcentaje. | 0–100 |
+| Control deslizante **Delay** | Establece el tiempo de retención de VOX antes de regresar a recepción. | 0–100 |
 | Botón **DEXP** | Activa o desactiva el expansor descendente (puerta de ruido). Se almacena como `DexpEnabled`. Consulte la nota a continuación. | — |
-| Deslizador **DEXP threshold** | Establece el umbral de la puerta DEXP. Se almacena como `DexpLevel`. Valor predeterminado: 0. Consulte la nota a continuación. | 0–100 |
-| **Low Cut < / >** | Ajusta la frecuencia de corte bajo del filtro TX en pasos de 50 Hz, fijándose al múltiplo de 50 Hz más cercano en la dirección elegida. Valor predeterminado: 50 Hz. | 0 a (corte alto − 50) |
-| **High Cut < / >** | Ajusta la frecuencia de corte alto del filtro TX en pasos de 50 Hz, fijándose al múltiplo de 50 Hz más cercano en la dirección elegida. Valor predeterminado: 3300 Hz. | (corte bajo + 50) a 10000 |
+| Control deslizante **DEXP threshold** | Establece el umbral de la puerta DEXP. Se almacena como `DexpLevel`. Valor predeterminado: 0. Arrastre para ajustar; la información sobre herramientas muestra el porcentaje. Consulte la nota a continuación. | 0–100 |
+| **Low Cut < / >** | Ajusta la frecuencia de corte bajo del filtro de TX en pasos de 50 Hz, ajustándose al múltiplo de 50 Hz más cercano en la dirección elegida. Valor predeterminado: 50 Hz. | 0 a (corte alto − 50) |
+| **High Cut < / >** | Ajusta la frecuencia de corte alto del filtro de TX en pasos de 50 Hz, ajustándose al múltiplo de 50 Hz más cercano en la dirección elegida. Valor predeterminado: 3300 Hz. | (corte bajo + 50) a 10000 |
 
-> **Nota — Limitación de firmware DEXP:** El conmutador **DEXP** y el deslizador **DEXP threshold** no son funcionales en la versión de firmware v1.4.0.0. El radio devuelve el error `0x5000002D` cuando se utilizan estos controles.
+> **Nota — Limitación de firmware DEXP:** La alternancia **DEXP** y el control deslizante **DEXP threshold** no son funcionales en la versión de firmware v1.4.0.0. El radio devuelve el error `0x5000002D` cuando se utilizan estos controles.
 
 ## Cómo funciona el ajuste de Low Cut y High Cut
 
-A partir de la versión v0.9.5.1, los botones **Low Cut < / >** y **High Cut < / >** fijan la frecuencia del filtro al siguiente múltiplo de 50 Hz en la dirección elegida, en lugar de sumar o restar un valor fijo de 50 Hz al valor actual. Por ejemplo, si el valor actual de corte bajo es 87 Hz, hacer clic en `>` lo establece en 100 Hz y hacer clic en `<` lo establece en 50 Hz. También puede ajustar cualquiera de los controles con la rueda del ratón. El radio acepta cualquier valor entero en Hz; el comportamiento de fijación es solo una conveniencia de la interfaz de usuario.
+A partir de la versión v0.9.5.1, los botones **Low Cut < / >** y **High Cut < / >** ajustan la frecuencia del filtro al siguiente múltiplo de 50 Hz en la dirección elegida, en lugar de sumar o restar un valor fijo de 50 Hz al valor actual. Por ejemplo, si el valor actual de corte bajo es 87 Hz, al hacer clic en `>` se establece en 100 Hz y al hacer clic en `<` se establece en 50 Hz. También puede ajustar cualquiera de los controles con la rueda del ratón. El radio acepta cualquier valor entero en Hz; el comportamiento de ajuste es solo una conveniencia de la interfaz de usuario.
 
 ## Consejos
 
-- La etiqueta numérica junto al deslizador **AM Carrier** muestra el valor actual en tiempo real. Úsela para establecer un nivel preciso sin adivinar la posición del deslizador.
-- El deslizador **AM Carrier** no tiene una clave de configuración persistente. Su valor se lee del radio al conectarse y se restablece si se vuelve a conectar.
-- Debido a que **Low Cut** y **High Cut** ahora se fijan a múltiplos de 50 Hz, al hacer clic una vez desde un valor fuera de la cuadrícula (por ejemplo, un valor no divisible por 50), primero se alineará al límite más cercano antes de continuar avanzando en la dirección esperada.
+- La etiqueta numérica junto al control deslizante **AM Carrier** muestra el valor actual en tiempo real. Úsela para establecer un nivel preciso sin adivinar la posición del control deslizante.
+- El control deslizante AM Carrier no tiene una clave de configuración persistente. Su valor se lee del radio al conectar y se restablece si se vuelve a conectar.
+- Debido a que **Low Cut** y **High Cut** ahora se ajustan a múltiplos de 50 Hz, al hacer clic una vez desde un valor fuera de la cuadrícula (por ejemplo, un valor no divisible por 50), primero se alineará con el límite más cercano antes de continuar avanzando en la dirección esperada.
 
 ## Relacionado
 
