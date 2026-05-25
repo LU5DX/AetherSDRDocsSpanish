@@ -110,7 +110,7 @@ Utilice el motor DeepFilterNet3 para la reducción de ruido basada en redes neur
 
 ## Relacionados
 
-- [Ajustar la profundidad de reducción y el umbral de NR2](tune-nr2-reduction-depth-and-threshold.md)
+- Ajustar la profundidad de reducción y el umbral de NR2
 - [Cambiar el método de ganancia de NR2 entre Linear, Log, Gamma y Trained](switch-nr2-gain-method-between-linear-log-gamma-and-trained.md)
 - [Cambiar el estimador de potencia de ruido de NR2 (OSMS/MMSE/NSTAT)](change-nr2-noise-power-estimator-osms-mmse-nstat.md)
 - [Ajustar la cantidad de reducción de NR4 en dB](adjust-nr4-reduction-amount-in-db.md)

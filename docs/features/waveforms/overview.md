@@ -29,4 +29,4 @@ El diálogo se conecta directamente al FlexWaveformModel del radio para obtener 
 
 ## Relacionado
 
-- [Configuración del radio...](radio-setup.md) — Configure la conexión del radio, audio, antena y ajustes de banda.
+- Configuración del radio... — Configure la conexión del radio, audio, antena y ajustes de banda.

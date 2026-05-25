@@ -1,36 +1,29 @@
 # Resumen de MQTT
 
-El applet de MQTT conecta AetherSDR con un broker MQTT de la estación para que pueda suscribirse a temas, ver los mensajes entrantes en un registro en vivo, superponer valores de temas en el panadapter y publicar mensajes predefinidos con botones personalizados. No se requiere conexión de radio.
+El applet MQTT conecta AetherSDR a un broker MQTT de la estación para que pueda suscribirse a tópicos, ver los mensajes entrantes en un registro en vivo, superponer valores de tópicos en el panadapter y publicar mensajes predefinidos con botones definidos por el usuario. No se requiere conexión de radio.
 
 ## Antes de comenzar
 
-- Un broker MQTT debe ser accesible en su red (por ejemplo, Mosquitto ejecutándose en `localhost`).
-- Si el applet de MQTT no es visible, actívelo haciendo clic en el botón de la bandeja MQTT en la barra lateral derecha. El applet está oculto por defecto.
-- Si el botón de la bandeja MQTT no aparece, es posible que su compilación de AetherSDR no incluya soporte MQTT (se requiere la compuerta de compilación `HAVE_MQTT`).
+- Debe poder acceder a un broker MQTT en su red (por ejemplo, Mosquitto ejecutándose en `localhost`).
+- Si el applet MQTT no está visible, actívelo haciendo clic en el botón de la bandeja MQTT en la barra lateral derecha. El applet está oculto de forma predeterminada.
+- Si el botón de la bandeja MQTT no aparece, es posible que su compilación de AetherSDR no incluya soporte MQTT (se requiere la puerta de compilación `HAVE_MQTT`).
 
 ## Cómo funciona
 
-Al hacer clic en Enable (cambiándolo de Off a On), el applet guarda toda la configuración del broker y abre una conexión con el broker. Se suscribe a cada tema listado en el campo Topics. Los mensajes entrantes aparecen en el registro de mensajes como líneas `topic: value`; el registro conserva las últimas 50 líneas. Los temas con el prefijo `*` en el campo Topics además envían su último valor al panadapter como superposición. Los botones de publicación permiten enviar una carga útil fija a un tema fijo con un solo clic mientras está conectado.
+Al hacer clic en Enable (cambiándolo de Off a On), el applet carga la contraseña MQTT del llavero del sistema, guarda toda la configuración del broker y abre una conexión con el broker. Se suscribe a cada tópico configurado en el cuadro de diálogo MQTT Settings. Los mensajes entrantes aparecen en el registro de mensajes como líneas `tópico: valor`; el registro conserva las últimas 50 líneas. Los tópicos con el prefijo `*` en la lista de suscripción además envían su último valor al panadapter como superposición. Los botones de publicación le permiten enviar una carga útil fija a un tópico fijo con un solo clic mientras está conectado.
 
-Al hacer clic nuevamente en Enable (cambiándolo de On a Off), se desconecta inmediatamente y se eliminan todas las superposiciones del panadapter.
+Al hacer clic nuevamente en Enable (cambiándolo de On a Off), se desconecta inmediatamente y se eliminan las superposiciones del panadapter.
 
 La configuración se guarda en el disco solo cuando Enable pasa de Off a On.
 
 ## Qué hace cada control
 
-| Control | Valor predeterminado | Rango válido | Clave persistida | Comportamiento |
-|---|---|---|---|---|
-| Host | `localhost` | Cualquier nombre de host o IP | `MqttHost` | Nombre de host o dirección IP del broker. |
-| Port | `1883` | 1–65535 | `MqttPort` | Puerto TCP del broker. Cambia automáticamente entre `1883` y `8883` cuando se activa TLS. |
-| User | _(vacío)_ | Cualquier cadena | `MqttUser` | Nombre de usuario del broker. Opcional. |
-| Pass | _(vacío)_ | Cualquier cadena | `MqttPass` | Contraseña del broker. Opcional. Se muestra oculta. |
-| Topics | _(vacío)_ | Lista separada por comas | `MqttTopics` | Temas a los que suscribirse. Anteponga `*` a un tema para también superponer su valor en el panadapter. Ejemplo: `*rotator/pos, *ant/selected, station/log`. |
-| TLS | Off | On / Off | `MqttTls` | Activa el cifrado TLS. Al alternarlo, se muestra u oculta la fila del certificado CA y se cambia automáticamente el puerto entre `1883` y `8883`. |
-| CA cert | _(vacío)_ | Ruta de archivo | `MqttCaFile` | Ruta a un archivo de certificado CA. Déjelo en blanco para usar el conjunto de CA del sistema. La fila solo es visible cuando TLS está marcado. |
-| Enable | Off | Off / On | _(no persistida)_ | Conecta (Off → On) o desconecta (On → Off). Todas las configuraciones se guardan en el disco al conectar. |
-| Publish buttons | _(ninguno)_ | Hasta 12 botones | `MqttButtons` | Cada botón publica una carga útil configurada en un tema configurado. Solo activo mientras está conectado. Se almacena como JSON. |
-| Edit / Done | Edit | Edit / Done | _(no persistida)_ | Activa el modo de edición de botones. En modo de edición, al hacer clic en un botón se abre su diálogo de edición, al hacer clic derecho en un botón se elimina y un mosaico `+` agrega un nuevo botón (hasta 12). Haga clic en Done para salir del modo de edición. |
-| Message log | _(vacío)_ | Últimas 50 líneas | _(no persistida)_ | Muestra los mensajes recibidos como líneas `topic: value`. Solo lectura. |
+| Control        | Valor predeterminado                                                                                                                         | Rango válido                                                                   |
+|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
+| Enable         | Off                                                                                                                                           | Off / On                                                                       |
+| Settings...    | Abre el cuadro de diálogo MQTT Settings (MqttSettingsDialog) para configurar la conexión al broker, las suscripciones y los botones de publicación. | Nuevo en v26.5.3. Reemplaza los campos Host/Puerto/Usuario/Contraseña/TLS/Tópicos en línea. |
+| Botones de publicación | Al hacer clic, publica la carga útil configurada en el tópico configurado a través de MqttClient::publish. Los botones se configuran en el cuadro de diálogo MQTT Settings. | Solo activos mientras está conectado. Se configuran mediante la pestaña Publish Buttons de MqttSettingsDialog. |
+| Registro de mensajes | Muestra los mensajes recibidos como líneas 'tópico: valor'. También procesa actualizaciones de alias de antena desde MQTT.                                              | Limitado a 50 entradas.                                                        |
 
 ## Indicador de estado
 
@@ -42,9 +35,11 @@ La etiqueta de estado junto a Enable muestra el estado actual de la conexión:
 
 ## Consejos
 
-- Los temas se comparan exactamente. Si un tema tiene una ruta profunda como `rotator/az/pos`, el registro de mensajes muestra solo el último segmento de la ruta (`pos`) como etiqueta, pero la ruta completa se usa para la coincidencia de superposición en el panadapter.
-- No necesita una conexión de radio para usar MQTT. El applet opera independientemente del estado de la conexión FlexRadio.
-- Los botones de publicación están inactivos (los clics no tienen efecto) mientras está desconectado. Conéctese primero, luego use los botones.
+- Los tópicos se comparan exactamente. Si un tópico tiene una ruta profunda como `rotator/az/pos`, el registro de mensajes muestra solo el último segmento de la ruta (`pos`) como etiqueta, pero la ruta completa se utiliza para la coincidencia de superposición del panadapter.
+- No necesita una conexión de radio para usar MQTT. El applet funciona independientemente del estado de la conexión FlexRadio.
+- Los botones de publicación están inactivos (los clics no tienen efecto) mientras esté desconectado. Conéctese primero, luego use los botones.
+- La contraseña MQTT se almacena en el llavero del sistema. Al habilitarlo por primera vez, el applet muestra "Waiting for keychain" hasta que se cargue la contraseña.
+- Toda la configuración de conexión del broker (host, puerto, credenciales, TLS, suscripciones) se configura exclusivamente a través del cuadro de diálogo MQTT Settings (Settings > MQTT...).
 
 ## Relacionados
 

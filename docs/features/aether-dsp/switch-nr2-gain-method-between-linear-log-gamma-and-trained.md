@@ -128,5 +128,5 @@ BNR utiliza el NVIDIA Broadcast SDK. El control de intensidad está disponible d
 ## Relacionados
 
 - [Cómo elegir la reducción de ruido adecuada: NR2, NR4, DFNR, MNR](../../operating/dsp/noise-reduction-overview.md)
-- [Activar NR2 en un slice](enable-nr2-on-a-slice.md)
-- [Activar NR4 en un slice](enable-nr4-on-a-slice.md)
+- Activar NR2 en un slice
+- Activar NR4 en un slice

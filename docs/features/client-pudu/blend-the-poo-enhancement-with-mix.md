@@ -57,5 +57,5 @@ La visualización del mando muestra el valor como un porcentaje entero (por ejem
 
 - [Dial Poo / Drive for LF thickness](dial-poo-drive-for-lf-thickness.md)
 - [Tune Poo to the fundamental of your voice (TX) or to bring out RX program lows](tune-poo-to-the-fundamental-of-your-voice-tx-or-to-bring-out-rx-program-lows.md)
-- [Blend the Clarity excitement with Mix](blend-the-clarity-excitement-with-mix.md)
+- Blend the Clarity excitement with Mix
 - [Aetherial TX Voice Processor / Aetherial RX Poodoo overview](overview.md)

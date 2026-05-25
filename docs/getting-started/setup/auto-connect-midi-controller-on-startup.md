@@ -66,4 +66,4 @@ Use el cuadro combinado **Profile:** y los botones **Save** y **Load** para gest
 - [MIDI Controller Mapping overview](../../features/midi-mapping/overview.md)
 - [Record a new binding with Learn mode](../../features/midi-mapping/record-a-new-binding-with-learn-mode.md)
 - [Save the current mapping as a named profile](../../features/midi-mapping/save-the-current-mapping-as-a-named-profile.md)
-- [Triggers for CW straight key and paddles](../../features/midi-mapping/cw-triggers.md)
+- Triggers for CW straight key and paddles

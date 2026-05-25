@@ -50,5 +50,5 @@ Aparece una nueva fila en la tabla de memoria con la frecuencia actual del VFO. 
 - [Sintonizar la radio a una memoria almacenada](tune-the-radio-to-a-stored-memory.md)
 - [Buscar memorias por nombre](search-memories-by-name.md)
 - [Eliminar una o más memorias](delete-one-or-more-memories.md)
-- [Importar y exportar memorias](import-and-export-memories.md)
+- Importar y exportar memorias
 - [Resumen de Canales de Memoria](overview.md)

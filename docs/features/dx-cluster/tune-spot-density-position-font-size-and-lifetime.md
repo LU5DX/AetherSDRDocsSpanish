@@ -90,5 +90,5 @@ Hacer doble clic en una fila de la tabla Spot List sintoniza el slice activo a l
 - [Elija colores para cada fuente de spot](pick-colors-for-each-spot-source.md)
 - [Borre todos los spots del panadapter](clear-all-spots-from-the-panadapter.md)
 - [Inicie el listener UDP de WSJT-X y filtre por CQ, POTA o llamadas a mí](start-wsjt-x-udp-listener-and-filter-for-cq-pota-or-calls-to-me.md)
-- [Edite comandos de inicio para fuentes de cluster](edit-startup-commands-for-cluster-sources.md)
+- Edite comandos de inicio para fuentes de cluster
 <!-- docmesh:llm version=V26.5.2 date=2026-06-02 -->

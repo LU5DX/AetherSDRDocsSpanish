@@ -36,4 +36,4 @@ El diálogo de Importación/Exportación de perfiles tiene dos pestañas: **Expo
 
 ## Relacionado
 
-- [Profile Manager](profile-manager.md): vea, cree, edite y elimine perfiles de transmisión
+- Profile Manager: vea, cree, edite y elimine perfiles de transmisión

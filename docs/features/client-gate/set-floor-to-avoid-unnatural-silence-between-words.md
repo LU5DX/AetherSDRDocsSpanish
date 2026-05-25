@@ -33,7 +33,7 @@ Para el lado RX, la clave persistida equivalente es `ClientGateRxFloorDb`. El ma
 ## Consejos
 
 - El valor predeterminado de Floor de -15.0 dB está marcado por la marca en la barra de reducción de ganancia. Si la atenuación en ese valor aún suena abrupta, intente elevar Floor a -10.0 dB o -6.0 dB.
-- Floor solo limita el techo de atenuación; no cambia cuándo ni con qué rapidez se abre o cierra la compuerta. Si la compuerta se abre y cierra demasiado bruscamente, ajuste también **Release**. Consulte [Ajustar Release para apertura/cierre natural](tune-release-for-natural-open-close.md).
+- Floor solo limita el techo de atenuación; no cambia cuándo ni con qué rapidez se abre o cierra la compuerta. Si la compuerta se abre y cierra demasiado bruscamente, ajuste también **Release**. Consulte Ajustar Release para apertura/cierre natural.
 - Si la compuerta vibra (se abre y cierra rápidamente con señales cercanas al umbral), aumente **Return** para ampliar la banda muerta de histéresis. La banda cian en la curva de transferencia se ensancha a medida que Return aumenta, lo que facilita la evaluación visual de la zona de retención.
 - Establecer Floor en 0.0 dB desactiva toda atenuación, lo que efectivamente anula el efecto de la compuerta sin deshabilitarla en la cadena.
 - Cuando la etapa Gate está deshabilitada en el widget CHAIN, todo el mosaico del applet se atenúa aproximadamente a la mitad de su opacidad. Esto coincide con el efecto de atenuación utilizado en la curva EQ y proporciona una indicación visual rápida de que la etapa está omitida, sin necesidad de verificar directamente el widget CHAIN.
@@ -50,7 +50,7 @@ Para el lado RX, la clave persistida equivalente es `ClientGateRxFloorDb`. El ma
 
 ## Relacionados
 
-- [Ajustar Release para apertura/cierre natural](tune-release-for-natural-open-close.md)
+- Ajustar Release para apertura/cierre natural
 - [Elegir comportamiento de compuerta vs. expansor suave mediante Ratio](choose-gate-vs-soft-expander-behaviour-via-ratio.md)
 - [Observar GR en vivo sin hablar](watch-live-gr-while-not-speaking.md)
 - [Establecer umbral TX justo por encima del piso de ruido ambiental](set-tx-threshold-just-above-room-noise-floor.md)

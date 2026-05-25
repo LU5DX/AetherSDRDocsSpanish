@@ -60,4 +60,4 @@ Si anteriormente utilizaba los controles independientes de sidetone local, consu
 
 - [Escuchar un monitor de sidetone de TX](listen-to-a-tx-sidetone-monitor.md)
 - [Cambiar el tono CW / frecuencia del sidetone](change-cw-pitch-sidetone-frequency.md)
-- [Configurar la velocidad CW y el retardo de break-in](set-cw-speed-and-break-in-delay.md)
+- Configurar la velocidad CW y el retardo de break-in
