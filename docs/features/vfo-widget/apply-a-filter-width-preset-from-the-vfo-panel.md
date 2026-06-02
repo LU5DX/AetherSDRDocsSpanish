@@ -1,33 +1,48 @@
-# Aplicar un ancho de filtro preestablecido desde el panel VFO
+# Aplicar un ancho de filtro predefinido desde el panel VFO
 
-Los botones de preestablecidos de filtro le permiten cambiar el ancho del filtro de recepción de un slice con un solo clic. Úselos para moverse rápidamente entre anchos de banda comunes — por ejemplo, entre un filtro SSB ancho de 3 kHz y un filtro CW estrecho de 500 Hz — sin salir de la vista del espectro.
+Los botones de preselección de filtro le permiten cambiar el ancho del filtro de recepción de un segmento con un solo clic. Úselos para moverse rápidamente entre anchos de banda comunes — por ejemplo, entre un filtro SSB ancho de 3 kHz y un filtro CW estrecho de 500 Hz — sin salir de la vista del espectro.
 
 ## Antes de comenzar
 
 - AetherSDR debe estar conectado a la radio. El panel VFO requiere una conexión activa con la radio.
-- El panel VFO del slice objetivo debe estar abierto y expandido. Si está colapsado a una tira de solo frecuencia, haga clic en cualquier parte del mismo para expandirlo primero.
+- El panel VFO del segmento objetivo debe estar abierto y expandido. Si está contraído a una tira de solo frecuencia, haga clic en cualquier parte del mismo para expandirlo primero.
 
 ## Pasos
 
-1. Haga clic en la bandera marcadora VFO en la pantalla del espectro para el slice que desea ajustar. El panel VFO se abre, anclado a la izquierda del marcador.
+1. Haga clic en la bandera marcadora VFO en la pantalla del espectro para el segmento que desea ajustar. El panel VFO se abre, anclado a la izquierda del marcador.
 2. Haga clic en la pestaña **Mode** dentro del panel VFO.
-3. Haga clic en el botón de preestablecido de filtro que corresponda al ancho de banda que desea. La radio aplica inmediatamente ese ancho de filtro al slice.
+3. Haga clic en el botón de preselección de filtro que corresponde al ancho de banda que desea. La radio aplica inmediatamente ese ancho de filtro al segmento.
 
-Para guardar el ancho de filtro actual en una ranura de preestablecido:
+Para guardar el ancho de filtro actual en una ranura de preselección:
 
-1. Ajuste el filtro al ancho de banda que desea guardar (consulte [Establecer un borde de filtro personalizado desde el panel VFO](set-a-custom-filter-edge-from-the-vfo-panel.md)).
-2. Haga clic derecho en la ranura del botón de preestablecido que desea sobrescribir.
+1. Ajuste el filtro al ancho de banda que desea guardar (consulte [Configurar un borde de filtro personalizado desde el panel VFO](set-a-custom-filter-edge-from-the-vfo-panel.md)).
+2. Haga clic con el botón derecho en la ranura del botón de preselección que desea sobrescribir.
 3. El ancho de filtro actual se guarda en esa ranura.
 
 ## Qué hace cada control
 
-| Control                          | Comportamiento                                                                                                                                                                                                                                   | Predeterminado                                                                                                          |
-|----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| Botones de preestablecidos de filtro (pestaña Mode) | Cada botón aplica un ancho de filtro preestablecido guardado al slice. Haga clic izquierdo para aplicar; haga clic derecho para guardar el ancho de filtro actual en esa ranura. Los bordes de filtro bajo y alto personalizados se pueden almacenar por ranura mediante clic derecho. | —                                                                                                                       |
-| Etiqueta de ancho de filtro      | Muestra el ancho de banda del filtro actual. Haga clic para recorrer los botones de preestablecidos de filtro en la pestaña Mode. Usa RxApplet::formatFilterWidth como fuente única de verdad, corrigiendo un desplazamiento de 0.1 kHz que afectaba las lecturas en modo SSB/digital (#2197, v0.9.8). |                                                                                                                         |
-| Botón ADSP (pestaña DSP)         | Abre el diálogo de configuración de AetherDSP (NR2 / NR4 / DFNR / RN2 / BNR / MNR del lado del cliente). Mismo punto de entrada que el menú Settings (v0.9.8).                                                                                   | Estilizado como un conmutador de DSP del lado de la radio pero no seleccionable. Al hacer clic, abre y enfoca el diálogo no modal de AetherDSP. |
-| Botón AetherVoice (pestaña DSP)  | Alterna la Aetherial Audio Channel Strip — el conjunto unificado de DSP de TX/RX (v0.9.8).                                                                                                                                                       | Ocupa 2 columnas en la cuadrícula DSP de 4 columnas. Coincide con los puntos de entrada existentes del menú/cadena para la tira.          |
-| Botón Lock VFO                   | Alterna el bloqueo de frecuencia para este slice. Cuando está bloqueado, la pantalla de frecuencia muestra un indicador "LOCKED" y se bloquea la sintonización con la rueda del ratón. La entrada directa de frecuencia también está bloqueada. Al desbloquear, se elimina la superposición. | off                                                                                                                     |
+| Control                          | Comportamiento                                                                                                                                                                                                                                       | Valor predeterminado                                                                                                                 |
+|----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| Botón de antena RX               | Abre un menú de selección de antena para la antena receptora de este segmento. Usa la lista de antenas específica del segmento cuando está disponible. Los elementos del menú muestran información sobre herramientas y sugerencia de estado.             | —                                                                                                                                    |
+| Botón de antena TX               | Abre un menú de selección de antena para la antena transmisora de este segmento. Filtra automáticamente los puertos de antena solo RX. Los elementos del menú muestran información sobre herramientas y sugerencia de estado.                            | —                                                                                                                                    |
+| Pantalla de frecuencia           | Muestra la frecuencia actual del segmento. Haga clic una vez para comenzar la entrada directa de frecuencia; escriba MHz y presione Enter o Tab. La entrada directa está bloqueada cuando el segmento está bloqueado.                                    | —                                                                                                                                    |
+| Etiqueta de ancho de filtro      | Muestra el ancho de banda del filtro actual. Haga clic para recorrer los botones de preselección de filtro en la pestaña Mode. Usa RxApplet::formatFilterWidth como fuente única de verdad, corrigiendo un desplazamiento de 0,1 kHz que afectaba las lecturas en modo SSB/digital (#2197, v0.9.8). |                                                                                                                                      |
+| Deslizador de ganancia AF (pestaña Audio) | Establece el nivel de salida de audio para este segmento (0-100).                                                                                                                                                                                       | 100                                                                                                                                  |
+| Deslizador de paneo (pestaña Audio)      | Establece el paneo estéreo izquierda/derecha para este segmento (0-100). 50 = centro. El relleno del deslizador se ancla desde el centro hacia afuera, con un punto de marca central en la ranura que muestra la posición neutra.                          | 50                                                                                                                                   |
+| Botón de silencio (pestaña Audio)        | Silencia la salida de audio para este segmento sin cambiar la configuración de ganancia AF.                                                                                                                                                            | desactivado                                                                                                                          |
+| Botón de squelch + deslizador (pestaña Audio) | Activa el squelch para este segmento. El deslizador adyacente establece el umbral (0-100). Deshabilitado para RTTY y modos digitales (DIGU, DIGL).                                                                                                      | desactivado                                                                                                                          |
+| Combinación AGC (pestaña Audio)           | Establece la velocidad de ataque/soltura del AGC para este segmento. Opciones: FAST, MED, SLOW, OFF.                                                                                                                                                   | FAST                                                                                                                                 |
+| Botones NR / NB / ANF / APF / NRL / NRS / RNN / NRF / ANFL / ANFT (pestaña DSP) | Activa el algoritmo correspondiente de reducción de ruido o filtrado del lado de la radio para este segmento. APF es visible solo en modo CW.                                                                                                             | desactivado                                                                                                                          |
+| Deslizador de nivel DSP (pestaña DSP)         | Establece el nivel de procesamiento para el algoritmo DSP nivelado activado más recientemente. La etiqueta a la izquierda identifica el objetivo actual. Se activa automáticamente al inicio si el perfil guardado de la radio tiene un DSP nivelado activado. Oculto (atenuado) cuando no hay ningún algoritmo nivelado activo. | —                                                                                                                                    |
+| Botón ADSP (pestaña DSP)                     | Abre el diálogo de configuración de AetherDSP (NR2 / NR4 / DFNR / RN2 / BNR / MNR del lado del cliente). Botón pulsador no verificable. Al hacer clic, eleva y enfoca el diálogo no modal.                                                               | —                                                                                                                                    |
+| Botón AetherVoice (pestaña DSP)              | Abre el Aetherial Audio Channel Strip — el conjunto unificado de DSP de TX/RX. Botón pulsador no verificable. Abarca 2 columnas en la cuadrícula DSP de 4 columnas.                                                                                     | —                                                                                                                                    |
+| Combinación Mode (pestaña Mode)              | Establece el modo de demodulación para este segmento. Opciones: USB, LSB, CW, CWL, AM, SAM, DIGU, DIGL, FM, NFM, DFM, RTTY.                                                                                                                           | USB                                                                                                                                  |
+| Botones de preselección de filtro (pestaña Mode) | Cada botón aplica una preselección de ancho de filtro guardada al segmento. Haga clic izquierdo para aplicar; haga clic derecho para guardar el ancho de filtro actual en esa ranura. Los bordes de filtro inferior y superior personalizados se pueden almacenar por ranura mediante clic derecho. | —                                                                                                                                    |
+| Botones + etiquetas RIT / XIT (pestaña X/RIT) | Activa la sintonización incremental del receptor (RIT) o del transmisor (XIT). La etiqueta muestra el desplazamiento actual; la rueda de desplazamiento ajusta en pasos de 10 Hz.                                                                      | desactivado                                                                                                                          |
+| Combinación de canal DAX (pestaña DAX)         | Asigna un canal de audio DAX a este segmento. Opciones: Off, 1-8.                                                                                                                                                                                     | Off                                                                                                                                  |
+| Botón de grosor del marcador                  | Recorre la línea del marcador VFO entre Off, 1 px y 3 px. Persiste por segmento.                                                                                                                                                                    | 1 px                                                                                                                                 |
+| Botón de bordes de filtro                     | Alterna las líneas de borde del filtro en la banda pasante del espectro. Persiste por segmento.                                                                                                                                                       | mostrado                                                                                                                            |
+| Alternancia de contracción                    | Contrae el panel VFO a una tira compacta de solo frecuencia. Persiste por segmento.                                                                                                                                                                | expandido                                                                                                                           |
 
 ## Cambios en la pestaña DSP en v0.9.8
 
@@ -40,9 +55,9 @@ La pestaña **DSP** ahora muestra solo los botones de reducción de ruido del la
 - **MNR**
 - **DFNR**
 
-Estos módulos DSP del lado del cliente ahora se acceden a través del menú de superposición del espectro y el applet AetherDSP. Actívelos allí en lugar de desde el panel VFO.
+Estos módulos DSP del lado del cliente ahora son accesibles a través del menú de superposición del espectro y el applet AetherDSP. Actívelos allí en lugar de desde el panel VFO.
 
-Los botones que permanecen en la pestaña DSP están dispuestos en una cuadrícula de cuatro columnas, seguidos por los botones de inicio ADSP y AetherVoice:
+Los botones que permanecen en la pestaña DSP están dispuestos en una cuadrícula de cuatro columnas, seguidos de los botones de lanzamiento ADSP y AetherVoice:
 
 | Posición | Botón |
 |---|---|
@@ -59,94 +74,65 @@ Los botones que permanecen en la pestaña DSP están dispuestos en una cuadrícu
 | Fila 4, col 1 | ADSP |
 | Fila 4, cols 2–3 | AetherVoice |
 
-Una fila compartida de **control deslizante de nivel DSP** aparece debajo de la cuadrícula de botones. El control deslizante se reorienta automáticamente al último botón DSP con nivel que se haya activado. En v0.9.8, cuando llega un cambio de estado de nivel DSP desde la radio (por ejemplo, cuando el perfil guardado de la radio tiene NR habilitado al inicio), el control deslizante aparece inmediatamente sin requerir una reactivación manual. Su etiqueta muestra el nombre del objetivo actual (por ejemplo, **NR** o **NB**), y el valor a la derecha del control deslizante muestra el nivel actual numéricamente. Cuando ningún algoritmo DSP con nivel está activo — o cuando solo RNN, ANFT o APF están encendidos — la fila del control deslizante está presente en el diseño pero visualmente atenuada. Hacer clic en ella mientras está atenuada no tiene efecto.
+Una fila compartida de **deslizador de nivel DSP** aparece debajo de la cuadrícula de botones. El deslizador se redirige automáticamente al botón DSP nivelado que se encendió más recientemente. En v0.9.8, cuando llega un cambio de estado de nivel DSP desde la radio (por ejemplo, cuando el perfil guardado de la radio tiene NR activado al inicio), el deslizador aparece inmediatamente sin requerir una reactivación manual. Su etiqueta muestra el nombre del objetivo actual (por ejemplo, **NR** o **NB**), y el valor a la derecha del deslizador muestra el nivel actual numéricamente. Cuando no hay ningún algoritmo DSP nivelado activo — o cuando solo RNN, ANFT o APF están encendidos — la fila del deslizador está presente en el diseño pero visualmente atenuada. Hacer clic en ella mientras está atenuada no tiene efecto.
 
-| Control | Comportamiento | Predeterminado | Clave de ajuste |
+| Control | Comportamiento | Valor predeterminado | Clave de configuración |
 |---|---|---|---|
-| Botones NR / NB / ANF / APF / NRL / NRS / RNN / NRF / ANFL / ANFT (pestaña DSP) | Activa el algoritmo de reducción de ruido o filtrado del lado de la radio correspondiente para este slice. APF es visible solo en modo CW. | off | — |
-| Control deslizante de nivel DSP (pestaña DSP) | Establece el nivel de procesamiento para el algoritmo DSP con nivel activado más recientemente. La etiqueta a la izquierda identifica el objetivo actual. Se activa automáticamente al inicio si el perfil guardado de la radio tiene un DSP con nivel habilitado. Oculto (atenuado) cuando ningún algoritmo con nivel está activo. | — | — |
-| Botón ADSP (pestaña DSP) | Abre el diálogo de configuración de AetherDSP (NR2 / NR4 / DFNR / RN2 / BNR / MNR del lado del cliente). Botón pulsador no seleccionable. | — | — |
-| Botón AetherVoice (pestaña DSP) | Abre la Aetherial Audio Channel Strip — el conjunto unificado de DSP de TX/RX. Botón pulsador no seleccionable. Ocupa 2 columnas en la cuadrícula DSP de 4 columnas. | — | — |
+| Botones NR / NB / ANF / APF / NRL / NRS / RNN / NRF / ANFL / ANFT (pestaña DSP) | Activa el algoritmo correspondiente de reducción de ruido o filtrado del lado de la radio para este segmento. APF es visible solo en modo CW. | desactivado | — |
+| Deslizador de nivel DSP (pestaña DSP) | Establece el nivel de procesamiento para el algoritmo DSP nivelado activado más recientemente. La etiqueta a la izquierda identifica el objetivo actual. Se activa automáticamente al inicio si el perfil guardado de la radio tiene un DSP nivelado activado. Oculto (atenuado) cuando no hay ningún algoritmo nivelado activo. | — | — |
+| Botón ADSP (pestaña DSP) | Abre el diálogo de configuración de AetherDSP (NR2 / NR4 / DFNR / RN2 / BNR / MNR del lado del cliente). Botón pulsador no verificable. | — | — |
+| Botón AetherVoice (pestaña DSP) | Abre el Aetherial Audio Channel Strip — el conjunto unificado de DSP de TX/RX. Botón pulsador no verificable. Abarca 2 columnas en la cuadrícula DSP de 4 columnas. | — | — |
 
 ## Cambios en el comportamiento del squelch (v26.5.1)
 
-El control de squelch en la pestaña **Audio** ahora está deshabilitado para modos RTTY y digitales, además del modo CW. Esto evita que el squelch bloquee señales FSK débiles que se envían a decodificadores externos a través de DAX (#2504).
+El control de squelch en la pestaña **Audio** ahora está deshabilitado para RTTY y modos digitales, además del modo CW. Esto evita que el squelch enmascare señales FSK débiles que se envían a decodificadores externos a través de DAX (#2504).
 
-Cuando cambia un slice a modo DIGU, DIGL o RTTY:
+Cuando cambia un segmento a modo DIGU, DIGL o RTTY:
 
-- El botón y el control deslizante de Squelch se deshabilitan.
+- El botón y el deslizador de Squelch se deshabilitan.
 - Si el squelch estaba activo, se apaga automáticamente. El estado anterior se guarda internamente y se restaura si vuelve a un modo de voz.
 
 Esto coincide con el comportamiento existente para el modo CW, donde la radio bloquea el squelch encendido a un nivel fijo y rechaza los cambios del usuario.
 
 ## Cambios en la selección de antena (v26.5.2.1)
 
-Los botones **RX antenna** y **TX antenna** ahora usan menús mejorados:
+Los botones de **antena RX** y **antena TX** ahora utilizan menús mejorados:
 
-- El menú de antena RX utiliza la `rxAntennaList()` del slice cuando está disponible, recurriendo a la lista global de antenas para compatibilidad con versiones anteriores.
-- El menú de antena TX filtra inteligentemente los puertos de antena solo de RX verificando prefijos "RX", prefijos "ANT", prefijos "TX" o "XVTR" como tokens de respaldo.
-- Los elementos del menú ahora almacenan el identificador de la antena como dato, permitiendo la selección por nombre interno en lugar de la etiqueta mostrada.
-- Cada elemento del menú incluye un tooltip y un status tip que muestran el identificador de la antena.
+- El menú de antena RX usa `rxAntennaList()` del segmento cuando está disponible, recurriendo a la lista global de antenas para compatibilidad con versiones anteriores.
+- El menú de antena TX filtra inteligentemente los puertos de antena solo RX verificando prefijos "RX", prefijos "ANT", prefijos "TX" o "XVTR" como tokens de respaldo.
+- Los elementos del menú ahora almacenan el identificador de la antena como datos, permitiendo la selección por nombre interno en lugar de etiqueta mostrada.
+- Cada elemento del menú incluye información sobre herramientas y sugerencia de estado que muestran el identificador de la antena.
 
-### Mejoras en la entrada de frecuencia (v26.5.2.1)
+## Mejoras en la entrada de frecuencia (v26.5.2.1)
 
-La lógica de entrada de frecuencia se ha actualizado para manejar mejor las bandas de transverter (XVTR):
+La lógica de entrada de frecuencia se ha actualizado para manejar mejor las bandas de transvertidor (XVTR):
 
-- La frecuencia máxima de XVTR se ha aumentado de 450 MHz a 50000 MHz para admitir bandas de microondas.
-- El análisis de conveniencia de "tres dígitos" (insertar un decimal después del tercer dígito para enteros simples como 1446 → 144.6 MHz) ahora solo se activa cuando la frecuencia del slice está entre 100 MHz y 999 MHz. Para bandas de 23 cm y microondas (por encima de 1000 MHz), un entero simple como 1296 se trata directamente como 1296 MHz.
+- La frecuencia máxima de XVTR se ha incrementado de 450 MHz a 50000 MHz para soportar bandas de microondas.
+- El análisis de conveniencia de "banda de tres dígitos" (insertar un decimal después del tercer dígito para enteros simples como 1446 → 144.6 MHz) ahora solo se activa cuando la frecuencia del segmento está entre 100 MHz y 999 MHz. Para bandas de 23 cm y microondas (por encima de 1000 MHz), un entero simple como 1296 se trata directamente como 1296 MHz.
 
-### Mejoras en la entrada de frecuencia (v26.5.3)
+## Mejoras en la entrada de frecuencia (v26.5.3)
 
-La lógica de entrada de frecuencia ahora utiliza la clase de utilidad `FrequencyEntryParser` para un análisis consistente en toda la aplicación:
+La lógica de entrada de frecuencia ahora usa la clase de utilidad `FrequencyEntryParser` para un análisis consistente en toda la aplicación:
 
 - La entrada explícita en MHz (escribir una frecuencia mayor a 54 MHz) ahora también se reconoce en bandas HF, permitiendo la entrada directa en MHz sin estar en una banda XVTR.
-- El método `normalizedMhzText()` maneja formatos con múltiples puntos como "14.225.000" eliminando los puntos adicionales después del primero, asegurando un análisis consistente.
-- La entrada directa de frecuencia se bloquea cuando el slice está bloqueado. Intentar ingresar una frecuencia mientras está bloqueado no produce ninguna acción.
+- El método `normalizedMhzText()` maneja formatos con múltiples puntos como "14.225.000" eliminando los puntos después del primero, asegurando un análisis consistente.
+- La entrada directa de frecuencia está bloqueada cuando el segmento está bloqueado. Intentar ingresar una frecuencia mientras está bloqueado no produce ninguna acción.
 
-### Renderizado de la insignia del slice (v26.5.2.1)
+## Renderizado de la insignia del segmento (v26.5.2.1)
 
-La insignia de la letra del slice ahora se renderiza como Qt Rich Text (`Qt::RichText`), solucionando un problema donde ciertas letras de slice se mostraban incorrectamente (#2606). El estilo de la insignia permanece igual.
+La insignia de la letra del segmento ahora se renderiza como Qt Rich Text (`Qt::RichText`), corrigiendo un problema donde ciertas letras de segmento se mostraban incorrectamente (#2606). El estilo de la insignia permanece igual.
 
-| Control | Comportamiento | Predeterminado | Clave de ajuste |
-|---|---|---|---|
-| Botón RX antenna | Abre un menú de selección de antena para la antena receptora de este slice. Utiliza la lista de antenas específica del slice cuando está disponible. Los elementos del menú muestran tooltip y status tip. | — | — |
-| Botón TX antenna | Abre un menú de selección de antena para la antena transmisora de este slice. Filtra automáticamente los puertos de antena solo de RX. Los elementos del menú muestran tooltip y status tip. | — | — |
+## Mejoras visuales del deslizador de paneo (v26.6.1)
 
-## Comportamiento de Lock VFO (v26.5.3)
+El **deslizador de paneo** en la pestaña **Audio** ahora pinta su relleno desde el centro hacia afuera, con un pequeño punto de marca central en la ranura. Esto hace que la posición neutral (50%) sea visible de un vistazo, y la dirección del relleno coincide con las expectativas del operador para un control de balance izquierda/derecha.
 
-El botón de bloqueo VFO ahora bloquea completamente todas las operaciones de sintonización cuando está activado:
+Anteriormente, el relleno del deslizador se pintaba desde el borde izquierdo hasta la posición del control, lo cual era engañoso para un control anclado al centro donde el cero significativo es el punto medio. El nuevo renderizado usa la clase `CenterMarkSlider` que sobrescribe el relleno de subpágina predeterminado de Qt: borra la mitad no deseada de la subpágina con el color de fondo de la ranura, luego agrega el relleno deseado del centro al control en el color de acento.
 
-- La sintonización con la rueda del ratón se bloquea y se envía una notificación `tuneBlockedByLock` al slice, que cancela cualquier entrada directa de frecuencia en curso.
-- El estado de bloqueo se refleja en la etiqueta de visualización de frecuencia, que muestra una superposición "LOCKED" cuando está bloqueado.
-- Desbloquear el VFO elimina la superposición y restaura el comportamiento normal de sintonización.
-- Cuando el VFO está bloqueado, el botón de bloqueo muestra un emoji de candado (🔒); cuando está desbloqueado, muestra un emoji de candado abierto (🔓).
+## Actualización del tema (v26.6.1)
 
-| Control | Comportamiento | Predeterminado | Clave de ajuste |
-|---|---|---|---|
-| Botón Lock VFO | Alterna el bloqueo de frecuencia para este slice. Cuando está bloqueado, se bloquean la sintonización con la rueda del ratón y la entrada directa de frecuencia. | off | — |
+El panel VFO ahora usa el sistema de temas para todos los elementos visuales:
 
-## Mejoras en el diseño de pestañas (v26.5.3)
-
-La pila de pestañas del panel VFO se ha mejorado para eliminar espacios en el diseño:
-
-- La clase `TabStack` ahora sobrescribe `sizeHint()` y `minimumSizeHint()` para informar solo el tamaño preferido de la página actual, en lugar del máximo entre todas las páginas.
-- Esto soluciona un problema donde aparecía un espacio en la pestaña Mode cuando la pestaña DSP era más alta (debido a que el digContainer es visible en modos DIGU/DIGL).
-
-## Consejos
-
-- La etiqueta de ancho de filtro en el encabezado del panel VFO muestra el ancho de banda activo en todo momento. Haga clic directamente en ella para recorrer los botones de preestablecidos sin cambiar a la pestaña Mode primero.
-- Las ranuras de preestablecidos se comparten entre todos los slices y modos. Sobrescribir una ranura afecta a todos los slices que la usan.
-- Las líneas de borde de filtro en el panadapter del espectro reflejan el ancho de filtro activo. Si las líneas están ocultas, actívelas con el botón Filter edges en el panel VFO. Consulte [Ocultar o mostrar líneas de borde de filtro en el espectro](hide-or-show-filter-edge-lines-on-the-spectrum.md).
-- Para acceder a NR2, RN2, BNR, NR4, MNR o DFNR, haga clic derecho en la superposición del espectro o abra el applet AetherDSP.
-- El control deslizante de nivel DSP ahora aparece inmediatamente al inicio para cualquier DSP con nivel que se haya guardado en el perfil de la radio, sin requerir activación manual.
-- El menú de antena RX ahora utiliza la lista de antenas específica del slice cuando está disponible, que puede diferir de la lista global de antenas en configuraciones con múltiples radios.
-- Al ingresar una frecuencia en una banda VHF/UHF (100-999 MHz), los enteros simples con 4+ dígitos tendrán un decimal insertado después del tercer dígito (ej., 14696 → 146.96 MHz). Para bandas de microondas por encima de 1000 MHz, los enteros simples se tratan directamente como MHz.
-- Cuando el VFO está bloqueado, haga clic nuevamente en el botón de bloqueo para desbloquear y restaurar la sintonización normal.
-- La entrada explícita en MHz (ej., "14225") ahora se reconoce en bandas HF, permitiendo la entrada directa de frecuencia sin el contexto de banda XVTR.
-
-## Relacionados
-
-- [Establecer un borde de filtro personalizado desde el panel VFO](set-a-custom-filter-edge-from-the-vfo-panel.md)
-- [Cambiar modo desde el panel VFO](change-mode-from-the-vfo-panel.md)
-- [Ocultar o mostrar líneas de borde de filtro en el espectro](hide-or-show-filter-edge-lines-on-the-spectrum.md)
-- [Descripción general del panel VFO](overview.md)
+- El contenedor del panel VFO está registrado bajo el ámbito de tema `spectrum/vfo`, permitiendo que los archivos de tema apunten a estilos específicos del VFO por separado de la pantalla del espectro.
+- Las clases `CenterMarkSlider` y `MiniBadgeButton` usan tokens de color de `ThemeManager` (`color.background.1`, `color.accent`, etc.) para sus operaciones de pintado personalizadas.
+- La hoja de estilo del botón MiniBadge usa el método `applyStyleSheet()` con variables de plantilla del tema (por ejemplo, `{{color.background.1}}`, `{{color.accent}}`) en lugar de colores hexadecimales codificados.
+- La herramienta Inspector (clic en modo Inspeccionar) en el panel VFO ahora muestra los tokens de tema que

@@ -1,10 +1,10 @@
 # Controles de TX
 
-El applet Controles de TX proporciona controles de transmisión: medidores de potencia directa y ROE, deslizadores de potencia RF/Tune, selector de perfil TX, botones TUNE/MOX/ATU/MEM y conmutación APD (Adaptive Pre-Distortion) con indicadores de estado.
+El applet Controles de TX proporciona controles de transmisión: medidores de potencia directa y ROE, deslizadores de potencia RF/Tono, selector de perfil TX, botones TUNE/MOX/ATU/MEM y conmutación de APD (Predistorsión Adaptativa) con indicadores de estado.
 
-## Cambiar perfiles TX (p. ej. SSB, Digital)
+## Cambiar perfiles TX (ej. SSB, Digital)
 
-Use el selector Perfil TX para cargar un perfil de transmisión con nombre desde la radio. Los perfiles almacenan configuraciones del micrófono, valores del ecualizador y otros parámetros de transmisión, permitiéndole cambiar rápidamente entre modos como SSB y Digital.
+Use el selector de Perfil TX para cargar un perfil de transmisión con nombre desde la radio. Los perfiles almacenan configuraciones de micrófono, valores de ecualizador y otros parámetros de transmisión, lo que le permite cambiar rápidamente entre modos como SSB y Digital.
 
 ### Antes de comenzar
 
@@ -14,8 +14,8 @@ Use el selector Perfil TX para cargar un perfil de transmisión con nombre desde
 ### Pasos
 
 1. Haga clic en el botón de la bandeja **TX** en la barra lateral derecha para abrir el applet Controles de TX.
-2. Localice el menú desplegable **TX Profile** cerca del centro del applet.
-3. Haga clic en el menú desplegable y seleccione el nombre del perfil que desea cargar (por ejemplo, "SSB" o "Digital").
+2. Localice la lista desplegable **TX Profile** cerca del centro del applet.
+3. Haga clic en la lista desplegable y seleccione el nombre del perfil que desea cargar (por ejemplo, "SSB" o "Digital").
 
 La radio carga el perfil seleccionado de inmediato. No se requiere ningún paso de confirmación.
 
@@ -23,7 +23,7 @@ La radio carga el perfil seleccionado de inmediato. No se requiere ningún paso 
 
 | Control | Tipo | Comportamiento |
 |---|---|---|
-| **TX Profile** | Menú desplegable | Selecciona y carga un perfil de transmisión desde la radio. La lista es proporcionada por la radio. |
+| **TX Profile** | Lista desplegable | Selecciona y carga un perfil de transmisión desde la radio. La lista es proporcionada por la radio. |
 
 ### Consejos
 
@@ -32,19 +32,21 @@ La radio carga el perfil seleccionado de inmediato. No se requiere ningún paso 
 
 ### Solución de problemas
 
-- **El menú desplegable TX Profile está vacío** — No existen perfiles de transmisión en la radio. Abra `Profiles > Profile Manager...` para crear uno.
-- **El menú desplegable TX Profile no responde** — AetherSDR no está conectado a la radio. Conéctelo primero mediante `Settings > Connect to Radio...`.
+- **La lista desplegable TX Profile está vacía** — No existen perfiles de transmisión en la radio. Abra `Profiles > Profile Manager...` para crear uno.
+- **La lista desplegable TX Profile no responde** — AetherSDR no está conectado a la radio. Conéctese primero mediante `Settings > Connect to Radio...`.
 
-## Deslizadores de Potencia RF y Potencia Tune
+## Deslizadores de Potencia RF y Potencia de Tono
 
-Los deslizadores **RF Power** y **Tune Pwr** controlan los niveles de potencia de transmisión. Al arrastrar cualquier deslizador, una información sobre herramientas muestra el valor actual en vatios (p. ej., "50 W").
+Los deslizadores **RF Power** y **Tune Pwr** controlan los niveles de potencia de transmisión. Al arrastrar cualquier deslizador, una información sobre herramientas muestra el valor actual como porcentaje (ej., "50%").
 
-| Control | Rango | Valor predeterminado | Comportamiento |
+| Control | Rango | Predeterminado | Comportamiento |
 |---|---|---|---|
-| **RF Power** | 0–100 | 100 | Establece el nivel de potencia de RF de transmisión. Llama a `TransmitModel::setRfPower`. |
-| **Tune Pwr** | 0–100 | 10 | Establece el nivel de potencia de la portadora de sintonía. Llama a `TransmitModel::setTunePower`. |
+| **RF Power** | 0–100 | 100 | Establece el nivel de potencia de RF de transmisión como porcentaje del máximo de la radio. Llama a `TransmitModel::setRfPower`. |
+| **Tune Pwr** | 0–100 | 10 | Establece el nivel de potencia de la portadora de sintonía como porcentaje del máximo de la radio. Llama a `TransmitModel::setTunePower`. |
 
-## Medidores de potencia
+> **Nota:** En v26.6.1, las informaciones sobre herramientas de los deslizadores ahora muestran porcentajes en lugar de valores en vatios. La potencia de salida real depende del modelo de radio y su potencia máxima nominal.
+
+## Medidores de Potencia
 
 | Medidor | Rango | Comportamiento |
 |---|---|---|
@@ -53,41 +55,41 @@ Los deslizadores **RF Power** y **Tune Pwr** controlan los niveles de potencia d
 
 ### Retención de pico del medidor de potencia RF (v26.5.2.1)
 
-El medidor **RF Pwr** incluye una función de retención de pico que captura y mantiene la lectura de potencia envolvente de pico (PEP):
+El medidor **RF Pwr** incluye una función de retención de pico que captura y mantiene la lectura de potencia de pico de envolvente (PEP):
 
 - El valor pico se mantiene constante durante 2 segundos después del pico más reciente.
-- Después del período de retención, el valor pico decae hacia la lectura actual a una velocidad que toma aproximadamente 2.5 segundos desde el pico hasta cero.
-- Cuando deja de transmitir, el valor de retención de pico se restablece a cero inmediatamente; una lectura PEP retenida no persiste entre transmisiones.
+- Después del período de retención, el valor pico disminuye gradualmente hacia la lectura actual a una velocidad que toma aproximadamente 2.5 segundos desde el pico hasta cero.
+- Cuando deja de transmitir, el valor de retención de pico se reinicia a cero inmediatamente — una lectura PEP retenida no persiste entre transmisiones.
 
-La velocidad de decaimiento se escala automáticamente según el modelo de radio: 48 W/s para una radio sin amplificador (escala de 120 W) y 240 W/s cuando un excitador Aurora 500 W está conectado (escala de 600 W).
+La velocidad de disminución se escala automáticamente según el modelo de radio: 48 W/s para una radio sin amplificador (escala de 120 W) y 240 W/s cuando un excitador Aurora 500 W está conectado (escala de 600 W).
 
 ## Comportamiento del botón ATU (v0.9.5.1)
 
 A partir de v0.9.5.1, el botón **ATU** funciona como un conmutador por frecuencia que refleja el comportamiento de SmartSDR:
 
-| Situación | Lo que hace el botón ATU |
+| Situación | Qué hace el botón ATU |
 |---|---|
 | Sin sintonización exitosa previa, o la frecuencia ha cambiado desde la última sintonización | Inicia un nuevo ciclo de sintonización ATU. |
-| El estado ATU es **Success** (o **OK**) y la frecuencia de transmisión no ha cambiado desde la última sintonización | Cambia el sintonizador al modo bypass. |
-| El ATU está en bypass | El siguiente clic inicia un nuevo ciclo de sintonización. |
+| El estado de ATU es **Success** (o **OK**) y la frecuencia de transmisión no ha cambiado desde la última sintonización | Cambia el sintonizador a bypass. |
+| ATU está en bypass | El siguiente clic inicia un nuevo ciclo de sintonización. |
 
 En la práctica, esto significa:
 
-1. Haga clic en **ATU** en una nueva frecuencia: el sintonizador ejecuta un ciclo de sintonización completo.
-2. Cuando el indicador **Success** se enciende en verde, haga clic en **ATU** nuevamente en la misma frecuencia: el sintonizador cambia a bypass.
-3. Cambie de frecuencia y haga clic en **ATU**: el sintonizador siempre inicia un nuevo ciclo, incluso si el estado anterior fue exitoso.
+1. Haga clic en **ATU** en una nueva frecuencia — el sintonizador ejecuta un ciclo de sintonización completo.
+2. Cuando el indicador **Success** se ilumina en verde, haga clic en **ATU** nuevamente en la misma frecuencia — el sintonizador cambia a bypass.
+3. Cambie de frecuencia y haga clic en **ATU** — el sintonizador siempre inicia un nuevo ciclo, incluso si el estado anterior fue exitoso.
 
-El indicador **Byp** se enciende en naranja cuando el sintonizador está en bypass. El indicador **Success** se enciende en verde cuando la sintonización fue exitosa y el sintonizador mantiene esa adaptación.
+El indicador **Byp** se ilumina en naranja siempre que el sintonizador esté en bypass. El indicador **Success** se ilumina en verde cuando la sintonización fue exitosa y el sintonizador mantiene esa adaptación.
 
 > **Nota:** Los botones **ATU** y **MEM** están deshabilitados cuando el amplificador TGXL está en modo OPERATE.
 
-### Luces indicadoras ATU
+### Luces indicadoras del ATU
 
 | Indicador | Color | Significado |
 |---|---|---|
-| **Success** | Verde | El estado ATU es Successful u OK. |
-| **Byp** | Naranja | El ATU está en Bypass o ManualBypass. |
-| **Mem** | Verde | El ATU está usando una memoria. |
+| **Success** | Verde | El estado de ATU es Successful u OK. |
+| **Byp** | Naranja | ATU está en Bypass o ManualBypass. |
+| **Mem** | Verde | ATU está usando una memoria. |
 
 Todos los indicadores están atenuados cuando la condición asociada no está activa.
 
@@ -97,7 +99,7 @@ Haga clic derecho en el botón **ATU** para abrir un menú contextual con dos op
 
 | Elemento del menú | Acción |
 |---|---|
-| **Pre-tune bands…** | Abre el diálogo Pre-Tune para barrer los ajustes del sintonizador de antena en un rango de frecuencias. Habilitado solo cuando **MEM** está activo. |
+| **Pre-tune bands…** | Abre el diálogo de Pre-sintonización para barrer los ajustes del sintonizador de antena en un rango de frecuencias. Habilitado solo cuando **MEM** está activo. |
 | **Clear ATU memories…** | Solicita confirmación y luego borra todas las memorias de sintonización ATU almacenadas en la radio. |
 
 > **Nota:** **Pre-tune bands…** está deshabilitado cuando el botón **MEM** está apagado. Active **MEM** primero para usar esta función.
@@ -108,7 +110,7 @@ Haga clic en **TUNE** para iniciar o detener una portadora de sintonía. Mientra
 
 ### Menú contextual del botón TUNE (v26.5.2.1)
 
-Haga clic derecho en el botón **TUNE** para elegir la forma de la portadora para el próximo ciclo de sintonía. Esta es una selección única: la elección no se guarda en la configuración de AetherSDR.
+Haga clic derecho en el botón **TUNE** para elegir la forma de la portadora para el próximo ciclo de sintonía. Esta es una selección de una sola vez — la elección no se guarda en la configuración de AetherSDR.
 
 | Elemento del menú | Acción |
 |---|---|
@@ -119,22 +121,22 @@ El modo de sintonía de la radio también se restablece a un solo tono después 
 
 ## Botón MOX
 
-Haga clic en **MOX** para activar o desactivar la transmisión manual. El botón se vuelve rojo mientras la transmisión está activada.
+Haga clic en **MOX** para activar o desactivar la transmisión manual. El botón se vuelve rojo mientras la TX está activada.
 
 ### Botón MOX y tonos Quindar (v0.9.7)
 
-A partir de v0.9.7, al hacer clic en **MOX**, la solicitud de PTT se enruta a través del coordinador de tonos Quindar en lugar de activar el transmisor directamente. El efecto práctico es:
+A partir de v0.9.7, al hacer clic en **MOX** se enruta la solicitud de PTT a través del coordinador de tonos Quindar en lugar de activar el transmisor directamente. El efecto práctico es:
 
-- Cuando Quindar está habilitado en la tira de canal de Audio y la rebanada TX activa está en un modo de telefonía (SSB, AM, FM, etc.), el tono K suena cuando se hace clic en **MOX** para activar y el tono BK suena cuando se hace clic en **MOX** para desactivar.
-- Cuando Quindar está deshabilitado, o la rebanada TX activa no está en un modo de telefonía, el comportamiento es idéntico a versiones anteriores: el transmisor se activa y desactiva inmediatamente.
+- Cuando Quindar está habilitado en la tira de canal de audio y el slice TX activo está en un modo telefónico (SSB, AM, FM, etc.), el tono K suena cuando se activa **MOX** y el tono BK suena cuando se desactiva **MOX**.
+- Cuando Quindar está deshabilitado, o el slice TX activo no está en un modo telefónico, el comportamiento es idéntico al de versiones anteriores: el transmisor se activa y desactiva inmediatamente.
 
-La apariencia del botón **MOX** no cambia: se vuelve rojo mientras la transmisión está activada y vuelve a su color predeterminado al soltarlo.
+La apariencia del botón **MOX** no cambia: se vuelve rojo mientras la TX está activada y vuelve a su color predeterminado al soltarlo.
 
-> **Nota:** Los tonos Quindar son una característica de la tira de canal de Audio. Active el control **QUIN** allí antes de esperar que los tonos suenen al usar PTT.
+> **Nota:** Los tonos Quindar son una función de la tira de canal de audio. Active el control **QUIN** allí antes de esperar que suenen los tonos al usar PTT.
 
 ## Botón MEM
 
-Haga clic en **MEM** para activar o desactivar la recuperación de memoria ATU. Deshabilitado cuando el TGXL está en modo OPERATE.
+Haga clic en **MEM** para activar o desactivar la recuperación de memoria ATU. Deshabilitado cuando TGXL está en modo OPERATE.
 
 ## Botón APD e indicadores de estado
 
@@ -143,8 +145,8 @@ Haga clic en **APD** para activar o desactivar la predistorsión adaptativa en l
 | Indicador | Significado |
 |---|---|
 | **Active** (verde) | APD está activado y el ecualizador se aplica activamente. |
-| **Cal** (verde) | APD está activado y aún está calibrando. |
-| **Avail** (verde) | APD está activado y hay una calibración disponible pero aún no se ha aplicado. |
+| **Cal** (verde) | APD está activado y aún calibrando. |
+| **Avail** (verde) | APD está activado y hay una calibración disponible pero aún no aplicada. |
 | Todos atenuados | APD está desactivado. |
 
 La progresión de APD sigue: **Cal** (calibrando) → **Avail** (listo) → **Active** (aplicado).
@@ -152,5 +154,5 @@ La progresión de APD sigue: **Cal** (calibrando) → **Avail** (listo) → **Ac
 ## Relacionados
 
 - [Descripción general de Controles de TX](overview.md)
-- [Establecer potencia de salida de RF](set-rf-output-power.md)
+- [Establecer potencia de salida RF](set-rf-output-power.md)
 - [Ejecutar una sintonía de dos tonos](run-a-two-tone-tune.md)

@@ -1,62 +1,65 @@
-# Operación Remota a través de SmartLink
+# Operación remota a través de SmartLink
 
 SmartLink le permite conectarse a un FLEX-8600 que se encuentra en una ubicación diferente a la de su computadora. Esta página cubre cómo iniciar sesión en su cuenta de SmartLink y conectarse a una radio remota desde la pantalla de conexión de AetherSDR.
 
-## Antes de empezar
+## Antes de comenzar
 
-- Su FLEX-8600 debe estar encendido y conectado a internet en la ubicación remota, con SmartLink habilitado en su firmware.
+- Su FLEX-8600 debe estar encendido y conectado a Internet en la ubicación remota, con SmartLink habilitado en su firmware.
 - Debe tener una cuenta de FlexRadio SmartLink (correo electrónico y contraseña).
 - AetherSDR no debe estar ya conectado a una radio. Si lo está, desconéctelo primero.
 
 ## Pasos
 
-1. Abra la pantalla de conexión. Aparece automáticamente cuando no hay ninguna radio conectada. También puede acceder a ella mediante `Settings > Connect to Radio...`.
+1. Abra la pantalla de conexión. Aparece automáticamente cuando no hay ninguna radio conectada. También puede acceder a ella a través de `Settings > Connect to Radio...`.
 2. Haga clic en **Remote with SmartLink**. Esto selecciona el modo SmartLink y muestra los controles de la cuenta SmartLink y de la radio remota.
 3. En el campo **SmartLink account: Email**, ingrese la dirección de correo electrónico de su cuenta FlexRadio.
 4. En el campo **SmartLink account: Password**, ingrese su contraseña. La contraseña no se guarda entre sesiones.
 5. Haga clic en **Sign In**. La etiqueta de estado se actualiza para mostrar el progreso de la autenticación.
 6. Una vez que haya iniciado sesión, la lista **Remote radios** se completa con las radios disponibles para su cuenta. Seleccione la radio que desea usar.
 7. Si su enlace al sitio remoto es lento (satélite, celular o banda ancha congestionada), marque **Use low bandwidth mode** antes de conectarse.
-8. Haga clic en **Connect Remote Radio**. La etiqueta de estado rastrea el progreso de la conexión. Cuando la conexión se realiza correctamente, se abre la interfaz principal de AetherSDR.
+8. Haga clic en **Connect Remote Radio**. La etiqueta de estado sigue el progreso de la conexión. Cuando la conexión se realiza correctamente, se abre la interfaz principal de AetherSDR.
 
 ## Función de cada control
 
-| Control | Qué hace | Configuración persistente |
+| Control | Función | Configuración persistente |
 |---|---|---|
 | **Remote with SmartLink** (botón de modo) | Cambia la pantalla de conexión al modo SmartLink. | `ConnectionMode` |
-| **SmartLink account: Email** | El correo electrónico de su cuenta FlexRadio. | `SmartLinkEmail` |
-| **SmartLink account: Password** | Su contraseña de SmartLink. No se guarda después de que finaliza la sesión. | — |
+| **SmartLink account: Email** | Correo electrónico de su cuenta FlexRadio. | `SmartLinkEmail` |
+| **SmartLink account: Password** | Su contraseña de SmartLink. No se guarda después de que finaliza la sesión. El campo está etiquetado con nombres de accesibilidad para gestores de contraseñas (macOS Passwords, Windows Authenticator, KDE Wallet). | — |
 | **Sign In** | Autentica con SmartLink y completa la lista **Remote radios**. | — |
 | **Sign Out** | Cierra la sesión de SmartLink y limpia la lista de radios remotas. | — |
-| **Remote radios** | Enumera las radios WAN de SmartLink disponibles para la cuenta que ha iniciado sesión. La lista tiene una altura de visualización fija; si tiene muchas radios remotas, desplácese dentro de la lista para verlas todas. | — |
-| **Use low bandwidth mode** | Reduce las tasas de datos de transmisión para enlaces lentos o con límite de datos. | `LowBandwidthMode` |
+| **Remote radios** | Enumera las radios WAN SmartLink disponibles para la cuenta que ha iniciado sesión. La lista tiene una altura de visualización fija; si tiene muchas radios remotas, desplácese dentro de la lista para verlas todas. | — |
+| **Use low bandwidth mode** | Reduce las tasas de datos de transmisión para enlaces lentos o medidos. | `LowBandwidthMode` |
+| **Enable adaptive frame-rate throttle** | Reduce automáticamente la velocidad de fotogramas FFT/waterfall cuando la calidad de la red se degrada. | `AdaptiveThrottleEnabled` |
 | **Connect Remote Radio** | Inicia una conexión WAN a la radio seleccionada en **Remote radios**. | — |
-| **Connect to last radio on start up** | Cuando está marcado, AetherSDR se conecta automáticamente a la última radio utilizada al iniciar y durante el descubrimiento por difusión / sonda de radio enrutada. Cuando no está marcado, se abre el cuadro de diálogo de conexión y el usuario debe elegir una radio manualmente cada sesión. Está marcado por defecto. | `AutoConnectToLastRadio` |
+| **Connect to last radio on start up** | Cuando está marcado, AetherSDR se conecta automáticamente a la última radio utilizada al inicio y durante la sonda de descubrimiento por difusión/radio enrutada. Cuando no está marcado, se abre el cuadro de diálogo de conexión y el usuario debe elegir una radio manualmente cada sesión. El valor predeterminado está marcado. | `AutoConnectToLastRadio` |
 
-## Conexión por IP (Modo manual)
+## Conexión por IP (Modo Manual)
 
-Si su radio está en una VPN o en una red enrutada que no es visible mediante descubrimiento LAN, use el modo Manual en lugar de SmartLink.
+Si su radio está en una VPN o en una red enrutada que no es visible mediante el descubrimiento LAN, use el modo Manual en lugar de SmartLink.
 
 1. Haga clic en **Connect by IP** en la página Local, o haga clic en el botón de modo **Manual** en la parte superior de la pantalla de conexión.
 2. En el campo **Radio IP address**, escriba la dirección IP de la radio. El campo acepta direcciones IPv4 e IPv6. AetherSDR normaliza la dirección cuando se conecta.
 3. El control **Radio IP address** es tanto un menú desplegable como un campo de texto. Almacena hasta tres direcciones utilizadas recientemente (guardadas como `RecentConnectByIpAddresses`). Para reutilizar una dirección anterior, haga clic en la flecha desplegable y selecciónela de la lista.
-4. Si es necesario, seleccione la interfaz de red local que desea usar en **Advanced: Source path**. Aparece una **Source warning label** debajo del selector si la interfaz elegida está obsoleta o es inalcanzable.
-5. Haga clic en **Connect by IP (manual)**. La **Manual result label** muestra si la sonda tuvo éxito o falló.
+4. Si es necesario, seleccione la interfaz de red local que desea usar en **Advanced: Source path**. Aparece una **Source warning label** debajo del selector si la interfaz elegida está obsoleta o es inaccesible.
+5. Haga clic en **Connect by IP (manual)**. La **Manual result label** muestra si la sonda se realizó correctamente o no.
 
 ## Consejos
 
-- `SmartLinkEmail` es persistente, por lo que su dirección de correo electrónico se rellena previamente la próxima vez que abra la pantalla de conexión. Su contraseña no es persistente y debe ingresarse cada sesión.
+- `SmartLinkEmail` se conserva, por lo que su dirección de correo electrónico se rellena previamente la próxima vez que abra la pantalla de conexión. Su contraseña no se conserva y debe ingresarse cada sesión.
 - Si la lista **Remote radios** está vacía después de iniciar sesión, es posible que la radio remota no tenga SmartLink habilitado o que esté fuera de línea.
 - El menú desplegable **Radio IP address** recuerda hasta tres direcciones recientes entre sesiones. Si usó anteriormente la configuración `LastRoutedRadioIp` (de una versión anterior a la v0.9.7), AetherSDR la importa automáticamente a la lista de direcciones recientes en el primer inicio.
-- **Connect to last radio on start up** está marcado por defecto. Si trabaja con varias radios y desea elegir explícitamente cada sesión, desmárquelo.
+- **Connect to last radio on start up** está marcado de forma predeterminada. Si trabaja con varias radios y desea elegir explícitamente cada sesión, desmárquelo.
+- El formulario de inicio de sesión de SmartLink se identifica en el árbol de accesibilidad como "SmartLink account login", lo que facilita que los gestores de contraseñas asocien los campos de credenciales con este formulario de inicio de sesión específico.
+- La casilla de verificación **Enable adaptive frame-rate throttle** no está marcada de forma predeterminada. Cuando está habilitada, AetherSDR reduce automáticamente la velocidad de fotogramas FFT y waterfall cuando la calidad de la red se degrada, lo que ayuda a mantener una conexión estable en enlaces de calidad variable.
 
 ## Solución de problemas
 
 - **La lista de radios remotas está vacía después de iniciar sesión** — Es posible que la radio en la ubicación remota esté fuera de línea o que SmartLink no esté habilitado en ella. Confirme que la radio esté encendida y registrada en la misma cuenta de FlexRadio.
-- **El inicio de sesión falla o la etiqueta de estado muestra un error** — Verifique que su correo electrónico y contraseña sean correctos. Asegúrese de que AetherSDR tenga acceso a internet saliente y que ningún firewall o proxy esté bloqueando la conexión SmartLink.
-- **El audio es entrecortado o se pierde con frecuencia** — Active **Use low bandwidth mode** antes de conectarse para reducir las tasas de transmisión para el enlace.
-- **La conexión manual falla o la etiqueta de resultado manual muestra un error** — Confirme que la dirección IP sea correcta y accesible desde esta máquina. Verifique que la interfaz de origen seleccionada en **Advanced: Source path** esté activa; descarte cualquier **Source warning label** seleccionando una interfaz válida.
-- **AetherSDR se conecta a la radio incorrecta al iniciar** — Desmarque **Connect to last radio on start up** para que la pantalla de conexión se abra en cada inicio y pueda seleccionar la radio deseada.
+- **El inicio de sesión falla o la etiqueta de estado muestra un error** — Verifique que su correo electrónico y contraseña sean correctos. Asegúrese de que AetherSDR tenga acceso a Internet saliente y que ningún firewall o proxy esté bloqueando la conexión SmartLink.
+- **El audio entrecorta o se corta con frecuencia** — Habilite **Use low bandwidth mode** antes de conectarse para reducir las tasas de transmisión para el enlace. Para conexiones de calidad variable, también habilite **Enable adaptive frame-rate throttle** para ajustar automáticamente las tasas de actualización de la pantalla.
+- **La conexión manual falla o la etiqueta de resultado manual muestra un error** — Confirme que la dirección IP sea correcta y accesible desde esta máquina. Verifique que la interfaz de origen seleccionada en **Advanced: Source path** esté activa; ignore cualquier **Source warning label** seleccionando una interfaz válida.
+- **AetherSDR se conecta a la radio incorrecta al inicio** — Desmarque **Connect to last radio on start up** para que la pantalla de conexión se abra en cada inicio y pueda seleccionar la radio deseada.
 - **El cuadro de diálogo de conexión aparece con una geometría incorrecta después de salir del modo de pantalla completa o sin marco** — Si tenía el cuadro de diálogo de conexión en modo sin marco y estaba oculto cuando se restauró la ventana, el cuadro de diálogo conserva su posición solo si era visible en el momento de la restauración. Esto evita que el cuadro de diálogo aparezca fuera de la pantalla.
 
 ## Relacionado

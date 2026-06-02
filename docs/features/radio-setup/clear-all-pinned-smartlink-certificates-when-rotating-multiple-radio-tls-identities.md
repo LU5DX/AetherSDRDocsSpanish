@@ -1,32 +1,52 @@
-# Borrar todos los certificados SmartLink anclados al rotar múltiples identidades TLS de radios
+# Borrar todos los certificados SmartLink fijados al rotar múltiples identidades TLS de radio
 
-Elimina todos los certificados TLS de SmartLink de confianza que AetherSDR ha anclado en la primera conexión, permitiéndole volver a anclar certificados de forma segura después de rotar identidades de radios o reemplazar hardware de radio.
+Elimina todos los certificados TLS de SmartLink de confianza que AetherSDR ha fijado en la primera conexión, permitiéndole volver a fijar certificados de forma segura después de rotar identidades de radio o reemplazar hardware de radio.
 
-## Antes de empezar
+## Antes de comenzar
 
 - La radio debe estar conectada a AetherSDR.
-- Desea reemplazar o rotar certificados TLS en múltiples radios y necesita borrar todos los anclajes de confianza en el primer uso almacenados.
+- Desea reemplazar o rotar certificados TLS en múltiples radios y necesita borrar todas las fijaciones de confianza en el primer uso almacenadas.
 
 ## Pasos
 
 1. Abra **Settings > Radio Setup...**
 2. Haga clic en la pestaña **SmartLink**.
 3. Haga clic en **Forget all**.
-4. En el cuadro de diálogo de confirmación, haga clic en **Yes** para borrar todos los certificados anclados.
+4. En el cuadro de diálogo de confirmación, haga clic en **Yes** para borrar todos los certificados fijados.
 
 ## Qué hace cada control
 
-| Control | Comportamiento | Clave de configuración |
-|---|---|---|
-| Sección **Pinned SmartLink Certificates** | Lista cada host que este cliente ha anclado en la primera conexión. Muestra el Host, la huella digital SHA-256 y la fecha de anclaje. | (no se persiste – administrado por `WanCertCache`) |
-| **Forget selected** | Elimina el certificado anclado del host seleccionado. La siguiente conexión a ese host vuelve a anclarlo silenciosamente. | (ninguna) |
-| **Forget all** | Borra todos los certificados anclados después de un mensaje de confirmación. La siguiente conexión a cada radio vuelve a anclarlos silenciosamente. | (ninguna) |
+| Control                                             | Comportamiento                                                                                                                                                                           | Clave de configuración                                                                                                               |
+|-----------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| Sección **Pinned SmartLink Certificates**           | Enumera cada host que este cliente ha fijado en la primera conexión. Muestra Host, huella SHA-256 y Fecha de fijación.                                                                   | (no se persiste – gestionado por `WanCertCache`)                                                                                     |
+| **Forget selected**                                 | Elimina el certificado fijado del host seleccionado. La próxima conexión a ese host lo vuelve a fijar silenciosamente.                                                                   | (ninguno)                                                                                                                            |
+| **Forget all**                                      | Borra todos los certificados fijados después de una solicitud de confirmación. La próxima conexión a cada radio los vuelve a fijar silenciosamente.                                       | (ninguno)                                                                                                                            |
+| SmartLink (pestaña)                                 | Gestión de certificados TLS de SmartLink fijados. Enumera cada certificado fijado (host, huella SHA-256, fecha de fijación) con Forget por fila y Forget All. Nuevo en v26.5.3 (#2951 Fase 2). | Se construye de forma diferida al hacer clic por primera vez. Fase 2 de GHSA-wfx7-w6p8-4jr2: la discrepancia de fijación de certificados ahora pausa firmemente el handshake con un diálogo modal. |
+| Pinned SmartLink Certificates (sección)             | Encabezado de sección para la tabla de certificados fijados dentro de la pestaña SmartLink. Enumera cada host que este cliente ha fijado en la primera conexión (confianza en el primer uso). | Fase 2 de GHSA-wfx7-w6p8-4jr2. Esquema de fijación migrado de cadenas simples a objetos {fp, pinnedAt}.                              |
+| Host / SHA-256 fingerprint / Pinned (columnas de tabla) | Tabla de solo lectura de 3 columnas: Host (nombre de host), huella SHA-256 (monoespaciada), Pinned (AAAA-MM-DD o '(pre-phase 2)').                                                       | Respaldado por WanCertCache en WanConnection.cpp.                                                                                    |
+| Forget selected                                     | Elimina la huella del certificado fijado del host seleccionado para que la próxima conexión lo vuelva a fijar silenciosamente.                                                            |                                                                                                                                      |
+| Forget all                                          | Borra todos los certificados fijados (con confirmación). La próxima conexión a cada radio los vuelve a fijar silenciosamente.                                                            | Muestra QMessageBox::question antes de borrar.                                                                                       |
+| **Radio (pestaña)**                                 | Información de la radio, identificación, información de licencia y actualización de firmware. Incluye botones de copia en los campos SN de Radio, Región, Versión HW, Modelo y Apodo.    | (ninguno)                                                                                                                            |
+| **Network (pestaña)**                               | Información de red de la radio y opciones de red avanzadas.                                                                                                                              |                                                                                                                                      |
+| **GPS (pestaña)**                                   | Presencia de GPS e información en vivo de lat/lon/alt/hora/satélites.                                                                                                                    |                                                                                                                                      |
+| **TX (pestaña)**                                    | Temporizaciones de TX, enclavamientos, potencia máxima, modo de sintonización, visualización de waterfall, seguimiento slice/TX y acceso directo a Configuración de Banda TX.           |                                                                                                                                      |
+| **Phone/CW (pestaña)**                              | Micrófono, manipulador CW, valores predeterminados RTTY.                                                                                                                                |                                                                                                                                      |
+| **RX (pestaña)**                                    | Calibración de desplazamiento de frecuencia GPSDO y fuente de referencia de 10 MHz.                                                                                                     |                                                                                                                                      |
+| **Audio (pestaña)**                                 | Salidas de audio de la radio, compresión, dispositivos PC, refuerzo, búfer, grabación y contenedor NVIDIA BNR.                                                                           |                                                                                                                                      |
+| **Filters (pestaña)**                               | Opciones de filtro de baja latencia / nítido por ancho de banda.                                                                                                                         |                                                                                                                                      |
+| **XVTR (pestaña)**                                  | Configuración por transvertidor -- Solo RX, válido, eliminar, más Crear Nuevo Transvertidor.                                                                                            |                                                                                                                                      |
+| **USB Cables (pestaña)**                            | Asigna adaptadores serie USB a tipos de cable CAT, BCD, bit y PTT.                                                                                                                       |                                                                                                                                      |
+| **Peripherals (pestaña)**                           | Conexión IP manual de dispositivos externos (TGXL, PGXL, Antenna Genius).                                                                                                                |                                                                                                                                      |
+| **APD (pestaña)**                                   | Selección del puerto de muestra de Predistorsión Adaptativa Externa por antena TX (ANT1, ANT2, XVTA, XVTB). La pestaña está oculta a menos que la radio reporte apd configurable=1 (FLEX-8x00 con SmartSDR 4.2.18+). |                                                                                                                                      |
+| **Themes (pestaña)**                                | Configuración de apariencia de la interfaz de usuario, incluyendo anulaciones de color por slice.                                                                                       |                                                                                                                                      |
+| **Serial (pestaña)**                                | Selección de puerto serie FlexControl, baudios/datos/paridad/stop, asignación de función de pin (DTR/RTS/CTS/DSR), intercambio de paletas, apertura automática y mapeo de acciones de botones. | Compilación condicionada por HAVE_SERIALPORT.                                                                                        |
 
 ## Consejos
 
-- Después de borrar todos los anclajes, la siguiente conexión SmartLink a cada radio confiará silenciosamente en el nuevo certificado y lo volverá a anclar.
-- Use **Forget selected** para eliminar el anclaje de un solo host si solo está actualizando una radio.
+- Después de borrar todas las fijaciones, la próxima conexión SmartLink a cada radio confiará silenciosamente y volverá a fijar el nuevo certificado.
+- Use **Forget selected** para eliminar la fijación de un solo host si solo está actualizando una radio.
+- En la pestaña **Radio**, haga clic en cualquier botón de copia (icono de portapapeles) junto a SN de Radio, Región, Versión HW, Modelo o Apodo para copiar el valor a su portapapeles. Una pequeña ventana emergente "¡Copiado!" confirma la acción.
 
 ## Relacionado
 
-- [Olvidar un certificado SmartLink anclado después de una actualización de firmware de radio o reemplazo de hardware](forget-a-pinned-smartlink-certificate-after-a-radio-firmware-update-or-hardware-replacement.md)
+- [Olvidar un certificado SmartLink fijado después de una actualización de firmware de radio o reemplazo de hardware](forget-a-pinned-smartlink-certificate-after-a-radio-firmware-update-or-hardware-replacement.md)

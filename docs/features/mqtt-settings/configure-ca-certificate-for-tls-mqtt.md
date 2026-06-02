@@ -1,11 +1,11 @@
 # Configurar certificado CA para TLS MQTT
 
-Proporcione un archivo de certificado CA personalizado al conectarse a un broker MQTT que utiliza una Autoridad Certificadora (CA) autofirmada o privada. Cuando no se especifica ningún archivo de certificado CA, AetherSDR utiliza el paquete de CA del sistema.
+Proporcione un archivo de certificado CA personalizado al conectarse a un broker MQTT que utilice una Autoridad Certificadora autofirmada o privada. Cuando no se especifica un archivo de certificado CA, AetherSDR utiliza el lote de CA del sistema.
 
 ## Antes de comenzar
 
 - Tiene un archivo de certificado CA en formato PEM en su sistema de archivos local.
-- El cuadro de diálogo MQTT Settings está abierto (`Settings > MQTT...`).
+- El cuadro de diálogo de Configuración MQTT está abierto (`Settings > MQTT...`).
 
 ## Pasos
 
@@ -13,12 +13,18 @@ Proporcione un archivo de certificado CA personalizado al conectarse a un broker
 2. En el campo **CA cert**, ingrese la ruta completa del sistema de archivos a su archivo de certificado CA, o haga clic en **Browse...** para seleccionarlo.
 3. Haga clic en **Apply** para guardar sin cerrar, o en **Ok** para guardar y cerrar.
 
-## Función de cada control
+## Descripción de cada control
 
 | Control | Descripción | Valor predeterminado | Clave de configuración |
 |---|---|---|---|
-| **Use TLS** | Casilla de verificación que habilita el cifrado TLS. Al marcarla, cambia automáticamente el puerto de 1883 a 8883 (y viceversa al desmarcarla). | sin marcar | `MqttTls` |
-| **CA cert** | Campo de texto para la ruta del archivo de certificado CA. Visible solo cuando **Use TLS** está marcado. Déjelo en blanco para usar el paquete de CA del sistema. El botón **Browse...** abre un cuadro de diálogo de selección de archivos. | en blanco | `MqttCaFile` |
+| **Use TLS** | Casilla de verificación que habilita el cifrado TLS. Marcarla cambia automáticamente el puerto de 1883 a 8883 (y viceversa al desmarcarla). | sin marcar | `MqttTls` |
+| **CA cert** | Campo de texto para la ruta del archivo de certificado CA. Visible solo cuando **Use TLS** está marcado. Déjelo en blanco para usar el lote de CA del sistema. El botón **Browse...** abre un cuadro de diálogo de selección de archivos. | en blanco | `MqttCaFile` |
+
+## Pestaña Publish Buttons
+
+| Control | Descripción | Valor predeterminado | Clave de configuración |
+|---|---|---|---|
+| **Internal AetherSDR Topics** | Grupo de solo lectura que lista los topics publicados automáticamente cuando MQTT está conectado. Estos topics no son configurables por el usuario. | `aethersdr/cw/decode` | — |
 
 ## Solución de problemas
 

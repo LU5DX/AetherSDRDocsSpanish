@@ -2,7 +2,7 @@
 
 Use el Panel multiFLEX para activar o desactivar multiFLEX en la FLEX-8600 conectada. Habilitar multiFLEX permite que múltiples estaciones cliente compartan la radio simultáneamente. El diálogo recuerda su posición y tamaño entre sesiones.
 
-## Antes de empezar
+## Antes de comenzar
 
 - AetherSDR debe estar conectado a una radio FLEX-8600. El Panel multiFLEX requiere una conexión activa con la radio.
 
@@ -12,24 +12,26 @@ Use el Panel multiFLEX para activar o desactivar multiFLEX en la FLEX-8600 conec
 2. Haga clic en el botón **Enable** para activar o desactivar multiFLEX en la radio. Cuando multiFLEX está deshabilitado, el botón muestra **Enable**. Cuando está habilitado, muestra **Disable**.
 3. Haga clic en **Close** para cerrar el diálogo.
 
-## Función de cada control
+## Qué hace cada control
 
 | Control | Comportamiento |
 |---|---|
 | Botón **Enable** | Activa o desactiva multiFLEX en la radio. La etiqueta del botón refleja el estado actual: **Disable** cuando multiFLEX está activo, **Enable** cuando está desactivado. |
-| Tabla de estaciones | Enumera cada cliente multiFLEX conectado actualmente a la radio. Columnas: LOCAL PTT, STATION, TX ANT, TX FREQ (MHz). |
-| **Enable** (PTT) | Activa o desactiva la autoridad PTT local para esta estación. Solo se muestra cuando hay más de un cliente conectado y esta estación no posee el PTT actualmente. |
+| Tabla de estaciones | Lista cada cliente multiFLEX actualmente conectado a la radio. Columnas: LOCAL PTT, STATION, TX ANT, TX FREQ (MHz). Un botón **Disconnect** está disponible en la última columna para cada estación conectada. |
+| **Enable** (PTT) | Alterna la autoridad de PTT local para esta estación. Solo se muestra cuando hay más de un cliente conectado y esta estación no posee el PTT actualmente. |
+| Botón **Disconnect** | Desconecta la estación cliente de esa fila de multiFLEX. El botón está deshabilitado para su propio cliente. La etiqueta del botón cambia a **Disconnecting…** mientras la solicitud de desconexión está pendiente, y regresa a **Disconnect** una vez que la radio confirma la expulsión. |
 | **Close** | Cierra el diálogo del Panel multiFLEX. |
 
 ## Consejos
 
-- La entrada de su estación en la tabla de estaciones se resalta en azul. Las demás estaciones conectadas aparecen en el color predeterminado.
-- Cuando solo hay un cliente conectado, los controles LOCAL PTT se ocultan automáticamente.
+- La entrada de su estación en la tabla de estaciones se resalta en azul. Las otras estaciones conectadas aparecen en el color predeterminado.
+- Cuando solo hay un cliente conectado, los controles de LOCAL PTT se ocultan automáticamente.
+- El botón **Disconnect** siempre está disponible para otras estaciones conectadas. Está deshabilitado para su propio cliente para evitar desconectarse accidentalmente.
 - El diálogo restaura automáticamente su posición y tamaño anteriores al reabrirse dentro de la misma sesión.
 
-## Relacionados
+## Relacionado
 
 - [Resumen del Panel multiFLEX](overview.md)
 - [Conceder o revocar PTT local](grant-or-revoke-local-ptt.md)
-- [Verificar qué antena y frecuencia está usando cada estación TX](check-which-antenna-and-frequency-each-tx-station-is-using.md)
+- [Verificar qué antena y frecuencia usa cada estación TX](check-which-antenna-and-frequency-each-tx-station-is-using.md)
 - [Ver todas las estaciones conectadas a esta FLEX](../../getting-started/setup/see-all-stations-connected-to-this-flex.md)

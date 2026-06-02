@@ -1,157 +1,278 @@
-# Configurar las funciones de los pines del puerto serie FlexControl
+# Configurar la Configuración del Radio
 
-Utilice esta página para asignar una función y polaridad a los pines de salida DTR y RTS del puerto serie conectado a su FlexControl u otro dispositivo conectado por serie. Esto permite que AetherSDR controle hardware externo — como líneas PTT o entradas de manipulador — a través de las señales de control del puerto serie.
+El diálogo **Configuración del Radio** (`Settings > Radio Setup...`) proporciona la configuración maestra por radio, con secciones de pestañas para información del radio, red, GPS, TX, Phone/CW, RX, audio, filtros, transverters, cables USB, periféricos, predistorsión adaptativa, temas, certificados anclados de SmartLink y configuraciones de puerto serie.
 
-## Antes de empezar
+## Antes de comenzar
 
-- La radio debe estar conectada. La pestaña Serial requiere una conexión activa con la radio.
-- La pestaña Serial solo está presente cuando AetherSDR se compiló con soporte para puerto serie (`HAVE_SERIALPORT`). Si no ve una pestaña Serial o un elemento de menú `Settings > FlexControl...`, su compilación no incluye esta funcionalidad.
-- Conozca la ruta del dispositivo de su puerto serie (por ejemplo, `/dev/ttyUSB0` en Linux o `COM3` en Windows).
+- El radio debe estar conectado antes de que la mayoría de las pestañas muestren información en vivo.
+- Algunas pestañas (APD, Themes, SmartLink, Serial) se crean de forma diferida y solo aparecen al hacer clic en ellas por primera vez.
+- AetherSDR utiliza una clase base `PersistentDialog` que guarda y restaura la geometría de la ventana automáticamente.
 
-## Pasos
+## Pasos para abrir
 
-1. Abra `Settings > FlexControl...` — esto lo lleva directamente a la pestaña Serial de Radio Setup. Alternativamente, abra `Settings > Radio Setup...` y haga clic en la pestaña **Serial**.
-2. En el cuadro combinado **Port**, seleccione su dispositivo serie de la lista. Haga clic en **Refresh** para volver a escanear si su dispositivo no aparece, o escriba la ruta directamente en el campo **Path**.
-3. Configure los parámetros de la línea serie usando los cuadros combinados **Baud**, **Data**, **Parity** y **Stop** para que coincidan con los requisitos de su dispositivo.
-4. Para el pin **DTR**, seleccione la función deseada en el cuadro combinado de función **DTR**, luego seleccione la polaridad activa en el cuadro combinado **Polarity** adyacente.
-5. Para el pin **RTS**, repita las mismas dos selecciones — función y polaridad — usando los cuadros combinados de función **RTS** y **Polarity**.
-6. Si las conexiones de su manipulador están invertidas, marque **Paddle Swap (swap dit/dah)**.
-7. Para que AetherSDR abra este puerto automáticamente cada vez que se inicie, marque **Auto-open serial port on startup**.
-8. Si está conectando una perilla de sintonía FlexControl, haga clic en **Detect** debajo de **FlexControl Tuning Knob** para identificar el dispositivo. Haga clic en **Close** para liberarlo.
-9. Para que AetherSDR detecte la perilla FlexControl automáticamente al inicio, marque **Auto-detect on startup**. Para invertir la dirección de sintonía, marque **Invert tuning direction**.
+1. Haga clic en **Settings > Radio Setup...** en el menú principal.
+2. El diálogo se abre mostrando la pestaña **Radio** de forma predeterminada.
+3. Haga clic en cualquier pestaña para acceder a su configuración.
 
-## Qué hace cada control
+---
 
-| Control | Qué hace | Valor predeterminado | Valores/rango válidos |
-|---|---|---|---|
-| **Port** | Selecciona o ingresa la ruta del dispositivo serie. | — | Puertos serie del sistema |
-| **Refresh** | Vuelve a escanear los puertos serie disponibles. | — | — |
-| **Path** | Campo editable que muestra la ruta del puerto seleccionado. | — | Cualquier ruta de dispositivo válida |
-| **Baud** | Velocidad en baudios del puerto serie. | — | Según opciones del cuadro combinado |
-| **Data** | Número de bits de datos. | — | Según opciones del cuadro combinado |
-| **Parity** | Configuración de paridad. | — | Según opciones del cuadro combinado |
-| **Stop** | Número de bits de parada. | — | Según opciones del cuadro combinado |
-| **DTR: Function** | Asigna una función de señal al pin de salida DTR. | — | Según opciones del cuadro combinado |
-| **DTR: Polarity** | Establece polaridad activa-alta o activa-baja para DTR. | — | Según opciones del cuadro combinado |
-| **RTS: Function** | Asigna una función de señal al pin de salida RTS. | — | Según opciones del cuadro combinado |
-| **RTS: Polarity** | Establece polaridad activa-alta o activa-baja para RTS. | — | Según opciones del cuadro combinado |
-| **Paddle Swap (swap dit/dah)** | Invierte las entradas dit y dah del manipulador. | Sin marcar | Marcado / Sin marcar |
-| **Auto-open serial port on startup** | Vuelve a abrir el puerto configurado al iniciar AetherSDR. | Sin marcar | Marcado / Sin marcar |
-| **FlexControl Tuning Knob: Detect** | Detecta una perilla FlexControl conectada. | — | — |
-| **FlexControl Tuning Knob: Close** | Libera la conexión de la perilla FlexControl. | — | — |
-| **Auto-detect on startup** | Detecta automáticamente la perilla FlexControl al inicio. | Sin marcar | Marcado / Sin marcar |
-| **Invert tuning direction** | Invierte la dirección de sintonía del FlexControl. | Sin marcar | Marcado / Sin marcar |
+## Pestaña Radio
 
-## Cambios en la actualización de firmware en v0.9.3
+La pestaña **Radio** muestra la identificación del radio, la información de licencia y los controles de actualización de firmware.
 
-El flujo de trabajo de actualización de firmware de la pestaña **Radio** ha cambiado. El botón **Browse .ssdr...** ha sido renombrado a **Select Installer...** y ahora acepta tres tipos de archivo en lugar de solo un archivo `.ssdr` pre-extraído:
+### Lectura de la información del radio
 
-- `.msi` — el instalador SmartSDR basado en WiX utilizado por FlexRadio para firmware 4.2 y posteriores.
-- `.exe` — el instalador SmartSDR autoextraíble más antiguo.
-- `.ssdr` — un archivo de firmware pre-extraído (aceptado como antes).
+- **Radio SN** — Número de serie del chasis (solo lectura). Muestra el serial del chasis si está disponible; de lo contrario, el serial del radio.
+- **Region** — Región regulatoria del radio (solo lectura).
+- **HW Version** — Cadena de versión del hardware (solo lectura).
+- **Model** — Modelo del radio (solo lectura).
+- **Options** — Opciones del radio bajo licencia (solo lectura). Muestra la lista de opciones del radio, o un valor predeterminado como "GPS, PGXL" si se detecta un amplificador.
+- **FlexControl** — Estado detectado del hardware FlexControl (solo lectura).
+- **multiFLEX** — Estado de habilitación de multiFLEX (solo lectura).
+- **License Info** — Muestra la suscripción, la fecha de vencimiento, el ID del radio y la versión bajo licencia (solo lectura).
 
-El preparador de firmware detecta el formato del archivo automáticamente a partir de los primeros 8 bytes (magia OLE/MSI para `.msi`, encabezado MZ PE/COFF para `.exe`) y extrae la carga útil `.ssdr` sin necesidad de herramientas externas. Una barra de progreso y una etiqueta de estado se actualizan mientras se ejecuta la extracción.
+### Copia de la información del radio
 
-Además, el botón **Check for Update** ya no se convierte en un botón **Download** cuando se encuentra una versión de firmware más reciente. En su lugar, cuando hay una actualización disponible, la etiqueta de estado le indica que descargue el instalador SmartSDR desde flexradio.com y luego haga clic en **Select Installer...** para prepararlo.
+Cada valor de solo lectura tiene un pequeño botón de copia a su lado. Haga clic en el botón de copia para copiar el valor al portapapeles. Aparece una breve ventana emergente "¡Copiado!" cerca del botón. El botón de copia está deshabilitado cuando el valor está vacío o muestra "—".
 
-### Controles de firmware de la pestaña Radio actualizados
+### Configuración de identificación
 
 | Control | Qué hace | Notas |
 |---|---|---|
-| **Check for Update** | Consulta las actualizaciones de firmware disponibles e informa el resultado en la etiqueta de estado. | Cuando se encuentra una actualización, la etiqueta le indica que descargue el instalador desde flexradio.com. La etiqueta del botón ya no cambia a **Download**. |
-| **Select Installer...** | Abre un selector de archivos. Seleccione un archivo `.msi`, `.exe` o `.ssdr`. El preparador extrae y prepara el firmware automáticamente. | Renombrado desde **Browse .ssdr...** en v0.9.3. |
-| **Upload Firmware** | Inicia la carga del firmware a la radio con una barra de progreso. | Habilitado solo después de que el preparador complete la extracción exitosamente. |
+| **Nickname** | Apodo del radio fácil de usar (editable). | — |
+| **Callsign** | Indicativo de la estación (editable). | — |
+| **Station Name** | Identifica este cliente de AetherSDR para otras estaciones multiFLEX. Se almacena en AppSettings. | Su valor predeterminado es el nombre de host del SO si está vacío. Se envía al radio como 'estación cliente <nombre>'. |
 
-## Cambios en la calibración de frecuencia en v0.9.2.1
+### Actualización de firmware
 
-La sección de calibración de frecuencia de la pestaña **RX** ha sido revisada. Anteriormente, el campo **Cal Frequency (MHz)** y el botón **Start** solo se mostraban cuando no se detectaba un GPSDO. A partir de v0.9.2.1, esos controles siempre están visibles independientemente de si hay un GPSDO instalado.
-
-El mensaje de estado en la parte superior del grupo de calibración cambia según el hardware:
-
-- GPSDO instalado — se muestra en verde: *GPSDO installed. Manual frequency offset calibration available.*
-- Sin GPSDO — se muestra en ámbar: *Manual frequency offset calibration available.*
-
-El botón **Start** ahora proporciona retroalimentación de estado en línea junto al botón. Mientras una calibración está en progreso, el botón está deshabilitado y su etiqueta cambia a **Busy**. La etiqueta de estado muestra la etapa actual (por ejemplo, *Starting…*) y se actualiza a medida que avanza la calibración. El botón se vuelve a habilitar cuando la calibración se completa o falla.
-
-Antes de iniciar la calibración, AetherSDR ahora restablece el error de frecuencia almacenado a cero (`radio set freq_error_ppb=0`) antes de enviar `radio pll_start`. Si el campo **Cal Frequency (MHz)** está vacío cuando hace clic en **Start**, la etiqueta de estado muestra *Enter cal frequency* en ámbar y la calibración no se inicia.
-
-### Controles de calibración de la pestaña RX actualizados
+1. Haga clic en **Check for Update** para consultar las actualizaciones de firmware disponibles. El resultado aparece en la etiqueta de estado. Si hay una actualización disponible, la etiqueta le indica que descargue el instalador de SmartSDR desde flexradio.com.
+2. Haga clic en **Select Installer...** para abrir un selector de archivos. Seleccione uno de:
+   - `.msi` — Instalador de SmartSDR basado en WiX para firmware 4.2+.
+   - `.exe` — Instalador de SmartSDR autoextraíble más antiguo.
+   - `.ssdr` — Archivo de firmware preextraído.
+3. El gestor de firmware detecta el formato del archivo automáticamente y extrae la carga útil `.ssdr`. Una barra de progreso y una etiqueta de estado muestran el progreso de la extracción.
+4. Una vez completada la extracción, haga clic en **Upload Firmware** para iniciar la carga. Una barra de progreso y una etiqueta de estado muestran el progreso de la carga.
 
 | Control | Qué hace | Notas |
 |---|---|---|
-| **Cal Frequency (MHz):** | Frecuencia utilizada para la calibración manual. | Ahora siempre se muestra, con o sin GPSDO. |
-| **Start** | Inicia el barrido de calibración de frecuencia. | Deshabilitado y etiquetado como **Busy** mientras está activo. Valida que se haya ingresado una frecuencia de calibración antes de proceder. |
-| **Freq Offset (ppb):** | Desplazamiento de frecuencia manual en partes por mil millones. | Se restablece a 0 automáticamente al hacer clic en **Start**. |
+| **Check for Update** | Consulta las actualizaciones de firmware disponibles. | Cuando se encuentra una actualización, la etiqueta le indica que descargue el instalador desde flexradio.com. |
+| **Select Installer...** | Abre un selector de archivos para archivos `.msi`, `.exe` o `.ssdr`. | Renombrado desde **Browse .ssdr...** en v0.9.3. |
+| **Upload Firmware** | Inicia la carga del firmware con barra de progreso y estado. | Habilitado solo después de que se completa la extracción. |
 
-## Cambios en la fuente de referencia de 10 MHz en v0.9.7
+### Remote On
 
-El cuadro combinado **10 MHz Reference Source:** en la pestaña **RX** se ha actualizado para poblarse y mostrarse con mayor precisión según el hardware detectado y el estado del oscilador en vivo.
+Haga clic en **Remote On** para habilitar la funcionalidad de activación remota / encendido remoto en el radio.
 
-Anteriormente, el cuadro combinado solo listaba las opciones correspondientes al hardware detectado al momento de abrir el diálogo (TCXO, GPSDO, External), y la etiqueta de estado de bloqueo mostraba solo la cadena de estado del oscilador seguida de "Locked" o "Unlocked". A partir de v0.9.7, el cuadro combinado y la etiqueta de estado se comportan de la siguiente manera.
+---
 
-### Población del cuadro combinado
+## Pestaña Network
 
-El cuadro combinado se reconstruye dinámicamente. **Auto** siempre está presente. Las entradas adicionales aparecen cuando alguna de las siguientes condiciones es verdadera para esa fuente:
+La pestaña **Network** muestra la información de red del radio y las opciones de red avanzadas.
 
-- La radio ha informado algún estado del oscilador (el campo de estado no está vacío) — en este caso **TCXO** y **External 10 MHz** siempre se incluyen.
-- El hardware correspondiente está detectado (`tcxoPresent`, `gpsdoPresent`, `extPresent`).
-- La fuente coincide con la configuración actual o el estado actual del oscilador.
+### Lectura de la información de red
 
-La entrada para una referencia externa ahora se etiqueta como **External 10 MHz** en lugar de **External**.
+- **IP Address / Mask / MAC Address** — Direcciones de red de solo lectura.
 
-El cuadro combinado selecciona la entrada que coincide con la configuración actual del oscilador de la radio. Si esa configuración no está en la lista, se retrotrae a la selección actual del cuadro combinado, luego a **Auto**.
-
-### Etiqueta de estado de bloqueo
-
-La etiqueta de estado de bloqueo junto al cuadro combinado ahora muestra una descripción más rica:
-
-- Cuando el estado del oscilador aún no se ha recibido: *Waiting for oscillator status* (se muestra en gris/azul).
-- Cuando **Auto** está seleccionado y la radio ha resuelto a una fuente específica: *Auto -> \<fuente resuelta\>* (por ejemplo, *Auto -> GPSDO*).
-- Cuando la configuración y el estado activo difieren: *\<configuración\> -> \<estado activo\>* (por ejemplo, *TCXO -> External 10 MHz*).
-- De lo contrario: solo el nombre de la fuente activa.
-
-En todos los casos se añade el estado de bloqueo: *Locked* (se muestra en verde) o *Unlocked* (se muestra en rojo). Si la fuente activa es **External 10 MHz** pero no se detecta ninguna referencia externa, se añade *(not detected)* después del estado de bloqueo.
-
-El color de la etiqueta es verde (`#00c040`) cuando está bloqueado, rojo (`#c04040`) cuando está desbloqueado y gris-azul (`#8aa8c0`) mientras espera el estado.
-
-### Controles de fuente de referencia de la pestaña RX actualizados
-
-| Control | Qué hace | Notas |
-|---|---|---|
-| **10 MHz Reference Source:** | Selecciona la fuente de referencia del oscilador. Envía `radio oscillator <valor>` a la radio cuando cambia. | Entradas **Auto**, **TCXO**, **GPSDO** y **External 10 MHz**. Las opciones mostradas dependen del hardware detectado y del estado del oscilador en vivo. El valor `ext` informado por la radio se trata como equivalente a `external`. |
-| Etiqueta de estado de bloqueo | Muestra la fuente activa, la resolución de Auto y el estado de bloqueo. Se actualiza en vivo a medida que la radio informa cambios en el estado del oscilador. | Verde = Bloqueado; Rojo = Desbloqueado; Gris-azul = esperando estado. Añade *(not detected)* cuando External 10 MHz está activo pero no hay señal de referencia externa presente. |
-
-## Temas de colores de slice (pestaña Themes)
-
-La pestaña **Themes** se añadió en v0.9.3 dentro de Radio Setup. Alberga la sección **Slice Colors**, que le permite reemplazar los colores de slice integrados de AetherSDR con una paleta completamente personalizada por slice.
-
-### Pasos
-
-1. Abra `Settings > Radio Setup...` y haga clic en la pestaña **Themes**.
-2. Seleccione **Custom colors** para habilitar la asignación de colores por slice. Seleccione **Use Aether defaults** para volver a la paleta integrada.
-3. Cuando **Custom colors** esté seleccionado, haga clic en cualquier botón con letra (**A** a **H**) para abrir un selector de color para ese slice. El color se aplica inmediatamente en los widgets VFO, superposiciones del panadapter e insignias de canal CAT.
-4. Para revertir todos los slices a los colores integrados, haga clic en **Reset All to Defaults**.
-
-### Controles de la pestaña Themes
+### Configuración de red
 
 | Control | Qué hace | Valor predeterminado | Notas |
 |---|---|---|---|
-| **Use Aether defaults** | Utiliza la paleta de colores de slice integrada de AetherSDR. | Seleccionado | Los botones de color de slice están deshabilitados cuando esto está activo. |
-| **Custom colors** | Habilita la asignación de colores por slice. | — | Activa los botones de color A–H. |
-| **Botones de color Slice A–H** | Abren un selector de color para cada letra de slice. | — | Los cambios se aplican inmediatamente. |
+| **Enforce Private IP Connections:** | Alterne para rechazar pares que no sean RFC1918. | — | — |
+| **Network MTU:** | Establece el tamaño máximo del paquete UDP VITA-49 saliente en bytes. | 1450 | Rango 576–9000 bytes. El valor predeterminado 1450 es seguro para la mayoría de los túneles VPN/SD-WAN. Se almacena en AppSettings. |
+| **DHCP / Static** | Alterne entre los modos DHCP e IP estática. | — | — |
+| **IP Address: / Mask: / Gateway:** | Campos de configuración de IP estática. | — | Habilitado cuando se selecciona el modo Static. |
+| **Apply** | Envía la configuración de red al radio. | — | — |
 
-## Cambios en el diálogo Radio Setup en v26.5.1
+---
 
-El diálogo Radio Setup ahora utiliza una clase base `PersistentDialog` que guarda y restaura su geometría automáticamente. El diálogo ya no utiliza una ventana sin marco con una barra de título personalizada — vuelve a un marco de ventana estándar del sistema operativo. El `PersistentDialog` guarda la geometría de la ventana en la configuración `RadioSetupDialogGeometry` al cerrar y la restaura al abrir. No se realiza ningún guardado o restauración manual de geometría en el `closeEvent` o el constructor.
+## Pestaña GPS
 
-### Limpieza de IP en la pestaña Peripherals
+La pestaña **GPS** muestra la presencia de GPS e información en vivo de posición/satélites cuando un receptor GPS está activo.
 
-La pestaña **Peripherals** ahora maneja correctamente la limpieza de una dirección IP manual guardada para dispositivos TGXL, PGXL y Antenna Genius. Cuando se hace clic en el botón **Connect** / **Disconnect**, se aplica la siguiente lógica:
+- Latitud, longitud, altitud, hora y cantidad de satélites (solo lectura).
+- Indicador de estado de bloqueo GPS.
 
-- Si está conectado y el campo IP se ha limpiado, la IP manual guardada y el puerto se eliminan de la configuración antes de desconectarse. Esto garantiza que los manejadores posteriores (por ejemplo, la visibilidad del botón SmartSDR) vean la configuración limpiada inmediatamente.
-- Si está desconectado y el campo IP está vacío con una IP manual guardada previamente, al hacer clic en el botón se limpia la IP manual guardada y el puerto de la configuración para que el dispositivo deje de conectarse automáticamente.
-- Si está desconectado y el campo IP está vacío sin IP manual guardada, el botón no hace nada.
+---
 
-### Guardar al cerrar para campos IP de periféricos
+## Pestaña TX
 
-Cuando cierre el diálogo Radio Setup, el **closeEvent** persiste cualquier edición de "IP de usuario
+La pestaña **TX** configura los tiempos de transmisión, los interbloqueos, la potencia máxima, el modo de sintonía, la visualización en waterfall, el seguimiento slice/TX y la Configuración de Banda de TX.
+
+### Configuración de Banda de TX
+
+Haga clic en **TX Band Settings** para abrir el diálogo dedicado de potencia/sintonía por banda.
+
+### Tiempos
+
+Use los cuadros de número en la sección **Timings (in ms)** para establecer los tiempos de retención y retardo de TX.
+
+### Interbloqueos
+
+Alterne **TX REQ: RCA** y **TX REQ: Accessory** para habilitar las entradas de interbloqueo RCA y de accesorio.
+
+### Potencia Máxima
+
+Establezca el límite de potencia de TX a nivel del radio usando el cuadro de número **Max Power:** (0–100%).
+
+### Modo de Sintonía
+
+Seleccione el comportamiento del botón de sintonía en el cuadro combinado **Tune Mode:**.
+
+### Waterfall
+
+Alterne **Show TX in Waterfall:** para dibujar la señal de TX en el waterfall.
+
+### Seguimiento Slice/TX
+
+| Control | Qué hace | Valor predeterminado | Notas |
+|---|---|---|---|
+| **TX Follows Active Slice** | TX sigue el slice activo. | False | Mutuamente excluyente con **Active Slice Follows TX**. Se deshabilita automáticamente durante la operación Split. |
+| **Active Slice Follows TX** | Cambia el slice activo cuando TX se mueve externamente (p. ej., WSJT-X o CAT). | False | Mutuamente excluyente con **TX Follows Active Slice**. |
+
+---
+
+## Pestaña Phone/CW
+
+La pestaña **Phone/CW** configura el micrófono, el manipulador de CW y los valores predeterminados de RTTY.
+
+### Medidor de Nivel
+
+Alterne **Enable/Disable the Level Meter During Receive** para mostrar el medidor de nivel del micrófono incluso durante la recepción.
+
+### Manipulador de CW
+
+| Control | Qué hace | Valor predeterminado | Notas |
+|---|---|---|---|
+| **Iambic:** | Habilita o deshabilita el manipulador iambic en el radio. | — | En v0.9.1, se agregaron los botones Mode A y Mode B junto a la alternancia de habilitación. Mode A = Curtis A; Mode B = Curtis B. |
+| **Iambic Mode: A / B** | Selecciona el modo iambic Curtis A o B tanto para el radio como para el manipulador de software local. | A | Par mutuamente excluyente agregado en v0.9.1. |
+| **Swap:** | Intercambia dit/dah. | — | — |
+| **Sideband:** | Selecciona la banda lateral del tono de CW. | — | Opciones: LSB / USB. |
+| **CWX:** | Habilita el tecleo por macros CWX. | — | — |
+| **Decode:** | Habilita la superposición de decodificación de CW en el panadapter. | True | Se almacena como `CwDecodeOverlay`. |
+
+### RTTY
+
+Establezca la frecuencia de marca predeterminada de RTTY usando el cuadro de número **RTTY Mark Default:**.
+
+---
+
+## Pestaña RX
+
+La pestaña **RX** proporciona la calibración de compensación de frecuencia del GPSDO y la selección de la fuente de referencia de 10 MHz.
+
+### Calibración de frecuencia
+
+La sección de calibración siempre está visible, independientemente de si hay un GPSDO instalado.
+
+- **GPSDO instalado** — se muestra en verde: *GPSDO instalado. Calibración manual de compensación de frecuencia disponible.*
+- **Sin GPSDO** — se muestra en ámbar: *Calibración manual de compensación de frecuencia disponible.*
+
+| Control | Qué hace | Notas |
+|---|---|---|
+| **Cal Frequency (MHz):** | Frecuencia utilizada para la calibración manual. | Siempre se muestra. |
+| **Start** | Inicia el barrido de calibración de frecuencia. | Deshabilitado y etiquetado como **Busy** mientras está activo. Valida que se haya ingresado una frecuencia de calibración. Restablece el error de frecuencia almacenado a cero antes de comenzar. |
+| **Freq Offset (ppb):** | Compensación de frecuencia manual en partes por mil millones. | Se restablece a 0 al hacer clic en **Start**. |
+
+### Fuente de Referencia de 10 MHz
+
+El cuadro combinado **10 MHz Reference Source:** se completa dinámicamente según el hardware detectado y el estado del oscilador en vivo.
+
+| Control | Qué hace | Notas |
+|---|---|---|
+| **10 MHz Reference Source:** | Selecciona la fuente de referencia del oscilador. Envía `radio oscillator <valor>` al radio cuando se cambia. | **Auto** siempre está presente. Entradas adicionales: **TCXO**, **GPSDO**, **External 10 MHz**. Las opciones dependen del hardware detectado y del estado del oscilador en vivo. |
+| Etiqueta de estado de bloqueo | Muestra la fuente activa, la resolución de Auto y el estado de bloqueo. Se actualiza en vivo. | Verde = Bloqueado; Rojo = Desbloqueado; Gris-azul = esperando estado. Agrega *(no detectado)* cuando External 10 MHz está activa pero no hay señal de referencia externa presente. |
+
+La etiqueta de estado de bloqueo muestra:
+- *Esperando estado del oscilador* cuando el estado aún no se ha recibido.
+- *Auto -> <fuente resuelta>* cuando Auto está seleccionado y el radio ha resuelto a una fuente específica.
+- *<configuración> -> <estado activo>* cuando la configuración y el estado activo difieren.
+- Solo el nombre de la fuente activa cuando coinciden.
+
+El estado de bloqueo (*Bloqueado* o *Desbloqueado*) siempre se agrega.
+
+---
+
+## Pestaña Audio
+
+La pestaña **Audio** configura las salidas de audio del radio, la compresión, los dispositivos de PC, el refuerzo, el búfer, la grabación y el contenedor NVIDIA BNR.
+
+### Salidas de audio del radio
+
+| Control | Qué hace | Notas |
+|---|---|---|
+| **Line Out:** | Control deslizante de ganancia de salida de línea. | — |
+| **Mute (Line Out)** | Silencia la salida de línea. | — |
+| **Headphone:** | Control deslizante de ganancia de auriculares. | — |
+| **Mute (Headphone)** | Silencia los auriculares. | — |
+| **Front Speaker: / Mute** | Silencia el altavoz frontal (específico del modelo). | — |
+
+### Compresión de Audio
+
+Seleccione el códec de audio para SmartLink/LAN usando los botones **Audio Compression (SmartLink):**: **Auto**, **Uncompressed** u **Opus** (predeterminado: Auto). Se almacena como `AudioCompression`.
+
+### Suspensión del sistema
+
+Marque **Prevent system sleep while connected** para mantener el SO despierto mientras el radio está conectado (predeterminado: False). Se almacena como `InhibitSleepWhileConnected`.
+
+### Dispositivos de Audio de PC
+
+Seleccione los dispositivos de entrada y salida de audio del host usando los cuadros combinados **Input:** y **Output:**.
+
+### Refuerzo de Audio
+
+Alterne **Audio Boost:** para habilitar ganancia adicional en la ruta de audio del cliente. Se almacena como `AudioBoost`.
+
+### Búfer de Audio
+
+Establezca el campo de texto **Audio Buffer:** para aumentar el búfer de audio en milisegundos para la fluctuación de VPN/SmartLink. Predeterminado: 200, rango 50–1000 ms. Se almacena como `AudioBufferMs`.
+
+### Grabación
+
+| Control | Qué hace | Valor predeterminado | Notas |
+|---|---|---|---|
+| **Recording: Radio Side / Client Side** | Elige la grabación del lado del radio o del lado del cliente. | Radio Side | Se almacena como `RecordingMode`. |
+| **Save to:** | Carpeta para grabaciones guardadas (solo del lado del cliente). | Documents/AetherSDR/Recordings | Se almacena como `QsoRecordingDir`. |
+| **...** | Navega para buscar la carpeta de grabación. | — | — |
+| **Auto-record on TX** | Graba automáticamente mientras se transmite. | False | Se almacena como `QsoRecordingAutoRecord`. |
+| **Idle timeout:** | Segundos de silencio antes de que se detenga la grabación. | 120 | Rango 10–3600 seg. Se almacena como `QsoRecordingIdleTimeout`. |
+
+### NVIDIA BNR
+
+Use los controles **NVIDIA BNR** para administrar el contenedor de eliminación de ruido NVIDIA Broadcast:
+- **Autostart Container** — Habilita el inicio automático.
+- **Start / Stop** — Inicia o detiene el contenedor manualmente.
+- **Check Status** — Muestra el estado del contenedor (Running/Stopped/Unknown) con un indicador de punto de color.
+
+---
+
+## Pestaña Filters
+
+La pestaña **Filters** configura opciones de filtro de baja latencia o nítidas por ancho de banda.
+
+### Nitidez del filtro
+
+Para los modos Voice, CW y Digital, use los **controles deslizantes de nitidez de filtro Voice / CW / Digital** para establecer la nitidez del filtro (0 = latencia más baja a 3 = más nítido). El control deslizante está deshabilitado cuando **Auto** está habilitado para ese modo.
+
+### Selección automática de filtro
+
+Alterne **Auto (Voice / CW / Digital)** para habilitar la selección automática del nivel de filtro para ese modo. Cuando está habilitado, el control deslizante de nitidez manual está deshabilitado.
+
+### Baja latencia para modos digitales
+
+Marque **Use Low Latency Filters for Digital Modes** para forzar el uso de filtros de baja latencia en DIGU/DIGL.
+
+---
+
+## Pestaña XVTR
+
+La pestaña **XVTR** administra la configuración por transverter.
+
+### Lista de transverters
+
+La pestaña contiene pestañas anidadas, una por transverter, más una pestaña **'+'** para crear nuevas entradas.
+
+### Controles por transverter
+
+| Control | Qué hace | Notas |
+|---|---|---|
+| **RX Only:** | Fuerza solo RX en ese transverter. |

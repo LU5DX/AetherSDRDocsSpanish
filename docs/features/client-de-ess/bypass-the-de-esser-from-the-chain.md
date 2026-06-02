@@ -1,43 +1,43 @@
 # Desescuchador Aetherial
 
-El Desescuchador Aetherial doma la sibilancia áspera de las 'S' y 'T' atenuando una banda estrecha cuando supera un umbral de cadena lateral. Utiliza procesamiento de banda dividida: solo se atenúa la salida del filtro paso banda de sibilancia, dejando intactos los graves y los medios. Esto corrige el error de atenuación de banda ancha que anteriormente causaba una pérdida de aproximadamente 30 W de potencia de transmisión. El panel muestra la respuesta del filtro paso banda de la cadena lateral, un medidor de reducción de ganancia de 24 dB, seis perillas de ajuste (Freq, Q, Thresh, Amount, Attack, Release) y una pendiente de cascada seleccionable por el usuario (12/24/36/48 dB/oct).
+El Desescuchador Aetherial doma la sibilancia áspera de las 'S' y 'T' atenuando una banda estrecha cuando supera un umbral de cadena lateral. Utiliza procesamiento de banda dividida: solo se atenúa la salida del filtro paso banda de sibilancia, dejando intactos los graves y medios. Esto corrige el error de atenuación de banda ancha que anteriormente causaba aproximadamente 30 W de pérdida de potencia de TX. El panel muestra la respuesta del filtro paso banda de la cadena lateral, un medidor de reducción de ganancia de 24 dB, seis perillas de ajuste (Freq, Q, Thresh, Amount, Attack, Release) y una pendiente de cascada seleccionable por el usuario (12/24/36/48 dB/oct).
 
 **Instancias del applet:**
-- **Instancia TX**: "Aetherial De-Esser" (se muestra en el Panel de Applets acoplado)
-- **Instancia RX**: "Aetherial De-Esser — RX" (accesible a través del Canal de Audio Aetherial)
+- **Instancia de TX**: "Aetherial De-Esser" (se muestra en el Applet Panel acoplado)
+- **Instancia de RX**: "Aetherial De-Esser — RX" (accesible a través del Aetherial Audio Channel Strip)
 
-## Antes de comenzar
+## Antes de empezar
 
-- AetherSDR debe estar abierto y la cadena de procesamiento de Audio Aetherial (TXDSP o RXDSP) debe ser visible.
+- AetherSDR debe estar abierto y la cadena de procesamiento de Aetherial Audio (TXDSP o RXDSP) debe estar visible.
 - La etapa DESS ya debe existir en el widget CHAIN. Si el desescuchador nunca se ha habilitado, es posible que la etapa DESS no esté presente.
-- El desescuchador está disponible tanto en las rutas de audio TX como RX. Cada ruta tiene su propia instancia independiente del Desescuchador Aetherial.
+- El desescuchador está disponible tanto en las rutas de audio de TX como de RX. Cada ruta tiene su propia instancia independiente del Desescuchador Aetherial.
 
 ## Bypass del desescuchador desde la cadena
 
-Elimine el Desescuchador Aetherial de su ruta de audio TX o RX sin cambiar ninguno de sus ajustes. El bypass es útil cuando desea comparar audio procesado y sin procesar, o deshabilitar temporalmente el desescuchado para una sesión en particular.
+Elimine el Desescuchador Aetherial de su ruta de audio de TX o RX sin cambiar ninguno de sus ajustes. El bypass es útil cuando desea comparar audio procesado y no procesado, o deshabilitar temporalmente el desescuchado para una sesión en particular.
 
-### Pasos para el bypass del desescuchador TX
+### Pasos para el bypass del desescuchador de TX
 
-1. Localice el widget CHAIN en el contenedor de Audio Aetherial (TXDSP).
-2. Encuentre la etapa **DESS** en la cadena.
+1. Localice el widget CHAIN en el contenedor de Aetherial Audio (TXDSP).
+2. Busque la etapa **DESS** en la cadena.
 3. Haga clic una vez en la etapa **DESS** para activar o desactivar el bypass.
 
-### Pasos para el bypass del desescuchador RX
+### Pasos para el bypass del desescuchador de RX
 
-1. Localice el widget CHAIN en el contenedor de Audio Aetherial (RXDSP).
-2. Encuentre la etapa **DESS** en la cadena.
+1. Localice el widget CHAIN en el contenedor de Aetherial Audio (RXDSP).
+2. Busque la etapa **DESS** en la cadena.
 3. Haga clic una vez en la etapa **DESS** para activar o desactivar el bypass.
 
-Cuando está en bypass, todo el mosaico del desescuchador se renderiza con opacidad reducida (55 % de lo normal). Al hacer clic nuevamente se rehabilita y se restaura la opacidad completa del mosaico. Los ajustes `ClientDeEssTxEnabled` y `ClientDeEssRxEnabled` se actualizan inmediatamente.
+Cuando está en bypass, todo el mosaico del desescuchador se renderiza con opacidad reducida (55% de lo normal). Al hacer clic una vez nuevamente se rehabilita y se restaura la opacidad completa del mosaico. Los ajustes `ClientDeEssTxEnabled` y `ClientDeEssRxEnabled` se actualizan inmediatamente.
 
 ## Abrir el panel de ajustes del desescuchador
 
 El panel de ajustes del desescuchador tiene dos instancias:
-- **Instancia TX**: "Aetherial De-Esser — TX" (accesible desde la ruta TX del Canal de Audio Aetherial)
-- **Instancia RX**: "Aetherial De-Esser — RX" (accesible desde la ruta RX del Canal de Audio Aetherial)
+- **Instancia de TX**: "Aetherial De-Esser — TX" (accesible desde la ruta TX del Aetherial Audio Channel Strip)
+- **Instancia de RX**: "Aetherial De-Esser — RX" (accesible desde la ruta RX del Aetherial Audio Channel Strip)
 
-Para abrir la instancia correspondiente:
-1. Abra el Canal de Audio Aetherial.
+Para abrir la instancia adecuada:
+1. Abra el Aetherial Audio Channel Strip.
 2. Haga clic en la etapa **DESS** para abrir el panel de ajustes del desescuchador para esa ruta (TX o RX).
 3. La barra de título del panel muestra "Aetherial De-Esser — TX" o "Aetherial De-Esser — RX" según la ruta a la que accedió.
 
@@ -45,45 +45,72 @@ Para abrir la instancia correspondiente:
 
 El panel del Desescuchador Aetherial contiene los siguientes controles:
 
-| Etiqueta | Tipo | Valor Predeterminado | Rango Válido | Clave de Ajuste | Comportamiento | Notas |
-|---|---|---|---|---|---|---|
-| Curva de respuesta de cadena lateral | indicador | — | — | — | ClientDeEssCurveWidget en modo compacto. Dibuja la respuesta del filtro paso banda con un punto móvil en la frecuencia central actual. | — |
-| Barra de reducción de ganancia | medidor | — | 0 a 24 dB GR | — | Barra horizontal de color rojo suave, llenado desde la derecha. La escala máxima es 24 dB; una marca indica la cantidad típica de -6 dB. | Se actualiza a ~30 Hz desde `ClientDeEss::gainReductionDb()`. |
-| Freq | perilla | 6000 Hz | 1000 a 12000 Hz | `ClientDeEssTxFrequencyHz` | Mapeo logarítmico (1000 * 12^n). Establece la frecuencia central de la banda de sibilancia. | Etiqueta '6.0 kHz' por encima de 1 kHz, 'N Hz' por debajo. |
-| Q | perilla | 2.00 | 0.5 a 5.0 | `ClientDeEssTxQ` | Mapeo lineal. Establece el ancho de banda de la banda de sibilancia — Q más alta = más estrecha. | Etiqueta 'X.XX'. |
-| Thresh | perilla | -30.0 dB | -60.0 a 0.0 dB | `ClientDeEssTxThresholdDb` | Mapeo lineal. Nivel por encima del cual el desescuchador comienza a atenuar la banda. | — |
-| Amount | perilla | -6.0 dB | -24.0 a 0.0 dB | `ClientDeEssTxAmountDb` | Mapeo lineal. Atenuación máxima aplicada en el pico de sibilancia. | Los valores son negativos (o cero) porque representan reducción. |
-| Attack | perilla | 1.0 ms | 0.1 a 30.0 ms | `ClientDeEssTxAttackMs` | Mapeo exponencial (0.1 * 300^n). Establece la rapidez con la que responde el desescuchador una vez que la sibilancia supera el umbral. | Presente en el StripDeEssPanel del Canal de Audio (RX y TX). El ClientDeEssApplet acoplado omite esta perilla. |
-| Release | perilla | 100 ms | 10.0 a 500.0 ms | `ClientDeEssTxReleaseMs` | Mapeo exponencial (10 * 50^n). Establece la rapidez con la que la ganancia vuelve a la normalidad después de que la sibilancia cae por debajo del umbral. | Presente en el StripDeEssPanel del Canal de Audio (RX y TX). El ClientDeEssApplet acoplado omite esta perilla. |
-| Slope | botón pulsador | 24 dB/oct (2 etapas) | 12 / 24 / 36 / 48 dB/oct (1 a 4 etapas) | `ClientDeEssTxSlopeStages` | Cicla el conteo de cascada del paso banda de la cadena lateral. Cada etapa agrega 12 dB/oct de atenuación fuera de la banda de sibilancia. Pendiente más alta = muesca efectiva más estrecha, menos atenuación colateral en el rango medio en frases con muchas 'S'. | Presente en el StripDeEssPanel flotante (columna izquierda, parte inferior). La etiqueta muestra 'N dB/oct'. Presente tanto para rutas TX como RX. Se conserva como `ClientDeEssTxSlopeStages` / `ClientDeEssRxSlopeStages`. |
+| Etiqueta                 | Tipo          | Predeterminado       | Clave de ajuste                  |
+|--------------------------|---------------|----------------------|----------------------------------|
+| Curva de respuesta de cadena lateral | indicador     | —                    | —                                |
+| Barra de reducción de ganancia       | medidor       | —                    | —                                |
+| Freq                     | perilla       | 6000 Hz              | `ClientDeEssTxFrequencyHz`       |
+| Q                        | perilla       | 2.00                 | `ClientDeEssTxQ`                 |
+| Thresh                   | perilla       | -30.0 dB             | `ClientDeEssTxThresholdDb`       |
+| Amount                   | perilla       | -6.0 dB              | `ClientDeEssTxAmountDb`          |
+| Attack                   | perilla       | 1.0 ms               | `ClientDeEssTxAttackMs`          |
+| Release                  | perilla       | 100 ms               | `ClientDeEssTxReleaseMs`         |
+| Slope                    | botón pulsador | 24 dB/oct (2 etapas) | `ClientDeEssTxSlopeStages`       |
+
+### Detalles de los controles
+
+- **Freq** (mapeo logarítmico, 1000 a 12000 Hz): Establece la frecuencia central de la banda de sibilancia. Las etiquetas muestran "6.0 kHz" por encima de 1 kHz, "N Hz" por debajo.
+- **Q** (mapeo lineal, 0.5 a 5.0): Establece el ancho de banda de la banda de sibilancia: un Q más alto equivale a un ancho de banda más estrecho. Las etiquetas muestran "X.XX".
+- **Thresh** (mapeo lineal, -60.0 a 0.0 dB): Nivel por encima del cual el desescuchador comienza a atenuar la banda.
+- **Amount** (mapeo lineal, -24.0 a 0.0 dB): Atenuación máxima aplicada en el pico de sibilancia. Los valores son negativos (o cero) porque representan reducción.
+- **Attack** (mapeo exponencial, 0.1 a 30.0 ms): Establece la rapidez con la que responde el desescuchador una vez que la sibilancia supera el umbral. Presente en el Channel Strip StripDeEssPanel (RX y TX). El ClientDeEssApplet acoplado omite esta perilla.
+- **Release** (mapeo exponencial, 10.0 a 500.0 ms): Establece la rapidez con la que la ganancia regresa después de que la sibilancia cae por debajo del umbral. Presente en el Channel Strip StripDeEssPanel (RX y TX). El ClientDeEssApplet acoplado omite esta perilla.
+- **Slope** (cicla a través de 12/24/36/48 dB/oct): Establece el recuento de cascada del filtro paso banda de la cadena lateral. Cada etapa añade 12 dB/oct de atenuación fuera de la banda de sibilancia. Una pendiente más alta equivale a una muesca efectiva más estrecha y menos atenuación colateral en frecuencias medias en frases con muchas 'S'. Presente en el StripDeEssPanel flotante (columna izquierda, parte inferior). La etiqueta muestra "N dB/oct". Presente tanto para rutas TX como RX. Se conserva como `ClientDeEssTxSlopeStages` / `ClientDeEssRxSlopeStages`.
 
 ## Indicadores
 
 | Etiqueta | Estados | Significado |
 |---|---|---|
-| Punto de frecuencia central | reposando en el pico de la curva | Marca la frecuencia central de sibilancia actualmente sintonizada en la curva de respuesta. |
-| Barra de reducción de ganancia | vacía, relleno de color rojo suave | Atenuación actual aplicada a la banda de sibilancia. |
+| Bola de frecuencia central | reposando en el pico de la curva | Marca la frecuencia central de sibilancia actualmente sintonizada en la curva de respuesta. |
+| Barra de reducción de ganancia | vacía, relleno rojo suave | Atenuación actual aplicada a la banda de sibilancia. El medidor es una barra horizontal de relleno rojo suave, llenada desde la derecha. La escala máxima es 24 dB; una marca indica la cantidad típica de -6 dB. Se actualiza aproximadamente a 30 Hz. |
 
 ## Edición de valor en línea en las perillas
 
 Las perillas del desescuchador (Freq, Q, Thresh, Amount, Attack, Release) admiten la edición de valor en línea. En lugar de arrastrar la perilla, puede escribir un valor directamente.
 
-### Para editar el valor de una perilla usando la edición en línea
+### Para editar un valor de perilla usando la edición en línea
 
 1. Haga clic en el texto del valor debajo de cualquier perilla del desescuchador. Aparece un pequeño campo de texto, delineado en cian cuando está enfocado.
 2. Escriba el nuevo valor. Puede incluir unidades (por ejemplo, "6 kHz", "-24.0 dB", "100 ms") o solo el número (por ejemplo, "6000", "2.0", "0.1").
 3. Presione **Enter** o haga clic en cualquier otro lugar del panel para confirmar el valor.
-4. Para cancelar la edición, presione **Escape** — se restaurará el valor anterior.
+4. Para cancelar la edición, presione **Escape**: se restaura el valor anterior.
 
-El valor se ajusta automáticamente al rango válido de la perilla. Se admite el análisis con reconocimiento de configuración regional (por ejemplo, "12,5" funciona en configuraciones regionales con coma decimal).
+El valor se ajusta automáticamente al rango válido de la perilla. Se admite el análisis con configuración regional (por ejemplo, "12,5" funciona en configuraciones regionales que usan coma decimal).
+
+## Temas y colores de las perillas
+
+En v26.6.1, los colores del componente de perilla ahora provienen del espacio de nombres `color.knob.*` del gestor de temas:
+- `color.knob.background` — el fondo del anillo de la perilla
+- `color.knob.foreground` — el arco de valor de la perilla
+- `color.knob.handle` — el indicador del puntero de la perilla
+
+El contenedor del applet del desescuchador está registrado como `applet/deess`, lo que permite anulaciones por contenedor de applet (por ejemplo, el desescuchador puede tener un color de primer plano de perilla ámbar mientras que otros applets usan un color diferente). El texto de la etiqueta y el valor debajo de la perilla continúan usando `color.text.secondary` y `color.text.primary` respectivamente.
+
+El widget de la curva de respuesta de la cadena lateral también obtiene sus colores de las claves del tema:
+- `color.background.0` — fondo de la curva
+- `color.background.1` — líneas de cuadrícula
+- `color.text.label` — etiquetas de los ejes
+- `color.accent.danger` — la curva de la banda de sibilancia (rojo suave)
+- `color.accent.dim` — línea indicadora de umbral
 
 ## Consejos
 
-- El bypass no restablece ningún valor de las perillas. Freq, Q, Thresh, Amount, Attack, Release y Slope conservan su configuración actual cuando vuelve a habilitar la etapa.
-- Las instancias del desescuchador TX y RX son independientes. Cambiar los ajustes de una no afecta a la otra.
-- La curva de respuesta de la cadena lateral y el medidor de reducción de ganancia reflejan la instancia activa actualmente (TX o RX) en la barra de título del panel.
+- El bypass no restablece ningún valor de las perillas. Freq, Q, Thresh, Amount, Attack, Release y Slope conservan todos sus ajustes actuales cuando vuelve a habilitar la etapa.
+- Las instancias del desescuchador de TX y RX son independientes. Cambiar los ajustes en una no afecta a la otra.
+- La curva de respuesta de la cadena lateral y el medidor de reducción de ganancia reflejan la instancia actualmente activa (TX o RX) en la barra de título del panel.
 - Puede usar la edición de valor en línea para ingresar valores exactos sin arrastrar las perillas. Esto es especialmente útil para ajustes finos o cuando conoce el ajuste preciso que necesita.
 - El botón Slope cicla a través de 12 → 24 → 36 → 48 dB/oct al hacer clic. Use una pendiente más pronunciada para un filtrado más estrecho alrededor de la frecuencia de sibilancia y reducir la atenuación colateral en el habla de rango medio.
+- El contenedor del desescuchador (`applet/deess`) permite a los autores de temas personalizar los colores de las perillas específicamente para el panel del desescuchador sin afectar otras perillas de compresores.
 
 ## Relacionados
 

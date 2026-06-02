@@ -1,36 +1,53 @@
 # Resumen del amplificador
 
-El applet Amplificador proporciona telemetría en tiempo real y control OPERATE/STANDBY para un amplificador Power Genius XL (PGXL) conectado. Úselo para monitorear la potencia directa, la ROE, la temperatura, la corriente de drenaje y el voltaje de la red eléctrica sin salir de AetherSDR.
+El applet Amplificador proporciona telemetría en tiempo real y control OPERATE/STANDBY para un amplificador Power Genius XL (PGXL) conectado. Úselo para monitorear la potencia directa, la ROE, la corriente de drenaje, la temperatura, el voltaje de drenaje y el voltaje de red sin salir de AetherSDR.
 
 ## Antes de comenzar
 
 - AetherSDR debe estar conectado a una radio Flex.
-- La radio debe detectar un amplificador Power Genius XL. El applet y su botón de bandeja permanecen ocultos hasta que la radio reporta un PGXL.
+- La radio debe detectar un amplificador Power Genius XL. El applet y su botón en la bandeja están ocultos hasta que la radio reporte un PGXL.
 
 ## Cómo funciona
 
-El applet Amplificador aparece en el panel de applets del lado derecho cuando AetherSDR detecta un amplificador PGXL en la red. Ábralo o ciérrelo con el botón de bandeja **AMP** en la barra lateral derecha.
+El applet Amplificador aparece en el panel derecho de applets cuando AetherSDR detecta un amplificador PGXL en la red. Ábralo o ciérrelo con el botón de bandeja **AMP** en la barra lateral derecha.
 
-Toda la telemetría se envía desde la radio en tiempo real. Los indicadores se actualizan a medida que el PGXL reporta nuevos valores; no es necesario sondeo ni actualización manual. El botón **OPERATE** / **STANDBY** refleja el estado actual del amplificador y le permite alternar entre ambos.
+Toda la telemetría se envía desde la radio en tiempo real. Los indicadores se actualizan a medida que el PGXL reporta nuevos valores; no se necesita sondeo ni actualización manual. El botón **OPERATE** / **STANDBY** refleja el estado actual del amplificador y le permite cambiar entre ambos.
 
-## Función de cada control
+## Qué hace cada control
 
-| Control          | Tipo             | Comportamiento                                                                                                                                                                                                                                                                                   |
-|------------------|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Fwd Pwr**      | Indicador        | Muestra la potencia de salida directa del PGXL.                                                                                                                                                                                                                                                  |
-| **SWR**          | Indicador        | Muestra la ROE en la salida del amplificador PGXL.                                                                                                                                                                                                                                               |
-| **Temp**         | Indicador        | Muestra la temperatura del disipador del PGXL.                                                                                                                                                                                                                                                   |
-| **Volts / Amps** | Indicador textual | Muestra el voltaje de la red eléctrica y la corriente de drenaje como `Volts: xxxV  Amps: x.xA`. Oculto hasta que llega la primera telemetría.                                                                                                                                                   |
-| **MEffA**        | Indicador textual | Muestra el valor MEffA del PGXL. Oculto hasta que la radio reporta un valor.                                                                                                                                                                                                                     |
-| **OPERATE**      | Botón            | Alterna el amplificador entre OPERATE y STANDBY. Oculto hasta que la radio reporta el estado del amplificador. Muestra **OPERATE** (verde) cuando el PGXL está en estado IDLE, OPERATE, TRANSMIT_A o TRANSMIT_B. Muestra **STANDBY** cuando el PGXL está en estado STANDBY, POWERUP o FAULT. |
+| Control          | Tipo               | Comportamiento                                                                                                                                                                                                                                                                                                            |
+|------------------|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **PWR**          | Valor + Indicador  | Muestra la potencia de salida directa del PGXL como valor numérico y en un indicador gráfico. La barra del indicador sube rápidamente con las ráfagas de RF y decae en aproximadamente 800 milisegundos, haciendo visibles incluso las transmisiones breves. El indicador se vuelve rojo por encima de 1500 W.            |
+| **SWR**          | Valor + Indicador  | Muestra la ROE del PGXL en la salida del amplificador como valor numérico y en un indicador gráfico. El indicador se vuelve rojo por encima de 2.5.                                                                                                                                                                        |
+| **Id**           | Valor + Indicador  | Muestra la corriente de drenaje del PGXL como valor numérico y en un indicador gráfico. El indicador se vuelve rojo por encima de 60 A.                                                                                                                                                                                   |
+| **Temp**         | Indicador de texto | Muestra la temperatura del disipador del PGXL como `xx C`.                                                                                                                                                                                                                                                               |
+| **Vdd**          | Indicador de texto | Muestra el voltaje de drenaje del PGXL como `Vdd xx V`.                                                                                                                                                                                                                                                                  |
+| **Vac**          | Indicador de texto | Muestra el voltaje de red del PGXL como `Vac xx V`.                                                                                                                                                                                                                                                                      |
+| **● RADIO**      | Indicador de texto | Muestra la fuente de los datos de telemetría. Aparece después de que llega la primera telemetría.                                                                                                                                                                                                                         |
+| **OPERATE**      | Botón              | Alterna el amplificador entre OPERATE (Operar) y STANDBY (Espera). Oculto hasta que la radio reporta el estado del amplificador. Muestra **OPERATE** (verde) cuando el PGXL está en estado IDLE (Inactivo), OPERATE (Operar), TRANSMIT_A (Transmitir_A) o TRANSMIT_B (Transmitir_B). Muestra **STANDBY** (Espera) cuando el PGXL está en estado STANDBY (Espera), POWERUP (Encendido) o FAULT (Falla). |
 
-Los tres indicadores utilizan una barra codificada por colores: verde por debajo del umbral amarillo, amarillo-ámbar en la zona de precaución y rojo por encima del umbral rojo. Las etiquetas de marcas en cada indicador tienen el color correspondiente a su zona.
+Los tres indicadores usan una barra codificada por colores: verde por debajo del umbral amarillo, amarillo-ámbar en la zona de precaución y rojo por encima del umbral rojo. Las marcas de cada indicador tienen el color correspondiente a su zona.
 
-Ninguno de los controles tiene configuraciones persistentes; todos los valores provienen en vivo del PGXL.
+Ninguno de los controles tiene configuración persistente; todos los valores provienen en vivo del PGXL.
 
-## Relacionado
+## Disposición
+
+El applet Amplificador muestra la telemetría en dos secciones:
+
+1. **Sección superior:** Tres filas, cada una con una etiqueta a la izquierda y un indicador a la derecha:
+   - **PWR** — potencia directa (0–2000 W, rojo > 1500 W)
+   - **SWR** — ROE (1.0–3.0, rojo > 2.5)
+   - **Id** — corriente de drenaje (0–70 A, rojo > 60 A)
+
+2. **Sección inferior:** Una pila de información de texto a la izquierda y el botón **OPERATE** a la derecha:
+   - Temperatura, voltaje de drenaje y voltaje de red
+   - Indicador de fuente de datos (`● RADIO`)
+
+Las etiquetas de valor numérico (PWR, SWR, Id) muestran el nombre del campo y el valor en vivo en texto azul claro en negrita.
+
+## Relacionados
 
 - [Poner el amplificador PGXL en OPERATE](put-the-pgxl-amplifier-in-operate.md)
 - [Poner el amplificador PGXL en STANDBY](put-the-pgxl-amplifier-in-standby.md)
 - [Monitorear la potencia directa y la ROE en la salida del amplificador](monitor-forward-power-and-swr-at-the-amplifier-output.md)
-- [Observar la temperatura del PGXL, la corriente de drenaje y el voltaje de la red eléctrica](watch-pgxl-temperature-drain-current-and-mains-voltage.md)
+- [Observar la temperatura del PGXL, la corriente de drenaje y el voltaje de red](watch-pgxl-temperature-drain-current-and-mains-voltage.md)

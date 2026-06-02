@@ -1,51 +1,52 @@
-# Añadir una memoria desde el slice activo
+# Añadir una memoria desde la franja activa
 
-Guarde la frecuencia, el modo y otros ajustes del slice activo como un nuevo canal de memoria para recuperarlos posteriormente.
+Guarde la frecuencia, el modo y otros parámetros actuales de la franja activa como un nuevo canal de memoria para recuperarlo posteriormente.
 
-## Antes de comenzar
+## Antes de empezar
 
-- Debe haber una radio conectada y al menos un slice activo.
-- Abra el diálogo de Canales de Memoria: **Settings > Memory...**
+- Debe haber una radio conectada y al menos una franja activa.
+- Abra el cuadro de diálogo Canales de memoria: **Settings > Memory...**
 
 ## Pasos
 
-1. En el diálogo de Canales de Memoria, haga clic en **Add**.
-   - O presione **Ctrl+N**.
-2. Aparece una nueva fila en la tabla de memoria con la frecuencia, el modo y otros parámetros actuales del slice activo.
+1. En el cuadro de diálogo Canales de memoria, haga clic en **Add**.
+   - O pulse **Ctrl+N**.
+2. Aparece una nueva fila en la tabla de memoria con la frecuencia, el modo y otros parámetros actuales de la franja activa.
 3. (Opcional) Edite el nombre de la memoria u otros campos:
    - Haga clic en **Edit** para activar la edición en línea del campo Nombre.
-   - Haga clic directamente en otras celdas para editar sus valores.
+   - Haga clic directamente en otras celdas para modificar sus valores.
 
-## Descripción de cada control
+## Función de cada control
 
 | Control | Etiqueta | Comportamiento |
 |---|---|---|
-| Barra de título | Memory Channels | Barra de título sin marco con degradado de 18 px, agarre a la izquierda y título del diálogo. Haga clic y arrastre para mover; haga doble clic para alternar maximizar/restaurar. |
-| Botón Minimizar | — (Minimizar) | Minimiza el diálogo. |
-| Botón Maximizar | □ (Maximizar) | Maximiza o restaura el diálogo. |
-| Botón Cerrar | × (Cerrar) | Cierra el diálogo. Escape limpia primero el campo de búsqueda y luego cierra el diálogo. |
-| Arrastrar para mover | — | Haga clic y arrastre la barra de título para mover el diálogo. Haga doble clic para alternar maximizar/restaurar. |
-| Redimensionar en 8 ejes | — | Haga clic y arrastre cualquier borde o esquina para redimensionar. El cursor cambia para indicar la dirección. Zona activa de 12 px. |
-| Campo de búsqueda | Search: | Filtra la tabla por nombre de memoria. Tiene un botón de limpiar; presione Enter para enviar. Ctrl+F enfoca este campo. |
-| Filtro de perfil | Profile: | Filtra memorias por perfil global o de transmisión activo. Predeterminado: "All Memories". |
-| Tabla de memoria | — | Muestra filas de memoria. Ordenable haciendo clic en los encabezados de columna (Frequency, Name, Mode). Columnas: Group, Owner, Frequency, Name, Mode, Step, FM TX Offset Dir, Repeater Offset, Tone Mode, Tone Value, Squelch, Squelch Level, RX Filter Low, RX Filter High, RTTY Mark, RTTY Shift, DIGL Offset, DIGU Offset. Haga doble clic para sintonizar. Ctrl+Shift+A selecciona todas las filas. Ctrl+F enfoca el campo de búsqueda. |
+| Barra de título | Memory Channels | Barra de título sin marco con degradado de 18 píxeles, tirador de arrastre a la izquierda y título del cuadro de diálogo. Haga clic y arrastre para mover; haga doble clic para alternar entre maximizar/restaurar. |
+| Botón Minimizar | — (Minimizar) | Minimiza el cuadro de diálogo. |
+| Botón Maximizar | □ (Maximizar) | Maximiza o restaura el cuadro de diálogo. |
+| Botón Cerrar | × (Cerrar) | Cierra el cuadro de diálogo. Escape borra primero el campo de búsqueda y luego cierra el cuadro de diálogo. |
+| Arrastrar para mover | — | Haga clic y arrastre la barra de título para mover el cuadro de diálogo. Haga doble clic para alternar entre maximizar/restaurar. |
+| Redimensionar en 8 ejes | — | Haga clic y arrastre cualquier borde o esquina para redimensionar. El cursor cambia para indicar la dirección de redimensionamiento. Zona de redimensionamiento de 12 píxeles. |
+| Campo de búsqueda | Search: | Filtra la tabla por nombre de memoria. Tiene un botón de borrar; pulse Enter para aplicar. Ctrl+F enfoca este campo. |
+| Filtro de perfil | Profile: | Filtra las memorias por perfil de transmisión global o activo. Valor predeterminado: "All Memories". |
+| Tabla de memorias | — | Muestra las filas de memoria. Ordenable haciendo clic en los encabezados de columna (Frequency, Name, Mode). Columnas: Group, Owner, Frequency, Name, Mode, Step, FM TX Offset Dir, Repeater Offset, Tone Mode, Tone Value, Squelch, Squelch Level, RX Filter Low, RX Filter High, RTTY Mark, RTTY Shift, DIGL Offset, DIGU Offset. Haga doble clic para sintonizar. Ctrl+Shift+A selecciona todas las filas. Ctrl+F enfoca el campo de búsqueda. El fondo de la tabla usa el color del tema `dialog/memory`. |
 | Contador de selección | — | Muestra "<N> de <M> seleccionados". |
-| Botón Añadir | Add | Crea una nueva memoria a partir de los ajustes actuales del slice activo. Atajo: Ctrl+N. |
-| Botón Editar | Edit | Activa la edición en línea en el campo Nombre de la memoria seleccionada. Solo se habilita cuando está seleccionada exactamente una memoria. Atajo: F2 o Ctrl+E. |
-| Botón Sintonizar | Tune | Sintoniza el slice activo en la memoria seleccionada. Solo se habilita cuando está seleccionada exactamente una memoria. |
-| Botón Seleccionar todo | Select All | Selecciona todas las filas visibles (respetando búsqueda/filtro). Atajo: Ctrl+Shift+A. |
-| Botón Eliminar | Remove | Elimina las memorias seleccionadas (con confirmación). Muestra progreso para eliminación por lotes. La etiqueta cambia a "Remove Selected" cuando hay más de una fila seleccionada. Atajo: Delete o Backspace. |
-| Botón Importar | Import... | Importa memorias desde un archivo CSV con diálogo de progreso. Muestra el progreso de importación y un resumen con cualquier fila omitida. |
-| Botón Exportar | Export... | Exporta las memorias seleccionadas (o filtradas) a CSV. Valida el CSV generado antes de guardar. |
+| Botón Add | Add | Crea una nueva memoria a partir de los parámetros actuales de la franja activa. Acceso directo: Ctrl+N. |
+| Botón Edit | Edit | Activa la edición en línea del campo Nombre de la memoria seleccionada. Solo se habilita cuando está seleccionada exactamente una memoria. Acceso directo: F2 o Ctrl+E. |
+| Botón Tune | Tune | Sintoniza la franja activa en la memoria seleccionada. Solo se habilita cuando está seleccionada exactamente una memoria. |
+| Botón Select All | Select All | Selecciona todas las filas visibles (respetando búsqueda/filtro). Acceso directo: Ctrl+Shift+A. |
+| Botón Remove | Remove | Elimina las memorias seleccionadas (con confirmación). Muestra el progreso en eliminaciones por lotes. La etiqueta del botón cambia a "Remove Selected" cuando hay más de una fila seleccionada. Acceso directo: Delete o Backspace. |
+| Botón Import | Import... | Importa memorias desde un archivo CSV con cuadro de diálogo de progreso. Muestra el progreso de la importación y un resumen con las filas omitidas. |
+| Botón Export | Export... | Exporta las memorias seleccionadas (o filtradas) a CSV. Valida el CSV generado antes de guardarlo. |
 
 ## Consejos
 
-- A la memoria se le asigna automáticamente un número de índice secuencial. Para renombrarla, seleccione la fila y haga clic en **Edit** o presione **F2**.
-- La memoria captura la frecuencia, modo, paso, ajustes de filtro del slice activo y cualquier parámetro de repetidor FM (dirección de desplazamiento, offset, modo de tono, valor de tono, ajustes de squelch).
-- El diálogo recuerda su tamaño y posición entre sesiones.
-- El botón Add siempre se dirige al slice activo; no hay selección por letra de slice.
+- La memoria recibe automáticamente un número de índice secuencial. Para renombrarla, seleccione la fila y haga clic en **Edit** o pulse **F2**.
+- La memoria captura la frecuencia, modo, paso, configuración de filtro y cualquier parámetro de repetidor FM (dirección de desplazamiento, desplazamiento, modo de tono, valor de tono, configuración de squelch) de la franja activa.
+- El cuadro de diálogo recuerda su tamaño y posición entre sesiones.
+- El botón Add siempre apunta a la franja activa; no hay selección por letra de franja.
+- El cuadro de diálogo usa el color del tema establecido para `dialog/memory`. Los colores alternos de fila en la tabla de memorias siguen el color de fondo del tema.
 
-## Relacionado
+## Relacionados
 
 - [Edit a memory's name inline](edit-a-memory-s-name-inline.md)
 - [Tune the radio to a stored memory](tune-the-radio-to-a-stored-memory.md)
