@@ -1,143 +1,242 @@
 # Usar XIT para desplazar la frecuencia de transmisión sin cambiar la recepción
 
-XIT (Sintonización Incremental de Transmisión) permite desplazar la frecuencia de transmisión en una cantidad fija de hercios mientras la frecuencia de recepción permanece en el VFO. Esto es útil cuando se trabaja en split, se compensa un desplazamiento de TX solicitado por la otra estación, o se ajusta a una frecuencia de red sin re-sintonizar el panadapter.
+XIT (Sintonización Incremental de Transmisión) le permite desplazar su frecuencia de transmisión en una cantidad fija de hercios mientras su frecuencia de recepción permanece en el VFO. Esto es útil cuando se trabaja en split, se compensa un desplazamiento de TX solicitado por la otra estación, o se iguala una frecuencia de red sin reajustar el panadapter.
 
-## Antes de empezar
+## Antes de comenzar
 
-- AetherSDR debe estar conectado al equipo de radio. Los controles XIT solo están activos cuando hay una conexión con el equipo.
-- Abra el applet RX Controls. Si no está visible, haga clic en el botón RX de la bandeja en la barra lateral derecha.
+- AetherSDR debe estar conectado a la radio. Los controles de XIT solo están activos cuando hay una conexión con la radio.
+- Abra el applet RX Controls. Si no está visible, haga clic en el botón RX de la barra lateral derecha.
 - Seleccione el slice que desea ajustar usando las pestañas de slice (A..H) en la parte superior del applet.
 
 ## Pasos
 
 1. En el applet RX Controls, desplácese hacia abajo hasta la sección RIT/XIT.
 2. Haga clic en XIT para habilitar la Sintonización Incremental de Transmisión. El botón se ilumina cuando está activo.
-3. Ajuste el desplazamiento XIT usando uno de estos métodos:
-   - Haga clic en los botones **<** o **>** que flanquean el cuadro de desplazamiento XIT para incrementar en pasos de 10 Hz.
-   - Coloque el cursor sobre el cuadro de desplazamiento XIT y gire la rueda del ratón para incrementar en pasos de 10 Hz.
+3. Ajuste el desplazamiento de XIT usando uno de estos métodos:
+   - Haga clic en los botones **<** o **>** que flanquean el cuadro de desplazamiento de XIT para avanzar en incrementos de 10 Hz.
+   - Pase el ratón sobre el cuadro de desplazamiento de XIT y gire la rueda del ratón para avanzar en incrementos de 10 Hz.
 4. Para devolver el desplazamiento de TX a cero sin deshabilitar XIT, haga clic en XIT 0.
-5. Para desactivar XIT, haga clic en XIT nuevamente para que el botón deje de estar iluminado.
+5. Para desactivar XIT, haga clic nuevamente en XIT para que el botón ya no esté iluminado.
 
 ## Qué hace cada control
 
-| Control       | Qué hace                                                                                         | Valor predeterminado |
-|---------------|--------------------------------------------------------------------------------------------------|----------------------|
-| XIT           | Activa o desactiva la Sintonización Incremental de Transmisión.                                   | Desactivado          |
-| Desplazamiento XIT | Establece el desplazamiento de frecuencia de TX en hercios. Se ajusta con los botones **<**/**>** o la rueda del ratón. | +0 Hz                |
-| XIT 0         | Restablece el desplazamiento XIT a +0 Hz sin desactivar XIT.                                     | —                    |
+| Control       | Qué hace                                                                                            | Por defecto |
+|---------------|-----------------------------------------------------------------------------------------------------|-------------|
+| XIT           | Activa o desactiva la Sintonización Incremental de Transmisión.                                     | Desactivado |
+| XIT offset    | Establece el desplazamiento de frecuencia de TX en hercios. Se ajusta con los botones **<** / **>** o la rueda del ratón. | +0 Hz       |
+| XIT 0         | Restablece el desplazamiento de XIT a +0 Hz sin desactivar XIT.                                    | —           |
 
 ## Consejos
 
 - RIT y XIT son independientes. Puede ejecutar ambos simultáneamente: RIT desplaza su frecuencia de recepción, XIT desplaza su frecuencia de transmisión, y la lectura del VFO permanece sin cambios.
-- Si necesita que el desplazamiento de TX persista durante una sesión, ajuste el desplazamiento XIT antes de transmitir; permanecerá configurado hasta que haga clic en XIT 0 o desactive XIT.
-- Para poner a cero el desplazamiento rápidamente antes de una transmisión, haga clic en XIT 0 en lugar de desactivar y volver a activar XIT.
+- Si necesita que el desplazamiento de TX persista durante una sesión, ajuste el desplazamiento de XIT antes de transmitir; permanecerá establecido hasta que haga clic en XIT 0 o desactive XIT.
+- Para poner a cero rápidamente el desplazamiento antes de una transmisión, haga clic en XIT 0 en lugar de desactivar y volver a activar XIT.
 
 ## Solución de problemas
 
-- **Los controles XIT están atenuados** — El equipo no está conectado. Use `Settings > Connect to Radio...` para establecer una conexión y luego intente nuevamente.
-- **La frecuencia de TX no se desplaza como se espera** — Confirme que el slice correcto está seleccionado usando las pestañas de slice (A..H). XIT solo actúa sobre el slice actualmente vinculado.
+- **Los controles de XIT aparecen atenuados** — La radio no está conectada. Use `Settings > Connect to Radio...` para establecer una conexión, luego intente de nuevo.
+- **La frecuencia de TX no se desplaza como se espera** — Confirme que el slice correcto está seleccionado usando las pestañas de slice (A..H). XIT actúa solo sobre el slice actualmente vinculado.
 
-## Colores de pestañas y distintivos de slice (v0.9.3)
+---
 
-A partir de la v0.9.3, los botones de pestaña de slice (A..H) y el distintivo de slice en la esquina superior izquierda del applet se colorean mediante el SliceColorManager. Cada slice tiene su propio color que persiste entre sesiones. El mismo color se refleja en los widgets VFO y las tiras de medidor para ese slice. Los colores no se pueden configurar desde el propio applet RX Controls; son gestionados centralmente por SliceColorManager y se aplican de manera consistente en todos los widgets que hacen referencia a un slice determinado.
+## Applet RX Controls — Referencia completa
 
-## Formato de texto del distintivo de slice (v26.5.2.1)
+El applet RX Controls proporciona controles de recepción por slice para el slice actualmente vinculado. Se muestra como un panel en la barra lateral derecha cuando se hace clic en el botón RX.
 
-A partir de la v26.5.2.1, la etiqueta del distintivo de slice admite renderizado de texto enriquecido (HTML). Esto permite que la letra del slice se formatee con etiquetas HTML cuando sea necesario, por ejemplo, para accesibilidad o requisitos de visualización especiales. El distintivo continúa mostrando la letra única del slice actualmente vinculado (A a H) con su color de identidad de slice. No se requiere ninguna acción de su parte.
+### Pestañas de slice (A..H)
 
-## Comportamiento de la pestaña de slice al reconectar (v0.9.5.1)
+La fila de pestañas de slice en la parte superior del applet le permite seleccionar a qué slice está vinculado el applet. Cada slice tiene su propio color que persiste entre sesiones. El mismo color se refleja en los widgets de VFO y las tiras de medidor para ese slice.
 
-En la v0.9.5.1, la fila de pestañas de slice se reconstruye correctamente cuando el número de slices disponibles cambia, por ejemplo, después de una desconexión y reconexión o después de que el equipo informe un número de slices diferente.
+- Haga clic en un botón de pestaña (A..H) para vincular el applet a ese slice.
+- La fila de pestañas se oculta si la radio solo admite un slice.
+- Al reconectar, la fila de pestañas se reconstruye correctamente cuando cambia el número de slices disponibles. El manejador de clic que emite `sliceActivationRequested` se conecta solo una vez por instancia del applet, independientemente de cuántas veces se reconstruya la fila de pestañas.
 
-Anteriormente, los botones de pestaña se creaban solo una vez y nunca se reemplazaban. Ahora, si el equipo informa un número máximo de slices diferente al ya mostrado, los botones existentes se eliminan primero —quitándolos del diseño y restaurando el distintivo de slice estático— antes de construir el nuevo conjunto. Esto evita que aparezcan botones de pestaña obsoletos después de la reconexión.
+### Insignia de slice
 
-El controlador de clic que emite `sliceActivationRequested` se conecta solo una vez por instancia del applet, independientemente de cuántas veces se reconstruya la fila de pestañas. Esto evita que se acumulen manejadores de señales duplicados a través de reconexiones.
+La insignia de slice en la esquina superior izquierda del applet muestra la letra del slice actualmente vinculado (A a H) con su color de identidad de slice. La insignia admite representación de texto enriquecido (HTML) para accesibilidad o requisitos de visualización especiales.
 
-No se requiere ninguna acción de su parte. La fila de pestañas se actualiza automáticamente cuando la conexión con el equipo cambia.
+### 🔓 / 🔒 (Bloqueo de sintonía)
 
-## Comportamiento del menú de antena (v26.5.2.1)
+Activa o desactiva el bloqueo de sintonía en el slice. Cuando está bloqueado, el slice ignora los cambios de frecuencia.
 
-En la v26.5.2.1, los menús de antena RX y TX mejoraron para una mayor precisión y fiabilidad:
+### ANT1 (Antena de RX)
 
-- **Menú de antena RX** ahora utiliza la `rxAntennaList()` dedicada del slice cuando está disponible, en lugar de la lista global de antenas del panadapter. Esto asegura que el menú muestre solo antenas válidas para el slice actual. Si el slice no proporciona una lista dedicada de antenas RX, se utiliza la lista global de antenas como respaldo.
-- **Menú de antena TX** filtra explícitamente las antenas para mostrar solo aquellas adecuadas para la transmisión. El applet utiliza un método dedicado (`txAntennaOptions()`) que identifica las antenas capaces de TX verificando si el token de la antena comienza con "ANT", "TX", o es igual a "XVTR". Las antenas que comienzan con "RX" se excluyen de las opciones de TX.
-- Los **elementos del menú** ahora muestran tooltips y consejos de estado que indican la cadena de identificación de la antena sin procesar. El campo de datos de la acción del menú, en lugar de su texto mostrado, se usa al establecer la antena en el slice. Esto evita que el formato de visualización interfiera con la selección real de la antena.
+Abre un menú que lista las antenas de recepción disponibles. El menú usa la lista `rxAntennaList()` dedicada del slice cuando está disponible, recurriendo a la lista global de antenas del panadapter. Etiqueta de color azul.
 
-No se requiere ninguna acción de su parte. Los menús de antena ahora muestran solo antenas apropiadas para cada función.
+### ANT1 (Antena de TX)
 
-## Persistencia del nivel de squelch manual (v26.5.2.1)
+Abre un menú que lista las antenas capaces de TX. Los puertos de antena solo de RX (prefijo "RX") se filtran. Etiqueta de color rojo.
 
-A partir de la v26.5.2.1, el nivel de umbral de squelch manual se guarda y restaura entre sesiones. Cuando ajusta el control deslizante del nivel de squelch manualmente, el valor se almacena del lado del cliente en el archivo de configuración de AetherSDR bajo `LastManualSquelchLevel`.
+### 2.7K (Ancho de filtro)
 
-Esto es necesario porque el modo de squelch automático del equipo puede sobrescribir la propiedad `squelchLevel` del slice, por lo que no se puede confiar en el equipo para preservar la preferencia manual del operador. Al persistir el nivel manual en AetherSDR, el applet puede restaurar su umbral de squelch preferido cuando salga del modo automático o reinicie la aplicación.
+Muestra el ancho de banda del filtro del slice actual. La lectura se comparte con el panel VFO y usa lógica sensible al modo para que los modos SSB y digitales muestren el ancho etiquetado correcto.
 
-El valor almacenado se limita al rango válido (0-100) al cargarse. El valor predeterminado es 20.
+### QSK
 
-No se requiere ninguna acción de su parte. Su preferencia de squelch manual ahora se recuerda entre sesiones.
+Se ilumina en ámbar cuando la ruptura de CW (QSK) está activa. Solo lectura; controlado a través del botón Breakin del applet CW.
 
-## Formato de almacenamiento de preselecciones de filtro (v0.9.5.1)
+### TX (Insignia)
 
-En la v0.9.5.1, las preselecciones de filtro guardadas por el ajuste `FilterPresets` pueden almacenar un valor simple de ancho de banda o un par explícito de borde inferior/borde superior. Esto coincide con el formato utilizado por el widget VFO.
+Haga clic para establecer este slice como el slice de TX.
 
-- **Formato de solo ancho** — un solo entero en hercios, por ejemplo `2700`. El applet centra la banda de paso simétricamente alrededor de la portadora utilizando los bordes predeterminados del modo.
-- **Formato Lo:Hi** — dos enteros separados por dos puntos, por ejemplo `300:3000`. El applet establece el borde inferior del filtro en 300 Hz y el borde superior en 3000 Hz exactamente. La etiqueta de ancho mostrada muestra la diferencia calculada (2700 Hz en este ejemplo).
+### Combo de modo
 
-Ambos formatos pueden aparecer en el mismo valor de `FilterPresets` separado por comas para un modo determinado. Las entradas que son mal formadas, tienen un borde superior igual o inferior al borde inferior, o son cero o negativas se omiten silenciosamente.
+Selecciona el modo del slice entre las opciones disponibles: USB, LSB, CW, AM, SAM, FM, NFM, DFM, DIGU, DIGL, RTTY. Si la compilación tiene soporte RADE, también está disponible RADE.
 
-Este cambio afecta cómo se guardan y cargan las preselecciones de filtro personalizadas, pero no cambia cómo interactúa con los botones de preselección de filtro. Haga clic derecho en un botón de preselección para guardar la banda de paso actual en esa ranura; haga clic en él para aplicar la preselección. El formato lo:hi se escribe automáticamente cuando guarda una preselección cuyo borde inferior difiere del valor predeterminado del modo.
+Al cambiar de modo:
+- Cambiar a RTTY o modos digitales (DIGU, DIGL) desactiva automáticamente el squelch, que de lo contrario eliminaría los caracteres FSK y rompería la decodificación.
+- Al salir del modo RADE, el applet emite una señal de desactivación solo si el slice estaba realmente en modo RADE, evitando señales de desactivación obsoletas al cambiar de modo en un slice que no es RADE.
 
-## Comportamiento del paso de ancho de filtro (v0.9.8)
+### Etiqueta de frecuencia
 
-En la v0.9.8, el método `stepFilterWidth()` recorre la lista de preselecciones de filtro por modo para ensanchar o estrechar la banda de paso. Esto asegura que los atajos de teclado u otros controles que recorren los anchos de filtro produzcan una geometría de borde correcta para el modo.
+Muestra la frecuencia actual del VFO con agrupación de puntos. Haga clic para cambiar al modo de edición.
 
-Cuando usa una acción de ensanchar/estrechar (como desde los botones Widen/Narrow en el panel VFO), el applet busca en la lista de preselecciones de filtro por modo la preselección más cercana al ancho de filtro actual. Luego aplica la siguiente preselección más ancha o más estrecha de esa lista. Si el ancho actual coincide exactamente con una preselección, se aplica directamente la siguiente preselección en la dirección elegida.
+### Edición de frecuencia
 
-Este comportamiento se aplica a todos los modos: LSB, CWL, DIGL, RTTY, AM, CW y USB. Los modos de la familia FM (FM, NFM, DFM) no tienen preselecciones de filtro e ignoran la acción de paso.
+Ingrese una frecuencia en MHz y presione Enter para sintonizar y re-centrar. Admite escalado automático de kHz/Hz. La entrada se normaliza para que solo se mantenga el primer punto como separador decimal; cualquier punto adicional se elimina. Escape cancela la entrada, restaura la frecuencia anterior y cierra el editor. Consciente de XVTR: acepta hasta 450 MHz cuando el slice está en una antena XVTR.
 
-No se necesita configuración. El comportamiento de paso utiliza el mismo ajuste `FilterPresets` que puede personalizar con el guardado con clic derecho.
+### STEP
 
-## Formato de la etiqueta de ancho de filtro (v0.9.8)
+Cicla a través de los tamaños de paso por modo usando los botones < / > o la rueda del ratón. La lista de pasos depende del modo del slice.
 
-En la v0.9.8, la lectura del ancho de filtro (compartida con el panel VFO a través de `RxApplet::formatFilterWidth`) utiliza lógica consciente del modo para que los modos SSB y digitales muestren el ancho etiquetado correcto. Esto asegura lecturas consistentes entre el applet RX Controls y el panel VFO, como se referencia en el problema #2197. No se requiere ninguna acción de su parte.
+### Preajustes de ancho de filtro
+
+Haga clic para aplicar un ancho de filtro preajustado. Haga clic derecho para guardar el ancho actual como un preajuste. Los botones se ocultan para los modos FM/NFM/DFM. Los preajustes son por modo.
+
+El método `stepFilterWidth()` recorre la lista de preajustes de filtro por modo para ampliar o reducir la banda de paso, produciendo una geometría de borde correcta para el modo.
+
+Los preajustes de filtro guardados pueden almacenar un valor de ancho de banda simple o un par explícito de borde bajo/borde alto (por ejemplo, `300:3000`).
+
+### Widget de banda de paso del filtro
+
+Arrastre los bordes lo/hi para ajustar la banda de paso del filtro.
+
+### Modo de tono (FM)
+
+Selecciona el modo de tono CTCSS en FM/NFM/DFM. Visible solo en modos de la familia FM.
+
+### Valor de tono CTCSS
+
+Selecciona la frecuencia del tono CTCSS enviada con la transmisión. Habilitado solo cuando el modo de tono es CTCSS TX.
+
+### Offset (FM)
+
+Establece la frecuencia de desplazamiento del repetidor de FM en MHz.
+
+### −, Símplex, + (Dirección del offset)
+
+Establece la dirección del desplazamiento del repetidor hacia abajo, símplex o hacia arriba.
+
+### REV
+
+Invierte el signo del desplazamiento de TX para trabajar un par de repetidores invertido.
+
+### 🔊 / 🔇 (Silencio)
+
+Un solo clic silencia/activa el sonido de este slice. Un doble clic silencia/activa el sonido de todos los slices propios. La acción se difiere por el intervalo de doble clic de la plataforma para que un doble clic pueda anular un solo clic.
+
+El estado de silencio NO se guarda ni se restaura al reconectar — la radio es la fuente de verdad para el estado de silencio de audio. El ícono de silencio se actualiza solo cuando la radio confirma el cambio de estado de silencio.
+
+### Ganancia de AF
+
+Ajusta la ganancia de salida de audio del slice (0-100).
+
+### Panorámico L / R
+
+Desplaza el audio del slice entre los canales izquierdo (0) y derecho (100). Un doble clic restablece a 50 (centro). El relleno del deslizador se ancla desde el centro hacia afuera para que el operador pueda ver la posición neutral de un vistazo. Se dibuja un pequeño punto de marca central en la ranura.
+
+### SQL
+
+Activa el squelch al nivel actual del deslizador. Deshabilitado (y desactivado automáticamente) en modos RTTY y digitales (DIGU, DIGL) donde el squelch eliminaría los caracteres FSK.
+
+### Nivel de squelch
+
+Ajusta el umbral de squelch (0-100). Solo tiene efecto cuando SQL está activado. Deshabilitado en modos RTTY y digitales.
+
+El nivel de umbral de squelch manual se guarda y restaura entre sesiones bajo `LastManualSquelchLevel`. Esto preserva su umbral de squelch preferido cuando sale del modo automático o reinicia la aplicación.
+
+### Modo AGC
+
+Establece el modo AGC del slice (Off, Slow, Med, Fast). Oculto en modos de la familia FM.
+
+### Umbral AGC
+
+Establece el umbral AGC (o nivel de AGC desactivado cuando el modo AGC está en Off). La información sobre herramientas refleja qué valor se está ajustando.
+
+### RIT
+
+Activa o desactiva la Sintonización Incremental de Recepción.
+
+### RIT 0
+
+Pone a cero el desplazamiento de RIT.
+
+### RIT offset
+
+Ajusta el desplazamiento de RIT en pasos de 10 Hz usando los botones < / > o la rueda del ratón.
+
+### XIT
+
+Activa o desactiva la Sintonización Incremental de Transmisión.
+
+### XIT 0
+
+Pone a cero el desplazamiento de XIT.
+
+### XIT offset
+
+Ajusta el desplazamiento de XIT en pasos de 10 Hz usando los botones < / > o la rueda del ratón.
+
+---
 
 ## Comportamiento del modo NT
 
 El modo NT se trata como un modo digital por el applet RX Controls. Específicamente:
 
-- NT sigue las mismas preselecciones de ancho de filtro y tamaños de paso que DIGU y DIGL.
-- La etiqueta de ancho de filtro calcula el ancho de banda de la misma manera que DIGU (usando el valor del borde superior).
-- El botón SQL y el control deslizante del nivel de squelch están deshabilitados cuando NT está activo, porque el audio se enruta a través de DAX y el squelch no tiene sentido. Si el squelch estaba activado cuando cambió a NT, se desactiva automáticamente y el estado anterior se guarda para su restauración cuando salga del modo NT.
+- NT sigue los mismos preajustes de ancho de filtro y tamaños de paso que DIGU y DIGL.
+- La etiqueta de ancho de filtro calcula el ancho de banda de la misma manera que DIGU (usando el valor del borde alto).
+- El botón SQL y el deslizador de nivel de squelch están deshabilitados cuando NT está activo, porque el audio se enruta a través de DAX y el squelch no es significativo. Si el squelch estaba activado cuando cambió a NT, se desactiva automáticamente y el estado anterior se guarda para su restauración cuando salga del modo NT.
 
-## Comportamiento del squelch en modos RTTY y digitales (v26.5.1)
+## Comportamiento del squelch en modos RTTY y digitales
 
-A partir de la v26.5.1, los controles de squelch (botón SQL y control deslizante del nivel de squelch) también están deshabilitados en modo RTTY, además de los modos digitales existentes (DIGU, DIGL) y el modo NT. Este cambio asegura que el squelch no elimine los caracteres FSK, lo que de otro modo rompería la decodificación.
+A partir de la versión v26.5.1, los controles de squelch (botón SQL y deslizador de nivel de squelch) también están deshabilitados en modo RTTY, además de los modos digitales existentes (DIGU, DIGL) y el modo NT. Este cambio asegura que el squelch no elimine los caracteres FSK, lo que de otro modo rompería la decodificación.
 
 Cuando cambia al modo RTTY:
-- El botón SQL y el control deslizante del nivel de squelch se deshabilitan automáticamente.
+- El botón SQL y el deslizador de nivel de squelch se deshabilitan automáticamente.
 - Si el squelch estaba activado cuando cambió a RTTY, se desactiva automáticamente y el estado anterior se guarda para su restauración cuando salga del modo RTTY o digital.
-- Los modos CW (CW, CWL) continúan teniendo el squelch deshabilitado como antes, con el estado del squelch gestionado por el propio equipo.
+- Los modos CW (CW, CWL) continúan teniendo el squelch deshabilitado como antes, con el estado del squelch gestionado por la propia radio.
 
-## Seguridad del modo RADE (v26.5.2.1)
+## Seguridad del modo RADE
 
-En la v26.5.2.1, la lógica de desactivación del modo RADE (RADE) se actualizó para reflejar que "RADE" es un modo solo del lado del cliente. El equipo en sí no entiende RADE como un modo distinto — cuando RADE está activo, el equipo devuelve el modo real subyacente (DIGL o DIGU) inmediatamente.
+En la versión v26.5.2.1, la lógica de desactivación del modo RADE se actualizó para reflejar que "RADE" es un modo solo del lado del cliente. La radio en sí misma no entiende RADE como un modo distinto — cuando RADE está activo, la radio devuelve inmediatamente el modo real subyacente (DIGL o DIGU).
 
-Anteriormente, el applet verificaba `m_slice->mode() == "RADE"` antes de emitir una señal de desactivación. Debido a que el equipo informa inmediatamente el modo real después de configurar RADE, esta condición nunca podía ser verdadera. Ahora, el applet emite `radeActivated(false)` solo si el slice estaba realmente en modo RADE cuando cambió la selección del combo de modo, evitando señales de desactivación obsoletas al cambiar modos en un slice que no estaba en RADE.
+El applet emite `radeActivated(false)` solo si el slice estaba realmente en modo RADE cuando cambió la selección del combo de modo, evitando señales de desactivación obsoletas al cambiar de modo en un slice que no es RADE.
 
 Esta corrección aborda los siguientes escenarios:
 - Cambiar entre modos que no son RADE en un slice que nunca estuvo en RADE.
-- RADE fue activado externamente (a través del combo del widget VFO, carga de perfil al inicio, o `MainWindow::activateRADE`).
+- RADE se activó externamente (a través del combo del widget VFO, carga de perfil al inicio, o `MainWindow::activateRADE`).
 - El slice se re-vincula a un slice diferente a través de `setSlice()`.
 
 No se requiere ninguna acción de su parte. El comportamiento de desactivación del modo RADE ahora se alinea correctamente con la naturaleza de solo lado del cliente del modo.
 
-## Estado de silencio de audio al reconectar (v0.9.10)
+## Estado de silencio de audio al reconectar
 
-En la v0.9.10, el estado del botón de silencio (🔊/🔇) NO se guarda ni restaura cuando la conexión con el equipo se pierde y se restablece. El equipo es la fuente de verdad para el estado de silencio de audio, según la Política de Ajustes Autoritativos del Equipo (#2489). Después de desconectarse y reconectarse, el botón de silencio refleja el estado de silencio real informado por el equipo, que puede ser diferente de lo que era antes de la desconexión.
+El estado del botón de silencio (🔊 / 🔇) NO se guarda ni se restaura cuando la conexión con la radio se pierde y se restablece. La radio es la fuente de verdad para el estado de silencio de audio. Después de desconectarse y reconectarse, el botón de silencio refleja el estado de silencio real informado por la radio, que puede ser diferente de lo que era antes de la desconexión.
 
-## Comportamiento del botón de silencio con doble clic (v26.5.3)
+## Comportamiento de doble clic del botón de silencio
 
-A partir de la v26.5.3, el botón de silencio (🔊/🔇) tiene un manejo mejorado del doble clic:
+El botón de silencio (🔊 / 🔇) tiene un manejo mejorado de doble clic:
 
-- **Un solo clic** silencia/activa el sonido solo del slice actual. La acción se difiere por el intervalo de doble clic de la plataforma (aproximadamente 400 ms) para que un doble clic pueda anularla. Si hace clic dos veces rápidamente, el segundo clic cancela el temporizador del clic único.
-- **Doble clic** silencia/activa el sonido de todos los slices propietarios a la vez.
-- El icono de silencio (🔊 o 🔇) se actualiza solo cuando el equipo confirma el cambio de estado de silencio, no instantáneamente al hacer clic. Esto asegura que el estado mostrado
+- **Un solo clic** silencia/activa el sonido solo del slice actual. La acción se difiere por el intervalo de doble clic de la plataforma (aproximadamente 400 ms) para que un doble clic pueda anularlo. Si hace clic dos veces rápidamente, el segundo clic cancela el temporizador de un solo clic.
+- **Doble clic** silencia/activa el sonido de todos los slices propios a la vez.
+- El ícono de silencio (🔊 o 🔇) se actualiza solo cuando la radio confirma el cambio de estado de silencio, no instantáneamente al hacer clic. Esto asegura que el estado mostrado siempre coincida con el estado de silencio de audio real de la radio.
+
+No se requiere ninguna acción de su parte. El botón de silencio ahora maneja correctamente tanto los clics simples como los dobles.
+
+## Comportamiento visual del deslizador de panorámico
+
+El relleno del deslizador de panorámico L/R se ancla desde el centro hacia afuera, por lo que el cero significativo es el punto medio. Se dibuja un pequeño punto de marca central en la ranura para que el operador pueda ver la posición neutral de un vistazo.
+
+## Tematización de colores
+
+En la versión v26.6.

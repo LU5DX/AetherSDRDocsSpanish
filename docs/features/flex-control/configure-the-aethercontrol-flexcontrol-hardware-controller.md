@@ -1,8 +1,8 @@
 # Configurar el controlador hardware AetherControl / FlexControl
 
-Configure una rueda FlexControl física o la rueda virtual AetherControl para sintonización y acciones de botones. El diálogo le permite gestionar la conexión, el comportamiento de la rueda y las asignaciones de botones tanto para controladores físicos como virtuales.
+Configure un FlexControl físico o la rueda virtual AetherControl para sintonización y acciones de botones. El diálogo permite gestionar la conexión, el comportamiento de la rueda y las asignaciones de botones tanto para controladores físicos como virtuales.
 
-## Antes de empezar
+## Antes de comenzar
 
 - Un FlexControl físico conectado por USB (para uso con hardware)
 - Para uso solo virtual, no se necesita hardware
@@ -10,44 +10,47 @@ Configure una rueda FlexControl física o la rueda virtual AetherControl para si
 ## Pasos
 
 1. Abra **Settings > AetherControl...**
-2. Para conectar un FlexControl físico, haga clic en **Detect** en la sección Physical. El diálogo escanea los puertos serie y se conecta automáticamente. Si falla la detección, haga clic en **Close** e intente de nuevo.
-3. Para usar la rueda virtual, haga clic y arrastre alrededor del indicador Wheel para sintonizar el slice activo.
-4. Ajuste el control deslizante **Wheel Tightness** para configurar el arrastre por inercia (0 = apretado, 100 = suelto). Valor predeterminado: 45.
-5. Ajuste el control deslizante **Mouse Sensitivity** para escalar el movimiento del puntero capturado (0 = menos, 100 = más). Valor predeterminado: 50.
-6. Alterne **Compact** para ocultar los botones auxiliares y mostrar solo la rueda y la lectura de frecuencia.
-7. Alterne **External Spin** para habilitar la sintonización por giro iniciada al arrastrar en el panadapter.
-8. Alterne **Reverse** para invertir la dirección de sintonización de la rueda.
+2. Para conectar un FlexControl físico, haga clic en **Detect** en la sección Physical. El diálogo escanea los puertos serie y se conecta automáticamente. Si la detección falla, haga clic en **Close** e intente de nuevo.
+3. Para usar la rueda virtual, haga doble clic y arrastre alrededor del indicador Wheel para sintonizar el slice activo. Vuelva a hacer doble clic para liberar la captura, o presione Escape.
+4. Ajuste el deslizador **Wheel Tightness** para configurar el arrastre de inercia (0 = apretado, 100 = suelto). Valor predeterminado: 45.
+5. Ajuste el deslizador **Mouse Sensitivity** para escalar el movimiento del puntero capturado (0 = menos, 100 = más). Valor predeterminado: 50.
+6. Active **Compact** para ocultar los botones auxiliares y mostrar solo la rueda y la lectura de frecuencia.
+7. Active **External Spin** para habilitar la sintonización de rueda iniciada mediante arrastre en el panadapter.
+8. Active **Reverse** para invertir la dirección de sintonización de la rueda.
 9. Configure la acción de presionar la rueda: seleccione una acción del cuadro combinado **Push**.
 10. Configure la acción de doble toque en la rueda: seleccione una acción del cuadro combinado **Double-tap**.
-11. Para configurar los botones auxiliares, haga clic en un botón auxiliar (etiquetado con puntos). Luego seleccione acciones de los cuadros combinados **Aux single-tap combo** y **Aux double-tap combo** que aparecen.
+11. Para configurar los botones auxiliares, haga clic en un botón aux (etiquetado con puntos). Luego seleccione acciones de los cuadros combinados **Aux single-tap combo** y **Aux double-tap combo** que aparecen.
 
 ## Qué hace cada control
 
 | Control | Predeterminado | Rango válido | Clave de configuración | Comportamiento |
-|---------|----------------|--------------|------------------------|----------------|
-| Wheel | — | — | — | Rueda virtual: gire con el ratón/toque para sintonizar el slice activo. Muestra la frecuencia y el modo. |
-| Physical | — | — | `FlexControlPort`, `FlexControlOpen`, `FlexControlAutoDetect` | Muestra el estado de conexión del FlexControl físico y el nombre del puerto. Los botones Detect/Close gestionan el dispositivo. |
-| Compact | — | — | `FlexControlCompactMode` | Oculta los botones auxiliares; solo muestra la rueda y la frecuencia. |
-| External Spin | — | — | `FlexControlVirtualExternalSpin` | Habilita la sintonización por giro al arrastrar en el panadapter. |
+|---------|---------|-------------|-------------|----------|
+| Wheel | — | — | — | Rueda virtual: haga doble clic para capturar, luego gire con ratón/táctil para sintonizar el slice activo. Vuelva a hacer doble clic o presione Escape para liberar. Muestra lectura de frecuencia y modo. |
+| Physical | — | — | `FlexControlPort`, `FlexControlOpen`, `FlexControlAutoDetect` | Muestra el estado de conexión del FlexControl físico y el nombre del puerto. Los botones Detect/Close gestionan el dispositivo. Restaura automáticamente el estado de los LED después de un reinicio del dispositivo. |
+| Compact | — | — | `FlexControlCompactMode` | Oculta los botones auxiliares; muestra solo la rueda y la frecuencia. |
+| External Spin | — | — | `FlexControlVirtualExternalSpin` | Habilita la sintonización de rueda activada por arrastre en el panadapter. |
 | Reverse | — | — | `FlexControlInvertDir` | Invierte la dirección de sintonización de la rueda. |
-| Push | — | — | `FlexControlButtonAction_*` | Acción asignada al toque simple en la rueda. |
-| Double-tap | — | — | almacenado por botón | Acción asignada al doble toque en la rueda. |
-| Wheel Tightness | 45 | 0–100 | `FlexControlVirtualWheel` (campo de soltura) | Ajusta el arrastre por inercia de la rueda virtual. 0 = apretado (parada rápida), 100 = suelto (arrastre largo). |
-| Mouse Sensitivity | 50 | 0–100 | `FlexControlVirtualWheel` (campo de sensibilidad) | Escala el movimiento del puntero capturado. 50 = escala 1.0x. |
-| Botones auxiliares (1–5) | — | 5 botones | — | Haga clic para seleccionar; luego configure las acciones de toque simple y doble toque. |
-| Aux single-tap combo | — | — | `FlexControlBtn1Action0`–`FlexControlBtn4Action0` | Acción para el toque simple en el botón auxiliar seleccionado. |
-| Aux double-tap combo | — | — | `FlexControlBtn1Action1`–`FlexControlBtn4Action1` | Acción para el doble toque en el botón auxiliar seleccionado. |
+| Push | — | — | `FlexControlButtonAction_*` | Acción asignada al presionar la rueda una vez. |
+| Double-tap | — | — | almacenado por botón | Acción asignada al presionar la rueda dos veces. |
+| Wheel Tightness | 45 | 0–100 | `FlexControlVirtualWheel` (campo de soltura) | Ajusta el arrastre de inercia de la rueda virtual. 0 = apretado (parada rápida), 100 = suelto (inercia larga). |
+| Mouse Sensitivity | 50 | 0–100 | `FlexControlVirtualWheel` (campo de sensibilidad) | Escala el movimiento del puntero capturado. 50 = escala 1.0x. El anti-fluctuación limita los deltas de puntero de un solo evento a 15°. Re-anclaje perezoso: cuando el puntero cruza la zona muerta central, el siguiente movimiento se re-ancla sin calcular un delta. |
+| Botones auxiliares (1–5) | — | 5 botones | — | Haga clic para seleccionar; luego configure las acciones de uno y dos toques. |
+| Aux single-tap combo | — | — | `FlexControlBtn1Action0`–`FlexControlBtn4Action0` | Acción para un toque en el botón auxiliar seleccionado. |
+| Aux double-tap combo | — | — | `FlexControlBtn1Action1`–`FlexControlBtn4Action1` | Acción para dos toques en el botón auxiliar seleccionado. |
 
 ## Consejos
 
-- Los controles deslizantes **Wheel Tightness** y **Mouse Sensitivity** solo afectan a la rueda virtual (uso con trackpad/ratón), no a un FlexControl físico.
-- Los ID de acción predefinidos incluyen: `Tune Slice`, `Band Zoom`, `Segment Zoom`, `RIT`, `XIT`, `Master Volume`, `Headphone Volume`, `AGCT`, `APF`, `Clear RIT`, `Clear XIT`, `Toggle APF`, `Change Active Slice`, `Split Active Slice`, `MOX`, `RF Power`, `CW Speed`, `Step Up`, `Step Down`, `Toggle Tune`, `Toggle Mute`, `Toggle Lock`, `Previous Slice`, `Toggle AGC`, `Slice AF Up`, `Slice AF Down`, `None` y macros CWX 1–12.
+- Los deslizadores **Wheel Tightness** y **Mouse Sensitivity** solo afectan a la rueda virtual (uso con trackpad/ratón), no a un FlexControl físico.
+- Los ID de acciones predefinidas incluyen: `Tune Slice`, `Band Zoom`, `Segment Zoom`, `RIT`, `XIT`, `Master Volume`, `Headphone Volume`, `AGCT`, `APF`, `Clear RIT`, `Clear XIT`, `Toggle APF`, `Change Active Slice`, `Split Active Slice`, `MOX`, `RF Power`, `CW Speed`, `Step Up`, `Step Down`, `Toggle Tune`, `Toggle Mute`, `Toggle Lock`, `Previous Slice`, `Toggle AGC`, `Slice AF Up`, `Slice AF Down`, `None` y macros CWX 1–12.
 - La configuración se guarda automáticamente al ajustar los controles en este diálogo.
+- La rueda virtual ahora usa doble clic para capturar y liberar, proporcionando una experiencia más intuitiva que el modelo anterior de clic para capturar / Escape para liberar. Escape sigue funcionando como vía de liberación secundaria.
+- El diálogo FlexControl restaura automáticamente el estado de los LED en el dispositivo físico cuando recibe un comando de reinicio de hardware, asegurando que los LED auxiliares coincidan con el botón del modo de rueda activo de la aplicación.
 
 ## Solución de problemas
 
-- **FlexControl físico no detectado** — Asegúrese de que el dispositivo esté conectado a un puerto USB. Haga clic en **Detect** de nuevo. Si aún no se encuentra, pruebe con un cable o puerto USB diferente.
-- **La rueda virtual se siente lenta** — Aumente **Mouse Sensitivity** y disminuya **Wheel Tightness** para una respuesta más rápida.
+- **FlexControl físico no detectado** — Asegúrese de que el dispositivo esté conectado a un puerto USB. Haga clic en **Detect** nuevamente. Si aún no se encuentra, pruebe con otro cable o puerto USB.
+- **La sintonización de la rueda virtual se siente lenta** — Aumente **Mouse Sensitivity** y disminuya **Wheel Tightness** para una respuesta más rápida.
+- **Los LED auxiliares en el FlexControl físico no coinciden** — Esto ahora se maneja automáticamente. El diálogo restaura el estado de los LED después de los reinicios del dispositivo, corrigiendo cualquier discrepancia que pudiera ocurrir durante las secuencias de encendido.
 
 ## Relacionados
 

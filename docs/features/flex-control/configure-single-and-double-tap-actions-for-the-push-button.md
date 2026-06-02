@@ -1,25 +1,25 @@
-# Configurar acciones de toque simple y doble para el botón PUSH
+# Configurar acciones de pulsación simple y doble para el botón PUSH
 
-Configure lo que sucede cuando toca o toca dos veces la rueda (botón PUSH) en el diálogo AetherControl. Esto le permite cambiar rápidamente el paso de frecuencia, cambiar de banda, alternar funciones o ejecutar macros CWX sin necesidad de usar el mouse.
+Configure lo que sucede al pulsar o pulsar dos veces la rueda (botón PUSH) en el cuadro de diálogo AetherControl. Esto le permite cambiar rápidamente el paso de frecuencia, cambiar de banda, alternar funciones o ejecutar macros CWX sin necesidad de usar el ratón.
 
 ## Antes de comenzar
 
-- Abra el diálogo AetherControl: `Settings > AetherControl...`
+- Abra el cuadro de diálogo AetherControl: `Settings > AetherControl...`
 
 ## Pasos
 
-1. Localice el cuadro combinado **Push (action)**. Este define la acción de un toque simple.
+1. Localice el cuadro combinado **Push (action)**. Este define la acción de pulsación simple.
 2. Haga clic en el cuadro combinado y seleccione la acción deseada de la lista.
-3. Localice el cuadro combinado **Double-tap (action)** directamente debajo. Este define la acción de un doble toque.
+3. Localice el cuadro combinado **Double-tap (action)** directamente debajo. Este define la acción de doble pulsación.
 4. Haga clic en el cuadro combinado y seleccione la acción deseada de la lista.
-5. Cierre el diálogo. Los cambios se guardan automáticamente.
+5. Cierre el cuadro de diálogo. Los cambios se guardan automáticamente.
 
 ## Qué hace cada control
 
 | Control | Comportamiento | Clave de configuración |
 |---|---|---|
-| Cuadro combinado **Push (action)** | Asigna una acción a un toque simple (pulsación) de la rueda. | `FlexControlButtonAction_*` |
-| Cuadro combinado **Double-tap (action)** | Asigna una acción a un doble toque de la rueda. | (se almacena junto con el toque simple en la misma estructura de configuración) |
+| Cuadro combinado **Push (action)** | Asigna una acción a una pulsación simple de la rueda. | `FlexControlButtonAction_*` |
+| Cuadro combinado **Double-tap (action)** | Asigna una acción a una doble pulsación de la rueda. | (almacenada junto con la pulsación simple en la misma estructura de configuración) |
 
 Las acciones disponibles para ambos cuadros combinados incluyen:
 
@@ -43,7 +43,7 @@ Las acciones disponibles para ambos cuadros combinados incluyen:
 | `ToggleMox` | MOX |
 | `WheelPower` | RF Power |
 | `WheelCwSpeed` | CW Speed |
-| `CwxF1` a `CwxF12` | CWX Macro 1 through 12 |
+| `CwxF1` a `CwxF12` | CWX Macro 1 a 12 |
 | `StepUp` | Step Up |
 | `StepDown` | Step Down |
 | `ToggleTune` | Toggle Tune |
@@ -56,8 +56,9 @@ Las acciones disponibles para ambos cuadros combinados incluyen:
 
 ## Consejos
 
-- Use una acción de rueda (Tune Slice, Master Volume, etc.) para el toque simple y una acción de un solo disparo (Step Up, Band Zoom, etc.) para el doble toque para lograr un comportamiento complementario.
-- El tiempo de guardia del doble toque es de 230 ms. Toque dos veces dentro de esa ventana para activar la acción de doble toque.
+- Use una acción de rueda (Tune Slice, Master Volume, etc.) para la pulsación simple y una acción de un solo disparo (Step Up, Band Zoom, etc.) para la doble pulsación para lograr un comportamiento complementario.
+- El tiempo de protección de doble pulsación es de 230 ms. Pulse dos veces dentro de esa ventana para activar la acción de doble pulsación.
+- Haga doble clic en la rueda virtual para capturar o liberar la sintonía circular usando el ratón o el panel táctil. Presione Escape como alternativa para liberar. La etiqueta de sugerencia de captura en la parte inferior del cuadro de diálogo ahora muestra "Double-click the knob to capture circular tuning."
 
 ## Relacionado
 

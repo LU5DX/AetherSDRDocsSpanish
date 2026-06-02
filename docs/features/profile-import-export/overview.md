@@ -1,6 +1,6 @@
-# Resumen de Importación/Exportación de perfiles
+# Importación/Exportación de Perfiles — Resumen
 
-La función de Importación/Exportación de perfiles le permite guardar perfiles de radio (Globales, de Transmisión y de Micrófono) en archivos en su máquina local y restaurarlos más tarde. Esto es útil para respaldar su configuración de radio, transferir ajustes entre radios o compartir perfiles con otros operadores.
+La función de Importación/Exportación de Perfiles le permite guardar perfiles de radio (Globales, de Transmisión y de Micrófono) en archivos en su máquina local y restaurarlos más tarde. Esto es útil para realizar copias de seguridad de la configuración de su radio, transferir ajustes entre radios o compartir perfiles con otros operadores.
 
 ## Antes de comenzar
 
@@ -9,19 +9,19 @@ La función de Importación/Exportación de perfiles le permite guardar perfiles
 
 ## Cómo funciona
 
-El diálogo de Importación/Exportación de perfiles tiene dos pestañas: **Export** e **Import**.
+El cuadro de diálogo de Importación/Exportación de Perfiles tiene dos pestañas: **Export** (Exportar) e **Import** (Importar).
 
-### Pestaña Export
+### Pestaña Export (Exportar)
 
-1. Abra el diálogo: **Profiles > Import/Export Profiles...**
+1. Abra el cuadro de diálogo: **Profiles > Import/Export Profiles...**
 2. Haga clic en la pestaña **Export** si no está seleccionada.
-3. Seleccione las casillas de verificación junto a los perfiles que desea exportar.
-4. Elija una ruta de archivo usando el selector de ruta de archivo.
+3. Marque las casillas junto a los perfiles que desea exportar.
+4. Elija una ruta de archivo usando el selector de rutas.
 5. Haga clic en **Export** para guardar los perfiles seleccionados en el archivo elegido.
 
-### Pestaña Import
+### Pestaña Import (Importar)
 
-1. Abra el diálogo: **Profiles > Import/Export Profiles...**
+1. Abra el cuadro de diálogo: **Profiles > Import/Export Profiles...**
 2. Haga clic en la pestaña **Import**.
 3. Busque el archivo de perfiles en su máquina local; se muestran los archivos disponibles.
 4. Seleccione qué perfiles restaurar usando las casillas de verificación.
@@ -30,10 +30,10 @@ El diálogo de Importación/Exportación de perfiles tiene dos pestañas: **Expo
 ## Qué hace cada control
 
 | Control | Tipo | Comportamiento | Notas |
-|---------|------|----------------|-------|
-| **Export** (pestaña) | pestaña | Muestra una lista de perfiles de radio con casillas de verificación para selección y un selector de ruta de archivo. Al hacer clic en **Export** se guardan los perfiles seleccionados en el archivo elegido. | Nuevo en v26.5.2.1. |
+|---------|------|---------------|-------|
+| **Export** (pestaña) | pestaña | Muestra una lista de perfiles de radio con casillas de verificación para seleccionar y un selector de ruta de archivo. Al hacer clic en **Export** se guardan los perfiles seleccionados en el archivo elegido. | Nuevo en v26.5.2.1. |
 | **Import** (pestaña) | pestaña | Muestra los archivos de perfiles disponibles en la máquina local. Seleccione qué perfiles restaurar y haga clic en **Import** para enviarlos a la radio. | — |
 
 ## Relacionado
 
-- Profile Manager: vea, cree, edite y elimine perfiles de transmisión
+- Profile Manager (Administrador de Perfiles) — ver, crear, editar y eliminar perfiles de transmisión

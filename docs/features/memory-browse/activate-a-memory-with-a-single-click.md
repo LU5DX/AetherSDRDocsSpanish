@@ -1,16 +1,16 @@
 # Active una memoria con un solo clic
 
-Active una memoria almacenada en el slice sintonizado haciendo clic en ella en el panel Memory Browser. Esto le permite saltar rápidamente a una frecuencia guardada sin necesidad de escribir ni navegar por menús.
+Active una memoria almacenada en el slice sintonizado haciendo clic en ella en el panel Memory Browser. Esto le permite saltar rápidamente a una frecuencia guardada sin escribir ni navegar por menús.
 
 ## Antes de comenzar
 
 - Su radio debe estar conectada y encendida.
-- Al menos una memoria debe estar almacenada en la radio. Si no existen memorias, el panel Memory Browser muestra "No memories are available yet."
+- Debe haber al menos una memoria almacenada en la radio. Si no existen memorias, el panel Memory Browser muestra "No memories are available yet."
 
 ## Pasos
 
 1. Abra el panel Memory Browser. Aparece como un panel lateral en el divisor de la ventana principal cuando la navegación por memorias está habilitada.
-2. Localice la memoria que desea activar en la tabla. Las memorias están ordenadas por frecuencia.
+2. Localice en la tabla la memoria que desea activar. Las memorias están ordenadas por frecuencia.
 3. Haga clic en la fila de esa memoria.
 
 El slice sintonizado cambia inmediatamente a la frecuencia de la memoria. La memoria más cercana a la frecuencia actual se resalta con un color de fondo distintivo.
@@ -19,10 +19,10 @@ El slice sintonizado cambia inmediatamente a la frecuencia de la memoria. La mem
 
 | Control | Comportamiento | Notas |
 |---|---|---|
-| Columna Frequency | Muestra la frecuencia de la memoria en MHz con seis decimales | La información sobre herramientas muestra la frecuencia completa |
-| Columna Name | Muestra el nombre de la memoria, o el grupo si el nombre está en blanco, o "Memory N" si ambos están en blanco | |
-| Fila resaltada | La memoria más cercana a la sintonización actual tiene un fondo distintivo | Se actualiza automáticamente al sintonizar |
-| Add Memory | Guarda el slice actual como una nueva entrada de memoria | Siempre visible en la parte inferior del panel |
+| Tabla de memorias | Muestra cada memoria ordenada por frecuencia; un solo clic o Enter activa el slice sintonizado en esa memoria | Columnas: Frequency, Name. La memoria más cercana a la sintonía actual se resalta con un fondo distintivo. Un doble clic también sintoniza. |
+| Fila resaltada | La memoria más cercana a la sintonía actual tiene un color de fondo distintivo | Se actualiza automáticamente mientras sintoniza |
+| Add Memory | Guarda el slice actual como una nueva entrada de memoria | Anclado en la parte inferior del panel, siempre visible. Añadido en v26.5.1 (#2533). |
+| No memories are available yet. | Se muestra cuando la radio no tiene memorias cargadas | |
 
 ## Consejos
 

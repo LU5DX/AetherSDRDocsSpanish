@@ -1,31 +1,37 @@
-# Abrir la configuración MQTT desde el applet MQTT
-
-Abra el diálogo de Configuración MQTT desde el applet MQTT para configurar conexiones de broker, suscripciones a temas y botones de publicación.
-
-## Antes de comenzar
-
-- AetherSDR debe estar compilado con soporte MQTT (el botón MQTT en la bandeja debe estar visible).
-- El applet MQTT debe estar visible en el Panel de applets.
+# Configurar Botones de Publicación MQTT
 
 ## Pasos
 
-1. Localice el applet MQTT en la bandeja del Panel de applets en la parte inferior de la ventana de AetherSDR.
-2. Haga clic en el botón **Settings** en el applet MQTT.
+1. En el cuadro de diálogo Configuración MQTT, haga clic en la pestaña **Publish Buttons**.
 
-El diálogo de Configuración MQTT se abre con la pestaña Broker visible.
+   La pestaña Publish Buttons muestra una tabla con las columnas **Label**, **Topic** y **Payload**, además de un cuadro de grupo de solo lectura **Internal AetherSDR Topics**.
 
-## Qué hace cada control
+2. Para agregar un botón:
+   - Haga clic en **Add** para insertar una nueva fila en blanco.
+   - El botón Add está deshabilitado cuando existen 12 filas (máximo).
+   - Ingrese una **Label** (texto del botón), **Topic** (tema MQTT para publicar) y **Payload** (mensaje a enviar).
 
-Consulte la descripción general de Configuración MQTT para obtener una descripción completa de todos los controles.
+3. Para eliminar un botón:
+   - Haga clic en la fila que desea eliminar.
+   - Haga clic en **Remove**.
 
-## Consejos
+4. Haga clic en **Apply** para guardar las definiciones de sus botones sin cerrar el diálogo, o haga clic en **OK** para guardar y cerrar.
 
-- También puede abrir el diálogo desde el menú principal: **Settings > MQTT...**
+## Qué muestra la sección Internal AetherSDR Topics
 
-## Relacionados
+El cuadro de grupo **Internal AetherSDR Topics** enumera los temas que AetherSDR publica automáticamente cada vez que MQTT está conectado:
 
-- [Descripción general de Configuración MQTT](overview.md)
+- `aethersdr/cw/decode`
+
+Estos temas no son configurables por el usuario y no pueden eliminarse. Aparecen automáticamente en el broker cuando la característica correspondiente está activa.
+
+## Número máximo de botones de publicación
+
+Puede definir hasta **12 botones de publicación**. El botón Add está deshabilitado cuando existen 12 filas.
+
+## Relacionado
+
+- [Resumen de Configuración MQTT](overview.md)
 - [Configurar la conexión del broker MQTT (host, puerto, credenciales, TLS)](../../getting-started/setup/configure-mqtt-broker-connection-host-port-credentials-tls.md)
-- [Suscribirse a temas MQTT y alternar la visualización del panadapter](../mqtt/subscribe-to-mqtt-topics-and-toggle-panadapter-display.md)
-- [Agregar o eliminar botones de publicación](add-or-remove-publish-buttons.md)
-- [Configurar el certificado CA para TLS MQTT](configure-ca-certificate-for-tls-mqtt.md)
+- [Suscribirse a temas MQTT y alternar visualización del panadapter](../mqtt/subscribe-to-mqtt-topics-and-toggle-panadapter-display.md)
+- [Configurar certificado CA para MQTT TLS](configure-ca-certificate-for-tls-mqtt.md)

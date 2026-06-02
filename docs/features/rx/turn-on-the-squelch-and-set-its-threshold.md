@@ -1,20 +1,20 @@
-# Activar el squelch y ajustar su umbral
+# Activar el silenciador y ajustar su umbral
 
-Use los controles de squelch en el applet de Controles de RX para silenciar la salida de audio cuando no haya señal presente. Esto es más útil en FM y en frecuencias ruidosas de HF donde se desea audio solo cuando una señal abre el squelch.
+Utilice los controles de silenciador en el applet RX Controls para silenciar la salida de audio cuando no haya señal presente. Esto es más útil en FM y en frecuencias HF ruidosas donde desea audio solo cuando una señal abre el silenciador.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a la radio. El applet de Controles de RX requiere una conexión activa con la radio.
-- Identifique la slice a la que desea aplicar el squelch.
+- AetherSDR debe estar conectado a la radio. El applet RX Controls requiere una conexión activa con la radio.
+- Identifique qué slice desea aplicar el silenciador.
 
 ## Pasos
 
-1. Abra el applet de Controles de RX haciendo clic en el botón **RX** de la bandeja en la barra lateral derecha si aún no está visible.
-2. Si tiene varias slices, haga clic en la pestaña de slice correspondiente (**A** a **H**) en la parte superior del applet para seleccionar la slice de destino.
-3. Ajuste el umbral de squelch arrastrando el control deslizante **Squelch level** al nivel deseado. Un valor más alto requiere una señal más fuerte para abrir el squelch.
-4. Haga clic en **SQL** para activar el squelch. El botón se activa y el squelch surte efecto al nivel configurado en el paso 3.
+1. Abra el applet RX Controls haciendo clic en el botón de la bandeja **RX** en la barra lateral derecha si aún no está visible.
+2. Si tiene múltiples slices, haga clic en la pestaña del slice correspondiente (**A** a **H**) en la parte superior del applet para seleccionar el slice de destino.
+3. Ajuste el umbral del silenciador arrastrando el control deslizante **Squelch level** al nivel deseado. Un valor más alto requiere una señal más fuerte para abrir el silenciador.
+4. Haga clic en **SQL** para habilitar el silenciador. El botón se activa y el silenciador entra en efecto al nivel configurado en el paso 3.
 
-Para desactivar el squelch, haga clic en **SQL** nuevamente para desactivarlo.
+Para desactivar el silenciador, haga clic en **SQL** nuevamente para desactivarlo.
 
 ## Qué hace cada control
 
@@ -23,28 +23,29 @@ Para desactivar el squelch, haga clic en **SQL** nuevamente para desactivarlo.
 | **SQL**           | Off                  | On / Off     |
 | **Squelch level** | 20                   | 0–100        |
 
-## Acerca de la memoria del nivel manual de squelch
+## Acerca de la memoria del nivel manual del silenciador
 
-El último umbral manual de squelch que configuró se guarda entre sesiones. Cuando cambie de modo o reinicie AetherSDR, el control deslizante **Squelch level** regresa a su ajuste manual anterior (valor almacenado en `LastManualSquelchLevel`). Esto persiste de forma independiente del nivel automático de squelch de la radio, el cual la radio puede sobrescribir cuando un valor sugerido por el algoritmo difiere de su preferencia.
+El último umbral manual del silenciador que configuró se guarda entre sesiones. Cuando cambie de modo o reinicie AetherSDR, el control deslizante **Squelch level** volverá a su ajuste manual anterior (valor almacenado en `LastManualSquelchLevel`). Esto persiste por separado del nivel automático del silenciador de la radio, el cual la radio puede sobrescribir cuando un valor sugerido por el algoritmo difiere de su preferencia.
 
 ## Consejos
 
 - Ajuste el control deslizante **Squelch level** antes de hacer clic en **SQL** para poder escuchar dónde se sitúa el umbral en relación con el ruido de fondo.
-- Si el squelch nunca se abre con una señal que usted puede oír, reduzca el valor de **Squelch level**.
-- Si el squelch nunca se cierra entre señales, aumente el valor de **Squelch level**.
-- El control deslizante se establece en 20 de forma predeterminada al iniciar por primera vez una instalación nueva.
+- Si el silenciador nunca se abre con una señal que puede escuchar, reduzca el valor de **Squelch level**.
+- Si el silenciador nunca se cierra entre señales, aumente el valor de **Squelch level**.
+- El control deslizante tiene un valor predeterminado de 20 en el primer inicio de una instalación nueva.
 
 ## Solución de problemas
 
-- **El audio está silenciado incluso con SQL desactivado** — Verifique si la slice está silenciada. La activación/desactivación del mute (🔊 / 🔇) es independiente del squelch. Haga clic en el botón de mute para reactivar el audio si es necesario. Además, compruebe que el control deslizante **AF gain** no esté en 0.
-- **El nivel de squelch está configurado pero no tiene efecto** — El control deslizante **Squelch level** solo controla el umbral; el circuito de squelch está inactivo hasta que **SQL** esté activado. Confirme que **SQL** esté marcado.
-- **El botón SQL aparece atenuado** — El squelch no está disponible en los modos CW, CWL, DIGU, DIGL, NT o RTTY. En modo CW/CWL la radio gestiona el squelch internamente. En modos digitales (DIGU, DIGL, NT) y RTTY, el audio se enruta a través de DAX y el squelch no tiene sentido práctico: enmudecería señales FSK débiles e interrumpiría la decodificación. Cambie a un modo que admita squelch, o use el control deslizante **AF gain** para controlar el nivel de audio.
-- **El nivel de squelch se restablece a un valor diferente del que configuré** — Si ve el control deslizante en un nivel que no eligió, es posible que la radio haya informado un nivel automático de squelch. El umbral manual de su último ajuste se conserva en la configuración de AetherSDR y se restaurará la próxima vez que active el squelch con **SQL**.
-- **Las pestañas de slice se ven incorrectas después de reconectar** — En la versión v0.9.5.1, los botones de las pestañas de slice se reconstruyen por completo cada vez que la radio se reconecta o cambia la cantidad de slices disponibles. Si la fila de pestañas se ve incorrecta, desconéctese y reconéctese a la radio; las pestañas se restablecerán para coincidir con la cantidad actual de slices del hardware.
+- **El audio está silenciado incluso con SQL desactivado** — Verifique si el slice está silenciado. La alternancia de silencio (🔊 / 🔇) es independiente del silenciador. Haga clic en el botón de silencio para reactivar el audio si es necesario. También verifique que el control deslizante **AF gain** no esté en 0.
+- **El nivel del silenciador está configurado pero no tiene efecto** — El control deslizante **Squelch level** solo controla el umbral; el circuito del silenciador está inactivo hasta que **SQL** esté habilitado. Confirme que **SQL** esté marcado.
+- **El botón SQL está atenuado** — El silenciador no está disponible en modos CW, CWL, DIGU, DIGL, NT o RTTY. En modo CW/CWL la radio gestiona el silenciador internamente. En modos digitales (DIGU, DIGL, NT) y RTTY, el audio se enruta a través de DAX y el silenciador no es relevante: bloquearía señales FSK débiles e interrumpiría la decodificación. Cambie a un modo que admita silenciador, o use el control deslizante **AF gain** para controlar el nivel de audio en su lugar.
+- **El nivel del silenciador se restablece a un valor diferente al que configuré** — Si ve el control deslizante en un nivel que no eligió, es posible que la radio haya informado un nivel automático de silenciador. El umbral manual de su último ajuste se conserva en la configuración de AetherSDR y se restaurará la próxima vez que habilite el silenciador con **SQL**.
+- **Las pestañas de slice se ven incorrectas después de reconectar** — En v0.9.5.1, los botones de las pestañas de slice se reconstruyen completamente cada vez que la radio se reconecta o cambia la cantidad de slices disponibles. Si la fila de pestañas parece incorrecta, desconéctese y reconéctese a la radio; las pestañas se restablecerán para coincidir con la cantidad actual de slices del hardware.
 
-## Relacionado
+## Relacionados
 
-- [Resumen de Controles de RX](overview.md)
-- [Cambiar modo (USB, LSB, CW, AM, FM, etc.)](change-mode-usb-lsb-cw-am-fm-etc.md)
-- [Trabajar con un repetidor FM usando tono CTCSS y desplazamiento +/-](work-an-fm-repeater-with-ctcss-tone-and-offset.md)
-- Ajustar el ancho del filtro
+- [RX Controls overview](overview.md)
+- [Change mode (USB, LSB, CW, AM, FM, etc.)](change-mode-usb-lsb-cw-am-fm-etc.md)
+- [Work an FM repeater with CTCSS tone and +/- offset](work-an-fm-repeater-with-ctcss-tone-and-offset.md)
+- [Adjust filter width](adjust-filter-width.md)
+- [Adjust AF gain and pan balance](adjust-af-gain-and-pan-balance.md)

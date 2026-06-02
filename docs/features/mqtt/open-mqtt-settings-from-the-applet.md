@@ -1,11 +1,11 @@
 # Abrir los ajustes MQTT desde el applet
 
-Abra el diálogo de Ajustes MQTT desde el applet MQTT para configurar la conexión al broker, las suscripciones y los ajustes de los botones de publicación.
+Abra el diálogo de Ajustes MQTT desde el applet MQTT para configurar la conexión al broker, las suscripciones y los botones de publicación.
 
-## Antes de empezar
+## Antes de comenzar
 
-- El applet MQTT debe estar visible. Actívelo con el botón MQTT en la bandeja de la barra lateral derecha.
-- La funcionalidad MQTT debe estar compilada (requiere la puerta de compilación `HAVE_MQTT`).
+- El applet MQTT debe estar visible. Actívelo con el botón de la bandeja MQTT en la barra lateral derecha.
+- La función MQTT debe estar compilada (requiere la compuerta de compilación `HAVE_MQTT`).
 
 ## Pasos
 
@@ -14,16 +14,25 @@ Abra el diálogo de Ajustes MQTT desde el applet MQTT para configurar la conexi�
 
 ## Función de cada control
 
-| Control | Comportamiento |
-|---|---|
-| Botón **Settings...** | Abre el diálogo de Ajustes MQTT (`MqttSettingsDialog`) para la conexión al broker, las suscripciones y la configuración de los botones de publicación. |
+| Control               | Comportamiento                                                                                                                   | Notas                                                                     |
+|-----------------------|----------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| Botón **Settings...** | Abre el diálogo de Ajustes MQTT (`MqttSettingsDialog`) para la conexión al broker, suscripciones y configuración de botones de publicación. | Nuevo en v26.5.3. Sustituye los campos en línea de Host/Puerto/Usuario/Contraseña/TLS/Temas. |
+| **Enable (Off/On)**   | Botón de alternancia que conecta o desconecta del broker usando los ajustes de MqttSettings. Emite connectRequested / disconnectRequested y guarda el estado de conexión habilitada. | La contraseña se carga desde el llavero del sistema al habilitar por primera vez. Si la contraseña del llavero aún no está cargada, muestra el estado 'Waiting for keychain'. |
+| **Botones de publicación** | Hasta 12 botones. Al hacer clic, publica la carga útil configurada en el tema configurado mediante MqttClient::publish.         | Solo activos mientras está conectado. Se configuran en la pestaña Publish Buttons del diálogo MqttSettingsDialog. Clave de ajuste: `MqttButtons`. |
+| **Registro de mensajes** | Muestra los mensajes recibidos como líneas "tema: valor". También procesa actualizaciones de alias de antena desde MQTT.        | Limitado a 50 entradas.                                                     |
+
+## Indicadores
+
+| Indicador           | Estados                                                                    | Significado                                                          |
+|----------------------|----------------------------------------------------------------------------|----------------------------------------------------------------------|
+| **Etiqueta de estado** | "Disconnected" (gris), "Connected" (verde) o un mensaje de error (color predeterminado) | Estado de la conexión con color: verde cuando está conectado, gris cuando está desconectado, color predeterminado en caso de error. |
 
 ## Relacionado
 
-- [Configurar los ajustes de conexión al broker (host, puerto, credenciales, TLS)](../../getting-started/setup/configure-broker-connection-settings-host-port-credentials-tls.md)
-- [Conectarse a un broker MQTT de estación](../../getting-started/setup/connect-to-a-station-mqtt-broker.md)
-- [Habilitar TLS con un certificado CA personalizado](enable-tls-with-a-custom-ca-certificate.md)
-- [Añadir o eliminar botones de publicación personalizados](add-or-remove-custom-publish-buttons.md)
-- [Suscribirse a temas MQTT y alternar la visualización del panadapter](subscribe-to-mqtt-topics-and-toggle-panadapter-display.md)
-- [Superponer un valor MQTT en el panadapter](overlay-an-mqtt-value-on-the-panadapter.md)
-- [Publicar un mensaje predefinido con un botón (p. ej., preajuste de rotor)](publish-a-canned-message-with-a-button-e-g-rotator-preset.md)
+- [Configure broker connection settings (host, port, credentials, TLS)](../../getting-started/setup/configure-broker-connection-settings-host-port-credentials-tls.md)
+- [Connect to a station MQTT broker](../../getting-started/setup/connect-to-a-station-mqtt-broker.md)
+- [Enable TLS with a custom CA certificate](enable-tls-with-a-custom-ca-certificate.md)
+- [Add or remove custom publish buttons](add-or-remove-custom-publish-buttons.md)
+- [Subscribe to MQTT topics and toggle panadapter display](subscribe-to-mqtt-topics-and-toggle-panadapter-display.md)
+- [Overlay an MQTT value on the panadapter](overlay-an-mqtt-value-on-the-panadapter.md)
+- [Publish a canned message with a button (e.g. rotator preset)](publish-a-canned-message-with-a-button-e-g-rotator-preset.md)

@@ -1,6 +1,6 @@
-# Alternar giro automático para la animación de cambio de frecuencia externo
+# Alternar el giro automático para la animación de cambio de frecuencia externa
 
-Active o desactive la animación automática de giro virtual del mando que se reproduce cuando una fuente externa cambia la frecuencia del slice, como al hacer clic en el panadapter o usar comandos CAT.
+Active o desactive la animación automática de giro del rueda virtual que se reproduce cuando una fuente externa cambia la frecuencia del slice, como al hacer clic en el panadapter o usar comandos CAT.
 
 ## Antes de comenzar
 
@@ -10,15 +10,15 @@ Active o desactive la animación automática de giro virtual del mando que se re
 
 1. Haga clic en **External Spin** para activar o desactivar la animación.
 
-Cuando está activado, arrastrar en el panadapter o cambiar la frecuencia desde una fuente externa activa una animación de gesto de sintonización con giro del mando en el mando virtual. Cuando está desactivado, los cambios de frecuencia ocurren inmediatamente sin animación.
+Cuando está habilitado, arrastrar sobre el panadapter o cambiar la frecuencia desde una fuente externa activa una animación de gesto de giro del rueda virtual. Cuando está deshabilitado, los cambios de frecuencia ocurren inmediatamente sin animación.
 
 ## Qué hace cada control
 
 | Control | Etiqueta | Comportamiento |
 |---------|----------|----------------|
-| Botón de alternancia | External Spin | Activa o desactiva la animación de giro en el mando virtual cuando los cambios de frecuencia se originan fuera del mando. Clave de configuración: `FlexControlVirtualExternalSpin` |
+| Botón de alternancia | External Spin | Habilita o deshabilita la animación de giro en el rueda virtual cuando los cambios de frecuencia se originan desde fuera del rueda. Clave de configuración: `FlexControlVirtualExternalSpin` |
 
 ## Relacionados
 
-- [Use el mando virtual para sintonizar el slice activo](use-the-virtual-wheel-to-tune-the-active-slice.md)
-- [Configure el controlador hardware AetherControl / FlexControl](configure-the-aethercontrol-flexcontrol-hardware-controller.md)
+- [Use the virtual wheel to tune the active slice](use-the-virtual-wheel-to-tune-the-active-slice.md)
+- [Configure the AetherControl / FlexControl hardware controller](configure-the-aethercontrol-flexcontrol-hardware-controller.md)

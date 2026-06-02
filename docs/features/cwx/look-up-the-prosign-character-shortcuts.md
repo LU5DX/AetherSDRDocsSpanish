@@ -1,6 +1,6 @@
-# Consultar los atajos de caracteres de prosignos
+# Consultar los atajos de caracteres para prosignos
 
-El panel CWX incluye una leyenda integrada de prosignos que muestra qué caracteres del teclado debe escribir para enviar prosignos CW comunes. Utilice esta referencia al redactar un búfer escrito o al escribir una macro.
+El panel CWX incluye una leyenda de prosignos incorporada que muestra qué caracteres del teclado debe escribir para enviar prosignos CW comunes. Use esta referencia al redactar un búfer de texto o escribir una macro.
 
 ## Antes de comenzar
 
@@ -10,19 +10,19 @@ El panel CWX incluye una leyenda integrada de prosignos que muestra qué caracte
 ## Pasos
 
 1. En el panel CWX, haga clic en **Setup** en la barra inferior.
-2. Localice la leyenda de prosignos que se muestra en la vista Setup. Es un indicador de solo lectura; no requiere interacción.
-3. Observe los atajos de caracteres mostrados (=, +, (, &, $) y utilícelos al escribir en el área de texto de envío o al editar una macro.
+2. Localice la leyenda de prosignos que se muestra en la vista de Setup. Es un indicador de solo lectura: no requiere interacción.
+3. Observe los atajos de caracteres mostrados (=, +, (, &, $) y úselos al escribir en el área de texto de envío o al editar una macro.
 
 ## Función de cada control
 
 | Control | Tipo | Comportamiento | Clave de configuración |
 |---|---|---|---|
 | Leyenda de prosignos | Indicador (solo lectura) | Muestra los atajos de teclado para prosignos CW comunes: `=`, `+`, `(`, `&`, `$`. | — |
-| Área de texto de envío | Campo de texto | Escriba aquí su mensaje CW, utilizando atajos de prosignos cuando sea necesario. Pulse Enter para enviar. | — |
-| Editores de macro F1 … F12 | Campos de texto | Introduzca atajos de prosignos directamente en el texto de la macro en la vista Setup. | `CwxMacro_F1` – `CwxMacro_F12` |
-| Velocidad: | Spinbox | Velocidad CW en WPM. | `CwxSpeedWpm` |
-| Retardo: | Spinbox | Retardo entre macros. | `CwxDelay` |
-| QSK | Botón de alternancia | Activa QSK (interrupción completa). | `CwxQsk` |
+| Área de texto de envío | Campo de texto | Escriba su mensaje CW aquí, usando atajos de prosignos cuando sea necesario. Presione Enter para enviar. | — |
+| Editores de macro F1 … F12 | Campos de texto | Ingrese atajos de prosignos directamente en el texto de la macro en la vista de Setup. | `CwxMacro_F1` – `CwxMacro_F12` |
+| Speed: | Spinbox | Velocidad CW en WPM. | `CwxSpeedWpm` |
+| Delay: | Spinbox | Retardo entre macros. | `CwxDelay` |
+| QSK | Botón de alternancia | Activa QSK (full break-in). | `CwxQsk` |
 | Send (vista) | Botón pulsador | Muestra el área de envío en vivo con historial y campo de texto. | — |
 | Live (vista) | Botón pulsador | Muestra la vista de envío en vivo. | — |
 | Setup (vista) | Botón pulsador | Muestra el editor de macros y la configuración de QSK. | — |
@@ -31,14 +31,14 @@ El panel CWX incluye una leyenda integrada de prosignos que muestra qué caracte
 
 ## Cómo interactúan Send y Live
 
-En la versión v0.9.2.1, el comportamiento del botón **Send** cambió. Ahora su acción depende de si **Live** está activado o no:
+En la versión v0.9.2.1, el comportamiento del botón **Send** cambió. Su acción ahora depende de si **Live** está actualmente activado:
 
-- **Live está desactivado:** Al hacer clic en **Send** se envía el búfer actual inmediatamente, exactamente como en versiones anteriores.
-- **Live está activado:** Al hacer clic en **Send**, primero se desactiva el modo Live y el panel vuelve a la vista de envío normal. El búfer *no* se retransmite. Esto evita que los caracteres que ya se enviaron uno por uno en modo Live se envíen nuevamente.
+- **Live está desactivado:** Al hacer clic en **Send**, se envía el búfer actual inmediatamente, exactamente como en versiones anteriores.
+- **Live está activado:** Al hacer clic en **Send**, primero se desactiva el modo Live y se devuelve el panel a la vista de envío normal. El búfer *no* se reenvía. Esto evita que los caracteres que ya se enviaron uno por uno en modo Live se vuelvan a enviar.
 
-El botón **Live** ahora es de alternancia. Hacer clic en él por segunda vez desactiva el modo Live sin salir de la vista de envío. El estado del botón se sincroniza con el modelo; si algo fuera del panel cambia el estado Live, el botón se actualiza para coincidir.
+El botón **Live** ahora es un conmutador. Al hacer clic en él por segunda vez, el modo Live se desactiva sin salir de la vista de envío. El estado del botón se mantiene sincronizado con el modelo; si algo externo al panel cambia el estado Live, el botón se actualiza para coincidir.
 
-Hacer clic en **Setup** siempre desactiva el modo Live antes de mostrar la vista del editor de macros.
+Al hacer clic en **Setup**, siempre se desactiva el modo Live antes de mostrar la vista del editor de macros.
 
 ## Acciones de las burbujas del historial de envío
 
@@ -48,23 +48,34 @@ El área de desplazamiento del historial de envío muestra cada búfer enviado c
   - **Resend:** Envía el mismo texto nuevamente como si lo hubiera escrito de nuevo. El texto aparece como una nueva burbuja en el historial.
   - **Clear History:** Elimina todas las burbujas del historial del área de desplazamiento. Esta acción no se puede deshacer.
 
+## Abortar una transmisión con Escape
+
+Presionar **Escape** durante una transmisión CW aborta el proceso de envío. Cuando se aborta una transmisión:
+
+- Todos los caracteres no enviados en el búfer actual se muestran con formato tachado en la burbuja del historial.
+- Los caracteres que ya se enviaron aparecen normalmente, sin tachado.
+- La marca de tiempo de la burbuja muestra cuándo se inició la transmisión.
+
+Esta distinción visual le ayuda a identificar qué partes de un mensaje se transmitieron realmente frente a las que se cancelaron durante el envío.
+
 ## Atajos de teclado en el panel CWX
 
 El panel CWX registra las teclas F1 a F12 y la tecla Escape como atajos de toda la aplicación. Los atajos F1–F12 se habilitan o deshabilitan según el modo del slice activo, gestionados por MainWindow. Se activan independientemente de si el panel CWX está visible, siempre que el slice activo esté en modo CW, CWL o CWU. Cuando el slice activo cambia a un modo diferente (como SSB), los atajos se deshabilitan automáticamente para evitar conflictos con otros paneles como el panel DVK.
 
 - **F1 – F12:** Envía la cadena de macro correspondiente.
-- **Escape:** Borra el búfer de envío actual.
+- **Escape:** Aborta la transmisión CW actual. Los caracteres no enviados aparecen con tachado en la burbuja del historial.
 
 ## Consejos
 
-- Los atajos de prosignos funcionan tanto en el área de texto de envío en vivo como en los editores de macros de las teclas F. Escríbalos como lo haría con cualquier otro carácter.
-- Para enviar una macro que contenga un prosigno, edite la cadena de la macro en la vista Setup utilizando los mismos atajos de caracteres y luego actívala con la tecla F correspondiente desde la vista Send.
-- Si cambia del modo Live al modo Send y desea transmitir el contenido del búfer, desactive Live primero (haga clic en **Live** para desactivarlo) y luego haga clic en **Send**.
-- Los atajos de teclado F1–F12 están activos siempre que el slice activo esté en modo CW, independientemente de si el panel CWX está visible. Si no puede activar una macro con una tecla F, verifique que el slice activo esté en modo CW, CWL o CWU.
+- Los atajos de prosignos funcionan tanto en el área de texto de envío en vivo como en los editores de macro de las teclas F. Escríbalos como cualquier otro carácter.
+- Para enviar una macro que contenga un prosigno, edite la cadena de macro en la vista de Setup usando los mismos caracteres de atajo, luego actívela con la tecla F correspondiente desde la vista de Send.
+- Si cambia del modo Live al modo Send y desea transmitir el contenido del búfer, primero desactive Live (haga clic en **Live** para desactivarlo) y luego haga clic en **Send**.
+- Los atajos de teclado F1–F12 están activos siempre que el slice activo esté en un modo CW, independientemente de si el panel CWX está visible. Si no puede activar una macro con una tecla F, verifique que el slice activo esté en modo CW, CWL o CWU.
 - Para reenviar un búfer anterior, haga clic derecho en la burbuja del historial y seleccione **Resend**. El texto original se conserva y se envía nuevamente como una nueva entrada en el historial.
-- Para borrar el historial de envío, haga clic derecho en cualquier burbuja y seleccione **Clear History**, o haga clic derecho en el fondo del área del historial si no hay burbujas presentes.
+- Para borrar el historial de envío, haga clic derecho en cualquier burbuja y seleccione **Clear History**, o haga clic derecho en el fondo del área de historial si no hay burbujas presentes.
+- Si aborta una transmisión con Escape, la burbuja del historial muestra la parte no enviada con formato tachado para obtener una retroalimentación visual clara.
 
-## Relacionado
+## Relacionados
 
 - [Enviar un búfer CW escrito en vivo](send-a-typed-cw-buffer-live.md)
 - [Editar una cadena de macro CW](edit-a-cw-macro-string.md)

@@ -1,149 +1,129 @@
-# Activar el offset RIT o XIT desde el panel VFO
+# Habilitar el desplazamiento RIT o XIT desde el panel VFO
 
-RIT (Receiver Incremental Tuning) y XIT (Transmitter Incremental Tuning) le permiten desplazar la frecuencia de recepción o transmisión en un pequeño offset sin mover el VFO principal. Esto es útil para trabajar contactos en frecuencias divididas o para compensar una estación que está ligeramente fuera de la frecuencia del dial.
+RIT (Sintonización Incremental del Receptor) y XIT (Sintonización Incremental del Transmisor) permiten desplazar la frecuencia de recepción o transmisión en un pequeño margen sin mover el VFO principal. Esto es útil para contactos en frecuencias divididas o para compensar una estación que está ligeramente fuera de la frecuencia de sintonía.
 
-## Antes de comenzar
+## Antes de empezar
 
 - AetherSDR debe estar conectado a la radio. El panel VFO requiere una conexión activa con la radio.
-- El panel VFO para el slice de destino debe estar abierto y expandido. Si está colapsado a la tira de solo frecuencia, haga clic en cualquier parte para expandirlo.
+- El panel VFO para la porción de espectro (slice) de destino debe estar abierto y expandido. Si está colapsado a una franja que solo muestra la frecuencia, haga clic en cualquier parte del mismo para expandirlo.
 
 ## Pasos
 
-1. Haga clic en el marcador VFO en la pantalla del espectro para el slice que desea ajustar. El panel VFO aparece anclado al marcador.
+1. Haga clic en la bandera del marcador VFO en la pantalla de espectro para la porción de espectro (slice) que desea ajustar. El panel VFO aparecerá anclado al marcador.
 2. Haga clic en la pestaña **X/RIT** dentro del panel VFO.
-3. Para habilitar el offset de recepción, haga clic en el botón **RIT**. El botón se activa y la etiqueta muestra el offset RIT actual.
-4. Para habilitar el offset de transmisión, haga clic en el botón **XIT**. El botón se activa y la etiqueta muestra el offset XIT actual.
-5. Con RIT o XIT activo, coloque el puntero del mouse sobre el botón correspondiente y gire la rueda del mouse para ajustar el offset. Cada paso de la rueda cambia el offset en 10 Hz.
-6. Para deshabilitar RIT o XIT, haga clic en el botón activo nuevamente.
+3. Para habilitar el desplazamiento del receptor, haga clic en el botón **RIT**. El botón se activa y la etiqueta muestra el desplazamiento RIT actual.
+4. Para habilitar el desplazamiento del transmisor, haga clic en el botón **XIT**. El botón se activa y la etiqueta muestra el desplazamiento XIT actual.
+5. Con RIT o XIT activo, coloque el puntero del ratón sobre el botón correspondiente y gire la rueda del ratón para ajustar el desplazamiento. Cada paso de la rueda cambia el desplazamiento en 10 Hz.
+6. Para deshabilitar RIT o XIT, vuelva a hacer clic en el botón activo.
 
-## Qué hace cada control
+## Función de cada control
 
-| Control                          | Tipo                                                                                                                                  | Valor predeterminado                                                                                                      |
-|----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
-| Botón de antena RX               | Botón pulsador                                                                                                                        | Abre el menú de selección de antena para la antena receptora de este slice.                                                |
-| Botón de antena TX               | Botón pulsador                                                                                                                        | Abre el menú de selección de antena para la antena transmisora de este slice.                                              |
-| Visualización de frecuencia      | Indicador                                                                                                                             | Muestra la frecuencia actual del slice. Haga clic una vez para iniciar la entrada directa de frecuencia; escriba MHz y presione Enter o Tab. |
-| Etiqueta de ancho de filtro      | Indicador                                                                                                                             | Muestra el ancho de banda del filtro actual. Haga clic para recorrer los botones de preselección de filtro en la pestaña Mode. Usa `RxApplet::formatFilterWidth` como fuente de verdad única, corrigiendo un offset de 0.1 kHz que afectaba las lecturas en modo SSB/digital (#2197, v0.9.8). |
-| Deslizador de ganancia AF (pestaña Audio) | Deslizador                                                                                                                         | 100                                                                                                                       |
-| Deslizador de paneo (pestaña Audio) | Deslizador                                                                                                                         | 50                                                                                                                        |
-| Botón de silencio (pestaña Audio) | Botón de alternancia                                                                                                                  | off                                                                                                                       |
-| Botón + deslizador de squelch (pestaña Audio) | Botón de alternancia                                                                                                             | off                                                                                                                       |
-| Combobox AGC (pestaña Audio)     | Combobox                                                                                                                              | FAST                                                                                                                      |
-| Botones NR / NR2 / RN2 / NR4 / MNR / DFNR / BNR / NRL / NRS / RNN / NRF (pestaña DSP) | Botón de alternancia                                                                                  | off                                                                                                                       |
-| Botón ADSP (pestaña DSP)         | Abre el diálogo AetherDSP Settings (NR2 / NR4 / DFNR / RN2 / BNR / MNR del lado cliente). Mismo punto de entrada que el menú Settings (v0.9.8). | Estilizado como un botón de alternancia DSP del lado de la radio pero sin posibilidad de marcar. Al hacer clic, abre y enfoca el diálogo no modal AetherDSP Settings. |
-| Botón AetherVoice (pestaña DSP)  | Activa la tira de canal de audio Aetherial, el conjunto unificado de DSP de TX/RX (v0.9.8).                                           | Ocupa 2 columnas en la cuadrícula DSP de 4 columnas. Coincide con los puntos de entrada de menú/cadena existentes para la tira. |
-| Deslizador de nivel DSP (pestaña DSP) | Deslizador                                                                                                                         | Establece la profundidad de procesamiento para la función DSP compatible activada más recientemente en este slice. La etiqueta a la izquierda identifica el objetivo actual. La fila se atenúa cuando ninguna función DSP elegible está activa. No se persiste; refleja el estado en vivo de la radio. |
-| Combobox de modo (pestaña Mode)  | Combobox                                                                                                                              | USB                                                                                                                       |
-| Botones de preselección de filtro (pestaña Mode) | Botón pulsador                                                                                                                       | Persistido en FilterPresets                                                                                               |
-| Botones + etiquetas RIT / XIT   | Botón de alternancia                                                                                                                  | off                                                                                                                       |
-| Combobox de canal DAX (pestaña DAX) | Combobox                                                                                                                           | Off                                                                                                                       |
-| Botón de grosor del marcador    | Botón pulsador                                                                                                                        | 1 px                                                                                                                      |
-| Botón de bordes de filtro       | Botón de alternancia                                                                                                                  | shown (mostrado)                                                                                                          |
-| Alternancia de colapso          | Botón de alternancia                                                                                                                  | expanded (expandido)                                                                                                      |
-| Distintivo TX                   | Indicador                                                                                                                             | Muestra TX (rojo) cuando este slice es el slice de transmisión activo. Oculto en caso contrario.                          |
-| Distintivo SPLIT                | Indicador                                                                                                                             | Muestra SPLIT (ámbar) cuando TX está asignado a un slice diferente al slice de recepción activo. Oculto en caso contrario. |
+| Control                              | Tipo              | Valor predeterminado | Notas                                                                     |
+|--------------------------------------|-------------------|----------------------|---------------------------------------------------------------------------|
+| Botón de antena RX                   | Botón pulsador    |                      | Abre el menú de selección de antena para la antena receptora de esta porción de espectro (slice). |
+| Botón de antena TX                   | Botón pulsador    |                      | Abre el menú de selección de antena para la antena transmisora de esta porción de espectro (slice). |
+| Indicador de frecuencia              | Indicador         |                      | Muestra la frecuencia actual de la porción de espectro (slice). Haga clic una vez para iniciar la entrada directa de frecuencia; escriba MHz y pulse Enter o Tab. |
+| Etiqueta de ancho de filtro          | Indicador         |                      | Muestra el ancho de banda del filtro actual. Haga clic para recorrer los botones de ajuste preestablecido del filtro en la pestaña Mode. Utiliza `RxApplet::formatFilterWidth` como fuente única de información. |
+| Control deslizante de ganancia AF (pestaña Audio) | Control deslizante | 100       | Establece el nivel de salida de audio para esta porción de espectro (slice). No se conserva: refleja el estado en vivo de la radio. |
+| Control deslizante de paneo (pestaña Audio) | Control deslizante | 50        | Establece el paneo estéreo izquierda/derecha para esta porción de espectro (slice). 50 = centro. |
+| Botón de silencio (pestaña Audio)    | Botón de alternancia | desactivado | Silencia la salida de audio para esta porción de espectro (slice) sin cambiar el ajuste de ganancia AF. |
+| Botón + control deslizante de squelch (pestaña Audio) | Botón de alternancia | desactivado | Activa el squelch para esta porción de espectro (slice). El control deslizante adyacente establece el umbral. |
+| Combo AGC (pestaña Audio)            | Cuadro combinado  | FAST                | Establece la velocidad de ataque/liberación del AGC para esta porción de espectro (slice). |
+| Botones NR / NR2 / RN2 / NR4 / MNR / DFNR / BNR / NRL / NRS / RNN / NRF (pestaña DSP) | Botón de alternancia | desactivado | Activa el algoritmo de reducción de ruido correspondiente para esta porción de espectro (slice). La disponibilidad de los botones depende de la serie de radio y la compilación. |
+| Botón ADSP (pestaña DSP)             | Botón pulsador    |                      | Abre el cuadro de diálogo de configuración de AetherDSP (NR2 / NR4 / DFNR / RN2 / BNR / MNR del lado del cliente). |
+| Botón AetherVoice (pestaña DSP)      | Botón pulsador    |                      | Alterna la Canaleta de Audio Aetherial — el conjunto unificado de DSP de TX/RX. Ocupa 2 columnas en la cuadrícula DSP de 4 columnas. |
+| Combo Mode (pestaña Mode)            | Cuadro combinado  | USB                  | Establece el modo de demodulación para esta porción de espectro (slice). |
+| Botones de ajuste preestablecido de filtro (pestaña Mode) | Botón pulsador |                      | Aplica un ancho de filtro preestablecido guardado. Haga clic derecho para guardar el ancho de filtro actual en esa ranura. Se conserva en FilterPresets. |
+| Botones RIT / XIT + etiquetas (pestaña X/RIT) | Botón de alternancia | desactivado | Activa la sintonización incremental del receptor (RIT) o del transmisor (XIT). La etiqueta muestra el desplazamiento actual; la rueda del ratón ajusta en pasos de 10 Hz. |
+| Combo de canal DAX (pestaña DAX)     | Cuadro combinado  | Off                  | Asigna un canal de audio DAX a esta porción de espectro (slice). |
+| Botón de grosor del marcador         | Botón pulsador    | 1 px                 | Recorre la línea del marcador VFO entre Off, 1 px y 3 px. Se conserva por porción de espectro (slice). |
+| Botón de bordes de filtro            | Botón de alternancia | mostrado           | Alterna las líneas de borde del filtro en la banda pasante del espectro. Se conserva por porción de espectro (slice). |
+| Alternancia de colapso               | Botón de alternancia | expandido          | Colapsa el panel VFO a una franja compacta que solo muestra la frecuencia. Se conserva por porción de espectro (slice). |
+| Insignia TX                          | Indicador         |                      | Muestra TX (rojo) cuando esta porción de espectro (slice) es la porción de espectro (slice) de transmisión activa. Oculto en caso contrario. |
+| Insignia SPLIT                       | Indicador         |                      | Muestra SPLIT (ámbar) cuando TX está asignada a una porción de espectro (slice) diferente a la porción de espectro (slice) de recepción activa. Oculto en caso contrario. |
 
-**Botón de antena RX** — Abre un menú de selección de antena para la antena receptora de este slice. El menú ahora usa la propiedad `rxAntennaList()` por slice cuando está disponible, recurriendo a la lista de antenas global. Los elementos del menú muestran una etiqueta legible junto al identificador interno de la antena.
+**Botón de antena RX** — Abre un menú de selección de antena para la antena receptora de esta porción de espectro (slice). El menú ahora utiliza la propiedad `rxAntennaList()` por porción de espectro (slice) cuando está disponible, recurriendo a la lista global de antenas. Los elementos del menú muestran una etiqueta legible junto con el identificador interno de la antena.
 
-**Botón de antena TX** — Abre un menú de selección de antena para la antena transmisora de este slice. El menú filtra los puertos de antena solo de recepción. Usa el helper `txAntennaOptions()` para determinar las antenas de transmisión válidas. Los elementos del menú muestran una etiqueta legible junto al identificador interno de la antena.
+**Botón de antena TX** — Abre un menú de selección de antena para la antena transmisora de esta porción de espectro (slice). El menú filtra los puertos de antena exclusivos de RX. Utiliza la función auxiliar `txAntennaOptions()` para determinar las antenas de transmisión válidas. Los elementos del menú muestran una etiqueta legible junto con el identificador interno de la antena.
 
-**Botón de grosor del marcador** — Recorre la línea del marcador VFO entre Off, 1 px y 3 px. Se persiste por slice.
+**Botón de grosor del marcador** — Recorre la línea del marcador VFO entre Off, 1 px y 3 px. Se conserva por porción de espectro (slice).
 
-**Botón de bordes de filtro** — Activa o desactiva las líneas del borde del filtro en la banda pasante del espectro. Se persiste por slice.
+**Botón de bordes de filtro** — Alterna las líneas de borde del filtro en la banda pasante del espectro. Se conserva por porción de espectro (slice).
 
-**Alternancia de colapso** — Colapsa el panel VFO a una tira compacta de solo frecuencia. Se persiste por slice.
+**Alternancia de colapso** — Colapsa el panel VFO a una franja compacta que solo muestra la frecuencia. Se conserva por porción de espectro (slice).
 
-**Distintivo TX** — Se muestra cuando este slice es el slice de transmisión activo. Muestra un indicador TX rojo.
+**Insignia TX** — Se muestra cuando esta porción de espectro (slice) es la porción de espectro (slice) de transmisión activa. Muestra un indicador TX rojo.
 
-**Distintivo SPLIT** — Se muestra cuando TX está asignado a un slice diferente al slice de recepción activo. Muestra un indicador SPLIT ámbar.
+**Insignia SPLIT** — Se muestra cuando TX está asignada a una porción de espectro (slice) diferente a la porción de espectro (slice) de recepción activa. Muestra un indicador SPLIT ámbar.
 
-**Botones + etiquetas RIT / XIT** — Activan la sintonización incremental del receptor (RIT) o del transmisor (XIT) para este slice. Cuando están activos, la etiqueta junto a cada botón muestra el valor del offset actual. Gire la rueda del mouse sobre el botón para ajustar el offset en pasos de 10 Hz. Ninguno de los ajustes se persiste; el estado refleja el estado en vivo de la radio.
+**Botones RIT / XIT + etiquetas** — Activan la sintonización incremental del receptor (RIT) o del transmisor (XIT) para esta porción de espectro (slice). Cuando están activos, la etiqueta al lado de cada botón muestra el valor de desplazamiento actual. Gire la rueda del ratón sobre el botón para ajustar el desplazamiento en pasos de 10 Hz. Ningún ajuste se conserva; el estado refleja el estado en vivo de la radio.
 
-**Botón + deslizador de squelch (pestaña Audio)** — Activa el squelch para este slice. El deslizador adyacente establece el umbral. El squelch se desactiva automáticamente cuando el modo del slice es CW, digital o RTTY, porque en esos modos el audio alimenta decodificadores externos a través de DAX donde el squelch bloquearía señales FSK débiles (#2504). El botón y el deslizador se atenúan en esos modos.
-
-**Deslizador de nivel DSP (pestaña DSP)** — Establece la profundidad de procesamiento para la función DSP compatible activada más recientemente en este slice. La etiqueta a la izquierda identifica el objetivo actual. La fila se atenúa cuando ninguna función DSP elegible está activa. No se persiste; refleja el estado en vivo de la radio.
+**Botón + control deslizante de squelch (pestaña Audio)** — Activa el squelch para esta porción de espectro (slice). El control deslizante adyacente establece el umbral. El squelch se desactiva automáticamente cuando el modo de la porción de espectro (slice) es CW, digital o RTTY, porque en esos modos el audio alimenta decodificadores externos a través de DAX, donde el squelch podría bloquear señales FSK débiles (#2504). El botón y el control deslizante se atenúan en esos modos.
 
 ## Consejos
 
-- Los offsets de RIT y XIT son independientes. Puede activar ambos al mismo tiempo para desplazar recepción y transmisión de forma independiente.
-- El ajuste con la rueda del mouse es de 10 Hz por paso. Para offsets mayores, gire la rueda varias muescas.
-- Cuando un slice está bloqueado, la sintonización con la rueda del mouse en el panel VFO está bloqueada. Aparece una notificación indicando que la sintonización está bloqueada por el bloqueo. La entrada directa de frecuencia también se cancela si estaba en progreso cuando se aplica el bloqueo.
+- Los desplazamientos RIT y XIT son independientes. Puede activar ambos al mismo tiempo para desplazar la recepción y la transmisión de forma independiente.
+- El ajuste con la rueda del ratón es de 10 Hz por paso. Para desplazamientos más grandes, gire la rueda varias muescas.
+- Cuando una porción de espectro (slice) está bloqueada, la sintonización con la rueda del ratón en el panel VFO está bloqueada. Aparece una notificación que indica que la sintonización está bloqueada por el bloqueo. La entrada directa de frecuencia también se cancela si estaba en progreso cuando se aplica el bloqueo.
+
+## Cambios en v26.6.1
+
+### Control deslizante de paneo adaptado al tema
+
+El control deslizante de paneo en la pestaña Audio ahora utiliza un relleno anclado al centro. La ranura del control deslizante se rellena desde el centro hacia afuera: en color de acento azul a la derecha del centro cuando el paneo está cargado a la derecha, y en un color de fondo a la izquierda del centro. Cuando el paneo está cargado a la izquierda, la ranura se rellena desde el centro hacia la izquierda en color de acento, mientras que el lado derecho utiliza el color de fondo. Esto coincide con el comportamiento de un control de balance estéreo donde el cero significativo es el punto medio. En la ranura, en el punto medio, todavía se dibuja un pequeño punto de marca central.
+
+### Soporte de tema para botones e insignias
+
+Todos los botones e insignias del panel VFO ahora respetan el tema actual. La hoja de estilo de los botones se ha actualizado para usar tokens de tema en lugar de colores fijos. Se declaran los siguientes tokens para cobertura de inspección:
+- `color.background.0`
+- `color.background.1`
+- `color.background.2`
+- `color.text.primary`
+- `color.text.label`
+- `color.accent`
+- `color.accent.bright`
+
+El panel VFO está registrado como un contenedor de tematización separado bajo el ámbito `spectrum/vfo`. Esto significa que las selecciones de color del tema se pueden aplicar específicamente al panel VFO sin afectar al resto de la pantalla de espectro.
 
 ## Cambios en v26.5.3
 
-### Comportamiento de sintonización en slice bloqueado
+### Comportamiento de sintonización en porción de espectro (slice) bloqueada
 
-Cuando un slice está bloqueado, las siguientes interacciones de sintonización en el panel VFO ahora están bloqueadas:
+Cuando una porción de espectro (slice) está bloqueada, las siguientes interacciones de sintonización en el panel VFO ahora están bloqueadas:
 
-- **Sintonización con rueda del mouse**: Girar la rueda del mouse sobre el panel VFO colapsado o expandido ya no cambia la frecuencia. Se muestra una notificación `tuneBlockedByLock`.
-- **Entrada directa de frecuencia**: Si está escribiendo una frecuencia y el slice se bloquea, la entrada directa se cancela y la visualización vuelve a la frecuencia bloqueada.
+- **Sintonización con la rueda del ratón**: Girar la rueda del ratón sobre el panel VFO colapsado o expandido ya no cambia la frecuencia. Se muestra una notificación `tuneBlockedByLock`.
+- **Entrada directa de frecuencia**: Si está en medio de escribir una frecuencia y la porción de espectro (slice) se bloquea, la entrada directa se cancela y la pantalla vuelve a la frecuencia bloqueada.
 
-La superposición de bloqueo (icono de candado) es gestionada centralmente por `SliceModel` y se limpia automáticamente cuando el slice se desbloquea (#2983).
+La superposición de bloqueo (icono de candado) es gestionada centralmente por `SliceModel` y se limpia automáticamente cuando la porción de espectro (slice) se desbloquea (#2983).
 
-### Mejoras en la entrada directa de banda XVTR
+### Mejoras en la entrada directa en bandas XVTR
 
-Al ingresar una frecuencia directamente en el panel VFO, el analizador ahora maneja correctamente las entradas explícitas en MHz por encima de 54 MHz incluso cuando no está en una banda XVTR. Si escribe un valor en formato MHz (por ejemplo, `144.200`), se acepta hasta 50 000 MHz sin ser malinterpretado como kHz o Hz. La inserción de conveniencia de banda de 3 dígitos para enteros simples en bandas de 2m/70cm solo se aplica cuando la frecuencia del slice está entre 100 MHz y 999 MHz.
+Al introducir una frecuencia directamente en el panel VFO, el analizador ahora gestiona correctamente las entradas explícitas de MHz por encima de 54 MHz, incluso cuando no se está en una banda XVTR. Si escribe un valor en formato MHz (p. ej., `144.200`), se acepta hasta 50 000 MHz sin ser malinterpretado como kHz o Hz. La inserción por conveniencia de banda de 3 dígitos para enteros simples en bandas de 2m/70cm sigue aplicándose solo cuando la frecuencia de la porción de espectro (slice) está entre 100 MHz y 999 MHz.
 
-### Optimización de altura de pestañas
+### Optimización de la altura de las pestañas
 
-La pila de pestañas del panel VFO ahora usa un widget `TabStack` personalizado que informa solo el tamaño preferido de la página actual. Anteriormente, cuando la pestaña DSP era más alta que la pestaña Mode (por ejemplo, cuando el contenedor de filtro digital era visible en modo DIGU/DIGL), el panel VFO asignaba una altura excesiva, causando un espacio vacío dentro de la pestaña Mode. Esto ahora está resuelto.
+La pila de pestañas del panel VFO ahora utiliza un widget `TabStack` personalizado que informa solo el tamaño preferido de la página actual. Anteriormente, cuando la pestaña DSP era más alta que la pestaña Mode (por ejemplo, cuando el contenedor de filtro digital era visible en modo DIGU/DIGL), el panel VFO asignaba una altura excesiva, lo que provocaba un espacio vacío dentro de la pestaña Mode. Esto ahora está resuelto.
 
 ## Cambios en v26.5.2.1
 
-### Manejo de frecuencia en banda XVTR
+### Gestión de frecuencia en bandas XVTR
 
-Cuando el slice está en una banda XVTR, la frecuencia máxima aceptada durante la entrada directa se ha incrementado de 450 MHz a 50 000 MHz para soportar bandas de microondas. El comportamiento de inserción de banda de 3 dígitos (insertar automáticamente un decimal después del tercer dígito para enteros simples en 2m/70cm) ahora solo se activa cuando la frecuencia del slice está entre 100 MHz y 999 MHz. Para bandas como 23cm (1296 MHz), los enteros simples se interpretan directamente como la frecuencia en MHz.
+Cuando la porción de espectro (slice) está en una banda XVTR, la frecuencia máxima aceptada durante la entrada directa se ha aumentado de 450 MHz a 50 000 MHz para admitir bandas de microondas. El comportamiento de inserción de banda de 3 dígitos (insertar automáticamente un decimal después del tercer dígito para enteros simples en las bandas de 2m/70cm) ahora solo se activa cuando la frecuencia de la porción de espectro (slice) está entre 100 MHz y 999 MHz. Para bandas como 23cm (1296 MHz), los enteros simples se interpretan directamente como la frecuencia en MHz.
 
 ### Mejoras en el menú de antena
 
-Tanto los botones de antena RX como TX ahora muestran una etiqueta legible en el menú junto al identificador interno de la antena. El menú usa `data()` internamente para la selección, coincidiendo con la cadena completa de la antena en lugar de la etiqueta mostrada. Los elementos del menú también incluyen texto de tooltip y status tip que muestra el identificador de antena sin procesar.
+Tanto los botones de antena RX como TX ahora muestran una etiqueta legible en el menú junto con el identificador interno de la antena. El menú utiliza `data()` internamente para la selección, coincidiendo con la cadena completa de la antena en lugar de la etiqueta mostrada. Los elementos del menú también incluyen texto de información sobre herramientas y de sugerencia de estado que muestra el identificador de antena sin procesar.
 
-### Soporte de texto enriquecido para distintivos de slice
+### Soporte de texto enriquecido para insignias de porción de espectro (slice)
 
-El distintivo de slice ahora soporta el formato de texto enriquecido (`Qt::RichText`), permitiendo formato HTML en ciertos casos (#2606).
+La insignia de porción de espectro (slice) ahora admite formato de texto enriquecido (`Qt::RichText`), lo que permite el formateo HTML en ciertos casos (#2606).
 
 ## Cambios en v26.5.1
 
 ### Squelch deshabilitado en modo RTTY
 
-El botón y el deslizador de squelch ahora se deshabilitan automáticamente cuando el slice está en modo RTTY, además de las restricciones existentes en modo digital y CW. Cuando el modo es RTTY, el botón de squelch se atenúa y no se puede alternar, y el deslizador de squelch se atenúa y no se puede ajustar. Si el squelch estaba previamente habilitado, se desactiva automáticamente al cambiar al modo RTTY. Esto evita que el squelch bloquee señales FSK débiles que los decodificadores RTTY externos necesitan recibir a través de DAX (#2504).
+El botón y el control deslizante de squelch ahora se desactivan automáticamente cuando la porción de espectro (slice) está en modo RTTY, además de las restricciones de modo digital y CW existentes. Cuando el modo es RTTY, el botón de squelch se atenúa y no se puede activar, y el control deslizante de squelch se atenúa y no se puede ajustar. Si el squelch estaba activado previamente, se desactiva automáticamente al cambiar al modo RTTY. Esto evita que el squelch bloquee las señales FSK débiles que los decodificadores RTTY externos necesitan recibir a través de DAX (#2504).
 
 ## Cambios en v0.9.8
 
-### Pestaña DSP — nuevos botones ADSP y AetherVoice
-
-La **pestaña DSP** en el panel VFO ahora incluye dos nuevos botones de lanzamiento de DSP del lado cliente:
-
-- **ADSP** — Abre el diálogo AetherDSP Settings (NR2 / NR4 / DFNR / RN2 / BNR / MNR del lado cliente). Este es un botón pulsador de una sola celda estilizado como los botones de alternancia DSP del lado de la radio pero sin posibilidad de marcar. Al hacer clic, abre y enfoca el diálogo no modal AetherDSP Settings.
-- **AetherVoice** — Activa la tira de canal de audio Aetherial, el conjunto unificado de DSP de TX/RX. Este botón ocupa 2 columnas en la cuadrícula DSP de 4 columnas.
-
-Ambos botones están colocados en la misma fila de la cuadrícula, con **ADSP** ocupando la columna más a la izquierda y **AetherVoice** ocupando las columnas 2-3.
-
-**Corrección de la etiqueta de ancho de filtro**
-
-La etiqueta de ancho de filtro ahora usa `RxApplet::formatFilterWidth` como la única fuente de verdad para el formato. Esto corrige un offset de 0.1 kHz que anteriormente afectaba las lecturas de filtro en modo SSB y digital (#2197).
-
-**Mejora del deslizador de nivel DSP**
-
-Los cambios de estado DSP desde el perfil de la radio ahora insertan correctamente el objetivo de nivel DSP asociado en la pila del deslizador. Esto asegura que el deslizador aparezca al inicio para cualquier función DSP que estuviera habilitada en el perfil guardado de la radio, sin requerir que el usuario la active manualmente primero.
-
-## Cambios en v0.9.7
-
-### Pestaña DSP — solo botones del lado de la radio
-
-La **pestaña DSP** en el panel VFO ahora muestra solo botones para funciones DSP que la propia radio proporciona. Los siguientes botones se han eliminado de la pestaña DSP del panel VFO:
-
-- **NR2** (reducción de ruido espectral)
-- **RN2** (supresión de ruido RNNoise)
-- **BNR** (eliminación de ruido neuronal GPU)
-- **NR4** (reducción de ruido por blanqueo espectral)
-- **MNR** (reducción de ruido MMSE-Wiener para macOS)
-- **DFNR** (reducción de ruido neuronal DeepFilterNet3)
-
-Estos módulos DSP del lado cliente ahora son accesibles desde el menú de superposición del espectro y desde el applet AetherDSP. Use esas ubicaciones para activarlos o ajustarlos.
-
-Los botones que permanecen en la pestaña DSP son: **NR**, **NB**, **ANF**, **APF**, **NRL**, **NRS**, **RNN**, **NRF**, **ANFL** y **ANFT**. La disposición de la cuadrícula es de cuatro columnas en tres filas. El botón **APF** es visible solo cuando el slice está en modo CW.
-
-### Pestaña DSP — deslizador de nivel DSP
-
-Se ha añadido una fila de deslizador de nivel compartida en la parte inferior de la pestaña DSP. El deslizador ajusta la profundidad de procesamiento de la función DSP compatible que se haya activado más recientemente. La
+###
