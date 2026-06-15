@@ -1,37 +1,37 @@
 # SpotHub
 
-El cuadro de diálogo SpotHub es el centro central para conectarse a fuentes de spots DX: cluster DX, Reverse Beacon Network, WSJT-X, SpotCollector, POTA y FreeDV, y para configurar cómo se muestran los spots en el panadapter.
+El diálogo de SpotHub es el centro central para conectarse a fuentes de spots DX — cluster DX, Reverse Beacon Network, WSJT-X, SpotCollector, POTA y FreeDV — y configurar cómo se muestran los spots en el panadapter.
 
-## Abrir SpotHub
+## Abrir el SpotHub
 
 1. Abra `Settings > SpotHub...`.
 
-## Descripción general de SpotHub
+## Resumen de SpotHub
 
-El cuadro de diálogo SpotHub contiene varias pestañas, cada una dedicada a una fuente de spots diferente, más una pestaña **Display** para la apariencia del panadapter.
+El diálogo de SpotHub contiene múltiples pestañas, cada una dedicada a una fuente de spots diferente, más una pestaña **Display** para la apariencia del panadapter.
 
 ## Pestaña Cluster
 
 Se conecta a un cluster DX tradicional mediante telnet.
 
 1. Haga clic en la pestaña **Cluster**.
-2. Ingrese el nombre del host del cluster en **Server:**. Este valor se guarda como `ClusterHost`.
+2. Ingrese el nombre de host del cluster en **Server:**. Este valor se guarda como `ClusterHost`.
 3. Ingrese el puerto telnet en **Port:**. Rango válido: 1–65535. Este valor se guarda como `ClusterPort`.
 4. Ingrese su indicativo en **Callsign:**. Este valor se guarda como `ClusterCallsign`.
 5. Haga clic en **Connect**.
 6. Confirme que el indicador de estado cambie a **Connected**. El tráfico telnet sin procesar aparece en la **Cluster Console**.
 7. Para enviar un comando, escriba en el campo de línea de comandos y haga clic en **Send**.
-8. Para configurar el color del spot, haga clic en **Spot Color:** y elija un color. Este valor se guarda como `ClusterSpotColor`.
+8. Para establecer el color del spot, haga clic en **Spot Color:** y seleccione un color. Este valor se guarda como `ClusterSpotColor`.
 9. Para que el cluster se conecte automáticamente cada vez que se inicie AetherSDR, active **Auto-connect on startup**. Esto se guarda como `ClusterAutoConnect`.
 
 ### Comandos de inicio para el cluster
 
-Haga clic en **Startup Commands…** para abrir un cuadro de diálogo donde puede ingresar un comando por línea. Estos comandos se envían al servidor del cluster automáticamente después de cada inicio de sesión.
+Haga clic en **Startup Commands…** para abrir un diálogo donde puede ingresar un comando por línea. Estos comandos se envían al servidor del cluster automáticamente después de cada inicio de sesión.
 
 Los comandos típicos incluyen:
-- `SET/NAME` — establecer su nombre
-- `SET/QTH` — establecer su ubicación
-- `ACCEPT/SPOT` — configurar el filtrado de spots
+- `SET/NAME` — establece su nombre
+- `SET/QTH` — establece su ubicación
+- `ACCEPT/SPOT` — configura el filtrado de spots
 
 Los comandos se almacenan como `DxClusterStartupCommands`.
 
@@ -40,52 +40,52 @@ Los comandos se almacenan como `DxClusterStartupCommands`.
 Se conecta al Reverse Beacon Network mediante telnet con limitación de velocidad.
 
 1. Haga clic en la pestaña **RBN**.
-2. Ingrese el nombre del host de RBN en **Server:**. Este valor se guarda como `RbnHost`.
+2. Ingrese el nombre de host del RBN en **Server:**. Este valor se guarda como `RbnHost`.
 3. Ingrese el puerto telnet en **Port:**. Rango válido: 1–65535. Este valor se guarda como `RbnPort`.
 4. Ingrese su indicativo en **Callsign:**. Este valor se guarda como `RbnCallsign`.
-5. Configure el **Rate Limit:** para limitar la cantidad de spots por segundo. Este valor se guarda como `RbnRateLimit`.
+5. Establezca **Rate Limit:** para limitar la cantidad de spots por segundo. Este valor se guarda como `RbnRateLimit`.
 6. Haga clic en **Connect**.
 7. Confirme que el indicador de estado cambie a **Connected**. El tráfico telnet sin procesar aparece en la **RBN Console**.
 8. Para enviar un comando, escriba en el campo de línea de comandos y haga clic en **Send**.
-9. Para configurar el color del spot, haga clic en **Spot Color:** y elija un color. Este valor se guarda como `RbnSpotColor`.
-10. Para que RBN se conecte automáticamente cada vez que se inicie AetherSDR, active **Auto-connect on startup**. Esto se guarda como `RbnAutoConnect`.
+9. Para establecer el color del spot, haga clic en **Spot Color:** y seleccione un color. Este valor se guarda como `RbnSpotColor`.
+10. Para que el RBN se conecte automáticamente cada vez que se inicie AetherSDR, active **Auto-connect on startup**. Esto se guarda como `RbnAutoConnect`.
 
 ### Comandos de inicio para RBN
 
-Haga clic en **Startup Commands…** para abrir un cuadro de diálogo donde puede ingresar un comando por línea. Estos comandos se envían al servidor RBN automáticamente después de cada inicio de sesión.
+Haga clic en **Startup Commands…** para abrir un diálogo donde puede ingresar un comando por línea. Estos comandos se envían al servidor del RBN automáticamente después de cada inicio de sesión.
 
 Los comandos se almacenan como `RbnStartupCommands`.
 
 ## Pestaña WSJT-X
 
-Escucha las transmisiones UDP de WSJT-X y muestra los spots decodificados.
+Escucha transmisiones UDP de WSJT-X y muestra los spots decodificados.
 
 1. Haga clic en la pestaña **WSJT-X**.
 2. Ingrese la dirección de enlace UDP en **Address:**. Este valor se guarda como `WsjtxAddress`.
 3. Ingrese el puerto UDP en **Port:**. Rango válido: 1–65535. Este valor se guarda como `WsjtxPort`.
 4. Haga clic en **Start**.
 5. Confirme que el indicador de estado cambie a **Listening**. Las transmisiones decodificadas aparecen en la consola **WSJT-X Decodes**.
-6. Para que el receptor se inicie automáticamente cada vez que se inicie AetherSDR, active **Auto-start on startup**. Esto se guarda como `WsjtxAutoStart`.
+6. Para que el listener se inicie automáticamente cada vez que se lance AetherSDR, active **Auto-start on startup**. Esto se guarda como `WsjtxAutoStart`.
 7. Use las casillas de verificación de filtro para controlar qué spots se muestran:
-   - **CQ** — mostrar solo llamadas CQ. Se guarda como `WsjtxFilterCQ`.
-   - **CQ POTA** — mostrar llamadas CQ POTA. Se guarda como `WsjtxFilterPOTA`.
-   - **Calling Me** — mostrar solo decodificaciones dirigidas a su indicativo. Se guarda como `WsjtxFilterCallingMe`.
-8. Haga clic en cada muestra de color para configurar el color de esa categoría:
+   - **CQ** — muestra solo llamadas CQ. Se guarda como `WsjtxFilterCQ`.
+   - **CQ POTA** — muestra llamadas CQ POTA. Se guarda como `WsjtxFilterPOTA`.
+   - **Calling Me** — muestra solo decodificaciones dirigidas a su indicativo. Se guarda como `WsjtxFilterCallingMe`.
+8. Haga clic en cada muestra de color para establecer el color de esa categoría:
    - **CQ color** — `WsjtxColorCQ`
    - **POTA color** — `WsjtxColorPOTA`
    - **Calling Me color** — `WsjtxColorCallingMe`
    - **Default color** — `WsjtxColorDefault`
-9. Configure **Spot Life:** para controlar cuántos segundos permanecen los spots de WSJT-X en el panadapter. Este valor se guarda como `WsjtxSpotLife`.
+9. Establezca **Spot Life:** para controlar cuántos segundos permanecen los spots de WSJT-X en el panadapter. Este valor se guarda como `WsjtxSpotLife`.
 
 ## Pestaña SpotCollector
 
-Recibe spots DX transmitidos por SpotCollector de Ham Radio Deluxe a través de UDP.
+Recibe spots DX transmitidos por SpotCollector de Ham Radio Deluxe mediante UDP.
 
 1. Haga clic en la pestaña **SpotCollector**.
-2. Configure **UDP Port:** con el puerto en el que SpotCollector está transmitiendo. Rango válido: 1–65535. Este valor se guarda como `SpotCollectorPort`.
+2. Establezca **UDP Port:** al puerto en el que SpotCollector está transmitiendo. Rango válido: 1–65535. Este valor se guarda como `SpotCollectorPort`.
 3. Haga clic en **Start**.
 4. Confirme que el indicador de estado cambie a **Listening**. Los spots entrantes aparecen en la consola **SpotCollector Spots** a medida que llegan.
-5. Para que el receptor se inicie automáticamente cada vez que se inicie AetherSDR, active **Auto-start on startup**. Esto se guarda como `SpotCollectorAutoStart`.
+5. Para que el listener se inicie automáticamente cada vez que se lance AetherSDR, active **Auto-start on startup**. Esto se guarda como `SpotCollectorAutoStart`.
 
 ## Pestaña POTA
 
@@ -93,11 +93,11 @@ Consulta api.pota.app para obtener activaciones actuales de Parks on the Air.
 
 1. Haga clic en la pestaña **POTA**.
 2. El indicador **Server:** muestra `api.pota.app (HTTP polling)`.
-3. Configure **Poll Interval:** para controlar cuántos segundos entre consultas. Este valor se guarda como `PotaPollInterval`.
+3. Establezca **Poll Interval:** para controlar cuántos segundos entre consultas. Este valor se guarda como `PotaPollInterval`.
 4. Haga clic en **Start**.
 5. Confirme que el indicador de estado cambie a **Polling**. El feed de activaciones aparece en la consola **POTA Activations**.
-6. Para configurar el color del spot, haga clic en **Spot Color:** y elija un color. Este valor se guarda como `PotaSpotColor`.
-7. Para que la consulta se inicie automáticamente cada vez que se inicie AetherSDR, active **Auto-start on startup**. Este valor se guarda como `PotaAutoStart`.
+6. Para establecer el color del spot, haga clic en **Spot Color:** y seleccione un color. Este valor se guarda como `PotaSpotColor`.
+7. Para que la consulta se inicie automáticamente cada vez que se lance AetherSDR, active **Auto-start on startup**. Esto se guarda como `PotaAutoStart`.
 
 ## Pestaña FreeDV
 
@@ -107,8 +107,8 @@ Se conecta a un feed WebSocket de spots del reportero FreeDV QSO.
 2. El indicador **Server:** muestra `qso.freedv.org (WebSocket)`.
 3. Haga clic en **Start**.
 4. Confirme que el indicador de estado cambie a **Connected**. La actividad de FreeDV aparece en la consola **FreeDV Spots**.
-5. Para configurar el color del spot, haga clic en **Spot Color:** y elija un color. Este valor se guarda como `FreeDvSpotColor`.
-6. Para que la conexión se inicie automáticamente cada vez que se inicie AetherSDR, active **Auto-start on startup**. Este valor se guarda como `FreeDvAutoStart`.
+5. Para establecer el color del spot, haga clic en **Spot Color:** y seleccione un color. Este valor se guarda como `FreeDvSpotColor`.
+6. Para que la conexión se inicie automáticamente cada vez que se lance AetherSDR, active **Auto-start on startup**. Esto se guarda como `FreeDvAutoStart`.
 
 ### Reporte de FreeDV Reporter
 
@@ -116,10 +116,10 @@ La pestaña **FreeDV** también contiene controles de reporte de estación que t
 
 #### Requisitos antes de habilitar
 
-- Debe estar disponible un indicativo válido, ya sea desde la radio (cuando **Use radio** está marcado) o escrito en el campo **Callsign:**.
-- Debe estar disponible un cuadrado de cuadrícula Maidenhead válido, ya sea desde el módulo GPS de la radio (cuando **Use GPS** está marcado, en hardware compatible) o escrito en el campo **Grid Square:**.
+- Debe estar disponible un indicativo válido — ya sea desde la radio (cuando **Use radio** está marcado) o escrito en el campo **Callsign:**.
+- Debe estar disponible un cuadrado de cuadrícula Maidenhead válido — ya sea desde el módulo GPS de la radio (cuando **Use GPS** está marcado, en hardware compatible) o escrito en el campo **Grid Square:**.
 
-Si falta alguno de estos valores al intentar habilitar el reporte, AetherSDR muestra una advertencia y deja la casilla sin marcar.
+Si falta alguno de los valores cuando intenta habilitar el reporte, AetherSDR muestra una advertencia y deja la casilla sin marcar.
 
 #### Pasos para habilitar el reporte
 
@@ -130,7 +130,7 @@ Si falta alguno de estos valores al intentar habilitar el reporte, AetherSDR mue
    - En radios con hardware GPS, marque **Use GPS** para completarlo automáticamente. Desmarque **Use GPS** para escribir un cuadrado de cuadrícula manualmente.
 4. Opcionalmente, ingrese un mensaje corto en **Station Msg:** — aparece junto a su indicativo en el mapa.
 5. Marque **Enable FreeDV Reporter reporting when RADE is active**.
-   - Si el indicativo o el cuadrado de cuadrícula están en blanco, aparece un cuadro de diálogo de advertencia. Complete el valor faltante e intente nuevamente.
+   - Si el indicativo o el cuadrado de cuadrícula están en blanco, aparece un diálogo de advertencia. Complete el valor faltante e intente nuevamente.
 6. El reporte ahora está activo siempre que el módem RADE esté funcionando.
 
 ## Pestaña Spot List
@@ -140,7 +140,7 @@ Muestra una tabla unificada y buscable de todos los spots activos de todas las f
 1. Haga clic en la pestaña **Spot List**.
 2. Use las casillas de verificación **Bands:** para alternar la visibilidad en la tabla. Una casilla por banda (160m, 80m, 60m, 40m, 30m, 20m, 17m, 15m, 12m, 10m, 6m, 2m, etc.).
 3. Haga clic en **Clear** para vaciar la lista de spots actual.
-4. La **Spot table** muestra todos los spots con las columnas: Time, Freq, DX Call, Comment, Spotter, Band, Mode, Source. Haga doble clic en cualquier fila para sintonizar el slice activo a esa frecuencia. AetherSDR lee la sugerencia de modo del comentario del spot y cambia el slice al modo correcto al mismo tiempo.
+4. La **Spot table** muestra todos los spots con columnas: Time, Freq, DX Call, Comment, Spotter, Band, Mode, Source. Haga doble clic en cualquier fila para sintonizar la slice activa a esa frecuencia. AetherSDR lee la sugerencia de modo del comentario del spot y cambia la slice al modo correcto al mismo tiempo.
 
 ## Pestaña Display
 
@@ -148,54 +148,54 @@ Controla cómo aparecen los spots en el panadapter, además de los marcadores de
 
 1. Haga clic en la pestaña **Display**.
 
-### Fila superior de conmutadores
+### Fila superior de alternancias
 
-| Conmutador | Descripción | Clave de configuración |
-|--------|-------------|-------------|
-| **Spots:** | Conmutador maestro para la superposición de spots DX. El valor predeterminado es **Enabled**. | `IsSpotsEnabled` |
-| **Memories:** | Conmuta la superposición de canales de memoria en el panadapter. El valor predeterminado es **Disabled**. | `IsMemorySpotsEnabled` |
-| **Auto:** | Cambia automáticamente el modo del slice al hacer clic en un spot que incluye información de modo (p. ej., CW, FT8, RTTY). El valor predeterminado es **Enabled**. | `SpotAutoSwitchMode` |
-| **Signals** | Marcadores dorados para señales detectadas de ancho de voz en el panadapter. El valor predeterminado es **Disabled**. Mismo conmutador que View > Signal History Markers. | `SHistoryMarkersEnabled` |
-| **QRM** | Marcadores rojos para portadoras persistentes e interferencia de banda ancha. El valor predeterminado es **Disabled**. Mismo conmutador que View > QRM History Markers. | `SHistoryQrmEnabled` |
-| **Clear All** | Borra todos los spots DX, el feed de memoria, los marcadores de Signal History y los marcadores de QRM del espectro. | — |
+| Alternancia | Descripción | Clave de configuración |
+|-------------|-------------|------------------------|
+| **Spots:** | Alternancia maestra para la superposición de spots DX. Por defecto **Enabled**. | `IsSpotsEnabled` |
+| **Memories:** | Alterna la superposición de canales de memoria en el panadapter. Por defecto **Disabled**. | `IsMemorySpotsEnabled` |
+| **Auto:** | Cambia automáticamente el modo de la slice al hacer clic en un spot que incluye información de modo (p. ej., CW, FT8, RTTY). Por defecto **Enabled**. | `SpotAutoSwitchMode` |
+| **Signals** | Marcadores dorados para señales detectadas de ancho de voz en el panadapter. Por defecto **Disabled**. Misma alternancia que View > Signal History Markers. | `SHistoryMarkersEnabled` |
+| **QRM** | Marcadores rojos para portadoras persistentes e interferencia de banda ancha. Por defecto **Disabled**. Misma alternancia que View > QRM History Markers. | `SHistoryQrmEnabled` |
+| **Clear All** | Limpia todos los spots DX, el feed de memoria, los marcadores de Signal History y los marcadores QRM del espectro. | — |
 
-### Controles deslizantes comunes
+### Deslizadores comunes
 
-| Control deslizante | Descripción | Clave de configuración |
-|--------|-------------|-------------|
-| **Levels:** | Número de filas de apilamiento vertical para spots. Rango 1–10, valor predeterminado 3. | `SpotsMaxLevel` |
-| **Position:** | Posición vertical en el panadapter. Rango 0–100, valor predeterminado 50. | `SpotsStartingHeightPercentage` |
-| **Font Size:** | Tamaño del texto del spot. Rango 8–32, valor predeterminado 16. | `SpotFontSize` |
+| Deslizador | Descripción | Clave de configuración |
+|------------|-------------|------------------------|
+| **Levels:** | Número de filas de apilamiento vertical para spots. Rango 1–10, por defecto 3. | `SpotsMaxLevel` |
+| **Position:** | Posición vertical en el panadapter. Rango 0–100, por defecto 50. | `SpotsStartingHeightPercentage` |
+| **Font Size:** | Tamaño del texto del spot. Rango 8–32, por defecto 16. | `SpotFontSize` |
 | **Spot Lifetime:** | Segundos antes de que un spot se desvanezca. Pasos no lineales desde 10 segundos hasta 24 horas. | `DxClusterSpotLifetimeSec` |
 
-### Sección Override colors
+### Sección de colores de anulación
 
 | Control | Descripción | Clave de configuración |
-|---------|-------------|-------------|
+|---------|-------------|------------------------|
 | **Override Colors:** | Fuerza un solo color de texto para todos los spots. | `IsSpotsOverrideColorsEnabled` |
-| Selector de color de texto del spot | Abre QColorDialog para elegir el color del texto del spot. Valor predeterminado #FFFF00. | `SpotsOverrideColor` |
-| **Override Background: Enabled** | Habilita un color de fondo personalizado para el spot. Valor predeterminado **Enabled**. | `IsSpotsOverrideBackgroundColorsEnabled` |
-| **Override Background: Auto** | Selecciona automáticamente el color de fondo para contraste. Valor predeterminado **Enabled**. | `IsSpotsOverrideToAutoBackgroundColorEnabled` |
-| Selector de color de fondo del spot | Abre QColorDialog para el color de fondo del spot. Valor predeterminado #000000. | `SpotsOverrideBgColor` |
-| **Background Opacity:** | Opacidad del color de fondo del spot. Rango 0–100, valor predeterminado 48. | `SpotsBackgroundOpacity` |
-| **Spot Lines:** | Dibuja líneas verticales desde el espectro hasta cada etiqueta de spot. Desactívelo durante concursos para reducir el desorden visual. Valor predeterminado **Enabled**. | `IsSpotsLinesEnabled` |
+| Selector de color de texto de spot | Abre QColorDialog para elegir el color del texto del spot. Por defecto #FFFF00. | `SpotsOverrideColor` |
+| **Override Background: Enabled** | Habilita un color de fondo personalizado para el spot. Por defecto **Enabled**. | `IsSpotsOverrideBackgroundColorsEnabled` |
+| **Override Background: Auto** | Selecciona automáticamente el color de fondo para contraste. Por defecto **Enabled**. | `IsSpotsOverrideToAutoBackgroundColorEnabled` |
+| Selector de color de fondo de spot | Abre QColorDialog para el color de fondo del spot. Por defecto #000000. | `SpotsOverrideBgColor` |
+| **Background Opacity:** | Opacidad del color de fondo del spot. Rango 0–100, por defecto 48. | `SpotsBackgroundOpacity` |
+| **Spot Lines:** | Dibuja líneas verticales desde el espectro hasta cada etiqueta de spot. Desactive durante concursos para reducir el desorden visual. Por defecto **Enabled**. | `IsSpotsLinesEnabled` |
 | **Total Spots:** | Conteo en vivo de spots actualmente rastreados en todas las fuentes. | — |
 
-### Sección DXCC Coloring
+### Sección de coloreado DXCC
 
 Controles en la columna izquierda debajo del divisor.
 
 | Control | Descripción | Clave de configuración |
-|---------|-------------|-------------|
-| **DXCC Colors:** | Colorea los spots según el estado de DXCC trabajado/confirmado/necesario. | `IsDxccColoringEnabled` |
-| **Log File (ADIF):** | Carga un archivo de registro ADIF para impulsar el coloreado DXCC. Supervisa automáticamente el archivo en busca de cambios después de la selección. La recarga automática está siempre habilitada cuando se selecciona un archivo. | `DxccAdifFilePath` |
+|---------|-------------|------------------------|
+| **DXCC Colors:** | Colorea los spots según el estado trabajado/confirmado/necesitado de DXCC. | `IsDxccColoringEnabled` |
+| **Log File (ADIF):** | Carga un archivo de registro ADIF para impulsar el coloreado DXCC. Vigila automáticamente el archivo en busca de cambios después de la selección. La recarga automática está siempre habilitada cuando se selecciona un archivo. | `DxccAdifFilePath` |
 | **Imported:** | Muestra el conteo de QSO y el conteo de entidades cuando se carga un registro. Formato: '<N> QSOs / <M> entities'. | — |
 | **Muestras de color DXCC (New DXCC / New Band / New Mode / Worked)** | Abre un selector de color para cada categoría de estado DXCC. | `DxccColorNewEntity` / `DxccColorNewBand` / `DxccColorNewMode` / `DxccColorWorked` |
 
-### Sección Signal History
+### Sección de Signal History
 
 Controles en la columna derecha debajo del divisor.
 
 | Control | Descripción | Clave de configuración |
-|---------|-------------|-------------|
-| **Marker Lifetime:** | Cuánto tiempo persiste un marcador de Signal History inactivo antes de ser eliminado. Control deslizante, rango 15–300
+|---------|-------------|------------------------|
+| **Marker Lifetime:** | Cuánto tiempo persiste un marcador de Signal History inactivo antes de ser eliminado. Deslizador, rango 15–300. | `SignalHistoryMarkerLifetimeSec` |

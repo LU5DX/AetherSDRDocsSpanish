@@ -1,34 +1,34 @@
-# Alternar marcadores de señal de voz en el panadapter
+# Alternar marcadores de señal de voz histórica en el panadapter
 
 Active marcadores dorados en el panadapter que muestran señales detectadas con ancho de voz, ayudándole a identificar visualmente transmisiones de voz activas.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar en ejecución (no se requiere conexión de radio para esta configuración).
+- AetherSDR debe estar ejecutándose (no se requiere conexión de radio para esta configuración).
 
 ## Pasos
 
 1. Abra **Settings > SpotHub...**.
 2. Haga clic en la pestaña **Display**.
-3. Haga clic en **Signals** (etiquetado "Signal History") para cambiarlo al estado activado/marcado.
+3. Haga clic en **Signals** (etiquetado como "Signal History") para cambiarlo al estado activado.
 
 Los marcadores dorados aparecen ahora en el panadapter en las frecuencias donde AetherSDR ha detectado señales con ancho de voz. Haga clic en un marcador con el cursor para sintonizar su slice activo a esa frecuencia.
 
 ## Función de cada control
 
-| Control | Valor predeterminado | Rango válido | Clave de configuración |
+| Control | Predeterminado | Rango válido | Clave de configuración |
 |---|---|---|---|
-| **Signals** (botón de alternancia, etiquetado "Signal History" en la pestaña Display) | Desactivado | Activado / Desactivado | `SHistoryMarkersEnabled` |
+| **Signals** (botón de alternancia, etiquetado "Signal History" en la pestaña Display) | Deshabilitado | Activado / Desactivado | `SHistoryMarkersEnabled` |
 
-Esta alternancia tiene una ruta dual: también se puede activar desde **View > Signal History Markers** en el menú principal.
+Esta alternancia tiene una doble vía: también puede activarse desde **View > Signal History Markers** en el menú principal.
 
 ## Consejos
 
-- Los marcadores dorados aparecen solo mientras la señal está activa. Use el deslizador **Marker Lifetime** en la misma pestaña Display para controlar cuánto tiempo permanece visible un marcador inactivo (valor predeterminado: 60 segundos).
+- Los marcadores dorados aparecen solo mientras la señal está activa. Use el control deslizante **Marker Lifetime** en la misma pestaña Display para controlar cuánto tiempo permanece visible un marcador inactivo (60 segundos predeterminado).
 - Para eliminar todos los marcadores (y todos los spots) del panadapter de una vez, haga clic en **Clear All** en la pestaña Display.
-- En las pestañas **Cluster** y **RBN**, haga clic en **Startup Commands…** para abrir un diálogo donde puede ingresar un comando por línea (por ejemplo, `SET/NAME`, `SET/QTH`, `ACCEPT/SPOT`) que se envía automáticamente al cluster después de cada inicio de sesión. Los comandos se guardan en la configuración de la aplicación (`DxClusterStartupCommands` y `RbnStartupCommands` respectivamente).
+- En las pestañas **Cluster** y **RBN**, haga clic en **Startup Commands…** para abrir un cuadro de diálogo donde puede ingresar un comando por línea (por ejemplo, `SET/NAME`, `SET/QTH`, `ACCEPT/SPOT`) que se envía automáticamente al clúster después de cada inicio de sesión. Los comandos se guardan en la configuración de la aplicación (`DxClusterStartupCommands` y `RbnStartupCommands` respectivamente).
 
-## Relacionados
+## Relacionado
 
 - [Toggle QRM markers to see persistent carriers and interference](toggle-qrm-markers-to-see-persistent-carriers-and-interference.md)
 - [Adjust S-History marker lifetime, QRM gate and edge threshold](adjust-s-history-marker-lifetime-qrm-gate-and-edge-threshold.md)
