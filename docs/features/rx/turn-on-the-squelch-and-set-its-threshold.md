@@ -47,5 +47,5 @@ El último umbral manual del silenciador que haya ajustado se guarda entre sesio
 - [RX Controls overview](overview.md)
 - [Change mode (USB, LSB, CW, AM, FM, etc.)](change-mode-usb-lsb-cw-am-fm-etc.md)
 - [Work an FM repeater with CTCSS tone and +/- offset](work-an-fm-repeater-with-ctcss-tone-and-offset.md)
-- [Adjust filter width](adjust-filter-width.md)
-- [Adjust AF gain and pan balance](adjust-af-gain-and-pan-balance.md)
+- Adjust filter width
+- Adjust AF gain and pan balance

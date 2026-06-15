@@ -81,4 +81,4 @@ Los modos **NT** y **RTTY** se tratan como modos digitales en el applet Controle
 - [Sintonizar la radio a una frecuencia (escriba MHz en el indicador)](tune-the-radio-to-a-frequency-type-mhz-in-the-readout.md)
 - [Activar el squelch y ajustar su umbral](turn-on-the-squelch-and-set-its-threshold.md)
 - [Seleccionar la antena de RX o TX para esta rebanada](select-the-rx-or-tx-antenna-for-this-slice.md)
-- [Calibrar AGC-T contra el piso de ruido](calibrate-agc-t-against-the-noise-floor.md)
+- Calibrar AGC-T contra el piso de ruido

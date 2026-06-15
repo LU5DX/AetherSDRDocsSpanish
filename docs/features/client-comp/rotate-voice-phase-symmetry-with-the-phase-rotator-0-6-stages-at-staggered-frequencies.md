@@ -114,7 +114,7 @@ Esto significa que puede aumentar Drive para que el compresor actúe con más fu
 
 ## Relacionado
 
-- [Rote la simetría de fase de la voz con el rotador Phase (0–6 etapas en frecuencias escalonadas)](rotate-voice-phase-symmetry-with-the-phase-rotator.md)
+- Rote la simetría de fase de la voz con el rotador Phase (0–6 etapas en frecuencias escalonadas)
 - [Abra el editor completo del compresor para los controles de Knee, Limiter, Drive y Phase](open-the-full-compressor-editor-for-knee-limiter-drive-and-phase-controls.md)
 
 ---

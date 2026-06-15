@@ -61,4 +61,4 @@ Todos los indicadores gráficos tienen nombres accesibles establecidos como "For
 - [Put the PGXL amplifier in STANDBY](put-the-pgxl-amplifier-in-standby.md)
 - [Monitor forward power and SWR at the amplifier output](monitor-forward-power-and-swr-at-the-amplifier-output.md)
 - [Watch PGXL temperature, drain current, and mains voltage](watch-pgxl-temperature-drain-current-and-mains-voltage.md)
-- [Change PGXL fan speed](change-pgxl-fan-speed.md)
+- Change PGXL fan speed

@@ -46,4 +46,4 @@ El panel multiFLEX muestra todos los clientes SmartSDR que están compartiendo a
 - [Habilitar multiFLEX en la radio](../../features/multi-flex/enable-multiflex-on-the-radio.md)
 - [Conceder o revocar el PTT local](../../features/multi-flex/grant-or-revoke-local-ptt.md)
 - [Verificar qué antena y frecuencia usa cada estación TX](../../features/multi-flex/check-which-antenna-and-frequency-each-tx-station-is-using.md)
-- [Desconectar una estación cliente](../../features/multi-flex/disconnect-a-client-station.md)
+- Desconectar una estación cliente

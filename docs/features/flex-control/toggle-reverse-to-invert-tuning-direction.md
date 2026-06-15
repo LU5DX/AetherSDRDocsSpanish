@@ -27,4 +27,4 @@ Esta página explica cómo invertir la dirección de la rueda virtual de AetherC
 - [Configure el controlador hardware AetherControl / FlexControl](configure-the-aethercontrol-flexcontrol-hardware-controller.md)
 - [Use la rueda virtual para sintonizar el slice activo](use-the-virtual-wheel-to-tune-the-active-slice.md)
 - [Ajuste la sensibilidad del ratón para la rueda virtual](adjust-mouse-sensitivity-for-the-virtual-wheel.md)
-- [Asigne acciones de rueda en el AetherControl](assign-wheel-actions-on-the-aethercontrol.md)
+- Asigne acciones de rueda en el AetherControl

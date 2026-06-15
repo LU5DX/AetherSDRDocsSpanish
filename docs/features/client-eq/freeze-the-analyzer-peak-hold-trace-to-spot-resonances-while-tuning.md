@@ -50,7 +50,7 @@ La traza de retención de pico marca el nivel de energía más alto observado en
 
 - [Abra el editor sin marco para agregar, eliminar o ajustar bandas en cualquier lado](open-the-frameless-editor-to-add-remove-tune-bands-on-either-side.md)
 - [Suavice la visualización del analizador para una lectura más fácil con el combo Smoothing](smooth-the-analyzer-display-for-easier-reading-with-the-smoothing-combo.md)
-- [Seleccione una curva de referencia para dar forma a su EQ hacia un objetivo de micrófono clásico](select-a-reference-curve-to-shape-your-eq-toward-a-classic-mic-target.md)
+- Seleccione una curva de referencia para dar forma a su EQ hacia un objetivo de micrófono clásico
 - [Arrastre la línea guía de corte del filtro de TX o RX para mover la banda de paso de la radio](drag-the-tx-or-rx-filter-cutoff-guide-line-to-move-the-radio-passband.md)
 - [Inspeccione la curva de EQ de TX y el espectro en vivo](inspect-the-tx-eq-curve-and-live-spectrum.md)
 - [Inspeccione la curva de EQ de RX y el espectro en vivo](inspect-the-rx-eq-curve-and-live-spectrum.md)

@@ -51,4 +51,4 @@ Cada mando en la fila de cinco mandos admite la entrada numérica directa. Haga 
 - [Watch live GR while not speaking](watch-live-gr-while-not-speaking.md)
 - [Set TX threshold just above room noise floor](set-tx-threshold-just-above-room-noise-floor.md)
 - [Choose gate vs soft-expander behaviour via ratio](choose-gate-vs-soft-expander-behaviour-via-ratio.md)
-- [Customize theme colors for knobs and curves](customize-theme-colors-for-knobs-and-curves.md) (si es aplicable a su configuración de tema)
+- Customize theme colors for knobs and curves (si es aplicable a su configuración de tema)

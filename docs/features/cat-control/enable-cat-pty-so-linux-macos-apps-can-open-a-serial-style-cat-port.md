@@ -46,7 +46,7 @@ CAT PTY crea cuatro enlaces simbólicos de puertos serie virtuales que los progr
 
 ## Relacionados
 
-- [Habilitar CAT TCP para que N1MM, Log4OM, WSJT-X puedan controlar el radio](enable-cat-tcp-so-n1mm-log4om-wsjtx-x-can-control-the-radio.md)
+- Habilitar CAT TCP para que N1MM, Log4OM, WSJT-X puedan controlar el radio
 - [Iniciar automáticamente los servidores CAT con AetherSDR](autostart-cat-servers-with-aethersdr.md)
 - [Resumen de CAT Control](overview.md)
 - [Verificar cuántos clientes externos están conectados a cada canal](../../getting-started/setup/check-how-many-external-clients-are-connected-to-each-channel.md)

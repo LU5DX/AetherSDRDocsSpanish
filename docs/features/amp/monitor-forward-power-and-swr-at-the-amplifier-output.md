@@ -61,4 +61,4 @@ Ninguno de los medidores tiene una clave de ajustes persistente. Los valores son
 - [Descripción general del amplificador](overview.md)
 - [Poner el amplificador PGXL en OPERATE](put-the-pgxl-amplifier-in-operate.md)
 - [Poner el amplificador PGXL en STANDBY](put-the-pgxl-amplifier-in-standby.md)
-- [Observar la temperatura, el voltaje de drenaje y el voltaje de red del PGXL](watch-pgxl-temperature-drain-voltage-and-mains-voltage.md)
+- Observar la temperatura, el voltaje de drenaje y el voltaje de red del PGXL

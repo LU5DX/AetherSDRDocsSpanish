@@ -39,7 +39,7 @@ En v26.5.2.1 y versiones posteriores, todos los mandos del editor Aetherial Tube
 
 **Release** — Utiliza mapeo exponencial en todo su rango. Define la rapidez con que el seguidor de envolvente se recupera después de que los niveles de señal caen cuando Envelope ≠ 0. La etiqueta se muestra como "X.XX ms" por debajo de 100 ms y "X.X ms" por encima de 100 ms. Clave de configuración: `ClientTubeTxReleaseMs` / `ClientTubeRxReleaseMs`.
 
-**RN2** — Botón de alternancia solo TX ubicado en StripTubePanel debajo del medidor de nivel de salida. Usa la etiqueta `RN2`. Consulte [Reduce background noise with RN2](reduce-background-noise-with-rn2.md) para obtener todos los detalles.
+**RN2** — Botón de alternancia solo TX ubicado en StripTubePanel debajo del medidor de nivel de salida. Usa la etiqueta `RN2`. Consulte Reduce background noise with RN2 para obtener todos los detalles.
 
 ## Consejos
 
@@ -64,4 +64,4 @@ En v26.5.2.1 y versiones posteriores, todos los mandos del editor Aetherial Tube
 - [Dial Drive until the curve starts to bend (TX warmth or RX tone shaping)](dial-drive-until-the-curve-starts-to-bend-tx-warmth-or-rx-tone-shaping.md)
 - [Bypass the tube from either chain](bypass-the-tube-from-either-chain.md)
 - [Monitor output clipping with the level meter in the editor](monitor-output-clipping-with-the-level-meter-in-the-editor.md)
-- [Reduce background noise with RN2](reduce-background-noise-with-rn2.md)
+- Reduce background noise with RN2

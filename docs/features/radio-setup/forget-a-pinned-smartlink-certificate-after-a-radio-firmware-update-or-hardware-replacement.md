@@ -30,4 +30,4 @@ El botón **Forget all** borra todos los certificados fijados después de un men
 ## Relacionado
 
 - [Clear all pinned SmartLink certificates when rotating multiple radio TLS identities](clear-all-pinned-smartlink-certificates-when-rotating-multiple-radio-tls-identities.md)
-- [Radio Setup dialog reference](radio-setup-dialog-reference.md)
+- Radio Setup dialog reference

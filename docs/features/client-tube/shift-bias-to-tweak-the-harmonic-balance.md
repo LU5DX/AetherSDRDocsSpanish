@@ -91,4 +91,4 @@ Cuando la etapa Tube está en bypass, todo el mosaico de la applet acoplada se r
 - [Compensate level changes with Output](compensate-level-changes-with-output.md)
 - [Monitor output clipping with the level meter in the editor](monitor-output-clipping-with-the-level-meter-in-the-editor.md)
 - [Bypass the tube from either chain](bypass-the-tube-from-either-chain.md)
-- [Use the Dry/Wet blend to control saturation mix](use-the-dry-wet-blend-to-control-saturation-mix.md)
+- Use the Dry/Wet blend to control saturation mix

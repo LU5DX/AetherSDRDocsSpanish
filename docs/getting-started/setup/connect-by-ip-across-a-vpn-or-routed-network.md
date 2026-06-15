@@ -55,5 +55,5 @@ Utilice este método cuando su FLEX-8600 esté en una subred diferente a la de s
 - [Connect to a remote radio through SmartLink](connect-to-a-remote-radio-through-smartlink.md)
 - [Pick the local network interface used for a manual connection](pick-the-local-network-interface-used-for-a-manual-connection.md)
 - [Enable low-bandwidth mode for slow links](../../features/connection/enable-low-bandwidth-mode-for-slow-links.md)
-- [Enable adaptive frame-rate throttle for very slow links](../../features/connection/enable-adaptive-frame-rate-throttle-for-very-slow-links.md)
+- Enable adaptive frame-rate throttle for very slow links
 - [Connect to a Radio overview](../../features/connection/overview.md)

@@ -34,4 +34,4 @@ Esta alternancia tiene una doble vía: también puede activarse desde **View > S
 - [Adjust S-History marker lifetime, QRM gate and edge threshold](adjust-s-history-marker-lifetime-qrm-gate-and-edge-threshold.md)
 - [Pick custom colors for voice signal and QRM markers](pick-custom-colors-for-voice-signal-and-qrm-markers.md)
 - [Enable Snap to Step for precise S-History tuning](enable-snap-to-step-for-precise-s-history-tuning.md)
-- [SpotHub dialog overview](spothub-dialog-overview.md)
+- SpotHub dialog overview

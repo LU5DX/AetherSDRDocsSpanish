@@ -75,4 +75,4 @@ La barra horizontal de color ámbar se llena de derecha a izquierda, mostrando h
 - [Watch live gain reduction while speaking or listening](watch-live-gain-reduction-while-speaking-or-listening.md)
 - [Open the full Compressor editor for knee and limiter controls](open-the-full-compressor-editor-for-knee-and-limiter-controls.md)
 - [Bypass the compressor from the chain](bypass-the-compressor-from-the-chain.md)
-- [Set pre-comp Drive and Phase Rotator for PAPR reduction](set-pre-comp-drive-and-phase-rotator-for-papr-reduction.md)
+- Set pre-comp Drive and Phase Rotator for PAPR reduction

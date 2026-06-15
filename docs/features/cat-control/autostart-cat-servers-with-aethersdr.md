@@ -68,7 +68,7 @@ El indicador de ruta PTY por canal muestra:
 ## Relacionado
 
 - [Descripción general de CAT Control](overview.md)
-- [Habilitar CAT TCP para que N1MM, Log4OM, WSJT-X puedan controlar el radio](enable-cat-tcp-so-n1mm-log4om-wsjtx-can-control-the-radio.md)
+- Habilitar CAT TCP para que N1MM, Log4OM, WSJT-X puedan controlar el radio
 - [Habilitar CAT PTY para que las aplicaciones de Linux/macOS puedan abrir un puerto CAT de tipo serie](enable-cat-pty-so-linux-macos-apps-can-open-a-serial-style-cat-port.md)
 - [Cambiar el puerto TCP base](change-the-base-tcp-port.md)
 - [Verificar cuántos clientes externos están conectados a cada canal](../../getting-started/setup/check-how-many-external-clients-are-connected-to-each-channel.md)
