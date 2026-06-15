@@ -57,7 +57,7 @@ Los colores de los controles se toman del espacio de nombres `color.knob.*` en e
 - `color.text.primary` — el texto del valor debajo del control.
 - `color.text.secondary` — la etiqueta del control sobre el anillo.
 
-Los cinco controles del editor "Aetherial FreeVerb — TX" usan los mismos colores temáticos. Para aplicar un esquema de color personalizado, consulte [Temas personalizados](custom-themes.md).
+Los cinco controles del editor "Aetherial FreeVerb — TX" usan los mismos colores temáticos. Para aplicar un esquema de color personalizado, consulte Temas personalizados.
 
 ## Consejos
 
@@ -74,4 +74,4 @@ Los cinco controles del editor "Aetherial FreeVerb — TX" usan los mismos color
 - [Ajustar el decaimiento al gusto sin empañar el habla](tune-decay-to-taste-without-muddying-speech.md)
 - [Reducir el brillo agudo de la cola con Atenuación](reduce-the-high-end-sparkle-of-the-tail-with-damp.md)
 - [Desplazar las reflexiones de la señal seca con Pre-demora](offset-reflections-from-the-dry-signal-with-pre.md)
-- [Temas personalizados](custom-themes.md)
+- Temas personalizados

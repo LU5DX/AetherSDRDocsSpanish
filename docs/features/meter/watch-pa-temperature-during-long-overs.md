@@ -1,6 +1,6 @@
-# Vigile la temperatura del PA durante sobretransmisiones largas
+# Vigile la temperatura del PA durante transmisiones largas
 
-El applet Meters muestra un indicador en vivo de la temperatura del amplificador de potencia (PA Temp) que lee la temperatura del amplificador de potencia de la radio en tiempo real. Mantenerlo visible durante sobretransmisiones largas le permite detectar la acumulación térmica antes de que se convierta en un problema.
+El applet Meters muestra un indicador de temperatura del PA en vivo que lee la temperatura del amplificador de potencia de la radio en tiempo real. Mantenerlo visible durante transmisiones largas le permite detectar acumulación térmica antes de que se convierta en un problema.
 
 ## Antes de comenzar
 
@@ -17,19 +17,20 @@ La barra se llena de izquierda a derecha a medida que la temperatura aumenta. La
 
 ## Función de cada control
 
-| Etiqueta | Rango      | Umbral rojo | Notas                                                                                                                     |
-|----------|------------|-------------|---------------------------------------------------------------------------------------------------------------------------|
-| PA Temp  | 0–120 °C   | > 70 °C     |                                                                                                                           |
-| +13.8V   | 10.0–16.0 V| > 15 V      | La etiqueta del indicador se actualiza dinámicamente para mostrar el voltaje en vivo reportado por la radio (ej. `+13.82V`) en lugar del texto estático `+13.8V`. |
-| Main Fan | 0–3000 rpm | > 2500 rpm  |                                                                                                                           |
+| Etiqueta | Rango       | Umbral rojo | Notas                                                                                                                                           |
+|----------|-------------|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| PA Temp  | 0–120 °C    | > 70 °C     | Nombre accesible: "PA temperature".                                                                                                             |
+| +13.8V   | 10.0–16.0 V | > 15 V      | La etiqueta del indicador se actualiza dinámicamente para mostrar el voltaje en vivo reportado por la radio (ej. `+13.82V`) en lugar del texto estático `+13.8V`. Nombre accesible: "Supply voltage". |
+| Main Fan | 0–3000 rpm  | > 2500 rpm  | Nombre accesible: "Main fan speed".                                                                                                             |
 
-Ninguno de estos controles tiene claves de configuración persistidas. Son pantallas de telemetría de solo lectura.
+Ninguno de estos controles tiene claves de configuración persistentes. Son visualizaciones de telemetría de solo lectura.
 
 ## Consejos
 
-- El indicador utiliza una respuesta suavizada, por lo que los picos breves son visibles sin causar parpadeo. Las lecturas prolongadas en la zona roja indican una condición térmica real, no un pico transitorio.
+- El indicador usa balística suavizada, por lo que los picos breves son visibles sin causar parpadeo. Lecturas sostenidas en la zona roja indican una condición térmica real, no un pico transitorio.
 - La etiqueta del indicador de voltaje de alimentación refleja el valor de voltaje en vivo reportado por la radio. La etiqueta se actualiza cada vez que llega una nueva lectura, por lo que siempre muestra el voltaje actual con dos decimales (por ejemplo, `+13.82V`).
-- No se muestra la corriente del PA. En el hardware serie FLEX-8000, el medidor de corriente del PA se satura bajo demanda completa del PA, por lo que se ha omitido intencionalmente.
+- La corriente del PA no se muestra. En hardware de la serie FLEX-8000, el medidor de corriente del PA satura con la potencia total del PA, por lo que se ha omitido intencionalmente.
+- Cada indicador tiene un nombre accesible configurado para compatibilidad con lectores de pantalla: "PA temperature", "Supply voltage" y "Main fan speed".
 
 ## Solución de problemas
 
@@ -37,6 +38,6 @@ Ninguno de estos controles tiene claves de configuración persistidas. Son panta
 
 ## Relacionados
 
-- [Descripción general de Meters](overview.md)
-- [Verifique el voltaje de alimentación de CC de la radio](check-the-radio-s-dc-supply-voltage.md)
-- [Supervise la velocidad del ventilador de enfriamiento principal](monitor-the-main-cooling-fan-speed.md)
+- [Meters overview](overview.md)
+- [Check the radio's DC supply voltage](check-the-radio-s-dc-supply-voltage.md)
+- [Monitor the main cooling fan speed](monitor-the-main-cooling-fan-speed.md)

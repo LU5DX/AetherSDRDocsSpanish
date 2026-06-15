@@ -1,44 +1,51 @@
-# Saltar las notas de la versión actual
+# Diálogo de Novedades
 
-Cuando AetherSDR detecta que hay una versión más reciente disponible, el diálogo "What's New" incluye una opción para evitar que vuelva a aparecer para esa versión. Use esta opción si ya ha visto las notas y no desea que el diálogo se muestre nuevamente en el siguiente inicio.
+El diálogo de Novedades muestra las notas de la versión actual de AetherSDR. Aparece automáticamente después de un cambio de versión, o puede abrirlo manualmente mediante `Help > What's New...`. El diálogo obtiene las notas de la versión en vivo desde la API de GitHub y las renderiza como Markdown con estilo.
 
 ## Antes de comenzar
 
-- El botón "Skip this version" solo aparece cuando hay una actualización disponible. Si no se detecta ninguna actualización, el botón no se muestra.
-- El diálogo "What's New" debe estar abierto. Se abre automáticamente después de un cambio de versión o manualmente a través de `Help > What's New...`.
+- Se requiere una conexión a internet activa para obtener las notas de la versión desde GitHub.
+- El diálogo aparece automáticamente cuando AetherSDR detecta que se ha instalado una nueva versión.
+- Puede abrir el diálogo en cualquier momento desde el menú Help.
 
 ## Pasos
 
-1. Abra el diálogo "What's New". Si no está ya en pantalla, vaya a `Help > What's New...`.
-2. Confirme que el botón "Skip this version" está visible en el pie de página. Si está ausente, no se ha detectado ninguna actualización y no corresponde saltar.
-3. Haga clic en "Skip this version".
+1. Si el diálogo no se abre automáticamente, vaya a `Help > What's New...`.
+2. Espere a que se carguen las notas de la versión. La etiqueta de estado muestra "Loading..." mientras se obtienen.
+3. Lea las notas de la versión en el área del navegador. Haga clic en cualquier enlace de número de issue/PR o @menciones para abrirlos en su navegador predeterminado.
+4. Para buscar dentro de las notas de la versión, haga clic en "Find", ingrese su texto de búsqueda y presione Enter. Las coincidencias se resaltan y la vista se desplaza cíclicamente.
+5. Cuando termine, haga clic en "Close" para cerrar el diálogo.
 
-El diálogo se cierra. AetherSDR escribe la cadena de la versión actual en `LastSeenVersion` y la guarda. El diálogo "What's New" no aparecerá automáticamente en el siguiente inicio para esta versión.
+## Función de cada control
 
-## Funciones de cada control
-
-| Control | Tipo | Comportamiento | Clave de configuración |
-|---|---|---|---|
-| Navegador de notas de versión | Campo de texto | Vista HTML desplazable de las entradas de la versión. Muestra las notas de versión obtenidas de los lanzamientos de GitHub para la versión actual. Muestra los cambios entre la última versión vista y la versión actual. | — |
-| "Got it — 73!" | Botón pulsador | Descarta el diálogo y marca la versión como vista. | `LastSeenVersion` |
-| "Upgrade" | Botón pulsador | Se muestra solo cuando hay una actualización disponible. Abre la página de descarga en `https://github.com/aethersdr/AetherSDR/releases/latest`. | — |
-| "Skip this version" | Botón pulsador | Se muestra solo cuando hay una actualización disponible. Guarda la versión actual en `LastSeenVersion` y cierra el diálogo para que el recordatorio no vuelva a aparecer. | `LastSeenVersion` |
-| Sugerencia | Indicador | Línea corta en el pie de página con orientación. | — |
+| Control                      | Tipo              | Comportamiento                                                                                                                                                     |
+|------------------------------|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| AETHERSDR V<version> eyebrow | Indicador         | Encabezado con marca que muestra la versión actual de AetherSDR y el título 'Welcome!' o 'What's New'. Renderizado como HTML con estilo en un QLabel con relleno.   |
+| Etiqueta de estado           | Indicador         | Debajo del encabezado muestra el título de la versión de GitHub y la fecha de publicación después de la descarga, o un mensaje de carga mientras se obtienen datos. Estado multilínea mediante inserción de `<br/>`. |
+| Navegador de notas de versión | Campo de texto    | QTextBrowser con desplazamiento que renderiza las notas de la versión como Markdown de estilo GitHub. Los números de issue/PR y @menciones son hipervínculos a GitHub. Al hacer clic en enlaces se abre el navegador predeterminado. Muestra estado 'Loading...', estado de error con sugerencias o el cuerpo de la versión renderizado. |
+| Find                         | Botón pulsador    | Abre un QInputDialog para ingresar texto de búsqueda; resalta coincidencias en las notas de la versión y se desplaza cíclicamente. Nuevo en v26.5.3 (#2979).          |
+| Upgrade                      | Botón pulsador    | Se muestra solo cuando `showUpgrade` es verdadero; abre la página de la última versión en GitHub y cierra el diálogo. Estilo de botón secundario.                 |
+| Skip this version            | Botón pulsador    | Se muestra solo cuando `showUpgrade` es verdadero; guarda la versión actual como vista para que el diálogo no se muestre en el próximo inicio. Estilo de botón secundario. |
+| Close                        | Botón pulsador    | Botón de acción principal que cierra el diálogo. Siempre visible. Estilo de botón primario azul.                                                                  |
 
 ## Consejos
 
-- "Skip this version" y "Got it — 73!" ambos escriben en `LastSeenVersion`. La diferencia práctica radica en la intención: "Got it — 73!" reconoce las notas de la versión actual, mientras que "Skip this version" descarta la solicitud de actualización sin realizar ninguna acción adicional.
-- Para volver a leer las notas de versión en cualquier momento, use `Help > What's New...`. Esto abre el diálogo independientemente del valor guardado de `LastSeenVersion`.
-- Las notas de versión se obtienen de la API de GitHub. Si su red está limitada por GitHub (HTTP 403 con un mensaje de "límite de tasa"), el diálogo muestra un mensaje amigable sugiriendo que lo intente de nuevo más tarde o que lea las notas directamente en `github.com/aethersdr/AetherSDR/releases`.
-- El navegador de notas de versión renderiza Markdown del cuerpo del lanzamiento de GitHub. Las referencias a problemas de GitHub (ej. `#123`) y las menciones a `@username` se convierten automáticamente en enlaces en los que se puede hacer clic.
+- Los botones "Skip this version" y "Upgrade" aparecen solo cuando hay una actualización disponible. Si no se detecta ninguna actualización, solo se muestra "Close".
+- "Skip this version" escribe la versión actual en `LastSeenVersion` y cierra el diálogo. El diálogo de Novedades no aparecerá automáticamente en el próximo inicio para esta versión.
+- "Upgrade" abre la página de versiones en GitHub usando la URL de versiones configurada en la aplicación. Al hacer clic también cierra el diálogo.
+- Para volver a leer las notas de la versión en cualquier momento, use `Help > What's New...`. Esto abre el diálogo independientemente del valor guardado de `LastSeenVersion`.
+- Las notas de la versión se obtienen de `api.github.com`. Si su red tiene límite de velocidad por GitHub (HTTP 403 con un mensaje de "límite de velocidad"), el diálogo muestra un mensaje amigable sugiriendo que intente de nuevo más tarde o lea las notas directamente en la página de versiones.
+- El navegador de notas de la versión renderiza Markdown desde el cuerpo de la versión de GitHub. Las referencias a issues de GitHub (por ejemplo, `#123`) y las menciones de `@username` se convierten automáticamente en enlaces en los que se puede hacer clic.
 
 ## Solución de problemas
 
-- **"Skip this version" no es visible** — El botón solo aparece cuando AetherSDR ha detectado que hay una actualización disponible. Si no se detecta ninguna actualización, solo se muestra "Got it — 73!". Este comportamiento es el esperado.
-- **Las notas de versión no se cargan** — El diálogo obtiene las notas de versión de `api.github.com`. Si ve un mensaje de error, puede deberse a problemas de red o a la limitación de tasa de GitHub. Intente de nuevo más tarde o visite la página de lanzamientos directamente.
+- **"Skip this version" no es visible** — El botón solo aparece cuando AetherSDR ha detectado que hay una actualización disponible. Si no se detecta ninguna actualización, solo se muestra "Close". Este es el comportamiento esperado.
+- **"Upgrade" no es visible** — Misma condición que arriba. El botón solo aparece cuando se detecta una actualización.
+- **Las notas de la versión no se cargan** — El diálogo obtiene las notas de la versión de `api.github.com`. Si ve un mensaje de error, puede deberse a problemas de red o límite de velocidad de GitHub. Intente de nuevo más tarde o visite la página de la versión directamente.
+- **El diálogo de búsqueda no encuentra coincidencias** — La búsqueda no distingue entre mayúsculas y minúsculas y busca en el texto renderizado de las notas de la versión. Asegúrese de que su término de búsqueda esté escrito correctamente.
 
-## Relacionado
+## Relacionados
 
-- [Volver a leer las notas de versión más tarde mediante el menú Help](re-read-release-notes-later-via-help-menu.md)
-- [Abrir el flujo de actualización para una compilación más reciente](open-the-upgrade-flow-for-a-newer-build.md)
-- [Leer qué cambió en la nueva versión](read-what-changed-in-the-new-version.md)
+- [Vuelva a leer las notas de la versión más tarde mediante el menú Help](re-read-release-notes-later-via-help-menu.md)
+- [Abra el flujo de actualización para una compilación más reciente](open-the-upgrade-flow-for-a-newer-build.md)
+- [Lea lo que cambió en la nueva versión](read-what-changed-in-the-new-version.md)

@@ -44,4 +44,4 @@ El Medidor de Nivel de Salida en el applet Tube muestra el nivel máximo post-sa
 ## Relacionados
 
 - [Resumen del medidor de nivel de salida](overview.md)
-- [Theme Editor](theme-editor.md)
+- Theme Editor

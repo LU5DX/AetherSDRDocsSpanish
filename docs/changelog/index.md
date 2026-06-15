@@ -6,6 +6,7 @@ title: Histórico de cambios
 
 Lista cronológica de cambios en la documentación, organizada por release de AetherSDR.
 
+- [v26.6.3](v26.6.3.md)
 - [v26.6.1](v26.6.1.md)
 - [v26.5.3](v26.5.3.md)
 - [v26.5.2.1](v26.5.2.1.md)

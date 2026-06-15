@@ -5,7 +5,7 @@ Utilice el flujo de informe de errores asistido por IA para obtener ayuda al red
 ## Antes de comenzar
 
 - Reproduzca el problema al menos una vez para poder describir lo que ocurrió.
-- Si desea adjuntar registros de diagnóstico, limpie el registro y reproduzca el problema primero para que el registro contenga únicamente la información relevante. Consulte [Limpiar el registro antes de reproducir un error](limpiar-el-registro-antes-de-reproducir-un-error.md).
+- Si desea adjuntar registros de diagnóstico, limpie el registro y reproduzca el problema primero para que el registro contenga únicamente la información relevante. Consulte Limpiar el registro antes de reproducir un error.
 - No es necesaria una conexión de radio, pero si está conectado, el paquete incluirá automáticamente el modelo de radio, el firmware y la información de serie.
 
 ## Pasos
@@ -50,9 +50,9 @@ Utilice el flujo de informe de errores asistido por IA para obtener ayuda al red
 
 ## Relacionados
 
-- [Limpiar el registro antes de reproducir un error](limpiar-el-registro-antes-de-reproducir-un-error.md)
-- [Habilitar el registro detallado para un subsistema específico](habilitar-el-registro-detallado-para-un-subsistema-especifico.md)
-- [Abrir la carpeta de registros para obtener múltiples archivos](abrir-la-carpeta-de-registros-para-obtener-multiples-archivos.md)
+- Limpiar el registro antes de reproducir un error
+- Habilitar el registro detallado para un subsistema específico
+- Abrir la carpeta de registros para obtener múltiples archivos
 
 ---
 

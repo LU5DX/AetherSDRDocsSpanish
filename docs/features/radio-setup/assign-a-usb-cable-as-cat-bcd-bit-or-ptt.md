@@ -1,6 +1,6 @@
 # Diálogo de Configuración de la Radio
 
-El diálogo de Configuración de la Radio es la ventana maestra de configuración por radio. Contiene pestañas para información de la radio, configuración de red, GPS, configuración de TX, Phone/CW, calibración de RX, audio, nombres de antenas, filtros, transvertidores, cables USB, periféricos, puertos serie, APD, temas y gestión de certificados SmartLink anclados.
+El diálogo de Configuración de la Radio es la ventana maestra de configuración por radio. Contiene pestañas para información de la radio, configuración de red, GPS, configuración de TX, Phone/CW, calibración de RX, audio, nombres de antenas, filtros, transverters, cables USB, periféricos, puertos serie, APD, temas y gestión de certificados fijados de SmartLink.
 
 ## Abrir el diálogo de Configuración de la Radio
 
@@ -14,15 +14,15 @@ La pestaña Radio muestra la identificación de la radio, información de licenc
 
 | Control | Descripción |
 |---|---|
-| **Radio SN** | Número de serie del chasis. Haga clic en el botón de copiar junto al valor para copiar el número de serie al portapapeles. |
-| **Region** | Región regulatoria (EE. UU. por defecto). |
-| **HW Version** | Cadena de versión del hardware. |
+| **Radio SN** | Número de serie del chasis. Haga clic en el botón de copia junto al valor para copiar el número de serie al portapapeles. |
+| **Region** | Región regulatoria (USA por defecto). |
+| **HW Version** | Cadena de versión de hardware. |
 | **Options** | Opciones de radio licenciadas. |
 | **FlexControl** | Estado detectado del hardware FlexControl. |
 | **multiFLEX** | Estado habilitado de multiFLEX. |
 | **Model** | Modelo de la radio. |
 
-Cada campo de valor de solo lectura tiene un botón de copiar. Haga clic en el icono del portapapeles para copiar el valor al portapapeles del sistema. Un breve mensaje emergente "Copied" confirma la acción. Los botones de copiar se atenúan visualmente cuando el valor está vacío o no disponible.
+Cada campo de valor de solo lectura tiene un botón de copia. Haga clic en el icono del portapapeles para copiar el valor al portapapeles del sistema. Una breve notificación emergente "Copied" confirma la acción. Los botones de copia se atenúan visualmente cuando el valor está vacío o no disponible.
 
 ### Campos configurables por el usuario
 
@@ -30,71 +30,72 @@ Cada campo de valor de solo lectura tiene un botón de copiar. Haga clic en el i
 |---|---|---|
 | **Nickname** | Apodo amigable de la radio. | |
 | **Callsign** | Indicativo de la estación. | |
-| **Station Name** | Identifica este cliente de AetherSDR ante otras estaciones multiFLEX. | Por defecto, es el nombre del host del SO si está vacío. Se almacena en AppSettings con la clave `StationName`. Se envía a la radio como "client station <nombre>". |
+| **Station Name** | Identifica este cliente de AetherSDR ante otras estaciones multiFLEX. | Por defecto es el nombre de host del SO si está vacío. Se almacena en AppSettings con la clave `StationName`. Se envía a la radio como "client station <name>". |
 
 ### Información de licencia
 
-La sección **License Info** muestra el estado de la suscripción, la fecha de expiración, el ID de la radio y la versión licenciada.
+La sección **License Info** muestra el estado de la suscripción, fecha de vencimiento, ID de la radio y versión licenciada. Cada campo incluye un botón de copia al portapapeles junto al valor.
 
 ### Actualización de firmware
 
 | Control | Descripción |
 |---|---|
-| **Check for Update** | Consulta si hay actualizaciones de firmware. |
-| **Browse .ssdr...** | Selecciona un archivo de imagen de firmware. |
+| **Check for Update** | Consulta actualizaciones de firmware. |
+| **Select Installer...** | Abre un diálogo de archivo para un instalador de SmartSDR (.msi, .exe) o un archivo de firmware .ssdr preextraído. Pasa la ruta seleccionada a FirmwareStager, que extrae la carga útil .ssdr y emite progreso. |
 | **Upload Firmware** | Inicia la carga del firmware con barra de progreso y estado. |
 | **Firmware status** | Vacío hasta que comienza una carga de firmware, luego muestra el progreso y el texto del resultado. |
 
-### Control remoto
+### Control remoto y reinicio
+
+| Control | Descripción | Notas |
+|---|---|---|
+| **Remote On** | Habilita el encendido remoto / remote-on. | |
+| **Reboot Radio** | Reinicia la radio conectada. | Solo habilitado cuando la radio está conectada. Al hacer clic, muestra un diálogo de confirmación. En conexiones WAN/SmartLink, debe reconectarse manualmente después de que la radio termine de iniciar. En conexiones LAN, AetherSDR se reconecta automáticamente. El diálogo se cierra después de iniciar el reinicio. Nuevo en v26.6.3 (#3334). |
+
+### Pestaña SmartLink
+
+La pestaña SmartLink gestiona los certificados TLS de SmartLink fijados. Lista cada certificado fijado con host, huella SHA-256 y fecha de fijación. Una discrepancia de certificado fijado ahora pausa el protocolo de enlace con un diálogo modal.
+
+#### Certificados SmartLink Fijados
 
 | Control | Descripción |
 |---|---|
-| **Remote On** | Habilita el encendido remoto / remoto-activado. |
+| **Pinned SmartLink Certificates (sección)** | Encabezado de sección para la tabla de certificados fijados. Lista cada host que este cliente ha fijado en la primera conexión (confianza en el primer uso). |
+| **Host / SHA-256 fingerprint / Pinned (columnas de tabla)** | Tabla de solo lectura de 3 columnas: Host (nombre de host), SHA-256 fingerprint (monoespaciado), Pinned (AAAA-MM-DD o "(pre-phase 2)"). |
+| **Forget selected** | Elimina la huella del certificado fijado del host seleccionado para que la próxima conexión lo vuelva a fijar silenciosamente. |
+| **Forget all** | Limpia todos los certificados fijados (con confirmación). La próxima conexión a cada radio los vuelve a fijar silenciosamente. Muestra un diálogo de confirmación antes de borrar. |
 
-## Pestaña SmartLink
+## Pestaña Red
 
-La pestaña SmartLink gestiona los certificados TLS de SmartLink anclados. Enumera cada certificado anclado con el host, la huella SHA-256 y la fecha de anclaje. Una discrepancia en el anclaje del certificado ahora pausa firmemente el handshake con un diálogo modal.
-
-### Certificados SmartLink Anclados
-
-| Control | Descripción |
-|---|---|
-| **Pinned SmartLink Certificates (sección)** | Encabezado de sección para la tabla de certificados anclados. Enumera cada host que este cliente ha anclado en la primera conexión (trust-on-first-use). |
-| **Host / SHA-256 fingerprint / Pinned (columnas de la tabla)** | Tabla de solo lectura de 3 columnas: Host (nombre del host), SHA-256 fingerprint (monoespaciado), Pinned (AAAA-MM-DD o "(pre-phase 2)"). |
-| **Forget selected** | Elimina la huella del certificado anclado del host seleccionado para que la próxima conexión lo vuelva a anclar silenciosamente. |
-| **Forget all** | Limpia todos los certificados anclados (con confirmación). La próxima conexión a cada radio los volverá a anclar silenciosamente. Muestra un diálogo de confirmación antes de borrar. |
-
-## Pestaña Network
-
-La pestaña Network muestra la información de red de la radio y proporciona opciones de configuración de red.
+La pestaña Red muestra información de red de la radio y proporciona opciones de configuración de red.
 
 ### Información de red (solo lectura)
 
 | Control | Descripción |
 |---|---|
-| **IP Address / Mask / MAC Address** | Direcciones de red de solo lectura. |
+| **IP Address / Mask / MAC Address** | Direcciones de red de solo lectura. Cada una incluye un botón de copia al portapapeles. |
 
 ### Configuración de red
 
-| Control | Valor predeterminado | Rango | Clave de configuración | Descripción |
+| Control | Valor por defecto | Rango | Clave de Configuración | Descripción |
 |---|---|---|---|---|
-| **Enforce Private IP Connections:** | | | | Rechaza pares que no sean RFC1918. |
-| **Network MTU:** | 1450 | 576-9000 bytes | `NetworkMtu` | Establece el tamaño máximo del paquete UDP VITA-49 saliente en bytes. El valor predeterminado de 1450 es seguro para la mayoría de los túneles VPN/SD-WAN. |
+| **Enforce Private IP Connections:** | | | | Rechaza pares no RFC1918. El botón de alternancia muestra "Enabled" cuando está marcado. |
+| **Network MTU:** | 1450 | 576-9000 bytes | `NetworkMtu` | Establece el tamaño máximo del paquete UDP VITA-49 saliente en bytes. El valor predeterminado 1450 es seguro para la mayoría de los túneles VPN/SD-WAN. |
 | **DHCP / Static** | | | | Cambia entre modos DHCP e IP estática. |
 | **IP Address: / Mask: / Gateway:** | | | | Campos de configuración de IP estática (visibles solo en modo Static). |
 | **Apply** | | | | Envía la configuración de red a la radio. |
 
 ## Pestaña GPS
 
-La pestaña GPS muestra la presencia del GPS y los datos de posición en vivo.
+La pestaña GPS muestra la presencia del GPS y datos de posición en vivo.
 
 | Control | Descripción |
 |---|---|
-| GPS status | Muestra información de latitud/longitud/altitud/hora/satélites cuando hay un GPS instalado y activo. |
+| Estado GPS | Muestra información de lat/lon/alt/hora/satélites cuando hay un GPS instalado y activo. |
 
 ## Pestaña TX
 
-La pestaña TX controla los tiempos de transmisión, los enclavamientos, los límites de potencia, los modos de sintonía y el comportamiento de seguimiento slice/TX.
+La pestaña TX controla los tiempos de transmisión, enclavamientos, límites de potencia, modos de sintonía y comportamiento de seguimiento de slice/TX.
 
 ### Configuración de banda TX
 
@@ -110,10 +111,10 @@ La pestaña TX controla los tiempos de transmisión, los enclavamientos, los lí
 
 | Campo | Descripción | Notas |
 |---|---|---|
-| **ACC TX:** | Retardo de TX ACC en milisegundos. | Comando: `interlock set acc_tx_delay=<ms>` |
+| **ACC TX:** | Retardo de TX de ACC en milisegundos. | Comando: `interlock set acc_tx_delay=<ms>` |
 | **TX Delay:** | Retardo de TX en milisegundos. | Comando: `interlock set tx_delay=<ms>` |
-| **RCA TX1:** | Retardo de TX1 RCA en milisegundos. | Comando: `interlock set tx1_delay=<ms>` |
-| **Timeout (sec):** | Tiempo de espera del enclavamiento en segundos. Se muestra e ingresa en segundos enteros; la radio almacena el valor internamente en milisegundos. | Comando: `interlock set timeout=<segundos * 1000>` |
+| **RCA TX1:** | Retardo de RCA TX1 en milisegundos. | Comando: `interlock set tx1_delay=<ms>` |
+| **Timeout (sec):** | Tiempo de espera de enclavamiento en segundos. Se muestra e ingresa en segundos enteros; la radio almacena el valor internamente en milisegundos. | Comando: `interlock set timeout=<segundos * 1000>` |
 
 ### Enclavamientos
 
@@ -124,12 +125,12 @@ La pestaña TX controla los tiempos de transmisión, los enclavamientos, los lí
 
 ### Potencia y sintonía
 
-| Control | Valor predeterminado | Rango | Descripción |
+| Control | Valor por defecto | Rango | Descripción |
 |---|---|---|---|
 | **Max Power:** | | 0-100% | Establece el límite de potencia de TX a nivel de radio. |
 | **Tune Mode:** | | | Selecciona cómo se comporta el botón de sintonía. |
 
-### Visualización en waterfall
+### Visualización en Waterfall
 
 | Control | Descripción |
 |---|---|
@@ -137,34 +138,34 @@ La pestaña TX controla los tiempos de transmisión, los enclavamientos, los lí
 
 ### Comportamiento de seguimiento Slice/TX
 
-| Control | Valor predeterminado | Clave de configuración | Descripción |
+| Control | Valor por defecto | Clave de Configuración | Descripción |
 |---|---|---|---|
-| **TX Follows Active Slice** | False | `TxFollowsActiveSlice` | TX sigue la slice activa. Es mutuamente excluyente con **Active Slice Follows TX**. Se deshabilita automáticamente durante la operación Split. |
-| **Active Slice Follows TX** | False | `ActiveFollowsTxSlice` | Cambia la slice activa cuando TX se mueve externamente (p. ej., WSJT-X o CAT). Es mutuamente excluyente con **TX Follows Active Slice**. |
+| **TX Follows Active Slice** | False | `TxFollowsActiveSlice` | TX sigue al slice activo. Mutuamente excluyente con **Active Slice Follows TX**. Se deshabilita automáticamente durante una operación Split. |
+| **Active Slice Follows TX** | False | `ActiveFollowsTxSlice` | Cambia el slice activo cuando TX se mueve externamente (p. ej., WSJT-X o CAT). Mutuamente excluyente con **TX Follows Active Slice**. |
 
 ## Pestaña Phone/CW
 
-La pestaña Phone/CW configura el micrófono, el manipulado CW y los valores predeterminados de RTTY.
+La pestaña Phone/CW configura el micrófono, el manipulador CW y los valores predeterminados de RTTY.
 
-### Indicador de nivel
+### Medidor de nivel
 
 | Control | Descripción |
 |---|---|
-| **Enable/Disable the Level Meter During Receive** | Muestra el indicador de nivel del micrófono incluso en RX. |
+| **Enable/Disable the Level Meter During Receive** | Muestra el medidor de nivel del micrófono incluso en RX. |
 
-### Manipulado CW
+### Manipulador CW
 
-| Control | Valor predeterminado | Rango | Descripción |
+| Control | Valor por defecto | Rango | Descripción |
 |---|---|---|---|
-| **Iambic:** | | Enabled / Disabled | Habilita o deshabilita el manipulado iambic en la radio. |
-| **Iambic Mode: A / B** | A | A / B | Selecciona el modo iambic Curtis A o B tanto para la radio como para el manipulador local de software. Par mutuamente excluyente. |
+| **Iambic:** | | Habilitado / Deshabilitado | Habilita o deshabilita el manipulador iambic en la radio. |
+| **Iambic Mode: A / B** | A | A / B | Selecciona el modo iambic Curtis A o B tanto para la radio como para el manipulador de software local. Par mutuamente excluyente. |
 | **Swap:** | | | Intercambia dit/dah. |
 | **Sideband:** | | LSB / USB | Selecciona la banda lateral del tono CW. |
-| **CWX:** | | | Habilita el manipulado por macros CWX. |
+| **CWX:** | | | Habilita la manipulación por macros CWX. |
 
 ### Decodificación
 
-| Control | Valor predeterminado | Clave de configuración | Descripción |
+| Control | Valor por defecto | Clave de Configuración | Descripción |
 |---|---|---|---|
 | **Decode:** | True | `CwDecodeOverlay` | Habilita la superposición de decodificación CW en el panadapter. |
 
@@ -176,40 +177,40 @@ La pestaña Phone/CW configura el micrófono, el manipulado CW y los valores pre
 
 ## Pestaña RX
 
-La pestaña RX proporciona controles de calibración de frecuencia y selección de la fuente de referencia de 10 MHz.
+La pestaña RX proporciona controles de calibración de frecuencia y selección de fuente de referencia de 10 MHz.
 
 ### Calibración de frecuencia
 
 Los controles de calibración son visibles independientemente de si hay un GPSDO instalado.
 
-- Si hay un GPSDO instalado, una línea de estado verde indica "GPSDO installed. Manual frequency offset calibration available."
-- Si no hay un GPSDO instalado, una línea de estado amarilla indica "Manual frequency offset calibration available."
+- Si hay un GPSDO instalado, una línea de estado verde indica "GPSDO instalado. Ajuste manual de compensación de frecuencia disponible."
+- Si no hay un GPSDO instalado, una línea de estado amarilla indica "Ajuste manual de compensación de frecuencia disponible."
 
 #### Procedimiento de calibración
 
 1. Abra `Settings > Radio Setup...` y haga clic en la pestaña **RX**.
 2. Ingrese una frecuencia de referencia conocida y precisa en **Cal Frequency (MHz):**.
-3. Haga clic en **Start**. El botón cambia a **Busy** y se deshabilita mientras la calibración se ejecuta. Una etiqueta de estado a la derecha del botón muestra el texto de progreso.
+3. Haga clic en **Start**. El botón cambia a **Busy** y se deshabilita mientras la calibración está en ejecución. Una etiqueta de estado a la derecha del botón muestra el texto de progreso.
    - "Starting…" aparece inmediatamente.
    - Si deja el campo **Cal Frequency (MHz):** vacío y hace clic en **Start**, la etiqueta de estado muestra "Enter cal frequency" en ámbar y la calibración no comienza.
-4. Espere a que la etiqueta de estado indique la finalización. El botón **Start** se vuelve a habilitar automáticamente.
+4. Espere hasta que la etiqueta de estado indique la finalización. El botón **Start** se vuelve a habilitar automáticamente.
 5. Confirme o ajuste el resultado usando **Freq Offset (ppb):**.
 
 | Control | Descripción | Notas |
 |---|---|---|
-| **Cal Frequency (MHz):** | Frecuencia utilizada para la calibración, ingresada en MHz con seis decimales. | Se envía a la radio como `radio set cal_freq=<valor>`. |
-| **Start** | Comienza el barrido de calibración. Se deshabilita y etiqueta como **Busy** mientras una calibración está en curso. | Restablece `freq_error_ppb` a 0 antes de comenzar. Requiere una frecuencia de calibración no vacía. |
-| **Freq Offset (ppb):** | Corrección manual del desplazamiento de frecuencia en partes por billón. | |
+| **Cal Frequency (MHz):** | Frecuencia utilizada para la calibración, ingresada en MHz con hasta seis decimales. | Se envía a la radio como `radio set cal_freq=<valor>`. |
+| **Start** | Comienza el barrido de calibración. Se deshabilita y etiqueta como **Busy** mientras la calibración está en progreso. | Restablece `freq_error_ppb` a 0 antes de comenzar. Requiere una frecuencia de calibración no vacía. |
+| **Freq Offset (ppb):** | Corrección manual de compensación de frecuencia en partes por billón. | |
 
 ### Referencia de 10 MHz
 
-| Control | Valor predeterminado | Rango | Descripción | Notas |
+| Control | Valor por defecto | Rango | Descripción | Notas |
 |---|---|---|---|---|
-| **10 MHz Reference Source:** | Auto | Auto / TCXO / GPSDO / External | Selecciona la fuente del oscilador de referencia. Las opciones mostradas dependen del hardware instalado. | El estado de bloqueo (Locked / Unlocked) se muestra junto al combo y se actualiza en vivo. Cuando se selecciona Auto y la radio ha resuelto una fuente específica, la etiqueta muestra "Auto -> <fuente>" para indicar el hardware activo. Si se selecciona una fuente External de 10 MHz pero no se detecta ninguna señal externa, la etiqueta añade "(not detected)". La etiqueta muestra "Waiting for oscillator status" hasta que la radio informa su primer estado del oscilador. |
+| **10 MHz Reference Source:** | Auto | Auto / TCXO / GPSDO / External | Selecciona la fuente de referencia del oscilador. Las opciones mostradas dependen del hardware instalado. | El estado de bloqueo (Locked / Unlocked) se muestra junto al combo y se actualiza en vivo. Cuando se selecciona Auto y la radio ha resuelto una fuente específica, la etiqueta muestra "Auto -> <fuente>" para indicar el hardware activo. Si se selecciona una fuente externa de 10 MHz pero no se detecta ninguna señal externa, la etiqueta añade "(not detected)". La etiqueta muestra "Waiting for oscillator status" hasta que la radio informe su primer estado del oscilador. |
 
 ## Pestaña Audio
 
-La pestaña Audio configura las salidas de audio de la radio, la compresión, los dispositivos de PC, el refuerzo, el búfer, la grabación y NVIDIA BNR.
+La pestaña Audio configura las salidas de audio de la radio, compresión, dispositivos de PC, refuerzo, búfer, grabación y NVIDIA BNR.
 
 ### Salidas de audio de la radio
 
@@ -223,13 +224,13 @@ La pestaña Audio configura las salidas de audio de la radio, la compresión, lo
 
 ### Compresión de audio
 
-| Control | Valor predeterminado | Clave de configuración | Descripción |
+| Control | Valor por defecto | Clave de Configuración | Descripción |
 |---|---|---|---|
-| **Audio Compression (SmartLink):** | Auto | `AudioCompression` | Selecciona el códec de audio para SmartLink/LAN: Auto, Uncompressed, u Opus. |
+| **Audio Compression (SmartLink):** | Auto | `AudioCompression` | Selecciona el códec de audio para SmartLink/LAN: Auto, Uncompressed u Opus. |
 
 ### Suspensión del sistema
 
-| Control | Valor predeterminado | Clave de configuración | Descripción |
+| Control | Valor por defecto | Clave de Configuración | Descripción |
 |---|---|---|---|
 | **Prevent system sleep while connected** | False | `InhibitSleepWhileConnected` | Mantiene el SO despierto mientras la radio está conectada para evitar caídas de flujos de audio/TCP/UDP durante la inactividad. |
 
@@ -240,38 +241,26 @@ La pestaña Audio configura las salidas de audio de la radio, la compresión, lo
 | **PC Audio Devices: Input:** | Selecciona el dispositivo de entrada de audio del host. |
 | **PC Audio Devices: Output:** | Selecciona el dispositivo de salida de audio del host. |
 
-### Refuerzo de audio y búfer
+### Refuerzo y búfer de audio
 
-| Control | Valor predeterminado | Rango | Clave de configuración | Descripción |
+| Control | Valor por defecto | Rango | Clave de Configuración | Descripción |
 |---|---|---|---|---|
 | **Audio Boost:** | | | `AudioBoost` | Habilita ganancia adicional en la ruta de audio del cliente. |
 | **Audio Buffer:** | 200 | 50-1000 ms | `AudioBufferMs` | Aumenta el búfer de audio en milisegundos para la fluctuación de VPN/SmartLink. |
 
 ### Grabación
 
-| Control | Valor predeterminado | Rango | Clave de configuración | Descripción |
+| Control | Valor por defecto | Rango | Clave de Configuración | Descripción |
 |---|---|---|---|---|
 | **Recording:** | Radio Side | Radio Side / Client Side | `RecordingMode` | Selecciona la grabación del lado de la radio o del lado del cliente. |
 | **Save to:** | | | `QsoRecordingDir` | Carpeta para grabaciones guardadas (solo lado del cliente). Por defecto es Documentos/AetherSDR/Recordings. |
-| **...** | | | | Examina la carpeta de grabación. |
-| **Auto-record on TX** | False | | `QsoRecordingAutoRecord` | Graba automáticamente mientras se transmite. |
-| **Idle timeout:** | 120 | 10-3600 seg | `QsoRecordingIdleTimeout` | Segundos de silencio antes de que se detenga la grabación. |
+| **...** | | | | Navega para seleccionar la carpeta de grabación. |
+| **Auto-record on TX** | False | | `QsoRecordingAutoRecord` | Graba automáticamente mientras transmite. |
+| **Idle timeout:** | 120 | 10-3600 seg | `QsoRecordingIdleTimeout` | Segundos de silencio antes de que la grabación se detenga. |
 
 ### NVIDIA BNR
 
 | Control | Descripción |
 |---|---|
 | **NVIDIA BNR: Autostart Container** | Habilita el inicio automático del contenedor. |
-| **NVIDIA BNR: Start / Stop** | Inicia o detiene manualmente el contenedor de eliminación de ruido NVIDIA Broadcast. |
-| **NVIDIA BNR: Check Status** | Verifica el estado del contenedor. |
-| **NVIDIA BNR status dot** | Punto de color que indica el estado del contenedor: Running/Stopped/Unknown. |
-
-## Pestaña Antennas
-
-La pestaña Antennas le permite asignar nombres amigables a cada puerto de antena en la radio para una identificación más fácil. Esta pestaña se construye de forma diferida cuando se hace clic en ella por primera vez.
-
-### Asignación de nombres de antenas
-
-| Control | Descripción | Notas |
-|---|---|---|
-| **Campos de nombre de antena (ANT1, ANT2, ANT3, ANT4, XVTA, XVTB)** | Campos de texto para cada puerto de antena. Ingrese un nombre personalizado (p. ej., "20m Beam", "80m Dipole"). | Los nombres se almacenan en App
+| **NVIDIA BNR: Start / Stop** | Inicia o detiene manualmente el contenedor de eliminación de ruido NVIDIA Broadcast
