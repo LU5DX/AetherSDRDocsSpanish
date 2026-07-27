@@ -85,5 +85,5 @@ Cuando la etapa de tubo está en bypass, todo el mosaico del applet acoplado se 
 - [Parallel-blend saturation with Dry/Wet](parallel-blend-saturation-with-mix.md)
 - [Compensate level changes with Output](compensate-level-changes-with-output.md)
 - [Bypass the tube from either chain](bypass-the-tube-from-either-chain.md)
-- [Modulate the tube curve with Envelope](modulate-the-tube-curve-with-envelope.md)
+- Modulate the tube curve with Envelope
 - Type exact values with the value popup editor

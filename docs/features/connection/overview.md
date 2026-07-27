@@ -105,4 +105,4 @@ Una vez conectado, haga clic en **Disconnect** para volver al panel de conexión
 - [Pick the local network interface used for a manual connection](../../getting-started/setup/pick-the-local-network-interface-used-for-a-manual-connection.md)
 - [Enable low-bandwidth mode for slow links](enable-low-bandwidth-mode-for-slow-links.md)
 - [Disconnect from the current radio](../../getting-started/setup/disconnect-from-the-current-radio.md)
-- [Set a custom nickname for a discovered radio](set-a-custom-nickname-for-a-discovered-radio.md)
+- Set a custom nickname for a discovered radio

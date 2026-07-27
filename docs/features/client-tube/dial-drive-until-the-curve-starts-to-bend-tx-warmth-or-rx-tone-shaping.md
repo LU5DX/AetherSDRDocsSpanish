@@ -84,4 +84,4 @@ Use el mando Drive para introducir la señal en la etapa de válvula y producir 
 - [Mezcle saturación en paralelo con Mix](parallel-blend-saturation-with-mix.md)
 - Use Envelope para una respuesta dinámica de válvula
 - [Ponga en bypass la válvula desde cualquiera de las cadenas](bypass-the-tube-from-either-chain.md)
-- [Active la supresión de ruido RNNoise en TX (RN2)](enable-rnnoise-noise-suppression-on-tx-rn2.md)
+- Active la supresión de ruido RNNoise en TX (RN2)

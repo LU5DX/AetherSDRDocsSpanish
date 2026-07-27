@@ -70,7 +70,7 @@ Los componentes de la perilla y el widget de curva de transferencia utilizan col
 ## Relacionado
 
 - [Establecer el umbral de TX justo por encima del piso de ruido ambiental](set-tx-threshold-just-above-room-noise-floor.md)
-- [Establecer Floor para evitar silencios antinaturales entre palabras](set-floor-to-avoid-unnatural-silence-between-palabras.md)
+- Establecer Floor para evitar silencios antinaturales entre palabras
 - [Elegir comportamiento de compuerta vs expansor suave mediante ratio](choose-gate-vs-soft-expander-behaviour-via-ratio.md)
 - [Ajustar return/release para apertura/cierre natural](tune-attack-release-for-natural-open-close.md)
 - [Omitir la compuerta de la cadena](bypass-the-gate-from-the-chain.md)

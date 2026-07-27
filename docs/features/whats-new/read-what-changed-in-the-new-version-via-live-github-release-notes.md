@@ -39,6 +39,6 @@ Consulte las notas de la versión de su AetherSDR actual, obtenidas en vivo desd
 ## Relacionado
 
 - [Vuelva a leer las notas de la versión más tarde mediante el menú Help](re-read-release-notes-later-via-help-menu.md)
-- [Busque dentro de las notas de la versión usando el botón Find](search-within-the-release-notes-using-the-find-button.md)
+- Busque dentro de las notas de la versión usando el botón Find
 - [Omita las notas de la versión actual](skip-the-current-version-s-release-notes.md)
 - [Abra el flujo de actualización para una compilación más reciente](open-the-upgrade-flow-for-a-newer-build.md)

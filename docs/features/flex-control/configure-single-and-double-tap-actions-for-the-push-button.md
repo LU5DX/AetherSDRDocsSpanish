@@ -67,7 +67,7 @@ Las acciones disponibles para ambos cuadros combinados incluyen:
 
 ## Relacionado
 
-- [Configure single- and double-tap actions for the PUSH button](configure-single--and-double-tap-actions-for-the-push-button.md)
+- Configure single- and double-tap actions for the PUSH button
 - [Configure the AetherControl / FlexControl hardware controller](configure-the-aethercontrol-flexcontrol-hardware-controller.md)
 
 ---
@@ -93,7 +93,7 @@ Configure el controlador rotatorio virtual o físico FlexControl en AetherSDR. E
 1. **Push (action)**: Seleccione una acción del cuadro combinado para la pulsación simple de la rueda.
 2. **Double-tap (action)**: Seleccione una acción del cuadro combinado para la doble pulsación de la rueda.
 
-Consulte [Configure single- and double-tap actions for the PUSH button](configure-single--and-double-tap-actions-for-the-push-button.md) para obtener la lista completa de acciones disponibles.
+Consulte Configure single- and double-tap actions for the PUSH button para obtener la lista completa de acciones disponibles.
 
 ## Configurar botones auxiliares
 
@@ -151,4 +151,4 @@ Consulte [Configure single- and double-tap actions for the PUSH button](configur
 
 ## Relacionado
 
-- [Configure single- and double-tap actions for the PUSH button](configure-single--and-double-tap-actions-for-the-push-button.md)
+- Configure single- and double-tap actions for the PUSH button

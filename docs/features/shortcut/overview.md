@@ -50,5 +50,5 @@ Los diálogos de importación y exportación recuerdan el último directorio uti
 - [Restablecer todos los atajos a sus valores predeterminados](reset-every-shortcut-back-to-defaults.md)
 - [Encontrar todas las acciones en una categoría](find-all-actions-in-a-category.md)
 - [Ver la tecla predeterminada de cualquier acción](see-the-default-key-for-any-action.md)
-- [Importar atajos de teclado desde un archivo](import-keyboard-shortcuts-from-a-file.md)
-- [Exportar atajos de teclado a un archivo](export-keyboard-shortcuts-from-a-file.md)
+- Importar atajos de teclado desde un archivo
+- Exportar atajos de teclado a un archivo

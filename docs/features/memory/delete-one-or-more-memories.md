@@ -32,8 +32,8 @@ Las memorias seleccionadas se eliminan permanentemente de la radio. Para elimina
 
 ## Relacionado
 
-- [Exportar memorias para respaldo o para compartir](exportar-memorias-para-respaldo-o-para-compartir.md)
-- [Buscar memorias por nombre](buscar-memorias-por-nombre.md)
-- [Filtrar memorias por perfil](filtrar-memorias-por-perfil.md)
-- [Importar memorias desde un archivo CSV/JSON](importar-memorias-desde-un-archivo-csv-json.md)
-- [Descripción general de Canales de Memoria](descripcion-general.md)
+- Exportar memorias para respaldo o para compartir
+- Buscar memorias por nombre
+- Filtrar memorias por perfil
+- Importar memorias desde un archivo CSV/JSON
+- Descripción general de Canales de Memoria

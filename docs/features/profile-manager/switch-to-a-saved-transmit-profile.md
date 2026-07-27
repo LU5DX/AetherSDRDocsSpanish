@@ -59,4 +59,4 @@ Alternativamente, haga doble clic en cualquier entrada de la **lista de perfiles
 - [Activar el guardado automático para que los ajustes de TX siempre persistan](turn-on-auto-save-so-tx-tweaks-always-persist.md)
 - [Descripción general del Administrador de perfiles](overview.md)
 - [Guardar el estado actual de la radio como un nuevo perfil global](save-the-current-radio-state-as-a-new-global-profile.md)
-- [Guardar el estado actual de la radio como un nuevo perfil de transmisión](save-the-current-radio-state-as-a-new-transmit-profile.md)
+- Guardar el estado actual de la radio como un nuevo perfil de transmisión
