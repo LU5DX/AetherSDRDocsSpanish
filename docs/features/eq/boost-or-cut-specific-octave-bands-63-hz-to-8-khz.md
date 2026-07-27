@@ -1,56 +1,56 @@
 # Aumentar o reducir bandas de octava específicas (63 Hz a 8 kHz)
 
-Utilice el applet Equalizer para subir o bajar bandas de frecuencia individuales en la trayectoria de audio de recepción o transmisión del radio. Cada una de las ocho bandas se puede ajustar entre −10 dB y +10 dB.
+Use el applet Equalizer para subir o bajar bandas de frecuencia individuales en la ruta de audio de recepción o transmisión del equipo. Cada una de las ocho bandas se puede ajustar entre −10 dB y +10 dB.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al radio. El applet Equalizer requiere una conexión activa con el radio.
-- Decida si está moldeando la trayectoria RX o TX antes de mover los deslizadores.
+- AetherSDR debe estar conectado al equipo. El applet Equalizer requiere una conexión activa con el equipo.
+- Decida si está moldeando la ruta de RX o TX antes de mover los deslizadores.
 
 ## Pasos
 
-1. Haga clic en el botón EQ de la bandeja en el panel de applets de la barra lateral derecha para abrir el mosaico Equalizer.
-2. Haga clic en TX para editar la trayectoria de transmisión, o haga clic en RX para editar la trayectoria de recepción. TX está seleccionado por defecto al abrir el applet. La última vista seleccionada se recuerda y restaura la próxima vez que abra el applet.
-3. Haga clic en ON para habilitar el ecualizador para la trayectoria seleccionada. ON se resalta en verde cuando está activo.
+1. Haga clic en el botón EQ de la bandeja en el panel de applets de la barra lateral derecha para abrir el panel Equalizer.
+2. Haga clic en TX para editar la ruta de transmisión, o haga clic en RX para editar la ruta de recepción. TX está seleccionado por defecto al abrir el applet. La última vista seleccionada se recuerda y se restaura la próxima vez que abra el applet.
+3. Haga clic en ON para activar el ecualizador en la ruta seleccionada. ON se resalta en verde cuando está activo.
 4. Arrastre el deslizador de la banda que desea ajustar. Las bandas están etiquetadas como **63**, **125**, **250**, **500**, **1k**, **2k**, **4k** y **8k** (Hz y kHz respectivamente). Arrastre hacia arriba para aumentar, arrastre hacia abajo para reducir.
-5. Mientras arrastra, aparece una etiqueta emergente cerca de la manija del deslizador que muestra el valor actual en dB (ej., "+3 dB" o "−5 dB"). Lea la etiqueta de valor directamente debajo de cada manija del deslizador para confirmar la cantidad en dB. La etiqueta se actualiza en vivo mientras arrastra.
+5. Mientras arrastra, aparece una etiqueta emergente cerca del control del deslizador que muestra el valor actual en dB (p. ej., "+3 dB" o "−5 dB"). Lea la etiqueta de valor directamente debajo de cada control del deslizador para confirmar la cantidad en dB. La etiqueta se actualiza en tiempo real mientras arrastra.
 6. También puede ajustar un deslizador con las teclas de flecha del teclado (Arriba/Abajo o Izquierda/Derecha) cuando un deslizador tiene el foco. La etiqueta emergente aparece y permanece brevemente después de soltar la tecla, igual que después de un arrastre con el ratón.
 7. Repita los pasos 4 a 6 para cualquier otra banda que desee ajustar.
 
-## Función de cada control
+## Qué hace cada control
 
 | Control | Tipo | Valor predeterminado | Rango | Comportamiento |
 |---|---|---|---|---|
-| ON | Botón de alternancia | Off (desmarcado) | On / Off | Activa o desactiva el ecualizador para la trayectoria seleccionada actualmente. Se resalta en verde cuando está activado. |
-| RX | Botón de alternancia | Sin marcar (o último estado seleccionado) | — | Cambia el applet para mostrar y editar las bandas del ecualizador de recepción. Se resalta en azul cuando está activo. |
+| ON | Botón de alternancia | Apagado (desmarcado) | Encendido / Apagado | Activa o desactiva el ecualizador para la ruta seleccionada actualmente. Se resalta en verde cuando está activado. |
+| RX | Botón de alternancia | Desmarcado (o último estado seleccionado) | — | Cambia el applet para mostrar y editar las bandas del ecualizador de recepción. Se resalta en azul cuando está activo. |
 | TX | Botón de alternancia | Marcado (o último estado seleccionado) | — | Cambia el applet para mostrar y editar las bandas del ecualizador de transmisión. Se resalta en azul cuando está activo. La última vista seleccionada (RX o TX) se recuerda entre sesiones del applet. |
-| Botón de arco Reset | Botón pulsador | — | — | Restablece las 8 bandas de la trayectoria seleccionada actualmente a 0 dB. Tooltip: "Reset all bands to 0 dB". |
-| 63 | Deslizador vertical | 0 dB | −10 a +10 dB | Ajusta la banda de 63 Hz para la trayectoria seleccionada. Arrastre hacia arriba para aumentar, hacia abajo para reducir. Aparece un aviso emergente que muestra el valor exacto mientras arrastra y permanece brevemente después de soltar. El ajuste con teclas de flecha también muestra el aviso emergente. |
-| 125 | Deslizador vertical | 0 dB | −10 a +10 dB | Ajusta la banda de 125 Hz para la trayectoria seleccionada. Arrastre hacia arriba para aumentar, hacia abajo para reducir. Aparece un aviso emergente que muestra el valor exacto mientras arrastra y permanece brevemente después de soltar. El ajuste con teclas de flecha también muestra el aviso emergente. |
-| 250 | Deslizador vertical | 0 dB | −10 a +10 dB | Ajusta la banda de 250 Hz para la trayectoria seleccionada. Arrastre hacia arriba para aumentar, hacia abajo para reducir. Aparece un aviso emergente que muestra el valor exacto mientras arrastra y permanece brevemente después de soltar. El ajuste con teclas de flecha también muestra el aviso emergente. |
-| 500 | Deslizador vertical | 0 dB | −10 a +10 dB | Ajusta la banda de 500 Hz para la trayectoria seleccionada. Arrastre hacia arriba para aumentar, hacia abajo para reducir. Aparece un aviso emergente que muestra el valor exacto mientras arrastra y permanece brevemente después de soltar. El ajuste con teclas de flecha también muestra el aviso emergente. |
-| 1k | Deslizador vertical | 0 dB | −10 a +10 dB | Ajusta la banda de 1 kHz para la trayectoria seleccionada. Arrastre hacia arriba para aumentar, hacia abajo para reducir. Aparece un aviso emergente que muestra el valor exacto mientras arrastra y permanece brevemente después de soltar. El ajuste con teclas de flecha también muestra el aviso emergente. |
-| 2k | Deslizador vertical | 0 dB | −10 a +10 dB | Ajusta la banda de 2 kHz para la trayectoria seleccionada. Arrastre hacia arriba para aumentar, hacia abajo para reducir. Aparece un aviso emergente que muestra el valor exacto mientras arrastra y permanece brevemente después de soltar. El ajuste con teclas de flecha también muestra el aviso emergente. |
-| 4k | Deslizador vertical | 0 dB | −10 a +10 dB | Ajusta la banda de 4 kHz para la trayectoria seleccionada. Arrastre hacia arriba para aumentar, hacia abajo para reducir. Aparece un aviso emergente que muestra el valor exacto mientras arrastra y permanece brevemente después de soltar. El ajuste con teclas de flecha también muestra el aviso emergente. |
-| 8k | Deslizador vertical | 0 dB | −10 a +10 dB | Ajusta la banda de 8 kHz para la trayectoria seleccionada. Arrastre hacia arriba para aumentar, hacia abajo para reducir. Aparece un aviso emergente que muestra el valor exacto mientras arrastra y permanece brevemente después de soltar. El ajuste con teclas de flecha también muestra el aviso emergente. |
-| Escala +10 / 0 / −10 dB | Etiquetas de referencia | — | — | Etiquetas de referencia izquierda y derecha que muestran el rango de +/−10 dB de los deslizadores. |
-| Etiqueta de valor por banda | Indicador | 0 | −10 a +10 | Muestra el valor en dB en vivo del deslizador directamente debajo de su manija. |
-| Aviso emergente de arrastre | Indicador | Ninguno | −10 a +10 | Etiqueta flotante que aparece cerca de la manija del deslizador durante las operaciones de arrastre o después de un ajuste con teclas de flecha. Muestra el valor actual en dB con signo (ej., "+3 dB" o "−5 dB"). Permanece un momento después de soltar el botón del ratón o la tecla. |
+| Botón Reset (arco) | Botón pulsador | — | — | Restablece las 8 bandas de la ruta seleccionada actualmente a 0 dB. Información sobre herramientas: "Restablecer todas las bandas a 0 dB". Se muestra como una flecha de 3/4 de círculo. |
+| 63 | Deslizador vertical | 0 dB | −10 a +10 dB | Ajusta la banda de 63 Hz para la ruta seleccionada. Arrastre hacia arriba para aumentar, hacia abajo para reducir. Una ventana emergente muestra el valor exacto mientras arrastra y permanece brevemente después de soltar. El ajuste con teclas de flecha también muestra la ventana emergente. |
+| 125 | Deslizador vertical | 0 dB | −10 a +10 dB | Ajusta la banda de 125 Hz para la ruta seleccionada. Arrastre hacia arriba para aumentar, hacia abajo para reducir. Una ventana emergente muestra el valor exacto mientras arrastra y permanece brevemente después de soltar. El ajuste con teclas de flecha también muestra la ventana emergente. |
+| 250 | Deslizador vertical | 0 dB | −10 a +10 dB | Ajusta la banda de 250 Hz para la ruta seleccionada. Arrastre hacia arriba para aumentar, hacia abajo para reducir. Una ventana emergente muestra el valor exacto mientras arrastra y permanece brevemente después de soltar. El ajuste con teclas de flecha también muestra la ventana emergente. |
+| 500 | Deslizador vertical | 0 dB | −10 a +10 dB | Ajusta la banda de 500 Hz para la ruta seleccionada. Arrastre hacia arriba para aumentar, hacia abajo para reducir. Una ventana emergente muestra el valor exacto mientras arrastra y permanece brevemente después de soltar. El ajuste con teclas de flecha también muestra la ventana emergente. |
+| 1k | Deslizador vertical | 0 dB | −10 a +10 dB | Ajusta la banda de 1 kHz para la ruta seleccionada. Arrastre hacia arriba para aumentar, hacia abajo para reducir. Una ventana emergente muestra el valor exacto mientras arrastra y permanece brevemente después de soltar. El ajuste con teclas de flecha también muestra la ventana emergente. |
+| 2k | Deslizador vertical | 0 dB | −10 a +10 dB | Ajusta la banda de 2 kHz para la ruta seleccionada. Arrastre hacia arriba para aumentar, hacia abajo para reducir. Una ventana emergente muestra el valor exacto mientras arrastra y permanece brevemente después de soltar. El ajuste con teclas de flecha también muestra la ventana emergente. |
+| 4k | Deslizador vertical | 0 dB | −10 a +10 dB | Ajusta la banda de 4 kHz para la ruta seleccionada. Arrastre hacia arriba para aumentar, hacia abajo para reducir. Una ventana emergente muestra el valor exacto mientras arrastra y permanece brevemente después de soltar. El ajuste con teclas de flecha también muestra la ventana emergente. |
+| 8k | Deslizador vertical | 0 dB | −10 a +10 dB | Ajusta la banda de 8 kHz para la ruta seleccionada. Arrastre hacia arriba para aumentar, hacia abajo para reducir. Una ventana emergente muestra el valor exacto mientras arrastra y permanece brevemente después de soltar. El ajuste con teclas de flecha también muestra la ventana emergente. |
+| Escala +10 / 0 / −10 dB | Etiquetas de referencia | — | — | Etiquetas de referencia izquierda y derecha que muestran el rango de +/-10 dB de los deslizadores. |
+| Etiqueta de valor por banda | Indicador | 0 | −10 a +10 | Muestra el valor en dB en vivo del deslizador directamente debajo de su control. |
+| Ventana emergente de arrastre | Indicador | Ninguno | −10 a +10 | Etiqueta flotante que aparece cerca del control del deslizador durante operaciones de arrastre o después de un ajuste con teclas de flecha. Muestra el valor actual en dB con signo (p. ej., "+3 dB" o "−5 dB"). Permanece un momento después de soltar el botón del ratón o la tecla. |
 
 ## Consejos
 
-- Los ajustes de RX y TX son independientes. Ajustar las bandas mientras TX está seleccionado no tiene efecto en la curva de RX, y viceversa.
+- Los ajustes de RX y TX son independientes. Ajustar bandas mientras TX está seleccionado no tiene efecto en la curva de RX, y viceversa.
 - Las etiquetas de escala +10 / 0 / −10 dB en los bordes izquierdo y derecho de la columna de deslizadores proporcionan una referencia visual para el punto medio (0 dB) y los límites del deslizador.
-- Para devolver rápidamente todas las bandas a planas sin mover cada deslizador individualmente, haga clic en el botón de arco Reset.
-- El applet recuerda si usó la vista RX o TX la última vez. Cuando vuelva a abrir el mosaico Equalizer, mostrará la misma vista que estaba usando, ahorrándole un clic.
-- El aviso emergente de arrastre muestra un valor dB con signo (ej., "+3 dB" para valores positivos, "−3 dB" para valores negativos, "0 dB" para cero) para coincidir con el formato utilizado en otras partes de la aplicación.
-- Los colores de la manija del deslizador y la ranura se adaptan al tema activo. El color de la manija utiliza el color de acento, mientras que el fondo de la ranura utiliza el color de la pista del deslizador del tema actual.
-- Mover el deslizador anterior o siguiente con la tecla Tab del teclado no activa el aviso emergente. Solo las teclas de flecha en un deslizador enfocado muestran el aviso emergente.
+- Para volver rápidamente todas las bandas a plano sin mover cada deslizador individualmente, haga clic en el botón Reset de arco.
+- El applet recuerda si usó la vista RX o TX la última vez. Cuando vuelva a abrir el panel Equalizer, mostrará la misma vista que estaba usando antes, ahorrándole un clic.
+- La ventana emergente de arrastre muestra un valor dB con signo (p. ej., "+3 dB" para valores positivos, "−3 dB" para valores negativos, "0 dB" para cero) para coincidir con el formato utilizado en otras partes de la aplicación.
+- El color del control y la ranura del deslizador se adaptan al tema activo. El color del control utiliza el color de acento, mientras que el fondo de la ranura utiliza el color de la pista del deslizador del tema actual.
+- Mover al deslizador anterior o siguiente con la tecla Tab del teclado no activa la ventana emergente. Solo las teclas de flecha en un deslizador enfocado muestran la ventana emergente.
 
 ## Solución de problemas
 
-- **Los deslizadores se mueven pero el audio no se ve afectado** — Verifique que ON esté resaltado en verde para la trayectoria activa. El ecualizador no tiene efecto cuando ON está desmarcado, incluso si los deslizadores están configurados en valores distintos de cero.
-- **Ajustar los deslizadores en la trayectoria TX cambia lo que escucha en RX** — Es posible que esté en la trayectoria equivocada. Haga clic en RX para confirmar que está editando las bandas de recepción, o haga clic en TX para transmisión. Las dos trayectorias son independientes; solo se está editando la trayectoria mostrada actualmente.
+- **Los deslizadores se mueven pero el audio no se ve afectado** — Verifique que ON esté resaltado en verde para la ruta activa. El ecualizador no tiene efecto cuando ON está desmarcado, incluso si los deslizadores están configurados en valores distintos de cero.
+- **Ajustar los deslizadores en la ruta TX cambia lo que escucha en RX** — Es posible que esté en la ruta incorrecta. Haga clic en RX para confirmar que está editando las bandas de recepción, o haga clic en TX para transmisión. Las dos rutas son independientes; solo se está editando la ruta mostrada actualmente.
 
 ## Relacionados
 

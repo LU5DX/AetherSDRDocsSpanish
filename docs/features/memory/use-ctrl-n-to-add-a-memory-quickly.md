@@ -1,12 +1,12 @@
-# Canales de Memoria
+# Canales de memoria
 
-El diálogo de Canales de Memoria le permite gestionar los canales de memoria del radio — añadir frecuencias desde el slice activo, editar memorias existentes, buscar y filtrar, sintonizar, importar/exportar y eliminar frecuencias almacenadas.
+El diálogo de Canales de memoria le permite gestionar los canales de memoria del radio — añadir frecuencias desde la porción activa, editar memorias existentes, buscar y filtrar, sintonizar, importar/exportar y eliminar frecuencias almacenadas.
 
 ## Abrir el diálogo
 
 1. Abra **Settings > Memory...**
 
-   Aparece el diálogo Canales de Memoria con una barra de título sin bordes y capacidad de redimensionamiento en 8 ejes.
+   Aparece el diálogo de Canales de memoria con una barra de título sin marco y capacidad de redimensionamiento en 8 ejes.
 
 ## Búsqueda y filtro
 
@@ -22,61 +22,69 @@ La tabla de memorias muestra y edita filas de memoria. Las columnas incluyen Gro
 - Ordene haciendo clic en los encabezados de columna (Frequency, Name, Mode).
 - Modo de selección extendida; edición en línea mediante el botón **Edit** o **F2**/**Ctrl+E**.
 - **Delete**/**Backspace** elimina las filas seleccionadas.
-- Haga doble clic para sintonizar el slice activo en esa memoria.
+- Un doble clic sintoniza la porción activa a esa memoria.
 - **Ctrl+Shift+A** selecciona todo.
+
+### Edición en línea con campos desplegables
+
+Al editar una celda de memoria, los campos restringidos (Mode, Offset Dir, Tone Mode, Tone Value, Step, Group) abren un editor de cuadro combinado. La lista se abre inmediatamente para que pueda elegir un valor con un solo clic.
+
+- **Campos estrictos** (no editables): Solo se ofrecen valores conocidos del radio.
+- **Campos editables**: Se proporcionan valores comunes, pero puede escribir texto personalizado; el radio valida la entrada al confirmar. Se aplican validadores de Entero y Decimal cuando corresponde.
+- Si una celda contiene un valor que no está en la lista (por ejemplo, de una memoria antigua), el valor se conserva y se muestra como el primer elemento para que no se cambie silenciosamente.
 
 ## Gestión de memorias
 
 | Control | Comportamiento |
 |---------|----------------|
-| **Import...** | Importa memorias desde un archivo CSV con un diálogo de progreso. Muestra el progreso de importación y un resumen con las filas omitidas. |
-| **Export...** | Exporta las memorias seleccionadas (o filtradas) a CSV. Valida el CSV generado antes de guardarlo. |
-| **Add** | Crea una nueva memoria desde el slice actual (activo). Atajo **Ctrl+N**. La variante de insignia de letra de slice fue eliminada; añadir siempre apunta al slice activo. |
-| **Edit** | Activa el modo de edición en línea en el campo de nombre de la memoria seleccionada. **F2** o **Ctrl+E** también activa la edición. Solo está habilitado cuando exactamente una memoria está seleccionada. |
-| **Tune** | Sintoniza el slice activo en la memoria seleccionada. Solo está habilitado cuando exactamente una memoria está seleccionada. |
-| **Select All** | Selecciona todas las filas visibles (respetando búsqueda/filtro). Atajo **Ctrl+Shift+A**. |
-| **Remove** | Elimina las memorias seleccionadas (con confirmación). Muestra progreso para eliminación por lotes. La tecla **Delete**/**Backspace** también activa la acción. La etiqueta del botón cambia a "Remove Selected" cuando más de una fila está seleccionada. |
+| **Import...** | Importa memorias desde un archivo CSV con diálogo de progreso. Muestra el progreso de importación y un resumen con las filas omitidas. |
+| **Export...** | Exporta memorias seleccionadas (o filtradas) a CSV. Valida el CSV generado antes de guardar. |
+| **Add** | Crea una nueva memoria desde la porción activa actual. Acceso directo **Ctrl+N**. Se eliminó la variante de insignia de letra de porción; añadir siempre apunta a la porción activa. |
+| **Edit** | Activa el modo de edición en línea en el campo Name de la memoria seleccionada. **F2** o **Ctrl+E** también activan la edición. Solo está habilitado cuando está seleccionada exactamente una memoria. |
+| **Tune** | Sintoniza la porción activa a la memoria seleccionada. Solo está habilitado cuando está seleccionada exactamente una memoria. |
+| **Select All** | Selecciona todas las filas visibles (respetando búsqueda/filtro). Acceso directo **Ctrl+Shift+A**. |
+| **Remove** | Elimina las memorias seleccionadas (con confirmación). Muestra progreso para eliminación por lotes. La tecla **Delete**/**Backspace** también lo activa. La etiqueta del botón cambia a "Remove Selected" cuando hay más de una fila seleccionada. |
 
 ## Barra de título y controles de ventana
 
-El diálogo Canales de Memoria tiene una interfaz moderna sin bordes:
+El diálogo de Canales de memoria tiene una interfaz moderna sin marco:
 
 | Control | Comportamiento |
 |---------|----------------|
-| **Barra de título — Memory Channels** | Barra de título degradada sin bordes de 18 px con un glifo de agarre a la izquierda y el título del diálogo. |
-| **— (Minimizar)** | Minimiza el diálogo. |
-| **□ (Maximizar)** | Maximiza o restaura el diálogo. |
-| **× (Cerrar)** | Cierra el diálogo. Escape primero limpia la búsqueda, luego cierra. |
+| **Title bar — Memory Channels** | Barra de título degradada de 18 px sin marco con glifo de agarre a la izquierda y el título del diálogo. |
+| **— (Minimize)** | Minimiza el diálogo. |
+| **□ (Maximize)** | Maximiza o restaura el diálogo. |
+| **× (Close)** | Cierra el diálogo. Escape primero limpia la búsqueda, luego cierra. |
 | **Arrastrar para mover** | Haga clic y arrastre la barra de título para mover el diálogo. Haga doble clic en la barra de título para alternar maximizar/restaurar. |
-| **Redimensionamiento en 8 ejes** | Haga clic y arrastre cualquier borde o esquina del diálogo para redimensionar. El cursor cambia para indicar la dirección de redimensionamiento. Zona de clic para redimensionar de 12 px. |
-| **Conteo de selección** | Muestra "<N> of <M> selected". |
+| **Redimensionamiento en 8 ejes** | Haga clic y arrastre cualquier borde o esquina del diálogo para redimensionarlo. El cursor cambia para indicar la dirección de redimensionamiento. Zona de impacto de redimensionamiento de 12 px. El borde superior reserva un área (la altura de la barra de título) para arrastrar y mover en lugar de redimensionar. |
+| **Conteo de selección** | Muestra "<N> de <M> seleccionados". |
 
 ## Atajos de teclado
 
 | Atajo | Acción |
 |-------|--------|
-| **Ctrl+N** | Añadir una nueva memoria desde el slice activo (funciona incluso cuando el diálogo está cerrado) |
+| **Ctrl+N** | Añadir una nueva memoria desde la porción activa (funciona incluso con el diálogo cerrado) |
 | **Ctrl+F** | Enfocar el campo de búsqueda |
 | **F2** o **Ctrl+E** | Editar el nombre de la memoria seleccionada |
-| **Delete** o **Backspace** | Eliminar las memorias seleccionadas |
+| **Delete** o **Backspace** | Eliminar memorias seleccionadas |
 | **Ctrl+Shift+A** | Seleccionar todas las filas visibles |
-| **Esc** | Limpiar la búsqueda primero, luego cerrar el diálogo |
-| **Doble clic** en una fila de memoria | Sintonizar el slice activo en esa memoria |
+| **Esc** | Limpiar búsqueda primero, luego cerrar diálogo |
+| **Doble clic** en una fila de memoria | Sintonizar la porción activa a esa memoria |
 
 ## Añadir una memoria rápidamente (Ctrl+N)
 
-Añada un canal de memoria desde el slice activo sin abrir ningún menú — solo presione un atajo de teclado.
+Añada un canal de memoria desde la porción activa sin abrir ningún menú — solo presione un atajo de teclado.
 
 ### Antes de comenzar
 
-- El radio debe estar conectado y tener un slice activo.
-- No es necesario que el diálogo Canales de Memoria esté abierto.
+- El radio debe estar conectado y tener una porción activa.
+- No es necesario que el diálogo de Canales de memoria esté abierto.
 
 ### Pasos
 
-1. Presione **Ctrl+N** en cualquier lugar de la ventana principal de la aplicación.
+1. Presione **Ctrl+N** en cualquier parte de la ventana principal de la aplicación.
 
-   Se crea una nueva memoria a partir de la frecuencia, modo y configuración de filtro del slice activo actual.
+   Se crea una nueva memoria a partir de la frecuencia, modo y configuración de filtro de la porción activa actual.
 
 2. (Opcional) Abra **Settings > Memory...** para ver la nueva memoria en la tabla y editar su nombre u otros campos.
 
@@ -87,4 +95,4 @@ Añada un canal de memoria desde el slice activo sin abrir ningún menú — sol
 
 ## Integración de temas
 
-El diálogo Canales de Memoria admite el estilo de temas. La tabla usa el color de fondo definido por el tema para filas alternas. Para aplicar un tema personalizado, configure el contenedor `dialog/memory` en la definición de su tema.
+El diálogo de Canales de memoria admite estilo de temas. La tabla usa el color de fondo definido por el tema para filas alternas. Para aplicar un tema personalizado, configure el contenedor `dialog/memory` en su definición de tema.

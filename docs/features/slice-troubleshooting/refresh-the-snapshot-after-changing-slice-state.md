@@ -1,94 +1,110 @@
-# Actualizar la instantánea después de cambiar el estado del slice
+# Solución de problemas de slices
 
-Después de modificar la configuración del slice —como ajustar el enrutamiento de audio, activar o desactivar el silencio, o cambiar las antenas— el cuadro de diálogo de Solución de problemas del slice no se actualiza automáticamente. Utilice **Actualizar instantánea** para volver a leer el estado actual del slice, de modo que el Resumen de incidencias y el JSON reflejen sus cambios.
+El cuadro de diálogo **Slice Troubleshooting** captura una instantánea JSON de cada slice, panadapter, transverter y canal DAX, y resume los problemas probables (audio faltante, silencio bloqueado, antena faltante, validez de XVTR) para que pueda compartirla con el soporte técnico.
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado al equipo. El cuadro de diálogo de Solución de problemas del slice requiere una conexión activa con el equipo.
+- AetherSDR debe estar conectado a la radio. El cuadro de diálogo **Slice Troubleshooting** requiere una conexión activa con la radio.
 - Abra el cuadro de diálogo mediante `Help > Slice Troubleshooting...` si aún no está abierto.
 
 ## Pasos
 
 1. Realice el cambio de estado del slice que desea capturar (por ejemplo, reactivar el audio de un slice, reasignar una antena o ajustar un canal DAX).
-2. En el cuadro de diálogo de Solución de problemas del slice, haga clic en **Actualizar instantánea**.
-3. El cuadro de diálogo vuelve a leer todo el estado del slice, panadaptador, transvertor, canal DAX, dispositivo de audio, DSP del cliente, enlace de dispositivo de control (MIDI), punto final de audio, renderizador, RX de audio remoto y conexión del slice del panadaptador.
-4. Revise los resultados actualizados en la pestaña **Resumen de incidencias** o en la pestaña **JSON**.
+2. En el cuadro de diálogo **Slice Troubleshooting**, haga clic en **Refresh Snapshot**.
+3. El cuadro de diálogo vuelve a leer todo el estado de slices, panadapters, transverters, canales DAX, dispositivos de audio, DSP del cliente, enlaces de dispositivos de control (MIDI), puntos de conexión de audio, renderizadores, audio RX remoto y conexiones de slice con el panadapter.
+4. Revise los resultados actualizados en la pestaña **Issue Summary** o en la pestaña **JSON**.
 
 ## Función de cada control
 
-| Control                     | Tipo   | Comportamiento                                                                                                                                                                      |
-|-----------------------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Actualizar instantánea**  | Botón  | Vuelve a leer el estado del slice en la instantánea. Utilícelo tras cualquier cambio de configuración del slice.                                                                     |
-| **Resumen de incidencias** (pestaña) | Pestaña | Muestra una lista con viñetas en lenguaje sencillo de los problemas detectados según la instantánea actual, incluyendo enrutamiento de audio, DSP, estado del dispositivo de control (MIDI), propiedad multi-cliente, enrutamiento RX de audio remoto, estado del punto final de audio, estado del renderizador y estado de conexión del slice del panadaptador. |
-| **JSON** (pestaña)          | Pestaña | Muestra la instantánea JSON completa (versión 3 del esquema) de los slices, canales DAX, dispositivos de audio, DSP del cliente, dispositivos de control, puntos finales de audio, renderizadores, ajustes de banda TX, estado RX de audio remoto y estado de conexión del slice del panadaptador. |
-| **Copiar resumen**          | Botón  | Copia el resumen de incidencias al portapapeles.                                                                                                                                     |
-| **Copiar JSON**             | Botón  | Copia el JSON completo al portapapeles.                                                                                                                                              |
-| **Exportar JSON...**        | Botón  | Guarda el JSON en un archivo.                                                                                                                                                        |
-| **Cerrar**                  | Botón  | Cierra el cuadro de diálogo.                                                                                                                                                         |
+| Control                 | Tipo   | Comportamiento                                                                               |
+|-------------------------|--------|----------------------------------------------------------------------------------------------|
+| **Refresh Snapshot**    | Botón  | Vuelve a leer el estado del slice en la instantánea. Úselo después de cualquier cambio en la configuración del slice. |
+| **Issue Summary** (pestaña) | Pestaña | Muestra una lista con viñetas en lenguaje sencillo de los problemas detectados según la instantánea actual, incluyendo enrutamiento de audio, DSP, estado del dispositivo de control (MIDI), propiedad multi-cliente, enrutamiento de audio RX remoto, estado del punto de conexión de audio, estado del renderizador y estado de la conexión del slice con el panadapter. |
+| **JSON** (pestaña)      | Pestaña | Muestra la instantánea JSON completa (versión 3 del esquema) de slices, canales DAX, dispositivos de audio, DSP del cliente, dispositivos de control, puntos de conexión de audio, renderizadores, configuración de banda TX, estado de audio RX remoto y estado de la conexión del slice con el panadapter. |
+| **Copy Summary**        | Botón  | Copia el resumen de problemas al portapapeles.                                              |
+| **Copy JSON**           | Botón  | Copia el JSON completo al portapapeles.                                                     |
+| **Export JSON...**      | Botón  | Guarda el JSON en un archivo.                                                               |
+| **Close**               | Botón  | Cierra el cuadro de diálogo.                                                                |
 
-## Qué informa el Resumen de incidencias
+## Qué informa el Issue Summary
 
-La pestaña **Resumen de incidencias** incluye las siguientes categorías de información. Cada elemento aparece como una viñeta en lenguaje sencillo en el resumen.
+La pestaña **Issue Summary** incluye las siguientes categorías de información. Cada elemento aparece como una viñeta en lenguaje sencillo en el resumen.
 
-### Estado de audio y hardware a nivel de equipo
+### Estado de audio y hardware a nivel de radio
 
 - Ganancia de auriculares, silencio de auriculares y estado de silencio del altavoz frontal.
 - Configuración del oscilador, estado de bloqueo, referencia externa y estado del TCXO.
 
-### Estado RX de audio remoto
+### Estado del audio RX remoto
 
-El resumen incluye dos viñetas para RX de audio remoto:
+El resumen incluye dos viñetas para el audio RX remoto:
 
-- **RX de audio remoto:** Informa el ID del flujo, si se espera un flujo, si la creación está pendiente, si se ha visto un mensaje de estado, si este cliente posee el flujo y la configuración de compresión en uso.
-- **Nota de ruta RX de audio remoto:** Una nota en lenguaje sencillo sobre el estado de enrutamiento RX de audio remoto, si está disponible.
+- **Remote audio RX:** Informa el ID del flujo, si se espera un flujo, si la creación está pendiente, si se ha visto un mensaje de estado, si este cliente posee el flujo y la configuración de compresión en uso.
+- **Remote audio route note:** Una nota en lenguaje sencillo sobre el estado de enrutamiento del audio RX remoto, si está disponible.
 
 ### Enrutamiento de audio por slice
 
 Para cada slice, el resumen informa:
 
-- Volumen RX del motor, estado de silencio y si el audio RX está en transmisión.
-- **Ruta de flujo del equipo:** Informa el ID del flujo RX de audio remoto, si se espera el flujo, si la creación o eliminación está pendiente, si se ha visto un mensaje de estado y si este cliente posee el flujo.
-- Ruta de entrada TX, selección de micrófono, modo TX DAX y ajustes relacionados.
+- Volumen de RX del motor, estado de silencio y si el audio de RX está en transmisión.
+- **Radio stream route:** Informa el ID del flujo de audio RX remoto, si se espera el flujo, si la creación o eliminación está pendiente, si se ha visto un mensaje de estado y si este cliente posee el flujo.
+- Ruta de entrada TX, selección de micrófono, modo DAX TX y configuraciones relacionadas.
 
-### Estado del punto final de audio
+### Estado del punto de conexión de audio
 
-Para cada punto final de audio, el resumen informa:
+Para cada punto de conexión de audio, el resumen informa:
 
-- Nombre, dirección (INPUT o OUTPUT) y tipo (tipo de punto final).
-- Backend, nombre del dispositivo, frecuencia de muestreo, cantidad de canales, formato de muestra y si el remuestreo está activo.
-- Estado operativo y de ejecución, estado del flujo e información de errores.
-- Estadísticas del búfer (bytes del búfer, bytes pico y cantidad de subejecuciones) si están disponibles.
-- Cualquier nota adicional sobre el punto final.
+- Nombre, dirección (INPUT o OUTPUT) y tipo (tipo de punto de conexión).
+- Backend, nombre del dispositivo, frecuencia de muestreo, cantidad de canales, formato de muestreo y si el remuestreo está activo.
+- Estado operativo y de ejecución, estado del flujo e información de error.
+- Estadísticas del búfer (bytes en búfer, bytes pico y cantidad de subdesbordamientos) si están disponibles.
+- Cualquier nota adicional sobre el punto de conexión.
 
 ### Estado del renderizador
 
-Para cada renderizador en el motor de audio, el resumen informa el nombre del renderizador, un identificador del backend, la frecuencia de muestreo y si el audio está actualmente activo.
+Para cada renderizador en el motor de audio, el resumen informa el nombre del renderizador, un identificador del backend, la frecuencia de muestreo y si el audio está activo actualmente.
 
-### Estado de conexión del slice del panadaptador
+### Estado de la conexión del slice con el panadapter
 
-Para cada panadaptador, el resumen informa:
+Para cada panadapter, el resumen informa:
 
-- El estado de conexión del slice, un resumen legible del estado del enlace, la lista de IDs de slice conectados, la lista de IDs de slice activos y si la conexión requiere atención.
+- El estado de la conexión del slice, un resumen legible del estado del enlace, la lista de IDs de slices conectados, la lista de IDs de slices activos y si la conexión requiere atención.
 
 ### Enlaces del dispositivo de control (MIDI)
 
-El resumen informa cada dispositivo de control y los enlaces MIDI asociados, incluyendo el alcance, los detalles de mapeo y las condiciones de error.
+El resumen informa cada dispositivo de control y los enlaces MIDI asociados, incluyendo el alcance, los detalles de asignación y las condiciones de error.
+
+## Detalles de la instantánea JSON
+
+La instantánea JSON incluye los siguientes parámetros de DSP del cliente para NR2 (reducción de ruido 2):
+
+- `nr2_enabled` – Indica si NR2 está habilitado.
+- `gain_method` – El nombre del método de reducción de ganancia.
+- `gain_method_id` – El ID del método de reducción de ganancia.
+- `npe_method` – El nombre del método de estimación de potencia de ruido.
+- `npe_method_id` – El ID del método de estimación de potencia de ruido.
+- `ae_filter` – Indica si el filtro de eco adaptativo está habilitado.
+- `gain_max` – Valor máximo de reducción de ganancia.
+- `gain_floor` – Valor del piso de ganancia.
+- `gain_smooth` – Factor de suavizado de ganancia.
+- `qspp` – Valor del procesador de potencia cuasi-estacionaria.
+- `legacy_geometry_and_gain_mapping` – Indica si la asignación heredada de geometría y ganancia está habilitada.
 
 ## Indicador de estado
 
-Después de hacer clic en **Copiar resumen**, **Copiar JSON** o **Exportar JSON...**, una etiqueta de estado debajo de los botones muestra el resultado de la operación (por ejemplo, *Copiado al portapapeles*).
+Después de hacer clic en **Copy Summary**, **Copy JSON** o **Export JSON...**, una etiqueta de estado debajo de los botones muestra el resultado de la operación (por ejemplo, *Copied to clipboard*).
 
 ## Consejos
 
-- Después de hacer clic en **Actualizar instantánea**, revise tanto la pestaña **Resumen de incidencias** como la pestaña **JSON** para confirmar que el cambio realizado se refleja antes de compartir la instantánea con el soporte técnico.
-- Si planea exportar o copiar la instantánea para un informe de error, haga siempre clic en **Actualizar instantánea** primero para asegurarse de que los datos estén actualizados.
-- La nota de ruta RX de audio remoto en el Resumen de incidencias es un indicador inicial útil de problemas de propiedad o creación del flujo al solucionar problemas de audio que no llegan al cliente.
-- El estado de conexión del slice del panadaptador y los detalles del punto final de audio pueden ayudar a identificar problemas de conectividad o estado del flujo que podrían no aparecer en otro lugar.
+- Después de hacer clic en **Refresh Snapshot**, revise tanto la pestaña **Issue Summary** como la pestaña **JSON** para confirmar que el cambio realizado se refleje antes de compartir la instantánea con el soporte técnico.
+- Si planea exportar o copiar la instantánea para un informe de error, siempre haga clic primero en **Refresh Snapshot** para asegurarse de que los datos estén actualizados.
+- La nota de enrutamiento de audio RX remoto en el Issue Summary es un primer indicador útil de problemas de propiedad del flujo o de creación al solucionar problemas de audio que no llegan al cliente.
+- El estado de la conexión del slice con el panadapter y los detalles del punto de conexión de audio pueden ayudar a identificar problemas de conectividad o estado del flujo que podrían no aparecer en otro lugar.
 
 ## Relacionados
 
-- [Descripción general de Solución de problemas del slice](overview.md)
-- [Capturar una instantánea del slice para soporte técnico](capture-a-slice-snapshot-for-support.md)
-- [Leer una lista en lenguaje sencillo de problemas sospechosos del slice](read-a-plain-language-list-of-suspected-slice-problems.md)
-- [Copiar la instantánea JSON completa al portapapeles](copy-the-full-json-snapshot-to-the-clipboard.md)
-- [Exportar la instantánea a un archivo para adjuntar a un informe de error](export-the-snapshot-to-a-file-to-attach-to-a-bug-report.md)
+- [Slice Troubleshooting overview](overview.md)
+- [Capture a slice snapshot for support](capture-a-slice-snapshot-for-support.md)
+- [Read a plain-language list of suspected slice problems](read-a-plain-language-list-of-suspected-slice-problems.md)
+- [Copy the full JSON snapshot to the clipboard](copy-the-full-json-snapshot-to-the-clipboard.md)
+- [Export the snapshot to a file to attach to a bug report](export-the-snapshot-to-a-file-to-attach-to-a-bug-report.md)
