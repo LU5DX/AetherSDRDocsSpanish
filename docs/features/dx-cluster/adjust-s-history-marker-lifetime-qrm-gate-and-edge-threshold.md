@@ -1,6 +1,6 @@
-# Ajustar la duración de los marcadores de S-History, compuerta QRM y umbral de borde
+# Ajustar la duración de los marcadores S-History, la puerta QRM y el umbral de borde
 
-Ajuste con precisión cómo se comportan los marcadores de Historial de Señales en el panadapter — cuánto tiempo permanecen, cuán persistentemente debe mantenerse una señal para ser marcada como QRM, y con qué agresividad el borde del marcador se ajusta a la portadora.
+Ajuste con precisión cómo se comportan los marcadores de Historial de Señales en el panadapter: cuánto tiempo permanecen, cuán persistentemente debe mantenerse una señal para ser marcada como QRM y con qué agresividad el borde del marcador se ajusta a la portadora.
 
 ## Antes de comenzar
 
@@ -9,38 +9,38 @@ Ajuste con precisión cómo se comportan los marcadores de Historial de Señales
 
 ## Pasos
 
-1. En **Signal History**, ajuste **Marker Lifetime:** arrastrando el control deslizante. Los marcadores inactivos se eliminan después de esta cantidad de segundos (rango 15–300 seg, predeterminado 60). Haga doble clic izquierdo en el control deslizante para restablecerlo a 60.
+1. En **Signal History**, ajuste **Marker Lifetime:** arrastrando el control deslizante. Los marcadores inactivos se eliminan después de esta cantidad de segundos (rango 15–300 seg, valor predeterminado 60). Haga doble clic izquierdo en el control deslizante para restablecerlo a 60.
 
-2. Ajuste **QRM Gate:** — los segundos que una portadora estrecha o una señal de banda ancha debe persistir antes de que el sistema la clasifique como QRM (rango 3–30 seg, predeterminado 6). Haga doble clic izquierdo en el control deslizante para restablecerlo a 6.
+2. Ajuste **QRM Gate:** — los segundos que una portadora estrecha o una señal de banda ancha debe persistir antes de que el sistema la clasifique como QRM (rango 3–30 seg, valor predeterminado 6). Haga doble clic izquierdo en el control deslizante para restablecerlo a 6.
 
-3. Ajuste **Edge Threshold:** — el nivel en dB por encima del piso de ruido para la caminata de borde de pendiente que refina el borde del lado de la portadora de un marcador. Un valor más bajo se ajusta más estrechamente a la portadora, pero es más sensible al ruido (rango 1.0–10.0 dB, predeterminado 3.0). Haga doble clic izquierdo en el control deslizante para restablecerlo a 3.0.
+3. Ajuste **Edge Threshold:** — el nivel en dB por encima del piso de ruido para la caminata de borde de pendiente que refina el borde del lado de la portadora de un marcador. Un valor más bajo se ajusta más a la portadora, pero es más sensible al ruido (rango 1.0–10.0 dB, valor predeterminado 3.0). Haga doble clic izquierdo en el control deslizante para restablecerlo a 3.0.
 
-4. Opcionalmente, active **Snap to Step:** en la sección Signal History para redondear el clic para sintonizar al tamaño de paso activo del slice más cercano.
+4. Opcionalmente, active **Snap to Step:** en la sección Signal History para redondear el clic para sintonizar al tamaño de paso activo de la slice más cercano.
 
 ## Qué hace cada control
 
-| Control | Etiqueta en el control deslizante | Predeterminado | Rango válido | Clave de configuración | Notas |
+| Control | Etiqueta en el control deslizante | Valor predeterminado | Rango válido | Clave de ajuste | Notas |
 |---|---|---|---|---|---|
 | **Marker Lifetime:** | `15 sec` – `300 sec` | 60 | 15–300 seg | `SHistoryLifetimeS` | Doble clic izquierdo restablece a 60 |
 | **QRM Gate:** | `3 sec` – `30 sec` | 6 | 3–30 seg | `SHistoryQrmGateS` | Doble clic izquierdo restablece a 6 |
 | **Edge Threshold:** | `1.0 dB` – `10.0 dB` | 3.0 | 1.0–10.0 dB | `SHistorySoftEdgeDb` | Doble clic izquierdo restablece a 3.0 |
-| **Snap to Step:** | botón de alternancia | Desactivado | Activado / Desactivado | `SHistorySnapToStep` | La alternancia siempre muestra la etiqueta "Enabled" — el texto no cambia a "Disabled" cuando se desactiva |
+| **Snap to Step:** | botón de alternancia | Deshabilitado | Habilitado / Deshabilitado | `SHistorySnapToStep` | La alternancia siempre muestra la etiqueta "Enabled" independientemente del estado — el botón presionado indica que está habilitado |
 
 ## Consejos
 
 - **Marker Lifetime** controla los marcadores de señales de ancho de banda de voz (dorados por defecto). Los marcadores QRM (rojos por defecto) también siguen esta duración — no tienen un tiempo separado.
-- Para ver los marcadores de Signal History en el panadapter, active **Signals** y/o **QRM** en la fila superior de alternancias en la pestaña Display. Sus claves persistentes son `SHistoryMarkersEnabled` y `SHistoryQrmEnabled`.
-- Activar **Snap to Step** oculta el pequeño desplazamiento de portadora que puede aparecer al hacer clic en un marcador de S-History; la frecuencia de sintonización se ajusta al siguiente múltiplo del tamaño de paso del slice activo.
+- Para ver los marcadores de Signal History en el panadapter, primero active **Signals** y/o **QRM** en la fila superior de alternancia en la pestaña Display. Sus claves persistidas son `SHistoryMarkersEnabled` y `SHistoryQrmEnabled`.
+- Activar **Snap to Step** oculta el pequeño desplazamiento de portadora que puede aparecer al hacer clic en un marcador S-History; la frecuencia de sintonización se ajusta al siguiente múltiplo del tamaño de paso de la slice activa.
 - Hacer doble clic izquierdo en cualquier control deslizante lo restablece a su valor predeterminado, proporcionando una forma rápida de restaurar el comportamiento de fábrica sin arrastrar.
 - El botón de alternancia **Snap to Step** siempre muestra "Enabled" independientemente de su estado. El estado actual se indica por si el botón está visualmente presionado (marcado) o no.
 
 ## Solución de problemas
 
 - **Los marcadores desaparecen demasiado rápido** — Aumente **Marker Lifetime:** a un valor más alto. Haga doble clic izquierdo en el control deslizante para restablecerlo al valor predeterminado de 60 segundos.
-- **Aparecen marcadores QRM en señales débiles que no son realmente interferencia** — Eleve **QRM Gate:** para que el sistema requiera un tiempo de retención más largo antes de clasificar la señal como QRM. Haga doble clic izquierdo en el control deslizante para restablecerlo al valor predeterminado de 6 segundos.
-- **Los bordes de los marcadores oscilan o saltan** — Aumente **Edge Threshold:** ligeramente (p. ej., de 3.0 a 4.0 dB) para reducir la sensibilidad al ruido. Haga doble clic izquierdo en el control deslizante para restablecerlo al valor predeterminado de 3.0 dB.
+- **Aparecen marcadores QRM en señales débiles que no son realmente interferencia** — Aumente **QRM Gate:** para que el sistema requiera un tiempo de retención más largo antes de clasificar la señal como QRM. Haga doble clic izquierdo en el control deslizante para restablecerlo al valor predeterminado de 6 segundos.
+- **Los bordes de los marcadores oscilan o saltan** — Aumente ligeramente **Edge Threshold:** (por ejemplo, de 3.0 a 4.0 dB) para reducir la sensibilidad al ruido. Haga doble clic izquierdo en el control deslizante para restablecerlo al valor predeterminado de 3.0 dB.
 
-## Relacionados
+## Relacionado
 
 - [Toggle Signal History voice markers on the panadapter](toggle-signal-history-voice-markers-on-the-panadapter.md)
 - [Toggle QRM markers to see persistent carriers and interference](toggle-qrm-markers-to-see-persistent-carriers-and-interference.md)

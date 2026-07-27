@@ -1,28 +1,28 @@
-# Seleccionar una fuente de micrófono (MIC, BAL, LINE, ACC, PC)
+# Applet P/CW (Phone/CW)
 
-Seleccione qué entrada física o virtual utiliza el radio como fuente de micrófono para transmisiones de voz. La elección determina de dónde toma el FLEX-8600 su audio de TX: el conector de micrófono del panel frontal, la entrada balanceada, la entrada de línea, el puerto de accesorios o el sistema de audio de la PC.
+El applet Phone/CW proporciona controles de transmisión adaptados al modo. Cuando el slice activo está en un modo de teléfono (USB, LSB, AM, FM), el applet muestra controles de micrófono y procesador. Cuando el slice activo está en modo CW o CWL, cambia automáticamente a controles CW (retardo, velocidad, tono lateral, iámbico, tono).
 
 ## Antes de comenzar
 
-- AetherSDR debe estar conectado a un radio FLEX-8600.
-- La porción activa debe estar en un modo de teléfono (USB, LSB, AM, FM, etc.). El applet Phone/CW muestra automáticamente el subpanel Phone en modos de voz.
+- AetherSDR debe estar conectado a una radio FLEX-8600.
+- El slice activo debe estar en modo de teléfono o modo CW para que aparezcan los controles respectivos.
 
-## Pasos
+## Cómo abrir el applet
 
-1. Haga clic en el botón `P/CW` de la bandeja en la barra lateral derecha para abrir el applet Phone/CW.
-2. Localice el cuadro desplegable **Mic source** en el subpanel Phone.
-3. Haga clic en **Mic source** y seleccione una de las fuentes disponibles: `MIC`, `BAL`, `LINE`, `ACC` o `PC`.
+1. Haga clic en el botón de la bandeja **P/CW** en la barra lateral derecha.
 
-La selección surte efecto inmediatamente en el radio.
+## Subpanel de teléfono
 
-## Qué hace cada control
+El subpanel de teléfono contiene la selección de entrada de micrófono, ganancia, procesamiento y controles de monitoreo.
 
-| Control                  | Descripción                                                                                                                                                                                                                     | Valor predeterminado |
-|--------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------|
-| **Mic source**           | Selecciona la fuente de entrada de micrófono enviada al radio.                                                                                                                                                                  | —                     |
-| **Mic gain**             | Ajusta el nivel de entrada del micrófono. Cuando la fuente es `PC`, o cuando el modo RADE está activo, el valor se almacena del lado del cliente en `PcMicGain` porque el radio no gestiona la ganancia en esas rutas.          | 50                    |
-| **ALC (panel Phone)**    | Muestra la lectura de control automático de nivel desde `MeterModel::swAlcChanged` (pico SSB posterior al ALC de software en dBFS). Se llena de derecha a izquierda: vacío a -20 dBFS, lleno a 0 dBFS. Se reemplazó desde HWALC (tensión RCA) al medidor SW ALC en v26.5.1 (#2552). | — |
-| **ALC (panel CW)**       | Refleja el indicador ALC del panel Phone; ambas lecturas provienen de `MeterModel::swAlcChanged` para lecturas consistentes entre voz y CW. Se agregó en v26.5.1 (#2552) como parte de la división del medidor SW ALC. Usa el modo `HGauge::setFillFromRight`. En v26.5.3 ambos indicadores se inicializan a -20 dBFS inmediatamente para evitar una lectura obsoleta durante el inicio (#2899). | — |
+### Fuente de micrófono
+
+Seleccione qué entrada física o virtual utiliza la radio como fuente de micrófono para transmisiones de voz. La elección determina de dónde toma el FLEX-8600 su audio de TX.
+
+1. Localice el cuadro desplegable **Mic source** en el subpanel de teléfono.
+2. Haga clic en **Mic source** y seleccione una de las fuentes disponibles: `MIC`, `BAL`, `LINE`, `ACC` o `PC`.
+
+La selección surte efecto inmediatamente en la radio.
 
 **Descripciones de las fuentes:**
 
@@ -30,102 +30,117 @@ La selección surte efecto inmediatamente en el radio.
 - **BAL** — Entrada de micrófono balanceada.
 - **LINE** — Entrada de nivel de línea.
 - **ACC** — Entrada de micrófono del puerto de accesorios.
-- **PC** — Sistema de audio de la computadora. El radio no informa el nivel de micrófono para esta fuente; AetherSDR almacena el valor de ganancia localmente en `PcMicGain`.
+- **PC** — Sistema de audio del ordenador. La radio no informa el nivel de micrófono para esta fuente; AetherSDR almacena el valor de ganancia localmente en `PcMicGain`.
 
-## Modo RADE y ganancia de micrófono
+Cuando la radio está siendo modulada por AetherSDR (modulación de host activa), el cuadro desplegable **Mic source** se fuerza únicamente a `PC` y se deshabilita. Una información sobre herramientas explica: "Esta radio es modulada por AetherSDR, por lo que el micrófono del PC es la única entrada. Las otras fuentes son conectores FlexRadio."
 
-Cuando el modo RADE está activo, el control deslizante de **Mic gain** actúa como un control de ganancia RADE del lado del cliente en lugar de enviar un comando de nivel de micrófono al radio. El valor del control deslizante se almacena en `PcMicGain`, la misma configuración utilizada para la fuente `PC`. Mover el control deslizante no sobrescribe la configuración de nivel de micrófono de hardware del radio mientras RADE está activo.
+### Controles de teléfono
 
-El medidor **Level** permanece activo durante la recepción cuando RADE está encendido. Esto permite monitorear el nivel de entrada entre transmisiones sin habilitar `met_in_rx` en el radio.
+| Control            | Descripción                                                                                                                                                                                     | Valor por defecto |
+|--------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
+| **Mic source**     | Selecciona la fuente de entrada de micrófono enviada a la radio.                                                                                                                                | —       |
+| **Mic gain**       | Ajusta el nivel de entrada del micrófono. Cuando la fuente es `PC`, el valor se almacena del lado del cliente en `PcMicGain` porque la radio no gestiona la ganancia en esa ruta.              | 50      |
+| **+ACC**           | Habilita la mezcla de la entrada de micrófono de accesorios junto con la fuente principal.                                                                                                      | —       |
+| **PROC**           | Activa o desactiva el procesador de voz.                                                                                                                                                        | —       |
+| **NOR/DX/DX+**     | Nivel del procesador de tres posiciones: 0 (NOR), 1 (DX), 2 (DX+).                                                                                                                             | 0       |
+| **DAX**            | Habilita DAX como fuente de audio de TX.                                                                                                                                                        | —       |
+| **MON**            | Habilita el monitor de tono lateral de TX para modos de teléfono.                                                                                                                               | —       |
+| **Monitor volume** | Establece el volumen del monitor de banda lateral.                                                                                                                                              | —       |
 
-Cuando se desactiva el modo RADE, el control deslizante vuelve al nivel de micrófono informado por el radio y el indicador **Level** se restablece a −150 dBFS hasta que llegue un nuevo valor de medición.
+### Indicadores de medición (Panel de teléfono)
 
-## Controles CW (v0.9.8+)
+#### Indicador de nivel
 
-Cuando la porción activa está en modo CW, el applet cambia al subpanel CW. En v0.9.8, las cuatro etiquetas de valor CW (Delay, Speed, Sidetone Volume, Pitch) se han convertido en widgets `QLineEdit` con `QIntValidator`. Haga clic en cualquier valor y escriba un número directamente, imitando el comportamiento de SmartSDR.
+Muestra el nivel máximo de entrada del micrófono en dBFS de -40 a +10 dBFS. Los valores superiores a 0 dBFS aparecen en rojo, lo que indica recorte.
 
-### Ingreso de valores CW
+- Suprimido a -150 dBFS cuando la radio está recibiendo y `met_in_rx` está desactivado.
+- Pase el cursor sobre el indicador para ver el nivel máximo exacto en dB con un decimal.
 
-| Control                  | Descripción                                                                                                                   | Valor predeterminado | Rango válido            | Notas                                                                                     |
-|--------------------------|-------------------------------------------------------------------------------------------------------------------------------|----------------------|-------------------------|-------------------------------------------------------------------------------------------|
-| **Delay**                | Retardo de pausa CW en milisegundos. Escriba un valor directamente en el campo de texto o use el control deslizante adyacente. | 500 ms               | 0–2000 ms (paso 10)     | En v0.9.8, `setCwDelay` se corrigió para almacenar en caché el valor inmediatamente para que la emisión del radio no devuelva el control deslizante (#2428). |
-| **Speed**                | Velocidad de tecleo CW en palabras por minuto. Escriba un valor directamente o use el control deslizante.                      | 20 WPM               | 5–100 WPM               | —                                                                                         |
-| **Sidetone volume**      | Volumen de monitorización CW. Escriba un valor directamente o use el control deslizante. Controla tanto el radio (`mon_gain_cw`) como el generador de tono local del lado del cliente de forma sincronizada. | 50 | 0–100 | (v0.9.8, #2429)                                                                          |
-| **Pitch**                | Tono de monitorización y decodificación CW. Escriba un valor (100–6000) o haga clic en los botones **< / >** para avanzar en pasos de 10 Hz. | 600 Hz | 100–6000 Hz (paso 10) | (v0.9.8, #2429)                                                                           |
+#### Indicador de compresión
 
-### Cómo funciona la escritura
+Muestra la cantidad de compresión de voz en dB de -25 a 0 dB, con llenado invertido. El indicador marca 0 dB durante la recepción; está controlado por el estado de TRANSMISIÓN del interbloqueo de la radio y la activación del procesador de voz.
+
+- Pase el cursor sobre el indicador para ver la cantidad exacta de compresión en dB con un decimal. El valor se muestra como un número positivo (por ejemplo, "12.5 dB" para 12.5 dB de compresión).
+
+#### Indicador ALC (Panel de teléfono)
+
+Muestra la lectura del control automático de nivel del medidor ALC de software (pico SSB posterior al ALC de software en dBFS). Se llena de derecha a izquierda: vacío a -20 dBFS, lleno a 0 dBFS. La zona roja (> -3 dBFS) indica ALC excesivo.
+
+- Pase el cursor sobre el indicador para ver el nivel ALC exacto en dBFS con un decimal.
+
+| Indicador         | Rango        | Zona roja | Dirección de llenado | Fuente                                      |
+|-------------------|--------------|-----------|----------------------|---------------------------------------------|
+| **Level**         | -40 a +10 dBFS | > 0 dBFS  | De abajo arriba      | Pico de entrada del micrófono               |
+| **Compression**   | -25 a 0 dB   | —         | De derecha a izquierda | Valor COMPPEAK de la radio (0–25 dB positivo, mostrado como negativo) |
+| **ALC**           | -20 a 0 dBFS | > -3 dBFS | De derecha a izquierda | `MeterModel::swAlcChanged` (pico SSB posterior al ALC de software) |
+
+## Subpanel CW
+
+Cuando el slice activo está en modo CW o CWL, el applet cambia automáticamente al subpanel CW.
+
+### Controles CW
+
+| Control               | Descripción                                                                                                                                              | Valor por defecto | Rango válido           | Notas                                                                                          |
+|-----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|---------|-----------------------|------------------------------------------------------------------------------------------------|
+| **Delay**             | Retardo de ruptura CW en milisegundos. Escriba un valor directamente en el campo de texto o use el deslizador adyacente.                                  | 500 ms  | 0–2000 ms (paso 10)   | El valor se almacena en caché inmediatamente para evitar el rebote del deslizador (#2428).    |
+| **Speed**             | Velocidad de tecleo CW en palabras por minuto. Escriba un valor directamente o use el deslizador.                                                          | 20 WPM  | 5–100 WPM             | —                                                                                              |
+| **Sidetone**          | Activa o desactiva el tono lateral CW. Controla simultáneamente el monitor alimentado por DAX de la radio y el generador de tono lateral del lado del cliente. | —       | Activado / Desactivado | —                                                                                              |
+| **Sidetone volume**   | Volumen del monitor CW. Escriba un valor directamente o use el deslizador. Controla simultáneamente el lado de la radio (`mon_gain_cw`) y el generador de tono lateral del lado del cliente. | 50      | 0–100                 | Un solo deslizador gobierna ambas rutas.                                                        |
+| **L / R pan (CW)**    | Establece la panorámica estéreo para el monitor CW y aplica panorámica de potencia constante al generador de tono lateral local. Haga doble clic para centrar en 50. | 50      | 0–100                 | —                                                                                              |
+| **Breakin**           | Activa o desactiva la ruptura completa (QSK). Con Breakin ACTIVADO, los flancos de la llave activan TX y el retardo de ruptura mantiene el relé. Con Breakin DESACTIVADO, las llaves se ponen en cola y el PTT debe activarse manualmente. | —       | Activado / Desactivado | Respeta completamente el ajuste `break_in` de la radio a partir de la v0.9.7.                 |
+| **Iambic**            | Activa o desactiva el modo de manipulador de paletas iámbico.                                                                                             | —       | Activado / Desactivado | —                                                                                              |
+| **Pitch < / >**       | Tono lateral y tono de descodificación CW. Escriba un valor (100–6000) o haga clic en los botones **<** / **>** para incrementar o decrementar de 10 en 10 Hz. | 600 Hz  | 100–6000 Hz (paso 10) | El tono siempre sigue automáticamente el ajuste `cw_pitch` de la radio.                       |
+
+### Cómo escribir
 
 1. Haga clic en cualquier campo de texto de valor (por ejemplo, el campo **Delay** que muestra "500").
-2. Escriba un nuevo número usando su teclado.
-3. Presione Enter o Tab para confirmar el valor. El control deslizante se actualiza inmediatamente para coincidir.
-4. Si escribe un valor fuera del rango válido, se ajustará al valor válido más cercano cuando presione Enter.
+2. Escriba un nuevo número con su teclado.
+3. Pulse Enter o Tabulador para confirmar el valor. El deslizador se actualiza para coincidir inmediatamente.
+4. Si escribe un valor fuera del rango válido, se ajusta al valor válido más cercano cuando pulsa Enter.
 
-### Comportamiento del tono local (Sidetone)
+### Comportamiento del tono lateral
 
-El interruptor **Sidetone** y el control deslizante **Sidetone volume** controlan tanto la monitorización alimentada por DAX del radio como el generador de tono local de baja latencia (~10 ms de latencia) de forma sincronizada. No hay controles de tono local separados; un único conjunto de controles gobierna ambas rutas.
+El interruptor **Sidetone** y el deslizador **Sidetone volume** controlan simultáneamente el monitor alimentado por DAX de la radio y el generador de tono lateral de baja latencia del lado del cliente (~10 ms de latencia). No hay controles de tono lateral local separados; un solo conjunto de controles gobierna ambas rutas.
 
-| Control                     | Descripción                                                                                                                                                  | Valor predeterminado | Valores válidos | Clave de configuración |
-|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------|-----------------|------------------------|
-| **Sidetone**                | Habilita o deshabilita el tono local CW. Controla tanto la monitorización alimentada por DAX del radio como el generador de tono local del lado del cliente simultáneamente. | —                    | On / Off        | —                      |
-| **Sidetone volume**         | Establece el volumen del tono local tanto para el radio (`mon_gain_cw`) como para el generador del lado del cliente.                                        | —                    | 0–100           | —                      |
-| **L / R pan (CW)**          | Establece la panorámica estéreo para la monitorización CW y aplica panorámica de potencia constante al generador de tono local. Haga doble clic para centrar en 50. | 50                 | 0–100           | —                      |
-| **Pitch < / >**             | Avanza el tono de monitorización y decodificación CW en pasos de 10 Hz, o escriba un valor directamente.                                                     | 600 Hz              | 100–6000 Hz     | —                      |
+En la v26.5.3 (#2899), el tono lateral CW se enruta a la salida de audio seleccionada por el usuario (configurada en Settings > Audio) en lugar de la salida predeterminada.
 
-El tono y la panorámica siempre siguen automáticamente las configuraciones `cw_pitch` y `mon_pan_cw` del radio. No hay un interruptor "Follow" separado ni un control deslizante de anulación manual de tono; esos controles se eliminaron en v0.9.2.1.
+El tono y la panorámica siempre siguen automáticamente los ajustes `cw_pitch` y `mon_pan_cw` de la radio. No hay un interruptor "Follow" separado ni un deslizador de anulación de tono manual.
 
-En v26.5.3 (#2899), el tono local CW ahora se enruta a la salida de audio seleccionada por el usuario en lugar de a la salida predeterminada. Esto significa que el tono se escucha a través del dispositivo que haya configurado en Settings > Audio, no necesariamente el predeterminado del sistema.
+### Indicador ALC (Panel CW)
 
-## Medición: Indicadores ALC (v26.5.1+)
+Aparece un indicador ALC idéntico en el subpanel CW, que lee de la misma fuente `MeterModel::swAlcChanged` que el indicador ALC del panel de teléfono. Esto garantiza lecturas ALC coherentes en toda la operación de voz y CW.
 
-En v26.5.1 (#2552), tanto el panel Phone como el panel CW recibieron indicadores ALC nuevos e idénticos. Estos reemplazan la ruta HWALC anterior (tensión RCA) que producía lecturas sin sentido.
+- Pase el cursor sobre el indicador para ver el nivel ALC exacto en dBFS con un decimal.
 
-| Indicador                    | Rango         | Zona roja   | Dirección de llenado | Fuente                                              |
-|------------------------------|---------------|-------------|----------------------|------------------------------------------------------|
-| **ALC (panel Phone)**        | -20 a 0 dBFS  | > -3 dBFS   | De derecha a izquierda | `MeterModel::swAlcChanged` (pico SSB posterior al ALC de software) |
-| **ALC (panel CW)**           | -20 a 0 dBFS  | > -3 dBFS   | De derecha a izquierda | `MeterModel::swAlcChanged` (fuente idéntica)                       |
+| Indicador       | Rango        | Zona roja | Dirección de llenado | Fuente                                      |
+|-----------------|--------------|-----------|----------------------|---------------------------------------------|
+| **ALC (CW)**    | -20 a 0 dBFS | > -3 dBFS | De derecha a izquierda | `MeterModel::swAlcChanged` (pico SSB posterior al ALC de software) |
 
-En v26.5.3, ambos indicadores ALC se inicializan a -20 dBFS inmediatamente después de su construcción. Esto evita una breve lectura obsoleta durante el inicio mientras llega la primera actualización de medición.
+## Integración del panel CWX
 
-Puntos clave:
-- Ambos indicadores leen de la misma fuente `MeterModel::swAlcChanged`, lo que garantiza lecturas consistentes entre voz y CW.
-- El indicador está vacío a -20 dBFS y se llena hacia la izquierda hasta 0 dBFS.
-- Los valores por debajo de -20 dBFS se fijan en el extremo izquierdo; los valores por encima de 0 dBFS se fijan en el extremo derecho (escala completa).
-- La zona roja (> -3 dBFS) indica ALC excesivo; procure mantener la lectura del indicador por debajo de -3 dBFS para una transmisión limpia.
-
-## Medición: Supresión del indicador Level durante recepción (v26.5.3+)
-
-En v26.5.3 (#2899), la lógica que suprime el indicador **Level** durante la recepción se trasladó a un método dedicado `applyLevelMeterReceiveGate()`. Este método se llama desde las señales de estado RX/TX y cambio de MOX, así como desde `updateMeters()` y `setRadeActive()`:
-
-- Cuando el radio está recibiendo y `met_in_rx` está deshabilitado, el indicador **Level** se establece en -150 dBFS independientemente de la fuente de micrófono (PC o RADE).
-- Anteriormente, la fuente `PC` y el modo RADE tenían una excepción que mantenía el indicador **Level** activo durante la recepción. A partir de v26.5.3, esa excepción se elimina: todas las fuentes de micrófono se suprimen por igual cuando `met_in_rx` está desactivado y el radio no está transmitiendo.
-
-## Medición: Indicador de compresión (v26.5.3+)
-
-En v26.5.3 (#2899), la ranura `updateCompression()` se actualizó para interpretar correctamente el valor `COMPPEAK` del radio. El radio informa la compresión como una cantidad positiva de 0–25 dB. La cara del indicador P/CW está invertida: 0 = sin compresión (sin reducción), -25 = compresión completa (reducción de 25 dB). El indicador ahora mapea el valor de compresión positivo del radio a un valor de indicador negativo:
-
-- `compPeak = 0 dB` → el indicador muestra `0 dB`
-- `compPeak = 25 dB` → el indicador muestra `-25 dB`
-
-Los valores se limitan al rango de 0–25 dB antes de la conversión, por lo que el indicador nunca lee más allá de `-25 dB`.
+Los atajos F1–F12 del panel CWX integrado se activan mediante el modo del slice activo a través de `MainWindow::CwxPanel::setShortcutsEnabled` en lugar de la visibilidad del panel. Los atajos se disparan cuando el slice está en modo CW/CWL independientemente de si el panel CWX está visible (#2582). Estos atajos son mutuamente excluyentes con las asignaciones de teclas F del panel DVK. Las macros CWX también liberan TX automáticamente cuando la cola se vacía (#2450, #2507).
 
 ## Soporte de temas (v26.6.1)
 
-En v26.6.1, el applet Phone/CW obtuvo soporte completo de temas. Los siguientes elementos visuales ahora respetan el tema activo:
+El applet Phone/CW soporta el tema activo. Los siguientes elementos visuales respetan el tema seleccionado:
 
-- **Contenedor del applet** — Usa `theme::setContainer(this, "applet/digi")` para un estilo de fondo consistente.
-- **Controles deslizantes y ranuras** — Todos los controles deslizantes (Mic gain, Processor level, Monitor volume, Delay, Speed, Sidetone volume, CW pan) ahora usan `applyPrimarySliderStyle()` en lugar de una hoja de estilo codificada, lo que permite aplicar los colores del tema.
-- **Colores de etiquetas** — Las etiquetas como "Delay:", "Speed:", y las etiquetas de panorámica "L" y "R" ahora usan `{{color.text.secondary}}` del tema.
-- **Botones de paso** — Los botones **<** y **>** para CW Pitch ahora usan `{{color.background.1}}` para los estados normal y hover, y `{{color.accent}}` para el estado presionado, reemplazando los colores codificados anteriores.
+- **Contenedor del applet** — Utiliza el estilo del tema para un fondo coherente.
+- **Manijas y ranuras de deslizadores** — Todos los deslizadores usan `applyPrimarySliderStyle()` para los colores del tema.
+- **Colores de etiquetas** — Etiquetas como "Delay:", "Speed:", "L" y etiquetas de panorámica "R" usan el color de texto secundario del tema.
+- **Botones de paso** — Los botones **<** y **>** para CW Pitch usan el color de fondo y acento del tema para los estados normal, hover y presionado.
 
-La integración de temas asegura que el applet Phone/CW coincida con el estilo visual del resto de la interfaz de AetherSDR cuando se selecciona un tema.
+## Lecturas al pasar el cursor (v26.7.4)
+
+En la v26.7.4 (#3936), los tres medidores del panel de teléfono (Level, Compression, ALC) y el indicador ALC del panel CW obtuvieron ventanas emergentes de lectura al pasar el cursor. Pase el cursor sobre cualquier indicador para ver el valor numérico exacto:
+
+- **Indicador Level**: Muestra "X.X dB" (un decimal).
+- **Indicador Compression**: Muestra la cantidad de compresión como un valor positivo en dB (por ejemplo, "12.5 dB").
+- **Indicadores ALC (Phone y CW)**: Muestra "X.X dBFS" (un decimal).
 
 ## Consejos
 
-- Cuando use `PC` como fuente, el medidor **Level** aparece inmediatamente cuando AetherSDR se conecta al radio, porque la medición del micrófono de PC se ejecuta del lado del cliente independientemente de la configuración `met_in_rx` del radio. El medidor no se suprime entre transmisiones para fuentes PC.
-- Cuando el modo RADE está activo, el medidor **Level** también se ejecuta del lado del cliente y no se suprime entre transmisiones, independientemente de la configuración `met_in_rx`. Esto coincide con el comportamiento de la fuente `PC`.
-- Para mezclar el puerto de accesorios junto con su fuente principal, habilite el botón de alternancia **+ACC** después de seleccionar su fuente principal.
-- A velocidades CW más altas, la ruta de tono local del lado del cliente (~10 ms de latencia) es más utilizable que la monitorización alimentada por DAX del radio. Debido a que el interruptor **Sidetone** controla ambas rutas juntas, habilitar el tono local siempre activa la ruta de baja latencia automáticamente.
-- Cuando VOX se alterna mediante un atajo de teclado, el panel Phone se actualiza instantáneamente para reflejar el nuevo estado de VOX (v0.9.3).
-- En Windows, la transmisión de tono local CW comienza inmediatamente al conectar (v0.9.3). Si el tono local está habilitado antes de conectar, no se requieren pasos adicionales después de establecer la conexión.
-- El indicador **Compression** lee 0 dB durante la recepción. Esto es intencional: en v0.9.7, el indicador está bloqueado en el estado TRANSMITTING del interbloqueo del radio, por lo que no se muestran lecturas obsoletas de la cadena de TX entre transmisiones. En v26.5.3, el mapeo del valor de compresión se corrigió para usar el rango positivo de 0–25 dB del radio.
-- El botón **Breakin** respeta completamente la configuración `break_in` del radio a partir de v0.9.7. Con **Breakin** activado (QSK), los flancos de la tecla activan TX y el retardo de pausa mantiene el relé.
+- Cuando use `PC` como fuente, el medidor **Level** aparece inmediatamente cuando AetherSDR se conecta a la radio, porque la medición del micrófono del PC se ejecuta del lado del cliente independientemente del ajuste `met_in_rx` de la radio.
+- Para mezclar el puerto de accesorios junto con su fuente principal, active el botón de conmutación **+ACC** después de seleccionar su fuente principal.
+- A velocidades CW más altas, la ruta de tono lateral del lado del cliente (~10 ms de latencia) es más utilizable que el monitor alimentado por DAX de la radio. Debido a que el interruptor **Sidetone** controla ambas rutas juntas, activar el tono lateral siempre activa automáticamente la ruta de baja latencia.
+- El indicador **Compression** marca 0 dB durante la recepción. Esto es intencional: el indicador está controlado por el estado de TRANSMISIÓN del interbloqueo de la radio.
+- El botón **Breakin** respeta completamente el ajuste `break_in` de la radio. Con **Breakin** activado (QSK), los flancos de la llave activan TX y el retardo de ruptura mantiene el relé. Con **Breakin** desactivado, debe activar el PTT manualmente.

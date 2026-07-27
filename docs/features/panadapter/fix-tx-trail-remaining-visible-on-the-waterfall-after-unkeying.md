@@ -1,33 +1,68 @@
-# Solucionar el rastro de TX que permanece visible en el waterfall tras soltar la tecla
+# Applet de Panadapter
 
-Después de transmitir, el waterfall podía continuar mostrando un rastro brillante de TX durante 10–23 segundos después de soltar la tecla. Esta página explica qué causaba el artefacto y confirma que está resuelto en la v0.9.7.
+El applet de Panadapter es un contenedor para una única visualización de panadapter (espectro FFT + waterfall) con una barra de título que ofrece agarre de arrastre, ventana flotante, maximizar y controles de cierre. Un panel opcional de decodificación CW puede aparecer debajo para la decodificación Morse fuera del aire.
 
-## Antes de comenzar
+## Controles
 
-- Se requiere AetherSDR v0.9.7 o posterior. Las versiones anteriores presentan el artefacto del rastro de 10–23 s por diseño.
-- La radio debe estar conectada. La corrección depende de recibir el estado de TRANSMITTING del interlock de la radio a través del protocolo SmartSDR.
+| Control | Tipo | Valor predeterminado | Rango | Clave de configuración | Comportamiento | Notas |
+|---------|------|---------|-------|-------------|----------|-------|
+| Título de slice | indicador | "Slice A" | Slice A..Slice H | *ninguno* | Muestra qué slice está vinculado a este panadapter. | |
+| ⬈ / ↩ (ventana flotante/acoplar) | botón_pulsador | | | *ninguno* | Saca el panadapter a una ventana flotante o lo vuelve a acoplar. Oculto en modo de un solo pan. | La ventana flotante no tiene marco. Arrastre mediante la barra de título de la aplicación, redimensione mediante el agarre de tamaño inferior derecho. En macOS, cada ciclo de flotante/acoplado restablece los recursos de GPU y evita que el espectro se vuelva obsoleto. |
+| □ (maximizar) | botón_pulsador | | | *ninguno* | Maximiza este panadapter en un diseño de varios paneles. Oculto en modo de un solo pan. |
+| × (cerrar) | botón_pulsador | | | *ninguno* | Cierra este panadapter. Oculto en modo de un solo pan. |
+| Espectro / waterfall | asa_arrastre | | | *ninguno* | Haga clic para activar el panadapter; arrastre para sintonizar, desplácese para hacer zoom. | |
+| Etiqueta de estadísticas CW | indicador | | | *ninguno* | Muestra el tono y la velocidad de CW detectados (p. ej., "700 Hz 20 WPM"). | |
+| Sens (sensibilidad del decodificador CW) | deslizador | 30 | 0-100 | CwDecoderSensitivity | Filtra decodificaciones de baja confianza. Los valores más altos son más estrictos. | Mapea 0-100 a un umbral de costo de 1.0-0.1. |
+| 🔒P (Bloquear tono) | botón_de_alternancia | | | *ninguno* | Bloquea el tono del decodificador CW en la frecuencia sintonizada actual. | |
+| 🔒S (Bloquear velocidad) | botón_de_alternancia | | | *ninguno* | Bloquea la velocidad del decodificador CW en las WPM actuales. | |
+| Lo (tono mínimo) | deslizador | 500 | 300-1200 Hz | *ninguno* | Tono mínimo que busca el decodificador CW. Se limita automáticamente a ≤ Hi. | |
+| Hi (tono máximo) | deslizador | 700 | 300-1200 Hz | *ninguno* | Tono máximo que busca el decodificador CW. Se limita automáticamente a ≥ Lo. | |
+| A- (reducir tamaño de fuente) | botón_pulsador | | | *ninguno* | Disminuye el tamaño de fuente del texto decodificado en 1 píxel. | Se conserva entre sesiones. Nuevo en v26.7.4. |
+| A+ (aumentar tamaño de fuente) | botón_pulsador | | | *ninguno* | Aumenta el tamaño de fuente del texto decodificado en 1 píxel. | Se conserva entre sesiones. Nuevo en v26.7.4. |
+| CPY ALL | botón_pulsador | | | *ninguno* | Copia todo el texto decodificado al portapapeles. | |
+| CPY VIS | botón_pulsador | | | *ninguno* | Copia solo el texto actualmente visible en el área de desplazamiento. | |
+| CLR | botón_pulsador | | | *ninguno* | Borra el búfer de decodificación CW. | |
+| ✕ (cerrar CW) | botón_pulsador | | | *ninguno* | Oculta el panel de decodificación CW por completo. | |
+| Texto de decodificación CW | campo_de_texto | | | *ninguno* | Visualización continua de solo lectura del texto CW decodificado. Coloreado por confianza: verde (<0.15), amarillo (<0.35), naranja (<0.60), rojo (≥0.60). | El tamaño de fuente se puede ajustar mediante los controles A+/A-. |
 
-## Pasos
+## Controles del Panel de Decodificación CW
 
-El artefacto se corrige automáticamente en la v0.9.7. No se requiere ninguna acción del usuario.
+El panel de decodificación CW aparece en la parte inferior del panadapter cuando el modo CW está activo. Contiene:
 
-Cuando transmite, el waterfall se congela tan pronto como el interlock de la radio reporta TRANSMITTING. Cuando suelta la tecla, el waterfall se descongela tan pronto como el interlock de la radio reporta que el estado TRANSMITTING se ha despejado. La congelación y descongelación ahora siguen el estado real del interlock de la radio en lugar de un flanco local del software, que era lo que causaba el artefacto del rastro en versiones anteriores.
+- **Asa de redimensionamiento por arrastre**: Una tira delgada de 4 píxeles a lo largo del borde superior del panel. Arrastre hacia arriba o hacia abajo para redimensionar la altura del panel y revelar más historial de texto decodificado. La altura del panel se conserva entre sesiones (rango: 60-600 píxeles).
+- **Barra de estadísticas**: Muestra el tono de CW (Hz) y la velocidad (WPM) detectados.
+- **Deslizador de sensibilidad**: Ajusta la sensibilidad del decodificador (0-100).
+- **Alternancias de bloqueo de tono/velocidad**: Bloquea los valores actuales de tono o velocidad.
+- **Deslizadores de rango de tono**: Establecen el rango de búsqueda de tono mínimo y máximo (300-1200 Hz).
+- **Controles de tamaño de fuente**: Los botones A- y A+ ajustan el tamaño de fuente del texto decodificado (8-32 píxeles). Los cambios se conservan y restauran en el próximo inicio.
+- **Botones de copia**: CPY ALL copia todo el texto decodificado; CPY VIS copia solo el texto visible.
+- **Botón CLR**: Borra el búfer de decodificación.
+- **Botón de cierre (✕)**: Cierra el panel de decodificación CW.
 
-Si está ejecutando la v0.9.7 y aún ve un rastro persistente después de soltar la tecla, siga los pasos de solución de problemas a continuación.
+## Comportamiento de Congelación del Waterfall
 
-## Consejos
+El waterfall se congela automáticamente cuando la radio entra en estado TRANSMITTING basado en el sistema de interbloqueo de la radio. Se descongela cuando el estado TRANSMITTING se despeja. Este comportamiento sigue el estado real del interbloqueo de hardware de la radio en lugar de un borde de software local, eliminando el artefacto de estela de TX de 10-23 segundos que podía aparecer después de desactivar la transmisión en versiones anteriores.
 
-- En una sesión multioperador (multiFLEX), cualquier cliente conectado que transmita provocará la congelación del waterfall en su panadapter. Esto es un comportamiento esperado.
-- Al reconectar la radio, los valores deseados de FPS del panadapter y duración de línea del waterfall se reafirman para evitar una caída silenciosa al valor predeterminado de 10 Hz de la radio.
+- En una sesión multiFLEX, cualquier cliente conectado que esté transmitiendo activa la congelación del waterfall en su panadapter.
+- Al reconectar la radio, los FPS deseados del panadapter y la duración de la línea del waterfall se reafirman automáticamente para evitar que caigan al valor predeterminado de 10 Hz de la radio.
 
-## Solución de problemas
+## Inicialización del Panadapter Secundario
 
-- **El rastro aún es visible después de soltar la tecla en la v0.9.7** — Confirme que el firmware de la radio es 4.1.5. Si el firmware es anterior, es posible que el estado TRANSMITTING del interlock no se reporte correctamente a través del protocolo, impidiendo que la congelación/descongelación se active en el momento adecuado.
-- **El waterfall permanece congelado después de soltar la tecla** — El estado del interlock de la radio no se ha despejado. Verifique que nada más (un pedal, VOX u otro cliente) esté manteniendo la radio en estado TRANSMITTING. Consulte `Settings > multiFLEX...` para revisar los clientes conectados.
-- **El artefacto solo aparece en un panadapter emergido** — En macOS, un panadapter emergido puede desarrollar problemas de superficie de GPU después de ciclos de flotación/acoplamiento. Consulte [Fix a static/stale spectrum in a popped-out panadapter on macOS](fix-a-static-stale-spectrum-in-a-popped-out-panadapter-on-macos.md).
+Los panadapters secundarios (Slices B-H) ahora tienen su rango de dBm preparado al reconectar la radio. Esto asegura que el ajuste automático del piso de ruido comience desde la línea base correcta en lugar del rango predeterminado [-50, +50] que podía causar una visualización plana del espectro después de la reconexión.
 
-## Relacionado
+## Indicadores
 
-- [Panadapter overview](overview.md)
-- [Fix a static/stale spectrum in a popped-out panadapter on macOS](fix-a-static-stale-spectrum-in-a-popped-out-panadapter-on-macos.md)
-- [Pop a panadapter out into its own window](pop-a-panadapter-out-into-its-own-window.md)
+| Etiqueta | Estados posibles | Significado |
+|-------|----------------|---------|
+| Estadísticas CW | `<hz> Hz <wpm> WPM` | Tono y velocidad detectados por el decodificador ggmorse |
+| Sugerencia CW | (requiere audio de PC) | Recordatorio de que el decodificador CW necesita enrutamiento de audio de PC para funcionar |
+
+## Detalles de Comportamiento
+
+### Ventana Flotante/Acoplar
+Cuando está acoplado, al hacer clic en ⬈ se saca el panadapter a una ventana flotante. Cuando está flotando, al hacer clic en ↩ se vuelve a acoplar. El botón de ventana flotante está oculto en modo de un solo pan. Las ventanas flotantes no tienen marco y pueden arrastrarse mediante la barra de título y redimensionarse mediante el agarre de tamaño inferior derecho. En macOS, cada ciclo de flotante/acoplado restablece los recursos de GPU para mantener el espectro activo. El estado guardado de la ventana flotante no se restaura cuando se añaden panadapters posteriores, evitando que aparezcan ventanas flotantes en blanco.
+
+### Dimensionamiento y Diseño
+- Las barras deslizadoras utilizan un `GuardedSlider` para evitar bucles de señal durante cambios programáticos.
+- La altura del panel de decodificación CW se puede ajustar entre 60 y 600 píxeles.
+- El tamaño de fuente del texto decodificado varía de 8 a 32 píxeles, ajustable en incrementos de 1 píxel.
