@@ -1,106 +1,32 @@
-# Configurar acciones de pulsación simple y doble para el botón PUSH
-
-Configure qué sucede al pulsar o hacer doble clic en la rueda (botón PUSH) en el diálogo AetherControl. Esto le permite cambiar rápidamente el paso de frecuencia, cambiar de banda, alternar funciones o ejecutar macros CWX sin necesidad de usar el ratón.
-
-## Antes de comenzar
-
-- Abra el diálogo AetherControl: `Settings > AetherControl...`
-
-## Pasos
-
-1. Localice el cuadro combinado **Push (action)**. Esto define la acción de pulsación simple.
-2. Haga clic en el cuadro combinado y seleccione la acción deseada de la lista.
-3. Localice el cuadro combinado **Double-tap (action)** justo debajo. Esto define la acción de doble pulsación.
-4. Haga clic en el cuadro combinado y seleccione la acción deseada de la lista.
-5. Cierre el diálogo. Los cambios se guardan automáticamente.
-
-## Función de cada control
-
-| Control | Comportamiento | Clave de configuración |
-|---|---|---|
-| Cuadro combinado **Push (action)** | Asigna una acción a una pulsación simple de la rueda. | `FlexControlButtonAction_*` |
-| Cuadro combinado **Double-tap (action)** | Asigna una acción a una doble pulsación de la rueda. | (almacenado junto con la pulsación simple en la misma estructura de configuración) |
-
-Las acciones disponibles para ambos cuadros combinados incluyen:
-
-| ID | Etiqueta |
-|---|---|
-| `None` | None |
-| `WheelFrequency` | Tune Slice |
-| `BandZoom` | Band Zoom |
-| `SegmentZoom` | Segment Zoom |
-| `WheelRit` | RIT (Receive Incremental Tuning) |
-| `WheelXit` | XIT (Transmit Incremental Tuning) |
-| `WheelVolume` | Master Volume |
-| `WheelSliceAudio` | Slice Audio Volume |
-| `WheelHeadphoneVolume` | Headphone Volume |
-| `WheelAgcT` | AGCT (Automatic Gain Control Threshold) |
-| `WheelApf` | APF (Audio Peaking Filter) |
-| `ClearRit` | Clear RIT |
-| `ClearXit` | Clear XIT |
-| `ToggleApf` | Toggle APF |
-| `NextSlice` | Change Active Slice |
-| `SplitActiveSlice` | Split Active Slice |
-| `ToggleMox` | MOX |
-| `WheelPower` | RF Power |
-| `WheelCwSpeed` | CW Speed |
-| `CwxF1` hasta `CwxF12` | CWX Macro 1 al 12 |
-| `StepUp` | Step Up |
-| `StepDown` | Step Down |
-| `ToggleTune` | Toggle Tune |
-| `ToggleMute` | Toggle Mute |
-| `ToggleLock` | Toggle Lock |
-| `PrevSlice` | Previous Slice |
-| `ToggleAgc` | Toggle AGC |
-| `VolumeUp` | Slice AF Up |
-| `VolumeDown` | Slice AF Down |
-
-### Nuevo en v26.6.3
-
-- **Slice Audio Volume** (`WheelSliceAudio`): Ajusta el volumen de audio del slice activo de forma independiente al volumen maestro. Esta acción se agregó a la lista de acciones disponibles en v26.6.3.
-
-## Consejos
-
-- Utilice una acción de rueda (Tune Slice, Master Volume, etc.) para pulsación simple y una acción instantánea (Step Up, Band Zoom, etc.) para doble pulsación para un comportamiento complementario.
-- El tiempo de guardia de doble pulsación es de 230 ms. Pulse dos veces dentro de esa ventana para activar la acción de doble pulsación.
-- Haga doble clic en la rueda virtual para capturar o liberar la sintonía circular usando el ratón o el trackpad. Presione Escape como liberación alternativa. La etiqueta de sugerencia de captura en la parte inferior del diálogo ahora muestra "Double-click the knob to capture circular tuning."
-
-## Relacionado
-
-- Configure single- and double-tap actions for the PUSH button
-- [Configure the AetherControl / FlexControl hardware controller](configure-the-aethercontrol-flexcontrol-hardware-controller.md)
-
----
-
 # Configurar el controlador de hardware AetherControl / FlexControl
 
-Configure el controlador rotatorio virtual o físico FlexControl en AetherSDR. El diálogo AetherControl proporciona una rueda de sintonía virtual con sintonía circular mediante ratón/táctil, mapeo de acciones del botón PUSH, cinco botones auxiliares con acciones de pulsación simple y doble, modo compacto y animación de giro externo en cambios de frecuencia.
+Configure el controlador rotatorio FlexControl virtual o físico en AetherSDR. El diálogo AetherControl proporciona una rueda de sintonización virtual con sintonización circular mediante mouse/táctil, mapeo de acciones de botón pulsador, cinco botones auxiliares con acciones de toque simple y doble toque, modo compacto, animación de giro externa en cambios de frecuencia y reconexión automática para el dispositivo físico.
 
 ## Antes de comenzar
 
 - Abra el diálogo AetherControl: `Settings > AetherControl...`
-- Conecte un dispositivo FlexControl físico mediante USB (opcional). Cuando esté conectado, el diálogo mostrará el nombre del puerto y el estado de la conexión.
+- Conecte un dispositivo FlexControl físico mediante USB (opcional). Cuando está conectado, el diálogo muestra el nombre del puerto y el estado de la conexión.
 
 ## Configurar la rueda virtual
 
-1. **Wheel**: Gire la rueda virtual con el ratón o táctil para sintonizar el slice activo. La frecuencia y el modo aparecen en la cara de la rueda.
-2. **Tightness**: Ajuste el control deslizante **Wheel Tightness** (0–100). 0 = tenso (parada rápida), 100 = suelto (desplazamiento largo). Esto afecta solo a la rueda virtual, no a un FlexControl físico.
+1. **Wheel**: Gire la rueda virtual con el mouse o táctil para sintonizar el slice activo. La frecuencia y el modo aparecen en la cara de la rueda.
+2. **Tightness**: Ajuste el control deslizante **Wheel Tightness** (0–100). 0 = firme (parada rápida), 100 = suelto (deslizamiento largo). Esto afecta solo a la rueda virtual, no a un FlexControl físico.
 3. **Mouse Sensitivity**: Ajuste el control deslizante **Mouse Sensitivity** (0–100). El punto medio (50) produce una escala de 1.0x. Los valores más altos hacen que movimientos pequeños del puntero giren más la rueda. Afecta solo a la rueda virtual.
-4. **Reverse**: Haga clic en **Reverse** para invertir la dirección de sintonía de la rueda.
+4. **Reverse**: Haga clic en **Reverse** para invertir la dirección de sintonización de la rueda.
 
-## Configurar acciones del botón PUSH
+## Configurar acciones del botón pulsador
 
-1. **Push (action)**: Seleccione una acción del cuadro combinado para la pulsación simple de la rueda.
-2. **Double-tap (action)**: Seleccione una acción del cuadro combinado para la doble pulsación de la rueda.
+1. **Push (action)**: Seleccione una acción del cuadro combinado para el toque simple de la rueda.
+2. **Double-tap (action)**: Seleccione una acción del cuadro combinado para el doble toque de la rueda.
 
-Consulte Configure single- and double-tap actions for the PUSH button para obtener la lista completa de acciones disponibles.
+Consulte Configurar acciones de toque simple y doble toque para el botón PUSH para ver la lista completa de acciones disponibles.
 
 ## Configurar botones auxiliares
 
 1. Haga clic en un **Aux button** (1–5) para seleccionarlo. El botón muestra un indicador de punto cuando está seleccionado.
 2. Para el botón auxiliar seleccionado, configure:
-   - **Aux single-tap combo**: Asigna una acción a la pulsación simple del botón auxiliar seleccionado.
-   - **Aux double-tap combo**: Asigna una acción a la doble pulsación del botón auxiliar seleccionado.
+   - **Aux single-tap combo**: Asigna una acción al toque simple del botón auxiliar seleccionado.
+   - **Aux double-tap combo**: Asigna una acción al doble toque del botón auxiliar seleccionado.
 3. Repita para cada botón auxiliar según sea necesario.
 
 ## Gestionar el dispositivo físico
@@ -109,46 +35,132 @@ Consulte Configure single- and double-tap actions for the PUSH button para obten
 2. Haga clic en **Detect** para buscar un FlexControl físico conectado.
 3. Haga clic en **Close** para desconectar el dispositivo físico.
 
+### Reconexión automática
+
+El dispositivo FlexControl físico ahora se reconecta automáticamente cuando la conexión USB se pierde y se restablece:
+
+- Cuando el dispositivo se desconecta (cable USB extraído, dispositivo desenchufado o error de puerto), AetherSDR reintenta la conexión cada 2 segundos.
+- Si el dispositivo sigue ausente, el intervalo de reintento aumenta de forma progresiva, duplicándose en cada intento hasta un máximo de 30 segundos.
+- En cada reintento, AetherSDR vuelve a detectar el puerto en lugar de reutilizar el nombre anterior, de modo que una reenumeración USB que asigne un nuevo puerto COM aún se reconecte correctamente.
+- Cuando el dispositivo regresa, la conexión se restablece automáticamente; no se necesita ninguna acción manual.
+- Si cierra la conexión manualmente con **Close**, los reintentos se detienen.
+
 ## Modo compacto
 
-1. Haga clic en **Compact** para alternar el modo compacto. Cuando está habilitado, los botones auxiliares se ocultan y solo permanecen visibles la rueda y la visualización de frecuencia.
+1. Haga clic en **Compact** para alternar el modo compacto. Cuando está habilitado, los botones auxiliares se ocultan y solo permanecen visibles la rueda y la pantalla de frecuencia.
 2. El diálogo se redimensiona automáticamente para ajustarse al contenido. En pantallas cortas o con escala DPI, aparece una barra de desplazamiento para mantener accesible el controlador completo.
 3. Haga clic en **Compact** nuevamente para volver a la vista completa.
 
 ## Giro externo
 
-1. Haga clic en **External Spin** para habilitar la sintonía de rueda con giro externo. Cuando está habilitado, arrastrar sobre el panadapter activa gestos de sintonía de rueda giratoria.
+1. Haga clic en **External Spin** para habilitar la sintonización de rueda con giro externo. Cuando está habilitado, arrastrar sobre el panadapter activa gestos de sintonización con rueda giratoria.
 
-## Función de cada control
+## Qué hace cada control
 
 | Control | Comportamiento | Clave de configuración |
 |---|---|---|
-| Indicador **Wheel** | Rueda de sintonía virtual con indicación de frecuencia/modo. Gírela con el ratón o táctil. | None |
-| Indicador **Physical** | Muestra el estado de conexión del FlexControl físico y el nombre del puerto. Los botones Detect/Close gestionan el dispositivo. | None |
-| Alternador **Compact** | Alterna el modo compacto: oculta los botones auxiliares, muestra solo la rueda y la frecuencia. | None |
-| Alternador **External Spin** | Habilita la sintonía de rueda con giro externo desde arrastres en el panadapter. | None |
-| Alternador **Reverse** | Invierte la dirección de sintonía de la rueda. | None |
-| Combinado **Push (action)** | Asigna acción a la pulsación simple de la rueda. | `FlexControlButtonAction_*` |
-| Combinado **Double-tap (action)** | Asigna acción a la doble pulsación de la rueda. | (almacenado junto con la pulsación simple) |
-| Control deslizante **Wheel Tightness** | Ajusta el arrastre de desplazamiento de la rueda virtual (0–100). 0 = tenso, 100 = suelto. | `FlexControlVirtualWheel` (JSON anidado, campo looseness) |
-| Control deslizante **Mouse Sensitivity** | Ajusta la escala de movimiento del puntero a la rueda (0–100). 50 = 1.0x. | `FlexControlVirtualWheel` (JSON anidado, campo sensitivity) |
-| **Aux buttons** (1–5) | Cinco botones auxiliares configurables con indicador de punto para la selección activa. | None |
-| Combinado **Aux single-tap combo** | Asigna acción a la pulsación simple del botón auxiliar seleccionado. | None |
-| Combinado **Aux double-tap combo** | Asigna acción a la doble pulsación del botón auxiliar seleccionado. | None |
+| Indicador **Wheel** | Rueda de sintonización virtual con lectura de frecuencia/modo. Gire con mouse o táctil. | Ninguna |
+| Indicador **Physical** | Muestra el estado de conexión del FlexControl físico y el nombre del puerto. Los botones Detect/Close gestionan el dispositivo. | Ninguna |
+| Alternador **Compact** | Alterna el modo compacto: oculta los botones auxiliares, muestra solo la rueda y la frecuencia. | Ninguna |
+| Alternador **External Spin** | Habilita la sintonización de rueda con giro externo desde arrastres en el panadapter. | Ninguna |
+| Alternador **Reverse** | Invierte la dirección de sintonización de la rueda. | Ninguna |
+| Cuadro combinado **Push (action)** | Asigna una acción al toque simple de la rueda. | `FlexControlButtonAction_*` |
+| Cuadro combinado **Double-tap (action)** | Asigna una acción al doble toque de la rueda. | (almacenado junto con el toque simple) |
+| Control deslizante **Wheel Tightness** | Ajusta el arrastre de deslizamiento de la rueda virtual (0–100). 0 = firme, 100 = suelto. | `FlexControlVirtualWheel` (JSON anidado, campo de soltura) |
+| Control deslizante **Mouse Sensitivity** | Ajusta la escala de movimiento puntero-a-rueda (0–100). 50 = 1.0x. | `FlexControlVirtualWheel` (JSON anidado, campo de sensibilidad) |
+| **Aux buttons** (1–5) | Cinco botones auxiliares configurables con indicador de punto para la selección activa. | Ninguna |
+| **Aux single-tap combo** | Asigna una acción al toque simple del botón auxiliar seleccionado. | Ninguna |
+| **Aux double-tap combo** | Asigna una acción al doble toque del botón auxiliar seleccionado. | Ninguna |
 
 ## Indicadores
 
 | Indicador | Significado |
 |---|---|
-| Indicación Slice / Frecuencia / Modo | Muestra qué slice está vinculado, su frecuencia actual y modo. |
+| Lectura de Slice / Frecuencia / Modo | Muestra qué slice está vinculado, su frecuencia actual y su modo. |
+| Estado físico | Muestra el estado de conexión y el nombre del puerto del dispositivo FlexControl físico. |
 
 ## Consejos
 
-- La rueda virtual admite sintonía circular con ratón/táctil: haga doble clic en la rueda para capturarla, luego gire su dedo o ratón en un movimiento circular. Presione Escape para liberar.
-- **Wheel Tightness** y **Mouse Sensitivity** afectan principalmente a los trackpads y no afectan a un dispositivo FlexControl físico.
+- La rueda virtual admite sintonización circular con mouse/táctil: haga doble clic en la rueda para capturarla y luego gire el dedo o el mouse en un movimiento circular. Presione Escape para soltar.
+- **Wheel Tightness** y **Mouse Sensitivity** afectan principalmente a los paneles táctiles y no afectan a un dispositivo FlexControl físico.
 - En modo compacto, el diálogo se redimensiona a un tamaño mínimo. Si el contenido supera la altura disponible de la pantalla, el diálogo se desplaza verticalmente.
 - Los cambios se guardan automáticamente al cerrar el diálogo.
+- Si el FlexControl físico se desconecta y se reconecta, AetherSDR restablece la conexión automáticamente en unos pocos segundos.
 
 ## Relacionado
 
-- Configure single- and double-tap actions for the PUSH button
+- Configurar acciones de toque simple y doble toque para el botón PUSH
+
+---
+
+# Configurar acciones de toque simple y doble toque para el botón PUSH
+
+Configure qué sucede al tocar o tocar dos veces la rueda (botón PUSH) en el diálogo AetherControl. Esto le permite cambiar rápidamente el paso de frecuencia, cambiar de banda, alternar funciones o ejecutar macros CWX sin tener que usar el mouse.
+
+## Antes de comenzar
+
+- Abra el diálogo AetherControl: `Settings > AetherControl...`
+
+## Pasos
+
+1. Localice el cuadro combinado **Push (action)**. Esto establece la acción de toque simple.
+2. Haga clic en el cuadro combinado y seleccione la acción deseada de la lista.
+3. Localice el cuadro combinado **Double-tap (action)** directamente debajo. Esto establece la acción de doble toque.
+4. Haga clic en el cuadro combinado y seleccione la acción deseada de la lista.
+5. Cierre el diálogo. Los cambios se guardan automáticamente.
+
+## Qué hace cada control
+
+| Control | Comportamiento | Clave de configuración |
+|---|---|---|
+| Cuadro combinado **Push (action)** | Asigna una acción al toque simple (pulsación) de la rueda. | `FlexControlButtonAction_*` |
+| Cuadro combinado **Double-tap (action)** | Asigna una acción al doble toque de la rueda. | (almacenado junto con el toque simple en la misma estructura de configuración) |
+
+Las acciones disponibles para ambos cuadros combinados incluyen:
+
+| ID | Etiqueta |
+|---|---|
+| `None` | Ninguna |
+| `WheelFrequency` | Sintonizar Slice |
+| `BandZoom` | Zoom de Banda |
+| `SegmentZoom` | Zoom de Segmento |
+| `WheelRit` | RIT (Sintonización Incremental de Recepción) |
+| `WheelXit` | XIT (Sintonización Incremental de Transmisión) |
+| `WheelVolume` | Volumen Maestro |
+| `WheelSliceAudio` | Volumen de Audio del Slice |
+| `WheelHeadphoneVolume` | Volumen de Auriculares |
+| `WheelAgcT` | AGCT (Umbral de Control Automático de Ganancia) |
+| `WheelApf` | APF (Filtro de Enfoque de Audio) |
+| `ClearRit` | Borrar RIT |
+| `ClearXit` | Borrar XIT |
+| `ToggleApf` | Alternar APF |
+| `NextSlice` | Cambiar Slice Activo |
+| `SplitActiveSlice` | Dividir Slice Activo |
+| `ToggleMox` | MOX |
+| `WheelPower` | Potencia de RF |
+| `WheelCwSpeed` | Velocidad CW |
+| `CwxF1` a `CwxF12` | Macro CWX 1 a 12 |
+| `StepUp` | Paso Arriba |
+| `StepDown` | Paso Abajo |
+| `ToggleTune` | Alternar Sintonía |
+| `ToggleMute` | Alternar Silencio |
+| `ToggleLock` | Alternar Bloqueo |
+| `PrevSlice` | Slice Anterior |
+| `ToggleAgc` | Alternar AGC |
+| `VolumeUp` | AF del Slice Arriba |
+| `VolumeDown` | AF del Slice Abajo |
+
+### Nuevo en v26.6.3
+
+- **Slice Audio Volume** (`WheelSliceAudio`): Ajusta el volumen de audio del slice activo de forma independiente del volumen maestro. Esta acción se agregó a la lista de acciones disponibles en v26.6.3.
+
+## Consejos
+
+- Use una acción de rueda (Sintonizar Slice, Volumen Maestro, etc.) para el toque simple y una acción de un solo disparo (Paso Arriba, Zoom de Banda, etc.) para el doble toque para obtener un comportamiento complementario.
+- El tiempo de guardado del doble toque es de 230 ms. Toque dos veces dentro de esa ventana para activar la acción de doble toque.
+- Haga doble clic en la rueda virtual para capturar o liberar la sintonización circular con el mouse o el panel táctil. Presione Escape como método alternativo para liberar. La etiqueta de sugerencia de captura en la parte inferior del diálogo ahora dice "Double-click the knob to capture circular tuning."
+
+## Relacionado
+
+- [Mapear acciones de botón pulsador y doble toque a la rueda](map-push-button-and-double-tap-actions-to-the-wheel.md)
+- [Configurar el controlador de hardware AetherControl / FlexControl](configure-the-aethercontrol-flexcontrol-hardware-controller.md)

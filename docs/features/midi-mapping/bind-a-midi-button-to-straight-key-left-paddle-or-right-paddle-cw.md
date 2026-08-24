@@ -1,70 +1,110 @@
-# Vincular un botón MIDI a la llave directa, la paleta izquierda o la paleta derecha de CW
+# Mapeo de controlador MIDI
 
-Use esta página para asignar un botón físico de su controlador MIDI a las entradas de llave directa, paleta izquierda (dit) o paleta derecha (dah) de CW de su FLEX-8600. Una vez vinculado, al presionar ese botón se activa la acción de manipulación correspondiente como un evento momentáneo (gate).
+Use esta página para asignar botones, perillas y otros controles de su controlador MIDI a funciones de radio en su FLEX-8600.
 
 ## Antes de comenzar
 
 - Su controlador MIDI está conectado a la computadora y es reconocido por el sistema operativo.
 - AetherSDR fue compilado con soporte MIDI (`HAVE_MIDI`).
-- El diálogo de Mapeo MIDI no está ya en modo Aprendizaje de una sesión anterior.
+- El diálogo de Mapeo MIDI no está ya en modo Learn de una sesión anterior.
 
-## Pasos
+## Configurar un controlador MIDI
 
 1. Abra `Settings > MIDI Mapping...`.
 2. En el cuadro combinado **Port:**, seleccione su controlador MIDI de la lista. Si no aparece, haga clic en **Refresh**.
-3. Haga clic en **Connect**. El indicador de estado cambia para mostrar que el puerto está abierto.
-4. En el cuadro combinado **Category**, seleccione `Phone/CW`.
-5. En el cuadro combinado **Parameter**, seleccione una de las siguientes opciones:
-   - `Trigger straight key` — envía una pulsación de llave directa
+3. Haga clic en **Connect**. El indicador de estado cambia a `Opened`.
+4. (Opcional) Marque **Auto-connect on startup** para reabrir el mismo puerto la próxima vez que AetherSDR se inicie.
+
+> El diálogo recuerda su tamaño y posición entre sesiones.
+
+## Crear una asignación con modo Learn
+
+1. En el cuadro combinado **Category**, seleccione una categoría para reducir la lista de parámetros.
+2. En el cuadro combinado **Parameter**, seleccione el parámetro de destino.
+3. Haga clic en **Learn**. La etiqueta del botón cambia a `Cancel Learn`.
+4. Mueva el control (botón, perilla o deslizador) en su controlador MIDI que desea asignar. AetherSDR detecta el mensaje MIDI y completa la asignación automáticamente.
+5. Confirme que la nueva fila aparece en la **tabla de asignaciones**, mostrando el nombre del parámetro, la fuente MIDI y el canal.
+6. Repita para cada asignación adicional.
+
+## Crear o editar una asignación manualmente
+
+Si prefiere no usar el modo Learn, o necesita corregir una asignación existente:
+
+1. Haga clic en **Manual…** para escribir el canal de una asignación (1–16), tipo de mensaje (Note, Control Change, Program Change, Pitch Bend) y número de mensaje.
+   - El mismo editor está disponible por fila: haga clic en el botón **✎ (edit binding)** en la fila que desea corregir.
+2. Cambie los valores y confirme para aplicar la asignación.
+
+## Editar, invertir o hacer una asignación relativa
+
+- **Invert** — Marque esta casilla para invertir la dirección del control en esa fila.
+- **Relative** — Marque esta casilla para tratar el control como un codificador rotatorio continuo.
+- **✎ (edit binding)** — Abre el mismo editor manual descrito anteriormente, precargado con los valores actuales de la fila, para que pueda corregir canal, tipo de mensaje o número.
+- **× (delete row)** — Elimina esa asignación.
+- **Clear All** — Elimina todas las asignaciones.
+
+## Administrar perfiles
+
+1. Para guardar las asignaciones actuales como un perfil, haga clic en **Save** y asígnele un nombre.
+2. Para aplicar un perfil guardado previamente, selecciónelo en el cuadro combinado **Profile:** y haga clic en **Load**.
+3. Para importar asignaciones desde un archivo:
+   - Haga clic en **Import...** y seleccione un XML de perfil de AetherSDR o un archivo `.map` de SmartSDR.
+   - AetherSDR informa cuántas asignaciones fueron importadas. Haga clic en **Load** para aplicarlas.
+4. Para escribir las asignaciones actuales en un archivo, haga clic en **Export...** y elija una ubicación. La exportación se guarda como un archivo XML de perfil de AetherSDR.
+   - AetherSDR recuerda el último directorio usado para Importar/Exportar y lo reabre la próxima vez.
+
+## Referencia de controles
+
+| Control                    | Tipo       | Comportamiento                                                                               |
+|----------------------------|------------|----------------------------------------------------------------------------------------------|
+| Port:                      | Cuadro combinado | Selecciona el dispositivo de entrada MIDI                                              |
+| Refresh                    | Botón      | Reescanea los puertos MIDI disponibles                                                       |
+| Connect                    | Botón      | Abre o cierra el puerto MIDI seleccionado                                                    |
+| Port status                | Indicador  | Muestra si el puerto MIDI está actualmente abierto (`Opened` o `Closed`)                     |
+| Activity indicator         | Indicador  | Muestra el mensaje MIDI más reciente recibido                                                |
+| Auto-connect on startup    | Casilla    | Reabre el puerto MIDI al iniciar                                                             |
+| Category                   | Cuadro combinado | Filtra la lista de parámetros por categoría de control                                 |
+| Parameter                  | Cuadro combinado | Elige el parámetro de destino para una nueva asignación                                 |
+| Learn                      | Botón      | Comienza a escuchar el siguiente mensaje MIDI y lo asigna al parámetro seleccionado          |
+| Manual…                    | Botón      | Abre un diálogo para escribir el canal, tipo de mensaje y número de una asignación en lugar de usar Learn |
+| Bindings table             | Lista      | Muestra las asignaciones existentes; columnas: Parámetro, Fuente MIDI, Canal, Invertir, Relativo, editar, eliminar |
+| ✎ (edit binding)           | Botón      | Abre el editor manual para esa fila                                                          |
+| Invert                     | Casilla    | Invierte la dirección del control para la fila                                               |
+| Relative                   | Casilla    | Trata el control como un codificador rotatorio continuo                                      |
+| × (delete row)             | Botón      | Elimina esa asignación                                                                       |
+| Clear All                  | Botón      | Elimina todas las asignaciones                                                               |
+| Profile:                   | Cuadro combinado | Selecciona un perfil de mapeo MIDI guardado                                              |
+| Save                       | Botón      | Guarda las asignaciones actuales como un perfil                                              |
+| Load                       | Botón      | Carga el perfil seleccionado                                                                 |
+| Import...                  | Botón      | Importa un archivo de perfil al almacén — XML de perfil de AetherSDR o un archivo `.map` de SmartSDR |
+| Export...                  | Botón      | Exporta las asignaciones actuales como un archivo XML de perfil de AetherSDR                 |
+| Close                      | Botón      | Cierra el diálogo                                                                             |
+
+## Asignar un botón MIDI a la tecla CW
+
+Estos pasos asignan un botón físico en su controlador MIDI a las entradas de tecla recta, paleta izquierda o paleta derecha CW.
+
+1. En el cuadro combinado **Category**, seleccione `Phone/CW`.
+2. En el cuadro combinado **Parameter**, seleccione una de las siguientes opciones:
+   - `Trigger straight key` — envía una pulsación de tecla recta
    - `Trigger CW Left Paddle` — envía un evento de paleta izquierda (dit)
    - `Trigger CW Right Paddle` — envía un evento de paleta derecha (dah)
-6. Haga clic en **Learn**. La etiqueta del botón cambia a `Cancel Learn`.
-7. Presione y mantenga presionado el botón físico de su controlador MIDI que desea vincular. AetherSDR detecta el mensaje MIDI y completa la vinculación automáticamente.
-8. Confirme que la nueva fila aparece en la **tabla de Vinculaciones**, mostrando el nombre del parámetro, la fuente MIDI y el canal.
-9. Repita los pasos 5 a 8 para cada entrada de CW adicional que desee vincular.
-10. Haga clic en **Close**.
+3. Haga clic en **Learn**, luego presione y mantenga presionado el botón físico en su controlador MIDI.
+4. Confirme que la nueva fila aparece en la **tabla de asignaciones**.
 
-## Qué hace cada control
+Estas tres acciones CW son de tipo momentáneo (compuerta): la tecla se mantiene presionada mientras el Note MIDI o botón permanezca activo, y luego se libera. Use un pad o botón que envíe mensajes tanto Note On como Note Off para un comportamiento de tecleo correcto.
 
-| Control | Tipo | Comportamiento | Clave de configuración |
-|---|---|---|---|
-| Port: | Cuadro combinado | Selecciona el dispositivo de entrada MIDI | `MidiPort` |
-| Refresh | Botón | Vuelve a escanear los puertos MIDI disponibles | — |
-| Connect | Botón | Abre o cierra el puerto MIDI seleccionado | — |
-| Estado del puerto | Indicador | Muestra si el puerto MIDI está actualmente abierto (Opened o Closed) | — |
-| Indicador de actividad | Indicador | Muestra el mensaje MIDI más reciente recibido | — |
-| Auto-connect on startup | Casilla de verificación | Vuelve a abrir el puerto MIDI automáticamente en el próximo inicio | `MidiAutoConnect` |
-| Category | Cuadro combinado | Filtra la lista de Parámetros; las categorías incluyen All, RX, TX, Phone/CW, EQ, Global, Mode, Band, Filter, Slice, Display y Frequency | — |
-| Parameter | Cuadro combinado | Elige la acción de destino a vincular; las opciones de CW son `Trigger straight key`, `Trigger CW Left Paddle`, `Trigger CW Right Paddle` | — |
-| Learn | Botón | Comienza a escuchar el siguiente mensaje MIDI y lo vincula al parámetro seleccionado; la etiqueta cambia a `Cancel Learn` mientras está activo | — |
-| Tabla de vinculaciones | Lista | Muestra todas las vinculaciones actuales con controles por fila de Invert, Relative y eliminar; columnas: Parameter, MIDI Source, Channel, Invert, Relative, (eliminar) | — |
-| Invert | Casilla de verificación | Invierte la dirección de control para la fila | — |
-| Relative | Casilla de verificación | Trata el control como un codificador sin fin | — |
-| × (eliminar fila) | Botón | Elimina esa vinculación | — |
-| Clear All | Botón | Elimina todas las vinculaciones | — |
-| Profile: | Cuadro combinado | Elige un perfil de mapeo MIDI guardado | — |
-| Save | Botón | Guarda las vinculaciones actuales como un perfil | — |
-| Load | Botón | Carga el perfil seleccionado | — |
-| Close | Botón | Cierra el diálogo | — |
-
-## Consejos
-
-- Estas tres acciones de CW son de tipo momentáneo (gate): la llave se mantiene activa mientras el mensaje de nota MIDI o el botón permanezcan activos, y luego se suelta. Use un pad o botón que envíe mensajes tanto de Note On como de Note Off para un correcto comportamiento de manipulación.
-- Si previamente guardó un mapeo que usaba los identificadores heredados `cw.key`, `cw.dit` o `cw.dah`, AetherSDR los migra automáticamente a los identificadores actuales (`cwkey`, `cwdit`, `cwdah`) al cargarlo. No se necesita ninguna acción manual.
-- Active **Auto-connect on startup** para que el puerto esté listo la próxima vez que AetherSDR se inicie sin necesidad de abrir este diálogo.
-- Use el cuadro combinado **Profile:** para guardar y cargar perfiles de mapeo con nombre. Haga clic en **Save** para almacenar las vinculaciones actuales, o en **Load** para aplicar un perfil guardado previamente.
-- El diálogo recuerda su tamaño y posición entre sesiones.
+Si previamente guardó un mapeo que usaba los IDs heredados `cw.key`, `cw.dit` o `cw.dah`, AetherSDR los migra automáticamente a los IDs actuales (`cwkey`, `cwdit`, `cwdah`) al cargar. No se requiere acción manual.
 
 ## Solución de problemas
 
-- **La categoría `Phone/CW` falta en la lista de Parámetros** — Confirme que su compilación de AetherSDR sea v0.9.7 o posterior. Las tres acciones de gate de CW se agregaron en esa versión.
-- **Learn se completa pero la llave no se activa al presionarla** — Verifique que el estado del puerto muestre que el puerto está abierto (se hizo clic en Connect y el indicador de estado confirma la conexión). También verifique que el controlador MIDI esté enviando mensajes Note On/Off, visibles en el indicador de actividad.
-- **La vinculación desaparece después de reiniciar AetherSDR** — Las vinculaciones se guardan automáticamente cuando Learn se completa. Si el archivo no se escribió, verifique que AetherSDR tenga permiso de escritura en su directorio de configuración.
+- **Learn se completa pero la tecla no se activa al presionarla** — Verifique que el estado del puerto muestre `Opened`. Confirme que el controlador MIDI está enviando mensajes Note On/Off, visibles en el indicador de actividad.
+- **La asignación desaparece después de reiniciar AetherSDR** — Las asignaciones se guardan automáticamente cuando Learn se completa. Si el archivo no se escribió, verifique que AetherSDR tenga permiso de escritura en su directorio de configuración.
+- **La categoría `Phone/CW` falta en la lista de parámetros** — Confirme que su compilación de AetherSDR sea v0.9.7 o posterior. Las tres acciones de compuerta CW se agregaron en esa versión.
 
 ## Relacionado
 
+- [Grabar una nueva asignación con modo Learn](record-a-new-binding-with-learn-mode.md)
 - [Conectar un controlador MIDI](../../getting-started/setup/connect-a-midi-controller.md)
-- [Grabar una nueva vinculación con el modo Aprendizaje](record-a-new-binding-with-learn-mode.md)
-- [Conectar automáticamente el controlador MIDI al inicio](../../getting-started/setup/auto-connect-midi-controller-on-startup.md)
-- [Eliminar una vinculación](delete-a-binding.md)
+- [Auto-conectar controlador MIDI al iniciar](../../getting-started/setup/auto-connect-midi-controller-on-startup.md)
+- [Eliminar una asignación](delete-a-binding.md)
 - [Guardar el mapeo actual como un perfil con nombre](save-the-current-mapping-as-a-named-profile.md)

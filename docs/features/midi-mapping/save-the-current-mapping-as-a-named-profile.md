@@ -1,41 +1,45 @@
-# Guardar la Asignación Actual como un Perfil Nombrado
+# Guardar la asignación actual como perfil con nombre
 
-Guarde sus asignaciones MIDI actuales bajo un nombre para poder recuperarlas más tarde o cambiar entre diseños de controlador sin tener que volver a aprender cada asignación.
+Guarde sus asignaciones MIDI actuales con un nombre para poder recuperarlas más tarde o cambiar entre diseños de controlador sin tener que volver a aprender cada asignación.
 
 ## Antes de comenzar
 
-- Debe existir al menos una asignación en la tabla de Asignaciones. Se puede guardar una asignación vacía, pero no es útil.
-- Abra `Settings > MIDI Mapping...` para acceder al diálogo de Asignación de Controlador MIDI.
+- Debe existir al menos una asignación en la tabla de asignaciones. Se puede guardar un mapeo vacío, pero no es útil.
+- Abra `Settings > MIDI Mapping...` para acceder al diálogo MIDI Controller Mapping.
 
 ## Pasos
 
 1. Abra `Settings > MIDI Mapping...`.
-2. Confirme que la tabla de Asignaciones muestre las asignaciones que desea guardar.
-3. En el campo **Profile:**, escriba un nombre para el perfil. El campo acepta texto libre; también muestra los nombres de perfiles existentes en su lista desplegable si se han guardado previamente.
+2. Confirme que la tabla de asignaciones muestra las asignaciones que desea guardar.
+3. En el campo **Profile:**, escriba un nombre para el perfil. El campo acepta texto libre; también muestra los nombres de perfiles existentes en su lista desplegable si se ha guardado alguno anteriormente.
 4. Haga clic en **Save**.
 
-El perfil se almacena de inmediato. La lista desplegable **Profile:** se actualiza para incluir el nuevo nombre.
+El perfil se almacena inmediatamente. La lista desplegable **Profile:** se actualiza para incluir el nuevo nombre.
 
 ## Qué hace cada control
 
-| Control | Qué hace | Clave de configuración |
-|---|---|---|
-| **Port:** | Selecciona el dispositivo de entrada MIDI. | `MidiPort` |
-| **Refresh** | Vuelve a escanear los puertos MIDI disponibles. | — |
-| **Connect** | Abre/cierra el puerto MIDI seleccionado. | — |
-| **Auto-connect on startup** | Vuelve a abrir el puerto MIDI al iniciar. | `MidiAutoConnect` |
-| **Category** | Filtra el combo de parámetros a una categoría de control. Categorías disponibles: All, RX, TX, Phone/CW, EQ, Global, Mode, Band, Filter, Slice, Display, Frequency. | — |
-| **Parameter** | Elige el parámetro de destino para una nueva asignación. En v26.6.1, hay tres acciones momentáneas (Gate) disponibles en la categoría Phone/CW: "Trigger straight key" (id: cwkey), "Trigger CW Left Paddle" (id: cwdit), "Trigger CW Right Paddle" (id: cwdah). Los IDs de puntos heredados cw.key/cw.dit/cw.dah se migran automáticamente al leer. | — |
-| **Learn** | Comienza a escuchar el siguiente mensaje MIDI y lo asigna al parámetro seleccionado. | — |
-| **Bindings table** | Muestra las asignaciones existentes con controles por fila de Invertir, Relativo y eliminar. Columnas: Parameter, MIDI Source, Channel, Invert, Relative, (delete). | — |
-| **Invert** | Invierte la dirección de control para la fila. | — |
-| **Relative** | Trata el control como un codificador sin fin. | — |
-| **× (delete row)** | Elimina esa asignación. | — |
-| **Clear All** | Elimina todas las asignaciones. | — |
-| **Profile:** | Cuadro combinado editable. Escriba un nuevo nombre para crear un perfil, o elija un nombre existente de la lista desplegable para sobrescribirlo. | — |
-| **Save** | Guarda las asignaciones actuales bajo el nombre mostrado en **Profile:**. No hace nada si el campo está vacío. | — |
-| **Load** | Reemplaza las asignaciones actuales con las almacenadas bajo el nombre de perfil seleccionado. | — |
-| **Close** | Cierra el diálogo. | — |
+| Control                     | Qué hace                                                                                                                                                                                                                                                                                                                                                                                                                                             | Clave de configuración                                                                              |
+|-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
+| **Port:**                   | Selecciona el dispositivo de entrada MIDI.                                                                                                                                                                                                                                                                                                                                                                                                               | `MidiPort`                                                                               |
+| **Refresh**                 | Vuelve a escanear los puertos MIDI disponibles.                                                                                                                                                                                                                                                                                                                                                                                                           | —                                                                                        |
+| **Connect**                 | Abre/cierra el puerto MIDI seleccionado.                                                                                                                                                                                                                                                                                                                                                                                                                 | —                                                                                        |
+| **Auto-connect on startup** | Reabre el puerto MIDI al iniciar.                                                                                                                                                                                                                                                                                                                                                                                                                         | `MidiAutoConnect`                                                                        |
+| **Category**                | Filtra el combo de parámetros por categoría de control. Categorías disponibles: All, RX, TX, Phone/CW, EQ, Global, Mode, Band, Filter, Slice, Display, Frequency.                                                                                                                                                                                                                                                                                          | —                                                                                        |
+| **Parameter**               | Elige el parámetro de destino para una nueva asignación. En v26.6.1, hay tres acciones momentáneas (Gate) disponibles en la categoría Phone/CW: "Trigger straight key" (id: cwkey), "Trigger CW Left Paddle" (id: cwdit), "Trigger CW Right Paddle" (id: cwdah). Los ID heredados con puntos cw.key/cw.dit/cw.dah se migran automáticamente al leerlos.                                                                                                     | —                                                                                        |
+| **Learn**                   | Comienza a escuchar el siguiente mensaje MIDI y lo asigna al parámetro seleccionado.                                                                                                                                                                                                                                                                                                                                                                       | —                                                                                        |
+| **Manual…**                 | Abre un diálogo para escribir el canal, tipo de mensaje y número de una asignación en lugar de usar el modo Learn.                                                                                                                                                                                                                                                                                                                                         | Nuevo en v26.8.4 (#4760). Abre el mismo editor manual que usa el botón de edición por fila. |
+| **Bindings table**          | Muestra las asignaciones existentes con controles por fila de Invert, Relative, edición (✎) y eliminación. Columnas: Parameter, MIDI Source, Channel, Invert, Relative, (edit), (delete).                                                                                                                                                                                                                                                                 | —                                                                                        |
+| **✎ (edit binding)**        | Abre el editor manual para corregir el canal, tipo y número de esta asignación.                                                                                                                                                                                                                                                                                                                                                                           | Nuevo en v26.8.4 (#4760).                                                                |
+| **Invert**                  | Invierte la dirección de control para la fila.                                                                                                                                                                                                                                                                                                                                                                                                              | —                                                                                        |
+| **Relative**                | Trata el control como un codificador sin fin.                                                                                                                                                                                                                                                                                                                                                                                                                | —                                                                                        |
+| **× (delete row)**          | Elimina esa asignación.                                                                                                                                                                                                                                                                                                                                                                                                                                    | —                                                                                        |
+| **Clear All**               | Elimina todas las asignaciones.                                                                                                                                                                                                                                                                                                                                                                                                                                   | —                                                                                        |
+| **Profile:**                | Cuadro combinado editable. Escriba un nombre nuevo para crear un perfil, o seleccione un nombre existente de la lista desplegable para sobrescribirlo.                                                                                                                                                                                                                                                                                                   | —                                                                                        |
+| **Save**                    | Guarda las asignaciones actuales bajo el nombre que se muestra en **Profile:**. No hace nada si el campo está vacío.                                                                                                                                                                                                                                                                                                                                        | —                                                                                        |
+| **Load**                    | Reemplaza las asignaciones actuales con las almacenadas bajo el nombre de perfil seleccionado.                                                                                                                                                                                                                                                                                                                                                         | —                                                                                        |
+| **Import...**               | Importa un archivo de perfil al almacén — XML de perfil de AetherSDR o un archivo ".map" de SmartSDR. Informa cuántas asignaciones se importaron y permite al usuario usar Load para aplicarlas.                                                                                                                                                                                                                                                              | Nuevo en v26.8.4.                                                                        |
+| **Export...**               | Exporta las asignaciones actuales como archivo XML de perfil de AetherSDR. El directorio recordado se guarda en `MidiImportExportPath`.                                                                                                                                                                                                                                                                                                                      | Nuevo en v26.8.4.                                                                        |
+| **Close**                   | Cierra el diálogo.                                                                                                                                                                                                                                                                                                                                                                                                                                       | —                                                                                        |
 
 ## Indicadores
 
@@ -46,18 +50,18 @@ El perfil se almacena de inmediato. La lista desplegable **Profile:** se actuali
 
 ## Consejos
 
-- Escribir un nombre que ya existe en **Profile:** y hacer clic en **Save** sobrescribe ese perfil sin un mensaje de confirmación.
-- Para mantener asignaciones separadas para diferentes controladores, use un nombre descriptivo como el modelo del controlador o el caso de uso.
+- Escribir un nombre que ya existe en **Profile:** y hacer clic en **Save** sobrescribe ese perfil sin solicitar confirmación.
+- Para mantener asignaciones separadas para diferentes controladores, use un nombre descriptivo como el modelo del controlador o su caso de uso.
 - El diálogo recuerda su posición y tamaño de ventana entre sesiones.
 
 ## Solución de problemas
 
-- **Hacer clic en Save no hace nada** — El campo **Profile:** está vacío o contiene solo espacios. Escriba un nombre primero.
+- **Al hacer clic en Save no pasa nada** — El campo **Profile:** está vacío o contiene solo espacios. Escriba un nombre primero.
 - **Un nombre de perfil no aparece en la lista desplegable después de guardar** — Haga clic en cualquier lugar para cerrar la lista desplegable y vuelva a abrirla; la lista se actualiza después de cada guardado.
 
 ## Relacionado
 
-- [Load a previously saved MIDI profile](load-a-previously-saved-midi-profile.md)
-- [Record a new binding with Learn mode](record-a-new-binding-with-learn-mode.md)
-- [Delete a binding](delete-a-binding.md)
-- [MIDI Controller Mapping overview](overview.md)
+- [Cargar un perfil MIDI previamente guardado](load-a-previously-saved-midi-profile.md)
+- [Registrar una nueva asignación con el modo Learn](record-a-new-binding-with-learn-mode.md)
+- [Eliminar una asignación](delete-a-binding.md)
+- [Descripción general de MIDI Controller Mapping](overview.md)

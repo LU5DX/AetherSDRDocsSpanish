@@ -1,61 +1,69 @@
-# Configuración de la Radio
+# Configuración de Radio
 
-El diálogo Configuración de la Radio es la ventana maestra de configuración por radio. Contiene pestañas para información de la radio, red, GPS, TX, Phone/CW, RX, audio, antenas, filtros, XVTR, cables USB, periféricos, APD, temas, puerto serie, configuración de certificados SmartLink anclados y acceso a receptores públicos KiwiSDR.
+El cuadro de diálogo Configuración de Radio es la ventana maestra de configuración por radio. Contiene pestañas para información de radio, red, GPS, TX, Phone/CW, RX, calibración, audio, antenas, filtros, XVTR, cables USB, periféricos, APD, temas, puerto serie, configuración de certificado anclado SmartLink y acceso a receptores públicos KiwiSDR.
 
-## Abrir el diálogo
+## Apertura del cuadro de diálogo
 
 1. Abra `Settings > Radio Setup...`.
-2. El diálogo se abre como una ventana persistente. Su tamaño y posición se guardan entre sesiones.
+2. El cuadro de diálogo se abre como una ventana persistente. Su tamaño y posición se guardan entre sesiones.
 
 ---
 
 ## Pestaña Radio
 
-La pestaña Radio muestra información de la radio, identificación, información de licencia y controles de actualización de firmware.
+La pestaña Radio muestra información del radio, identificación, información de licencia y controles de actualización de firmware.
 
-### Información de la radio
+### Información del radio
 
-| Control                                             | Tipo                                                                                                                                                                                        | Comportamiento                                                                                                                                                                                                                                                    |
-|-----------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Radio SN                                            | Número de serie del chasis (solo lectura).                                                                                                                                                  | Incluye un botón de copia al portapapeles (icono de bandeja) junto al valor. Nuevo en v26.5.3 (#2976).                                                                                                                                                            |
-| Region                                              | Indicador                                                                                                                                                                                   | Región regulatoria de la radio.                                                                                                                                                                                                                                   |
-| HW Version                                          | Cadena de versión de hardware.                                                                                                                                                              | Incluye un botón de copia al portapapeles junto al valor (#2976).                                                                                                                                                                                                 |
-| Model                                               | Modelo de la radio.                                                                                                                                                                         | Incluye un botón de copia al portapapeles junto al valor (#2976).                                                                                                                                                                                                 |
-| Options                                             | Muestra las opciones de radio licenciadas.                                                                                                                                                  | Incluye un botón de copia al portapapeles junto al valor (#2976).                                                                                                                                                                                                 |
-| FlexControl                                         | Indicador                                                                                                                                                                                   | Estado detectado del hardware FlexControl.                                                                                                                                                                                                                        |
-| multiFLEX                                           | Indicador                                                                                                                                                                                   | Estado habilitado de multiFLEX.                                                                                                                                                                                                                                   |
-| Nickname                                            | Campo de texto                                                                                                                                                                              | Apodo amigable de la radio.                                                                                                                                                                                                                                        |
-| Callsign                                            | Campo de texto                                                                                                                                                                              | Indicativo de la estación.                                                                                                                                                                                                                                        |
-| Station Name                                        | Campo de texto                                                                                                                                                                              | Identifica este cliente AetherSDR ante otras estaciones multiFLEX. Por defecto es el nombre del host del SO si está vacío. Almacenado en AppSettings. Enviado a la radio como 'client station \<name\>'.                                                           |
-| License Info                                        | Indicador                                                                                                                                                                                   | Muestra los detalles de la licencia de la radio (Suscripción, Vencimiento, ID de Radio, Versión licenciada).                                                                                                                                                      |
-| Select Installer...                                 | Abre un diálogo de archivo para un instalador de SmartSDR (.msi, .exe) o un archivo de firmware .ssdr previamente extraído. Pasa la ruta seleccionada a FirmwareStager que extrae la carga útil .ssdr y emite el progreso. | La etiqueta cambió de 'Browse .ssdr...' a 'Select Installer...' en v26.5.3.                                                                                                                                                                                       |
-| Reboot Radio                                        | Botón pulsador                                                                                                                                                                              | Reinicia la radio conectada. Deshabilitado cuando la radio está desconectada. Muestra un diálogo de confirmación antes de reiniciar. En conexiones LAN, AetherSDR se reconecta automáticamente después de que la radio arranca; en SmartLink/WAN, se requiere reconexión manual. Nuevo en v26.6.3 (#3334). |
-| SmartLink (pestaña)                                 | Gestión de certificados TLS SmartLink anclados. Lista cada certificado anclado (host, huella SHA-256, fecha de anclaje) con opciones Forget y Forget All por fila. Nuevo en v26.5.3 (#2951 Phase 2).     | Se construye de forma diferida al hacer clic por primera vez. Fase 2 de GHSA-wfx7-w6p8-4jr2: la discrepancia de certificado ahora pausa firmemente el handshake con un diálogo modal.                                                                             |
-| Pinned SmartLink Certificates (sección)             | Encabezado de sección para la tabla de certificados anclados dentro de la pestaña SmartLink. Lista cada host que este cliente ha anclado en la primera conexión (trust-on-first-use).       | Fase 2 de GHSA-wfx7-w6p8-4jr2. El esquema de anclaje migró de cadenas simples a objetos {fp, pinnedAt}.                                                                                                                                                          |
-| Host / SHA-256 fingerprint / Pinned (columnas de tabla) | Tabla de solo lectura de 3 columnas: Host (nombre del host), SHA-256 fingerprint (monoespaciado), Pinned (AAAA-MM-DD o '(pre-phase 2)').                                                    | Respaldado por WanCertCache en WanConnection.cpp.                                                                                                                                                                                                                 |
-| Forget selected                                     | Elimina la huella del certificado anclado del host seleccionado para que la próxima conexión lo vuelva a anclar silenciosamente.                                                                                                                            |                                                                                                                                                                                                                                                                   |
-| Forget all                                          | Limpia todos los certificados anclados (con confirmación). La próxima conexión a cada radio los vuelve a anclar silenciosamente.                                                             | Muestra QMessageBox::question antes de borrar.                                                                                                                                                                                                                    |
-| Check for Update                                    | Botón pulsador                                                                                                                                                                              | Consulta actualizaciones de firmware.                                                                                                                                                                                                                             |
-| Upload Firmware                                     | Botón pulsador                                                                                                                                                                              | Inicia la subida de firmware con barra de progreso y estado.                                                                                                                                                                                                      |
+| Control | Tipo | Comportamiento |
+|---|---|---|
+| Radio SN | Número de serie del chasis (solo lectura). | Incluye un botón de copiar al portapapeles (ícono de bandeja) junto al valor. Nuevo en v26.5.3 (#2976). |
+| Region | Indicador | Región regulatoria del radio. |
+| HW Version | Cadena de versión de hardware. | Incluye un botón de copiar al portapapeles junto al valor (#2976). |
+| Model | Modelo del radio. | Incluye un botón de copiar al portapapeles junto al valor (#2976). |
+| Options | Muestra las opciones licenciadas del radio. | Incluye un botón de copiar al portapapeles junto al valor (#2976). |
+| FlexControl | Indicador | Estado de detección del hardware FlexControl. |
+| multiFLEX | Indicador | Estado de habilitación de multiFLEX. |
+| Nickname | Campo de texto | Apodo amigable del radio. |
+| Callsign | Campo de texto | Indicativo de la estación. |
+| Station Name | Campo de texto | Identifica a este cliente AetherSDR ante otras estaciones multiFLEX. Usa el nombre de host del SO si está vacío. Se almacena en AppSettings. Se envía al radio como 'client station \<name\>'. |
+| License Info | Indicador | Muestra los detalles de licencia del radio (Subscription, Expiration, Radio ID, Licensed version). |
+| Select Installer... | Abre un diálogo de archivos para un instalador SmartSDR (.msi, .exe) o un archivo de firmware .ssdr preextraído. Pasa la ruta seleccionada a FirmwareStager, que extrae el payload .ssdr y emite progreso. | La etiqueta cambió de 'Browse .ssdr...' a 'Select Installer...' en v26.5.3. |
+| Reboot Radio | Botón pulsador | Reinicia el radio conectado. Deshabilitado cuando el radio está desconectado. Muestra un diálogo de confirmación antes de reiniciar. En conexiones LAN, AetherSDR se reconecta automáticamente después de que el radio arranca; en SmartLink/WAN, se requiere reconexión manual. Nuevo en v26.8.4 (#4448). |
+| SmartLink (pestaña) | Gestión de certificados TLS SmartLink anclados. Lista cada certificado anclado (host, huella SHA-256, fecha de anclaje) con botones Forget y Forget All por fila. Nuevo en v26.5.3 (#2951 Fase 2). | Se construye de forma diferida al hacer clic por primera vez. Fase 2 de GHSA-wfx7-w6p8-4jr2: una discrepancia de certificado anclado pausa firmemente el handshake con un diálogo modal. |
+| Pinned SmartLink Certificates (sección) | Encabezado de sección para la tabla de certificados anclados dentro de la pestaña SmartLink. Lista cada host que este cliente ha anclado en la primera conexión (confianza en el primer uso). | Fase 2 de GHSA-wfx7-w6p8-4jr2. El esquema de anclaje migró de cadenas simples a objetos {fp, pinnedAt}. |
+| Host / SHA-256 fingerprint / Pinned (columnas de tabla) | Tabla de solo lectura de 3 columnas: Host (nombre de host), SHA-256 fingerprint (monoespaciado), Pinned (AAAA-MM-DD o '(pre-phase 2)'). | Respaldada por WanCertCache en WanConnection.cpp. |
+| Forget selected | Elimina la huella del certificado anclado del host seleccionado para que la siguiente conexión vuelva a anclar silenciosamente. | |
+| Forget all | Borra todos los certificados anclados (con confirmación). La siguiente conexión a cada radio vuelve a anclar silenciosamente. | Muestra QMessageBox::question antes de borrar. |
+| Check for Update | Botón pulsador | Consulta actualizaciones de firmware. |
+| Upload Firmware | Botón pulsador | Inicia la carga de firmware con barra de progreso y estado. |
+| Agent Automation (MCP): | Habilita el puente de automatización en la aplicación para que un asistente de codificación con IA (mediante el servidor MCP) pueda inspeccionar y controlar la aplicación en ejecución. Desactivado por defecto; el operador lo habilita explícitamente. | Nuevo en v26.8.4 (#3646). Se persiste mediante AutomationBridgeSettings. La variable de entorno de lanzamiento AETHER_AUTOMATION fuerza la habilitación del puente independientemente de este interruptor y deshabilita el control en la interfaz. El keying de transmisión permanece bloqueado a menos que se establezca AETHER_AUTOMATION_ALLOW_TX. |
+| Access Token: | Visualización de solo lectura del token de acceso MCP; péguelo en la variable de entorno AETHER_MCP_TOKEN del asistente. Se almacena en el almacén secreto del SO. | Nuevo en v26.8.4. Genera automáticamente un token hexadecimal de 128 bits cuando el puente se habilita sin uno. Marcador '(loading…)' hasta que la lectura del llavero esté disponible. |
+| Copy (Access Token) | Copia el token de acceso al portapapeles. | Nuevo en v26.8.4. |
+| Rotate (Access Token) | Genera un nuevo token y lo aplica inmediatamente, bloqueando a cualquier cliente que aún use el anterior. | Nuevo en v26.8.4. |
+| Allow TX via MCP: Enable transmit control | Permite que un cliente MCP active el transmisor (MOX/PTT/TUNE/ATU/CWX). Desactivado por defecto; la primera activación muestra una confirmación de responsabilidad del operador. | Nuevo en v26.8.4. Se aplica en el puente; ningún cliente puede cambiarlo. Afectado por AETHER_AUTOMATION_ALLOW_TX (forzado activado) y AETHER_AUTOMATION_NO_TX (fijado desactivado). Un watchdog de desactivación forzada limita la TX originada por el puente. |
+| Observe only: Read-only (block all driving) | Hace que el puente sea de solo observación: los clientes MCP pueden leer el estado, pero todo verbo mutador (set/invoke/connect/tune/capture) es rechazado. | Nuevo en v26.8.4 (#4188). Se aplica en la aplicación, por lo que un cliente no puede omitirlo. La variable de lanzamiento AETHER_AUTOMATION_READONLY lo fija activado para ejecuciones headless/CI. |
+| VITA-49 RX buffer: | Control deslizante con ajuste a valores preestablecidos que configura el buffer de recepción del kernel (SO_RCVBUF) para el socket de flujo VITA-49; un valor mayor absorbe ráfagas de panadapter/waterfall para que no se descarten paquetes. | Nuevo en v26.8.4 (#3810). Valores preestablecidos de 256 KB a 4 MB. El sistema limita la concesión en net.core.rmem_max; una etiqueta en vivo 'granted: <size>' muestra cuánto otorgó realmente el kernel. |
+| granted: (VITA-49 RX buffer) | Muestra el tamaño de buffer que el kernel realmente otorgó (versus el valor preestablecido solicitado). | Nuevo en v26.8.4. Muestra '(applies on connect)' cuando no hay conexión activa. |
 
-Cada valor de solo lectura tiene un botón de copia al portapapeles junto a él (un pequeño icono que aparece al pasar el ratón). Haga clic en el botón para copiar el valor.
+Cada valor de solo lectura tiene un botón de copiar al portapapeles junto a él (un pequeño ícono que aparece al pasar el cursor). Haga clic en el botón para copiar el valor.
 
 ### Remote On
 
-Haga clic en **Remote On** para habilitar la funcionalidad de encendido remoto/despertar remoto.
+Haga clic en **Remote On** para habilitar la función de encendido remoto / wake remoto.
 
 ### Reboot Radio
 
-Haga clic en **Reboot Radio** para reiniciar la radio conectada. Un diálogo de confirmación advierte:
+Haga clic en **Reboot Radio** para reiniciar el radio conectado. Un diálogo de confirmación advierte:
 
-- **Conexión LAN:** AetherSDR se desconecta y se reconecta automáticamente una vez que la radio termina de arrancar.
-- **Conexión SmartLink/WAN:** AetherSDR se desconecta. Debe reconectarse manualmente después de que la radio se reinicie.
+- **Conexión LAN:** AetherSDR se desconecta y se reconecta automáticamente una vez que el radio termina de arrancar.
+- **Conexión SmartLink/WAN:** AetherSDR se desconecta. Debe reconectarse manualmente después de que el radio se reinicie.
 
-El botón está deshabilitado cuando la radio está desconectada o reconectándose. Se vuelve a habilitar automáticamente cuando la radio se reconecta.
+El botón está deshabilitado cuando el radio está desconectado o reconectándose. Se rehabilita automáticamente cuando el radio se reconecta.
 
 ### Actualización de firmware
 
-**Check for Update** consulta a la radio si hay actualizaciones de firmware disponibles. Cuando se encuentra una versión más reciente, AetherSDR muestra un mensaje informativo:
+**Check for Update** consulta al radio las actualizaciones de firmware disponibles. Cuando se encuentra una versión más reciente, AetherSDR muestra un mensaje informativo:
 
 > Update available: v*X.Y.Z*
 > Download the SmartSDR installer from flexradio.com,
@@ -69,39 +77,39 @@ El botón está deshabilitado cuando la radio está desconectada o reconectándo
 | Instalador autoextraíble de SmartSDR | .exe | Versiones anteriores de SmartSDR |
 | Archivo de firmware extraído | .ssdr | Como en versiones anteriores de AetherSDR |
 
-El gestor de firmware detecta el formato automáticamente a partir de los primeros 8 bytes del archivo (mágica OLE/MSI frente a cabecera PE/COFF MZ) y extrae la carga útil .ssdr sin necesidad de herramientas externas.
+El preparador de firmware detecta el formato automáticamente a partir de los primeros 8 bytes del archivo (magic OLE/MSI frente al encabezado PE/COFF MZ) y extrae el payload .ssdr sin requerir herramientas externas.
 
 #### Para preparar firmware desde un instalador local
 
-1. Descargue el instalador de SmartSDR desde flexradio.com.
+1. Descargue el instalador SmartSDR desde flexradio.com.
 2. Abra `Settings > Radio Setup...`.
 3. Haga clic en la pestaña **Radio**.
 4. Haga clic en **Select Installer...**.
 5. En el selector de archivos, seleccione el archivo .msi, .exe o .ssdr.
 6. AetherSDR extrae y prepara el firmware. Observe la barra de progreso y la línea de estado para ver el progreso y cualquier error.
-7. Cuando la preparación esté completa, haga clic en **Upload Firmware** para enviar el firmware a la radio.
+7. Cuando la preparación esté completa, haga clic en **Upload Firmware** para enviar el firmware al radio.
 
 ---
 
 ## Pestaña Network
 
-La pestaña Network muestra información de red de la radio y opciones de red avanzadas.
+La pestaña Network muestra información de red del radio y opciones de red avanzadas.
 
 ### Información de red
 
 | Control | Tipo | Comportamiento |
 |---|---|---|
-| IP Address / Mask / MAC Address | Indicador | Direcciones de red de solo lectura. Cada una incluye un botón de copia al portapapeles (#2976). |
+| IP Address / Mask / MAC Address | Indicador | Direcciones de red de solo lectura. Cada una incluye un botón de copiar al portapapeles (#2976). |
 
 ### Configuración de red
 
 | Control | Tipo | Predeterminado | Rango | Comportamiento |
 |---|---|---|---|---|
 | Enforce Private IP Connections | Botón de alternancia | — | — | Rechaza pares que no sean RFC1918. |
-| Network MTU | Spinbox | 1450 | 576–9000 bytes | Establece el tamaño máximo de paquete UDP VITA-49 saliente en bytes. El valor predeterminado 1450 es seguro para la mayoría de los túneles VPN/SD-WAN. Almacenado en AppSettings. |
+| Network MTU | Spinbox | 1450 | 576–9000 bytes | Establece el tamaño máximo de paquete UDP VITA-49 saliente en bytes. El valor predeterminado de 1450 es seguro para la mayoría de los túneles VPN/SD-WAN. Se almacena en AppSettings. |
 | DHCP / Static | Botón de alternancia | — | — | Cambia entre modos DHCP e IP estática. |
 | IP Address / Mask / Gateway | Campo de texto | — | — | Campos de configuración de IP estática. |
-| Apply | Botón pulsador | — | — | Envía la configuración de red a la radio. |
+| Apply | Botón pulsador | — | — | Envía la configuración de red al radio. |
 
 ---
 
@@ -113,7 +121,7 @@ La pestaña GPS muestra la presencia de GPS y la información en vivo de latitud
 
 ## Pestaña TX
 
-La pestaña TX contiene temporizaciones de TX, interbloqueos, potencia máxima, modo de sintonía, visualización en waterfall, opciones de seguimiento slice/TX y un acceso directo a la Configuración de Banda TX.
+La pestaña TX contiene temporizaciones de TX, interbloqueos, potencia máxima, modo de sintonía, visualización en waterfall, opciones de slice/TX y un acceso directo a TX Band Settings.
 
 ### TX Band Settings
 
@@ -121,18 +129,18 @@ Haga clic en **TX Band Settings** para abrir el diálogo dedicado de potencia/si
 
 ### Temporizaciones
 
-La sección de temporizaciones de TX incluye campos spinbox para valores en milisegundos.
+La sección de temporizaciones TX incluye campos spinbox para valores en milisegundos.
 
-| Control | Etiqueta mostrada | Predeterminado | Comportamiento |
+| Control | Etiqueta de visualización | Predeterminado | Comportamiento |
 |---|---|---|---|
 | ACC TX | ACC TX: | — | Retardo de temporización ACC en ms. |
 | TX Delay | TX Delay: | — | Retardo de TX en ms. |
 | RCA TX1 | RCA TX1: | — | Retardo de RCA TX1 en ms. |
-| Timeout | Timeout (sec): | — | Tiempo de espera de interbloqueo mostrado en segundos. La radio almacena este valor en milisegundos. |
+| Timeout | Timeout (sec): | — | Tiempo de espera de interbloqueo mostrado en segundos. El radio almacena este valor en milisegundos. |
 
 ### Interbloqueos
 
-**TX REQ: RCA** y **TX REQ: Accessory** son botones de alternancia que habilitan las entradas de interbloqueo de accesorios y RCA.
+Los botones de alternancia **TX REQ: RCA** y **TX REQ: Accessory** habilitan las entradas de interbloqueo RCA y de accesorios.
 
 ### Potencia y sintonía
 
@@ -141,98 +149,30 @@ La sección de temporizaciones de TX incluye campos spinbox para valores en mili
 | Max Power | Spinbox | — | 0–100% | Establece el límite de potencia de TX a nivel de radio. |
 | Tune Mode | Cuadro combinado | — | — | Selecciona cómo se comporta el botón de sintonía. |
 
-### Seguimiento de waterfall y slice
+### Waterfall y seguimiento de slice
 
-| Control | Tipo | Predeterminado | Clave de ajuste | Comportamiento |
+| Control | Tipo | Predeterminado | Clave de configuración | Comportamiento |
 |---|---|---|---|---|
-| Show TX in Waterfall | Botón de alternancia | — | — | Dibuja la señal de TX en el waterfall. |
-| TX Follows Active Slice | Botón pulsador | False | `TxFollowsActiveSlice` | TX sigue al slice activo. Mutuamente excluyente con 'Active Slice Follows TX'. Se deshabilita automáticamente durante la operación Split. |
-| Active Slice Follows TX | Botón pulsador | False | `ActiveFollowsTxSlice` | Cambia el slice activo cuando TX se mueve externamente (por ejemplo, WSJT-X o CAT). Mutuamente excluyente con 'TX Follows Active Slice'. |
+| Show TX in Waterfall | Botón de alternancia | — | — | Dibuja la señal TX en el waterfall. |
+| TX Follows Active Slice | Botón pulsador | False | `TxFollowsActiveSlice` | La TX sigue al slice activo. Mutuamente excluyente con 'Active Slice Follows TX'. Se deshabilita automáticamente durante operación Split. |
+| Active Slice Follows TX | Botón pulsador | False | `ActiveFollowsTxSlice` | Cambia el slice activo cuando la TX se mueve externamente (p. ej., WSJT-X o CAT). Mutuamente excluyente con 'TX Follows Active Slice'. |
 
 ---
 
 ## Pestaña Phone/CW
 
-La pestaña Phone/CW configura el micrófono, el manipulador CW y los valores predeterminados de RTTY.
+La pestaña Phone/CW configura los valores predeterminados de micrófono, manipulador CW y RTTY.
 
 ### Micrófono
 
-**Enable/Disable the Level Meter During Receive** activa o desactiva la visualización del medidor de nivel de micrófono incluso en RX.
+**Enable/Disable the Level Meter During Receive** alterna la visualización del medidor de nivel de micrófono incluso en RX.
 
 ### Manipulador CW
 
 | Control | Tipo | Predeterminado | Rango | Comportamiento |
 |---|---|---|---|---|
-| Iambic | Botón de alternancia | — | Enabled / Disabled | Habilita o deshabilita el manipulador iambic en la radio. |
-| Iambic Mode | Botón pulsador | A | A / B | Selecciona el modo iambic Curtis A o B tanto para la radio como para el manipulador local por software. Par mutuamente excluyente. |
+| Iambic | Botón de alternancia | — | Enabled / Disabled | Habilita o deshabilita el manipulador iambic en el radio. |
+| Iambic Mode | Botón pulsador | A | A / B | Selecciona el modo iambic Curtis A o B tanto para el radio como para el manipulador local por software. Par mutuamente excluyente. |
 | Swap | Botón de alternancia | — | — | Intercambia dit/dah. |
-| Sideband | Cuadro combinado | — | LSB / USB | Selecciona la banda lateral del tono CW. |
-| CWX | Botón de alternancia | — | — | Habilita el keying de macros CWX. |
-| Decode | Botón de alternancia | True | — | Habilita la superposición de decodificación CW en el panadapter. Clave de ajuste: `CwDecodeOverlay`. |
-
-### RTTY
-
-**RTTY Mark Default** spinbox establece la frecuencia de marca RTTY predeterminada.
-
----
-
-## Pestaña RX
-
-La pestaña RX contiene la calibración de desviación de frecuencia del GPSDO y la selección de la fuente de referencia de 10 MHz.
-
-### Calibración de frecuencia
-
-| Control | Tipo | Comportamiento |
-|---|---|---|
-| Cal Frequency (MHz) | Spinbox | Frecuencia utilizada para la calibración manual. |
-| Start | Botón pulsador | Inicia el barrido de calibración de frecuencia. |
-| Freq Offset (ppb) | Spinbox | Desviación de frecuencia manual en ppb. |
-
-### Fuente de Referencia de 10 MHz
-
-El cuadro combinado **10 MHz Reference Source:** lista las fuentes de oscilador disponibles dinámicamente según el hardware presente y el estado del oscilador informado por la radio.
-
-| Etiqueta | Valor interno | Cuándo se muestra |
-|---|---|---|
-| Auto | auto | Siempre se muestra |
-| TCXO | tcxo | Se muestra cuando hay hardware TCXO presente, se ha recibido el estado del oscilador o el ajuste actual o guardado es `tcxo` |
-| GPSDO | gpsdo | Se muestra cuando hay hardware GPSDO presente o el ajuste actual o guardado es `gpsdo` |
-| External 10 MHz | external | Se muestra cuando hay una referencia externa presente, se ha recibido el estado del oscilador o el ajuste actual o guardado es `external` |
-
-#### Visualización del estado de bloqueo
-
-La etiqueta de estado de bloqueo junto al cuadro combinado muestra información más rica que texto plano:
-
-| Situación | Ejemplo de texto mostrado |
-|---|---|
-| Estado del oscilador aún no recibido | `Waiting for oscillator status` |
-| El modo Auto se ha resuelto a una fuente | `Auto -> GPSDO Locked` |
-| El ajuste guardado difiere del estado activo | `TCXO -> GPSDO Locked` |
-| El ajuste y el estado coinciden | `GPSDO Locked` |
-| External seleccionado pero la referencia no detectada | `External 10 MHz Unlocked (not detected)` |
-
-El color de la etiqueta se actualiza automáticamente: verde (`#00c040`) cuando está bloqueado, rojo (`#c04040`) cuando está desbloqueado y gris (`#8aa8c0`) mientras se espera el estado.
-
----
-
-## Pestaña Audio
-
-La pestaña Audio configura las salidas de audio de la radio, compresión, dispositivos del PC, refuerzo (boost), búfer, grabación y el contenedor NVIDIA BNR.
-
-### Salidas de audio de la radio
-
-| Control | Tipo | Comportamiento |
-|---|---|---|
-| Line Out | Deslizador | Ganancia de salida de línea. |
-| Mute (Line Out) | Botón pulsador | Silencia la salida de línea. |
-| Headphone | Deslizador | Ganancia de auriculares. |
-| Mute (Headphone) | Botón pulsador | Silencia los auriculares. |
-| Front Speaker / Mute | Botón pulsador | Silencia el altavoz frontal (específico del modelo). |
-
-### Compresión de audio
-
-**Audio Compression (SmartLink):** alterna entre Auto, Uncompressed y Opus. Clave de ajuste: `AudioCompression`.
-
-### Suspensión del sistema
-
-**Prevent system sleep while connected** casilla de verificación que mantiene el SO despierto mientras la radio está conectada para evitar caídas en los flujos de audio/TCP/UDP durante la inactividad. Predeterminado: False. Clave de ajuste:
+| Sideband | Cuadro combinado | — | LSB / USB | Selecciona la banda lateral de tono CW. |
+| CWX | Botón de alternancia | — | — | Habilita CW
