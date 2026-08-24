@@ -65,7 +65,7 @@ Cinco botones auxiliares configurables (1–5) se encuentran debajo de la rueda.
 
 ## Relacionados
 
-- [Invertir la dirección de sintonización en el AetherControl](reverse-tuning-direction-on-the-aethercontrol.md)
+- Invertir la dirección de sintonización en el AetherControl
 - [Usar la rueda virtual para sintonizar el slice activo](use-the-virtual-wheel-to-tune-the-active-slice.md)
 - [Ajustar la sensibilidad del ratón para la rueda virtual](adjust-mouse-sensitivity-for-the-virtual-wheel.md)
-- [Ajustar la firmeza de la rueda virtual](adjust-wheel-tightness-for-the-virtual-wheel.md)
+- Ajustar la firmeza de la rueda virtual

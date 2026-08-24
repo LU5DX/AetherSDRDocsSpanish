@@ -75,5 +75,5 @@ Use el cuadro combinado **Profile:** y los botones **Save** y **Load** para admi
 - [Descripción general de MIDI Controller Mapping](../../features/midi-mapping/overview.md)
 - [Registrar una nueva vinculación con el modo Learn](../../features/midi-mapping/record-a-new-binding-with-learn-mode.md)
 - [Guardar la asignación actual como un perfil con nombre](../../features/midi-mapping/save-the-current-mapping-as-a-named-profile.md)
-- [Importar y exportar perfiles de asignación](../../features/midi-mapping/import-and-export-mapping-profiles.md)
+- Importar y exportar perfiles de asignación
 - Disparadores para llave telegráfica y paletas CW

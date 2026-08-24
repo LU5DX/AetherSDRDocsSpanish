@@ -178,4 +178,4 @@ La pestaña BNR (NVIDIA Broadcast) utiliza el SDK de NVIDIA Broadcast para la re
 - [Activar o desactivar la estimación de ruido adaptativa de NR4](enable-or-disable-nr4-adaptive-noise-estimation.md)
 - [Ajustar la profundidad de enmascaramiento y la fuerza de supresión de NR4](tune-nr4-masking-depth-and-suppression-strength.md)
 - [Elegir la reducción de ruido adecuada: NR2, NR4, DFNR, MNR](../../operating/dsp/noise-reduction-overview.md)
-- [Establecer la mezcla seca del piso de ruido de RN2](set-rn2-noise-floor-dry-mix.md)
+- Establecer la mezcla seca del piso de ruido de RN2
