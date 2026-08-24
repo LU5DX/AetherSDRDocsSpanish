@@ -1,7 +1,6 @@
-# Diálogo de Configuración de Radio
+# Diálogo de configuración de radio
 
-Esta página describe todos los controles del diálogo **Radio Setup**  
-(`Settings > Radio Setup...`). El diálogo tiene una barra de pestañas en la parte superior; cada sección a continuación cubre una pestaña.
+Esta página describe cada control en el diálogo **Radio Setup** (`Settings > Radio Setup...`). El diálogo tiene una barra de pestañas en la parte superior; cada sección a continuación cubre una pestaña.
 
 ---
 
@@ -13,78 +12,112 @@ Muestra la identificación de la radio, información de licencia y controles de 
 
 | Indicador | Comportamiento |
 |---|---|
-| **Radio SN** | Número de serie del chasis (solo lectura). Incluye un botón de copia al portapapeles (icono de bandeja) junto al valor. |
-| **Model** | Modelo de la radio (solo lectura). Incluye un botón de copia al portapapeles junto al valor. |
-| **HW Version** | Cadena de versión de hardware (solo lectura). Incluye un botón de copia al portapapeles junto al valor. |
-| **Region** | Región regulatoria; predeterminado EE. UU. (solo lectura). |
-| **FlexControl** | Estado de detección del hardware FlexControl (solo lectura). |
-| **multiFLEX** | Estado de habilitación de multiFLEX (solo lectura). |
-| **Options** | Muestra las opciones de radio licenciadas (solo lectura). Incluye un botón de copia al portapapeles junto al valor. |
-| **License Info** | Muestra la suscripción, la fecha de vencimiento, el ID de radio y la versión licenciada desde la radio (solo lectura). Cada campo incluye un botón de copia al portapapeles junto al valor. |
+| **Radio SN** | Número de serie del chasis (solo lectura). Incluye un botón de copiar al portapapeles (icono de bandeja) junto al valor. |
+| **Model** | Modelo de la radio (solo lectura). Incluye un botón de copiar al portapapeles junto al valor. |
+| **HW Version** | Cadena de versión de hardware (solo lectura). Incluye un botón de copiar al portapapeles junto al valor. |
+| **Region** | Región regulatoria; predeterminada EE. UU. (solo lectura). |
+| **FlexControl** | Estado detectado del hardware FlexControl (solo lectura). |
+| **multiFLEX** | Estado habilitado de multiFLEX (solo lectura). |
+| **Options** | Muestra las opciones de radio licenciadas (solo lectura). Incluye un botón de copiar al portapapeles junto al valor. |
+| **License Info** | Muestra la suscripción, expiración, ID de radio y versión licenciada de la radio (solo lectura). Cada campo incluye un botón de copiar al portapapeles junto al valor. |
 
 ### Campos editables
 
 | Control | Tipo | Comportamiento |
 |---|---|---|
-| **Nickname** | Campo de texto | Apodo descriptivo de la radio. |
+| **Nickname** | Campo de texto | Apodo de radio fácil de usar. |
 | **Callsign** | Campo de texto | Indicativo de la estación. |
-| **Station Name** | Campo de texto | Identifica este cliente AetherSDR para otras estaciones multiFLEX. Se almacena en `StationName`. Toma como valor predeterminado el nombre de host del SO si se deja vacío. Se envía a la radio como `client station <nombre>`. |
+| **Station Name** | Campo de texto | Identifica este cliente AetherSDR ante otras estaciones multiFLEX. Se almacena en `StationName`. Si se deja vacío, usa el nombre de host del sistema operativo. Se envía a la radio como `client station <name>`. |
 
-### Botones de copia
+### Botones de copiar
 
-Cada indicador de solo lectura en la pestaña Radio ahora tiene un pequeño **botón de copia al portapapeles** (icono de documentos superpuestos) a su derecha. Haga clic en el botón para copiar el valor del indicador al portapapeles del sistema. Aparece una breve etiqueta emergente ("¡Copiado!") cerca del botón tras una copia exitosa. El botón se atenúa visualmente cuando el valor está vacío o es un marcador de posición con guión.
+Cada indicador de solo lectura en la pestaña Radio tiene ahora un pequeño **botón de copiar al portapapeles** (icono de documentos superpuestos) a su derecha. Haga clic en el botón para copiar el valor del indicador al portapapeles del sistema. Aparece una breve etiqueta emergente ("Copied!") cerca del botón después de una copia exitosa. El botón se atenúa visualmente cuando el valor está vacío o es un guion de marcador de posición.
 
-| Indicador con botón de copia | Valor copiado |
+| Indicador con botón de copiar | Valor copiado |
 |---|---|
 | **Radio SN** | El número de serie del chasis, o el número de serie de la radio si el del chasis está vacío. |
 | **Model** | La cadena del modelo de la radio. |
-| **HW Version** | La cadena de la versión de hardware, con el prefijo "v" si aún no está presente. |
+| **HW Version** | La cadena de versión de hardware, con el prefijo "v" si no está presente. |
 | **Region** | La cadena de la región regulatoria. |
 | **FlexControl** | La cadena del estado de detección de FlexControl. |
-| **multiFLEX** | La cadena del estado de habilitación de multiFLEX. |
+| **multiFLEX** | La cadena del estado habilitado de multiFLEX. |
 | **Options** | La cadena de opciones licenciadas; si está vacía, muestra "GPS" o "GPS, PGXL" según la presencia del amplificador. |
-| **License Info** | La cadena completa de detalles de la licencia tal como se muestra. |
+| **License Info** | La cadena completa de detalles de licencia tal como se muestra. |
 
 ### Botones
 
 | Control | Comportamiento |
 |---|---|
 | **Remote On** | Habilita el encendido remoto / activación remota. |
-| **Check for Update** | Consulta las actualizaciones de firmware disponibles. Cuando se encuentra una actualización, la etiqueta de estado dice: *Update available: vX.Y.Z — Download the SmartSDR installer from flexradio.com, then click 'Select Installer...' to stage it.* Cuando el firmware está actualizado, la etiqueta dice: *Firmware is up to date (vX.Y.Z).* |
-| **Select Installer...** | Abre un selector de archivos. Acepta un instalador SmartSDR `.msi` (formato FlexRadio v4.2+ WiX), un instalador autoextraíble `.exe` (versiones anteriores) o un archivo de firmware `.ssdr` preextraído. El preparador de firmware detecta automáticamente el formato a partir de los primeros 8 bytes (magia OLE/MSI vs. cabecera MZ PE/COFF) y extrae la carga útil `.ssdr` sin herramientas externas. Anteriormente etiquetado **Browse .ssdr...** (cambiado en v26.5.3). |
-| **Upload Firmware** | Inicia la carga del firmware. Una barra de progreso y una etiqueta de estado siguen el progreso. Solo se habilita después de que un archivo válido haya sido preparado por **Select Installer...**. |
-| **Reboot Radio** | Solicita confirmación: *Reboot the connected radio now?* El texto de advertencia difiere para conexiones WAN (SmartLink) vs. LAN. En LAN, AetherSDR se reconectará automáticamente después de que la radio arranque. En WAN, debe reconectarse manualmente. Al hacer clic en Aceptar, se envía el comando de reinicio y se cierra el diálogo. Deshabilitado cuando la radio no está conectada. Estilizado con un fondo rojizo para indicar la naturaleza destructiva de la acción. |
+| **Check for Update** | Consulta actualizaciones de firmware disponibles. Cuando se encuentra una actualización, la etiqueta de estado dice: *Update available: vX.Y.Z — Download the SmartSDR installer from flexradio.com, then click 'Select Installer...' to stage it.* Cuando el firmware está actualizado, la etiqueta dice: *Firmware is up to date (vX.Y.Z).* |
+| **Select Installer...** | Abre un selector de archivos. Acepta un instalador SmartSDR `.msi` (formato WiX de FlexRadio v4.2+), un instalador autoejecutable `.exe` (versiones anteriores) o un archivo de firmware `.ssdr` preextraído. El preparador de firmware detecta automáticamente el formato a partir de los primeros 8 bytes (magia OLE/MSI frente al encabezado PE/COFF MZ) y extrae la carga útil `.ssdr` sin herramientas externas. Anteriormente etiquetado **Browse .ssdr...** (cambiado en v26.5.3). |
+| **Upload Firmware** | Inicia la carga del firmware. Una barra de progreso y una etiqueta de estado siguen el avance. Solo se habilita después de que **Select Installer...** haya preparado un archivo válido. |
+| **Reboot Radio** | Solicita confirmación: *Reboot the connected radio now?* El texto de advertencia difiere para conexiones WAN (SmartLink) frente a LAN. En LAN, AetherSDR se reconectará automáticamente después de que la radio arranque. En WAN, debe reconectarse manualmente. Al hacer clic en OK se envía el comando de reinicio y se cierra el diálogo. Deshabilitado cuando la radio no está conectada. Con fondo rojizo para indicar la naturaleza destructiva de la acción. |
 
 ### Preparación de una actualización de firmware
 
 1. Haga clic en **Check for Update**.
 2. Si hay una actualización disponible, descargue el instalador de SmartSDR desde flexradio.com.
 3. Haga clic en **Select Installer...** y seleccione el archivo `.msi`, `.exe` o `.ssdr` descargado.
-   - La etiqueta de estado muestra *Preparing firmware from \<nombrearchivo\>...* mientras el preparador extrae la carga útil.
-4. Cuando la preparación se completa, la etiqueta de estado confirma la disponibilidad y **Upload Firmware** se activa.
+   - La etiqueta de estado muestra *Preparing firmware from \<filename\>...* mientras el preparador extrae la carga útil.
+4. Cuando la preparación se complete, la etiqueta de estado confirma que está listo y **Upload Firmware** se activa.
 5. Haga clic en **Upload Firmware** para transferir el firmware a la radio.
 
 ---
 
 ## Pestaña Network
 
-Muestra las direcciones de red y le permite ajustar la configuración de red.
+Muestra las direcciones de red y permite ajustar la configuración de red.
 
 ### Indicadores
 
 | Indicador | Comportamiento |
 |---|---|
-| **IP Address / Mask / MAC Address** | Direcciones de red de solo lectura informadas por la radio. Cada una incluye un botón de copia al portapapeles. |
+| **IP Address / Mask / MAC Address** | Direcciones de red de solo lectura reportadas por la radio. Cada una incluye un botón de copiar al portapapeles. |
+
+### Controles
+
+| Control | Tipo | Predeterminado |
+|---|---|---|
+| **Enforce Private IP Connections:** | Botón de alternancia | Habilitado |
+| **Agent Automation (MCP):** | Botón de alternancia | Deshabilitado. Habilita el puente de automatización en la aplicación para que un asistente de codificación de IA (mediante el servidor MCP) pueda inspeccionar y controlar la aplicación en ejecución. Desactivado por defecto; el operador decide activarlo. Nuevo en v26.8.4 (#3646). Se conserva mediante AutomationBridgeSettings. La variable de entorno de lanzamiento AETHER_AUTOMATION fuerza la habilitación del puente independientemente de esta alternancia y deshabilita el control en la interfaz. El control de transmisión permanece bloqueado a menos que se establezca AETHER_AUTOMATION_ALLOW_TX. |
+| **Access Token:** | Campo de texto (solo lectura) | (ninguno). Genera automáticamente un token hexadecimal de 128 bits cuando el puente se habilita sin uno. Péguelo en la variable de entorno AETHER_MCP_TOKEN del asistente. Se almacena en el almacén secreto del sistema operativo. Marcador de posición '(loading…)' hasta que se lea el llavero. Nuevo en v26.8.4. |
+| **Copy (Access Token)** | Botón pulsador | Copia el token de acceso al portapapeles. Nuevo en v26.8.4. |
+| **Rotate (Access Token)** | Botón pulsador | Genera un nuevo token y lo aplica inmediatamente, bloqueando a cualquier cliente que aún use el anterior. Nuevo en v26.8.4. |
+| **Allow TX via MCP: Enable transmit control** | Casilla de verificación | Falso. Permite que un cliente MCP active el transmisor (MOX/PTT/TUNE/ATU/CWX). Desactivado por defecto; el primer cambio a habilitado muestra una confirmación de responsabilidad del operador. Se aplica en el puente; ningún cliente puede cambiarlo. Anulado por AETHER_AUTOMATION_ALLOW_TX (forzado a activado) y AETHER_AUTOMATION_NO_TX (fijado en desactivado). Un vigilante de desactivación forzada limita la transmisión originada por el puente. Nuevo en v26.8.4. |
+| **Observe only: Read-only (block all driving)** | Casilla de verificación | Falso. Hace que el puente sea de solo observación: los clientes MCP pueden leer el estado, pero todo verbo de mutación (set/invoke/connect/tune/capture) se rechaza. Se aplica en la aplicación, por lo que un cliente no puede omitirlo. La variable de lanzamiento AETHER_AUTOMATION_READONLY lo fija en activado para ejecuciones sin interfaz/CI. Nuevo en v26.8.4 (#4188). |
+| **VITA-49 RX buffer:** | Control deslizante (ajuste a valores preestablecidos) | 4 MB. Establece el búfer de recepción del kernel (SO_RCVBUF) para el socket de flujo VITA-49; un valor mayor absorbe ráfagas de panadapter/waterfall para que no se pierdan paquetes. Valores preestablecidos de 256 KB a 4 MB. El sistema limita la concesión a net.core.rmem_max; una etiqueta en vivo 'granted: <size>' muestra lo que el kernel realmente concedió. Nuevo en v26.8.4 (#3810). |
+| **granted: (VITA-49 RX buffer)** | Indicador | Muestra el tamaño de búfer que el kernel realmente concedió (frente al valor preestablecido solicitado). Muestra '(applies on connect)' cuando no hay conexión activa. Nuevo en v26.8.4. |
+| **Network MTU:** | Control numérico | 1450. Establece el tamaño máximo de paquete UDP VITA-49 saliente en bytes (576–9000). El valor predeterminado 1450 es seguro para la mayoría de los túneles VPN/SD-WAN. Se almacena en `NetworkMtu`. |
+| **DHCP / Static** | Botón de alternancia | — |
+| **IP Address: / Mask: / Gateway:** | Campos de texto | — |
+| **Apply** | Botón pulsador | Envía la configuración de red a la radio. |
+
+---
+
+## Pestaña Calibration
+
+Proporciona calibración manual de compensación de frecuencia para radios que no pueden calibrar su propio oscilador. Esta pestaña está oculta por defecto y solo aparece para backends que reportan la capacidad `hostFrequencyCalibration` (como HL2).
+
+> **Nota:** A diferencia de la pestaña Flex RX (que ofrece los mismos controles de calibración para radios con hardware GPSDO), esta pestaña Calibration se usa cuando la radio no puede corregir su oscilador y la corrección debe realizarse en el cliente host. La pestaña está restringida por capacidad: permanece oculta en una FLEX-8600 incluso si escribe "calibration" en el cuadro de filtro.
 
 ### Controles
 
 | Control | Tipo | Predeterminado | Comportamiento |
 |---|---|---|---|
-| **Enforce Private IP Connections:** | Botón de alternancia | Habilitado | Rechaza pares que no sean RFC1918. |
-| **Network MTU:** | Spinbox | 1450 | Establece el tamaño máximo del paquete UDP VITA-49 saliente en bytes. Rango 576–9000. Almacenado en `NetworkMtu`. El valor predeterminado 1450 es seguro para la mayoría de los túneles VPN/SD-WAN. |
-| **DHCP / Static** | Botón de alternancia | — | Cambia entre modos DHCP e IP estática. |
-| **IP Address: / Mask: / Gateway:** | Campos de texto | — | Campos de configuración de IP estática. |
-| **Apply** | Botón pulsador | — | Envía la configuración de red a la radio. |
+| **Cal Frequency (MHz):** | Control numérico | — | Frecuencia utilizada para la calibración manual. |
+| **Freq Offset (ppb):** | Control numérico | — | Compensación de frecuencia manual en partes por mil millones. Se aplica directamente sin ejecutar un barrido. |
+| **Trim** | Botón pulsador | — | Confirma la compensación de frecuencia mostrada en la calibración de la radio conectada. El valor se vuelve a leer de la radio cada vez que se abre el diálogo o cambia la conexión, por lo que no se puede confirmar accidentalmente un valor obsoleto de una radio previamente conectada. |
+
+### Uso de la pestaña Calibration
+
+1. Haga clic en `Settings > Radio Setup...`.
+2. Haga clic en la pestaña **Calibration**.
+3. Ingrese una frecuencia de referencia conocida y precisa en **Cal Frequency (MHz):**.
+4. Ajuste **Freq Offset (ppb):** para corregir el error de frecuencia mostrado.
+5. Haga clic en **Trim** para confirmar la compensación en la radio.
+
+Los valores de calibración se vuelven a leer cada vez que se muestra el diálogo o se conecta una radio diferente, lo que garantiza que la compensación mostrada siempre refleje la radio actualmente conectada.
 
 ---
 
@@ -94,106 +127,41 @@ Muestra la presencia de GPS y datos de posición en vivo cuando hay un receptor 
 
 | Indicador | Comportamiento |
 |---|---|
-| Datos GPS en vivo | Muestra latitud, longitud, altitud, hora y número de satélites. Actualizado en tiempo real. |
+| Datos GPS en vivo | Muestra latitud, longitud, altitud, hora y cantidad de satélites. Se actualiza en tiempo real. |
 
 ---
 
 ## Pestaña TX
 
-Controla los tiempos de TX, límites de potencia, modo de sintonía (Tune) y el comportamiento de seguimiento de slice (receptor virtual).
+Controla temporizaciones de TX, límites de potencia, modo de sintonía y comportamiento de seguimiento de slice.
 
 | Control | Tipo | Predeterminado | Comportamiento |
 |---|---|---|---|
-| **Timings (in ms)** | Campos Spinbox | — | Tiempos de retención (hang) y retardo (delay) de TX. Campos: ACC TX (ms), TX Delay (ms), RCA TX1 (ms). |
-| **Timeout (sec):** | Spinbox | — | Tiempo de espera de interbloqueo en segundos. El valor se envía a la radio en milisegundos (multiplicado por 1000). |
+| **Timings (in ms)** | Campos de control numérico | — | Temporizaciones de retención y retardo de TX. Campos: ACC TX (ms), TX Delay (ms), RCA TX1 (ms). |
+| **Timeout (sec):** | Control numérico | — | Tiempo de espera de interbloqueo en segundos. El valor se envía a la radio en milisegundos (multiplicado por 1000). |
 | **Interlocks - TX REQ: RCA / Accessory** | Botón de alternancia | — | Habilita las entradas de interbloqueo RCA y de accesorio. |
-| **Max Power:** | Spinbox | — | Límite de potencia TX a nivel de radio (0–100%). |
+| **Max Power:** | Control numérico | — | Límite de potencia de TX a nivel de radio (0–100 %). |
 | **Tune Mode:** | Cuadro combinado | — | Selecciona cómo se comporta el botón Tune. |
-| **Show TX in Waterfall:** | Botón de alternancia | — | Dibuja la señal de TX en la visualización del waterfall. |
-| **TX Follows Active Slice** | Botón pulsador | False | TX sigue al slice activo. Mutuamente excluyente con **Active Slice Follows TX**. Se desactiva automáticamente durante la operación en Split (dividido). Almacenado en `TxFollowsActiveSlice`. |
-| **Active Slice Follows TX** | Botón pulsador | False | Cambia el slice activo cuando TX se mueve externamente (por ejemplo, WSJT-X o CAT). Mutuamente excluyente con **TX Follows Active Slice**. Almacenado en `ActiveFollowsTxSlice`. |
-| **TX Band Settings** | Botón pulsador | — | Abre el diálogo dedicado de potencia y sintonía por banda. |
+| **Show TX in Waterfall:** | Botón de alternancia | — | Dibuja la señal de TX en la visualización de waterfall. |
+| **TX Follows Active Slice** | Botón pulsador | Falso | TX sigue al slice activo. Mutuamente excluyente con **Active Slice Follows TX**. Se deshabilita automáticamente durante operación Split. Se almacena en `TxFollowsActiveSlice`. |
+| **Active Slice Follows TX** | Botón pulsador | Falso | Cambia el slice activo cuando TX se mueve externamente (p. ej., WSJT-X o CAT). Mutuamente excluyente con **TX Follows Active Slice**. Se almacena en `ActiveFollowsTxSlice`. |
+| **TX Band Settings** | Botón pulsador | — | Abre el diálogo dedicado de potencia por banda y sintonía. |
 
 ---
 
 ## Pestaña Phone/CW
 
-Configura el micrófono, el manipulador CW (keyer) y los valores predeterminados de RTTY.
+Configura el micrófono, el manipulador CW y los valores predeterminados de RTTY.
 
-### Manipador iámbico (Iambic keyer)
+### Manipulador iambic
 
 1. Haga clic en `Settings > Radio Setup...`.
 2. Haga clic en la pestaña **Phone/CW**.
-3. Confirme que **Iambic:** dice **Enabled**. Si dice **Disabled**, haga clic una vez para habilitar el manipulador.
-4. Haga clic en **A** o **B** para seleccionar el modo iámbico Curtis.
+3. Confirme que **Iambic:** muestra **Enabled**. Si muestra **Disabled**, haga clic una vez para habilitar el manipulador.
+4. Haga clic en **A** o **B** para seleccionar el modo iambic Curtis.
 
 | Control | Tipo | Predeterminado | Comportamiento |
 |---|---|---|---|
-| **Enable/Disable the Level Meter During Receive** | Botón de alternancia | — | Muestra el medidor de nivel de micrófono durante RX. |
-| **Iambic:** | Botón de alternancia | — | Habilita o deshabilita el manipulador iámbico en la radio. Siempre dice "Enabled" cuando está activado. |
-| **Iambic Mode: A / B** | Botón pulsador (par mutuamente excluyente) | A | Selecciona el modo iámbico Curtis A o B tanto para el manipulador de hardware de la radio como para el manipulador de software local. Modo A = Curtis A; Modo B = Curtis B. |
-| **Swap:** | Botón de alternancia | — | Intercambia dit y dah. |
-| **Sideband:** | Cuadro combinado | — | Selecciona la banda lateral del tono CW (LSB o USB). |
-| **CWX:** | Botón de alternancia | — | Habilita la activación de macros CWX. |
-| **Decode:** | Botón de alternancia | True | Habilita la superposición de decodificación CW en el panadapter. Almacenado en `CwDecodeOverlay`. |
-| **RTTY Mark Default:** | Spinbox | — | Frecuencia predeterminada de marca RTTY. |
-
-**Modo A vs. Modo B:** El modo A (Curtis A) suelta el último elemento cuando ambas paletas se sueltan a medio apretar (squeeze). El modo B (Curtis B) completa el último elemento antes de detenerse. El manipulador de software local refleja el modo que seleccione, proporcionando una respuesta de tono sidetone inferior a 5 ms, independiente de la latencia de la red.
-
----
-
-## Pestaña RX
-
-Proporciona calibración de compensación de frecuencia del GPSDO y selección de la fuente de referencia de 10 MHz.
-
-Los controles de calibración están disponibles independientemente de si hay un GPSDO instalado. La etiqueta de estado en la parte superior del grupo dice:
-
-- **GPSDO installed. Manual frequency offset calibration available.** (verde) — GPSDO presente.
-- **Manual frequency offset calibration available.** (ámbar) — sin GPSDO.
-
-### Uso de la calibración de frecuencia
-
-1. Haga clic en `Settings > Radio Setup...`.
-2. Haga clic en la pestaña **RX**.
-3. Introduzca una frecuencia de referencia conocida y precisa en **Cal Frequency (MHz):**.
-4. Haga clic en **Start**.
-   - La etiqueta del botón cambia a **Busy** y se deshabilita mientras se ejecuta la calibración.
-   - La etiqueta de estado informa el progreso (Starting… y estados subsiguientes).
-   - AetherSDR restablece el error de frecuencia a 0 ppb (`radio set freq_error_ppb=0`) antes de iniciar el barrido.
-5. Cuando la calibración se completa, el botón se vuelve a habilitar y la etiqueta de estado se actualiza con el resultado.
-6. Si **Cal Frequency (MHz):** está vacío cuando hace clic en **Start**, la etiqueta de estado muestra **Enter cal frequency** y la calibración no comienza.
-
-### Controles de calibración
-
-| Control | Tipo | Predeterminado | Comportamiento |
-|---|---|---|---|
-| **Cal Frequency (MHz):** | Spinbox | — | Frecuencia utilizada para la calibración. No debe estar vacía antes de hacer clic en Start. |
-| **Start** | Botón pulsador | — | Restablece el error de frecuencia a 0 ppb, luego inicia el barrido de calibración. Se deshabilita y etiqueta como Busy durante una calibración activa. |
-| **Freq Offset (ppb):** | Spinbox | — | Compensación de frecuencia manual en partes por billón (ppb). Se aplica directamente sin ejecutar un barrido. |
-| **10 MHz Reference Source:** | Cuadro combinado | Auto | Selecciona la fuente de referencia del oscilador. El cuadro combinado se completa dinámicamente según el hardware instalado y el estado actual del oscilador: **Auto**, **TCXO**, **GPSDO** y **External 10 MHz** aparecen solo cuando el hardware correspondiente se detecta o se seleccionó previamente. Cuando **Auto** está activo, la etiqueta de estado muestra la fuente resuelta (por ejemplo, *Auto -> GPSDO*). Si la fuente seleccionada difiere del estado activo, se muestran ambas (por ejemplo, *GPSDO -> TCXO*). El estado de bloqueo (**Locked** / **Unlocked**) se añade y se actualiza en vivo; si se selecciona **External 10 MHz** pero no se detecta ninguna señal externa, se añade *(not detected)*. |
-
----
-
-## Pestaña Antennas
-
-Configura nombres de antena definidos por el usuario para cada puerto de antena TX.
-
-| Control | Tipo | Predeterminado | Comportamiento |
-|---|---|---|---|
-| **ANT1 / ANT2 / XVTA / XVTB** | Campos de texto | — | Introduzca un nombre personalizado (hasta 20 caracteres) para cada puerto de antena. Los nombres se envían a la radio y se muestran en los botones de banda (band-stack) y en el selector de antena del slice. |
-
----
-
-## Pestaña Audio
-
-Configura las salidas de audio de la radio, los dispositivos de audio del PC, la grabación y el contenedor NVIDIA BNR.
-
-| Control | Tipo | Predeterminado | Comportamiento |
-|---|---|---|---|
-| **Line Out:** | Control deslizante | — | Ganancia de la salida de línea. |
-| **Mute (Line Out)** | Botón pulsador | — | Silencia la salida de línea. |
-| **Headphone:** | Control deslizante | — | Ganancia de auriculares. |
-| **Mute (Headphone)** | Botón pulsador | — | Silencia la salida de auriculares. |
-| **Front Speaker: / Mute** | Botón pulsador | — | Silencia el altavoz frontal (según el modelo). |
-| **Audio Compression (SmartLink): Auto / Uncompressed / Opus** | Botón pulsador | Auto | Selecciona el códec de audio para conexiones SmartLink/LAN. Almacenado en `AudioCompression`. |
-| **Prevent system sleep while connected** | Casilla de verificación | False | Mantiene el SO despierto mientras la radio está conectada para evitar caídas de fluj
+| **Enable/Disable the Level Meter During Receive** | Botón de alternancia | — | Muestra el medidor de nivel del micrófono durante RX. |
+| **Iambic:** | Botón de alternancia | — | Habilita o deshabilita el manipulador iambic en la radio. Siempre muestra "Enabled" cuando está activado. |
+| **Iambic Mode: A / B** | Botón pulsador (par mutuamente excluyente) | A | Selecciona el modo iambic Curtis A o B para el manipulador de hardware de la radio y el manipulador de software local. Modo A = Curtis A; Modo B = Curtis B. |

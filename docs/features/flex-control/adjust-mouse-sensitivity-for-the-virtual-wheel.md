@@ -1,6 +1,6 @@
 # Diálogo de AetherControl / FlexControl
 
-El diálogo de AetherControl permite configurar tanto el hardware físico FlexControl como la rueda de sintonización virtual. Incluye una visualización de rueda virtual, configuración de botones auxiliares y ajustes de sensibilidad de sintonización.
+El diálogo de AetherControl ofrece configuración tanto para el hardware físico FlexControl como para la rueda de sintonización virtual. Incluye una visualización de rueda virtual, configuración de botones auxiliares y ajustes de sensibilidad de sintonización.
 
 ## Abrir el diálogo
 
@@ -8,97 +8,99 @@ El diálogo de AetherControl permite configurar tanto el hardware físico FlexCo
 
 ## Visualización de la rueda virtual
 
-La rueda virtual muestra el slice activo actual, su frecuencia y modo. Puede girarla con el ratón o el tacto para sintonizar el slice activo.
+La rueda virtual muestra el slice activo actual, su frecuencia y modo. Puede girarla con el mouse o con el tacto para sintonizar el slice activo.
 
 ## FlexControl físico
 
-El diálogo muestra el estado de conexión y el nombre del puerto del FlexControl físico. Use los botones **Detect** y **Close** para gestionar el dispositivo físico.
+El diálogo muestra el estado de conexión y el nombre del puerto del FlexControl físico. Use los botones **Detect** y **Close** para administrar el dispositivo físico.
+
+Si la conexión con un FlexControl físico se pierde — por ejemplo, si se desconecta el cable USB — AetherSDR reintenta la conexión automáticamente. Los reintentos comienzan después de 2 segundos y aumentan progresivamente hasta un intervalo máximo de 30 segundos hasta que el dispositivo se detecte nuevamente. El controlador vuelve a detectar el nombre del puerto en cada reintento, por lo que un dispositivo que se reenumera en un puerto COM diferente se reconecta correctamente. La falla se registra una vez por interrupción en lugar de en cada reintento.
 
 ## Modo compacto
 
-Active **Compact** para ocultar los botones auxiliares y mostrar solo la rueda y la lectura de frecuencia, obteniendo una interfaz mínima.
+Active **Compact** para ocultar los botones auxiliares y mostrar solo la rueda y la lectura de frecuencia para una interfaz mínima.
 
 ## Giro externo
 
-Active **External Spin** para permitir que los gestos de arrastre sobre el panadapter activen el comportamiento de sintonización con rueda giratoria.
+Active **External Spin** para permitir gestos de arrastre en el panadapter que activen el comportamiento de sintonización de la rueda giratoria.
 
-## Invertir dirección
+## Dirección inversa
 
-Active **Reverse** para invertir la dirección de giro de la rueda.
+Active **Reverse** para invertir la dirección de sintonización de la rueda.
 
 ## Acciones de la rueda
 
-Asigne acciones al pulsar o hacer doble clic en la rueda:
+Asigne acciones al presionar o tocar dos veces la rueda:
 
 | Control | Descripción |
 |---------|-------------|
-| **Push (action)** | Seleccione una acción para un solo clic en la rueda |
-| **Double-tap (action)** | Seleccione una acción para un doble clic en la rueda |
+| **Push (action)** | Seleccione una acción para un toque simple en la rueda |
+| **Double-tap (action)** | Seleccione una acción para un doble toque en la rueda |
 
-Acciones disponibles para la rueda:
+Acciones de rueda disponibles:
 
 | ID de acción | Nombre mostrado |
-|--------------|-----------------|
-| `WheelRit` | RIT (Sintonización Incremental en Recepción) |
-| `WheelXit` | XIT (Sintonización Incremental en Transmisión) |
-| `WheelVolume` | Volumen Maestro |
-| `WheelSliceAudio` | Volumen de Audio del Slice |
-| `WheelHeadphoneVolume` | Volumen de Auriculares |
-| `WheelAgcT` | AGCT (Umbral de Control Automático de Ganancia) |
-| `WheelApf` | APF (Filtro de Enfoque de Audio) |
+|-----------|--------------|
+| `WheelRit` | RIT (Receive Incremental Tuning) |
+| `WheelXit` | XIT (Transmit Incremental Tuning) |
+| `WheelVolume` | Master Volume |
+| `WheelSliceAudio` | Slice Audio Volume |
+| `WheelHeadphoneVolume` | Headphone Volume |
+| `WheelAgcT` | AGCT (Automatic Gain Control Threshold) |
+| `WheelApf` | APF (Audio Peaking Filter) |
 
-**WheelSlice Audio** controla el volumen de audio del slice activo actual, independientemente del control de volumen maestro. Las configuraciones heredadas que usan `WheelMasterAf` se reconocen automáticamente como equivalentes a `WheelVolume`.
+**WheelSlice Audio** controla el volumen de audio del slice activo actual, independiente del control de volumen maestro. Los ajustes heredados que usan `WheelMasterAf` se reconocen automáticamente como equivalentes a `WheelVolume`.
 
 ## Botones auxiliares
 
-Configure cinco botones auxiliares, cada uno con acciones separadas para un solo clic y doble clic:
+Configure cinco botones auxiliares, cada uno con acciones separadas de toque simple y doble toque:
 
-1. Haga clic en uno de los cinco botones **Aux** (marcados con puntos) para seleccionarlo.
-2. En el **Aux single-tap combo**, seleccione la acción para un solo clic.
-3. En el **Aux double-tap combo**, seleccione la acción para un doble clic.
+1. Haga clic en uno de los cinco botones **Aux** (etiquetados con puntos) para seleccionarlo.
+2. En el **combo de toque simple de Aux**, seleccione la acción para un toque simple.
+3. En el **combo de doble toque de Aux**, seleccione la acción para un doble toque.
 
 Cada botón auxiliar recuerda sus propias asignaciones de forma independiente. El botón auxiliar seleccionado se indica mediante el estado del punto junto a su etiqueta.
 
 ## Control deslizante de tensión de la rueda
 
-Ajusta el arrastre por inercia de la rueda virtual:
+Ajusta el arrastre de inercia de la rueda virtual:
 
-| Control | Valor predeterminado | Rango | Clave de configuración |
-|---------|----------------------|-------|------------------------|
+| Control | Predeterminado | Rango | Clave de ajuste |
+|---------|---------|-------|-------------|
 | Control deslizante Wheel Tightness | 45 | 0–100 | `FlexControlVirtualWheel` (JSON anidado, campo `looseness`) |
 
-- **Tight** (izquierda, valor 0): se detiene rápidamente al soltar la rueda.
-- **Loose** (derecha, valor 100): se desliza largo tiempo al soltar la rueda.
-- Afecta principalmente el uso del trackpad; no afecta a un FlexControl físico.
-- Anteriormente se almacenaba bajo la clave plana heredada `FlexControlVirtualWheelLooseness`; se migra automáticamente en la primera lectura.
+- **Tight** (izquierda, valor 0): detención rápida después de soltar la rueda.
+- **Loose** (derecha, valor 100): inercia prolongada después de soltar la rueda.
+- Afecta principalmente el uso del trackpad; no afecta un FlexControl físico.
+- Antes se almacenaba bajo la clave plana heredada `FlexControlVirtualWheelLooseness`; se migra automáticamente en la primera lectura.
 
-## Control deslizante de sensibilidad del ratón
+## Control deslizante de sensibilidad del mouse
 
 Ajusta cuánto movimiento del puntero gira la rueda virtual:
 
-| Control | Valor predeterminado | Rango | Clave de configuración |
-|---------|----------------------|-------|------------------------|
-| Control deslizante Mouse Sensitivity | 50 | 0–100 | `FlexControlVirtualWheel` (JSON anidado, campo `sensitivity` field) |
+| Control | Predeterminado | Rango | Clave de ajuste |
+|---------|---------|-------|-------------|
+| Control deslizante Mouse Sensitivity | 50 | 0–100 | `FlexControlVirtualWheel` (JSON anidado, campo `sensitivity`) |
 
 - **Less** (izquierda, valor 0): requiere más movimiento del puntero.
 - **More** (derecha, valor 100): requiere menos movimiento del puntero.
 - El punto medio (50) produce una escala de 1.0x.
-- Los deltas del puntero de evento único se limitan a 15° (π/12 radianes) para reducir la inestabilidad.
+- Los deltas de puntero de evento único se limitan a 15° (π/12 radianes) para reducir la vibración.
 - El reanclaje diferido evita saltos no deseados cuando el puntero cruza la zona muerta central de la rueda.
-- Afecta solo a la rueda virtual; no cambia el comportamiento de un FlexControl físico.
+- Afecta solo la rueda virtual; no cambia el comportamiento de un FlexControl físico.
 
 ### Consejos
 
-- Si usa un trackpad, pruebe comenzar con Mouse Sensitivity en el valor 65 y ajuste desde allí.
-- Use el control deslizante complementario **Wheel Tightness** para controlar la sensación de deslizamiento.
+- Si usa un trackpad, intente comenzar con Mouse Sensitivity en el valor 65 y ajuste desde allí.
+- Use el control deslizante complementario **Wheel Tightness** para controlar la sensación de inercia.
 
 ## Comportamiento de captura/liberación
 
-- **Haga doble clic** en la rueda virtual para capturar la entrada del ratón para sintonización circular.
-- **Haga doble clic** nuevamente para liberar la captura.
-- Presione **Escape** como ruta de liberación secundaria.
+- **Doble clic** en la rueda virtual para capturar la entrada del mouse para sintonización circular.
+- **Doble clic** nuevamente para liberar la captura.
+- Presione **Escape** como vía secundaria de liberación.
 - Un solo clic ya no captura ni libera la rueda.
 
 ## Tamaño de la ventana
 
-El diálogo de AetherControl se adapta al tamaño de su pantalla. Cuando se abre en modo no compacto en una pantalla de poca altura, el área de contenido se desplaza verticalmente para que todos los controles sigan siendo accesibles. El diálogo nunca se abre con una altura mayor que la altura disponible del espacio de trabajo.
+El diálogo de AetherControl se adapta al tamaño de su pantalla. Cuando se abre en modo no compacto en una pantalla más baja, el área de contenido se desplaza verticalmente para que todos los controles permanezcan accesibles. El diálogo nunca se abre más alto que la altura disponible del espacio de trabajo.

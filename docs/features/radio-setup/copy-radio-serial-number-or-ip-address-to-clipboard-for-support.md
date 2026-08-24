@@ -1,126 +1,169 @@
-# Copiar el número de serie o la dirección IP de la radio al portapapeles para soporte técnico
+# Configuración del Radio
 
-Esta página le ayuda a copiar rápidamente el número de serie, la dirección IP u otra información de identificación de su FLEX-8600 al portapapeles del sistema para que pueda pegarla en un ticket de soporte o correo electrónico.
+Esta página cubre el diálogo **Radio Setup**, la ventana maestra de configuración por radio. Incluye información del radio, configuración de red, GPS, TX, Phone/CW, RX, audio, filtros, transverters, cables USB, conexiones periféricas y gestión de certificados SmartLink fijados. Muchos valores de solo lectura incluyen un botón de copiado al portapapeles para compartirlos fácilmente con soporte técnico.
 
 ## Antes de comenzar
 
-- Su radio debe estar conectada a AetherSDR.
+- Su radio debe estar conectado a AetherSDR, salvo que se indique lo contrario.
 
-## Pasos
+## Abrir Configuración del Radio
 
-### Copiar el número de serie de la radio
+1. Haga clic en `Settings > Radio Setup...`.
+2. El diálogo se abre con una lista de navegación de pestañas a la izquierda y un panel de configuración a la derecha.
+
+## Copiar valores al portapapeles
+
+Varios valores de solo lectura (número de serie, versión de hardware, modelo, opciones, dirección IP, dirección MAC, campos de licencia) incluyen un botón de copiado al portapapeles (icono de bandeja) inmediatamente a la derecha del valor. Haga clic en él para copiar el valor al portapapeles de su sistema y pegarlo en un ticket de soporte o correo electrónico.
+
+### Copiar el número de serie del radio
 
 1. Abra `Settings > Radio Setup...`.
 2. En la pestaña **Radio**, localice la etiqueta de solo lectura **Radio SN**.
-3. Haga clic en el botón de copia al portapapeles (icono de bandeja) inmediatamente a la derecha del valor del número de serie.
+3. Haga clic en el botón de copiado al portapapeles (icono de bandeja) inmediatamente a la derecha del valor del número de serie.
 
-### Copiar la dirección IP de la radio
-
-1. Abra `Settings > Radio Setup...`.
-2. Haga clic en la pestaña **Network**.
-3. Localice la etiqueta de solo lectura **IP Address**.
-4. Haga clic en el botón de copia al portapapeles (icono de bandeja) inmediatamente a la derecha del valor de la dirección IP.
-
-### Copiar la dirección MAC
+### Copiar la dirección IP o dirección MAC del radio
 
 1. Abra `Settings > Radio Setup...`.
 2. Haga clic en la pestaña **Network**.
-3. Localice la etiqueta de solo lectura **MAC Address**.
-4. Haga clic en el botón de copia al portapapeles (icono de bandeja) inmediatamente a la derecha de la dirección MAC.
+3. Localice la etiqueta de solo lectura **IP Address** o **MAC Address**.
+4. Haga clic en el botón de copiado al portapapeles (icono de bandeja) inmediatamente a la derecha del valor.
 
-### Copiar la versión del firmware o la información de licencia
+### Copiar la versión de firmware o información de licencia
 
 1. Abra `Settings > Radio Setup...`.
-2. En la pestaña **Radio**, desplácese hasta la sección **License Info**.
-3. Haga clic en el botón de copia al portapapeles junto a cualquier campo: **Subscription**, **Expiration**, **Radio ID** o **Licensed version**.
+2. En la pestaña **Radio**, desplácese a la sección **License Info**.
+3. Haga clic en el botón de copiado al portapapeles junto a cualquier campo: **Subscription**, **Expiration**, **Radio ID** o **Licensed version**.
 
 También puede copiar **HW Version**, **Model** u **Options** desde la pestaña **Radio** de la misma manera.
 
-## Función de cada control
+## Pestañas
 
-| Control                                             | Comportamiento                                                                                                                                                                                                                                                               | Notas                                                                                                                               |
-|-----------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
-| Botón de copia al portapapeles (icono de bandeja)                   | Un icono pequeño junto a cada valor de solo lectura. Al hacer clic, copia ese valor al portapapeles del sistema y muestra brevemente un mensaje emergente "Copiado". El botón aparece atenuado cuando el valor está vacío o no disponible. |                                                                                                                                     |
-| Select Installer...                                 | Abre un diálogo de archivos para un instalador de SmartSDR (.msi, .exe) o un archivo de firmware .ssdr previamente extraído. Pasa la ruta seleccionada a FirmwareStager que extrae el contenido .ssdr y emite el progreso.            | La etiqueta cambió de 'Browse .ssdr...' a 'Select Installer...' en v26.5.3.                                                           |
-| SmartLink (tab)                                     | Gestión de certificados TLS anclados de SmartLink. Muestra una lista de cada certificado anclado (host, huella SHA-256, fecha de anclaje) con botones Forget (Olvidar) por fila y Forget All (Olvidar todo). Nuevo en v26.5.3 (#2951 Fase 2).                | Se construye de forma diferida al hacer clic por primera vez. Fase 2 de GHSA-wfx7-w6p8-4jr2: la discrepancia de certificado ahora pausa forzosamente el handshake con un diálogo modal. |
-| Pinned SmartLink Certificates (sección)             | Encabezado de sección para la tabla de certificados anclados dentro de la pestaña SmartLink. Lista todos los hosts que este cliente ha anclado en la primera conexión (confianza en el primer uso).                                                     | Fase 2 de GHSA-wfx7-w6p8-4jr2. El esquema de anclaje migró de cadenas de texto simples a objetos {fp, pinnedAt}.                                   |
-| Host / SHA-256 fingerprint / Pinned (columnas de tabla) | Tabla de solo lectura de 3 columnas: Host (nombre de host), SHA-256 fingerprint (fuente monoespaciada), Pinned (AAAA-MM-DD o '(pre-phase 2)').                                                                                    | Respaldado por WanCertCache en WanConnection.cpp.                                                                                        |
-| Forget selected                                     | Elimina la huella del certificado anclado del host seleccionado para que la próxima conexión lo vuelva a anclar silenciosamente.                                                                                                              |                                                                                                                                     |
-| Forget all                                          | Borra todos los certificados anclados (con confirmación). La próxima conexión a cada radio los volverá a anclar silenciosamente.                                                                                                             | Muestra un QMessageBox::question antes de borrar.                                                                                          |
-| Radio (tab)                                         | Información de la radio, identificación, información de licencia y actualización de firmware.                                                                                                                                   |                                                                                                                                     |
-| Radio SN                                            | Número de serie del chasis (solo lectura).                                                                                                                                                                     | Incluye un botón de copia al portapapeles (icono de bandeja) junto al valor. Nuevo en v26.5.3 (#2976).                                             |
-| Region                                              | Región regulatoria de la radio.                                                                                                                                                                               |                                                                                                                                     |
-| HW Version                                          | Cadena de versión del hardware.                                                                                                                                                                               | Incluye un botón de copia al portapapeles junto al valor (#2976).                                                                         |
-| Remote On                                           | Habilita el encendido remoto / remote-on.                                                                                                                                                                       |                                                                                                                                     |
-| Options                                             | Muestra las opciones de radio licenciadas.                                                                                                                                                                          | Incluye un botón de copia al portapapeles junto al valor (#2976).                                                                         |
-| FlexControl                                         | Estado detectado del hardware FlexControl.                                                                                                                                                                |                                                                                                                                     |
-| multiFLEX                                           | Estado de habilitación de multiFLEX.                                                                                                                                                                               |                                                                                                                                     |
-| Model                                               | Modelo de la radio.                                                                                                                                                                                           | Incluye un botón de copia al portapapeles junto al valor (#2976).                                                                         |
-| Nickname                                            | Apodo amigable de la radio.                                                                                                                                                                          |                                                                                                                                     |
-| Callsign                                            | Indicativo de la estación.                                                                                                                                                                                      |                                                                                                                                     |
-| Station Name                                        | Identifica a este cliente AetherSDR ante otras estaciones multiFLEX. Por defecto, toma el nombre del host del SO si está vacío.                                                                                                    | Se almacena en AppSettings. Se envía a la radio como 'client station <name>'.                                                                    |
-| License Info (Subscription / Expiration / Radio ID / Licensed version) | Muestra los detalles de la licencia desde la radio.                                                                                                                              | Cada campo (Subscription, Expiration, Radio ID, Licensed version) incluye un botón de copia al portapapeles junto al valor (#2976).       |
-| Check for Update                                    | Consulta actualizaciones de firmware.                                                                                                                                                                          |                                                                                                                                     |
-| Upload Firmware                                     | Inicia la carga del firmware con barra de progreso y estado.                                                                                                                                                   |                                                                                                                                     |
-| Network (tab)                                       | Información de red de la radio y opciones de red avanzadas.                                                                                                                                                |                                                                                                                                     |
-| IP Address / Mask / MAC Address                     | Direcciones de red de solo lectura.                                                                                                                                                                           | Cada una incluye un botón de copia al portapapeles (#2976).                                                                                      |
-| Enforce Private IP Connections                      | Rechaza pares que no sean RFC1918.                                                                                                                                                                             |                                                                                                                                     |
-| Network MTU                                         | Establece el tamaño máximo de paquete UDP VITA-49 de salida en bytes. Valor predeterminado 1450. Rango 576-9000 bytes.                                                                                                           | Se almacena en AppSettings.                                                                                                              |
-| DHCP / Static                                       | Cambia entre los modos DHCP e IP estática.                                                                                                                                                             |                                                                                                                                     |
-| IP Address / Mask / Gateway (Static)                | Campos de configuración de IP estática.                                                                                                                                                                        |                                                                                                                                     |
-| Apply (Network)                                     | Envía la configuración de red a la radio.                                                                                                                                                                |                                                                                                                                     |
-| GPS (tab)                                           | Presencia de GPS e información en vivo de latitud/longitud/altitud/hora/satélites.                                                                                                                                                |                                                                                                                                     |
-| TX (tab)                                            | Temporizaciones de TX, enclavamientos, potencia máxima, modo de sintonía, visualización en waterfall, seguimiento de slice/TX y acceso directo a la configuración de banda de TX.                                                                                       |                                                                                                                                     |
-| TX Band Settings                                    | Abre el diálogo dedicado de potencia/sintonía por banda.                                                                                                                                                        |                                                                                                                                     |
-| Timings (in ms)                                     | Temporizaciones de retención/retardo de TX.                                                                                                                                                                               |                                                                                                                                     |
-| Interlocks - TX REQ: RCA / Accessory                | Habilita las entradas de enclavamiento RCA y Accessory.                                                                                                                                                            |                                                                                                                                     |
-| Max Power                                           | Establece el límite de potencia de TX a nivel de radio. Rango 0-100 %.                                                                                                                                                         |                                                                                                                                     |
-| Tune Mode                                           | Selecciona cómo se comporta el botón de sintonía.                                                                                                                                                                   |                                                                                                                                     |
-| Show TX in Waterfall                                | Dibuja la señal de TX en el waterfall.                                                                                                                                                                      |                                                                                                                                     |
-| TX Follows Active Slice                             | TX sigue al slice activo. Mutuamente exclusivo con 'Active Slice Follows TX'. Valor predeterminado: False.                                                                                                        | Se desactiva automáticamente durante una operación Split.                                                                                      |
-| Active Slice Follows TX                             | Cambia el slice activo cuando el TX se mueve externamente (ej. WSJT-X o CAT). Mutuamente exclusivo con 'TX Follows Active Slice'. Valor predeterminado: False.                                                            |                                                                                                                                     |
-| Phone/CW (tab)                                      | Micrófono, manipulador CW, valores predeterminados de RTTY.                                                                                                                                                                   |                                                                                                                                     |
-| Enable/Disable the Level Meter During Receive       | Muestra el medidor de nivel del micrófono incluso en RX.                                                                                                                                                                      |                                                                                                                                     |
-| Iambic                                              | Habilita o deshabilita el manipulador iambic en la radio.                                                                                                                                                     | En v0.9.1, se agregaron los botones Mode A y Mode B junto al interruptor Enabled.                                                          |
-| Iambic Mode: A / B                                  | Selecciona el modo iambic Curtis A o B tanto para la radio como para el manipulador de software local. Valor predeterminado: A.                                                                                                         | Par mutuamente exclusivo agregado en v0.9.1.                                                                                            |
-| Swap                                                | Intercambia dit/dah.                                                                                                                                                                                         |                                                                                                                                     |
-| Sideband                                            | Selecciona la banda lateral del tono CW. Opciones: LSB, USB.                                                                                                                                                         |                                                                                                                                     |
-| CWX                                                 | Habilita el keying por macros CWX.                                                                                                                                                                              |                                                                                                                                     |
-| Decode                                              | Habilita la superposición de decodificación CW en el panadapter. Valor predeterminado: True.                                                                                                                                        |                                                                                                                                     |
-| RTTY Mark Default                                   | Frecuencia de marca RTTY predeterminada.                                                                                                                                                                           |                                                                                                                                     |
-| RX (tab)                                            | Calibración de compensación de frecuencia del GPSDO y fuente de referencia de 10 MHz.                                                                                                                                        |                                                                                                                                     |
-| Cal Frequency (MHz)                                 | Frecuencia utilizada para la calibración manual.                                                                                                                                                                 |                                                                                                                                     |
-| Start                                               | Inicia el barrido de calibración de frecuencia.                                                                                                                                                                |                                                                                                                                     |
-| Freq Offset (ppb)                                   | Compensación de frecuencia manual en ppb.                                                                                                                                                                        |                                                                                                                                     |
-| 10 MHz Reference Source                             | Selecciona la fuente de referencia del oscilador. Opciones: Auto, TCXO, GPSDO, External. Valor predeterminado: Auto.                                                                                                              | El estado de bloqueo (Locked / Unlocked) se muestra junto al cuadro combinado y se actualiza en vivo.                                                       |
-| Audio (tab)                                         | Salidas de audio de la radio, compresión, dispositivos de PC, refuerzo, búfer, grabación y contenedor NVIDIA BNR.                                                                                                      |                                                                                                                                     |
-| Line Out                                            | Ganancia de salida de línea.                                                                                                                                                                                         |                                                                                                                                     |
-| Mute (Line Out)                                     | Silencia la salida de línea.                                                                                                                                                                                        |                                                                                                                                     |
-| Headphone                                           | Ganancia de auriculares.                                                                                                                                                                                        |                                                                                                                                     |
-| Mute (Headphone)                                    | Silencia los auriculares.                                                                                                                                                                                       |                                                                                                                                     |
-| Front Speaker / Mute                                | Silencia el altavoz frontal (específico del modelo).                                                                                                                                                                  |                                                                                                                                     |
-| Audio Compression (SmartLink): Auto / Uncompressed / Opus | Selecciona el códec de audio para SmartLink/LAN. Valor predeterminado: Auto.                                                                                                                                            |                                                                                                                                     |
-| Prevent system sleep while connected                | Mantiene el SO despierto mientras la radio está conectada para evitar caídas en los flujos de audio/TCP/UDP durante la inactividad. Valor predeterminado: False.                                                                                            |                                                                                                                                     |
-| PC Audio Devices: Input / Output                    | Selecciona los dispositivos de audio de entrada/salida del host.                                                                                                                                                                       |                                                                                                                                     |
-| Audio Boost                                         | Habilita ganancia adicional en la ruta de audio del cliente.                                                                                                                                                           |                                                                                                                                     |
-| Audio Buffer                                        | Aumenta el búfer de audio en milisegundos para mitigar la fluctuación (jitter) en VPN/SmartLink. Valor predeterminado: 200. Rango 50-1000 ms.                                                                                                       | Se almacena como 'AudioBufferMs'.                                                                                                          |
-| Recording: Radio Side / Client Side                 | Selecciona la grabación del lado de la radio o del lado del cliente. Valor predeterminado: Radio Side.                                                                                                                                        |                                                                                                                                     |
-| Save to                                             | Carpeta para grabaciones guardadas (solo lado del cliente). Valor predeterminado: Documents/AetherSDR/Recordings.                                                                                                           |                                                                                                                                     |
-| ... (Browse)                                        | Navega para seleccionar la carpeta de grabaciones.                                                                                                                                                                          |                                                                                                                                     |
-| Auto-record on TX                                   | Graba automáticamente mientras se transmite. Valor predeterminado: False.                                                                                                                                              |                                                                                                                                     |
-| Idle timeout                                        | Segundos de silencio antes de que la grabación se detenga. Valor predeterminado: 120. Rango 10-3600 seg.                                                                                                                            |                                                                                                                                     |
-| NVIDIA BNR: Autostart Container / Start / Stop / Check Status | Controla el contenedor de eliminación de ruido NVIDIA Broadcast.                                                                                                                                          |                                                                                                                                     |
-| NVIDIA BNR status dot                               | Punto de color que indica el estado del contenedor: Running (Ejecutándose) / Stopped (Detenido) / Unknown (Desconocido).                                                                                                                                             |                                                                                                                                     |
-| Filters (tab)                                       | Opciones de filtro de baja latencia / nítido por ancho de banda.                                                                                                                                                     |                                                                                                                                     |
-| Voice / CW / Digital filter sharpness sliders       | Establece la nitidez del filtro (0=menor latencia a 3=más nítido) por modo; el control deslizante se deshabilita cuando Auto está habilitado.                                                                                             |                                                                                                                                     |
-| Auto (Voice / CW / Digital)                         | Habilita la selección automática del nivel de filtro para ese modo; deshabilita el control deslizante de nitidez manual.                                                                                                         |                                                                                                                                     |
-| Use Low Latency Filters for Digital Modes           | Fuerza el uso de filtros de baja latencia en DIGU/DIGL.                                                                                                                                                              |                                                                                                                                     |
-| XVTR (tab)                                          | Configuración por transvertidor: RX Only (Solo RX), válido, eliminar, más Create New Transverter (Crear nuevo transvertidor).                                                                                                                 | Contiene pestañas anidadas, una por transvertidor, y una pestaña '+'.                                                                                  |
-| RX Only (XVTR)                                      | Fuerza solo RX en ese transvertidor.                                                                                                                                                                    |                                                                                                                                     |
-| Remove (XVTR)                                       | Elimina la definición del transvertidor.                                                                                                                                                                    |                                                                                                                                     |
-| Create New Transverter                              | Agrega una nueva entrada de transvertidor.                                                                                                                                                                          |                                                                                                                                     |
-| USB Cables (tab)                                    | Asigna adaptadores de serie USB a los tipos de cable CAT, BCD, bit y PTT.                                                                                                                                    |                                                                                                                                     |
-| Cables list / Status                                | Cables USB detectados por tipo con estado Plugged (Conectado) / Unplugged (Desconectado).                                                                                                                                           |                                                                                                                                     |
-| Name / Enabled / Speed / Data Bits / Parity / Stop Bits / Flow / Source / Auto Report / BCD Type / Polarity / Bit Configuration (0-7) | Parámetros de serie y comportamiento por cable.                                                                                             |                                                                                                                                     |
-| Peripherals (tab)                                   | Conexión IP manual de dispositivos externos (TGXL, PGXL, Antenna Genius).                                                                                                                                   |                                                                                                                                     |
-| Connect / Disconnect                                | Conecta o desconecta el periférico seleccionado.                                                                                                                                                           |                                                                                                                                     |
+### Radio
+
+La pestaña **Radio** muestra identificación del radio, información de licencia y controles de actualización de firmware.
+
+| Control | Comportamiento | Notas |
+|---------|----------|-------|
+| Radio SN | Número de serie del chasis (solo lectura). | Incluye un botón de copiado al portapapeles (icono de bandeja) junto al valor. |
+| Region | Región regulatoria del radio. | |
+| HW Version | Cadena de versión de hardware. | Incluye un botón de copiado al portapapeles junto al valor. |
+| Remote On | Habilita el encendido remoto / remote-on. | |
+| Options | Muestra las opciones licenciadas del radio. | Incluye un botón de copiado al portapapeles junto al valor. |
+| FlexControl | Estado detectado del hardware FlexControl. | |
+| multiFLEX | Estado habilitado de multiFLEX. | |
+| Reboot Radio | Reinicia el radio conectado con un diálogo de confirmación. AetherSDR se desconecta y (en LAN) se reconecta automáticamente una vez que el arranque finaliza. | Solo habilitado cuando está conectado y el backend admite un reinicio del cliente (p. ej., HL2 es solo RX, por lo que el botón está deshabilitado). En SmartLink/WAN el operador debe reconectarse manualmente después del reinicio. |
+| Model | Modelo del radio. | Incluye un botón de copiado al portapapeles junto al valor. |
+| Nickname | Apodo amigable del radio. | |
+| Callsign | Indicativo de la estación. | |
+| Station Name | Identifica este cliente AetherSDR ante otras estaciones multiFLEX. Se establece por defecto al nombre de host del SO si está vacío. | Se almacena en AppSettings. Se envía al radio como 'client station `<name>`'. |
+| License Info (Subscription / Expiration / Radio ID / Licensed version) | Muestra los detalles de licencia del radio. | Cada campo incluye un botón de copiado al portapapeles junto al valor. |
+| Check for Update | Consulta actualizaciones de firmware. | |
+| Select Installer... | Abre un diálogo de archivos para un instalador SmartSDR (.msi, .exe) o un archivo de firmware .ssdr preextraído. Pasa la ruta seleccionada a FirmwareStager, que extrae el payload .ssdr y emite progreso. | La etiqueta cambió desde 'Browse .ssdr...' en una versión anterior. |
+| Upload Firmware | Inicia la carga del firmware con barra de progreso y estado. | |
+
+### Network
+
+La pestaña **Network** muestra información de red del radio y opciones avanzadas de red.
+
+| Control | Comportamiento | Notas |
+|---------|----------|-------|
+| IP Address / Mask / MAC Address | Direcciones de red de solo lectura. | Cada una incluye un botón de copiado al portapapeles. |
+| Enforce Private IP Connections: | Rechaza pares no RFC1918. | |
+| Agent Automation (MCP): | Habilita el puente de automatización integrado para que un asistente de codificación con IA (a través del servidor MCP) pueda inspeccionar y controlar la aplicación en ejecución. Desactivado por defecto; el operador debe aceptarlo explícitamente. | Se persiste mediante AutomationBridgeSettings. La variable de entorno de lanzamiento `AETHER_AUTOMATION` fuerza la habilitación del puente independientemente de este interruptor y deshabilita el control en la interfaz. El keying de transmisión permanece bloqueado a menos que se establezca `AETHER_AUTOMATION_ALLOW_TX`. |
+| Access Token: | Muestra de solo lectura del token de acceso MCP; péguelo en la variable de entorno `AETHER_MCP_TOKEN` del asistente. Se almacena en el almacén de secretos del SO. | Genera automáticamente un token hexadecimal de 128 bits cuando el puente se habilita sin uno. Marcador de posición '(loading…)' hasta que se lea la lectura del llavero. |
+| Copy (Access Token) | Copia el token de acceso al portapapeles. | |
+| Rotate (Access Token) | Genera un nuevo token y lo aplica inmediatamente, bloqueando a cualquier cliente que aún use el anterior. | |
+| Allow TX via MCP: Enable transmit control | Permite que un cliente MCP keyee el transmisor (MOX/PTT/TUNE/ATU/CWX). Desactivado por defecto; la primera habilitación muestra una confirmación de responsabilidad del operador. | Se aplica en el puente; ningún cliente puede cambiarlo. Es anulado por `AETHER_AUTOMATION_ALLOW_TX` (forzado a activado) y `AETHER_AUTOMATION_NO_TX` (fijado a desactivado). Un watchdog de deskeying forzado limita la TX originada por el puente. |
+| Observe only: Read-only (block all driving) | Hace que el puente sea de solo observación: los clientes MCP pueden leer el estado, pero todo verbo mutador (set/invoke/connect/tune/capture) es rechazado. | Se aplica en la aplicación, por lo que un cliente no puede omitirlo. La variable de lanzamiento `AETHER_AUTOMATION_READONLY` lo fija a activado para ejecuciones headless/CI. |
+| VITA-49 RX buffer: | Control deslizante con ajuste a valores preestablecidos que configura el buffer de recepción del kernel (SO_RCVBUF) para el socket de flujo VITA-49; un tamaño mayor absorbe ráfagas de panadapter/waterfall para que no se pierdan paquetes. | Valores preestablecidos de 256 KB a 4 MB. El sistema limita la concesión a `net.core.rmem_max`; una etiqueta en vivo 'granted: \<size\>' muestra lo que el kernel realmente concedió. |
+| granted: (VITA-49 RX buffer) | Muestra el tamaño de buffer que el kernel realmente concedió (frente al valor preestablecido solicitado). | Muestra '(applies on connect)' cuando no hay una conexión activa. |
+| Network MTU: | Establece el tamaño máximo de paquete UDP de salida VITA-49 en bytes. Valor predeterminado 1450. Rango 576-9000 bytes. | Se almacena en AppSettings. |
+| DHCP / Static | Cambia entre modos DHCP e IP estática. | |
+| IP Address: / Mask: / Gateway: | Campos de configuración de IP estática. | |
+| Apply | Envía la configuración de red al radio. | |
+
+### GPS
+
+La pestaña **GPS** muestra presencia de GPS e información en vivo de lat/lon/alt/hora/satélites.
+
+### TX
+
+La pestaña **TX** configura temporizaciones de TX, interbloqueos, potencia máxima, modo de sintonización, visualización en waterfall, seguimiento de slice/TX y proporciona un acceso directo a TX Band Settings.
+
+| Control | Comportamiento | Notas |
+|---------|----------|-------|
+| TX Band Settings | Abre el diálogo dedicado de potencia/sintonización por banda. | |
+| Timings (in ms) | Temporizaciones de retención / retardo de TX. | |
+| Interlocks - TX REQ: RCA / Accessory | Habilita las entradas de interbloqueo RCA y accesorio. | |
+| Max Power: | Establece el límite de potencia TX a nivel de radio. Rango 0-100 %. | |
+| Tune Mode: | Selecciona cómo se comporta el botón de sintonización. | |
+| Show TX in Waterfall: | Dibuja la señal TX en el waterfall. | |
+| TX Follows Active Slice | La TX sigue a la slice activa. Mutuamente excluyente con 'Active Slice Follows TX'. Valor predeterminado False. | Se deshabilita automáticamente durante la operación en Split. |
+| Active Slice Follows TX | Cambia la slice activa cuando la TX se mueve externamente (p. ej., WSJT-X o CAT). Mutuamente excluyente con 'TX Follows Active Slice'. Valor predeterminado False. | |
+
+### Phone/CW
+
+La pestaña **Phone/CW** configura el micrófono, keyer CW y valores predeterminados de RTTY.
+
+| Control | Comportamiento | Notas |
+|---------|----------|-------|
+| Enable/Disable the Level Meter During Receive | Muestra el medidor de nivel de micrófono incluso en RX. | |
+| Iambic: | Habilita o deshabilita el keyer iambic en el radio. | Se agregaron botones Mode A y Mode B junto al interruptor Enabled. |
+| Iambic Mode: A / B | Selecciona el modo iambic Curtis A o B tanto para el radio como para el keyer de software local. Valor predeterminado A. | Par mutuamente excluyente. |
+| Swap: | Intercambia dit/dah. | |
+| Sideband: | Selecciona la banda lateral del tono CW. Opciones: LSB, USB. | |
+| CWX: | Habilita el keying de macros CWX. | |
+| Decode: RX | Habilita la superposición de decodificación CW en el panadapter para CW recibido. Valor predeterminado True. | Se persiste como un blob JSON anidado bajo `CwDecoder` con campos `rx` y `tx`. La clave heredada `CwDecodeOverlay` se migra automáticamente en la primera lectura. |
+| Decode: TX | Decodifica el propio keying CW del operador mediante el tono lateral del lado del cliente, útil como herramienta de autoentrenamiento para la sincronización de paddle/bug. Valor predeterminado False. | |
+| RTTY Mark Default: | Frecuencia de marca RTTY predeterminada. | |
+
+### RX
+
+La pestaña **RX** maneja la calibración de offset de frecuencia GPSDO y la fuente de referencia de 10 MHz.
+
+| Control | Comportamiento | Notas |
+|---------|----------|-------|
+| Cal Frequency (MHz): | Frecuencia utilizada para la calibración manual. | |
+| Start | Inicia el barrido de calibración de frecuencia. | |
+| Freq Offset (ppb): | Offset de frecuencia manual en ppb. | |
+| 10 MHz Reference Source: | Selecciona la fuente de referencia del oscilador. Opciones: Auto, TCXO, GPSDO, External. Valor predeterminado Auto. | El estado de bloqueo (Locked / Unlocked) se muestra junto al combo y se actualiza en vivo. |
+
+### Calibration
+
+La pestaña **Calibration** está disponible solo en radios cuyo backend requiere calibración de frecuencia del lado del host (actualmente solo HL2 y backends similares de solo RX). En radios FLEX, esta pestaña está oculta porque el radio realiza su propia calibración de hardware en la pestaña **RX**.
+
+Cuando está conectado a un radio compatible, la pestaña proporciona:
+
+| Control | Comportamiento | Notas |
+|---------|----------|-------|
+| (Controles de calibración de frecuencia del host) | Corrige manualmente la frecuencia del oscilador local del radio en ppb/ppm. | La pestaña está oculta a menos que el backend conectado informe la capacidad `hostFrequencyCalibration`. Escribir "calibration" en el cuadro de búsqueda del diálogo no mostrará la pestaña en un radio FLEX. |
+
+### Antennas
+
+La pestaña **Antennas** le permite asignar nombres de visualización personalizados a cada puerto de antena (ANT1, ANT2, XVTA, XVTB, etc.). Estos nombres aparecen en los indicadores de antena RX/TX del panadapter en lugar de los tokens de puerto sin procesar.
+
+| Control | Comportamiento | Notas |
+|---------|----------|-------|
+| Port / Custom name / Preview / Clear (columnas de tabla) | Cuadrícula de filas de puertos de antena. Cada fila tiene una etiqueta de puerto de solo lectura (p. ej., ANT1), un campo de texto editable (máx. 16 caracteres), una vista previa del nombre de visualización final y un botón Clear para restablecer el nombre personalizado. | Las filas se actualizan automáticamente cuando cambian las asignaciones de antena de las slices. Cuando el nombre personalizado de un puerto está vacío, se usa el token de puerto sin procesar como nombre de visualización. |
+
+### Audio
+
+La pestaña **Audio** configura las salidas de audio del radio, compresión, dispositivos de PC, boost, buffer, grabación y el contenedor NVIDIA BNR.
+
+| Control | Comportamiento | Notas |
+|---------|----------|-------|
+| Line Out: | Ganancia de salida de línea. | |
+| Mute (Line Out) | Silencia la salida de línea. | |
+| Headphone: | Ganancia de auriculares. | |
+| Mute (Headphone) | Silencia los auriculares. | |
+| Front Speaker: / Mute | Silencia el altavoz frontal (específico del modelo). | |
+| Audio Compression (SmartLink): Auto / Uncompressed / Opus | Selecciona el códec de audio para SmartLink/LAN. Valor predeterminado Auto. | |
+| Prevent system sleep while connected | Mantiene el SO despierto mientras el radio está conectado para evitar caídas de flujos de audio/TCP/UDP durante la inactividad. Valor predeterminado False. | |
+| PC Audio Devices: Input: / Output: | Selecciona los dispositivos de audio de entrada/salida del host. | |
+| Audio Boost: | Habilita ganancia adicional en la ruta de audio del cliente. | |
+| Audio Buffer: | Aumenta el buffer de audio en milisegundos para la fluctuación de VPN/SmartLink. Valor predeterminado 200. Rango 50-1000 ms. | Se almacena como `AudioBufferMs`. |
+| Recording: Radio Side / Client Side | Selecciona la grabación del lado del radio o del lado del cliente. Valor predeterminado Radio Side. | |
+| Save to: | Carpeta para grabaciones guardadas (solo lado del cliente). Valor predeterminado Documents/AetherSDR/Recordings. | |
+| ... | Busca la carpeta de grabaciones. | |
+| Auto-record on TX | Graba automáticamente mientras transmite. Valor predeterminado False. | |
+| Idle timeout: |

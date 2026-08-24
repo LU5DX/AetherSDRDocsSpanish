@@ -1,34 +1,85 @@
-# Elegir GPU o CPU para el reconocimiento de voz
+# Asistente de copia — Voz a texto
 
-Seleccione si el motor de texto-a-voz whisper.cpp utiliza la GPU o la CPU de su sistema para la transcripción. El procesamiento con GPU es más rápido pero requiere VRAM; el procesamiento con CPU funciona en cualquier sistema pero es más lento.
+Transcripción de voz en tiempo real para el segmento activo. Utiliza whisper.cpp para decodificar el audio de voz recibido en una transcripción desplazable con código de colores (verde = alta confianza, rojo = baja). Incluye selección de modelo, selector de dispositivo de cómputo y coloreado de texto basado en la confianza.
 
-## Antes de empezar
+## Controles
 
-- Copy Assist debe estar abierto: `View > Copy Assist` (Ctrl+Shift+T)
-- Debe haber una radio conectada
+### Habilitar / Deshabilitar
 
-## Pasos
+Inicia o detiene el motor de voz a texto whisper.cpp en el audio del segmento activo.
 
-1. Abra el cuadro de diálogo de configuración de Copy Assist haciendo clic en **Settings** en el panel de Copy Assist.
-2. Localice el cuadro combinado **Compute device**.
-3. Seleccione **GPU** o **CPU** en la lista desplegable.
-4. Cierre el cuadro de diálogo de configuración.
+| Propiedad | Valor |
+|---|---|
+| Tipo | Botón de alternancia |
+| Predeterminado | Deshabilitado |
 
-El nuevo dispositivo de cómputo se utilizará la próxima vez que active la transcripción.
+### Transcripción
 
-## Función de cada control
+Transcripción desplazable y de solo lectura del habla decodificada. El texto se colorea según la confianza de whisper: verde (alta), amarillo (media), rojo (baja). El botón Borrar vacía el búfer.
 
-| Control | Valor predeterminado | Rango válido | Comportamiento |
-|---|---|---|---|
-| Compute device | GPU (CUDA/Metal) | GPU / CPU | Selecciona si whisper se ejecuta en GPU (más rápido, necesita VRAM) o CPU (más lento, funciona en todas partes) |
+| Propiedad | Valor |
+|---|---|
+| Tipo | Campo de texto |
 
-## Consejos
+### Nivel del modelo
 
-- Si observa valores altos de acumulación (ámbar/rojo) con GPU seleccionada, intente primero cambiar a un modelo de nivel más pequeño antes de recurrir a la CPU.
-- En sistemas con memoria de GPU limitada (por ejemplo, gráficos integrados), el modo CPU puede ser más estable.
+Tamaño del modelo de Whisper. Los modelos más grandes son más precisos pero más lentos y usan más VRAM/RAM.
 
-## Relacionados
+| Propiedad | Valor |
+|---|---|
+| Tipo | Cuadro combinado |
+| Predeterminado | tiny |
+| Rango válido | tiny / base / small / medium |
 
-- [Copy Assist — Descripción general de voz a texto](overview.md)
-- [Habilitar la transcripción de voz a texto en una slice](enable-speech-to-text-transcription-on-a-slice.md)
-- [Cambiar el nivel del modelo whisper para precisión frente a velocidad](change-the-whisper-model-tier-for-accuracy-vs-speed.md)
+### Dispositivo de cómputo
+
+Selecciona si whisper se ejecuta en GPU (más rápido, requiere VRAM) o CPU (más lento, funciona en cualquier lugar).
+
+| Propiedad | Valor |
+|---|---|
+| Tipo | Cuadro combinado |
+| Predeterminado | GPU (CUDA/Metal) |
+| Rango válido | GPU / CPU |
+
+### Indicador de acumulación
+
+Segundos de audio recibido aún no transcrito. El color escala de ámbar a rojo a medida que la acumulación crece.
+
+| Propiedad | Valor |
+|---|---|
+| Tipo | Indicador |
+| Predeterminado | 0.0s |
+
+### Botón de configuración
+
+Abre el diálogo no modal de configuración de Asistente de copia para el nivel del modelo, el dispositivo de cómputo y la configuración del motor.
+
+| Propiedad | Valor |
+|---|---|
+| Tipo | Botón pulsador |
+
+### Borrar
+
+Limpia el búfer de transcripción actual.
+
+| Propiedad | Valor |
+|---|---|
+| Tipo | Botón pulsador |
+
+## Indicadores
+
+### Estado del motor
+
+Estado actual del motor de voz a texto whisper.cpp.
+
+| Estado | Significado |
+|---|---|
+| Idle | El motor no está en ejecución |
+| Downloading model | El modelo se está descargando |
+| Loading model | El modelo se está cargando en memoria |
+| Listening | El motor está transcribiendo activamente |
+| Error | El motor encontró un error |
+
+### Acumulación
+
+Segundos de audio no transcrito en el búfer de la canalización.

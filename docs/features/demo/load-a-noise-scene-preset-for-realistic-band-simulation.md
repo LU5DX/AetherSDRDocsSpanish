@@ -1,34 +1,36 @@
-# Cargue un preajuste de escena de ruido para simulación realista de banda
+# Cargue un preset de escena de ruido para una simulación realista de banda
 
-Esta página explica cómo cargar un preajuste de escena de ruido con un solo clic en el Modo Demo, dando forma instantáneamente al ruido RF sintético para simular una condición de banda específica.
+Esta página explica cómo cargar un preset de escena de ruido con un solo clic en el Modo Demo, dando forma instantáneamente al ruido RF sintético para simular una condición de banda específica.
 
 ## Antes de comenzar
 
-- La radio Demo incorporada debe estar conectada (consulte [Iniciar la radio demo incorporada](start-the-built-in-demo-radio.md))
-- El applet de Modo Demo debe estar visible en el Panel de Applets
+- La radio Demo integrada debe estar conectada (consulte [Iniciar la radio demo integrada](start-the-built-in-demo-radio.md))
+- El applet del Modo Demo debe ser visible en el Panel de Applets
 
 ## Pasos
 
-1. Localice el applet de Modo Demo en la bandeja del Panel de Applets (busque la etiqueta "DEMO").
-2. Encuentre la sección **Scene presets** que contiene botones de preajuste.
-3. Haga clic en el preajuste que coincida con el escenario de banda deseado (por ejemplo, **storm**, **night-40m**, **contest pileup**, **quiet band**, etc.).
+1. Localice el applet del Modo Demo en la bandeja del Panel de Applets (busque la etiqueta "DEMO").
+2. Busque la sección **Presets de escena** que contiene los botones de presets. Los botones se ajustan a varias líneas si el panel de applets es estrecho, por lo que todas las etiquetas permanecen completamente visibles.
+3. Haga clic en el preset que coincida con el escenario de banda deseado (por ejemplo, **tormenta**, **noche-40m**, **pileup de concurso**, **banda tranquila**, etc.).
 
-La escena de ruido se actualiza de inmediato: todos los canales de ruido (ruido rosa, ruido blanco, ráfagas de QRM, birdies, etc.) y sus niveles se configuran para coincidir con el preajuste seleccionado.
+La escena de ruido se actualiza de inmediato: todos los canales de ruido (ruido rosa, ruido blanco, ráfagas de QRM, birdies, etc.) y sus niveles se configuran para coincidir con el preset seleccionado.
 
 ## Qué hace cada control
 
 | Control | Comportamiento |
 |---------|----------------|
-| **Noise channel toggles** (casillas de verificación) | Activan o desactivan fuentes de ruido individuales (ruido rosa, ruido blanco, ráfagas de QRM, birdies, etc.) |
-| **Noise level sliders** | Ajustan el nivel por canal para cada fuente de ruido |
-| **Scene presets** (botones pulsadores) | Botones de un solo clic que configuran todos los canales para que coincidan con un escenario específico (storm, night-40m, contest pileup, quiet band, etc.) |
+| **Alternadores de canal de ruido** (casillas de verificación) | Activan o desactivan fuentes de ruido individuales (ruido rosa, ruido blanco, ráfagas de QRM, birdies, etc.) |
+| **Deslizadores de nivel de ruido** | Ajustan el nivel por canal de cada fuente de ruido |
+| **Presets de escena** (botones pulsadores) | Botones de un clic que configuran todos los canales para coincidir con un escenario específico (tormenta, noche-40m, pileup de concurso, banda tranquila, etc.) |
 
 ## Consejos
 
-- Los preajustes de escena anulan cualquier activación manual de canales y controles deslizantes de nivel que haya configurado.
-- Después de cargar un preajuste, aún puede ajustar finamente los canales de ruido individuales usando los interruptores y controles deslizantes.
+- Los presets de escena anulan cualquier alternador de canal y deslizador de nivel que haya configurado manualmente.
+- Después de cargar un preset, aún puede ajustar finamente los canales de ruido individuales usando los alternadores y deslizadores.
+- Pase el cursor sobre cualquier alternador de canal de ruido o deslizador de nivel para ver una explicación de una línea sobre cómo suena esa fuente de ruido en una banda real de HF.
+- Si los botones de preset aparecen recortados, ensanche el panel de applets — los botones ahora se ajustan en lugar de comprimirse, por lo que cada etiqueta permanece legible.
 
-## Relacionados
+## Relacionado
 
 - [Descripción general del Modo Demo](overview.md)
 - [Dé forma al ruido RF sintético con controles por canal](shape-synthetic-rf-noise-with-per-channel-controls.md)
